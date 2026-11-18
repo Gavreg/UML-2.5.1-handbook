@@ -138,7 +138,7 @@ def check_static():
     return errors, all_routes
 
 
-def check_route(browser, route, expected):
+def check_route(browser, route, expected, known_routes):
     with tempfile.TemporaryDirectory() as profile:
         result = subprocess.run(
             [
@@ -164,6 +164,9 @@ def check_route(browser, route, expected):
         return f"{route or '#/'}: missing expected text {expected!r}"
     if "<h1" not in dom:
         return f"{route or '#/'}: missing h1"
+    for target in set(re.findall(r'href="(#[^"]*)"', dom)):
+        if target not in known_routes:
+            return f"{route or '#/'}: broken internal link {target}"
     errors = re.findall(r"(?:Uncaught|SyntaxError|ReferenceError|TypeError)[^\r\n]*", console)
     if errors:
         return f"{route or '#/'}: {'; '.join(errors)}"
@@ -369,7 +372,8 @@ def main():
     print(f"SVG geometry checks: OK; {len(vectors)} diagrams passed")
 
     with ThreadPoolExecutor(max_workers=4) as executor:
-        failures = list(executor.map(lambda item: check_route(browser, *item), all_routes))
+        known_routes = {item[0] for item in all_routes} | {"#/", "#content"}
+        failures = list(executor.map(lambda item: check_route(browser, *item, known_routes), all_routes))
     failures = [failure for failure in failures if failure]
     if failures:
         for failure in failures:

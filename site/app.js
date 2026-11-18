@@ -56,6 +56,32 @@
       : `<code>${escapeHtml(name)}</code>`;
   }
 
+  const metamodelNames = [...classifierByName.keys(), ...associationByName.keys()]
+    .sort((first, second) => second.length - first.length);
+  const metamodelNamePattern = new RegExp(
+    `(^|[^A-Za-z0-9_])(${metamodelNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})(?![A-Za-z0-9_])`,
+    "g"
+  );
+
+  function metamodelDescription(value, currentName = "") {
+    const text = String(value);
+    let html = "";
+    let offset = 0;
+    for (const match of text.matchAll(metamodelNamePattern)) {
+      const name = match[2];
+      const start = match.index + match[1].length;
+      html += escapeHtml(text.slice(offset, start));
+      if (name === currentName) {
+        html += escapeHtml(name);
+      } else {
+        const type = classifierByName.has(name) ? "classifier" : "association";
+        html += `<a href="#/${type}/${slug(name)}">${escapeHtml(name)}</a>`;
+      }
+      offset = start + name.length;
+    }
+    return html + escapeHtml(text.slice(offset));
+  }
+
   function linkList(items = [], type = "classifier") {
     if (!items.length) return "";
     const linker = type === "association" ? associationLink : classifierLink;
@@ -81,16 +107,16 @@
     </a>`;
   }
 
-  function detailSection(title, items, key = "signature") {
+  function detailSection(title, items, key = "signature", currentName = "") {
     if (!items || !items.length) return "";
     return `<section><h2>${title}</h2><ul class="detail-list">${items.map(item => `
       <li class="detail-item">
         <code>${escapeHtml(item[key] || item.name)}</code>
-        ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ""}
+        ${item.description ? `<p>${metamodelDescription(item.description, currentName)}</p>` : ""}
       </li>`).join("")}</ul></section>`;
   }
 
-  function propertyList(properties) {
+  function propertyList(properties, currentName = "") {
     return `<ul class="detail-list property-list">${properties.map(property => `
       <li class="detail-item">
         <code>${escapeHtml(property.signature)}</code>
@@ -98,13 +124,13 @@
           ${property.association ? associationLink(property.association) : ""}
           ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}
         </div>
-        <p>${escapeHtml(property.description)}</p>
+        <p>${metamodelDescription(property.description, currentName)}</p>
       </li>`).join("")}</ul>`;
   }
 
-  function propertySection(title, properties, collapsible = false, note = "Включены обычные атрибуты и концы ассоциаций, которыми класс владеет по нормативной XMI-модели.") {
+  function propertySection(title, properties, currentName = "", collapsible = false, note = "Включены обычные атрибуты и концы ассоциаций, которыми класс владеет по нормативной XMI-модели.") {
     if (!properties || !properties.length) return "";
-    const content = propertyList(properties);
+    const content = propertyList(properties, currentName);
     return `<section>${collapsible
       ? `<details class="inherited-properties"><summary><span>${title}</span><span class="property-count">${properties.length}</span></summary>${content}</details>`
       : `<h2>${title} <span class="property-count">${properties.length}</span></h2><p class="section-note">${escapeHtml(note)}</p>${content}`}</section>`;
@@ -179,12 +205,14 @@
       <div class="notice">Рисунок 7.1 перерисован в масштабируемый SVG: названия классов ведут на их страницы. Остальные рисунки пока представлены скриншотами спецификации с переходами в списке «Элементы на диаграмме».</div>
       <h2>Структура раздела 7</h2>
       <div class="card-grid">
-        ${data.sections.slice(0, 7).map(section => `<a class="link-card" href="#/section/${slug(section.id)}">
-          <span class="link-card-top"><span class="link-card-number">${section.id}</span><span aria-hidden="true">→</span></span>
-          <strong>${escapeHtml(section.title)}</strong>
-          <small>${escapeHtml(section.en)}</small>
-          <p>${escapeHtml(section.summary)}</p>
-        </a>`).join("")}
+        ${data.sections.slice(0, 7).map(section => `<article class="link-card">
+          <a class="link-card-heading" href="#/section/${slug(section.id)}">
+            <span class="link-card-top"><span class="link-card-number">${section.id}</span><span aria-hidden="true">→</span></span>
+            <strong>${escapeHtml(section.title)}</strong>
+            <small>${escapeHtml(section.en)}</small>
+          </a>
+          <p>${metamodelDescription(section.summary)}</p>
+        </article>`).join("")}
       </div>
       <h2>Справочные каталоги</h2>
       <div class="card-grid">
@@ -212,9 +240,9 @@
       <p class="eyebrow">Раздел ${section.id} · стр. ${section.page}</p>
       <h1>${escapeHtml(section.title)}</h1>
       <p class="original-name" lang="en">${escapeHtml(section.en)}</p>
-      <div class="definition"><span class="definition-label">Содержание раздела</span><p>${escapeHtml(section.summary)}</p></div>
-      ${section.semantics ? `<section><h2>Семантика</h2><p>${escapeHtml(section.semantics)}</p></section>` : ""}
-      ${section.notation ? `<section><h2>Нотация</h2><p>${escapeHtml(section.notation)}</p></section>` : ""}
+      <div class="definition"><span class="definition-label">Содержание раздела</span><p>${metamodelDescription(section.summary)}</p></div>
+      ${section.semantics ? `<section><h2>Семантика</h2><p>${metamodelDescription(section.semantics)}</p></section>` : ""}
+      ${section.notation ? `<section><h2>Нотация</h2><p>${metamodelDescription(section.notation)}</p></section>` : ""}
       ${isClassifiers ? `<section><h2>Классификаторы раздела</h2><div class="object-list">${data.classifiers.filter(item => item.section.startsWith("7.8.")).map(item => objectRow(item, "classifier")).join("")}</div></section>` : ""}
       ${isAssociations ? `<section><h2>Ассоциации раздела</h2><div class="object-list">${data.associations.map(item => objectRow(item, "association")).join("")}</div></section>` : ""}
       ${section.figures.length ? `<section><h2>Абстрактный синтаксис и примеры</h2>${section.figures.map(figureCard).join("")}</section>` : ""}
@@ -237,14 +265,14 @@
       <h1>${escapeHtml(item.ru)}</h1>
       <p class="original-name" lang="en">${escapeHtml(item.name)} [${escapeHtml(item.kind)}]</p>
       <div class="meta-row"><span class="kind-tag">${kindLabels[item.kind]}</span><span class="meta-tag">OMG UML 2.5.1, стр. ${item.page}</span></div>
-      <div class="definition"><span class="definition-label">Определение</span><p>${escapeHtml(item.definition)}</p></div>
+      <div class="definition"><span class="definition-label">Определение</span><p>${metamodelDescription(item.definition, item.name)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations)}</section>` : ""}
       ${item.specializations ? `<section><h2>Специализации</h2>${linkList(item.specializations)}</section>` : ""}
-      ${propertySection("Атрибуты", directProperties)}
-      ${propertySection("Унаследованные атрибуты", xmi?.inherited, true)}
-      ${detailSection("Операции", item.operations)}
-      ${detailSection("Ограничения", item.constraints, "name")}
-      ${detailSection("Литералы", item.literals, "name")}
+      ${propertySection("Атрибуты", directProperties, item.name)}
+      ${propertySection("Унаследованные атрибуты", xmi?.inherited, item.name, true)}
+      ${detailSection("Операции", item.operations, "signature", item.name)}
+      ${detailSection("Ограничения", item.constraints, "name", item.name)}
+      ${detailSection("Литералы", item.literals, "name", item.name)}
       ${relatedFigures(figures)}
       ${sourceLink(item.page)}`;
   }
@@ -264,10 +292,10 @@
       <h1>${escapeHtml(item.ru)}</h1>
       <p class="original-name" lang="en">${escapeHtml(item.name)} [Association]</p>
       <div class="meta-row"><span class="kind-tag">Ассоциация</span><span class="meta-tag">OMG UML 2.5.1, стр. ${item.page}</span></div>
-      <div class="definition"><span class="definition-label">Определение</span><p>${escapeHtml(item.definition)}</p></div>
+      <div class="definition"><span class="definition-label">Определение</span><p>${metamodelDescription(item.definition, item.name)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations, "association")}</section>` : ""}
       ${item.specializations ? `<section><h2>Специализации</h2>${linkList(item.specializations, "association")}</section>` : ""}
-      ${propertySection("Концы ассоциации", ends, false, "Типы, кратность и другие характеристики обоих концов сверены с нормативным XMI.")}
+      ${propertySection("Концы ассоциации", ends, item.name, false, "Типы, кратность и другие характеристики обоих концов сверены с нормативным XMI.")}
       <section><h2>Диаграммы в спецификации</h2><div class="meta-row">${item.diagrams.map(name => `<span class="meta-tag">${escapeHtml(name)}</span>`).join("")}</div></section>
       ${relatedFigures(associationFigures(item))}
       ${sourceLink(item.page)}`;

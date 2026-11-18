@@ -90,7 +90,7 @@
 <text class="association-label" x="178" y="320" text-anchor="end">1</text>
 <text class="association-label" x="178" y="345" text-anchor="end">{ordered, subsets ownedElement,</text>
 <text class="association-label" x="178" y="365" text-anchor="end">subsets parameter}</text>
-<text class="association-label" x="40" y="415" text-anchor="end">1..*</text>
+<text class="association-label" x="40" y="435" text-anchor="end">1..*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-parameter-templatesignature" target="_top" aria-label="Открыть описание ассоциации A_parameter_templateSignature">
 <g class="association-group" id="A_parameter_templateSignature"><title>Связывает TemplateParameter с TemplateSignature, к которой он относится.</title>

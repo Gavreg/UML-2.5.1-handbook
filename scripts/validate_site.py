@@ -478,17 +478,33 @@ SVG_GEOMETRY_SCRIPT = r"""
     }
   }
 
+  const distanceToBox = (point, box) => Math.hypot(
+    Math.max(box.x - point.x, 0, point.x - box.x - box.width),
+    Math.max(box.y - point.y, 0, point.y - box.y - box.height)
+  );
+  const axialGap = (origin, box, horizontal) => horizontal
+    ? Math.max(box.x - origin.x, origin.x - box.x - box.width, 0)
+    : Math.max(box.y - origin.y, origin.y - box.y - box.height, 0);
   for (const group of document.querySelectorAll("g.association-group")) {
     const path = group.querySelector("path.association");
     const roles = [...group.querySelectorAll("text.association-end")];
     if (!path || roles.length !== 2) continue;
     const length = path.getTotalLength();
-    [false, true].forEach((atEnd, index) => {
-      const role = roles[index];
+    const origins = [path.getPointAtLength(0), path.getPointAtLength(length)];
+    const placements = roles.map(role => {
       const box = role.getBBox();
-      const origin = path.getPointAtLength(atEnd ? length : 0);
-      const next = path.getPointAtLength(atEnd ? length - 1 : 1);
+      const distances = origins.map(origin => distanceToBox(origin, box));
+      const endIndex = distances[0] <= distances[1] ? 0 : 1;
+      const origin = origins[endIndex];
+      const next = path.getPointAtLength(endIndex ? length - 1 : 1);
       const horizontal = Math.abs(next.x - origin.x) > Math.abs(next.y - origin.y);
+      return { role, box, endIndex, origin, next, horizontal, nameGap: axialGap(origin, box, horizontal) };
+    });
+    if (placements[0].endIndex === placements[1].endIndex) {
+      errors.push(`association end labels assigned to the same end: ${group.id}`);
+    }
+    for (const placement of placements) {
+      const { role, box, origin, next, horizontal } = placement;
       const name = role.textContent.trim();
       if (horizontal) {
         const toRight = next.x > origin.x;
@@ -516,7 +532,19 @@ SVG_GEOMETRY_SCRIPT = r"""
           errors.push(`vertical association end alignment: ${name}`);
         }
       }
-    });
+    }
+    for (const label of group.querySelectorAll("text.association-label")) {
+      const box = label.getBBox();
+      const placement = placements.reduce((nearest, candidate) => {
+        const labelCenter = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+        return distanceToBox(labelCenter, candidate.box) < distanceToBox(labelCenter, nearest.box)
+          ? candidate : nearest;
+      });
+      const endIndex = placement.endIndex;
+      if (placement.nameGap > axialGap(origins[endIndex], box, placement.horizontal) + 0.75) {
+        errors.push(`association end name is farther than its modifier: ${placement.role.textContent.trim()} / ${label.textContent.trim()}`);
+      }
+    }
   }
 
   for (const path of document.querySelectorAll("path.association")) {

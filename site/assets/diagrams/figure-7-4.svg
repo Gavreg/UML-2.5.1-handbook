@@ -109,12 +109,12 @@
 <g class="association-group" id="A_parameterSubstitution_templateBinding"><title>Связывает TemplateBinding с принадлежащими ему TemplateParameterSubstitutions.</title>
 <path class="association" d="M 765 420 V 520" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 765 420 V 520" aria-hidden="true"/>
 <polygon class="composition" points="765,520 757,512 765,504 773,512"/><circle class="end-dot" cx="765" cy="420" r="3"/>
-<text class="association-end" x="753" y="443" text-anchor="end"><title>Привязка, владеющая подстановкой.</title>+ templateBinding</text>
-<text class="association-end" x="785" y="497"><title>Подстановки параметров, принадлежащие привязке.</title>+ parameterSubstitution</text>
-<text class="association-label" x="753" y="468" text-anchor="end">{subsets owner}</text>
-<text class="association-label" x="753" y="493" text-anchor="end">1</text>
-<text class="association-label" x="785" y="447">{subsets ownedElement}</text>
-<text class="association-label" x="785" y="472">*</text>
+<text class="association-end" x="753" y="493" text-anchor="end"><title>Привязка, владеющая подстановкой.</title>+ templateBinding</text>
+<text class="association-end" x="785" y="443"><title>Подстановки параметров, принадлежащие привязке.</title>+ parameterSubstitution</text>
+<text class="association-label" x="753" y="443" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="753" y="468" text-anchor="end">1</text>
+<text class="association-label" x="785" y="493">{subsets ownedElement}</text>
+<text class="association-label" x="785" y="468">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-templatebinding-boundelement" target="_top" aria-label="Открыть описание ассоциации A_templateBinding_boundElement">
 <g class="association-group" id="A_templateBinding_boundElement"><title>Связывает TemplateableElement с его TemplateBindings.</title>
@@ -124,7 +124,7 @@
 <text class="association-end" x="638" y="555" text-anchor="end"><title>Необязательные привязки элемента к шаблонам.</title>+ templateBinding</text>
 <text class="association-label" x="282" y="530">{subsets source, owner}</text>
 <text class="association-label" x="282" y="605">1</text>
-<text class="association-label" x="638" y="505" text-anchor="end">{subsets directedRelationship, ownedElement}</text>
+<text class="association-label" x="638" y="510" text-anchor="end">{subsets directedRelationship, ownedElement}</text>
 <text class="association-label" x="638" y="594" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-signature-templatebinding" target="_top" aria-label="Открыть описание ассоциации A_signature_templateBinding">

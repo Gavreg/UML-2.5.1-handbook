@@ -167,7 +167,7 @@
 <text class="association-label" x="1132" y="463">{subsets target}</text>
 <text class="association-label" x="1132" y="483">1</text>
 <text class="association-label" x="1132" y="500">{subsets directedRelationship}</text>
-<text class="association-label" x="1212" y="564">*</text>
+<text class="association-label" x="1212" y="580">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-elementimport-importingnamespace" target="_top" aria-label="Открыть описание ассоциации A_elementImport_importingNamespace">
 <g class="association-group" id="A_elementImport_importingNamespace"><title>Связывает Namespace с принадлежащими ему ElementImports.</title>
@@ -196,11 +196,11 @@
 <path class="association" d="M 1195 880 V 1000" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1195 880 V 1000" aria-hidden="true"/>
 <circle class="end-dot" cx="1195" cy="880" r="3"/>
 <text class="association-end" x="1183" y="904" text-anchor="end"><title>packageImport. Связывает импортированный Package с PackageImport.</title>+ packageImport</text>
-<text class="association-end" x="1207" y="955"><title>Пакет, члены которого импортируются.</title>+ importedPackage</text>
+<text class="association-end" x="1207" y="975"><title>Пакет, члены которого импортируются.</title>+ importedPackage</text>
 <text class="association-label" x="1183" y="929" text-anchor="end">{subsets directedRelationship}</text>
 <text class="association-label" x="1183" y="954" text-anchor="end">*</text>
 <text class="association-label" x="1207" y="925">{subsets target}</text>
-<text class="association-label" x="1220" y="980">1</text>
+<text class="association-label" x="1220" y="950">1</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-ownedrule-context" target="_top" aria-label="Открыть описание ассоциации A_ownedRule_context">
 <g class="association-group" id="A_ownedRule_context"><title>Связывает Namespace с принадлежащими ему Constraints и их контекстом.</title>

@@ -258,7 +258,7 @@ def figure_7_3():
         ("TemplateSignature", "ownedParameter", "+ ownedParameter", 160, 390, "end"),
         ' marker-end="url(#navigation)"', diamond(190, 230, "down") + dot(190, 400),
         [("{subsets templateSignature,", 178, 278, "end"), ("subsets owner}", 178, 298, "end"), ("1", 178, 320, "end"),
-         ("{ordered, subsets ownedElement,", 178, 345, "end"), ("subsets parameter}", 178, 365, "end"), ("1..*", 40, 415, "end")])
+         ("{ordered, subsets ownedElement,", 178, 345, "end"), ("subsets parameter}", 178, 365, "end"), ("1..*", 40, 435, "end")])
     association(svg, "A_parameter_templateSignature", "M 275 230 V 400",
         ("TemplateParameter", "templateSignature", "+ templateSignature", 287, 253, "start"),
         ("TemplateSignature", "parameter", "+ parameter", 340, 377, "start"),
@@ -318,17 +318,17 @@ def figure_7_4():
         [("0..1", 282, 495, "start"), ("{subsets owner, redefines templateParameterSubstitution}", 282, 470, "start"),
          ("{subsets ownedElement, actual}", 580, 350, "end"), ("*", 580, 430, "end")])
     association(svg, "A_parameterSubstitution_templateBinding", "M 765 420 V 520",
-        ("TemplateParameterSubstitution", "templateBinding", "+ templateBinding", 753, 443, "end"),
-        ("TemplateBinding", "parameterSubstitution", "+ parameterSubstitution", 785, 497, "start"),
+        ("TemplateParameterSubstitution", "templateBinding", "+ templateBinding", 753, 493, "end"),
+        ("TemplateBinding", "parameterSubstitution", "+ parameterSubstitution", 785, 443, "start"),
         ' marker-start="url(#navigation-start)"', diamond(765, 520, "up") + dot(765, 420),
-        [("{subsets owner}", 753, 468, "end"), ("1", 753, 493, "end"),
-         ("{subsets ownedElement}", 785, 447, "start"), ("*", 785, 472, "start")])
+        [("{subsets owner}", 753, 443, "end"), ("1", 753, 468, "end"),
+         ("{subsets ownedElement}", 785, 493, "start"), ("*", 785, 468, "start")])
     association(svg, "A_templateBinding_boundElement", "M 270 570 H 650",
         ("TemplateBinding", "boundElement", "+ boundElement", 282, 555, "start"),
         ("TemplateableElement", "templateBinding", "+ templateBinding", 638, 555, "end"),
         ' marker-end="url(#navigation)"', diamond(270, 570, "right") + dot(650, 570),
         [("{subsets source, owner}", 282, 530, "start"), ("1", 282, 605, "start"),
-         ("{subsets directedRelationship, ownedElement}", 638, 505, "end"), ("*", 638, 594, "end")])
+         ("{subsets directedRelationship, ownedElement}", 638, 510, "end"), ("*", 638, 594, "end")])
     association(svg, "A_signature_templateBinding", "M 300 700 H 650",
         ("TemplateBinding", "signature", "+ signature", 312, 685, "start"),
         ("TemplateSignature", "templateBinding", "+ templateBinding", 638, 685, "end"),
@@ -387,7 +387,7 @@ def figure_7_5():
         ("PackageableElement", "import", "+ import", 1132, 525, "start"),
         ' marker-start="url(#navigation-start)"', dot(1120, 540),
         [("{subsets target}", 1132, 463, "start"), ("1", 1132, 483, "start"),
-         ("{subsets directedRelationship}", 1132, 500, "start"), ("*", 1212, 564, "start")])
+         ("{subsets directedRelationship}", 1132, 500, "start"), ("*", 1212, 580, "start")])
     association(svg, "A_elementImport_importingNamespace", "M 470 575 H 960",
         ("Namespace", "elementImport", "+ elementImport", 482, 560, "start"),
         ("ElementImport", "importingNamespace", "+ importingNamespace", 940, 560, "end"),
@@ -402,10 +402,10 @@ def figure_7_5():
          ("{subsets source, owner}", 940, 765, "end"), ("1", 940, 849, "end")])
     association(svg, "A_importedPackage_packageImport", "M 1195 880 V 1000",
         ("PackageImport", "packageImport", "+ packageImport", 1183, 904, "end"),
-        ("PackageImport", "importedPackage", "+ importedPackage", 1207, 955, "start"),
+        ("PackageImport", "importedPackage", "+ importedPackage", 1207, 975, "start"),
         ' marker-end="url(#navigation)"', dot(1195, 880),
         [("{subsets directedRelationship}", 1183, 929, "end"), ("*", 1183, 954, "end"),
-         ("{subsets target}", 1207, 925, "start"), ("1", 1220, 980, "start")])
+         ("{subsets target}", 1207, 925, "start"), ("1", 1220, 950, "start")])
     association(svg, "A_ownedRule_context", "M 300 660 V 947 H 700",
         ("Constraint", "context", "+ context", 288, 697, "end"),
         ("Namespace", "ownedRule", "+ ownedRule", 688, 932, "end"),
@@ -590,8 +590,8 @@ def figure_7_12():
     class_node(svg, "Purchase", 35, 90, 150, 65, example=True)
     class_node(svg, "Customer", 375, 90, 160, 65, example=True)
     class_node(svg, "Account", 715, 90, 150, 65, example=True)
-    example_association(svg, "M 375 120 H 185", [("purchase", 280, 85, "middle"), ("*", 363, 144, "end"), ("{ordered, unique}", 197, 144, "start")], title="Покупки клиента: упорядоченное множество без повторов.")
-    example_association(svg, "M 535 120 H 715", [("account", 625, 85, "middle"), ("{unique}", 547, 144, "start"), ("0..5", 703, 144, "end")], title="Счета клиента: не более пяти уникальных значений.")
+    example_association(svg, "M 375 120 H 185", [("purchase", 197, 105, "start"), ("*", 197, 144, "start"), ("{ordered, unique}", 197, 165, "start")], title="Покупки клиента: упорядоченное множество без повторов.")
+    example_association(svg, "M 535 120 H 715", [("account", 703, 105, "end"), ("{unique}", 703, 165, "end"), ("0..5", 703, 144, "end")], title="Счета клиента: не более пяти уникальных значений.")
     return svg
 
 

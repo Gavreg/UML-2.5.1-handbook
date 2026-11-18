@@ -238,6 +238,7 @@ SVG_GEOMETRY_SCRIPT = r"""
   }
 
   for (const path of document.querySelectorAll("path.association")) {
+    if (!path.closest("g.association-group")) errors.push("association has no hover group");
     const length = path.getTotalLength();
     const start = path.getPointAtLength(0);
     const end = path.getPointAtLength(length);

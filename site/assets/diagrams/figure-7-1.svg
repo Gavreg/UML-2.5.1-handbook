@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="990" height="778" viewBox="0 0 990 778" role="img" aria-labelledby="diagram-title diagram-description">
   <title id="diagram-title">Рисунок 7.1 — корневые понятия UML</title>
-  <desc id="diagram-description">Метаклассы Element, Relationship, DirectedRelationship и Comment, их обобщения и ассоциации. Названия классов являются ссылками на страницы справочника.</desc>
+  <desc id="diagram-description">Метаклассы Element, Relationship, DirectedRelationship и Comment, их обобщения и ассоциации. Названия классов являются ссылками на страницы справочника. При наведении на ассоциацию подсвечиваются её линия, окончания и подписи.</desc>
   <defs>
     <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
     </marker>
     <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#111111" stroke-width="1.2"/>
+      <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/>
     </marker>
     <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
-      <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#111111" stroke-width="1.2"/>
+      <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/>
     </marker>
     <style>
       .background, .class-box { fill: #ffffff; }
@@ -25,75 +25,15 @@
       a:hover .class-box { fill: #eef3fb; stroke: #1e3a8a; }
       a:focus-visible { outline: none; }
       a:focus-visible .class-box { stroke: #7c3aed; stroke-width: 3; }
+      .association { pointer-events: stroke; }
+      .association-hitbox { fill: none; stroke: transparent; stroke-width: 10; pointer-events: stroke; }
+      .association-group:hover .association { stroke: #1e3a8a; stroke-width: 2.2; }
+      .association-group:hover text { fill: #1e3a8a; }
+      .association-group:hover .end-dot, .association-group:hover .composition { fill: #1e3a8a; }
     </style>
   </defs>
 
   <rect class="background" width="990" height="778"/>
-
-  <g aria-label="Ассоциации и обобщения">
-    <path class="association" d="M 479 103 H 933 V 476 H 770" marker-start="url(#navigation-start)"/>
-    <path class="association" d="M 479 183 H 698 V 467" marker-end="url(#navigation)"/>
-    <path class="association" d="M 479 259 H 622 V 334 H 465 V 304" marker-end="url(#navigation)"/>
-
-    <path class="association" d="M 343 103 H 51 V 658 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
-    <path class="association" d="M 343 199 H 121 V 742 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
-    <path class="association" d="M 343 285 H 168 V 490 H 368" marker-start="url(#navigation-start)"/>
-
-    <path class="generalization-line" d="M 446 470 V 400 H 424 V 304" marker-end="url(#generalization)"/>
-    <path class="generalization-line" d="M 698 467 V 400 H 424"/>
-    <path class="generalization-line" d="M 476 643 V 510" marker-end="url(#generalization)"/>
-
-  </g>
-
-  <g aria-label="Подписи ассоциаций">
-    <text x="100" y="57">{readOnly, union, subsets</text>
-    <text x="100" y="76">relatedElement}</text>
-    <text x="230" y="94">+ /source</text>
-    <text x="280" y="124">1..*</text>
-
-    <text x="535" y="93">+ annotatedElement</text>
-    <text x="535" y="124">*</text>
-
-    <text x="114" y="151">{readOnly, union, subsets</text>
-    <text x="114" y="170">relatedElement}</text>
-    <text x="230" y="190">+ /target</text>
-    <text x="280" y="220">1..*</text>
-
-    <text x="510" y="151">{subsets owner}</text>
-    <text x="510" y="170">+ owningElement</text>
-    <text x="510" y="205">0..1</text>
-
-    <text x="207" y="256">{readOnly, union}</text>
-    <text x="207" y="275">+ /relatedElement</text>
-    <text x="280" y="305">1..*</text>
-
-    <text x="510" y="232">{readOnly, union}</text>
-    <text x="510" y="251">+ /owner</text>
-    <text x="510" y="281">0..1</text>
-    <text x="590" y="327">*</text>
-    <text x="465" y="354">+ /ownedElement</text>
-    <text x="465" y="373">{readOnly, union}</text>
-
-    <text x="686" y="425">*</text>
-    <text x="716" y="415">{subsets ownedElement}</text>
-    <text x="716" y="434">+ ownedComment</text>
-
-    <text x="238" y="431">{readOnly, union}</text>
-    <text x="238" y="450">+ /relationship</text>
-    <text x="776" y="501">+ comment</text>
-    <text x="776" y="524">*</text>
-    <text x="340" y="514">*</text>
-
-    <text x="132" y="606">{readOnly, union,</text>
-    <text x="132" y="625">subsets relationship}</text>
-    <text x="182" y="647">+ /directedRelationship</text>
-    <text x="347" y="682">*</text>
-
-    <text x="132" y="694">{readOnly, union,</text>
-    <text x="132" y="713">subsets relationship}</text>
-    <text x="182" y="737">+ /directedRelationship</text>
-    <text x="347" y="767">*</text>
-  </g>
 
   <a href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса">
     <title>Element — открыть описание</title>
@@ -124,16 +64,87 @@
     <text x="618" y="510">+ body : String [0..1]</text>
   </a>
 
-  <g aria-hidden="true">
-    <circle class="end-dot" cx="479" cy="103" r="3"/>
-    <circle class="end-dot" cx="770" cy="476" r="3"/>
-    <circle class="end-dot" cx="698" cy="467" r="3"/>
-    <circle class="end-dot" cx="465" cy="304" r="3"/>
+  <g aria-label="Обобщения">
+    <path class="generalization-line" d="M 446 470 V 400 H 424 V 304" marker-end="url(#generalization)"/>
+    <path class="generalization-line" d="M 698 467 V 400 H 424"/>
+    <path class="generalization-line" d="M 476 643 V 510" marker-end="url(#generalization)"/>
+  </g>
+
+  <g class="association-group" id="A_source_directedRelationship" aria-label="Ассоциация source — directedRelationship">
+    <path class="association" d="M 343 103 H 51 V 658 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
+    <path class="association-hitbox" d="M 343 103 H 51 V 658 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="103" r="3"/>
+    <text x="100" y="57">{readOnly, union, subsets</text>
+    <text x="100" y="76">relatedElement}</text>
+    <text x="230" y="94">+ /source</text>
+    <text x="280" y="124">1..*</text>
+    <text x="132" y="606">{readOnly, union,</text>
+    <text x="132" y="625">subsets relationship}</text>
+    <text x="182" y="647">+ /directedRelationship</text>
+    <text x="347" y="682">*</text>
+  </g>
+
+  <g class="association-group" id="A_target_directedRelationship" aria-label="Ассоциация target — directedRelationship">
+    <path class="association" d="M 343 199 H 121 V 742 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
+    <path class="association-hitbox" d="M 343 199 H 121 V 742 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="199" r="3"/>
+    <text x="114" y="151">{readOnly, union, subsets</text>
+    <text x="114" y="170">relatedElement}</text>
+    <text x="230" y="190">+ /target</text>
+    <text x="280" y="220">1..*</text>
+    <text x="132" y="694">{readOnly, union,</text>
+    <text x="132" y="713">subsets relationship}</text>
+    <text x="182" y="737">+ /directedRelationship</text>
+    <text x="347" y="767">*</text>
+  </g>
+
+  <g class="association-group" id="A_relatedElement_relationship" aria-label="Ассоциация relatedElement — relationship">
+    <path class="association" d="M 343 285 H 168 V 490 H 368" marker-start="url(#navigation-start)"/>
+    <path class="association-hitbox" d="M 343 285 H 168 V 490 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="285" r="3"/>
     <circle class="end-dot" cx="368" cy="490" r="3"/>
+    <text x="207" y="256">{readOnly, union}</text>
+    <text x="207" y="275">+ /relatedElement</text>
+    <text x="280" y="305">1..*</text>
+    <text x="238" y="431">{readOnly, union}</text>
+    <text x="238" y="450">+ /relationship</text>
+    <text x="340" y="514">*</text>
+  </g>
+
+  <g class="association-group" id="A_annotatedElement_comment" aria-label="Ассоциация annotatedElement — comment">
+    <path class="association" d="M 479 103 H 933 V 476 H 770" marker-start="url(#navigation-start)"/>
+    <path class="association-hitbox" d="M 479 103 H 933 V 476 H 770" aria-hidden="true"/>
+    <circle class="end-dot" cx="479" cy="103" r="3"/>
+    <circle class="end-dot" cx="770" cy="476" r="3"/>
+    <text x="535" y="93">+ annotatedElement</text>
+    <text x="535" y="124">*</text>
+    <text x="776" y="501">+ comment</text>
+    <text x="776" y="524">*</text>
+  </g>
+
+  <g class="association-group" id="A_ownedComment_owningElement" aria-label="Ассоциация ownedComment — owningElement">
+    <path class="association" d="M 479 183 H 698 V 467" marker-end="url(#navigation)"/>
+    <path class="association-hitbox" d="M 479 183 H 698 V 467" aria-hidden="true"/>
     <path class="composition" d="M 487 177 L 495 183 L 487 189 L 479 183 Z"/>
+    <circle class="end-dot" cx="698" cy="467" r="3"/>
+    <text x="510" y="151">{subsets owner}</text>
+    <text x="510" y="170">+ owningElement</text>
+    <text x="510" y="205">0..1</text>
+    <text x="686" y="425">*</text>
+    <text x="716" y="415">{subsets ownedElement}</text>
+    <text x="716" y="434">+ ownedComment</text>
+  </g>
+
+  <g class="association-group" id="A_ownedElement_owner" aria-label="Ассоциация owner — ownedElement">
+    <path class="association" d="M 479 259 H 622 V 334 H 465 V 304" marker-end="url(#navigation)"/>
+    <path class="association-hitbox" d="M 479 259 H 622 V 334 H 465 V 304" aria-hidden="true"/>
     <path class="composition" d="M 487 253 L 495 259 L 487 265 L 479 259 Z"/>
+    <circle class="end-dot" cx="465" cy="304" r="3"/>
+    <text x="510" y="232">{readOnly, union}</text>
+    <text x="510" y="251">+ /owner</text>
+    <text x="510" y="281">0..1</text>
+    <text x="590" y="327">*</text>
+    <text x="465" y="354">+ /ownedElement</text>
+    <text x="465" y="373">{readOnly, union}</text>
   </g>
 </svg>

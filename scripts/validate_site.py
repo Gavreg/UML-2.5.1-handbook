@@ -118,7 +118,7 @@ def check_static():
             if route not in {item[0] for item in all_routes}:
                 errors.append(f"Broken SVG link in {vector}: {route}")
 
-    expected = (3, 9, 28, 36, 21)
+    expected = (3, 9, 29, 36, 21)
     if len(all_routes) != sum(expected):
         errors.append(f"Route extraction mismatch: {len(all_routes)} routes")
 
@@ -138,24 +138,138 @@ def check_static():
     return errors, all_routes
 
 
+INHERITANCE_GEOMETRY_SCRIPT = r"""
+(() => {
+  const errors = [];
+  const svg = document.querySelector("svg.inheritance-svg");
+  if (!svg) {
+    document.documentElement.setAttribute("data-inheritance-errors", "missing inheritance SVG");
+    return;
+  }
+  const blocks = [...svg.querySelectorAll(".inheritance-class")].map(element => ({
+    element,
+    rect: element.querySelector(".inheritance-class-box"),
+    text: element.querySelector(".inheritance-class-name")
+  })).map(item => ({ ...item, box: item.rect.getBBox(), textBox: item.text.getBBox() }));
+  const paths = [...svg.querySelectorAll("path.inheritance-generalization")];
+  const inside = (point, box, margin = 0.75) => point.x > box.x + margin
+    && point.x < box.x + box.width - margin
+    && point.y > box.y + margin
+    && point.y < box.y + box.height - margin;
+  const onBorder = (point, box) => {
+    const withinX = point.x >= box.x - 0.75 && point.x <= box.x + box.width + 0.75;
+    const withinY = point.y >= box.y - 0.75 && point.y <= box.y + box.height + 0.75;
+    return (withinY && (Math.abs(point.x - box.x) <= 0.75 || Math.abs(point.x - box.x - box.width) <= 0.75))
+      || (withinX && (Math.abs(point.y - box.y) <= 0.75 || Math.abs(point.y - box.y - box.height) <= 0.75));
+  };
+  const overlaps = (a, b) => Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 0.5
+    && Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y) > 0.5;
+
+  if (!blocks.length) errors.push("inheritance SVG has no class blocks");
+  if (svg.querySelectorAll("text:not(.inheritance-class-name)").length) errors.push("inheritance SVG has non-class text");
+  const known = new Set(window.UML_DATA.classifiers.map(item => item.name));
+  for (const block of blocks) {
+    const name = block.element.dataset.classifier;
+    if (!block.element.querySelector(":scope > title")?.textContent.trim()) errors.push(`class has no definition tooltip: ${name}`);
+    if (known.has(name) && block.element.tagName.toLowerCase() !== "a") errors.push(`class has no link: ${name}`);
+    if (!inside({ x: block.textBox.x, y: block.textBox.y }, block.box, 4)
+      || !inside({ x: block.textBox.x + block.textBox.width, y: block.textBox.y + block.textBox.height }, block.box, 4)) {
+      errors.push(`class name exceeds its block: ${name}`);
+    }
+  }
+  for (let first = 0; first < blocks.length; first += 1) {
+    for (let second = first + 1; second < blocks.length; second += 1) {
+      if (overlaps(blocks[first].textBox, blocks[second].textBox)) errors.push("class names overlap");
+    }
+  }
+
+  const current = blocks.filter(block => block.element.hasAttribute("data-current"));
+  const roots = blocks.filter(block => block.element.dataset.depth === "0");
+  if (current.length !== 1) errors.push("inheritance SVG must have one current class");
+  if (!roots.length) errors.push("inheritance SVG has no root");
+  const left = Math.min(...blocks.map(block => block.box.x));
+  const right = Math.max(...blocks.map(block => block.box.x + block.box.width));
+  if (roots.some(block => Math.abs(block.box.x - left) > 0.75)) errors.push("root is not the leftmost block");
+  if (current.length === 1 && Math.abs(current[0].box.x + current[0].box.width - right) > 0.75) {
+    errors.push("current class is not the rightmost block");
+  }
+
+  const names = new Set(blocks.map(block => block.element.dataset.classifier));
+  const expectedEdges = blocks.reduce((count, block) => count
+    + (window.UML_XMI_DATA.generalizations[block.element.dataset.classifier] || []).filter(parent => names.has(parent)).length, 0);
+  if (paths.length !== expectedEdges) errors.push(`generalization edge count: ${paths.length} instead of ${expectedEdges}`);
+
+  const terminalRun = path => {
+    const length = path.getTotalLength();
+    const origin = path.getPointAtLength(length);
+    const next = path.getPointAtLength(length - 1);
+    const runX = next.x - origin.x;
+    const runY = next.y - origin.y;
+    const runLength = Math.hypot(runX, runY);
+    const unitX = runX / runLength;
+    const unitY = runY / runLength;
+    let run = 1;
+    for (let distance = 2; distance < length; distance += 1) {
+      const point = path.getPointAtLength(length - distance);
+      const cross = Math.abs((point.x - origin.x) * unitY - (point.y - origin.y) * unitX);
+      if (cross > 0.25) break;
+      run = distance;
+    }
+    return run;
+  };
+  for (const path of paths) {
+    if (path.getAttribute("marker-end") !== "url(#inheritance-generalization)") errors.push("nonstandard inheritance marker");
+    if (terminalRun(path) < 12) errors.push("insufficient straight segment before inheritance marker");
+    const length = path.getTotalLength();
+    const start = path.getPointAtLength(0);
+    const end = path.getPointAtLength(length);
+    if (!blocks.some(block => onBorder(start, block.box))) errors.push("inheritance start is not on a class border");
+    if (!blocks.some(block => onBorder(end, block.box))) errors.push("inheritance end is not on a class border");
+    for (let distance = 1; distance < length - 1; distance += 1) {
+      if (blocks.some(block => inside(path.getPointAtLength(distance), block.box))) {
+        errors.push(`inheritance line enters a class block: ${path.getAttribute("d")}`);
+        break;
+      }
+    }
+  }
+  document.documentElement.setAttribute("data-inheritance-errors", [...new Set(errors)].join(" | "));
+})();
+"""
+
+
 def check_route(browser, route, expected, known_routes):
-    with tempfile.TemporaryDirectory() as profile:
-        result = subprocess.run(
-            [
-                str(browser),
-                "--headless=new",
-                "--disable-gpu",
-                "--disable-background-networking",
-                "--no-first-run",
-                f"--user-data-dir={profile}",
-                "--virtual-time-budget=1000",
-                "--dump-dom",
-                INDEX.resolve().as_uri() + route,
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=45,
-        )
+    page = INDEX
+    validation_page = None
+    if route.startswith("#/classifier/"):
+        script = f'<script>document.addEventListener("DOMContentLoaded", () => {{{INHERITANCE_GEOMETRY_SCRIPT}}});</script>'
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=SITE, prefix=".validate-", suffix=".html", delete=False
+        ) as temporary:
+            temporary.write(INDEX.read_text(encoding="utf-8").replace("</body>", script + "</body>"))
+            validation_page = Path(temporary.name)
+        page = validation_page
+    try:
+        with tempfile.TemporaryDirectory() as profile:
+            result = subprocess.run(
+                [
+                    str(browser),
+                    "--headless=new",
+                    "--disable-gpu",
+                    "--disable-background-networking",
+                    "--disable-extensions",
+                    "--no-first-run",
+                    f"--user-data-dir={profile}",
+                    "--virtual-time-budget=1000",
+                    "--dump-dom",
+                    page.resolve().as_uri() + route,
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=45,
+            )
+    finally:
+        if validation_page:
+            validation_page.unlink()
     dom = result.stdout.decode("utf-8", errors="replace")
     console = result.stderr.decode("utf-8", errors="replace")
     if result.returncode:
@@ -164,10 +278,23 @@ def check_route(browser, route, expected, known_routes):
         return f"{route or '#/'}: missing expected text {expected!r}"
     if "<h1" not in dom:
         return f"{route or '#/'}: missing h1"
+    if route.startswith("#/classifier/"):
+        if 'class="inheritance-svg"' not in dom:
+            return f"{route}: missing inheritance SVG"
+        if 'data-current="true"' not in dom:
+            return f"{route}: missing current class in inheritance SVG"
+        match = re.search(r'data-inheritance-errors="([^"]*)"', dom)
+        if not match:
+            return f"{route}: inheritance geometry check did not run"
+        if match.group(1):
+            return f"{route}: {match.group(1)}"
     for target in set(re.findall(r'href="(#[^"]*)"', dom)):
         if target not in known_routes:
             return f"{route or '#/'}: broken internal link {target}"
-    errors = re.findall(r"(?:Uncaught|SyntaxError|ReferenceError|TypeError)[^\r\n]*", console)
+    errors = [
+        error for error in re.findall(r"(?:Uncaught|SyntaxError|ReferenceError|TypeError)[^\r\n]*", console)
+        if "chrome-extension://" not in error
+    ]
     if errors:
         return f"{route or '#/'}: {'; '.join(errors)}"
     return None
@@ -407,6 +534,7 @@ def check_svg_geometry(browser, vector):
                 "--headless=new",
                 "--disable-gpu",
                 "--disable-background-networking",
+                "--disable-extensions",
                 "--no-first-run",
                 f"--user-data-dir={workspace / 'profile'}",
                 "--virtual-time-budget=1000",

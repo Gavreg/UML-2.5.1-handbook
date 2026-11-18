@@ -249,6 +249,112 @@
       ${sourceLink(section.page)}`;
   }
 
+  function inheritanceDiagram(item) {
+    const nodes = new Map();
+    function visit(name) {
+      if (nodes.has(name)) return;
+      const parents = xmiData.generalizations?.[name]
+        || classifierByName.get(name)?.generalizations
+        || [];
+      nodes.set(name, { name, parents });
+      parents.forEach(visit);
+    }
+    visit(item.name);
+
+    const depths = new Map();
+    function depth(name) {
+      if (depths.has(name)) return depths.get(name);
+      const parents = nodes.get(name)?.parents || [];
+      const value = parents.length ? 1 + Math.max(...parents.map(depth)) : 0;
+      depths.set(name, value);
+      return value;
+    }
+    nodes.forEach(node => depth(node.name));
+
+    const columns = Array.from({ length: Math.max(...depths.values()) + 1 }, () => []);
+    nodes.forEach(node => columns[depths.get(node.name)].push(node));
+    const margin = 24;
+    const rowGap = 72;
+    const columnGap = 72;
+    const boxHeight = 40;
+    const maxRows = Math.max(...columns.map(column => column.length));
+    const contentHeight = (maxRows - 1) * rowGap + boxHeight;
+    columns.forEach(column => column.forEach(node => {
+      node.width = Math.max(96, Math.ceil(node.name.length * 9 + 36));
+      node.height = boxHeight;
+    }));
+
+    let columnX = margin;
+    columns.forEach(column => {
+      const columnWidth = Math.max(...column.map(node => node.width));
+      const columnHeight = (column.length - 1) * rowGap + boxHeight;
+      const columnOffset = (contentHeight - columnHeight) / 2;
+      column.forEach((node, row) => {
+        node.x = columnX;
+        node.y = margin + columnOffset + row * rowGap;
+        node.columnRight = columnX + columnWidth;
+      });
+      columnX += columnWidth + columnGap;
+    });
+    const width = columnX - columnGap + margin;
+
+    const edges = [];
+    const outgoing = new Map();
+    const incoming = new Map();
+    nodes.forEach(node => {
+      node.parents.forEach(parentName => {
+        const parent = nodes.get(parentName);
+        if (!parent) return;
+        const edge = { parent, child: node, outIndex: outgoing.get(parentName) || 0, inIndex: incoming.get(node.name) || 0 };
+        outgoing.set(parentName, edge.outIndex + 1);
+        incoming.set(node.name, edge.inIndex + 1);
+        edges.push(edge);
+      });
+    });
+    const longEdges = edges.filter(edge => depths.get(edge.child.name) - depths.get(edge.parent.name) > 1);
+    const height = margin * 2 + contentHeight + longEdges.length * 16;
+    let longLane = 0;
+    const edgeOffset = (index, count) => (index - (count - 1) / 2) * 8;
+    const paths = edges.map(edge => {
+      const parentRight = edge.parent.x + edge.parent.width;
+      const sourceY = edge.parent.y + boxHeight / 2 + edgeOffset(edge.outIndex, outgoing.get(edge.parent.name));
+      const targetY = edge.child.y + boxHeight / 2 + edgeOffset(edge.inIndex, incoming.get(edge.child.name));
+      if (depths.get(edge.child.name) - depths.get(edge.parent.name) > 1) {
+        const sourceJunction = edge.parent.columnRight + 16 + edge.outIndex * 6;
+        const targetJunction = edge.child.x - 16 - edge.inIndex * 6;
+        const busY = margin + contentHeight + 16 + longLane * 16;
+        longLane += 1;
+        return `<path class="inheritance-generalization" d="M ${parentRight} ${sourceY} H ${sourceJunction} V ${busY} H ${targetJunction} V ${targetY} H ${edge.child.x}" marker-end="url(#inheritance-generalization)"/>`;
+      }
+      const gap = edge.child.x - edge.parent.columnRight;
+      const junctionX = edge.parent.columnRight + gap * (0.35 + edge.inIndex * 0.1);
+      return `<path class="inheritance-generalization" d="M ${parentRight} ${sourceY} H ${junctionX} V ${targetY} H ${edge.child.x}" marker-end="url(#inheritance-generalization)"/>`;
+    }).join("");
+
+    const blocks = columns.flat().map(node => {
+      const classifier = classifierByName.get(node.name);
+      const definition = classifier?.definition || xmiData.classifierDefinitions?.[node.name] || node.name;
+      const abstract = classifier?.kind === "Abstract Class" ? " abstract" : "";
+      const current = node.name === item.name ? " current" : "";
+      const content = `<title>${escapeHtml(`${node.name}. ${definition}`)}</title>
+        <rect class="inheritance-class-box${current}" x="${node.x}" y="${node.y}" width="${node.width}" height="${boxHeight}"/>
+        <text class="inheritance-class-name${abstract}" x="${node.x + node.width / 2}" y="${node.y + 25}" text-anchor="middle">${escapeHtml(node.name)}</text>`;
+      const attributes = `class="inheritance-class" data-classifier="${escapeHtml(node.name)}" data-depth="${depths.get(node.name)}"${current ? ' data-current="true"' : ""}`;
+      return classifier
+        ? `<a ${attributes} href="#/classifier/${slug(node.name)}">${content}</a>`
+        : `<g ${attributes}>${content}</g>`;
+    }).join("");
+
+    return `<section class="inheritance-section"><h2>Наследование</h2><div class="inheritance-diagram">
+      <svg class="inheritance-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="--diagram-width: ${width}px" role="img" aria-label="Иерархия наследования ${escapeHtml(item.name)}">
+        <title>Иерархия наследования ${escapeHtml(item.name)}</title>
+        <desc>Корневые предки расположены слева, целевой класс ${escapeHtml(item.name)} — справа.</desc>
+        <defs><marker id="inheritance-generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker></defs>
+        ${paths}${blocks}
+      </svg>
+    </div></section>`;
+  }
+
   function renderClassifier(id) {
     const item = data.classifiers.find(entry => slug(entry.name) === id);
     if (!item) return renderNotFound();
@@ -264,6 +370,7 @@
       <p class="eyebrow">${kindLabels[item.kind]} · раздел ${item.section}</p>
       <h1>${escapeHtml(item.ru)}</h1>
       <p class="original-name" lang="en">${escapeHtml(item.name)} [${escapeHtml(item.kind)}]</p>
+      ${inheritanceDiagram(item)}
       <div class="meta-row"><span class="kind-tag">${kindLabels[item.kind]}</span><span class="meta-tag">OMG UML 2.5.1, стр. ${item.page}</span></div>
       <div class="definition"><span class="definition-label">Определение</span><p>${metamodelDescription(item.definition, item.name)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations)}</section>` : ""}

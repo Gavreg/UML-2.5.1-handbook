@@ -1,8 +1,91 @@
 window.UML_XMI_DATA = {
   "source": "OMG UML 2.5.1, formal/17-12-05, UML.xmi (20161101)",
   "classes": {
-    "Element": {
+    "Abstraction": {
       "direct": [
+        {
+          "id": "Abstraction-mapping",
+          "name": "mapping",
+          "signature": "mapping : OpaqueExpression [0..1] {subsets ownedElement}",
+          "description": "Необязательное выражение, уточняющее отношение между поставщиками и клиентами.",
+          "type": "OpaqueExpression",
+          "association": "A_mapping_abstraction",
+          "owner": "Abstraction",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Dependency-client",
+          "name": "client",
+          "signature": "client : NamedElement [1..*] {subsets source}",
+          "description": "Элементы, зависящие от поставщиков.",
+          "type": "NamedElement",
+          "association": "A_clientDependency_client",
+          "owner": "Dependency",
+          "subsets": [
+            "source"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "Dependency-supplier",
+          "name": "supplier",
+          "signature": "supplier : NamedElement [1..*] {subsets target}",
+          "description": "Элементы, от которых зависят клиенты.",
+          "type": "NamedElement",
+          "association": "A_supplier_supplierDependency",
+          "owner": "Dependency",
+          "subsets": [
+            "target"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "DirectedRelationship-source",
+          "name": "source",
+          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Исходные элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_source_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "DirectedRelationship-target",
+          "name": "target",
+          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Целевые элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_target_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Relationship"
+        },
         {
           "id": "Element-ownedComment",
           "name": "ownedComment",
@@ -14,7 +97,8 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "inheritedFrom": "Element"
         },
         {
           "id": "Element-ownedElement",
@@ -25,7 +109,8 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "Element",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "inheritedFrom": "Element"
         },
         {
           "id": "Element-owner",
@@ -36,21 +121,140 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "Element",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
         }
-      ],
-      "inherited": []
+      ]
     },
-    "Relationship": {
+    "Comment": {
       "direct": [
         {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
+          "id": "Comment-annotatedElement",
+          "name": "annotatedElement",
+          "signature": "annotatedElement : Element [0..*]",
+          "description": "Элементы, к которым относится комментарий.",
           "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
+          "association": "A_annotatedElement_comment",
+          "owner": "Comment",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "Comment-body",
+          "name": "body",
+          "signature": "body : String [0..1]",
+          "description": "Текст комментария.",
+          "type": "String",
+          "association": null,
+          "owner": "Comment",
           "subsets": [],
           "redefines": []
         }
@@ -93,6 +297,413 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [],
           "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "Constraint": {
+      "direct": [
+        {
+          "id": "Constraint-constrainedElement",
+          "name": "constrainedElement",
+          "signature": "constrainedElement : Element [0..*] {ordered}",
+          "description": "Упорядоченное множество элементов, к которым применяется ограничение.",
+          "type": "Element",
+          "association": "A_constrainedElement_constraint",
+          "owner": "Constraint",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "Constraint-context",
+          "name": "context",
+          "signature": "context : Namespace [0..1] {subsets namespace}",
+          "description": "Пространство имён, владеющее ограничением.",
+          "type": "Namespace",
+          "association": "A_ownedRule_context",
+          "owner": "Constraint",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "Constraint-specification",
+          "name": "specification",
+          "signature": "specification : ValueSpecification [1..1] {subsets ownedElement}",
+          "description": "Условие, которое должно быть истинным для выполнения ограничения.",
+          "type": "ValueSpecification",
+          "association": "A_specification_owningConstraint",
+          "owner": "Constraint",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        }
+      ]
+    },
+    "Dependency": {
+      "direct": [
+        {
+          "id": "Dependency-client",
+          "name": "client",
+          "signature": "client : NamedElement [1..*] {subsets source}",
+          "description": "Элементы, зависящие от поставщиков.",
+          "type": "NamedElement",
+          "association": "A_clientDependency_client",
+          "owner": "Dependency",
+          "subsets": [
+            "source"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "Dependency-supplier",
+          "name": "supplier",
+          "signature": "supplier : NamedElement [1..*] {subsets target}",
+          "description": "Элементы, от которых зависят клиенты.",
+          "type": "NamedElement",
+          "association": "A_supplier_supplierDependency",
+          "owner": "Dependency",
+          "subsets": [
+            "target"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "DirectedRelationship-source",
+          "name": "source",
+          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Исходные элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_source_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "DirectedRelationship-target",
+          "name": "target",
+          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Целевые элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_target_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Relationship"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
         }
       ]
     },
@@ -178,412 +789,80 @@ window.UML_XMI_DATA = {
         }
       ]
     },
-    "Comment": {
+    "Element": {
       "direct": [
         {
-          "id": "Comment-annotatedElement",
-          "name": "annotatedElement",
-          "signature": "annotatedElement : Element [0..*]",
-          "description": "Элементы, к которым относится комментарий.",
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
           "type": "Element",
-          "association": "A_annotatedElement_comment",
-          "owner": "Comment",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
           "subsets": [],
           "redefines": []
         },
         {
-          "id": "Comment-body",
-          "name": "body",
-          "signature": "body : String [0..1]",
-          "description": "Текст комментария.",
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": []
+    },
+    "ElementImport": {
+      "direct": [
+        {
+          "id": "ElementImport-alias",
+          "name": "alias",
+          "signature": "alias : String [0..1]",
+          "description": "Альтернативное имя импортированного элемента; по умолчанию псевдоним не используется.",
           "type": "String",
           "association": null,
-          "owner": "Comment",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "TemplateParameter": {
-      "direct": [
-        {
-          "id": "TemplateParameter-default",
-          "name": "default",
-          "signature": "default : ParameterableElement [0..1]",
-          "description": "Значение формального параметра по умолчанию.",
-          "type": "ParameterableElement",
-          "association": "A_default_templateParameter",
-          "owner": "TemplateParameter",
+          "owner": "ElementImport",
           "subsets": [],
           "redefines": []
         },
         {
-          "id": "TemplateParameter-ownedDefault",
-          "name": "ownedDefault",
-          "signature": "ownedDefault : ParameterableElement [0..1] {subsets ownedElement, default}",
-          "description": "Принадлежащее параметру значение по умолчанию.",
-          "type": "ParameterableElement",
-          "association": "A_ownedDefault_templateParameter",
-          "owner": "TemplateParameter",
+          "id": "ElementImport-importedElement",
+          "name": "importedElement",
+          "signature": "importedElement : PackageableElement [1..1] {subsets target}",
+          "description": "Элемент, имя которого добавляется в пространство имён.",
+          "type": "PackageableElement",
+          "association": "A_importedElement_import",
+          "owner": "ElementImport",
           "subsets": [
-            "ownedElement",
-            "default"
+            "target"
           ],
           "redefines": []
         },
         {
-          "id": "TemplateParameter-ownedParameteredElement",
-          "name": "ownedParameteredElement",
-          "signature": "ownedParameteredElement : ParameterableElement [0..1] {subsets ownedElement, parameteredElement}",
-          "description": "Принадлежащий параметру параметризуемый элемент.",
-          "type": "ParameterableElement",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "TemplateParameter",
-          "subsets": [
-            "ownedElement",
-            "parameteredElement"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "TemplateParameter-parameteredElement",
-          "name": "parameteredElement",
-          "signature": "parameteredElement : ParameterableElement [1..1]",
-          "description": "Элемент, представленный параметром шаблона.",
-          "type": "ParameterableElement",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "TemplateParameter",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "TemplateParameter-signature",
-          "name": "signature",
-          "signature": "signature : TemplateSignature [1..1] {subsets templateSignature, owner}",
-          "description": "Подпись, владеющая параметром.",
-          "type": "TemplateSignature",
-          "association": "A_ownedParameter_signature",
-          "owner": "TemplateParameter",
-          "subsets": [
-            "templateSignature",
-            "owner"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "TemplateSignature": {
-      "direct": [
-        {
-          "id": "TemplateSignature-ownedParameter",
-          "name": "ownedParameter",
-          "signature": "ownedParameter : TemplateParameter [0..*] {ordered, subsets ownedElement, parameter}",
-          "description": "Формальные параметры, принадлежащие подписи.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameter_signature",
-          "owner": "TemplateSignature",
-          "subsets": [
-            "ownedElement",
-            "parameter"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "TemplateSignature-parameter",
-          "name": "parameter",
-          "signature": "parameter : TemplateParameter [1..*] {ordered}",
-          "description": "Упорядоченное множество всех формальных параметров.",
-          "type": "TemplateParameter",
-          "association": "A_parameter_templateSignature",
-          "owner": "TemplateSignature",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "TemplateSignature-template",
-          "name": "template",
-          "signature": "template : TemplateableElement [1..1] {subsets owner}",
-          "description": "Элемент-шаблон, владеющий подписью.",
-          "type": "TemplateableElement",
-          "association": "A_ownedTemplateSignature_template",
-          "owner": "TemplateSignature",
-          "subsets": [
-            "owner"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "TemplateableElement": {
-      "direct": [
-        {
-          "id": "TemplateableElement-ownedTemplateSignature",
-          "name": "ownedTemplateSignature",
-          "signature": "ownedTemplateSignature : TemplateSignature [0..1] {subsets ownedElement}",
-          "description": "Необязательная подпись, делающая элемент шаблоном.",
-          "type": "TemplateSignature",
-          "association": "A_ownedTemplateSignature_template",
-          "owner": "TemplateableElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "TemplateableElement-templateBinding",
-          "name": "templateBinding",
-          "signature": "templateBinding : TemplateBinding [0..*] {subsets directedRelationship, ownedElement}",
-          "description": "Необязательные привязки элемента к шаблонам.",
-          "type": "TemplateBinding",
-          "association": "A_templateBinding_boundElement",
-          "owner": "TemplateableElement",
-          "subsets": [
-            "directedRelationship",
-            "ownedElement"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "ParameterableElement": {
-      "direct": [
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "TemplateBinding": {
-      "direct": [
-        {
-          "id": "TemplateBinding-boundElement",
-          "name": "boundElement",
-          "signature": "boundElement : TemplateableElement [1..1] {subsets source, owner}",
-          "description": "Элемент, к которому применяется привязка.",
-          "type": "TemplateableElement",
-          "association": "A_templateBinding_boundElement",
-          "owner": "TemplateBinding",
+          "id": "ElementImport-importingNamespace",
+          "name": "importingNamespace",
+          "signature": "importingNamespace : Namespace [1..1] {subsets source, owner}",
+          "description": "Пространство имён, выполняющее импорт.",
+          "type": "Namespace",
+          "association": "A_elementImport_importingNamespace",
+          "owner": "ElementImport",
           "subsets": [
             "source",
             "owner"
@@ -591,29 +870,14 @@ window.UML_XMI_DATA = {
           "redefines": []
         },
         {
-          "id": "TemplateBinding-parameterSubstitution",
-          "name": "parameterSubstitution",
-          "signature": "parameterSubstitution : TemplateParameterSubstitution [0..*] {subsets ownedElement}",
-          "description": "Подстановки параметров, принадлежащие привязке.",
-          "type": "TemplateParameterSubstitution",
-          "association": "A_parameterSubstitution_templateBinding",
-          "owner": "TemplateBinding",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "TemplateBinding-signature",
-          "name": "signature",
-          "signature": "signature : TemplateSignature [1..1] {subsets target}",
-          "description": "Подпись целевого шаблона.",
-          "type": "TemplateSignature",
-          "association": "A_signature_templateBinding",
-          "owner": "TemplateBinding",
-          "subsets": [
-            "target"
-          ],
+          "id": "ElementImport-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [1..1] = public",
+          "description": "Видимость импортированного элемента внутри и за пределами импортирующего пространства имён.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "ElementImport",
+          "subsets": [],
           "redefines": []
         }
       ],
@@ -698,55 +962,193 @@ window.UML_XMI_DATA = {
         }
       ]
     },
-    "TemplateParameterSubstitution": {
+    "MultiplicityElement": {
       "direct": [
         {
-          "id": "TemplateParameterSubstitution-actual",
-          "name": "actual",
-          "signature": "actual : ParameterableElement [1..1]",
-          "description": "Фактический параметр подстановки.",
-          "type": "ParameterableElement",
-          "association": "A_actual_templateParameterSubstitution",
-          "owner": "TemplateParameterSubstitution",
+          "id": "MultiplicityElement-isOrdered",
+          "name": "isOrdered",
+          "signature": "isOrdered : Boolean [1..1] = false",
+          "description": "Определяет последовательный порядок значений многозначной кратности.",
+          "type": "Boolean",
+          "association": null,
+          "owner": "MultiplicityElement",
           "subsets": [],
           "redefines": []
         },
         {
-          "id": "TemplateParameterSubstitution-formal",
-          "name": "formal",
-          "signature": "formal : TemplateParameter [1..1]",
-          "description": "Соответствующий формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_formal_templateParameterSubstitution",
-          "owner": "TemplateParameterSubstitution",
+          "id": "MultiplicityElement-isUnique",
+          "name": "isUnique",
+          "signature": "isUnique : Boolean [1..1] = true",
+          "description": "Определяет уникальность значений многозначной кратности.",
+          "type": "Boolean",
+          "association": null,
+          "owner": "MultiplicityElement",
           "subsets": [],
           "redefines": []
         },
         {
-          "id": "TemplateParameterSubstitution-ownedActual",
-          "name": "ownedActual",
-          "signature": "ownedActual : ParameterableElement [0..1] {subsets ownedElement, actual}",
-          "description": "Принадлежащий подстановке фактический параметр.",
-          "type": "ParameterableElement",
-          "association": "A_ownedActual_owningTemplateParameterSubstitution",
-          "owner": "TemplateParameterSubstitution",
+          "id": "MultiplicityElement-lower",
+          "name": "lower",
+          "signature": "/lower : Integer [1..1]",
+          "description": "Нижняя граница интервала кратности.",
+          "type": "Integer",
+          "association": null,
+          "owner": "MultiplicityElement",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "MultiplicityElement-lowerValue",
+          "name": "lowerValue",
+          "signature": "lowerValue : ValueSpecification [0..1] {subsets ownedElement}",
+          "description": "Спецификация нижней границы.",
+          "type": "ValueSpecification",
+          "association": "A_lowerValue_owningLower",
+          "owner": "MultiplicityElement",
           "subsets": [
-            "ownedElement",
-            "actual"
+            "ownedElement"
           ],
           "redefines": []
         },
         {
-          "id": "TemplateParameterSubstitution-templateBinding",
-          "name": "templateBinding",
-          "signature": "templateBinding : TemplateBinding [1..1] {subsets owner}",
-          "description": "Привязка, владеющая подстановкой.",
-          "type": "TemplateBinding",
-          "association": "A_parameterSubstitution_templateBinding",
-          "owner": "TemplateParameterSubstitution",
+          "id": "MultiplicityElement-upper",
+          "name": "upper",
+          "signature": "/upper : UnlimitedNatural [1..1]",
+          "description": "Верхняя граница интервала кратности.",
+          "type": "UnlimitedNatural",
+          "association": null,
+          "owner": "MultiplicityElement",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "MultiplicityElement-upperValue",
+          "name": "upperValue",
+          "signature": "upperValue : ValueSpecification [0..1] {subsets ownedElement}",
+          "description": "Спецификация верхней границы.",
+          "type": "ValueSpecification",
+          "association": "A_upperValue_owningUpper",
+          "owner": "MultiplicityElement",
           "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "NamedElement": {
+      "direct": [
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
             "owner"
           ],
+          "redefines": []
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "NamedElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1]",
+          "description": "Видимость элемента за пределами владеющего пространства имён.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
           "redefines": []
         }
       ],
@@ -952,256 +1354,6 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [],
           "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "NamedElement": {
-      "direct": [
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "NamedElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1]",
-          "description": "Видимость элемента за пределами владеющего пространства имён.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "ElementImport": {
-      "direct": [
-        {
-          "id": "ElementImport-alias",
-          "name": "alias",
-          "signature": "alias : String [0..1]",
-          "description": "Альтернативное имя импортированного элемента; по умолчанию псевдоним не используется.",
-          "type": "String",
-          "association": null,
-          "owner": "ElementImport",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "ElementImport-importedElement",
-          "name": "importedElement",
-          "signature": "importedElement : PackageableElement [1..1] {subsets target}",
-          "description": "Элемент, имя которого добавляется в пространство имён.",
-          "type": "PackageableElement",
-          "association": "A_importedElement_import",
-          "owner": "ElementImport",
-          "subsets": [
-            "target"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "ElementImport-importingNamespace",
-          "name": "importingNamespace",
-          "signature": "importingNamespace : Namespace [1..1] {subsets source, owner}",
-          "description": "Пространство имён, выполняющее импорт.",
-          "type": "Namespace",
-          "association": "A_elementImport_importingNamespace",
-          "owner": "ElementImport",
-          "subsets": [
-            "source",
-            "owner"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "ElementImport-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [1..1] = public",
-          "description": "Видимость импортированного элемента внутри и за пределами импортирующего пространства имён.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "ElementImport",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "DirectedRelationship-source",
-          "name": "source",
-          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Исходные элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_source_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "DirectedRelationship-target",
-          "name": "target",
-          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Целевые элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_target_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
-          "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Relationship"
         },
         {
           "id": "Element-ownedComment",
@@ -1516,6 +1668,1755 @@ window.UML_XMI_DATA = {
         }
       ]
     },
+    "ParameterableElement": {
+      "direct": [
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "Realization": {
+      "direct": [],
+      "inherited": [
+        {
+          "id": "Abstraction-mapping",
+          "name": "mapping",
+          "signature": "mapping : OpaqueExpression [0..1] {subsets ownedElement}",
+          "description": "Необязательное выражение, уточняющее отношение между поставщиками и клиентами.",
+          "type": "OpaqueExpression",
+          "association": "A_mapping_abstraction",
+          "owner": "Abstraction",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Abstraction"
+        },
+        {
+          "id": "Dependency-client",
+          "name": "client",
+          "signature": "client : NamedElement [1..*] {subsets source}",
+          "description": "Элементы, зависящие от поставщиков.",
+          "type": "NamedElement",
+          "association": "A_clientDependency_client",
+          "owner": "Dependency",
+          "subsets": [
+            "source"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "Dependency-supplier",
+          "name": "supplier",
+          "signature": "supplier : NamedElement [1..*] {subsets target}",
+          "description": "Элементы, от которых зависят клиенты.",
+          "type": "NamedElement",
+          "association": "A_supplier_supplierDependency",
+          "owner": "Dependency",
+          "subsets": [
+            "target"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "DirectedRelationship-source",
+          "name": "source",
+          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Исходные элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_source_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "DirectedRelationship-target",
+          "name": "target",
+          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Целевые элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_target_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Relationship"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        }
+      ]
+    },
+    "Relationship": {
+      "direct": [
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "TemplateBinding": {
+      "direct": [
+        {
+          "id": "TemplateBinding-boundElement",
+          "name": "boundElement",
+          "signature": "boundElement : TemplateableElement [1..1] {subsets source, owner}",
+          "description": "Элемент, к которому применяется привязка.",
+          "type": "TemplateableElement",
+          "association": "A_templateBinding_boundElement",
+          "owner": "TemplateBinding",
+          "subsets": [
+            "source",
+            "owner"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateBinding-parameterSubstitution",
+          "name": "parameterSubstitution",
+          "signature": "parameterSubstitution : TemplateParameterSubstitution [0..*] {subsets ownedElement}",
+          "description": "Подстановки параметров, принадлежащие привязке.",
+          "type": "TemplateParameterSubstitution",
+          "association": "A_parameterSubstitution_templateBinding",
+          "owner": "TemplateBinding",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateBinding-signature",
+          "name": "signature",
+          "signature": "signature : TemplateSignature [1..1] {subsets target}",
+          "description": "Подпись целевого шаблона.",
+          "type": "TemplateSignature",
+          "association": "A_signature_templateBinding",
+          "owner": "TemplateBinding",
+          "subsets": [
+            "target"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "DirectedRelationship-source",
+          "name": "source",
+          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Исходные элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_source_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "DirectedRelationship-target",
+          "name": "target",
+          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Целевые элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_target_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Relationship"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "TemplateParameter": {
+      "direct": [
+        {
+          "id": "TemplateParameter-default",
+          "name": "default",
+          "signature": "default : ParameterableElement [0..1]",
+          "description": "Значение формального параметра по умолчанию.",
+          "type": "ParameterableElement",
+          "association": "A_default_templateParameter",
+          "owner": "TemplateParameter",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameter-ownedDefault",
+          "name": "ownedDefault",
+          "signature": "ownedDefault : ParameterableElement [0..1] {subsets ownedElement, default}",
+          "description": "Принадлежащее параметру значение по умолчанию.",
+          "type": "ParameterableElement",
+          "association": "A_ownedDefault_templateParameter",
+          "owner": "TemplateParameter",
+          "subsets": [
+            "ownedElement",
+            "default"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameter-ownedParameteredElement",
+          "name": "ownedParameteredElement",
+          "signature": "ownedParameteredElement : ParameterableElement [0..1] {subsets ownedElement, parameteredElement}",
+          "description": "Принадлежащий параметру параметризуемый элемент.",
+          "type": "ParameterableElement",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "TemplateParameter",
+          "subsets": [
+            "ownedElement",
+            "parameteredElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameter-parameteredElement",
+          "name": "parameteredElement",
+          "signature": "parameteredElement : ParameterableElement [1..1]",
+          "description": "Элемент, представленный параметром шаблона.",
+          "type": "ParameterableElement",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "TemplateParameter",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameter-signature",
+          "name": "signature",
+          "signature": "signature : TemplateSignature [1..1] {subsets templateSignature, owner}",
+          "description": "Подпись, владеющая параметром.",
+          "type": "TemplateSignature",
+          "association": "A_ownedParameter_signature",
+          "owner": "TemplateParameter",
+          "subsets": [
+            "templateSignature",
+            "owner"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "TemplateParameterSubstitution": {
+      "direct": [
+        {
+          "id": "TemplateParameterSubstitution-actual",
+          "name": "actual",
+          "signature": "actual : ParameterableElement [1..1]",
+          "description": "Фактический параметр подстановки.",
+          "type": "ParameterableElement",
+          "association": "A_actual_templateParameterSubstitution",
+          "owner": "TemplateParameterSubstitution",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameterSubstitution-formal",
+          "name": "formal",
+          "signature": "formal : TemplateParameter [1..1]",
+          "description": "Соответствующий формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_formal_templateParameterSubstitution",
+          "owner": "TemplateParameterSubstitution",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameterSubstitution-ownedActual",
+          "name": "ownedActual",
+          "signature": "ownedActual : ParameterableElement [0..1] {subsets ownedElement, actual}",
+          "description": "Принадлежащий подстановке фактический параметр.",
+          "type": "ParameterableElement",
+          "association": "A_ownedActual_owningTemplateParameterSubstitution",
+          "owner": "TemplateParameterSubstitution",
+          "subsets": [
+            "ownedElement",
+            "actual"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateParameterSubstitution-templateBinding",
+          "name": "templateBinding",
+          "signature": "templateBinding : TemplateBinding [1..1] {subsets owner}",
+          "description": "Привязка, владеющая подстановкой.",
+          "type": "TemplateBinding",
+          "association": "A_parameterSubstitution_templateBinding",
+          "owner": "TemplateParameterSubstitution",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "TemplateSignature": {
+      "direct": [
+        {
+          "id": "TemplateSignature-ownedParameter",
+          "name": "ownedParameter",
+          "signature": "ownedParameter : TemplateParameter [0..*] {ordered, subsets ownedElement, parameter}",
+          "description": "Формальные параметры, принадлежащие подписи.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameter_signature",
+          "owner": "TemplateSignature",
+          "subsets": [
+            "ownedElement",
+            "parameter"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateSignature-parameter",
+          "name": "parameter",
+          "signature": "parameter : TemplateParameter [1..*] {ordered}",
+          "description": "Упорядоченное множество всех формальных параметров.",
+          "type": "TemplateParameter",
+          "association": "A_parameter_templateSignature",
+          "owner": "TemplateSignature",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "TemplateSignature-template",
+          "name": "template",
+          "signature": "template : TemplateableElement [1..1] {subsets owner}",
+          "description": "Элемент-шаблон, владеющий подписью.",
+          "type": "TemplateableElement",
+          "association": "A_ownedTemplateSignature_template",
+          "owner": "TemplateSignature",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "TemplateableElement": {
+      "direct": [
+        {
+          "id": "TemplateableElement-ownedTemplateSignature",
+          "name": "ownedTemplateSignature",
+          "signature": "ownedTemplateSignature : TemplateSignature [0..1] {subsets ownedElement}",
+          "description": "Необязательная подпись, делающая элемент шаблоном.",
+          "type": "TemplateSignature",
+          "association": "A_ownedTemplateSignature_template",
+          "owner": "TemplateableElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "TemplateableElement-templateBinding",
+          "name": "templateBinding",
+          "signature": "templateBinding : TemplateBinding [0..*] {subsets directedRelationship, ownedElement}",
+          "description": "Необязательные привязки элемента к шаблонам.",
+          "type": "TemplateBinding",
+          "association": "A_templateBinding_boundElement",
+          "owner": "TemplateableElement",
+          "subsets": [
+            "directedRelationship",
+            "ownedElement"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "Type": {
+      "direct": [
+        {
+          "id": "Type-package",
+          "name": "package",
+          "signature": "package : Package [0..1] {subsets owningPackage}",
+          "description": "Пакет, владеющий типом, если он задан.",
+          "type": "Package",
+          "association": "A_ownedType_package",
+          "owner": "Type",
+          "subsets": [
+            "owningPackage"
+          ],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        }
+      ]
+    },
+    "TypedElement": {
+      "direct": [
+        {
+          "id": "TypedElement-type",
+          "name": "type",
+          "signature": "type : Type [0..1]",
+          "description": "Тип элемента.",
+          "type": "Type",
+          "association": "A_type_typedElement",
+          "owner": "TypedElement",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1]",
+          "description": "Видимость элемента за пределами владеющего пространства имён.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        }
+      ]
+    },
+    "Usage": {
+      "direct": [],
+      "inherited": [
+        {
+          "id": "Dependency-client",
+          "name": "client",
+          "signature": "client : NamedElement [1..*] {subsets source}",
+          "description": "Элементы, зависящие от поставщиков.",
+          "type": "NamedElement",
+          "association": "A_clientDependency_client",
+          "owner": "Dependency",
+          "subsets": [
+            "source"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "Dependency-supplier",
+          "name": "supplier",
+          "signature": "supplier : NamedElement [1..*] {subsets target}",
+          "description": "Элементы, от которых зависят клиенты.",
+          "type": "NamedElement",
+          "association": "A_supplier_supplierDependency",
+          "owner": "Dependency",
+          "subsets": [
+            "target"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Dependency"
+        },
+        {
+          "id": "DirectedRelationship-source",
+          "name": "source",
+          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Исходные элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_source_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "DirectedRelationship-target",
+          "name": "target",
+          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
+          "description": "Целевые элементы направленного отношения.",
+          "type": "Element",
+          "association": "A_target_directedRelationship",
+          "owner": "DirectedRelationship",
+          "subsets": [
+            "relatedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "DirectedRelationship"
+        },
+        {
+          "id": "Relationship-relatedElement",
+          "name": "relatedElement",
+          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
+          "description": "Элементы, связанные этим отношением.",
+          "type": "Element",
+          "association": "A_relatedElement_relationship",
+          "owner": "Relationship",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Relationship"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        }
+      ]
+    },
+    "Expression": {
+      "direct": [
+        {
+          "id": "Expression-operand",
+          "name": "operand",
+          "signature": "operand : ValueSpecification [0..*] {ordered, subsets ownedElement}",
+          "description": "Упорядоченная последовательность спецификаций значений-операндов.",
+          "type": "ValueSpecification",
+          "association": "A_operand_expression",
+          "owner": "Expression",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": []
+        },
+        {
+          "id": "Expression-symbol",
+          "name": "symbol",
+          "signature": "symbol : String [0..1]",
+          "description": "Символ, связанный с этим узлом дерева выражения.",
+          "type": "String",
+          "association": null,
+          "owner": "Expression",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "TypedElement-type",
+          "name": "type",
+          "signature": "type : Type [0..1]",
+          "description": "Тип элемента.",
+          "type": "Type",
+          "association": "A_type_typedElement",
+          "owner": "TypedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "TypedElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        }
+      ]
+    },
+    "OpaqueExpression": {
+      "direct": [
+        {
+          "id": "OpaqueExpression-behavior",
+          "name": "behavior",
+          "signature": "behavior : Behavior [0..1]",
+          "description": "Поведение UML, задающее вычисление выражения.",
+          "type": "Behavior",
+          "association": "A_behavior_opaqueExpression",
+          "owner": "OpaqueExpression",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "OpaqueExpression-body",
+          "name": "body",
+          "signature": "body : String [0..*] {ordered, nonunique}",
+          "description": "Текстовое определение поведения выражения, возможно на нескольких языках.",
+          "type": "String",
+          "association": null,
+          "owner": "OpaqueExpression",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "OpaqueExpression-language",
+          "name": "language",
+          "signature": "language : String [0..*] {ordered}",
+          "description": "Языки текстовых определений; порядок языков соответствует порядку строк body. Если языки не указаны, они могут следовать из выражения или контекста.",
+          "type": "String",
+          "association": null,
+          "owner": "OpaqueExpression",
+          "subsets": [],
+          "redefines": []
+        },
+        {
+          "id": "OpaqueExpression-result",
+          "name": "result",
+          "signature": "/result : Parameter [0..1] {readOnly}",
+          "description": "Единственный возвращаемый параметр поведения, значения которого являются результатом вычисления выражения.",
+          "type": "Parameter",
+          "association": "A_result_opaqueExpression",
+          "owner": "OpaqueExpression",
+          "subsets": [],
+          "redefines": []
+        }
+      ],
+      "inherited": [
+        {
+          "id": "TypedElement-type",
+          "name": "type",
+          "signature": "type : Type [0..1]",
+          "description": "Тип элемента.",
+          "type": "Type",
+          "association": "A_type_typedElement",
+          "owner": "TypedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "TypedElement"
+        },
+        {
+          "id": "NamedElement-clientDependency",
+          "name": "clientDependency",
+          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
+          "description": "Зависимости, в которых элемент выступает клиентом.",
+          "type": "Dependency",
+          "association": "A_clientDependency_client",
+          "owner": "NamedElement",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-name",
+          "name": "name",
+          "signature": "name : String [0..1]",
+          "description": "Имя элемента.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-nameExpression",
+          "name": "nameExpression",
+          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
+          "description": "Выражение, определяющее имя элемента.",
+          "type": "StringExpression",
+          "association": "A_nameExpression_namedElement",
+          "owner": "NamedElement",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-namespace",
+          "name": "namespace",
+          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
+          "description": "Пространство имён, владеющее элементом.",
+          "type": "Namespace",
+          "association": "A_ownedMember_namespace",
+          "owner": "NamedElement",
+          "subsets": [
+            "memberNamespace",
+            "owner"
+          ],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "NamedElement-qualifiedName",
+          "name": "qualifiedName",
+          "signature": "/qualifiedName : String [0..1] {readOnly}",
+          "description": "Имя, построенное по иерархии вложенных пространств имён.",
+          "type": "String",
+          "association": null,
+          "owner": "NamedElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        }
+      ]
+    },
     "StringExpression": {
       "direct": [
         {
@@ -1761,125 +3662,20 @@ window.UML_XMI_DATA = {
         }
       ]
     },
-    "Constraint": {
-      "direct": [
-        {
-          "id": "Constraint-constrainedElement",
-          "name": "constrainedElement",
-          "signature": "constrainedElement : Element [0..*] {ordered}",
-          "description": "Упорядоченное множество элементов, к которым применяется ограничение.",
-          "type": "Element",
-          "association": "A_constrainedElement_constraint",
-          "owner": "Constraint",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "Constraint-context",
-          "name": "context",
-          "signature": "context : Namespace [0..1] {subsets namespace}",
-          "description": "Пространство имён, владеющее ограничением.",
-          "type": "Namespace",
-          "association": "A_ownedRule_context",
-          "owner": "Constraint",
-          "subsets": [
-            "namespace"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "Constraint-specification",
-          "name": "specification",
-          "signature": "specification : ValueSpecification [1..1] {subsets ownedElement}",
-          "description": "Условие, которое должно быть истинным для выполнения ограничения.",
-          "type": "ValueSpecification",
-          "association": "A_specification_owningConstraint",
-          "owner": "Constraint",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        }
-      ],
+    "ValueSpecification": {
+      "direct": [],
       "inherited": [
         {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
+          "id": "TypedElement-type",
+          "name": "type",
+          "signature": "type : Type [0..1]",
+          "description": "Тип элемента.",
+          "type": "Type",
+          "association": "A_type_typedElement",
+          "owner": "TypedElement",
           "subsets": [],
           "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
+          "inheritedFrom": "TypedElement"
         },
         {
           "id": "NamedElement-clientDependency",
@@ -1947,6 +3743,85 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [],
           "inheritedFrom": "NamedElement"
+        },
+        {
+          "id": "Element-ownedComment",
+          "name": "ownedComment",
+          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
+          "description": "Комментарии, принадлежащие элементу.",
+          "type": "Comment",
+          "association": "A_ownedComment_owningElement",
+          "owner": "Element",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-ownedElement",
+          "name": "ownedElement",
+          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
+          "description": "Элементы, принадлежащие данному элементу.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "Element-owner",
+          "name": "owner",
+          "signature": "/owner : Element [0..1] {readOnly, union}",
+          "description": "Элемент-владелец.",
+          "type": "Element",
+          "association": "A_ownedElement_owner",
+          "owner": "Element",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "Element"
+        },
+        {
+          "id": "PackageableElement-visibility",
+          "name": "visibility",
+          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
+          "description": "Видимость элемента; при владении пространством имён она обязательна.",
+          "type": "VisibilityKind",
+          "association": null,
+          "owner": "PackageableElement",
+          "subsets": [],
+          "redefines": [
+            "visibility"
+          ],
+          "inheritedFrom": "PackageableElement"
+        },
+        {
+          "id": "ParameterableElement-owningTemplateParameter",
+          "name": "owningTemplateParameter",
+          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
+          "description": "Формальный параметр, владеющий этим элементом.",
+          "type": "TemplateParameter",
+          "association": "A_ownedParameteredElement_owningTemplateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [
+            "owner",
+            "templateParameter"
+          ],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
+        },
+        {
+          "id": "ParameterableElement-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : TemplateParameter [0..1]",
+          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
+          "type": "TemplateParameter",
+          "association": "A_parameteredElement_templateParameter",
+          "owner": "ParameterableElement",
+          "subsets": [],
+          "redefines": [],
+          "inheritedFrom": "ParameterableElement"
         }
       ]
     },
@@ -2317,1693 +4192,6 @@ window.UML_XMI_DATA = {
           ],
           "redefines": [],
           "inheritedFrom": "Namespace"
-        }
-      ]
-    },
-    "Type": {
-      "direct": [
-        {
-          "id": "Type-package",
-          "name": "package",
-          "signature": "package : Package [0..1] {subsets owningPackage}",
-          "description": "Пакет, владеющий типом, если он задан.",
-          "type": "Package",
-          "association": "A_ownedType_package",
-          "owner": "Type",
-          "subsets": [
-            "owningPackage"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        }
-      ]
-    },
-    "TypedElement": {
-      "direct": [
-        {
-          "id": "TypedElement-type",
-          "name": "type",
-          "signature": "type : Type [0..1]",
-          "description": "Тип элемента.",
-          "type": "Type",
-          "association": "A_type_typedElement",
-          "owner": "TypedElement",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1]",
-          "description": "Видимость элемента за пределами владеющего пространства имён.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "MultiplicityElement": {
-      "direct": [
-        {
-          "id": "MultiplicityElement-isOrdered",
-          "name": "isOrdered",
-          "signature": "isOrdered : Boolean [1..1] = false",
-          "description": "Определяет последовательный порядок значений многозначной кратности.",
-          "type": "Boolean",
-          "association": null,
-          "owner": "MultiplicityElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "MultiplicityElement-isUnique",
-          "name": "isUnique",
-          "signature": "isUnique : Boolean [1..1] = true",
-          "description": "Определяет уникальность значений многозначной кратности.",
-          "type": "Boolean",
-          "association": null,
-          "owner": "MultiplicityElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "MultiplicityElement-lower",
-          "name": "lower",
-          "signature": "/lower : Integer [1..1]",
-          "description": "Нижняя граница интервала кратности.",
-          "type": "Integer",
-          "association": null,
-          "owner": "MultiplicityElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "MultiplicityElement-lowerValue",
-          "name": "lowerValue",
-          "signature": "lowerValue : ValueSpecification [0..1] {subsets ownedElement}",
-          "description": "Спецификация нижней границы.",
-          "type": "ValueSpecification",
-          "association": "A_lowerValue_owningLower",
-          "owner": "MultiplicityElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "MultiplicityElement-upper",
-          "name": "upper",
-          "signature": "/upper : UnlimitedNatural [1..1]",
-          "description": "Верхняя граница интервала кратности.",
-          "type": "UnlimitedNatural",
-          "association": null,
-          "owner": "MultiplicityElement",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "MultiplicityElement-upperValue",
-          "name": "upperValue",
-          "signature": "upperValue : ValueSpecification [0..1] {subsets ownedElement}",
-          "description": "Спецификация верхней границы.",
-          "type": "ValueSpecification",
-          "association": "A_upperValue_owningUpper",
-          "owner": "MultiplicityElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        }
-      ]
-    },
-    "ValueSpecification": {
-      "direct": [],
-      "inherited": [
-        {
-          "id": "TypedElement-type",
-          "name": "type",
-          "signature": "type : Type [0..1]",
-          "description": "Тип элемента.",
-          "type": "Type",
-          "association": "A_type_typedElement",
-          "owner": "TypedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "TypedElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        }
-      ]
-    },
-    "Dependency": {
-      "direct": [
-        {
-          "id": "Dependency-client",
-          "name": "client",
-          "signature": "client : NamedElement [1..*] {subsets source}",
-          "description": "Элементы, зависящие от поставщиков.",
-          "type": "NamedElement",
-          "association": "A_clientDependency_client",
-          "owner": "Dependency",
-          "subsets": [
-            "source"
-          ],
-          "redefines": []
-        },
-        {
-          "id": "Dependency-supplier",
-          "name": "supplier",
-          "signature": "supplier : NamedElement [1..*] {subsets target}",
-          "description": "Элементы, от которых зависят клиенты.",
-          "type": "NamedElement",
-          "association": "A_supplier_supplierDependency",
-          "owner": "Dependency",
-          "subsets": [
-            "target"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "DirectedRelationship-source",
-          "name": "source",
-          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Исходные элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_source_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "DirectedRelationship-target",
-          "name": "target",
-          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Целевые элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_target_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
-          "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Relationship"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        }
-      ]
-    },
-    "Abstraction": {
-      "direct": [
-        {
-          "id": "Abstraction-mapping",
-          "name": "mapping",
-          "signature": "mapping : OpaqueExpression [0..1] {subsets ownedElement}",
-          "description": "Необязательное выражение, уточняющее отношение между поставщиками и клиентами.",
-          "type": "OpaqueExpression",
-          "association": "A_mapping_abstraction",
-          "owner": "Abstraction",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "Dependency-client",
-          "name": "client",
-          "signature": "client : NamedElement [1..*] {subsets source}",
-          "description": "Элементы, зависящие от поставщиков.",
-          "type": "NamedElement",
-          "association": "A_clientDependency_client",
-          "owner": "Dependency",
-          "subsets": [
-            "source"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "Dependency-supplier",
-          "name": "supplier",
-          "signature": "supplier : NamedElement [1..*] {subsets target}",
-          "description": "Элементы, от которых зависят клиенты.",
-          "type": "NamedElement",
-          "association": "A_supplier_supplierDependency",
-          "owner": "Dependency",
-          "subsets": [
-            "target"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "DirectedRelationship-source",
-          "name": "source",
-          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Исходные элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_source_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "DirectedRelationship-target",
-          "name": "target",
-          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Целевые элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_target_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
-          "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Relationship"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        }
-      ]
-    },
-    "Realization": {
-      "direct": [],
-      "inherited": [
-        {
-          "id": "Abstraction-mapping",
-          "name": "mapping",
-          "signature": "mapping : OpaqueExpression [0..1] {subsets ownedElement}",
-          "description": "Необязательное выражение, уточняющее отношение между поставщиками и клиентами.",
-          "type": "OpaqueExpression",
-          "association": "A_mapping_abstraction",
-          "owner": "Abstraction",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Abstraction"
-        },
-        {
-          "id": "Dependency-client",
-          "name": "client",
-          "signature": "client : NamedElement [1..*] {subsets source}",
-          "description": "Элементы, зависящие от поставщиков.",
-          "type": "NamedElement",
-          "association": "A_clientDependency_client",
-          "owner": "Dependency",
-          "subsets": [
-            "source"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "Dependency-supplier",
-          "name": "supplier",
-          "signature": "supplier : NamedElement [1..*] {subsets target}",
-          "description": "Элементы, от которых зависят клиенты.",
-          "type": "NamedElement",
-          "association": "A_supplier_supplierDependency",
-          "owner": "Dependency",
-          "subsets": [
-            "target"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "DirectedRelationship-source",
-          "name": "source",
-          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Исходные элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_source_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "DirectedRelationship-target",
-          "name": "target",
-          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Целевые элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_target_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
-          "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Relationship"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        }
-      ]
-    },
-    "Usage": {
-      "direct": [],
-      "inherited": [
-        {
-          "id": "Dependency-client",
-          "name": "client",
-          "signature": "client : NamedElement [1..*] {subsets source}",
-          "description": "Элементы, зависящие от поставщиков.",
-          "type": "NamedElement",
-          "association": "A_clientDependency_client",
-          "owner": "Dependency",
-          "subsets": [
-            "source"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "Dependency-supplier",
-          "name": "supplier",
-          "signature": "supplier : NamedElement [1..*] {subsets target}",
-          "description": "Элементы, от которых зависят клиенты.",
-          "type": "NamedElement",
-          "association": "A_supplier_supplierDependency",
-          "owner": "Dependency",
-          "subsets": [
-            "target"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Dependency"
-        },
-        {
-          "id": "DirectedRelationship-source",
-          "name": "source",
-          "signature": "/source : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Исходные элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_source_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "DirectedRelationship-target",
-          "name": "target",
-          "signature": "/target : Element [1..*] {readOnly, union, subsets relatedElement}",
-          "description": "Целевые элементы направленного отношения.",
-          "type": "Element",
-          "association": "A_target_directedRelationship",
-          "owner": "DirectedRelationship",
-          "subsets": [
-            "relatedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "DirectedRelationship"
-        },
-        {
-          "id": "Relationship-relatedElement",
-          "name": "relatedElement",
-          "signature": "/relatedElement : Element [1..*] {readOnly, union}",
-          "description": "Элементы, связанные этим отношением.",
-          "type": "Element",
-          "association": "A_relatedElement_relationship",
-          "owner": "Relationship",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Relationship"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        }
-      ]
-    },
-    "OpaqueExpression": {
-      "direct": [
-        {
-          "id": "OpaqueExpression-behavior",
-          "name": "behavior",
-          "signature": "behavior : Behavior [0..1]",
-          "description": "Поведение UML, задающее вычисление выражения.",
-          "type": "Behavior",
-          "association": "A_behavior_opaqueExpression",
-          "owner": "OpaqueExpression",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "OpaqueExpression-body",
-          "name": "body",
-          "signature": "body : String [0..*] {ordered, nonunique}",
-          "description": "Текстовое определение поведения выражения, возможно на нескольких языках.",
-          "type": "String",
-          "association": null,
-          "owner": "OpaqueExpression",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "OpaqueExpression-language",
-          "name": "language",
-          "signature": "language : String [0..*] {ordered}",
-          "description": "Языки текстовых определений; порядок языков соответствует порядку строк body. Если языки не указаны, они могут следовать из выражения или контекста.",
-          "type": "String",
-          "association": null,
-          "owner": "OpaqueExpression",
-          "subsets": [],
-          "redefines": []
-        },
-        {
-          "id": "OpaqueExpression-result",
-          "name": "result",
-          "signature": "/result : Parameter [0..1] {readOnly}",
-          "description": "Единственный возвращаемый параметр поведения, значения которого являются результатом вычисления выражения.",
-          "type": "Parameter",
-          "association": "A_result_opaqueExpression",
-          "owner": "OpaqueExpression",
-          "subsets": [],
-          "redefines": []
-        }
-      ],
-      "inherited": [
-        {
-          "id": "TypedElement-type",
-          "name": "type",
-          "signature": "type : Type [0..1]",
-          "description": "Тип элемента.",
-          "type": "Type",
-          "association": "A_type_typedElement",
-          "owner": "TypedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "TypedElement"
-        },
-        {
-          "id": "NamedElement-clientDependency",
-          "name": "clientDependency",
-          "signature": "/clientDependency : Dependency [0..*] {subsets directedRelationship}",
-          "description": "Зависимости, в которых элемент выступает клиентом.",
-          "type": "Dependency",
-          "association": "A_clientDependency_client",
-          "owner": "NamedElement",
-          "subsets": [
-            "directedRelationship"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-name",
-          "name": "name",
-          "signature": "name : String [0..1]",
-          "description": "Имя элемента.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-nameExpression",
-          "name": "nameExpression",
-          "signature": "nameExpression : StringExpression [0..1] {subsets ownedElement}",
-          "description": "Выражение, определяющее имя элемента.",
-          "type": "StringExpression",
-          "association": "A_nameExpression_namedElement",
-          "owner": "NamedElement",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-namespace",
-          "name": "namespace",
-          "signature": "/namespace : Namespace [0..1] {readOnly, union, subsets memberNamespace, owner}",
-          "description": "Пространство имён, владеющее элементом.",
-          "type": "Namespace",
-          "association": "A_ownedMember_namespace",
-          "owner": "NamedElement",
-          "subsets": [
-            "memberNamespace",
-            "owner"
-          ],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "NamedElement-qualifiedName",
-          "name": "qualifiedName",
-          "signature": "/qualifiedName : String [0..1] {readOnly}",
-          "description": "Имя, построенное по иерархии вложенных пространств имён.",
-          "type": "String",
-          "association": null,
-          "owner": "NamedElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "NamedElement"
-        },
-        {
-          "id": "Element-ownedComment",
-          "name": "ownedComment",
-          "signature": "ownedComment : Comment [0..*] {subsets ownedElement}",
-          "description": "Комментарии, принадлежащие элементу.",
-          "type": "Comment",
-          "association": "A_ownedComment_owningElement",
-          "owner": "Element",
-          "subsets": [
-            "ownedElement"
-          ],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-ownedElement",
-          "name": "ownedElement",
-          "signature": "/ownedElement : Element [0..*] {readOnly, union}",
-          "description": "Элементы, принадлежащие данному элементу.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "Element-owner",
-          "name": "owner",
-          "signature": "/owner : Element [0..1] {readOnly, union}",
-          "description": "Элемент-владелец.",
-          "type": "Element",
-          "association": "A_ownedElement_owner",
-          "owner": "Element",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "Element"
-        },
-        {
-          "id": "PackageableElement-visibility",
-          "name": "visibility",
-          "signature": "visibility : VisibilityKind [0..1] = public {redefines visibility}",
-          "description": "Видимость элемента; при владении пространством имён она обязательна.",
-          "type": "VisibilityKind",
-          "association": null,
-          "owner": "PackageableElement",
-          "subsets": [],
-          "redefines": [
-            "visibility"
-          ],
-          "inheritedFrom": "PackageableElement"
-        },
-        {
-          "id": "ParameterableElement-owningTemplateParameter",
-          "name": "owningTemplateParameter",
-          "signature": "owningTemplateParameter : TemplateParameter [0..1] {subsets owner, templateParameter}",
-          "description": "Формальный параметр, владеющий этим элементом.",
-          "type": "TemplateParameter",
-          "association": "A_ownedParameteredElement_owningTemplateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [
-            "owner",
-            "templateParameter"
-          ],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
-        },
-        {
-          "id": "ParameterableElement-templateParameter",
-          "name": "templateParameter",
-          "signature": "templateParameter : TemplateParameter [0..1]",
-          "description": "Параметр шаблона, представляющий этот элемент как формальный параметр.",
-          "type": "TemplateParameter",
-          "association": "A_parameteredElement_templateParameter",
-          "owner": "ParameterableElement",
-          "subsets": [],
-          "redefines": [],
-          "inheritedFrom": "ParameterableElement"
         }
       ]
     }
@@ -5063,5 +5251,125 @@ window.UML_XMI_DATA = {
         }
       ]
     }
+  },
+  "generalizations": {
+    "Abstraction": [
+      "Dependency"
+    ],
+    "Comment": [
+      "Element"
+    ],
+    "Constraint": [
+      "PackageableElement"
+    ],
+    "Dependency": [
+      "DirectedRelationship",
+      "PackageableElement"
+    ],
+    "DirectedRelationship": [
+      "Relationship"
+    ],
+    "Element": [],
+    "ElementImport": [
+      "DirectedRelationship"
+    ],
+    "Expression": [
+      "ValueSpecification"
+    ],
+    "MultiplicityElement": [
+      "Element"
+    ],
+    "NamedElement": [
+      "Element"
+    ],
+    "Namespace": [
+      "NamedElement"
+    ],
+    "OpaqueExpression": [
+      "ValueSpecification"
+    ],
+    "Package": [
+      "PackageableElement",
+      "TemplateableElement",
+      "Namespace"
+    ],
+    "PackageImport": [
+      "DirectedRelationship"
+    ],
+    "PackageableElement": [
+      "ParameterableElement",
+      "NamedElement"
+    ],
+    "ParameterableElement": [
+      "Element"
+    ],
+    "Realization": [
+      "Abstraction"
+    ],
+    "Relationship": [
+      "Element"
+    ],
+    "StringExpression": [
+      "TemplateableElement",
+      "Expression"
+    ],
+    "TemplateBinding": [
+      "DirectedRelationship"
+    ],
+    "TemplateParameter": [
+      "Element"
+    ],
+    "TemplateParameterSubstitution": [
+      "Element"
+    ],
+    "TemplateSignature": [
+      "Element"
+    ],
+    "TemplateableElement": [
+      "Element"
+    ],
+    "Type": [
+      "PackageableElement"
+    ],
+    "TypedElement": [
+      "NamedElement"
+    ],
+    "Usage": [
+      "Dependency"
+    ],
+    "ValueSpecification": [
+      "TypedElement",
+      "PackageableElement"
+    ]
+  },
+  "classifierDefinitions": {
+    "Abstraction": "An Abstraction is a Relationship that relates two Elements or sets of Elements that represent the same concept at different levels of abstraction or from different viewpoints.",
+    "Comment": "A Comment is a textual annotation that can be attached to a set of Elements.",
+    "Constraint": "A Constraint is a condition or restriction expressed in natural language text or in a machine readable language for the purpose of declaring some of the semantics of an Element or set of Elements.",
+    "Dependency": "A Dependency is a Relationship that signifies that a single model Element or a set of model Elements requires other model Elements for their specification or implementation. This means that the complete semantics of the client Element(s) are either semantically or structurally dependent on the definition of the supplier Element(s).",
+    "DirectedRelationship": "A DirectedRelationship represents a relationship between a collection of source model Elements and a collection of target model Elements.",
+    "Element": "An Element is a constituent of a model. As such, it has the capability of owning other Elements.",
+    "ElementImport": "An ElementImport identifies a NamedElement in a Namespace other than the one that owns that NamedElement and allows the NamedElement to be referenced using an unqualified name in the Namespace owning the ElementImport.",
+    "Expression": "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
+    "MultiplicityElement": "A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A MultiplicityElement embeds this information to specify the allowable cardinalities for an instantiation of the Element.",
+    "NamedElement": "A NamedElement is an Element in a model that may have a name. The name may be given directly and/or via the use of a StringExpression.",
+    "Namespace": "A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by name.",
+    "OpaqueExpression": "An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML",
+    "Package": "A package can have one or more profile applications to indicate which profiles have been applied. Because a profile is a package, it is possible to apply a profile not only to packages, but also to profiles.\nPackage specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter.\nA package is used to group elements, and provides a namespace for the grouped elements.",
+    "PackageImport": "A PackageImport is a Relationship that imports all the non-private members of a Package into the Namespace owning the PackageImport, so that those Elements may be referred to by their unqualified names in the importingNamespace.",
+    "PackageableElement": "A PackageableElement is a NamedElement that may be owned directly by a Package. A PackageableElement is also able to serve as the parameteredElement of a TemplateParameter.",
+    "ParameterableElement": "A ParameterableElement is an Element that can be exposed as a formal TemplateParameter for a template, or specified as an actual parameter in a binding of a template.",
+    "Realization": "Realization is a specialized Abstraction relationship between two sets of model Elements, one representing a specification (the supplier) and the other represents an implementation of the latter (the client). Realization can be used to model stepwise refinement, optimizations, transformations, templates, model synthesis, framework composition, etc.",
+    "Relationship": "Relationship is an abstract concept that specifies some kind of relationship between Elements.",
+    "StringExpression": "A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.",
+    "TemplateBinding": "A TemplateBinding is a DirectedRelationship between a TemplateableElement and a template. A TemplateBinding specifies the TemplateParameterSubstitutions of actual parameters for the formal parameters of the template.",
+    "TemplateParameter": "A TemplateParameter exposes a ParameterableElement as a formal parameter of a template.",
+    "TemplateParameterSubstitution": "A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.",
+    "TemplateSignature": "A Template Signature bundles the set of formal TemplateParameters for a template.",
+    "TemplateableElement": "A TemplateableElement is an Element that can optionally be defined as a template and bound to other templates.",
+    "Type": "A Type constrains the values represented by a TypedElement.",
+    "TypedElement": "A TypedElement is a NamedElement that may have a Type specified for it.",
+    "Usage": "A Usage is a Dependency in which the client Element requires the supplier Element (or set of Elements) for its full implementation or operation.",
+    "ValueSpecification": "A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template."
   }
 };

@@ -21,6 +21,10 @@ OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
 XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
 UML_NS = "{http://www.omg.org/spec/UML/20131001}"
 
+CLASSIFIER_TRANSLATIONS = {
+    "Expression": "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
+}
+
 PROPERTY_TRANSLATIONS = {
     "A_actual_templateParameterSubstitution-templateParameterSubstitution": "Подстановки, в которых элемент выступает фактическим параметром.",
     "A_annotatedElement_comment-comment": "Комментарии, присоединённые к элементу.",
@@ -148,16 +152,6 @@ def curated_descriptions(text):
     return result
 
 
-def diagram_classifiers(text):
-    block = text.split("const diagrams = [", 1)[1].split("return {", 1)[0]
-    names = []
-    for related in re.findall(r"related: \[([^]]*)\]", block):
-        for name in re.findall(r'"([A-Za-z]+)"', related):
-            if name not in names:
-                names.append(name)
-    return names
-
-
 def association_names(text):
     block = text.split("const associations = [", 1)[1].split("const diagrams = [", 1)[0]
     return re.findall(r'name: "(A_[A-Za-z_]+)"', block)
@@ -278,6 +272,12 @@ class XmiModel:
             for prop in classifier.findall("ownedAttribute")
         ]
 
+    def classifier_definition(self, class_name):
+        if class_name in CLASSIFIER_TRANSLATIONS:
+            return CLASSIFIER_TRANSLATIONS[class_name]
+        comment = self.classes[class_name].find("ownedComment")
+        return comment.get("body", "") if comment is not None else ""
+
     def generalizations(self, class_name):
         return [
             item.get("general")
@@ -328,7 +328,7 @@ def generate():
     text = DATA.read_text(encoding="utf-8")
     model = XmiModel(XMI)
     descriptions = curated_descriptions(text)
-    class_names = diagram_classifiers(text)
+    class_names = [name for name, _ in classifier_blocks(text)]
     association_list = association_names(text)
 
     enumeration_names = {
@@ -379,6 +379,14 @@ def generate():
         "source": "OMG UML 2.5.1, formal/17-12-05, UML.xmi (20161101)",
         "classes": classes,
         "associations": associations,
+        "generalizations": {
+            name: model.generalizations(name)
+            for name in sorted(required_classes)
+        },
+        "classifierDefinitions": {
+            name: model.classifier_definition(name)
+            for name in sorted(required_classes)
+        },
     }
     return "window.UML_XMI_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
 

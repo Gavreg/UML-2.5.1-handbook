@@ -528,6 +528,17 @@ window.UML_DATA = (() => {
       figures: ["7.5"]
     },
     {
+      name: "Expression",
+      ru: "Выражение",
+      kind: "Class",
+      section: "8.6.5",
+      page: 81,
+      definition: "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
+      generalizations: ["ValueSpecification"],
+      specializations: ["StringExpression"],
+      figures: []
+    },
+    {
       name: "OpaqueExpression",
       ru: "Непрозрачное выражение",
       kind: "Class",

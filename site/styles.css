@@ -957,6 +957,68 @@ h3 {
   color: var(--text-muted);
 }
 
+.inheritance-section {
+  margin: 0 0 24px;
+}
+
+.inheritance-diagram {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.inheritance-svg {
+  width: 100%;
+  min-width: min(var(--diagram-width), 900px);
+  height: auto;
+}
+
+.inheritance-generalization {
+  fill: none;
+  stroke: #111111;
+  stroke-width: 1.4;
+}
+
+.inheritance-class-box {
+  fill: #ffffff;
+  stroke: #111111;
+  stroke-width: 1.4;
+}
+
+.inheritance-class-box.current {
+  fill: #eef3fb;
+}
+
+.inheritance-class-name {
+  fill: #111111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.inheritance-class-name.abstract {
+  font-style: italic;
+}
+
+.inheritance-class[href] {
+  cursor: pointer;
+}
+
+.inheritance-class[href]:hover .inheritance-class-box {
+  fill: #eef3fb;
+  stroke: #1e3a8a;
+}
+
+.inheritance-class[href]:focus-visible {
+  outline: none;
+}
+
+.inheritance-class[href]:focus-visible .inheritance-class-box {
+  stroke: #7c3aed;
+  stroke-width: 3;
+}
+
 .diagram-full {
   margin: 28px 0 20px;
   padding: 24px;

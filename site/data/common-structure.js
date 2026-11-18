@@ -758,7 +758,7 @@ window.UML_DATA = (() => {
   ];
 
   const diagrams = [
-    { id: "7.1", title: "Корневые понятия", en: "Root", section: "7.2", page: 21, related: ["Element", "Relationship", "DirectedRelationship", "Comment"] },
+    { id: "7.1", title: "Корневые понятия", en: "Root", section: "7.2", page: 21, related: ["Element", "Relationship", "DirectedRelationship", "Comment"], vector: "assets/diagrams/figure-7-1.svg" },
     { id: "7.2", title: "Обозначение комментария", en: "Comment notation", section: "7.2", page: 22, related: ["Comment"] },
     { id: "7.3", title: "Шаблоны", en: "Templates", section: "7.3", page: 23, related: ["TemplateParameter", "TemplateSignature", "TemplateableElement", "ParameterableElement", "Element"] },
     { id: "7.4", title: "Привязки шаблонов", en: "Template bindings", section: "7.3", page: 23, related: ["TemplateBinding", "TemplateParameterSubstitution", "TemplateParameter", "ParameterableElement", "TemplateableElement", "TemplateSignature", "DirectedRelationship", "Element"] },

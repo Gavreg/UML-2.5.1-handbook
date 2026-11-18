@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="990" height="778" viewBox="0 0 990 778" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">Рисунок 7.1 — корневые понятия UML</title>
+  <desc id="diagram-description">Метаклассы Element, Relationship, DirectedRelationship и Comment, их обобщения и ассоциации. Названия классов являются ссылками на страницы справочника.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+    </marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#111111" stroke-width="1.2"/>
+    </marker>
+    <style>
+      .background, .class-box { fill: #ffffff; }
+      .class-box, .association, .generalization-line, .class-divider { stroke: #111111; stroke-width: 1.4; }
+      .association, .generalization-line { fill: none; }
+      .class-divider { stroke-width: 1; }
+      text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+      .class-name { font-weight: 700; }
+      .abstract { font-style: italic; }
+      .end-dot, .composition { fill: #111111; }
+      a { cursor: pointer; }
+      a:hover .class-box { fill: #eef3fb; stroke: #1e3a8a; }
+      a:focus-visible { outline: none; }
+      a:focus-visible .class-box { stroke: #7c3aed; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <rect class="background" width="990" height="778"/>
+
+  <g aria-label="Ассоциации и обобщения">
+    <path class="association" d="M 479 103 H 933 V 476 H 770" marker-start="url(#navigation)"/>
+    <path class="association" d="M 479 183 H 698 V 467" marker-end="url(#navigation)"/>
+    <path class="association" d="M 479 259 H 622 V 310 H 465 V 303" marker-end="url(#navigation)"/>
+
+    <path class="association" d="M 343 103 H 51 V 658 H 368" marker-start="url(#navigation)" marker-end="url(#navigation)"/>
+    <path class="association" d="M 343 199 H 121 V 742 H 368" marker-start="url(#navigation)" marker-end="url(#navigation)"/>
+    <path class="association" d="M 343 285 H 168 V 490 H 368" marker-start="url(#navigation)"/>
+
+    <path class="generalization-line" d="M 446 470 V 400 H 424 V 310" marker-end="url(#generalization)"/>
+    <path class="generalization-line" d="M 698 467 V 400 H 424"/>
+    <path class="generalization-line" d="M 476 643 V 517" marker-end="url(#generalization)"/>
+
+  </g>
+
+  <g aria-label="Подписи ассоциаций">
+    <text x="100" y="57">{readOnly, union, subsets</text>
+    <text x="100" y="76">relatedElement}</text>
+    <text x="230" y="94">+ /source</text>
+    <text x="280" y="118">1..*</text>
+
+    <text x="535" y="93">+ annotatedElement</text>
+    <text x="535" y="108">*</text>
+
+    <text x="114" y="151">{readOnly, union, subsets</text>
+    <text x="114" y="170">relatedElement}</text>
+    <text x="230" y="190">+ /target</text>
+    <text x="280" y="212">1..*</text>
+
+    <text x="510" y="151">{subsets owner}</text>
+    <text x="510" y="170">+ owningElement</text>
+    <text x="510" y="191">0..1</text>
+
+    <text x="207" y="256">{readOnly, union}</text>
+    <text x="207" y="275">+ /relatedElement</text>
+    <text x="280" y="291">1..*</text>
+
+    <text x="510" y="237">{readOnly, union}</text>
+    <text x="510" y="256">+ /owner</text>
+    <text x="510" y="276">0..1</text>
+    <text x="590" y="313">*</text>
+    <text x="465" y="354">+ /ownedElement</text>
+    <text x="465" y="373">{readOnly, union}</text>
+
+    <text x="686" y="425">*</text>
+    <text x="716" y="415">{subsets ownedElement}</text>
+    <text x="716" y="434">+ ownedComment</text>
+
+    <text x="238" y="431">{readOnly, union}</text>
+    <text x="238" y="450">+ /relationship</text>
+    <text x="776" y="501">+ comment</text>
+    <text x="776" y="516">*</text>
+    <text x="340" y="501">*</text>
+
+    <text x="58" y="618">{readOnly, union, subsets relationship}</text>
+    <text x="182" y="640">+ /directedRelationship</text>
+    <text x="347" y="670">*</text>
+
+    <text x="58" y="715">{readOnly, union, subsets relationship}</text>
+    <text x="182" y="737">+ /directedRelationship</text>
+    <text x="347" y="755">*</text>
+  </g>
+
+  <a href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса">
+    <title>Element — открыть описание</title>
+    <rect class="class-box" x="343" y="97" width="136" height="207"/>
+    <line class="class-divider" x1="343" y1="121" x2="479" y2="121"/>
+    <text class="class-name abstract" x="411" y="115" text-anchor="middle">Element</text>
+  </a>
+
+  <a href="../../index.html#/classifier/relationship" target="_top" aria-label="Relationship — открыть описание класса">
+    <title>Relationship — открыть описание</title>
+    <rect class="class-box" x="368" y="470" width="157" height="40"/>
+    <line class="class-divider" x1="368" y1="477" x2="525" y2="477"/>
+    <text class="class-name abstract" x="446.5" y="493" text-anchor="middle">Relationship</text>
+  </a>
+
+  <a href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса">
+    <title>DirectedRelationship — открыть описание</title>
+    <rect class="class-box" x="368" y="643" width="216" height="107"/>
+    <line class="class-divider" x1="368" y1="668" x2="584" y2="668"/>
+    <text class="class-name abstract" x="476" y="663" text-anchor="middle">DirectedRelationship</text>
+  </a>
+
+  <a href="../../index.html#/classifier/comment" target="_top" aria-label="Comment — открыть описание класса">
+    <title>Comment — открыть описание</title>
+    <rect class="class-box" x="612" y="467" width="158" height="43"/>
+    <line class="class-divider" x1="612" y1="477" x2="770" y2="477"/>
+    <text class="class-name" x="691" y="489" text-anchor="middle">Comment</text>
+    <text x="618" y="498">+ body : String [0..1]</text>
+  </a>
+
+  <g aria-hidden="true">
+    <circle class="end-dot" cx="479" cy="103" r="3"/>
+    <circle class="end-dot" cx="770" cy="476" r="3"/>
+    <circle class="end-dot" cx="698" cy="467" r="3"/>
+    <circle class="end-dot" cx="465" cy="303" r="3"/>
+    <circle class="end-dot" cx="343" cy="103" r="3"/>
+    <circle class="end-dot" cx="343" cy="199" r="3"/>
+    <circle class="end-dot" cx="343" cy="285" r="3"/>
+    <circle class="end-dot" cx="368" cy="490" r="3"/>
+    <path class="composition" d="M 479 177 L 487 183 L 479 189 L 471 183 Z"/>
+    <path class="composition" d="M 479 253 L 487 259 L 479 265 L 471 259 Z"/>
+  </g>
+</svg>

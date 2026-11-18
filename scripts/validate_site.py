@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import xml.etree.ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -36,6 +37,8 @@ class ResourceParser(HTMLParser):
             self.resources.append(attributes["href"])
         if tag == "img" and attributes.get("src"):
             self.resources.append(attributes["src"])
+        if tag == "object" and attributes.get("data"):
+            self.resources.append(attributes["data"])
 
 
 def slug(value):
@@ -102,6 +105,19 @@ def check_static():
             errors.append(f"Empty image: {image.name}")
 
     all_routes = routes()
+    data_text = DATA.read_text(encoding="utf-8")
+    vectors = re.findall(r'vector: "([^"]+\.svg)"', data_text)
+    for vector in vectors:
+        vector_path = SITE / vector
+        if not vector_path.is_file():
+            errors.append(f"Missing vector diagram: {vector}")
+            continue
+        svg = ET.parse(vector_path).getroot()
+        for link in svg.findall("{http://www.w3.org/2000/svg}a"):
+            route = "#/" + link.get("href", "").split("#/", 1)[-1]
+            if route not in {item[0] for item in all_routes}:
+                errors.append(f"Broken SVG link in {vector}: {route}")
+
     expected = (3, 9, 28, 36, 21)
     if len(all_routes) != sum(expected):
         errors.append(f"Route extraction mismatch: {len(all_routes)} routes")

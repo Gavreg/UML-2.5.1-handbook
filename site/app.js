@@ -116,12 +116,19 @@
     return `<section><h2>Связанные диаграммы</h2><div class="diagram-grid">${ids.map(id => diagramTile(diagramById.get(id))).join("")}</div></section>`;
   }
 
+  function diagramObject(diagram) {
+    return `<object class="diagram-object" data="${diagram.vector}" type="image/svg+xml" width="990" height="778" aria-label="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}. Интерактивная SVG-диаграмма">
+      <img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}">
+    </object>`;
+  }
+
   function figureCard(id) {
     const diagram = diagramById.get(id);
+    const visual = diagram.vector
+      ? `<div class="figure-link">${diagramObject(diagram)}</div>`
+      : `<a class="figure-link" href="#/diagram/${slug(diagram.id)}" aria-label="Открыть рисунок ${escapeHtml(diagram.id)} отдельно"><img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}" loading="lazy"></a>`;
     return `<figure class="figure-card" id="figure-${slug(diagram.id)}">
-      <a class="figure-link" href="#/diagram/${slug(diagram.id)}" aria-label="Открыть рисунок ${escapeHtml(diagram.id)} отдельно">
-        <img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}" loading="lazy">
-      </a>
+      ${visual}
       <figcaption class="figure-caption">
         <strong>Рис. ${escapeHtml(diagram.id)}</strong>
         <span>${escapeHtml(diagram.title)}</span>
@@ -131,6 +138,7 @@
         <summary>Элементы на диаграмме</summary>
         ${linkList(diagram.related)}
       </details>
+      ${diagram.vector ? `<a class="figure-open" href="#/diagram/${slug(diagram.id)}">Открыть рисунок отдельно</a>` : ""}
     </figure>`;
   }
 
@@ -169,7 +177,7 @@
         <div class="stat"><strong>24</strong><span>классификатора</span></div>
         <div class="stat"><strong>21</strong><span>рисунок из спецификации</span></div>
       </div>
-      <div class="notice">На текущем этапе рисунки представлены скриншотами официальной спецификации. Переходы к элементам доступны в списке «Элементы на диаграмме». Следующий этап — масштабируемые SVG с интерактивными классами.</div>
+      <div class="notice">Рисунок 7.1 перерисован в масштабируемый SVG: названия классов ведут на их страницы. Остальные рисунки пока представлены скриншотами спецификации с переходами в списке «Элементы на диаграмме».</div>
       <h2>Структура раздела 7</h2>
       <div class="card-grid">
         ${data.sections.slice(0, 7).map(section => `<a class="link-card" href="#/section/${slug(section.id)}">
@@ -285,7 +293,7 @@
       <p class="eyebrow">Рисунок ${diagram.id} · раздел ${diagram.section}</p>
       <h1>${escapeHtml(diagram.title)}</h1>
       <p class="original-name" lang="en">${escapeHtml(diagram.en)}</p>
-      <div class="diagram-full"><img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}"></div>
+      <div class="diagram-full">${diagram.vector ? diagramObject(diagram) : `<img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}">`}</div>
       <section><h2>Элементы на диаграмме</h2>${linkList(diagram.related)}</section>
       <p><a href="#/section/${slug(diagram.section)}">Перейти к разделу ${escapeHtml(diagram.section)}</a></p>
       ${sourceLink(diagram.page)}`;

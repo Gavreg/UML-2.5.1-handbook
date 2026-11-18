@@ -76,14 +76,14 @@
     <path class="association" d="M 343 103 H 51 V 658 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
     <path class="association-hitbox" d="M 343 103 H 51 V 658 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="103" r="3"/>
-    <text x="100" y="57">{readOnly, union, subsets</text>
-    <text x="100" y="76">relatedElement}</text>
-    <text class="association-end" x="230" y="94"><title>Исходные элементы направленного отношения.</title>+ /source</text>
-    <text x="280" y="124">1..*</text>
-    <text x="132" y="606">{readOnly, union,</text>
-    <text x="132" y="625">subsets relationship}</text>
-    <text class="association-end" x="182" y="647"><title>Направленные отношения, для которых элемент является источником.</title>+ /directedRelationship</text>
-    <text x="347" y="682">*</text>
+    <text x="335" y="51" text-anchor="end">{readOnly, union, subsets</text>
+    <text x="335" y="72" text-anchor="end">relatedElement}</text>
+    <text class="association-end" x="335" y="92" text-anchor="end"><title>Исходные элементы направленного отношения.</title>+ /source</text>
+    <text x="335" y="126" text-anchor="end">1..*</text>
+    <text x="360" y="578" text-anchor="end">{readOnly, union,</text>
+    <text x="360" y="599" text-anchor="end">subsets relationship}</text>
+    <text class="association-end" x="360" y="620" text-anchor="end"><title>Направленные отношения, для которых элемент является источником.</title>+ /directedRelationship</text>
+    <text x="360" y="646" text-anchor="end">*</text>
   </g>
   </a>
 
@@ -92,14 +92,14 @@
     <path class="association" d="M 343 199 H 121 V 742 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
     <path class="association-hitbox" d="M 343 199 H 121 V 742 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="199" r="3"/>
-    <text x="114" y="151">{readOnly, union, subsets</text>
-    <text x="114" y="170">relatedElement}</text>
-    <text class="association-end" x="230" y="190"><title>Целевые элементы направленного отношения.</title>+ /target</text>
-    <text x="280" y="220">1..*</text>
-    <text x="132" y="694">{readOnly, union,</text>
-    <text x="132" y="713">subsets relationship}</text>
-    <text class="association-end" x="182" y="737"><title>Направленные отношения, для которых элемент является целью.</title>+ /directedRelationship</text>
-    <text x="347" y="767">*</text>
+    <text x="335" y="146" text-anchor="end">{readOnly, union, subsets</text>
+    <text x="335" y="167" text-anchor="end">relatedElement}</text>
+    <text class="association-end" x="335" y="188" text-anchor="end"><title>Целевые элементы направленного отношения.</title>+ /target</text>
+    <text x="335" y="222" text-anchor="end">1..*</text>
+    <text x="360" y="689" text-anchor="end">{readOnly, union,</text>
+    <text x="360" y="710" text-anchor="end">subsets relationship}</text>
+    <text class="association-end" x="360" y="731" text-anchor="end"><title>Направленные отношения, для которых элемент является целью.</title>+ /directedRelationship</text>
+    <text x="360" y="766" text-anchor="end">*</text>
   </g>
   </a>
 
@@ -109,12 +109,12 @@
     <path class="association-hitbox" d="M 343 285 H 168 V 490 H 368" aria-hidden="true"/>
     <circle class="end-dot" cx="343" cy="285" r="3"/>
     <circle class="end-dot" cx="368" cy="490" r="3"/>
-    <text x="207" y="256">{readOnly, union}</text>
-    <text class="association-end" x="207" y="275"><title>Элементы, связанные этим отношением.</title>+ /relatedElement</text>
-    <text x="280" y="305">1..*</text>
-    <text x="238" y="431">{readOnly, union}</text>
-    <text class="association-end" x="238" y="450"><title>Отношения, в которых участвует элемент.</title>+ /relationship</text>
-    <text x="340" y="514">*</text>
+    <text x="335" y="253" text-anchor="end">{readOnly, union}</text>
+    <text class="association-end" x="335" y="274" text-anchor="end"><title>Элементы, связанные этим отношением.</title>+ /relatedElement</text>
+    <text x="335" y="308" text-anchor="end">1..*</text>
+    <text x="360" y="459" text-anchor="end">{readOnly, union}</text>
+    <text class="association-end" x="360" y="480" text-anchor="end"><title>Отношения, в которых участвует элемент.</title>+ /relationship</text>
+    <text x="360" y="512" text-anchor="end">*</text>
   </g>
   </a>
 
@@ -124,10 +124,10 @@
     <path class="association-hitbox" d="M 479 103 H 933 V 476 H 770" aria-hidden="true"/>
     <circle class="end-dot" cx="479" cy="103" r="3"/>
     <circle class="end-dot" cx="770" cy="476" r="3"/>
-    <text class="association-end" x="535" y="93"><title>Элементы, к которым относится комментарий.</title>+ annotatedElement</text>
-    <text x="535" y="124">*</text>
-    <text class="association-end" x="776" y="501"><title>Комментарии, присоединённые к элементу.</title>+ comment</text>
-    <text x="776" y="524">*</text>
+    <text class="association-end" x="487" y="92"><title>Элементы, к которым относится комментарий.</title>+ annotatedElement</text>
+    <text x="487" y="127">*</text>
+    <text class="association-end" x="778" y="466"><title>Комментарии, присоединённые к элементу.</title>+ comment</text>
+    <text x="778" y="498">*</text>
   </g>
   </a>
 
@@ -137,27 +137,27 @@
     <path class="association-hitbox" d="M 479 183 H 698 V 467" aria-hidden="true"/>
     <path class="composition" d="M 487 177 L 495 183 L 487 189 L 479 183 Z"/>
     <circle class="end-dot" cx="698" cy="467" r="3"/>
-    <text x="510" y="151">{subsets owner}</text>
-    <text class="association-end" x="510" y="170"><title>Элемент, владеющий комментарием.</title>+ owningElement</text>
-    <text x="510" y="205">0..1</text>
-    <text x="686" y="425">*</text>
-    <text x="716" y="415">{subsets ownedElement}</text>
-    <text class="association-end" x="716" y="434"><title>Комментарии, принадлежащие элементу.</title>+ ownedComment</text>
+    <text x="487" y="149">{subsets owner}</text>
+    <text class="association-end" x="487" y="170"><title>Элемент, владеющий комментарием.</title>+ owningElement</text>
+    <text x="487" y="208">0..1</text>
+    <text x="706" y="456">*</text>
+    <text x="690" y="435" text-anchor="end">{subsets ownedElement}</text>
+    <text class="association-end" x="690" y="456" text-anchor="end"><title>Комментарии, принадлежащие элементу.</title>+ ownedComment</text>
   </g>
   </a>
 
   <a class="association-link" href="../../index.html#/association/a-ownedelement-owner" target="_top" aria-label="Открыть описание ассоциации owner — ownedElement">
   <g class="association-group" id="A_ownedElement_owner" aria-label="Ассоциация owner — ownedElement">
-    <path class="association" d="M 479 259 H 622 V 334 H 465 V 304" marker-end="url(#navigation)"/>
-    <path class="association-hitbox" d="M 479 259 H 622 V 334 H 465 V 304" aria-hidden="true"/>
+    <path class="association" d="M 479 259 H 622 V 364 H 465 V 304" marker-end="url(#navigation)"/>
+    <path class="association-hitbox" d="M 479 259 H 622 V 364 H 465 V 304" aria-hidden="true"/>
     <path class="composition" d="M 487 253 L 495 259 L 487 265 L 479 259 Z"/>
     <circle class="end-dot" cx="465" cy="304" r="3"/>
-    <text x="510" y="232">{readOnly, union}</text>
-    <text class="association-end" x="510" y="251"><title>Элемент-владелец.</title>+ /owner</text>
-    <text x="510" y="281">0..1</text>
-    <text x="590" y="327">*</text>
-    <text class="association-end" x="465" y="354"><title>Элементы, принадлежащие данному элементу.</title>+ /ownedElement</text>
-    <text x="465" y="373">{readOnly, union}</text>
+    <text x="487" y="225">{readOnly, union}</text>
+    <text class="association-end" x="487" y="246"><title>Элемент-владелец.</title>+ /owner</text>
+    <text x="487" y="286">0..1</text>
+    <text x="457" y="326" text-anchor="end">*</text>
+    <text class="association-end" x="473" y="326"><title>Элементы, принадлежащие данному элементу.</title>+ /ownedElement</text>
+    <text x="473" y="347">{readOnly, union}</text>
   </g>
   </a>
 </svg>

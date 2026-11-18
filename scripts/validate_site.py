@@ -197,6 +197,21 @@ SVG_GEOMETRY_SCRIPT = r"""
     return (withinY && (Math.abs(point.x - box.x) <= 0.75 || Math.abs(point.x - box.x - box.width) <= 0.75))
       || (withinX && (Math.abs(point.y - box.y) <= 0.75 || Math.abs(point.y - box.y - box.height) <= 0.75));
   };
+  const expanded = (box, horizontal, vertical) => ({
+    x: box.x - horizontal,
+    y: box.y - vertical,
+    width: box.width + horizontal * 2,
+    height: box.height + vertical * 2
+  });
+  const unitProbe = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  unitProbe.setAttribute("width", "1ex");
+  unitProbe.setAttribute("height", "0");
+  document.documentElement.appendChild(unitProbe);
+  const ex = unitProbe.getBBox().width || 8;
+  unitProbe.remove();
+  const horizontalGap = ex;
+  const verticalGap = ex / 2;
+  const associationLabel = label => Boolean(label.element.closest("g.association-group"));
 
   for (let first = 0; first < labels.length; first += 1) {
     for (let second = first + 1; second < labels.length; second += 1) {
@@ -216,7 +231,8 @@ SVG_GEOMETRY_SCRIPT = r"""
       }
     } else {
       for (const classBox of classBoxes) {
-        if (overlaps(label.box, classBox.box)) errors.push(`label/class: ${label.name}`);
+        const clearance = associationLabel(label) ? expanded(classBox.box, horizontalGap, verticalGap) : classBox.box;
+        if (overlaps(label.box, clearance)) errors.push(`label/class clearance: ${label.name}`);
       }
     }
   }
@@ -225,12 +241,9 @@ SVG_GEOMETRY_SCRIPT = r"""
   for (const line of lines) {
     const length = line.getTotalLength();
     for (const label of labels) {
-      const box = {
-        x: label.box.x - 0.75,
-        y: label.box.y - 0.75,
-        width: label.box.width + 1.5,
-        height: label.box.height + 1.5
-      };
+      const gapX = associationLabel(label) ? horizontalGap : 0.75;
+      const gapY = associationLabel(label) ? verticalGap : 0.75;
+      const box = expanded(label.box, gapX, gapY);
       for (let distance = 0; distance <= length; distance += 1) {
         if (inside(line.getPointAtLength(distance), box, 0)) {
           errors.push(`text/line: ${label.name} at ${label.box.x},${label.box.y}`);
@@ -255,6 +268,75 @@ SVG_GEOMETRY_SCRIPT = r"""
         errors.push(`association end has no description tooltip: ${end.textContent.trim()}`);
       }
     }
+  }
+
+  const endShapes = [...document.querySelectorAll(".end-dot, .composition")].map(element => ({
+    element,
+    box: element.getBBox()
+  }));
+  const markerBoxes = [];
+  for (const path of document.querySelectorAll("path.association")) {
+    const length = path.getTotalLength();
+    const addMarker = atEnd => {
+      const origin = path.getPointAtLength(atEnd ? length : 0);
+      const base = path.getPointAtLength(atEnd ? Math.max(0, length - 8) : Math.min(8, length));
+      markerBoxes.push({
+        x: Math.min(origin.x, base.x),
+        y: Math.min(origin.y, base.y) - 4,
+        width: Math.abs(base.x - origin.x),
+        height: Math.abs(base.y - origin.y) + 8
+      });
+    };
+    if (path.hasAttribute("marker-start")) addMarker(false);
+    if (path.hasAttribute("marker-end")) addMarker(true);
+  }
+  for (const label of labels.filter(associationLabel)) {
+    for (const shape of [...endShapes, ...markerBoxes]) {
+      if (overlaps(label.box, expanded(shape.box || shape, horizontalGap, verticalGap))) {
+        errors.push(`text/end marker clearance: ${label.name}`);
+      }
+    }
+  }
+
+  for (const group of document.querySelectorAll("g.association-group")) {
+    const path = group.querySelector("path.association");
+    const roles = [...group.querySelectorAll("text.association-end")];
+    if (!path || roles.length !== 2) continue;
+    const length = path.getTotalLength();
+    [false, true].forEach((atEnd, index) => {
+      const role = roles[index];
+      const box = role.getBBox();
+      const origin = path.getPointAtLength(atEnd ? length : 0);
+      const next = path.getPointAtLength(atEnd ? length - 1 : 1);
+      const horizontal = Math.abs(next.x - origin.x) > Math.abs(next.y - origin.y);
+      const name = role.textContent.trim();
+      if (horizontal) {
+        const toRight = next.x > origin.x;
+        const gap = toRight ? box.x - origin.x : origin.x - box.x - box.width;
+        const perpendicularGap = origin.y < box.y ? box.y - origin.y
+          : origin.y > box.y + box.height ? origin.y - box.y - box.height : 0;
+        if (gap < horizontalGap - 0.75 || gap > horizontalGap * 3 || perpendicularGap > ex * 6) {
+          errors.push(`horizontal association end placement: ${name}`);
+        }
+        const expectedAnchor = toRight ? "start" : "end";
+        if ((role.getAttribute("text-anchor") || "start") !== expectedAnchor) {
+          errors.push(`horizontal association end alignment: ${name}`);
+        }
+      } else {
+        const downward = next.y > origin.y;
+        const sideGap = downward ? box.y - origin.y : origin.y - box.y - box.height;
+        const onLeft = box.x + box.width <= origin.x;
+        const lateralGap = onLeft ? origin.x - box.x - box.width : box.x - origin.x;
+        if (sideGap < verticalGap - 0.75 || sideGap > verticalGap * 6
+          || lateralGap < horizontalGap - 0.75) {
+          errors.push(`vertical association end placement: ${name}`);
+        }
+        const expectedAnchor = onLeft ? "end" : "start";
+        if ((role.getAttribute("text-anchor") || "start") !== expectedAnchor) {
+          errors.push(`vertical association end alignment: ${name}`);
+        }
+      }
+    });
   }
 
   for (const path of document.querySelectorAll("path.association")) {

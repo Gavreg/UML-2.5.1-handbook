@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="310" viewBox="0 0 850 310" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.9">
+  <title id="diagram-title">Рисунок 7.9 — Открытый и закрытый импорт пакетов</title>
+  <desc id="diagram-description">ShoppingCart открыто импортирует Auxiliary, закрыто импортирует Types и открыто импортируется в WebShop.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="850" height="310"/>
+  <g class="package-node"><title>Пакет Auxiliary.</title>
+<path class="package-box" d="M 35 35 H 100 V 65 H 235 V 120 H 35 Z"/>
+<text class="class-name" x="67.5" y="56" text-anchor="middle">Auxiliary</text>
+</g>
+<g class="package-node"><title>Пакет Types.</title>
+<path class="package-box" d="M 35 205 H 100 V 235 H 235 V 290 H 35 Z"/>
+<text class="class-name" x="67.5" y="226" text-anchor="middle">Types</text>
+</g>
+<g class="package-node"><title>Пакет ShoppingCart.</title>
+<path class="package-box" d="M 325 120 H 545 V 150 H 555 V 205 H 325 Z"/>
+<text class="class-name" x="435.0" y="141" text-anchor="middle">ShoppingCart</text>
+</g>
+<g class="package-node"><title>Пакет WebShop.</title>
+<path class="package-box" d="M 650 100 H 710 V 130 H 825 V 185 H 650 Z"/>
+<text class="class-name" x="680.0" y="121" text-anchor="middle">WebShop</text>
+</g>
+<a class="dependency-group" href="../../index.html#/classifier/packageimport" target="_top"><title>Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title><path class="dependency-line" d="M 325 200 L 235 85" marker-end="url(#navigation)"/><text x="285" y="70" text-anchor="middle">«access»</text></a>
+<a class="dependency-group" href="../../index.html#/classifier/packageimport" target="_top"><title>Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title><path class="dependency-line" d="M 325 190 L 235 240" marker-end="url(#navigation)"/><text x="340" y="230" text-anchor="middle">«import»</text></a>
+<a class="dependency-group" href="../../index.html#/classifier/packageimport" target="_top"><title>Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title><path class="dependency-line" d="M 650 150 H 555" marker-end="url(#navigation)"/><text x="602" y="130" text-anchor="middle">«import»</text></a>
+</svg>

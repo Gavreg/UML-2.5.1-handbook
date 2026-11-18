@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.17">
+  <title id="diagram-title">Рисунок 7.17 — Абстрактный синтаксис зависимостей</title>
+  <desc id="diagram-description">Метаклассы Dependency, Abstraction, Realization, Usage и связанные классификаторы.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="1200" height="650"/>
+  <a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
+<rect class="class-box" x="580" y="30" width="240" height="50"/>
+<line class="class-divider" x1="580" y1="62" x2="820" y2="62"/>
+<text class="class-name abstract" x="700.0" y="53" text-anchor="middle">DirectedRelationship</text>
+</a>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="900" y="30" width="230" height="50"/>
+<line class="class-divider" x1="900" y1="62" x2="1130" y2="62"/>
+<text class="class-name abstract" x="1015.0" y="53" text-anchor="middle">PackageableElement</text>
+</a>
+<a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="30" y="160" width="240" height="150"/>
+<line class="class-divider" x1="30" y1="192" x2="270" y2="192"/>
+<text class="class-name abstract" x="150.0" y="183" text-anchor="middle">NamedElement</text>
+</a>
+<a class="class-node" data-classifier="Dependency" href="../../index.html#/classifier/dependency" target="_top" aria-label="Dependency — открыть описание класса"><title>Dependency. Relationship, показывающий, что элемент или множество элементов-клиентов нуждается в других элементах-поставщиках для своей спецификации или реализации.</title>
+<rect class="class-box" x="600" y="160" width="220" height="125"/>
+<line class="class-divider" x1="600" y1="192" x2="820" y2="192"/>
+<text class="class-name" x="710.0" y="183" text-anchor="middle">Dependency</text>
+</a>
+<a class="class-node" data-classifier="OpaqueExpression" href="../../index.html#/classifier/opaqueexpression" target="_top" aria-label="OpaqueExpression — открыть описание класса"><title>OpaqueExpression. ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.</title>
+<rect class="class-box" x="30" y="405" width="240" height="65"/>
+<line class="class-divider" x1="30" y1="437" x2="270" y2="437"/>
+<text class="class-name" x="150.0" y="428" text-anchor="middle">OpaqueExpression</text>
+</a>
+<a class="class-node" data-classifier="Abstraction" href="../../index.html#/classifier/abstraction" target="_top" aria-label="Abstraction — открыть описание класса"><title>Abstraction. Relationship, связывающий два элемента или множества элементов, которые представляют одно понятие на разных уровнях абстракции или с разных точек зрения.</title>
+<rect class="class-box" x="550" y="405" width="180" height="65"/>
+<line class="class-divider" x1="550" y1="437" x2="730" y2="437"/>
+<text class="class-name" x="640.0" y="428" text-anchor="middle">Abstraction</text>
+</a>
+<a class="class-node" data-classifier="Usage" href="../../index.html#/classifier/usage" target="_top" aria-label="Usage — открыть описание класса"><title>Usage. Dependency, в которой элемент-клиент нуждается в элементе-поставщике или множестве поставщиков для своей полной реализации или работы.</title>
+<rect class="class-box" x="880" y="300" width="130" height="60"/>
+<line class="class-divider" x1="880" y1="332" x2="1010" y2="332"/>
+<text class="class-name" x="945.0" y="323" text-anchor="middle">Usage</text>
+</a>
+<a class="class-node" data-classifier="Realization" href="../../index.html#/classifier/realization" target="_top" aria-label="Realization — открыть описание класса"><title>Realization. Специализированное отношение Abstraction между спецификацией-поставщиком и её реализацией-клиентом.</title>
+<rect class="class-box" x="550" y="550" width="180" height="60"/>
+<line class="class-divider" x1="550" y1="582" x2="730" y2="582"/>
+<text class="class-name" x="640.0" y="573" text-anchor="middle">Realization</text>
+</a>
+<path class="generalization-line" d="M 700 160 V 80" data-child="Dependency" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 820 180 L 1015 80" data-child="Dependency" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 945 300 V 235 H 820" data-child="Usage" data-parent="Dependency" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 640 405 V 285" data-child="Abstraction" data-parent="Dependency" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 640 550 V 470" data-child="Realization" data-parent="Abstraction" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-supplier-supplierdependency" target="_top" aria-label="Открыть описание ассоциации A_supplier_supplierDependency">
+<g class="association-group" id="A_supplier_supplierDependency"><title>Связывает NamedElement-поставщика с Dependencies, которые на него ссылаются.</title>
+<path class="association" d="M 270 185 H 600" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 185 H 600" aria-hidden="true"/>
+<circle class="end-dot" cx="270" cy="185" r="3"/><circle class="end-dot" cx="600" cy="185" r="3"/>
+<text class="association-end" x="282" y="170"><title>Элементы, от которых зависят клиенты.</title>+ supplier</text>
+<text class="association-end" x="588" y="170" text-anchor="end"><title>supplierDependency. Связывает NamedElement-поставщика с Dependencies, которые на него ссылаются.</title>+ supplierDependency</text>
+<text class="association-label" x="282" y="145">{subsets target}</text>
+<text class="association-label" x="282" y="209">1..*</text>
+<text class="association-label" x="588" y="145" text-anchor="end">{subsets directedRelationship}</text>
+<text class="association-label" x="588" y="209" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-clientdependency-client" target="_top" aria-label="Открыть описание ассоциации A_clientDependency_client">
+<g class="association-group" id="A_clientDependency_client"><title>Связывает NamedElement-клиента с его Dependencies.</title>
+<path class="association" d="M 270 260 H 600" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 260 H 600" aria-hidden="true"/>
+<circle class="end-dot" cx="270" cy="260" r="3"/><circle class="end-dot" cx="600" cy="260" r="3"/>
+<text class="association-end" x="282" y="245"><title>Элементы, зависящие от поставщиков.</title>+ client</text>
+<text class="association-end" x="588" y="245" text-anchor="end"><title>Зависимости, в которых элемент выступает клиентом.</title>+ /clientDependency</text>
+<text class="association-label" x="282" y="300">{subsets source}</text>
+<text class="association-label" x="282" y="284">1..*</text>
+<text class="association-label" x="588" y="225" text-anchor="end">{subsets directedRelationship}</text>
+<text class="association-label" x="588" y="284" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-mapping-abstraction" target="_top" aria-label="Открыть описание ассоциации A_mapping_abstraction">
+<g class="association-group" id="A_mapping_abstraction"><title>Связывает OpaqueExpression отображения с владеющим Abstraction.</title>
+<path class="association" d="M 270 435 H 550" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 435 H 550" aria-hidden="true"/>
+<circle class="end-dot" cx="270" cy="435" r="3"/><polygon class="composition" points="550,435 542,427 534,435 542,443"/>
+<text class="association-end" x="282" y="420"><title>Необязательное выражение, уточняющее отношение между поставщиками и клиентами.</title>+ mapping</text>
+<text class="association-end" x="530" y="415" text-anchor="end"><title>abstraction. Связывает OpaqueExpression отображения с владеющим Abstraction.</title>+ abstraction</text>
+<text class="association-label" x="282" y="395">{subsets ownedElement}</text>
+<text class="association-label" x="282" y="467">0..1</text>
+<text class="association-label" x="530" y="370" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="530" y="467" text-anchor="end">0..1</text>
+</g></a>
+</svg>

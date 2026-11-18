@@ -1,0 +1,713 @@
+"""
+Name: generate_common_structure_svg.py
+Purpose: Generate interactive vector versions of all 21 figures in UML 2.5.1 Clause 7.
+Interface: python scripts/generate_common_structure_svg.py [--output-dir PATH] [--check]
+Goal: Preserve OMG semantics and notation while adding local links, tooltips and consistent geometry.
+Sources: docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
+Requires: Python 3 standard library.
+"""
+
+from argparse import ArgumentParser
+from html import escape
+import json
+from pathlib import Path
+import re
+
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = ROOT / "site" / "data" / "common-structure.js"
+XMI_PATH = ROOT / "site" / "data" / "common-structure-xmi.js"
+
+
+def slug(value):
+    return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", value.lower()))
+
+
+def quoted(value):
+    return json.loads(f'"{value}"')
+
+
+DATA_TEXT = DATA_PATH.read_text(encoding="utf-8")
+CLASS_BLOCK = DATA_TEXT.split("const classifiers = [", 1)[1].split("const associations = [", 1)[0]
+ASSOCIATION_BLOCK = DATA_TEXT.split("const associations = [", 1)[1].split("const diagrams = [", 1)[0]
+CLASSES = {
+    match.group(1): {"kind": match.group(2), "definition": quoted(match.group(3))}
+    for match in re.finditer(
+        r'name: "([A-Za-z]+)".*?kind: "([^"]+)".*?definition: "((?:\\.|[^"\\])*)"',
+        CLASS_BLOCK,
+        re.S,
+    )
+}
+ASSOCIATIONS = {
+    match.group(1): quoted(match.group(2))
+    for match in re.finditer(
+        r'name: "(A_[A-Za-z_]+)", ru: "(?:\\.|[^"\\])*", section: "(?:\\.|[^"\\])*", page: \d+,\s+definition: "((?:\\.|[^"\\])*)"',
+        ASSOCIATION_BLOCK,
+        re.S,
+    )
+}
+XMI_TEXT = XMI_PATH.read_text(encoding="utf-8")
+XMI = json.loads(re.search(r"=\s*(\{.*\});?\s*$", XMI_TEXT, re.S).group(1))
+PROPERTY_DESCRIPTIONS = {}
+for class_name, class_data in XMI["classes"].items():
+    for group in ("direct", "inherited"):
+        for prop in class_data.get(group, []):
+            PROPERTY_DESCRIPTIONS[(class_name, prop["name"])] = prop["description"]
+
+
+STYLE = """
+  .background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+""".strip()
+
+
+class Svg:
+    def __init__(self, figure, title, description, width, height):
+        self.figure = figure
+        self.width = width
+        self.height = height
+        self.parts = []
+        self.title = title
+        self.description = description
+
+    def add(self, value):
+        self.parts.append(value)
+
+    def render(self):
+        return f'''<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="{self.width}" height="{self.height}" viewBox="0 0 {self.width} {self.height}" role="img" aria-labelledby="diagram-title diagram-description" data-figure="{self.figure}">
+  <title id="diagram-title">Рисунок {self.figure} — {escape(self.title)}</title>
+  <desc id="diagram-description">{escape(self.description)}</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>{STYLE}</style>
+  </defs>
+  <rect class="background" width="{self.width}" height="{self.height}"/>
+  {chr(10).join(self.parts)}
+</svg>
+'''
+
+
+def text(value, x, y, anchor="start", css="", title=""):
+    class_attr = f' class="{css}"' if css else ""
+    anchor_attr = f' text-anchor="{anchor}"' if anchor != "start" else ""
+    tooltip = f"<title>{escape(title)}</title>" if title else ""
+    return f'<text{class_attr} x="{x}" y="{y}"{anchor_attr}>{tooltip}{escape(value)}</text>'
+
+
+def class_node(svg, name, x, y, width, height, attributes=None, operations=None, stereotype="", example=False, tooltip=""):
+    attributes = attributes or []
+    operations = operations or []
+    known = None if example else CLASSES.get(name)
+    definition = tooltip or (known["definition"] if known else f"Пример класса {name}.")
+    abstract = known and known["kind"] == "Abstract Class"
+    header = 50 if stereotype else 32
+    href = f'../../index.html#/classifier/{slug(name)}'
+    tag = "g" if example or not known else "a"
+    link_attrs = "" if tag == "g" else f' href="{href}" target="_top" aria-label="{escape(name)} — открыть описание класса"'
+    svg.add(f'<{tag} class="class-node" data-classifier="{escape(name)}"{link_attrs}><title>{escape(name)}. {escape(definition)}</title>')
+    svg.add(f'<rect class="class-box" x="{x}" y="{y}" width="{width}" height="{height}"/>')
+    svg.add(f'<line class="class-divider" x1="{x}" y1="{y + header}" x2="{x + width}" y2="{y + header}"/>')
+    if stereotype:
+        svg.add(text(stereotype, x + width / 2, y + 19, "middle"))
+        svg.add(text(name, x + width / 2, y + 41, "middle", "class-name" + (" abstract" if abstract else "")))
+    else:
+        svg.add(text(name, x + width / 2, y + 23, "middle", "class-name" + (" abstract" if abstract else "")))
+    line_y = y + header + 22
+    for attribute in attributes:
+        svg.add(text(attribute, x + 10, line_y, css="attribute"))
+        line_y += 21
+    if operations:
+        operation_top = line_y - 12
+        svg.add(f'<line class="class-divider" x1="{x}" y1="{operation_top}" x2="{x + width}" y2="{operation_top}"/>')
+        for operation in operations:
+            if operation:
+                svg.add(text(operation, x + 10, operation_top + 21, css="operation"))
+            operation_top += 21
+    svg.add(f'</{tag}>')
+
+
+def generalization(svg, path, marker=True, child="", parent="", dashed=False):
+    marker_attr = ' marker-end="url(#generalization)"' if marker else ""
+    data = f' data-child="{escape(child)}" data-parent="{escape(parent)}"' if child and parent else ""
+    css = "generalization-line dependency-line" if dashed else "generalization-line"
+    svg.add(f'<path class="{css}" d="{path}"{data}{marker_attr}/>' )
+
+
+def association(svg, name, path, start, end, markers="", decorations="", labels=None):
+    definition = ASSOCIATIONS[name]
+    svg.add(f'<a class="association-link" href="../../index.html#/association/{slug(name)}" target="_top" aria-label="Открыть описание ассоциации {escape(name)}">')
+    svg.add(f'<g class="association-group" id="{name}"><title>{escape(definition)}</title>')
+    svg.add(f'<path class="association" d="{path}"{markers}/><path class="association-hitbox" d="{path}" aria-hidden="true"/>')
+    svg.add(decorations)
+    for owner, prop, label_value, x, y, anchor in (start, end):
+        description = PROPERTY_DESCRIPTIONS.get((owner, prop), f"{prop}. {definition}")
+        svg.add(text(label_value, x, y, anchor, "association-end", description))
+    for label_value, x, y, anchor in labels or []:
+        svg.add(text(label_value, x, y, anchor, "association-label"))
+    svg.add('</g></a>')
+
+
+def example_association(svg, path, labels=None, markers=' marker-end="url(#navigation)"', title="Ассоциация между элементами примера."):
+    svg.add(f'<g class="example-association-group"><title>{escape(title)}</title><path class="example-association" d="{path}"{markers}/><path class="association-hitbox" d="{path}" aria-hidden="true"/>')
+    for label_value, x, y, anchor in labels or []:
+        svg.add(text(label_value, x, y, anchor, "example-label"))
+    svg.add('</g>')
+
+
+def dependency(svg, path, label_value, label_x, label_y, title, href="", alias=""):
+    marker = ' marker-end="url(#navigation)"'
+    content = f'<path class="dependency-line" d="{path}"{marker}/>{text(label_value, label_x, label_y, "middle")}'
+    if alias:
+        content += text(alias, label_x, label_y + 21, "middle", "example-label")
+    tooltip = f'<title>{escape(title)}</title>'
+    if href:
+        svg.add(f'<a class="dependency-group" href="{href}" target="_top">{tooltip}{content}</a>')
+    else:
+        svg.add(f'<g class="dependency-group">{tooltip}{content}</g>')
+
+
+def note(svg, x, y, width, height, lines, href="", title=""):
+    fold = 18
+    shape = f'M {x} {y} H {x + width - fold} L {x + width} {y + fold} V {y + height} H {x} Z M {x + width - fold} {y} V {y + fold} H {x + width}'
+    content = f'<path class="note-box" d="{shape}"/>'
+    for index, line in enumerate(lines):
+        content += text(line, x + 12, y + 25 + index * 22, css="attribute")
+    if href:
+        svg.add(f'<a href="{href}" target="_top"><title>{escape(title)}</title>{content}</a>')
+    else:
+        svg.add(f'<g><title>{escape(title)}</title>{content}</g>')
+
+
+def package(svg, name, x, y, width, height, tab_width=190, tooltip=""):
+    svg.add(f'<g class="package-node"><title>{escape(tooltip or f"Пакет {name}.")}</title>')
+    svg.add(f'<path class="package-box" d="M {x} {y} H {x + tab_width} V {y + 30} H {x + width} V {y + height} H {x} Z"/>')
+    svg.add(text(name, x + tab_width / 2, y + 21, "middle", "class-name"))
+    svg.add('</g>')
+
+
+def diamond(x, y, direction="right"):
+    points = {
+        "right": f'{x},{y} {x + 8},{y - 8} {x + 16},{y} {x + 8},{y + 8}',
+        "left": f'{x},{y} {x - 8},{y - 8} {x - 16},{y} {x - 8},{y + 8}',
+        "down": f'{x},{y} {x - 8},{y + 8} {x},{y + 16} {x + 8},{y + 8}',
+        "up": f'{x},{y} {x - 8},{y - 8} {x},{y - 16} {x + 8},{y - 8}',
+    }
+    return f'<polygon class="composition" points="{points[direction]}"/>'
+
+
+def dot(x, y):
+    return f'<circle class="end-dot" cx="{x}" cy="{y}" r="3"/>'
+
+
+def figure_7_2():
+    svg = Svg("7.2", "Обозначение комментария", "Примечание с текстом комментария связано пунктирной линией с классом Account.", 800, 190)
+    note(svg, 40, 30, 320, 115, ["This class was added", "by Alan Wright after", "meeting with the", "mission planning team."], "../../index.html#/classifier/comment", CLASSES["Comment"]["definition"])
+    svg.add('<path class="note-link" d="M 360 92 H 500"/>')
+    class_node(svg, "Account", 500, 65, 150, 55, example=True)
+    return svg
+
+
+def figure_7_3():
+    svg = Svg("7.3", "Шаблоны", "Метаклассы TemplateSignature, TemplateParameter, TemplateableElement и ParameterableElement, их обобщения и ассоциации.", 1300, 840)
+    class_node(svg, "Element", 590, 30, 120, 45)
+    class_node(svg, "TemplateSignature", 130, 170, 200, 60)
+    class_node(svg, "TemplateableElement", 900, 170, 230, 60)
+    class_node(svg, "TemplateParameter", 130, 400, 200, 310)
+    class_node(svg, "ParameterableElement", 900, 400, 240, 310)
+    class_node(svg, "Element", 590, 765, 120, 45)
+    generalization(svg, "M 230 170 V 100 H 650 V 75", child="TemplateSignature", parent="Element")
+    generalization(svg, "M 1015 170 V 100 H 650", False)
+    generalization(svg, "M 230 710 V 745 H 650 V 765", child="TemplateParameter", parent="Element")
+    generalization(svg, "M 1020 710 V 745 H 650", False)
+
+    association(svg, "A_ownedTemplateSignature_template", "M 330 195 H 900",
+        ("TemplateSignature", "template", "+ template", 350, 175, "start"),
+        ("TemplateableElement", "ownedTemplateSignature", "+ ownedTemplateSignature", 880, 175, "end"),
+        ' marker-start="url(#navigation-start)"', dot(330, 195) + diamond(900, 195, "left"),
+        [("{subsets owner}", 350, 150, "start"), ("0..1", 350, 225, "start"),
+         ("{subsets ownedElement}", 880, 150, "end"), ("1", 880, 225, "end")])
+    association(svg, "A_ownedParameter_signature", "M 190 230 V 400",
+        ("TemplateParameter", "signature", "+ signature", 170, 253, "end"),
+        ("TemplateSignature", "ownedParameter", "+ ownedParameter", 160, 390, "end"),
+        ' marker-end="url(#navigation)"', diamond(190, 230, "down") + dot(190, 400),
+        [("{subsets templateSignature,", 178, 278, "end"), ("subsets owner}", 178, 298, "end"), ("1", 178, 320, "end"),
+         ("{ordered, subsets ownedElement,", 178, 345, "end"), ("subsets parameter}", 178, 365, "end"), ("1..*", 40, 415, "end")])
+    association(svg, "A_parameter_templateSignature", "M 275 230 V 400",
+        ("TemplateParameter", "templateSignature", "+ templateSignature", 287, 253, "start"),
+        ("TemplateSignature", "parameter", "+ parameter", 340, 377, "start"),
+        ' marker-end="url(#navigation)"', dot(275, 230),
+        [("0..1", 287, 278, "start"), ("{ordered}", 287, 323, "start"), ("1..*", 340, 360, "start")])
+
+    association(svg, "A_ownedParameteredElement_owningTemplateParameter", "M 330 440 H 900",
+        ("ParameterableElement", "owningTemplateParameter", "+ owningTemplateParameter", 350, 425, "start"),
+        ("TemplateParameter", "ownedParameteredElement", "+ ownedParameteredElement", 880, 415, "end"),
+        ' marker-start="url(#navigation-start)"', dot(330, 440) + diamond(900, 440, "left"),
+        [("{subsets owner, templateParameter}", 350, 405, "start"), ("0..1", 350, 464, "start"),
+         ("{subsets ownedElement, parameteredElement}", 880, 390, "end"), ("0..1", 880, 475, "end")])
+    association(svg, "A_parameteredElement_templateParameter", "M 330 530 H 900",
+        ("ParameterableElement", "templateParameter", "+ templateParameter", 350, 515, "start"),
+        ("TemplateParameter", "parameteredElement", "+ parameteredElement", 880, 515, "end"),
+        ' marker-start="url(#navigation-start)"', dot(330, 530) + dot(900, 530),
+        [("0..1", 350, 554, "start"), ("1", 880, 554, "end")])
+    association(svg, "A_default_templateParameter", "M 330 600 H 900",
+        ("ParameterableElement", "default", "+ default", 350, 585, "start"),
+        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 585, "end"),
+        ' marker-end="url(#navigation)"', dot(330, 600),
+        [("0..1", 350, 630, "start"), ("0..1", 880, 630, "end")])
+    association(svg, "A_ownedDefault_templateParameter", "M 330 700 H 900",
+        ("ParameterableElement", "ownedDefault", "+ ownedDefault", 350, 680, "start"),
+        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 680, "end"),
+        ' marker-end="url(#navigation)"', diamond(330, 700, "right"),
+        [("{subsets ownedElement, default}", 350, 650, "start"), ("0..1", 350, 735, "start"),
+         ("{subsets owner, redefines templateParameter}", 880, 650, "end"), ("0..1", 880, 735, "end")])
+    return svg
+
+
+def figure_7_4():
+    svg = Svg("7.4", "Привязки шаблонов", "Метаклассы TemplateParameterSubstitution, TemplateBinding и связанные элементы шаблонов.", 1200, 830)
+    class_node(svg, "Element", 540, 30, 120, 45)
+    class_node(svg, "TemplateParameter", 60, 140, 210, 65)
+    class_node(svg, "ParameterableElement", 40, 285, 230, 115)
+    class_node(svg, "TemplateParameterSubstitution", 600, 130, 330, 290)
+    class_node(svg, "TemplateableElement", 50, 540, 220, 65)
+    class_node(svg, "TemplateSignature", 100, 680, 200, 65)
+    class_node(svg, "TemplateBinding", 650, 520, 220, 225)
+    class_node(svg, "DirectedRelationship", 640, 770, 240, 45)
+    generalization(svg, "M 765 130 V 90 H 600 V 75", child="TemplateParameterSubstitution", parent="Element")
+    generalization(svg, "M 760 745 V 770", child="TemplateBinding", parent="DirectedRelationship")
+
+    association(svg, "A_formal_templateParameterSubstitution", "M 270 165 H 600",
+        ("TemplateParameterSubstitution", "formal", "+ formal", 282, 150, "start"),
+        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 588, 150, "end"),
+        ' marker-start="url(#navigation-start)"', dot(600, 165), [("1", 282, 189, "start"), ("*", 588, 189, "end")])
+    association(svg, "A_actual_templateParameterSubstitution", "M 270 315 H 600",
+        ("TemplateParameterSubstitution", "actual", "+ actual", 282, 300, "start"),
+        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 588, 300, "end"),
+        ' marker-start="url(#navigation-start)"', dot(600, 315), [("1", 282, 339, "start"), ("*", 588, 339, "end")])
+    association(svg, "A_ownedActual_owningTemplateParameterSubstitution", "M 270 395 H 600",
+        ("TemplateParameterSubstitution", "owningTemplateParameterSubstitution", "+ owningTemplateParameterSubstitution", 282, 420, "start"),
+        ("TemplateParameterSubstitution", "ownedActual", "+ ownedActual", 580, 375, "end"),
+        ' marker-start="url(#navigation-start)"', diamond(600, 395, "left"),
+        [("0..1", 282, 495, "start"), ("{subsets owner, redefines templateParameterSubstitution}", 282, 470, "start"),
+         ("{subsets ownedElement, actual}", 580, 350, "end"), ("*", 580, 430, "end")])
+    association(svg, "A_parameterSubstitution_templateBinding", "M 765 420 V 520",
+        ("TemplateParameterSubstitution", "templateBinding", "+ templateBinding", 753, 443, "end"),
+        ("TemplateBinding", "parameterSubstitution", "+ parameterSubstitution", 785, 497, "start"),
+        ' marker-start="url(#navigation-start)"', diamond(765, 520, "up") + dot(765, 420),
+        [("{subsets owner}", 753, 468, "end"), ("1", 753, 493, "end"),
+         ("{subsets ownedElement}", 785, 447, "start"), ("*", 785, 472, "start")])
+    association(svg, "A_templateBinding_boundElement", "M 270 570 H 650",
+        ("TemplateBinding", "boundElement", "+ boundElement", 282, 555, "start"),
+        ("TemplateableElement", "templateBinding", "+ templateBinding", 638, 555, "end"),
+        ' marker-end="url(#navigation)"', diamond(270, 570, "right") + dot(650, 570),
+        [("{subsets source, owner}", 282, 530, "start"), ("1", 282, 605, "start"),
+         ("{subsets directedRelationship, ownedElement}", 638, 505, "end"), ("*", 638, 594, "end")])
+    association(svg, "A_signature_templateBinding", "M 300 700 H 650",
+        ("TemplateBinding", "signature", "+ signature", 312, 685, "start"),
+        ("TemplateSignature", "templateBinding", "+ templateBinding", 638, 685, "end"),
+        ' marker-start="url(#navigation-start)"', dot(650, 700),
+        [("{subsets target}", 312, 660, "start"), ("1", 312, 724, "start"),
+         ("{subsets directedRelationship}", 638, 660, "end"), ("*", 638, 724, "end")])
+    return svg
+
+
+def figure_7_5():
+    svg = Svg("7.5", "Пространства имён", "Метамодель пространств имён, импорта элементов и пакетов, видимости и ограничений.", 1400, 1080)
+    class_node(svg, "Element", 620, 30, 120, 45)
+    class_node(svg, "NamedElement", 300, 145, 360, 145, ["+ name : String [0..1]", "+ /qualifiedName : String [0..1] {readOnly}", "+ visibility : VisibilityKind [0..1]"])
+    class_node(svg, "Namespace", 250, 470, 220, 190)
+    class_node(svg, "StringExpression", 1010, 170, 220, 60)
+    class_node(svg, "VisibilityKind", 1130, 30, 180, 150, ["public", "private", "protected", "package"], stereotype="«enumeration»")
+    class_node(svg, "ParameterableElement", 980, 260, 230, 50)
+    class_node(svg, "PackageableElement", 960, 350, 260, 70, ["+ visibility : VisibilityKind [0..1] = public"])
+    class_node(svg, "ElementImport", 960, 540, 240, 90, ["+ alias : String [0..1]", "+ visibility : VisibilityKind = public"])
+    class_node(svg, "DirectedRelationship", 960, 675, 240, 50)
+    class_node(svg, "PackageImport", 960, 790, 240, 90, ["+ visibility : VisibilityKind = public"])
+    class_node(svg, "Constraint", 700, 920, 180, 55)
+    class_node(svg, "Package", 1120, 1000, 150, 55)
+    generalization(svg, "M 480 145 V 100 H 680 V 75", child="NamedElement", parent="Element")
+    generalization(svg, "M 360 470 V 290", child="Namespace", parent="NamedElement")
+    generalization(svg, "M 1090 350 V 310", child="PackageableElement", parent="ParameterableElement")
+    generalization(svg, "M 1080 630 V 675", child="ElementImport", parent="DirectedRelationship")
+    generalization(svg, "M 1080 790 V 725", child="PackageImport", parent="DirectedRelationship")
+
+    association(svg, "A_member_memberNamespace", "M 300 180 H 20 V 500 H 250",
+        ("NamedElement", "member", "+ /member", 288, 165, "end"),
+        ("Namespace", "memberNamespace", "+ /memberNamespace", 238, 485, "end"),
+        ' marker-start="url(#navigation-start)"', dot(300, 180),
+        [("{readOnly, union}", 288, 140, "end"), ("*", 288, 210, "end"),
+         ("{readOnly, union}", 238, 420, "end"), ("0..1", 238, 445, "end")])
+    association(svg, "A_ownedMember_namespace", "M 300 250 H 50 V 575 H 250",
+        ("Namespace", "namespace", "+ /namespace", 288, 235, "end"),
+        ("Namespace", "ownedMember", "+ /ownedMember", 238, 555, "end"),
+        ' marker-start="url(#navigation-start)"', dot(300, 250) + diamond(250, 575, "left"),
+        [("{readOnly, union, subsets", 288, 275, "end"), ("memberNamespace, owner}", 288, 295, "end"), ("0..1", 288, 320, "end"),
+         ("{readOnly, union,", 238, 600, "end"), ("subsets member,", 238, 620, "end"), ("subsets ownedElement}", 238, 640, "end"), ("*", 238, 665, "end")])
+    association(svg, "A_nameExpression_namedElement", "M 660 200 H 1010",
+        ("NamedElement", "nameExpression", "+ nameExpression", 680, 185, "start"),
+        ("NamedElement", "namedElement", "+ namedElement", 990, 185, "end"),
+        ' marker-end="url(#navigation)"', diamond(660, 200, "right") + dot(1010, 200),
+        [("{subsets ownedElement}", 680, 160, "start"), ("0..1", 680, 230, "start"),
+         ("{subsets owner}", 990, 160, "end"), ("0..1", 990, 230, "end")])
+    association(svg, "A_importedMember_namespace", "M 470 500 H 750 V 385 H 960",
+        ("Namespace", "importedMember", "+ /importedMember", 482, 485, "start"),
+        ("PackageableElement", "namespace", "+ namespace", 940, 370, "end"),
+        "", dot(470, 500),
+        [("{readOnly, subsets member}", 482, 460, "start"), ("*", 482, 524, "start"),
+         ("{subsets memberNamespace}", 940, 345, "end"), ("0..1", 940, 409, "end")])
+    association(svg, "A_importedElement_import", "M 1120 420 V 540",
+        ("ElementImport", "importedElement", "+ importedElement", 1132, 443, "start"),
+        ("PackageableElement", "import", "+ import", 1132, 525, "start"),
+        ' marker-start="url(#navigation-start)"', dot(1120, 540),
+        [("{subsets target}", 1132, 463, "start"), ("1", 1132, 483, "start"),
+         ("{subsets directedRelationship}", 1132, 500, "start"), ("*", 1212, 564, "start")])
+    association(svg, "A_elementImport_importingNamespace", "M 470 575 H 960",
+        ("Namespace", "elementImport", "+ elementImport", 482, 560, "start"),
+        ("ElementImport", "importingNamespace", "+ importingNamespace", 940, 560, "end"),
+        ' marker-end="url(#navigation)"', diamond(470, 575, "right") + dot(960, 575),
+        [("{subsets directedRelationship, ownedElement}", 482, 540, "start"), ("*", 482, 605, "start"),
+         ("{subsets source, owner}", 940, 515, "end"), ("1", 940, 599, "end")])
+    association(svg, "A_packageImport_importingNamespace", "M 420 660 V 825 H 960",
+        ("Namespace", "packageImport", "+ packageImport", 432, 697, "start"),
+        ("PackageImport", "importingNamespace", "+ importingNamespace", 940, 810, "end"),
+        ' marker-end="url(#navigation)"', diamond(420, 660, "down") + dot(960, 825),
+        [("{subsets directedRelationship, ownedElement}", 432, 722, "start"), ("*", 432, 747, "start"),
+         ("{subsets source, owner}", 940, 765, "end"), ("1", 940, 849, "end")])
+    association(svg, "A_importedPackage_packageImport", "M 1195 880 V 1000",
+        ("PackageImport", "packageImport", "+ packageImport", 1183, 904, "end"),
+        ("PackageImport", "importedPackage", "+ importedPackage", 1207, 955, "start"),
+        ' marker-end="url(#navigation)"', dot(1195, 880),
+        [("{subsets directedRelationship}", 1183, 929, "end"), ("*", 1183, 954, "end"),
+         ("{subsets target}", 1207, 925, "start"), ("1", 1220, 980, "start")])
+    association(svg, "A_ownedRule_context", "M 300 660 V 947 H 700",
+        ("Constraint", "context", "+ context", 288, 697, "end"),
+        ("Namespace", "ownedRule", "+ ownedRule", 688, 932, "end"),
+        ' marker-end="url(#navigation)"', diamond(300, 660, "down") + dot(700, 947),
+        [("{subsets namespace}", 288, 722, "end"), ("0..1", 288, 747, "end"),
+         ("{subsets ownedMember}", 688, 907, "end"), ("*", 688, 971, "end")])
+    return svg
+
+
+def figure_7_10():
+    svg = Svg("7.10", "Абстрактный синтаксис типов и кратности", "Метаклассы Type, TypedElement, MultiplicityElement и ValueSpecification.", 1100, 660)
+    class_node(svg, "NamedElement", 100, 40, 190, 50)
+    class_node(svg, "TypedElement", 100, 170, 190, 60)
+    class_node(svg, "PackageableElement", 700, 40, 240, 50)
+    class_node(svg, "Type", 770, 170, 140, 60)
+    class_node(svg, "Element", 400, 305, 120, 50)
+    class_node(svg, "MultiplicityElement", 70, 440, 360, 160, ["+ isOrdered : Boolean = false", "+ isUnique : Boolean = true", "+ /lower : Integer", "+ /upper : UnlimitedNatural"])
+    class_node(svg, "ValueSpecification", 790, 430, 260, 160)
+    generalization(svg, "M 195 170 V 90", child="TypedElement", parent="NamedElement")
+    generalization(svg, "M 840 170 V 90", child="Type", parent="PackageableElement")
+    generalization(svg, "M 250 440 V 395 H 460 V 355", child="MultiplicityElement", parent="Element")
+    association(svg, "A_type_typedElement", "M 290 195 H 770",
+        ("Type", "typedElement", "+ typedElement", 302, 180, "start"),
+        ("TypedElement", "type", "+ type", 758, 180, "end"),
+        ' marker-end="url(#navigation)"', dot(770, 195), [("*", 302, 219, "start"), ("0..1", 758, 219, "end")])
+    association(svg, "A_lowerValue_owningLower", "M 430 475 H 790",
+        ("ValueSpecification", "owningLower", "+ owningLower", 442, 460, "start"),
+        ("MultiplicityElement", "lowerValue", "+ lowerValue", 770, 460, "end"),
+        ' marker-end="url(#navigation)"', diamond(430, 475, "right") + dot(790, 475),
+        [("{subsets owner}", 442, 435, "start"), ("0..1", 442, 505, "start"),
+         ("{subsets ownedElement}", 770, 435, "end"), ("0..1", 770, 505, "end")])
+    association(svg, "A_upperValue_owningUpper", "M 430 575 H 790",
+        ("ValueSpecification", "owningUpper", "+ owningUpper", 442, 560, "start"),
+        ("MultiplicityElement", "upperValue", "+ upperValue", 770, 560, "end"),
+        ' marker-end="url(#navigation)"', diamond(430, 575, "right") + dot(790, 575),
+        [("{subsets owner}", 442, 535, "start"), ("0..1", 442, 605, "start"),
+         ("{subsets ownedElement}", 770, 535, "end"), ("0..1", 770, 605, "end")])
+    return svg
+
+
+def figure_7_13():
+    svg = Svg("7.13", "Абстрактный синтаксис ограничений", "Метакласс Constraint, его контекст, ограничиваемые элементы и спецификация.", 1100, 430)
+    class_node(svg, "PackageableElement", 440, 30, 200, 50)
+    class_node(svg, "Constraint", 400, 130, 240, 190)
+    class_node(svg, "Namespace", 40, 190, 150, 55)
+    class_node(svg, "Element", 880, 115, 140, 55)
+    class_node(svg, "ValueSpecification", 820, 280, 230, 65)
+    generalization(svg, "M 520 130 V 80", child="Constraint", parent="PackageableElement")
+    association(svg, "A_constrainedElement_constraint", "M 640 155 H 880",
+        ("Element", "constraint", "+ constraint", 652, 140, "start"),
+        ("Constraint", "constrainedElement", "+ constrainedElement", 860, 115, "end"),
+        ' marker-end="url(#navigation)"', dot(640, 155),
+        [("*", 652, 185, "start"), ("{ordered}", 860, 90, "end"), ("*", 860, 185, "end")])
+    association(svg, "A_ownedRule_context", "M 190 225 H 400",
+        ("Constraint", "context", "+ context", 202, 210, "start"),
+        ("Namespace", "ownedRule", "+ ownedRule", 388, 210, "end"),
+        "", diamond(190, 225, "right") + dot(400, 225),
+        [("{subsets namespace}", 202, 180, "start"), ("0..1", 202, 255, "start"),
+         ("{subsets ownedMember}", 388, 155, "end"), ("*", 388, 249, "end")])
+    association(svg, "A_specification_owningConstraint", "M 640 285 H 820",
+        ("ValueSpecification", "owningConstraint", "+ owningConstraint", 652, 270, "start"),
+        ("Constraint", "specification", "+ specification", 810, 245, "end"),
+        ' marker-end="url(#navigation)"', diamond(640, 285, "right"),
+        [("{subsets owner}", 652, 220, "start"), ("0..1", 652, 315, "start"),
+         ("{subsets ownedElement}", 810, 350, "end"), ("1", 790, 380, "end")])
+    return svg
+
+
+def figure_7_17():
+    svg = Svg("7.17", "Абстрактный синтаксис зависимостей", "Метаклассы Dependency, Abstraction, Realization, Usage и связанные классификаторы.", 1200, 650)
+    class_node(svg, "DirectedRelationship", 580, 30, 240, 50)
+    class_node(svg, "PackageableElement", 900, 30, 230, 50)
+    class_node(svg, "NamedElement", 30, 160, 240, 150)
+    class_node(svg, "Dependency", 600, 160, 220, 125)
+    class_node(svg, "OpaqueExpression", 30, 405, 240, 65)
+    class_node(svg, "Abstraction", 550, 405, 180, 65)
+    class_node(svg, "Usage", 880, 300, 130, 60)
+    class_node(svg, "Realization", 550, 550, 180, 60)
+    generalization(svg, "M 700 160 V 80", child="Dependency", parent="DirectedRelationship")
+    generalization(svg, "M 820 180 L 1015 80", child="Dependency", parent="PackageableElement")
+    generalization(svg, "M 945 300 V 235 H 820", child="Usage", parent="Dependency")
+    generalization(svg, "M 640 405 V 285", child="Abstraction", parent="Dependency")
+    generalization(svg, "M 640 550 V 470", child="Realization", parent="Abstraction")
+    association(svg, "A_supplier_supplierDependency", "M 270 185 H 600",
+        ("Dependency", "supplier", "+ supplier", 282, 170, "start"),
+        ("NamedElement", "supplierDependency", "+ supplierDependency", 588, 170, "end"),
+        ' marker-start="url(#navigation-start)"', dot(270, 185) + dot(600, 185),
+        [("{subsets target}", 282, 145, "start"), ("1..*", 282, 209, "start"),
+         ("{subsets directedRelationship}", 588, 145, "end"), ("*", 588, 209, "end")])
+    association(svg, "A_clientDependency_client", "M 270 260 H 600",
+        ("Dependency", "client", "+ client", 282, 245, "start"),
+        ("NamedElement", "clientDependency", "+ /clientDependency", 588, 245, "end"),
+        ' marker-start="url(#navigation-start)"', dot(270, 260) + dot(600, 260),
+        [("{subsets source}", 282, 300, "start"), ("1..*", 282, 284, "start"),
+         ("{subsets directedRelationship}", 588, 225, "end"), ("*", 588, 284, "end")])
+    association(svg, "A_mapping_abstraction", "M 270 435 H 550",
+        ("Abstraction", "mapping", "+ mapping", 282, 420, "start"),
+        ("OpaqueExpression", "abstraction", "+ abstraction", 530, 415, "end"),
+        ' marker-start="url(#navigation-start)"', dot(270, 435) + diamond(550, 435, "left"),
+        [("{subsets ownedElement}", 282, 395, "start"), ("0..1", 282, 467, "start"),
+         ("{subsets owner}", 530, 370, "end"), ("0..1", 530, 467, "end")])
+    return svg
+
+
+def figure_7_6():
+    svg = Svg("7.6", "Пакет-шаблон со строковыми параметрами", "Шаблон ResourceAllocation с параметрами Resource, ResourceKind и System и два варианта привязки TrainingAdmin.", 1100, 940)
+    package(svg, "ResourceAllocation", 30, 150, 960, 570, 260)
+    svg.add('<rect class="note-box template-signature" x="790" y="25" width="270" height="105"/>')
+    svg.add(text("Resource: StringExpression,", 802, 50, css="attribute"))
+    svg.add(text("ResourceKind: StringExpression,", 802, 74, css="attribute"))
+    svg.add(text("System", 802, 98, css="attribute"))
+    svg.add('<path class="note-link" d="M 925 130 V 150"/>')
+    class_node(svg, "$<Resource>$", 80, 250, 175, 80, example=True)
+    class_node(svg, "Allocation", 400, 250, 230, 85, ["$<Resource>Allocation$"], example=True)
+    class_node(svg, "$<ResourceKind>$", 70, 500, 195, 80, example=True)
+    class_node(svg, "TimeSlot", 290, 385, 160, 70, example=True)
+    class_node(svg, "Request", 480, 500, 180, 80, example=True)
+    class_node(svg, "System", 790, 365, 170, 80, example=True)
+    example_association(svg, "M 400 285 H 255", [("resource", 330, 270, "middle"), ("1", 267, 309, "start")], title="Ресурс, участвующий в распределении.")
+    example_association(svg, "M 135 500 V 330", [("resource", 147, 355, "start"), ("*", 147, 475, "start")], title="Ресурсы выбранного вида.")
+    example_association(svg, "M 480 535 H 265", [("$the<ResourceKind>$", 370, 520, "middle"), ("1", 277, 559, "start")], title="Вид ресурса запроса.")
+    example_association(svg, "M 515 335 V 500", [("1", 527, 475, "start")], title="Запрос на распределение.")
+    example_association(svg, "M 790 385 H 710 V 285 H 630", [("allocation", 745, 240, "middle"), ("$a<Resource>Allocation$", 698, 360, "end"), ("*", 642, 309, "start")], title="Распределения, назначенные системе.")
+    example_association(svg, "M 875 445 V 535 H 660", [("request", 720, 520, "middle"), ("*", 672, 559, "start")], title="Запросы, связанные с системой.")
+    example_association(svg, "M 370 385 V 350 H 415 V 335", [("timeSlot", 382, 340, "end"), ("1", 427, 370, "start")], title="Временной интервал распределения.")
+    example_association(svg, "M 167 250 V 215 H 875 V 365", [("$a<Resource>$", 167, 200, "middle"), ("*", 179, 239, "start")], title="Системные ресурсы шаблона.")
+    example_association(svg, "M 167 580 V 675 H 875 V 445", [("$a<ResourceKind>$", 180, 660, "start"), ("*", 155, 660, "end")], title="Виды ресурсов, доступные системе.")
+    class_node(svg, "TrainingAdmin", 470, 825, 220, 85, example=True)
+    dependency(svg, "M 520 825 L 275 720", "«bind»", 200, 765, "Привязка Resource → Instructor, ResourceKind → Qualification, System → TrainingAdminSystem.", "../../index.html#/classifier/templatebinding")
+    svg.add(text('Resource -> "Instructor",', 100, 790, css="example-label"))
+    svg.add(text('ResourceKind -> "Qualification",', 100, 812, css="example-label"))
+    svg.add(text("System -> TrainingAdminSystem", 100, 834, css="example-label"))
+    dependency(svg, "M 620 825 L 835 720", "«bind»", 800, 765, "Привязка Resource → Facility, ResourceKind → FacilitySpecification, System → TrainingAdminSystem.", "../../index.html#/classifier/templatebinding")
+    svg.add(text('Resource -> "Facility",', 735, 790, css="example-label"))
+    svg.add(text('ResourceKind -> "FacilitySpecification",', 735, 812, css="example-label"))
+    svg.add(text("System -> TrainingAdminSystem", 735, 834, css="example-label"))
+    return svg
+
+
+def figure_7_7():
+    svg = Svg("7.7", "Пример импорта элемента", "Пакет Program импортирует типы String и Time из пакета Types.", 800, 330)
+    package(svg, "Program", 35, 180, 170, 100, 75)
+    package(svg, "Types", 450, 35, 280, 280, 95)
+    class_node(svg, "String", 500, 85, 150, 65, stereotype="«datatype»", example=True)
+    class_node(svg, "Integer", 520, 160, 150, 65, stereotype="«datatype»", example=True)
+    class_node(svg, "Time", 480, 240, 150, 65, stereotype="«datatype»", example=True)
+    dependency(svg, "M 205 205 L 500 120", "«access»", 340, 145, CLASSES["ElementImport"]["definition"], "../../index.html#/classifier/elementimport")
+    dependency(svg, "M 205 270 H 480", "«import»", 340, 250, CLASSES["ElementImport"]["definition"], "../../index.html#/classifier/elementimport")
+    return svg
+
+
+def figure_7_8():
+    svg = Svg("7.8", "Импорт элемента с псевдонимом", "Пакет Shapes импортирует Real из Types под псевдонимом Double.", 850, 250)
+    package(svg, "Types", 35, 65, 250, 155, 95)
+    package(svg, "Shapes", 565, 65, 250, 155, 100)
+    class_node(svg, "Real", 75, 120, 140, 65, stereotype="«datatype»", example=True)
+    class_node(svg, "Circle", 605, 115, 170, 85, ["radius : Double"], example=True)
+    dependency(svg, "M 605 155 H 215", "«import»", 410, 125, CLASSES["ElementImport"]["definition"], "../../index.html#/classifier/elementimport", "Double")
+    return svg
+
+
+def figure_7_9():
+    svg = Svg("7.9", "Открытый и закрытый импорт пакетов", "ShoppingCart открыто импортирует Auxiliary, закрыто импортирует Types и открыто импортируется в WebShop.", 850, 310)
+    package(svg, "Auxiliary", 35, 35, 200, 85, 65)
+    package(svg, "Types", 35, 205, 200, 85, 65)
+    package(svg, "ShoppingCart", 325, 120, 230, 85, 220)
+    package(svg, "WebShop", 650, 100, 175, 85, 60)
+    dependency(svg, "M 325 200 L 235 85", "«access»", 285, 70, CLASSES["PackageImport"]["definition"], "../../index.html#/classifier/packageimport")
+    dependency(svg, "M 325 190 L 235 240", "«import»", 340, 230, CLASSES["PackageImport"]["definition"], "../../index.html#/classifier/packageimport")
+    dependency(svg, "M 650 150 H 555", "«import»", 602, 130, CLASSES["PackageImport"]["definition"], "../../index.html#/classifier/packageimport")
+    return svg
+
+
+def figure_7_11():
+    svg = Svg("7.11", "Кратность в текстовой спецификации", "Атрибуты Customer демонстрируют кратность, упорядоченность и уникальность.", 650, 250)
+    class_node(svg, "Customer", 50, 40, 560, 160, ["purchase : Purchase [*] {ordered, unique}", "account : Account [0..5] {unique}"], [""], example=True, tooltip="Пример спецификации кратности атрибутов.")
+    return svg
+
+
+def figure_7_12():
+    svg = Svg("7.12", "Кратность как дополнение к обозначению", "Кратность и свойства концов ассоциаций между Purchase, Customer и Account.", 900, 240)
+    class_node(svg, "Purchase", 35, 90, 150, 65, example=True)
+    class_node(svg, "Customer", 375, 90, 160, 65, example=True)
+    class_node(svg, "Account", 715, 90, 150, 65, example=True)
+    example_association(svg, "M 375 120 H 185", [("purchase", 280, 85, "middle"), ("*", 363, 144, "end"), ("{ordered, unique}", 197, 144, "start")], title="Покупки клиента: упорядоченное множество без повторов.")
+    example_association(svg, "M 535 120 H 715", [("account", 625, 85, "middle"), ("{unique}", 547, 144, "start"), ("0..5", 703, 144, "end")], title="Счета клиента: не более пяти уникальных значений.")
+    return svg
+
+
+def figure_7_14():
+    svg = Svg("7.14", "Ограничение в примечании", "Ограничение связывает роли boss и employer в ассоциациях Person и Company.", 850, 420)
+    class_node(svg, "Person", 120, 125, 150, 65, example=True)
+    class_node(svg, "Company", 600, 125, 170, 65, example=True)
+    example_association(svg, "M 195 125 V 55 H 55 V 157 H 120", [("boss", 207, 90, "start"), ("0..1", 207, 112, "start")], title="Необязательный руководитель Person.")
+    example_association(svg, "M 270 157 H 600", [("employee", 350, 140, "middle"), ("employer", 520, 140, "middle"), ("*", 282, 181, "start"), ("0..1", 588, 181, "end")], markers="", title="Связь сотрудника и работодателя.")
+    note(svg, 180, 300, 390, 90, ["{self.boss->isEmpty() or", "self.employer = self.boss.employer}"], "../../index.html#/classifier/constraint", CLASSES["Constraint"]["definition"])
+    svg.add('<path class="note-link" d="M 250 300 L 195 190"/>')
+    return svg
+
+
+def figure_7_15():
+    svg = Svg("7.15", "Ограничение, связанное с атрибутом", "Ограничение size >= 0 записано рядом с атрибутом класса Stack.", 500, 290)
+    class_node(svg, "Stack", 55, 45, 330, 190, ["size: Integer {size >= 0}"], ["push()", "pop()"], example=True, tooltip="Атрибут size ограничен неотрицательными значениями.")
+    return svg
+
+
+def figure_7_16():
+    svg = Svg("7.16", "Ограничение {xor}", "Две ассоциации Account исключают одновременную связь с Person и Corporation.", 750, 330)
+    class_node(svg, "Account", 35, 135, 150, 65, example=True)
+    class_node(svg, "Person", 500, 45, 160, 65, example=True)
+    class_node(svg, "Corporation", 500, 240, 180, 65, example=True)
+    example_association(svg, "M 185 155 L 500 85", markers="", title="Связь Account с Person.")
+    example_association(svg, "M 185 180 L 500 260", markers="", title="Связь Account с Corporation.")
+    svg.add('<path class="note-link" d="M 340 115 V 220"/>')
+    svg.add(text("{xor}", 352, 170, css="class-name", title=CLASSES["Constraint"]["definition"]))
+    return svg
+
+
+def figure_7_18():
+    svg = Svg("7.18", "Dependency между двумя элементами", "Пунктирная зависимость с открытым наконечником между двумя NamedElement.", 950, 200)
+    class_node(svg, "NamedElement-1", 35, 70, 210, 80, example=True, tooltip="Клиент зависимости.")
+    class_node(svg, "NamedElement-2", 705, 70, 210, 80, example=True, tooltip="Поставщик зависимости.")
+    dependency(svg, "M 245 110 H 705", "«keywordOrStereotypeName»", 475, 75, CLASSES["Dependency"]["definition"], "../../index.html#/classifier/dependency", "dependencyName")
+    return svg
+
+
+def figure_7_19():
+    svg = Svg("7.19", "Пример зависимости «Instantiate»", "CarFactory имеет зависимость Instantiate от Car.", 850, 180)
+    class_node(svg, "CarFactory", 35, 60, 190, 80, example=True)
+    class_node(svg, "Car", 625, 60, 190, 80, example=True)
+    dependency(svg, "M 225 100 H 625", "«Instantiate»", 425, 80, CLASSES["Dependency"]["definition"], "../../index.html#/classifier/dependency")
+    return svg
+
+
+def figure_7_20():
+    svg = Svg("7.20", "Пример зависимости «use»", "Order использует Line Item.", 750, 230)
+    class_node(svg, "Order", 35, 75, 190, 85, example=True)
+    class_node(svg, "Line Item", 525, 60, 190, 115, example=True)
+    dependency(svg, "M 225 117 H 525", "«use»", 375, 92, CLASSES["Usage"]["definition"], "../../index.html#/classifier/usage")
+    return svg
+
+
+def figure_7_21():
+    svg = Svg("7.21", "Пример зависимости Realization", "Owner и Employee реализуют Business; пунктирные линии заканчиваются общим незакрашенным треугольником.", 700, 360)
+    class_node(svg, "Business", 260, 35, 180, 70, example=True)
+    class_node(svg, "Owner", 55, 250, 180, 70, example=True)
+    class_node(svg, "Employee", 465, 250, 180, 70, example=True)
+    generalization(svg, "M 145 250 V 170 H 350 V 105", child="Owner", parent="Business", dashed=True)
+    generalization(svg, "M 555 250 V 170 H 350", False, dashed=True)
+    return svg
+
+
+FIGURE_BUILDERS = {
+    "7.2": figure_7_2,
+    "7.3": figure_7_3,
+    "7.4": figure_7_4,
+    "7.5": figure_7_5,
+    "7.6": figure_7_6,
+    "7.7": figure_7_7,
+    "7.8": figure_7_8,
+    "7.9": figure_7_9,
+    "7.10": figure_7_10,
+    "7.11": figure_7_11,
+    "7.12": figure_7_12,
+    "7.13": figure_7_13,
+    "7.14": figure_7_14,
+    "7.15": figure_7_15,
+    "7.16": figure_7_16,
+    "7.17": figure_7_17,
+    "7.18": figure_7_18,
+    "7.19": figure_7_19,
+    "7.20": figure_7_20,
+    "7.21": figure_7_21,
+}
+
+
+def main():
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "site" / "assets" / "diagrams")
+    parser.add_argument("--check", action="store_true", help="Check generated SVG files without rewriting them")
+    args = parser.parse_args()
+    missing = []
+    changed = []
+    for figure, builder in FIGURE_BUILDERS.items():
+        target = args.output_dir / f"figure-{figure.replace('.', '-')}.svg"
+        content = builder().render()
+        if not target.is_file():
+            missing.append(str(target))
+        elif target.read_text(encoding="utf-8") != content:
+            changed.append(str(target))
+        if not args.check:
+            target.write_text(content, encoding="utf-8", newline="\n")
+            print(f"Figure {figure}: {target}")
+    if args.check and (missing or changed):
+        for path in missing:
+            print(f"Missing: {path}")
+        for path in changed:
+            print(f"Outdated: {path}")
+        raise SystemExit(1)
+    if args.check:
+        print(f"Generated SVG checks: OK; {len(FIGURE_BUILDERS)} figures synchronized")
+
+
+if __name__ == "__main__":
+    main()

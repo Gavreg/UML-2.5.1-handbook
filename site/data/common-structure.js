@@ -792,7 +792,8 @@ window.UML_DATA = (() => {
     { id: "7.21", title: "Пример зависимости Realization", en: "An example of a realization Dependency", section: "7.7", page: 40, related: ["Realization"] }
   ].map(diagram => ({
     ...diagram,
-    image: `assets/diagrams/figure-${diagram.id.replace(".", "-")}.png`
+    image: `assets/diagrams/figure-${diagram.id.replace(".", "-")}.png`,
+    vector: `assets/diagrams/figure-${diagram.id.replace(".", "-")}.svg`
   }));
 
   return { sections, classifiers, associations, diagrams };

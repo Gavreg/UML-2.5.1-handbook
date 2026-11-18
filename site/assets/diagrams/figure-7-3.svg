@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="840" viewBox="0 0 1300 840" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.3">
+  <title id="diagram-title">Рисунок 7.3 — Шаблоны</title>
+  <desc id="diagram-description">Метаклассы TemplateSignature, TemplateParameter, TemplateableElement и ParameterableElement, их обобщения и ассоциации.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="1300" height="840"/>
+  <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+<rect class="class-box" x="590" y="30" width="120" height="45"/>
+<line class="class-divider" x1="590" y1="62" x2="710" y2="62"/>
+<text class="class-name abstract" x="650.0" y="53" text-anchor="middle">Element</text>
+</a>
+<a class="class-node" data-classifier="TemplateSignature" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
+<rect class="class-box" x="130" y="170" width="200" height="60"/>
+<line class="class-divider" x1="130" y1="202" x2="330" y2="202"/>
+<text class="class-name" x="230.0" y="193" text-anchor="middle">TemplateSignature</text>
+</a>
+<a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
+<rect class="class-box" x="900" y="170" width="230" height="60"/>
+<line class="class-divider" x1="900" y1="202" x2="1130" y2="202"/>
+<text class="class-name abstract" x="1015.0" y="193" text-anchor="middle">TemplateableElement</text>
+</a>
+<a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
+<rect class="class-box" x="130" y="400" width="200" height="310"/>
+<line class="class-divider" x1="130" y1="432" x2="330" y2="432"/>
+<text class="class-name" x="230.0" y="423" text-anchor="middle">TemplateParameter</text>
+</a>
+<a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="900" y="400" width="240" height="310"/>
+<line class="class-divider" x1="900" y1="432" x2="1140" y2="432"/>
+<text class="class-name abstract" x="1020.0" y="423" text-anchor="middle">ParameterableElement</text>
+</a>
+<a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+<rect class="class-box" x="590" y="765" width="120" height="45"/>
+<line class="class-divider" x1="590" y1="797" x2="710" y2="797"/>
+<text class="class-name abstract" x="650.0" y="788" text-anchor="middle">Element</text>
+</a>
+<path class="generalization-line" d="M 230 170 V 100 H 650 V 75" data-child="TemplateSignature" data-parent="Element" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1015 170 V 100 H 650"/>
+<path class="generalization-line" d="M 230 710 V 745 H 650 V 765" data-child="TemplateParameter" data-parent="Element" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1020 710 V 745 H 650"/>
+<a class="association-link" href="../../index.html#/association/a-ownedtemplatesignature-template" target="_top" aria-label="Открыть описание ассоциации A_ownedTemplateSignature_template">
+<g class="association-group" id="A_ownedTemplateSignature_template"><title>Связывает TemplateableElement с принадлежащей ему TemplateSignature.</title>
+<path class="association" d="M 330 195 H 900" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 330 195 H 900" aria-hidden="true"/>
+<circle class="end-dot" cx="330" cy="195" r="3"/><polygon class="composition" points="900,195 892,187 884,195 892,203"/>
+<text class="association-end" x="350" y="175"><title>Элемент-шаблон, владеющий подписью.</title>+ template</text>
+<text class="association-end" x="880" y="175" text-anchor="end"><title>Необязательная подпись, делающая элемент шаблоном.</title>+ ownedTemplateSignature</text>
+<text class="association-label" x="350" y="150">{subsets owner}</text>
+<text class="association-label" x="350" y="225">0..1</text>
+<text class="association-label" x="880" y="150" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="880" y="225" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedparameter-signature" target="_top" aria-label="Открыть описание ассоциации A_ownedParameter_signature">
+<g class="association-group" id="A_ownedParameter_signature"><title>Связывает TemplateSignature с принадлежащими ему TemplateParameters.</title>
+<path class="association" d="M 190 230 V 400" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 190 230 V 400" aria-hidden="true"/>
+<polygon class="composition" points="190,230 182,238 190,246 198,238"/><circle class="end-dot" cx="190" cy="400" r="3"/>
+<text class="association-end" x="170" y="253" text-anchor="end"><title>Подпись, владеющая параметром.</title>+ signature</text>
+<text class="association-end" x="160" y="390" text-anchor="end"><title>Формальные параметры, принадлежащие подписи.</title>+ ownedParameter</text>
+<text class="association-label" x="178" y="278" text-anchor="end">{subsets templateSignature,</text>
+<text class="association-label" x="178" y="298" text-anchor="end">subsets owner}</text>
+<text class="association-label" x="178" y="320" text-anchor="end">1</text>
+<text class="association-label" x="178" y="345" text-anchor="end">{ordered, subsets ownedElement,</text>
+<text class="association-label" x="178" y="365" text-anchor="end">subsets parameter}</text>
+<text class="association-label" x="40" y="415" text-anchor="end">1..*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-parameter-templatesignature" target="_top" aria-label="Открыть описание ассоциации A_parameter_templateSignature">
+<g class="association-group" id="A_parameter_templateSignature"><title>Связывает TemplateParameter с TemplateSignature, к которой он относится.</title>
+<path class="association" d="M 275 230 V 400" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 275 230 V 400" aria-hidden="true"/>
+<circle class="end-dot" cx="275" cy="230" r="3"/>
+<text class="association-end" x="287" y="253"><title>templateSignature. Связывает TemplateParameter с TemplateSignature, к которой он относится.</title>+ templateSignature</text>
+<text class="association-end" x="340" y="377"><title>Упорядоченное множество всех формальных параметров.</title>+ parameter</text>
+<text class="association-label" x="287" y="278">0..1</text>
+<text class="association-label" x="287" y="323">{ordered}</text>
+<text class="association-label" x="340" y="360">1..*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedparameteredelement-owningtemplateparameter" target="_top" aria-label="Открыть описание ассоциации A_ownedParameteredElement_owningTemplateParameter">
+<g class="association-group" id="A_ownedParameteredElement_owningTemplateParameter"><title>Связывает TemplateParameter с принадлежащим ему ParameterableElement.</title>
+<path class="association" d="M 330 440 H 900" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 330 440 H 900" aria-hidden="true"/>
+<circle class="end-dot" cx="330" cy="440" r="3"/><polygon class="composition" points="900,440 892,432 884,440 892,448"/>
+<text class="association-end" x="350" y="425"><title>Формальный параметр, владеющий этим элементом.</title>+ owningTemplateParameter</text>
+<text class="association-end" x="880" y="415" text-anchor="end"><title>Принадлежащий параметру параметризуемый элемент.</title>+ ownedParameteredElement</text>
+<text class="association-label" x="350" y="405">{subsets owner, templateParameter}</text>
+<text class="association-label" x="350" y="464">0..1</text>
+<text class="association-label" x="880" y="390" text-anchor="end">{subsets ownedElement, parameteredElement}</text>
+<text class="association-label" x="880" y="475" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-parameteredelement-templateparameter" target="_top" aria-label="Открыть описание ассоциации A_parameteredElement_templateParameter">
+<g class="association-group" id="A_parameteredElement_templateParameter"><title>Связывает ParameterableElement с представляющим его TemplateParameter.</title>
+<path class="association" d="M 330 530 H 900" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 330 530 H 900" aria-hidden="true"/>
+<circle class="end-dot" cx="330" cy="530" r="3"/><circle class="end-dot" cx="900" cy="530" r="3"/>
+<text class="association-end" x="350" y="515"><title>Параметр шаблона, представляющий этот элемент как формальный параметр.</title>+ templateParameter</text>
+<text class="association-end" x="880" y="515" text-anchor="end"><title>Элемент, представленный параметром шаблона.</title>+ parameteredElement</text>
+<text class="association-label" x="350" y="554">0..1</text>
+<text class="association-label" x="880" y="554" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-default-templateparameter" target="_top" aria-label="Открыть описание ассоциации A_default_templateParameter">
+<g class="association-group" id="A_default_templateParameter"><title>Связывает значение ParameterableElement по умолчанию с TemplateParameter.</title>
+<path class="association" d="M 330 600 H 900" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 330 600 H 900" aria-hidden="true"/>
+<circle class="end-dot" cx="330" cy="600" r="3"/>
+<text class="association-end" x="350" y="585"><title>default. Связывает значение ParameterableElement по умолчанию с TemplateParameter.</title>+ default</text>
+<text class="association-end" x="880" y="585" text-anchor="end"><title>templateParameter. Связывает значение ParameterableElement по умолчанию с TemplateParameter.</title>+ templateParameter</text>
+<text class="association-label" x="350" y="630">0..1</text>
+<text class="association-label" x="880" y="630" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-owneddefault-templateparameter" target="_top" aria-label="Открыть описание ассоциации A_ownedDefault_templateParameter">
+<g class="association-group" id="A_ownedDefault_templateParameter"><title>Специализация A_default_templateParameter для значения, принадлежащего TemplateParameter.</title>
+<path class="association" d="M 330 700 H 900" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 330 700 H 900" aria-hidden="true"/>
+<polygon class="composition" points="330,700 338,692 346,700 338,708"/>
+<text class="association-end" x="350" y="680"><title>ownedDefault. Специализация A_default_templateParameter для значения, принадлежащего TemplateParameter.</title>+ ownedDefault</text>
+<text class="association-end" x="880" y="680" text-anchor="end"><title>templateParameter. Специализация A_default_templateParameter для значения, принадлежащего TemplateParameter.</title>+ templateParameter</text>
+<text class="association-label" x="350" y="650">{subsets ownedElement, default}</text>
+<text class="association-label" x="350" y="735">0..1</text>
+<text class="association-label" x="880" y="650" text-anchor="end">{subsets owner, redefines templateParameter}</text>
+<text class="association-label" x="880" y="735" text-anchor="end">0..1</text>
+</g></a>
+</svg>

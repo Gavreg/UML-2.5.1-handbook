@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="420" viewBox="0 0 850 420" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.14">
+  <title id="diagram-title">Рисунок 7.14 — Ограничение в примечании</title>
+  <desc id="diagram-description">Ограничение связывает роли boss и employer в ассоциациях Person и Company.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="850" height="420"/>
+  <g class="class-node" data-classifier="Person"><title>Person. Пример класса Person.</title>
+<rect class="class-box" x="120" y="125" width="150" height="65"/>
+<line class="class-divider" x1="120" y1="157" x2="270" y2="157"/>
+<text class="class-name" x="195.0" y="148" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Company"><title>Company. Пример класса Company.</title>
+<rect class="class-box" x="600" y="125" width="170" height="65"/>
+<line class="class-divider" x1="600" y1="157" x2="770" y2="157"/>
+<text class="class-name" x="685.0" y="148" text-anchor="middle">Company</text>
+</g>
+<g class="example-association-group"><title>Необязательный руководитель Person.</title><path class="example-association" d="M 195 125 V 55 H 55 V 157 H 120" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 195 125 V 55 H 55 V 157 H 120" aria-hidden="true"/>
+<text class="example-label" x="207" y="90">boss</text>
+<text class="example-label" x="207" y="112">0..1</text>
+</g>
+<g class="example-association-group"><title>Связь сотрудника и работодателя.</title><path class="example-association" d="M 270 157 H 600"/><path class="association-hitbox" d="M 270 157 H 600" aria-hidden="true"/>
+<text class="example-label" x="350" y="140" text-anchor="middle">employee</text>
+<text class="example-label" x="520" y="140" text-anchor="middle">employer</text>
+<text class="example-label" x="282" y="181">*</text>
+<text class="example-label" x="588" y="181" text-anchor="end">0..1</text>
+</g>
+<a href="../../index.html#/classifier/constraint" target="_top"><title>Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title><path class="note-box" d="M 180 300 H 552 L 570 318 V 390 H 180 Z M 552 300 V 318 H 570"/><text class="attribute" x="192" y="325">{self.boss-&gt;isEmpty() or</text><text class="attribute" x="192" y="347">self.employer = self.boss.employer}</text></a>
+<path class="note-link" d="M 250 300 L 195 190"/>
+</svg>

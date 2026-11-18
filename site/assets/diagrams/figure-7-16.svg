@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="330" viewBox="0 0 750 330" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.16">
+  <title id="diagram-title">Рисунок 7.16 — Ограничение {xor}</title>
+  <desc id="diagram-description">Две ассоциации Account исключают одновременную связь с Person и Corporation.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="750" height="330"/>
+  <g class="class-node" data-classifier="Account"><title>Account. Пример класса Account.</title>
+<rect class="class-box" x="35" y="135" width="150" height="65"/>
+<line class="class-divider" x1="35" y1="167" x2="185" y2="167"/>
+<text class="class-name" x="110.0" y="158" text-anchor="middle">Account</text>
+</g>
+<g class="class-node" data-classifier="Person"><title>Person. Пример класса Person.</title>
+<rect class="class-box" x="500" y="45" width="160" height="65"/>
+<line class="class-divider" x1="500" y1="77" x2="660" y2="77"/>
+<text class="class-name" x="580.0" y="68" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Corporation"><title>Corporation. Пример класса Corporation.</title>
+<rect class="class-box" x="500" y="240" width="180" height="65"/>
+<line class="class-divider" x1="500" y1="272" x2="680" y2="272"/>
+<text class="class-name" x="590.0" y="263" text-anchor="middle">Corporation</text>
+</g>
+<g class="example-association-group"><title>Связь Account с Person.</title><path class="example-association" d="M 185 155 L 500 85"/><path class="association-hitbox" d="M 185 155 L 500 85" aria-hidden="true"/>
+</g>
+<g class="example-association-group"><title>Связь Account с Corporation.</title><path class="example-association" d="M 185 180 L 500 260"/><path class="association-hitbox" d="M 185 180 L 500 260" aria-hidden="true"/>
+</g>
+<path class="note-link" d="M 340 115 V 220"/>
+<text class="class-name" x="352" y="170"><title>Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>{xor}</text>
+</svg>

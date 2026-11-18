@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="250" viewBox="0 0 850 250" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.8">
+  <title id="diagram-title">Рисунок 7.8 — Импорт элемента с псевдонимом</title>
+  <desc id="diagram-description">Пакет Shapes импортирует Real из Types под псевдонимом Double.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="850" height="250"/>
+  <g class="package-node"><title>Пакет Types.</title>
+<path class="package-box" d="M 35 65 H 130 V 95 H 285 V 220 H 35 Z"/>
+<text class="class-name" x="82.5" y="86" text-anchor="middle">Types</text>
+</g>
+<g class="package-node"><title>Пакет Shapes.</title>
+<path class="package-box" d="M 565 65 H 665 V 95 H 815 V 220 H 565 Z"/>
+<text class="class-name" x="615.0" y="86" text-anchor="middle">Shapes</text>
+</g>
+<g class="class-node" data-classifier="Real"><title>Real. Пример класса Real.</title>
+<rect class="class-box" x="75" y="120" width="140" height="65"/>
+<line class="class-divider" x1="75" y1="170" x2="215" y2="170"/>
+<text x="145.0" y="139" text-anchor="middle">«datatype»</text>
+<text class="class-name" x="145.0" y="161" text-anchor="middle">Real</text>
+</g>
+<g class="class-node" data-classifier="Circle"><title>Circle. Пример класса Circle.</title>
+<rect class="class-box" x="605" y="115" width="170" height="85"/>
+<line class="class-divider" x1="605" y1="147" x2="775" y2="147"/>
+<text class="class-name" x="690.0" y="138" text-anchor="middle">Circle</text>
+<text class="attribute" x="615" y="169">radius : Double</text>
+</g>
+<a class="dependency-group" href="../../index.html#/classifier/elementimport" target="_top"><title>Позволяет ссылаться на NamedElement из другого пространства имён по неквалифицированному имени внутри пространства имён, владеющего импортом.</title><path class="dependency-line" d="M 605 155 H 215" marker-end="url(#navigation)"/><text x="410" y="125" text-anchor="middle">«import»</text><text class="example-label" x="410" y="146" text-anchor="middle">Double</text></a>
+</svg>

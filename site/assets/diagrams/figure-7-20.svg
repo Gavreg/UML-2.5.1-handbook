@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="230" viewBox="0 0 750 230" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.20">
+  <title id="diagram-title">Рисунок 7.20 — Пример зависимости «use»</title>
+  <desc id="diagram-description">Order использует Line Item.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="750" height="230"/>
+  <g class="class-node" data-classifier="Order"><title>Order. Пример класса Order.</title>
+<rect class="class-box" x="35" y="75" width="190" height="85"/>
+<line class="class-divider" x1="35" y1="107" x2="225" y2="107"/>
+<text class="class-name" x="130.0" y="98" text-anchor="middle">Order</text>
+</g>
+<g class="class-node" data-classifier="Line Item"><title>Line Item. Пример класса Line Item.</title>
+<rect class="class-box" x="525" y="60" width="190" height="115"/>
+<line class="class-divider" x1="525" y1="92" x2="715" y2="92"/>
+<text class="class-name" x="620.0" y="83" text-anchor="middle">Line Item</text>
+</g>
+<a class="dependency-group" href="../../index.html#/classifier/usage" target="_top"><title>Dependency, в которой элемент-клиент нуждается в элементе-поставщике или множестве поставщиков для своей полной реализации или работы.</title><path class="dependency-line" d="M 225 117 H 525" marker-end="url(#navigation)"/><text x="375" y="92" text-anchor="middle">«use»</text></a>
+</svg>

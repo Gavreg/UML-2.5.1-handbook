@@ -68,6 +68,13 @@ def routes():
     return result
 
 
+def diagram_vectors():
+    text = DATA.read_text(encoding="utf-8")
+    diagram_block = text.split("const diagrams = [", 1)[1].split("].map(diagram =>", 1)[0]
+    ids = re.findall(r'\{ id: "(7\.\d+)"', diagram_block)
+    return [f"assets/diagrams/figure-{figure.replace('.', '-')}.svg" for figure in ids]
+
+
 def find_browser(explicit):
     if explicit:
         path = Path(explicit)
@@ -106,7 +113,9 @@ def check_static():
 
     all_routes = routes()
     data_text = DATA.read_text(encoding="utf-8")
-    vectors = re.findall(r'vector: "([^"]+\.svg)"', data_text)
+    vectors = diagram_vectors()
+    if len(vectors) != 21:
+        errors.append(f"Expected 21 vector diagrams, found {len(vectors)}")
     for vector in vectors:
         vector_path = SITE / vector
         if not vector_path.is_file():
@@ -135,6 +144,15 @@ def check_static():
     )
     if sync.returncode:
         errors.append(f"XMI data check failed: {sync.stdout}{sync.stderr}")
+    generated = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "generate_common_structure_svg.py"), "--check"],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if generated.returncode:
+        errors.append(f"Generated SVG check failed: {generated.stdout}{generated.stderr}")
     return errors, all_routes
 
 
@@ -323,6 +341,7 @@ SVG_GEOMETRY_SCRIPT = r"""
   }));
   const classBoxes = [...document.querySelectorAll("rect.class-box")].map(element => ({
     element,
+    name: element.closest(".class-node")?.dataset.classifier || "",
     box: element.getBBox()
   }));
   const overlaps = (a, b) => Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 0.5
@@ -362,7 +381,7 @@ SVG_GEOMETRY_SCRIPT = r"""
   }
 
   for (const label of labels) {
-    const owner = label.element.closest("a")?.querySelector("rect.class-box");
+    const owner = label.element.closest(".class-node, a")?.querySelector("rect.class-box");
     if (owner) {
       const box = owner.getBBox();
       if (!inside({ x: label.box.x, y: label.box.y }, box, 1)
@@ -372,12 +391,12 @@ SVG_GEOMETRY_SCRIPT = r"""
     } else {
       for (const classBox of classBoxes) {
         const clearance = associationLabel(label) ? expanded(classBox.box, horizontalGap, verticalGap) : classBox.box;
-        if (overlaps(label.box, clearance)) errors.push(`label/class clearance: ${label.name}`);
+        if (overlaps(label.box, clearance)) errors.push(`label/class clearance: ${label.name} at ${label.box.x},${label.box.y}; class ${classBox.box.x},${classBox.box.y},${classBox.box.width},${classBox.box.height}`);
       }
     }
   }
 
-  const lines = [...document.querySelectorAll("path.association, path.generalization-line, line.class-divider")];
+  const lines = [...document.querySelectorAll("path.association, path.generalization-line, path.example-association, path.dependency-line, path.note-link, line.class-divider")];
   for (const line of lines) {
     const length = line.getTotalLength();
     for (const label of labels) {
@@ -467,7 +486,7 @@ SVG_GEOMETRY_SCRIPT = r"""
         const sideGap = downward ? box.y - origin.y : origin.y - box.y - box.height;
         const onLeft = box.x + box.width <= origin.x;
         const lateralGap = onLeft ? origin.x - box.x - box.width : box.x - origin.x;
-        if (sideGap < verticalGap - 0.75 || sideGap > verticalGap * 6
+        if (sideGap < verticalGap - 0.75 || sideGap > ex * 6
           || lateralGap < horizontalGap - 0.75) {
           errors.push(`vertical association end placement: ${name}`);
         }
@@ -505,6 +524,14 @@ SVG_GEOMETRY_SCRIPT = r"""
   }
   for (const path of document.querySelectorAll("path.generalization-line[marker-end]")) {
     if (path.getAttribute("marker-end") !== "url(#generalization)") errors.push("nonstandard generalization marker");
+    if (path.dataset.child && path.dataset.parent) {
+      const child = classBoxes.find(block => block.name === path.dataset.child);
+      const parents = classBoxes.filter(block => block.name === path.dataset.parent);
+      const length = path.getTotalLength();
+      const end = path.getPointAtLength(length);
+      if (!child || !onBorder(path.getPointAtLength(0), child.box)) errors.push(`generalization does not start at child: ${path.dataset.child}`);
+      if (!parents.length || !parents.some(parent => onBorder(end, parent.box))) errors.push(`generalization does not point to parent: ${path.dataset.parent}`);
+    }
   }
 
   const terminalRun = (path, atEnd) => {
@@ -586,7 +613,7 @@ def main():
     if not browser:
         raise SystemExit("Chrome or Edge is required for browser checks; use --static-only to skip them")
 
-    vectors = re.findall(r'vector: "([^"]+\.svg)"', DATA.read_text(encoding="utf-8"))
+    vectors = diagram_vectors()
     geometry_failures = [error for vector in vectors for error in check_svg_geometry(browser, vector)]
     if geometry_failures:
         for failure in geometry_failures:

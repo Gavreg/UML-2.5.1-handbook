@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1080" viewBox="0 0 1400 1080" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.5">
+  <title id="diagram-title">Рисунок 7.5 — Пространства имён</title>
+  <desc id="diagram-description">Метамодель пространств имён, импорта элементов и пакетов, видимости и ограничений.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="1400" height="1080"/>
+  <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+<rect class="class-box" x="620" y="30" width="120" height="45"/>
+<line class="class-divider" x1="620" y1="62" x2="740" y2="62"/>
+<text class="class-name abstract" x="680.0" y="53" text-anchor="middle">Element</text>
+</a>
+<a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="300" y="145" width="360" height="145"/>
+<line class="class-divider" x1="300" y1="177" x2="660" y2="177"/>
+<text class="class-name abstract" x="480.0" y="168" text-anchor="middle">NamedElement</text>
+<text class="attribute" x="310" y="199">+ name : String [0..1]</text>
+<text class="attribute" x="310" y="220">+ /qualifiedName : String [0..1] {readOnly}</text>
+<text class="attribute" x="310" y="241">+ visibility : VisibilityKind [0..1]</text>
+</a>
+<a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
+<rect class="class-box" x="250" y="470" width="220" height="190"/>
+<line class="class-divider" x1="250" y1="502" x2="470" y2="502"/>
+<text class="class-name abstract" x="360.0" y="493" text-anchor="middle">Namespace</text>
+</a>
+<a class="class-node" data-classifier="StringExpression" href="../../index.html#/classifier/stringexpression" target="_top" aria-label="StringExpression — открыть описание класса"><title>StringExpression. Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.</title>
+<rect class="class-box" x="1010" y="170" width="220" height="60"/>
+<line class="class-divider" x1="1010" y1="202" x2="1230" y2="202"/>
+<text class="class-name" x="1120.0" y="193" text-anchor="middle">StringExpression</text>
+</a>
+<a class="class-node" data-classifier="VisibilityKind" href="../../index.html#/classifier/visibilitykind" target="_top" aria-label="VisibilityKind — открыть описание класса"><title>VisibilityKind. Перечисление, литералы которого определяют видимость элементов в модели.</title>
+<rect class="class-box" x="1130" y="30" width="180" height="150"/>
+<line class="class-divider" x1="1130" y1="80" x2="1310" y2="80"/>
+<text x="1220.0" y="49" text-anchor="middle">«enumeration»</text>
+<text class="class-name" x="1220.0" y="71" text-anchor="middle">VisibilityKind</text>
+<text class="attribute" x="1140" y="102">public</text>
+<text class="attribute" x="1140" y="123">private</text>
+<text class="attribute" x="1140" y="144">protected</text>
+<text class="attribute" x="1140" y="165">package</text>
+</a>
+<a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="980" y="260" width="230" height="50"/>
+<line class="class-divider" x1="980" y1="292" x2="1210" y2="292"/>
+<text class="class-name abstract" x="1095.0" y="283" text-anchor="middle">ParameterableElement</text>
+</a>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="960" y="350" width="260" height="70"/>
+<line class="class-divider" x1="960" y1="382" x2="1220" y2="382"/>
+<text class="class-name abstract" x="1090.0" y="373" text-anchor="middle">PackageableElement</text>
+<text class="attribute" x="970" y="404">+ visibility : VisibilityKind [0..1] = public</text>
+</a>
+<a class="class-node" data-classifier="ElementImport" href="../../index.html#/classifier/elementimport" target="_top" aria-label="ElementImport — открыть описание класса"><title>ElementImport. Позволяет ссылаться на NamedElement из другого пространства имён по неквалифицированному имени внутри пространства имён, владеющего импортом.</title>
+<rect class="class-box" x="960" y="540" width="240" height="90"/>
+<line class="class-divider" x1="960" y1="572" x2="1200" y2="572"/>
+<text class="class-name" x="1080.0" y="563" text-anchor="middle">ElementImport</text>
+<text class="attribute" x="970" y="594">+ alias : String [0..1]</text>
+<text class="attribute" x="970" y="615">+ visibility : VisibilityKind = public</text>
+</a>
+<a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
+<rect class="class-box" x="960" y="675" width="240" height="50"/>
+<line class="class-divider" x1="960" y1="707" x2="1200" y2="707"/>
+<text class="class-name abstract" x="1080.0" y="698" text-anchor="middle">DirectedRelationship</text>
+</a>
+<a class="class-node" data-classifier="PackageImport" href="../../index.html#/classifier/packageimport" target="_top" aria-label="PackageImport — открыть описание класса"><title>PackageImport. Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title>
+<rect class="class-box" x="960" y="790" width="240" height="90"/>
+<line class="class-divider" x1="960" y1="822" x2="1200" y2="822"/>
+<text class="class-name" x="1080.0" y="813" text-anchor="middle">PackageImport</text>
+<text class="attribute" x="970" y="844">+ visibility : VisibilityKind = public</text>
+</a>
+<a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
+<rect class="class-box" x="700" y="920" width="180" height="55"/>
+<line class="class-divider" x1="700" y1="952" x2="880" y2="952"/>
+<text class="class-name" x="790.0" y="943" text-anchor="middle">Constraint</text>
+</a>
+<a class="class-node" data-classifier="Package" href="../../index.html#/classifier/package" target="_top" aria-label="Package — открыть описание класса"><title>Package. Элемент для группировки других элементов и предоставления им пространства имён; может использоваться как шаблон и применять профили.</title>
+<rect class="class-box" x="1120" y="1000" width="150" height="55"/>
+<line class="class-divider" x1="1120" y1="1032" x2="1270" y2="1032"/>
+<text class="class-name" x="1195.0" y="1023" text-anchor="middle">Package</text>
+</a>
+<path class="generalization-line" d="M 480 145 V 100 H 680 V 75" data-child="NamedElement" data-parent="Element" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 360 470 V 290" data-child="Namespace" data-parent="NamedElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1090 350 V 310" data-child="PackageableElement" data-parent="ParameterableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1080 630 V 675" data-child="ElementImport" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1080 790 V 725" data-child="PackageImport" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-member-membernamespace" target="_top" aria-label="Открыть описание ассоциации A_member_memberNamespace">
+<g class="association-group" id="A_member_memberNamespace"><title>Связывает NamedElement с пространствами имён, членом которых он является.</title>
+<path class="association" d="M 300 180 H 20 V 500 H 250" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 300 180 H 20 V 500 H 250" aria-hidden="true"/>
+<circle class="end-dot" cx="300" cy="180" r="3"/>
+<text class="association-end" x="288" y="165" text-anchor="end"><title>member. Связывает NamedElement с пространствами имён, членом которых он является.</title>+ /member</text>
+<text class="association-end" x="238" y="485" text-anchor="end"><title>memberNamespace. Связывает NamedElement с пространствами имён, членом которых он является.</title>+ /memberNamespace</text>
+<text class="association-label" x="288" y="140" text-anchor="end">{readOnly, union}</text>
+<text class="association-label" x="288" y="210" text-anchor="end">*</text>
+<text class="association-label" x="238" y="420" text-anchor="end">{readOnly, union}</text>
+<text class="association-label" x="238" y="445" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedmember-namespace" target="_top" aria-label="Открыть описание ассоциации A_ownedMember_namespace">
+<g class="association-group" id="A_ownedMember_namespace"><title>Связывает Namespace с непосредственно принадлежащими ему NamedElements.</title>
+<path class="association" d="M 300 250 H 50 V 575 H 250" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 300 250 H 50 V 575 H 250" aria-hidden="true"/>
+<circle class="end-dot" cx="300" cy="250" r="3"/><polygon class="composition" points="250,575 242,567 234,575 242,583"/>
+<text class="association-end" x="288" y="235" text-anchor="end"><title>Пространство имён, владеющее элементом.</title>+ /namespace</text>
+<text class="association-end" x="238" y="555" text-anchor="end"><title>Члены, непосредственно принадлежащие пространству имён.</title>+ /ownedMember</text>
+<text class="association-label" x="288" y="275" text-anchor="end">{readOnly, union, subsets</text>
+<text class="association-label" x="288" y="295" text-anchor="end">memberNamespace, owner}</text>
+<text class="association-label" x="288" y="320" text-anchor="end">0..1</text>
+<text class="association-label" x="238" y="600" text-anchor="end">{readOnly, union,</text>
+<text class="association-label" x="238" y="620" text-anchor="end">subsets member,</text>
+<text class="association-label" x="238" y="640" text-anchor="end">subsets ownedElement}</text>
+<text class="association-label" x="238" y="665" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-nameexpression-namedelement" target="_top" aria-label="Открыть описание ассоциации A_nameExpression_namedElement">
+<g class="association-group" id="A_nameExpression_namedElement"><title>Связывает StringExpression с NamedElement, имя которого оно определяет.</title>
+<path class="association" d="M 660 200 H 1010" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 660 200 H 1010" aria-hidden="true"/>
+<polygon class="composition" points="660,200 668,192 676,200 668,208"/><circle class="end-dot" cx="1010" cy="200" r="3"/>
+<text class="association-end" x="680" y="185"><title>Выражение, определяющее имя элемента.</title>+ nameExpression</text>
+<text class="association-end" x="990" y="185" text-anchor="end"><title>namedElement. Связывает StringExpression с NamedElement, имя которого оно определяет.</title>+ namedElement</text>
+<text class="association-label" x="680" y="160">{subsets ownedElement}</text>
+<text class="association-label" x="680" y="230">0..1</text>
+<text class="association-label" x="990" y="160" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="990" y="230" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-importedmember-namespace" target="_top" aria-label="Открыть описание ассоциации A_importedMember_namespace">
+<g class="association-group" id="A_importedMember_namespace"><title>Связывает импортированный PackageableElement с Namespace, членом которого он стал.</title>
+<path class="association" d="M 470 500 H 750 V 385 H 960"/><path class="association-hitbox" d="M 470 500 H 750 V 385 H 960" aria-hidden="true"/>
+<circle class="end-dot" cx="470" cy="500" r="3"/>
+<text class="association-end" x="482" y="485"><title>Члены, добавленные импортом элемента или пакета.</title>+ /importedMember</text>
+<text class="association-end" x="940" y="370" text-anchor="end"><title>Пространство имён, владеющее элементом.</title>+ namespace</text>
+<text class="association-label" x="482" y="460">{readOnly, subsets member}</text>
+<text class="association-label" x="482" y="524">*</text>
+<text class="association-label" x="940" y="345" text-anchor="end">{subsets memberNamespace}</text>
+<text class="association-label" x="940" y="409" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-importedelement-import" target="_top" aria-label="Открыть описание ассоциации A_importedElement_import">
+<g class="association-group" id="A_importedElement_import"><title>Связывает импортированный PackageableElement с ElementImport.</title>
+<path class="association" d="M 1120 420 V 540" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 1120 420 V 540" aria-hidden="true"/>
+<circle class="end-dot" cx="1120" cy="540" r="3"/>
+<text class="association-end" x="1132" y="443"><title>Элемент, имя которого добавляется в пространство имён.</title>+ importedElement</text>
+<text class="association-end" x="1132" y="525"><title>import. Связывает импортированный PackageableElement с ElementImport.</title>+ import</text>
+<text class="association-label" x="1132" y="463">{subsets target}</text>
+<text class="association-label" x="1132" y="483">1</text>
+<text class="association-label" x="1132" y="500">{subsets directedRelationship}</text>
+<text class="association-label" x="1212" y="564">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-elementimport-importingnamespace" target="_top" aria-label="Открыть описание ассоциации A_elementImport_importingNamespace">
+<g class="association-group" id="A_elementImport_importingNamespace"><title>Связывает Namespace с принадлежащими ему ElementImports.</title>
+<path class="association" d="M 470 575 H 960" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 470 575 H 960" aria-hidden="true"/>
+<polygon class="composition" points="470,575 478,567 486,575 478,583"/><circle class="end-dot" cx="960" cy="575" r="3"/>
+<text class="association-end" x="482" y="560"><title>Импорты отдельных элементов, принадлежащие пространству имён.</title>+ elementImport</text>
+<text class="association-end" x="940" y="560" text-anchor="end"><title>Пространство имён, выполняющее импорт.</title>+ importingNamespace</text>
+<text class="association-label" x="482" y="540">{subsets directedRelationship, ownedElement}</text>
+<text class="association-label" x="482" y="605">*</text>
+<text class="association-label" x="940" y="515" text-anchor="end">{subsets source, owner}</text>
+<text class="association-label" x="940" y="599" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-packageimport-importingnamespace" target="_top" aria-label="Открыть описание ассоциации A_packageImport_importingNamespace">
+<g class="association-group" id="A_packageImport_importingNamespace"><title>Связывает Namespace с принадлежащими ему PackageImports.</title>
+<path class="association" d="M 420 660 V 825 H 960" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 420 660 V 825 H 960" aria-hidden="true"/>
+<polygon class="composition" points="420,660 412,668 420,676 428,668"/><circle class="end-dot" cx="960" cy="825" r="3"/>
+<text class="association-end" x="432" y="697"><title>Импорты пакетов, принадлежащие пространству имён.</title>+ packageImport</text>
+<text class="association-end" x="940" y="810" text-anchor="end"><title>Пространство имён, выполняющее импорт.</title>+ importingNamespace</text>
+<text class="association-label" x="432" y="722">{subsets directedRelationship, ownedElement}</text>
+<text class="association-label" x="432" y="747">*</text>
+<text class="association-label" x="940" y="765" text-anchor="end">{subsets source, owner}</text>
+<text class="association-label" x="940" y="849" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-importedpackage-packageimport" target="_top" aria-label="Открыть описание ассоциации A_importedPackage_packageImport">
+<g class="association-group" id="A_importedPackage_packageImport"><title>Связывает импортированный Package с PackageImport.</title>
+<path class="association" d="M 1195 880 V 1000" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1195 880 V 1000" aria-hidden="true"/>
+<circle class="end-dot" cx="1195" cy="880" r="3"/>
+<text class="association-end" x="1183" y="904" text-anchor="end"><title>packageImport. Связывает импортированный Package с PackageImport.</title>+ packageImport</text>
+<text class="association-end" x="1207" y="955"><title>Пакет, члены которого импортируются.</title>+ importedPackage</text>
+<text class="association-label" x="1183" y="929" text-anchor="end">{subsets directedRelationship}</text>
+<text class="association-label" x="1183" y="954" text-anchor="end">*</text>
+<text class="association-label" x="1207" y="925">{subsets target}</text>
+<text class="association-label" x="1220" y="980">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedrule-context" target="_top" aria-label="Открыть описание ассоциации A_ownedRule_context">
+<g class="association-group" id="A_ownedRule_context"><title>Связывает Namespace с принадлежащими ему Constraints и их контекстом.</title>
+<path class="association" d="M 300 660 V 947 H 700" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 300 660 V 947 H 700" aria-hidden="true"/>
+<polygon class="composition" points="300,660 292,668 300,676 308,668"/><circle class="end-dot" cx="700" cy="947" r="3"/>
+<text class="association-end" x="288" y="697" text-anchor="end"><title>Пространство имён, владеющее ограничением.</title>+ context</text>
+<text class="association-end" x="688" y="932" text-anchor="end"><title>Ограничения, принадлежащие пространству имён.</title>+ ownedRule</text>
+<text class="association-label" x="288" y="722" text-anchor="end">{subsets namespace}</text>
+<text class="association-label" x="288" y="747" text-anchor="end">0..1</text>
+<text class="association-label" x="688" y="907" text-anchor="end">{subsets ownedMember}</text>
+<text class="association-label" x="688" y="971" text-anchor="end">*</text>
+</g></a>
+</svg>

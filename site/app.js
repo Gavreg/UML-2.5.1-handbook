@@ -172,7 +172,7 @@
   }
 
   function diagramObject(diagram) {
-    return `<object class="diagram-object" data="${diagram.vector}" type="image/svg+xml" width="990" height="778" aria-label="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}. Интерактивная SVG-диаграмма">
+    return `<object class="diagram-object" data="${diagram.vector}" type="image/svg+xml" aria-label="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}. Интерактивная SVG-диаграмма">
       <img src="${diagram.image}" alt="Рисунок ${escapeHtml(diagram.id)}. ${escapeHtml(diagram.title)}">
     </object>`;
   }
@@ -199,7 +199,7 @@
 
   function diagramTile(diagram) {
     return `<a class="diagram-tile" href="#/diagram/${slug(diagram.id)}">
-      <span class="diagram-preview"><img src="${diagram.image}" alt="" loading="lazy"></span>
+      <span class="diagram-preview"><img src="${diagram.vector || diagram.image}" alt="" loading="lazy"></span>
       <span class="diagram-tile-caption">
         <strong>Рис. ${escapeHtml(diagram.id)} — ${escapeHtml(diagram.title)}</strong>
         <small>Раздел ${escapeHtml(diagram.section)} · стр. ${diagram.page}</small>
@@ -232,7 +232,7 @@
         <div class="stat"><strong>24</strong><span>классификатора</span></div>
         <div class="stat"><strong>21</strong><span>рисунок из спецификации</span></div>
       </div>
-      <div class="notice">Рисунок 7.1 перерисован в масштабируемый SVG: названия классов ведут на их страницы. Остальные рисунки пока представлены скриншотами спецификации с переходами в списке «Элементы на диаграмме».</div>
+      <div class="notice">Все рисунки раздела 7 перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
       <h2>Структура раздела 7</h2>
       <div class="card-grid">
         ${data.sections.slice(0, 7).map(section => `<article class="link-card">
@@ -445,7 +445,7 @@
       ${breadcrumbs([{ label: "7 Common Structure" }, { label: "Диаграммы" }])}
       <p class="eyebrow">Common Structure · 21 рисунок</p>
       <h1>Диаграммы</h1>
-      <p class="lead">Оригинальные рисунки раздела 7. Изображения сохранены локально и доступны без подключения к сети.</p>
+      <p class="lead">Векторные копии рисунков раздела 7. Все материалы сохранены локально и доступны без подключения к сети.</p>
       <div class="diagram-grid">${data.diagrams.map(diagramTile).join("")}</div>`;
   }
 

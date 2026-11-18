@@ -19,17 +19,20 @@
 - `site/styles.css` — адаптивное оформление без внешних шрифтов и библиотек.
 - `site/data/common-structure.js` — русские описания раздела 7 и данные для локальной работы через `file://` без `fetch`.
 - `site/data/common-structure-xmi.js` — генерируемые из XMI собственные и унаследованные атрибуты классов, включая принадлежащие им концы ассоциаций, обобщения и определения предков; страницы ассоциаций содержат оба их конца.
-- `site/assets/diagrams/` — 21 PNG-скриншот рисунков спецификации; рисунок 7.1 также перерисован в интерактивный SVG со ссылками классов.
+- `site/assets/diagrams/` — интерактивные SVG для 21 рисунка раздела 7; исходные PNG сохранены как справочные копии и резерв для встроенных объектов.
 - `docs/` — официальные PDF и XMI OMG, извлечённые текстовые материалы.
-- `scripts/render_common_structure_diagrams.py` — повторное создание скриншотов из PDF; требует PyMuPDF.
+- `scripts/render_common_structure_diagrams.py` — повторное создание справочных PNG из PDF; требует PyMuPDF.
+- `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21; ссылки и подсказки строятся по данным справочника и XMI.
 - `scripts/sync_xmi_properties.py` — генерация и проверка свойств по нормативному XMI; русские описания отсутствующих свойств задаются в самом скрипте.
-- `scripts/validate_site.py` — статическая проверка, контроль синхронизации с XMI, геометрическая проверка основных SVG и диаграмм наследования, проверка всех маршрутов через локальный Chrome или Edge.
+- `scripts/validate_site.py` — статическая проверка, контроль синхронизации с XMI и генератором SVG, геометрическая проверка всех 21 диаграмм и иерархий наследования, проверка всех маршрутов через локальный Chrome или Edge.
 
 ### Команды проверки
 
 ```bash
 python scripts/sync_xmi_properties.py
 python scripts/sync_xmi_properties.py --check
+python scripts/generate_common_structure_svg.py
+python scripts/generate_common_structure_svg.py --check
 python scripts/validate_site.py
 python scripts/render_common_structure_diagrams.py
 ```
@@ -66,7 +69,7 @@ python scripts/render_common_structure_diagrams.py
 
 #Этапы создания
 
-1. Базовый каркас проекта. Пока в него включен только 7 раздел спецификации (Common structure). Рисунок 7.1 перерисован в интерактивный SVG; остальные диаграммы пока являются скриншотами из спецификации.
+1. Базовый каркас проекта. Пока в него включен только 7 раздел спецификации (Common structure). Все рисунки раздела перерисованы в интерактивные SVG; PNG остаются справочными копиями оригиналов.
 
 ## Правила наполнения справочника
 

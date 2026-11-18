@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.12">
+  <title id="diagram-title">Рисунок 7.12 — Кратность как дополнение к обозначению</title>
+  <desc id="diagram-description">Кратность и свойства концов ассоциаций между Purchase, Customer и Account.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="900" height="240"/>
+  <g class="class-node" data-classifier="Purchase"><title>Purchase. Пример класса Purchase.</title>
+<rect class="class-box" x="35" y="90" width="150" height="65"/>
+<line class="class-divider" x1="35" y1="122" x2="185" y2="122"/>
+<text class="class-name" x="110.0" y="113" text-anchor="middle">Purchase</text>
+</g>
+<g class="class-node" data-classifier="Customer"><title>Customer. Пример класса Customer.</title>
+<rect class="class-box" x="375" y="90" width="160" height="65"/>
+<line class="class-divider" x1="375" y1="122" x2="535" y2="122"/>
+<text class="class-name" x="455.0" y="113" text-anchor="middle">Customer</text>
+</g>
+<g class="class-node" data-classifier="Account"><title>Account. Пример класса Account.</title>
+<rect class="class-box" x="715" y="90" width="150" height="65"/>
+<line class="class-divider" x1="715" y1="122" x2="865" y2="122"/>
+<text class="class-name" x="790.0" y="113" text-anchor="middle">Account</text>
+</g>
+<g class="example-association-group"><title>Покупки клиента: упорядоченное множество без повторов.</title><path class="example-association" d="M 375 120 H 185" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 375 120 H 185" aria-hidden="true"/>
+<text class="example-label" x="280" y="85" text-anchor="middle">purchase</text>
+<text class="example-label" x="363" y="144" text-anchor="end">*</text>
+<text class="example-label" x="197" y="144">{ordered, unique}</text>
+</g>
+<g class="example-association-group"><title>Счета клиента: не более пяти уникальных значений.</title><path class="example-association" d="M 535 120 H 715" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 535 120 H 715" aria-hidden="true"/>
+<text class="example-label" x="625" y="85" text-anchor="middle">account</text>
+<text class="example-label" x="547" y="144">{unique}</text>
+<text class="example-label" x="703" y="144" text-anchor="end">0..5</text>
+</g>
+</svg>

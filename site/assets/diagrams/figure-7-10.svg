@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="660" viewBox="0 0 1100 660" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.10">
+  <title id="diagram-title">Рисунок 7.10 — Абстрактный синтаксис типов и кратности</title>
+  <desc id="diagram-description">Метаклассы Type, TypedElement, MultiplicityElement и ValueSpecification.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="1100" height="660"/>
+  <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="100" y="40" width="190" height="50"/>
+<line class="class-divider" x1="100" y1="72" x2="290" y2="72"/>
+<text class="class-name abstract" x="195.0" y="63" text-anchor="middle">NamedElement</text>
+</a>
+<a class="class-node" data-classifier="TypedElement" href="../../index.html#/classifier/typedelement" target="_top" aria-label="TypedElement — открыть описание класса"><title>TypedElement. NamedElement, для которого может быть задан Type.</title>
+<rect class="class-box" x="100" y="170" width="190" height="60"/>
+<line class="class-divider" x1="100" y1="202" x2="290" y2="202"/>
+<text class="class-name abstract" x="195.0" y="193" text-anchor="middle">TypedElement</text>
+</a>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="700" y="40" width="240" height="50"/>
+<line class="class-divider" x1="700" y1="72" x2="940" y2="72"/>
+<text class="class-name abstract" x="820.0" y="63" text-anchor="middle">PackageableElement</text>
+</a>
+<a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
+<rect class="class-box" x="770" y="170" width="140" height="60"/>
+<line class="class-divider" x1="770" y1="202" x2="910" y2="202"/>
+<text class="class-name abstract" x="840.0" y="193" text-anchor="middle">Type</text>
+</a>
+<a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+<rect class="class-box" x="400" y="305" width="120" height="50"/>
+<line class="class-divider" x1="400" y1="337" x2="520" y2="337"/>
+<text class="class-name abstract" x="460.0" y="328" text-anchor="middle">Element</text>
+</a>
+<a class="class-node" data-classifier="MultiplicityElement" href="../../index.html#/classifier/multiplicityelement" target="_top" aria-label="MultiplicityElement — открыть описание класса"><title>MultiplicityElement. Содержит определение включительного интервала неотрицательных целых чисел и задаёт допустимые кардинальности для экземпляра элемента.</title>
+<rect class="class-box" x="70" y="440" width="360" height="160"/>
+<line class="class-divider" x1="70" y1="472" x2="430" y2="472"/>
+<text class="class-name abstract" x="250.0" y="463" text-anchor="middle">MultiplicityElement</text>
+<text class="attribute" x="80" y="494">+ isOrdered : Boolean = false</text>
+<text class="attribute" x="80" y="515">+ isUnique : Boolean = true</text>
+<text class="attribute" x="80" y="536">+ /lower : Integer</text>
+<text class="attribute" x="80" y="557">+ /upper : UnlimitedNatural</text>
+</a>
+<a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="790" y="430" width="260" height="160"/>
+<line class="class-divider" x1="790" y1="462" x2="1050" y2="462"/>
+<text class="class-name abstract" x="920.0" y="453" text-anchor="middle">ValueSpecification</text>
+</a>
+<path class="generalization-line" d="M 195 170 V 90" data-child="TypedElement" data-parent="NamedElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 840 170 V 90" data-child="Type" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 250 440 V 395 H 460 V 355" data-child="MultiplicityElement" data-parent="Element" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-type-typedelement" target="_top" aria-label="Открыть описание ассоциации A_type_typedElement">
+<g class="association-group" id="A_type_typedElement"><title>Связывает Type с TypedElements, для которых он задан.</title>
+<path class="association" d="M 290 195 H 770" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 290 195 H 770" aria-hidden="true"/>
+<circle class="end-dot" cx="770" cy="195" r="3"/>
+<text class="association-end" x="302" y="180"><title>typedElement. Связывает Type с TypedElements, для которых он задан.</title>+ typedElement</text>
+<text class="association-end" x="758" y="180" text-anchor="end"><title>Тип элемента.</title>+ type</text>
+<text class="association-label" x="302" y="219">*</text>
+<text class="association-label" x="758" y="219" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-lowervalue-owninglower" target="_top" aria-label="Открыть описание ассоциации A_lowerValue_owningLower">
+<g class="association-group" id="A_lowerValue_owningLower"><title>Связывает ValueSpecification нижней границы с владеющим MultiplicityElement.</title>
+<path class="association" d="M 430 475 H 790" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 430 475 H 790" aria-hidden="true"/>
+<polygon class="composition" points="430,475 438,467 446,475 438,483"/><circle class="end-dot" cx="790" cy="475" r="3"/>
+<text class="association-end" x="442" y="460"><title>owningLower. Связывает ValueSpecification нижней границы с владеющим MultiplicityElement.</title>+ owningLower</text>
+<text class="association-end" x="770" y="460" text-anchor="end"><title>Спецификация нижней границы.</title>+ lowerValue</text>
+<text class="association-label" x="442" y="435">{subsets owner}</text>
+<text class="association-label" x="442" y="505">0..1</text>
+<text class="association-label" x="770" y="435" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="770" y="505" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-uppervalue-owningupper" target="_top" aria-label="Открыть описание ассоциации A_upperValue_owningUpper">
+<g class="association-group" id="A_upperValue_owningUpper"><title>Связывает ValueSpecification верхней границы с владеющим MultiplicityElement.</title>
+<path class="association" d="M 430 575 H 790" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 430 575 H 790" aria-hidden="true"/>
+<polygon class="composition" points="430,575 438,567 446,575 438,583"/><circle class="end-dot" cx="790" cy="575" r="3"/>
+<text class="association-end" x="442" y="560"><title>owningUpper. Связывает ValueSpecification верхней границы с владеющим MultiplicityElement.</title>+ owningUpper</text>
+<text class="association-end" x="770" y="560" text-anchor="end"><title>Спецификация верхней границы.</title>+ upperValue</text>
+<text class="association-label" x="442" y="535">{subsets owner}</text>
+<text class="association-label" x="442" y="605">0..1</text>
+<text class="association-label" x="770" y="535" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="770" y="605" text-anchor="end">0..1</text>
+</g></a>
+</svg>

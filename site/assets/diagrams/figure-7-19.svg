@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="180" viewBox="0 0 850 180" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.19">
+  <title id="diagram-title">Рисунок 7.19 — Пример зависимости «Instantiate»</title>
+  <desc id="diagram-description">CarFactory имеет зависимость Instantiate от Car.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="850" height="180"/>
+  <g class="class-node" data-classifier="CarFactory"><title>CarFactory. Пример класса CarFactory.</title>
+<rect class="class-box" x="35" y="60" width="190" height="80"/>
+<line class="class-divider" x1="35" y1="92" x2="225" y2="92"/>
+<text class="class-name" x="130.0" y="83" text-anchor="middle">CarFactory</text>
+</g>
+<g class="class-node" data-classifier="Car"><title>Car. Пример класса Car.</title>
+<rect class="class-box" x="625" y="60" width="190" height="80"/>
+<line class="class-divider" x1="625" y1="92" x2="815" y2="92"/>
+<text class="class-name" x="720.0" y="83" text-anchor="middle">Car</text>
+</g>
+<a class="dependency-group" href="../../index.html#/classifier/dependency" target="_top"><title>Relationship, показывающий, что элемент или множество элементов-клиентов нуждается в других элементах-поставщиках для своей спецификации или реализации.</title><path class="dependency-line" d="M 225 100 H 625" marker-end="url(#navigation)"/><text x="425" y="80" text-anchor="middle">«Instantiate»</text></a>
+</svg>

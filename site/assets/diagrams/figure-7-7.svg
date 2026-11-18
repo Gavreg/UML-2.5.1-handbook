@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="330" viewBox="0 0 800 330" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.7">
+  <title id="diagram-title">Рисунок 7.7 — Пример импорта элемента</title>
+  <desc id="diagram-description">Пакет Program импортирует типы String и Time из пакета Types.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="800" height="330"/>
+  <g class="package-node"><title>Пакет Program.</title>
+<path class="package-box" d="M 35 180 H 110 V 210 H 205 V 280 H 35 Z"/>
+<text class="class-name" x="72.5" y="201" text-anchor="middle">Program</text>
+</g>
+<g class="package-node"><title>Пакет Types.</title>
+<path class="package-box" d="M 450 35 H 545 V 65 H 730 V 315 H 450 Z"/>
+<text class="class-name" x="497.5" y="56" text-anchor="middle">Types</text>
+</g>
+<g class="class-node" data-classifier="String"><title>String. Пример класса String.</title>
+<rect class="class-box" x="500" y="85" width="150" height="65"/>
+<line class="class-divider" x1="500" y1="135" x2="650" y2="135"/>
+<text x="575.0" y="104" text-anchor="middle">«datatype»</text>
+<text class="class-name" x="575.0" y="126" text-anchor="middle">String</text>
+</g>
+<g class="class-node" data-classifier="Integer"><title>Integer. Пример класса Integer.</title>
+<rect class="class-box" x="520" y="160" width="150" height="65"/>
+<line class="class-divider" x1="520" y1="210" x2="670" y2="210"/>
+<text x="595.0" y="179" text-anchor="middle">«datatype»</text>
+<text class="class-name" x="595.0" y="201" text-anchor="middle">Integer</text>
+</g>
+<g class="class-node" data-classifier="Time"><title>Time. Пример класса Time.</title>
+<rect class="class-box" x="480" y="240" width="150" height="65"/>
+<line class="class-divider" x1="480" y1="290" x2="630" y2="290"/>
+<text x="555.0" y="259" text-anchor="middle">«datatype»</text>
+<text class="class-name" x="555.0" y="281" text-anchor="middle">Time</text>
+</g>
+<a class="dependency-group" href="../../index.html#/classifier/elementimport" target="_top"><title>Позволяет ссылаться на NamedElement из другого пространства имён по неквалифицированному имени внутри пространства имён, владеющего импортом.</title><path class="dependency-line" d="M 205 205 L 500 120" marker-end="url(#navigation)"/><text x="340" y="145" text-anchor="middle">«access»</text></a>
+<a class="dependency-group" href="../../index.html#/classifier/elementimport" target="_top"><title>Позволяет ссылаться на NamedElement из другого пространства имён по неквалифицированному имени внутри пространства имён, владеющего импортом.</title><path class="dependency-line" d="M 205 270 H 480" marker-end="url(#navigation)"/><text x="340" y="250" text-anchor="middle">«import»</text></a>
+</svg>

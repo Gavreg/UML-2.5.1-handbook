@@ -170,6 +170,135 @@ def check_route(browser, route, expected):
     return None
 
 
+SVG_GEOMETRY_SCRIPT = r"""
+(() => {
+  const errors = [];
+  const labels = [...document.querySelectorAll("text")].map((element, index) => ({
+    element,
+    box: element.getBBox(),
+    name: element.textContent.trim() || `text ${index}`
+  }));
+  const classBoxes = [...document.querySelectorAll("rect.class-box")].map(element => ({
+    element,
+    box: element.getBBox()
+  }));
+  const overlaps = (a, b) => Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 0.5
+    && Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y) > 0.5;
+  const inside = (point, box, margin = 0.75) => point.x > box.x + margin
+    && point.x < box.x + box.width - margin
+    && point.y > box.y + margin
+    && point.y < box.y + box.height - margin;
+  const onBorder = (point, box) => {
+    const withinX = point.x >= box.x - 0.75 && point.x <= box.x + box.width + 0.75;
+    const withinY = point.y >= box.y - 0.75 && point.y <= box.y + box.height + 0.75;
+    return (withinY && (Math.abs(point.x - box.x) <= 0.75 || Math.abs(point.x - box.x - box.width) <= 0.75))
+      || (withinX && (Math.abs(point.y - box.y) <= 0.75 || Math.abs(point.y - box.y - box.height) <= 0.75));
+  };
+
+  for (let first = 0; first < labels.length; first += 1) {
+    for (let second = first + 1; second < labels.length; second += 1) {
+      if (overlaps(labels[first].box, labels[second].box)) {
+        errors.push(`text/text: ${labels[first].name} / ${labels[second].name}`);
+      }
+    }
+  }
+
+  for (const label of labels) {
+    const owner = label.element.closest("a")?.querySelector("rect.class-box");
+    if (owner) {
+      const box = owner.getBBox();
+      if (!inside({ x: label.box.x, y: label.box.y }, box, 1)
+        || !inside({ x: label.box.x + label.box.width, y: label.box.y + label.box.height }, box, 1)) {
+        errors.push(`text/class border: ${label.name}`);
+      }
+    } else {
+      for (const classBox of classBoxes) {
+        if (overlaps(label.box, classBox.box)) errors.push(`label/class: ${label.name}`);
+      }
+    }
+  }
+
+  const lines = [...document.querySelectorAll("path.association, path.generalization-line, line.class-divider")];
+  for (const line of lines) {
+    const length = line.getTotalLength();
+    for (const label of labels) {
+      const box = {
+        x: label.box.x - 0.75,
+        y: label.box.y - 0.75,
+        width: label.box.width + 1.5,
+        height: label.box.height + 1.5
+      };
+      for (let distance = 0; distance <= length; distance += 1) {
+        if (inside(line.getPointAtLength(distance), box, 0)) {
+          errors.push(`text/line: ${label.name} at ${label.box.x},${label.box.y}`);
+          break;
+        }
+      }
+    }
+  }
+
+  for (const path of document.querySelectorAll("path.association")) {
+    const length = path.getTotalLength();
+    const start = path.getPointAtLength(0);
+    const end = path.getPointAtLength(length);
+    if (!classBoxes.some(classBox => onBorder(start, classBox.box))) errors.push("association start is not on a class border");
+    if (!classBoxes.some(classBox => onBorder(end, classBox.box))) errors.push("association end is not on a class border");
+    for (let distance = 1; distance < length - 1; distance += 1) {
+      if (classBoxes.some(classBox => inside(path.getPointAtLength(distance), classBox.box))) {
+        errors.push("association enters a class");
+        break;
+      }
+    }
+  }
+
+  for (const path of document.querySelectorAll("path.association")) {
+    for (const attribute of ["marker-start", "marker-end"]) {
+      const marker = path.getAttribute(attribute);
+      if (marker && marker !== "url(#navigation)" && marker !== "url(#navigation-start)") {
+        errors.push(`nonstandard association marker: ${marker}`);
+      }
+    }
+  }
+  for (const path of document.querySelectorAll("path.generalization-line[marker-end]")) {
+    if (path.getAttribute("marker-end") !== "url(#generalization)") errors.push("nonstandard generalization marker");
+  }
+  document.documentElement.setAttribute("data-geometry-errors", [...new Set(errors)].join(" | "));
+})();
+"""
+
+
+def check_svg_geometry(browser, vector):
+    source = SITE / vector
+    with tempfile.TemporaryDirectory() as workspace:
+        workspace = Path(workspace)
+        copy = workspace / source.name
+        script = f"<script><![CDATA[{SVG_GEOMETRY_SCRIPT}]]></script>"
+        copy.write_text(source.read_text(encoding="utf-8").replace("</svg>", script + "</svg>"), encoding="utf-8")
+        result = subprocess.run(
+            [
+                str(browser),
+                "--headless=new",
+                "--disable-gpu",
+                "--disable-background-networking",
+                "--no-first-run",
+                f"--user-data-dir={workspace / 'profile'}",
+                "--virtual-time-budget=1000",
+                "--dump-dom",
+                copy.resolve().as_uri(),
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=45,
+        )
+    dom = result.stdout.decode("utf-8", errors="replace")
+    if result.returncode:
+        return [f"{vector}: browser exit code {result.returncode}"]
+    match = re.search(r'data-geometry-errors="([^"]*)"', dom)
+    if not match:
+        return [f"{vector}: SVG geometry check did not run"]
+    return [f"{vector}: {error}" for error in match.group(1).split(" | ") if error]
+
+
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--browser", help="Path to Chrome or Edge")
@@ -188,6 +317,14 @@ def main():
     browser = find_browser(args.browser)
     if not browser:
         raise SystemExit("Chrome or Edge is required for browser checks; use --static-only to skip them")
+
+    vectors = re.findall(r'vector: "([^"]+\.svg)"', DATA.read_text(encoding="utf-8"))
+    geometry_failures = [error for vector in vectors for error in check_svg_geometry(browser, vector)]
+    if geometry_failures:
+        for failure in geometry_failures:
+            print(f"ERROR: {failure}")
+        raise SystemExit(1)
+    print(f"SVG geometry checks: OK; {len(vectors)} diagrams passed")
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         failures = list(executor.map(lambda item: check_route(browser, *item), all_routes))

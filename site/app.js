@@ -349,16 +349,17 @@
       const parentRight = edge.parent.x + edge.parent.width;
       const sourceY = edge.parent.y + boxHeight / 2 + edgeOffset(edge.outIndex, outgoing.get(edge.parent.name));
       const targetY = edge.child.y + boxHeight / 2 + edgeOffset(edge.inIndex, incoming.get(edge.child.name));
+      const attributes = `data-parent="${escapeHtml(edge.parent.name)}" data-child="${escapeHtml(edge.child.name)}"`;
       if (depths.get(edge.child.name) - depths.get(edge.parent.name) > 1) {
         const sourceJunction = edge.parent.columnRight + 16 + edge.outIndex * 6;
         const targetJunction = edge.child.x - 16 - edge.inIndex * 6;
         const busY = margin + contentHeight + 16 + longLane * 16;
         longLane += 1;
-        return `<path class="inheritance-generalization" d="M ${parentRight} ${sourceY} H ${sourceJunction} V ${busY} H ${targetJunction} V ${targetY} H ${edge.child.x}" marker-end="url(#inheritance-generalization)"/>`;
+        return `<path class="inheritance-generalization" ${attributes} d="M ${edge.child.x} ${targetY} H ${targetJunction} V ${busY} H ${sourceJunction} V ${sourceY} H ${parentRight}" marker-end="url(#inheritance-generalization)"/>`;
       }
       const gap = edge.child.x - edge.parent.columnRight;
       const junctionX = edge.parent.columnRight + gap * (0.35 + edge.inIndex * 0.1);
-      return `<path class="inheritance-generalization" d="M ${parentRight} ${sourceY} H ${junctionX} V ${targetY} H ${edge.child.x}" marker-end="url(#inheritance-generalization)"/>`;
+      return `<path class="inheritance-generalization" ${attributes} d="M ${edge.child.x} ${targetY} H ${junctionX} V ${sourceY} H ${parentRight}" marker-end="url(#inheritance-generalization)"/>`;
     }).join("");
 
     const blocks = columns.flat().map(node => {

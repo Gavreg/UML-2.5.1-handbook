@@ -167,6 +167,15 @@ INHERITANCE_GEOMETRY_SCRIPT = r"""
 
   if (!blocks.length) errors.push("inheritance SVG has no class blocks");
   if (svg.querySelectorAll("text:not(.inheritance-class-name)").length) errors.push("inheritance SVG has non-class text");
+  if (blocks.length) {
+    const bodyFontSize = parseFloat(getComputedStyle(document.body).fontSize);
+    const diagramFontSize = parseFloat(getComputedStyle(blocks[0].text).fontSize);
+    const scale = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+    if (diagramFontSize <= bodyFontSize || diagramFontSize > bodyFontSize * 1.2) {
+      errors.push(`inheritance font size ${diagramFontSize} is not slightly larger than body text ${bodyFontSize}`);
+    }
+    if (Math.abs(scale - 1) > 0.02) errors.push(`inheritance SVG is scaled instead of using its natural size: ${scale}`);
+  }
   const known = new Set(window.UML_DATA.classifiers.map(item => item.name));
   for (const block of blocks) {
     const name = block.element.dataset.classifier;
@@ -225,6 +234,10 @@ INHERITANCE_GEOMETRY_SCRIPT = r"""
     const end = path.getPointAtLength(length);
     if (!blocks.some(block => onBorder(start, block.box))) errors.push("inheritance start is not on a class border");
     if (!blocks.some(block => onBorder(end, block.box))) errors.push("inheritance end is not on a class border");
+    const child = blocks.find(block => block.element.dataset.classifier === path.dataset.child);
+    const parent = blocks.find(block => block.element.dataset.classifier === path.dataset.parent);
+    if (!child || !onBorder(start, child.box)) errors.push(`inheritance does not start at child class: ${path.dataset.child}`);
+    if (!parent || !onBorder(end, parent.box)) errors.push(`generalization arrow does not point to parent class: ${path.dataset.parent}`);
     for (let distance = 1; distance < length - 1; distance += 1) {
       if (blocks.some(block => inside(path.getPointAtLength(distance), block.box))) {
         errors.push(`inheritance line enters a class block: ${path.getAttribute("d")}`);

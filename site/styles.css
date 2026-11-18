@@ -969,8 +969,7 @@ h3 {
 }
 
 .inheritance-svg {
-  width: 100%;
-  min-width: min(var(--diagram-width), 900px);
+  width: var(--diagram-width);
   height: auto;
 }
 
@@ -993,7 +992,7 @@ h3 {
 .inheritance-class-name {
   fill: #111111;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
 }
 

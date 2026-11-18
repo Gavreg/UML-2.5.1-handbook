@@ -62,6 +62,69 @@ PROPERTY_TRANSLATIONS = {
     "Package-profileApplication": "Применения профилей, показывающие, какие профили применены к пакету.",
     "StringExpression-owningExpression": "Строковое выражение, частью которого является данное подвыражение.",
     "StringExpression-subExpression": "Строковые подвыражения, образующие данное выражение.",
+    "A_behavior_opaqueExpression-opaqueExpression": "Непрозрачное выражение, вычисление которого задаёт поведение.",
+    "A_operand_expression-expression": "Выражение, которому принадлежит операнд.",
+    "A_ownedStereotype_owningPackage-owningPackage": "Пакет, владеющий стереотипом.",
+    "A_packagedElement_owningPackage-owningPackage": "Пакет, владеющий упаковываемым элементом.",
+    "A_result_opaqueExpression-opaqueExpression": "Непрозрачное выражение, результат которого задаёт параметр.",
+    "Action-localPostcondition": "Ограничение, которое должно выполняться после завершения выполнения действия.",
+    "Action-localPrecondition": "Ограничение, которое должно выполняться перед началом выполнения действия.",
+    "ActivityEdge-guard": "Спецификация значения, определяющая, может ли маркер проходить по ребру деятельности; при её отсутствии прохождение не ограничено.",
+    "ActivityEdge-weight": "Минимальное число маркеров, которые должны одновременно проходить по ребру; по умолчанию равно 1.",
+    "ActivityPartition-represents": "Элемент, представленный функциональностью, моделируемой внутри раздела деятельности.",
+    "Association-endType": "Классификаторы, используемые как типы концов ассоциации.",
+    "Behavior-postcondition": "Необязательные ограничения, выполняемые после завершения поведения, если перед вызовом были выполнены предусловия.",
+    "Behavior-precondition": "Необязательные ограничения, которые должны выполняться перед вызовом поведения.",
+    "BehavioralFeature-raisedException": "Типы исключений, которые могут возникать при вызове поведенческой характеристики.",
+    "ChangeEvent-changeExpression": "Логическая спецификация значения; событие изменения происходит при смене её значения с false на true.",
+    "Classifier-inheritedMember": "Элементы, унаследованные классификатором от общих классификаторов.",
+    "CollaborationUse-roleBinding": "Соответствие характеристик кооперации характеристикам владеющего классификатора, определяющее роли соединяемых элементов.",
+    "Component-packagedElement": "Упаковываемые элементы, принадлежащие компоненту.",
+    "ConsiderIgnoreFragment-message": "Сообщения, применимые к этому фрагменту взаимодействия.",
+    "DeploymentTarget-deployedElement": "Элементы, представленные в артефакте, развёрнутом на цели развёртывания.",
+    "Duration-expr": "Спецификация значения, вычисляющая длительность.",
+    "DurationObservation-event": "События входа или выхода, между которыми измеряется длительность.",
+    "Extend-condition": "Условие, которое должно выполняться при достижении первой точки расширения; без него расширение безусловно.",
+    "InformationFlow-informationSource": "Источник, из которого исходят передаваемые информационные элементы.",
+    "InformationFlow-informationTarget": "Цель, которой направляются передаваемые информационные элементы.",
+    "InformationFlow-realization": "Отношения, реализующие указанный информационный поток.",
+    "InstanceSpecification-specification": "Спецификация способа вычисления, вывода или построения экземпляра.",
+    "InteractionConstraint-maxint": "Максимальное число итераций цикла.",
+    "InteractionConstraint-minint": "Минимальное число итераций цикла.",
+    "InteractionUse-argument": "Фактические аргументы взаимодействия.",
+    "InteractionUse-returnValue": "Значение выполненного взаимодействия.",
+    "Interval-max": "Спецификация максимального значения интервала.",
+    "Interval-min": "Спецификация минимального значения интервала.",
+    "JoinNode-joinSpec": "Условие, при котором узел слияния предлагает маркер на исходящем ребре; по умолчанию требуются маркеры на всех входящих рёбрах.",
+    "Lifeline-selector": "Если соединяемый элемент многозначен, задаёт конкретную часть внутри этого множества.",
+    "Manifestation-utilizedElement": "Элемент модели, используемый при воплощении в артефакте.",
+    "Message-argument": "Аргументы сообщения.",
+    "Message-signature": "Спецификация содержимого сообщения: операция или сигнал.",
+    "ObjectNode-upperBound": "Максимальное число маркеров в узле объектов; при достижении границы новые маркеры не поступают, а при её отсутствии ограничения нет.",
+    "Operation-bodyCondition": "Необязательное ограничение на значения результата вызова операции.",
+    "Operation-postcondition": "Необязательные ограничения на состояние системы после завершения операции.",
+    "Operation-precondition": "Необязательные ограничения на состояние системы при вызове операции.",
+    "Operation-raisedException": "Типы исключений, которые могут возникать при вызове операции.",
+    "Operation-type": "Возвращаемый тип операции, если он есть; выводится из возвращаемого параметра.",
+    "PackageMerge-mergedPackage": "Пакет, содержимое которого объединяется с принимающим пакетом.",
+    "PackageMerge-receivingPackage": "Пакет, расширяемый содержимым объединяемого пакета.",
+    "Parameter-defaultValue": "Спецификация значения, используемого, если аргумент параметра не передан.",
+    "ParameterSet-condition": "Ограничение, определяющее возможность начала или завершения выполнения со значениями параметров набора.",
+    "Profile-metaclassReference": "Импорт метакласса, который может быть расширен профилем.",
+    "Profile-metamodelReference": "Импорт пакета, содержащего прямо или косвенно расширяемые метаклассы.",
+    "ProfileApplication-applyingPackage": "Пакет, владеющий применением профиля.",
+    "Property-defaultValue": "Спецификация значения по умолчанию свойства при создании экземпляра владеющего классификатора.",
+    "ProtocolTransition-postCondition": "Постусловие перехода, которое должно выполняться после его срабатывания и входит в постусловие связанной операции.",
+    "ProtocolTransition-preCondition": "Предусловие перехода, проверяемое перед его срабатыванием.",
+    "RedefinableTemplateSignature-inheritedParameter": "Формальные параметры расширяемых сигнатур шаблонов.",
+    "Slot-value": "Значение или значения, хранящиеся в слоте.",
+    "State-stateInvariant": "Условия, которые всегда истинны, пока это состояние является текущим.",
+    "StateInvariant-invariant": "Ограничение, которое должно выполняться во время выполнения для этого инварианта состояния.",
+    "TimeExpression-expr": "Спецификация значения, вычисляющая значение временного выражения.",
+    "TimeObservation-event": "Событие входа или выхода, по которому определяется наблюдение времени.",
+    "Transition-guard": "Ограничение-сторож, управляющее срабатыванием перехода; оно вычисляется без побочных эффектов.",
+    "ValuePin-value": "Спецификация значения, вычисляемого для получения значения контакта значения.",
+    "ValueSpecificationAction-value": "Спецификация значения, которое требуется вычислить.",
 }
 
 
@@ -209,15 +272,14 @@ class XmiModel:
             "redefines": redefines,
         }
 
-    def direct_properties(self, class_name, descriptions, clause7_associations):
+    def direct_properties(self, class_name, descriptions):
         classifier = self.classes[class_name]
         properties = [
             self.property(prop, descriptions, class_name)
             for prop in classifier.findall("ownedAttribute")
         ]
         owned_ids = {prop["id"] for prop in properties}
-        for association_name in clause7_associations:
-            association = self.associations[association_name]
+        for association in self.associations.values():
             for end_ref in association.findall("memberEnd"):
                 prop = self.elements[end_ref.get(XMI_NS + "idref")]
                 prop_id = prop.get(XMI_NS + "id")
@@ -307,7 +369,7 @@ def generate():
     for name in class_names:
         require_with_ancestors(name)
     direct_by_class = {
-        name: model.direct_properties(name, descriptions, association_list)
+        name: model.direct_properties(name, descriptions)
         for name in required_classes
     }
     classes = {}

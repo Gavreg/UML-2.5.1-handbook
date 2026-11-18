@@ -103,7 +103,7 @@
       </li>`).join("")}</ul>`;
   }
 
-  function propertySection(title, properties, collapsible = false, note = "Включены обычные атрибуты и обе стороны показанных в разделе 7 ассоциаций. Сигнатуры сверены с нормативным XMI.") {
+  function propertySection(title, properties, collapsible = false, note = "Включены все обычные атрибуты и обе стороны всех ассоциаций нормативной XMI-модели.") {
     if (!properties || !properties.length) return "";
     const content = propertyList(properties);
     return `<section>${collapsible

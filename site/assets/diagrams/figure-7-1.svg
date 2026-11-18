@@ -20,7 +20,7 @@
       text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
       .class-name { font-weight: 700; }
       .abstract { font-style: italic; }
-      .association-group text { font-size: 11px; }
+      .association-group text { font-size: 14px; }
       .end-dot, .composition { fill: #111111; }
       a { cursor: pointer; }
       a:hover .class-box { fill: #eef3fb; stroke: #1e3a8a; }

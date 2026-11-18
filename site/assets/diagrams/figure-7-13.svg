@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="430" viewBox="0 0 1100 430" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.13">
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="430" viewBox="0 0 1250 430" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.13">
   <title id="diagram-title">Рисунок 7.13 — Абстрактный синтаксис ограничений</title>
   <desc id="diagram-description">Метакласс Constraint, его контекст, ограничиваемые элементы и спецификация.</desc>
   <defs>
@@ -16,7 +16,7 @@
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
   .attribute, .operation { font-size: 14px; }
-  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -34,7 +34,7 @@
   .example-association-group:hover .end-dot { fill: #1e3a8a; }
   .association-end { cursor: help; }</style>
   </defs>
-  <rect class="background" width="1100" height="430"/>
+  <rect class="background" width="1250" height="430"/>
   <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
 <rect class="class-box" x="440" y="30" width="200" height="50"/>
 <line class="class-divider" x1="440" y1="62" x2="640" y2="62"/>
@@ -56,9 +56,9 @@
 <text class="class-name abstract" x="950.0" y="138" text-anchor="middle">Element</text>
 </a>
 <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
-<rect class="class-box" x="820" y="280" width="230" height="65"/>
-<line class="class-divider" x1="820" y1="312" x2="1050" y2="312"/>
-<text class="class-name abstract" x="935.0" y="303" text-anchor="middle">ValueSpecification</text>
+<rect class="class-box" x="970" y="280" width="230" height="65"/>
+<line class="class-divider" x1="970" y1="312" x2="1200" y2="312"/>
+<text class="class-name abstract" x="1085.0" y="303" text-anchor="middle">ValueSpecification</text>
 </a>
 <path class="generalization-line" d="M 520 130 V 80" data-child="Constraint" data-parent="PackageableElement" marker-end="url(#generalization)"/>
 <a class="association-link" href="../../index.html#/association/a-constrainedelement-constraint" target="_top" aria-label="Открыть описание ассоциации A_constrainedElement_constraint">
@@ -84,13 +84,13 @@
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-specification-owningconstraint" target="_top" aria-label="Открыть описание ассоциации A_specification_owningConstraint">
 <g class="association-group" id="A_specification_owningConstraint"><title>Связывает ValueSpecification с Constraint, которому принадлежит условие.</title>
-<path class="association" d="M 640 285 H 820" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 640 285 H 820" aria-hidden="true"/>
+<path class="association" d="M 640 285 H 970" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 640 285 H 970" aria-hidden="true"/>
 <polygon class="composition" points="640,285 648,277 656,285 648,293"/>
 <text class="association-end" x="652" y="270"><title>owningConstraint. Связывает ValueSpecification с Constraint, которому принадлежит условие.</title>+ owningConstraint</text>
-<text class="association-end" x="810" y="245" text-anchor="end"><title>Условие, которое должно быть истинным для выполнения ограничения.</title>+ specification</text>
+<text class="association-end" x="960" y="245" text-anchor="end"><title>Условие, которое должно быть истинным для выполнения ограничения.</title>+ specification</text>
 <text class="association-label" x="652" y="220">{subsets owner}</text>
 <text class="association-label" x="652" y="315">0..1</text>
-<text class="association-label" x="810" y="350" text-anchor="end">{subsets ownedElement}</text>
-<text class="association-label" x="790" y="380" text-anchor="end">1</text>
+<text class="association-label" x="960" y="350" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="940" y="380" text-anchor="end">1</text>
 </g></a>
 </svg>

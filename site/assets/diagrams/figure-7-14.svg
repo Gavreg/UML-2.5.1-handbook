@@ -16,7 +16,7 @@
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
   .attribute, .operation { font-size: 14px; }
-  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -50,8 +50,8 @@
 <text class="example-label" x="207" y="112">0..1</text>
 </g>
 <g class="example-association-group"><title>Связь сотрудника и работодателя.</title><path class="example-association" d="M 270 157 H 600"/><path class="association-hitbox" d="M 270 157 H 600" aria-hidden="true"/>
-<text class="example-label" x="350" y="140" text-anchor="middle">employee</text>
-<text class="example-label" x="520" y="140" text-anchor="middle">employer</text>
+<text class="example-label" x="282" y="140">employee</text>
+<text class="example-label" x="588" y="140" text-anchor="end">employer</text>
 <text class="example-label" x="282" y="181">*</text>
 <text class="example-label" x="588" y="181" text-anchor="end">0..1</text>
 </g>

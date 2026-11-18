@@ -66,7 +66,7 @@ STYLE = """
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
   .attribute, .operation { font-size: 14px; }
-  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -292,50 +292,50 @@ def figure_7_3():
 
 
 def figure_7_4():
-    svg = Svg("7.4", "Привязки шаблонов", "Метаклассы TemplateParameterSubstitution, TemplateBinding и связанные элементы шаблонов.", 1200, 830)
+    svg = Svg("7.4", "Привязки шаблонов", "Метаклассы TemplateParameterSubstitution, TemplateBinding и связанные элементы шаблонов.", 1400, 830)
     class_node(svg, "Element", 540, 30, 120, 45)
     class_node(svg, "TemplateParameter", 60, 140, 210, 65)
     class_node(svg, "ParameterableElement", 40, 285, 230, 115)
-    class_node(svg, "TemplateParameterSubstitution", 600, 130, 330, 290)
+    class_node(svg, "TemplateParameterSubstitution", 800, 130, 330, 290)
     class_node(svg, "TemplateableElement", 50, 540, 220, 65)
     class_node(svg, "TemplateSignature", 100, 680, 200, 65)
-    class_node(svg, "TemplateBinding", 650, 520, 220, 225)
-    class_node(svg, "DirectedRelationship", 640, 770, 240, 45)
-    generalization(svg, "M 765 130 V 90 H 600 V 75", child="TemplateParameterSubstitution", parent="Element")
-    generalization(svg, "M 760 745 V 770", child="TemplateBinding", parent="DirectedRelationship")
+    class_node(svg, "TemplateBinding", 850, 520, 220, 225)
+    class_node(svg, "DirectedRelationship", 840, 770, 240, 45)
+    generalization(svg, "M 965 130 V 90 H 600 V 75", child="TemplateParameterSubstitution", parent="Element")
+    generalization(svg, "M 960 745 V 770", child="TemplateBinding", parent="DirectedRelationship")
 
-    association(svg, "A_formal_templateParameterSubstitution", "M 270 165 H 600",
+    association(svg, "A_formal_templateParameterSubstitution", "M 270 165 H 800",
         ("TemplateParameterSubstitution", "formal", "+ formal", 282, 150, "start"),
-        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 588, 150, "end"),
-        ' marker-start="url(#navigation-start)"', dot(600, 165), [("1", 282, 189, "start"), ("*", 588, 189, "end")])
-    association(svg, "A_actual_templateParameterSubstitution", "M 270 315 H 600",
+        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 788, 150, "end"),
+        ' marker-start="url(#navigation-start)"', dot(800, 165), [("1", 282, 189, "start"), ("*", 788, 189, "end")])
+    association(svg, "A_actual_templateParameterSubstitution", "M 270 315 H 800",
         ("TemplateParameterSubstitution", "actual", "+ actual", 282, 300, "start"),
-        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 588, 300, "end"),
-        ' marker-start="url(#navigation-start)"', dot(600, 315), [("1", 282, 339, "start"), ("*", 588, 339, "end")])
-    association(svg, "A_ownedActual_owningTemplateParameterSubstitution", "M 270 395 H 600",
+        ("TemplateParameter", "templateParameterSubstitution", "+ templateParameterSubstitution", 788, 300, "end"),
+        ' marker-start="url(#navigation-start)"', dot(800, 315), [("1", 282, 339, "start"), ("*", 788, 339, "end")])
+    association(svg, "A_ownedActual_owningTemplateParameterSubstitution", "M 270 395 H 800",
         ("TemplateParameterSubstitution", "owningTemplateParameterSubstitution", "+ owningTemplateParameterSubstitution", 282, 420, "start"),
-        ("TemplateParameterSubstitution", "ownedActual", "+ ownedActual", 580, 375, "end"),
-        ' marker-start="url(#navigation-start)"', diamond(600, 395, "left"),
+        ("TemplateParameterSubstitution", "ownedActual", "+ ownedActual", 780, 375, "end"),
+        ' marker-start="url(#navigation-start)"', diamond(800, 395, "left"),
         [("0..1", 282, 495, "start"), ("{subsets owner, redefines templateParameterSubstitution}", 282, 470, "start"),
-         ("{subsets ownedElement, actual}", 580, 350, "end"), ("*", 580, 430, "end")])
-    association(svg, "A_parameterSubstitution_templateBinding", "M 765 420 V 520",
-        ("TemplateParameterSubstitution", "templateBinding", "+ templateBinding", 753, 493, "end"),
-        ("TemplateBinding", "parameterSubstitution", "+ parameterSubstitution", 785, 443, "start"),
-        ' marker-start="url(#navigation-start)"', diamond(765, 520, "up") + dot(765, 420),
-        [("{subsets owner}", 753, 443, "end"), ("1", 753, 468, "end"),
-         ("{subsets ownedElement}", 785, 493, "start"), ("*", 785, 468, "start")])
-    association(svg, "A_templateBinding_boundElement", "M 270 570 H 650",
+         ("{subsets ownedElement, actual}", 780, 350, "end"), ("*", 780, 430, "end")])
+    association(svg, "A_parameterSubstitution_templateBinding", "M 965 420 V 520",
+        ("TemplateParameterSubstitution", "templateBinding", "+ templateBinding", 953, 493, "end"),
+        ("TemplateBinding", "parameterSubstitution", "+ parameterSubstitution", 985, 443, "start"),
+        ' marker-start="url(#navigation-start)"', diamond(965, 520, "up") + dot(965, 420),
+        [("{subsets owner}", 953, 443, "end"), ("1", 953, 468, "end"),
+         ("{subsets ownedElement}", 985, 493, "start"), ("*", 985, 468, "start")])
+    association(svg, "A_templateBinding_boundElement", "M 270 570 H 850",
         ("TemplateBinding", "boundElement", "+ boundElement", 282, 555, "start"),
-        ("TemplateableElement", "templateBinding", "+ templateBinding", 638, 555, "end"),
-        ' marker-end="url(#navigation)"', diamond(270, 570, "right") + dot(650, 570),
+        ("TemplateableElement", "templateBinding", "+ templateBinding", 838, 555, "end"),
+        ' marker-end="url(#navigation)"', diamond(270, 570, "right") + dot(850, 570),
         [("{subsets source, owner}", 282, 530, "start"), ("1", 282, 605, "start"),
-         ("{subsets directedRelationship, ownedElement}", 638, 510, "end"), ("*", 638, 594, "end")])
-    association(svg, "A_signature_templateBinding", "M 300 700 H 650",
+         ("{subsets directedRelationship, ownedElement}", 838, 510, "end"), ("*", 838, 594, "end")])
+    association(svg, "A_signature_templateBinding", "M 300 700 H 850",
         ("TemplateBinding", "signature", "+ signature", 312, 685, "start"),
-        ("TemplateSignature", "templateBinding", "+ templateBinding", 638, 685, "end"),
-        ' marker-start="url(#navigation-start)"', dot(650, 700),
+        ("TemplateSignature", "templateBinding", "+ templateBinding", 838, 685, "end"),
+        ' marker-start="url(#navigation-start)"', dot(850, 700),
         [("{subsets target}", 312, 660, "start"), ("1", 312, 724, "start"),
-         ("{subsets directedRelationship}", 638, 660, "end"), ("*", 638, 724, "end")])
+         ("{subsets directedRelationship}", 838, 660, "end"), ("*", 838, 724, "end")])
     return svg
 
 
@@ -400,7 +400,7 @@ def figure_7_5():
         ("PackageImport", "importingNamespace", "+ importingNamespace", 940, 910, "end"),
         ' marker-end="url(#navigation)"', diamond(420, 660, "down") + dot(960, 925),
         [("{subsets directedRelationship, ownedElement}", 432, 722, "start"), ("*", 432, 747, "start"),
-         ("{subsets source, owner}", 940, 865, "end"), ("1", 940, 949, "end")])
+         ("{subsets source, owner}", 940, 870, "end"), ("1", 940, 949, "end")])
     association(svg, "A_importedPackage_packageImport", "M 1195 980 V 1100",
         ("PackageImport", "packageImport", "+ packageImport", 1183, 1004, "end"),
         ("PackageImport", "importedPackage", "+ importedPackage", 1207, 1075, "start"),
@@ -448,12 +448,12 @@ def figure_7_10():
 
 
 def figure_7_13():
-    svg = Svg("7.13", "Абстрактный синтаксис ограничений", "Метакласс Constraint, его контекст, ограничиваемые элементы и спецификация.", 1100, 430)
+    svg = Svg("7.13", "Абстрактный синтаксис ограничений", "Метакласс Constraint, его контекст, ограничиваемые элементы и спецификация.", 1250, 430)
     class_node(svg, "PackageableElement", 440, 30, 200, 50)
     class_node(svg, "Constraint", 400, 130, 240, 190)
     class_node(svg, "Namespace", 40, 190, 150, 55)
     class_node(svg, "Element", 880, 115, 140, 55)
-    class_node(svg, "ValueSpecification", 820, 280, 230, 65)
+    class_node(svg, "ValueSpecification", 970, 280, 230, 65)
     generalization(svg, "M 520 130 V 80", child="Constraint", parent="PackageableElement")
     association(svg, "A_constrainedElement_constraint", "M 640 155 H 880",
         ("Element", "constraint", "+ constraint", 652, 140, "start"),
@@ -466,12 +466,12 @@ def figure_7_13():
         "", diamond(190, 225, "right") + dot(400, 225),
         [("{subsets namespace}", 202, 180, "start"), ("0..1", 202, 255, "start"),
          ("{subsets ownedMember}", 388, 155, "end"), ("*", 388, 249, "end")])
-    association(svg, "A_specification_owningConstraint", "M 640 285 H 820",
+    association(svg, "A_specification_owningConstraint", "M 640 285 H 970",
         ("ValueSpecification", "owningConstraint", "+ owningConstraint", 652, 270, "start"),
-        ("Constraint", "specification", "+ specification", 810, 245, "end"),
+        ("Constraint", "specification", "+ specification", 960, 245, "end"),
         ' marker-end="url(#navigation)"', diamond(640, 285, "right"),
         [("{subsets owner}", 652, 220, "start"), ("0..1", 652, 315, "start"),
-         ("{subsets ownedElement}", 810, 350, "end"), ("1", 790, 380, "end")])
+         ("{subsets ownedElement}", 960, 350, "end"), ("1", 940, 380, "end")])
     return svg
 
 
@@ -601,7 +601,7 @@ def figure_7_14():
     class_node(svg, "Person", 120, 125, 150, 65, example=True)
     class_node(svg, "Company", 600, 125, 170, 65, example=True)
     example_association(svg, "M 195 125 V 55 H 55 V 157 H 120", [("boss", 207, 90, "start"), ("0..1", 207, 112, "start")], title="Необязательный руководитель Person.")
-    example_association(svg, "M 270 157 H 600", [("employee", 350, 140, "middle"), ("employer", 520, 140, "middle"), ("*", 282, 181, "start"), ("0..1", 588, 181, "end")], markers="", title="Связь сотрудника и работодателя.")
+    example_association(svg, "M 270 157 H 600", [("employee", 282, 140, "start"), ("employer", 588, 140, "end"), ("*", 282, 181, "start"), ("0..1", 588, 181, "end")], markers="", title="Связь сотрудника и работодателя.")
     note(svg, 180, 300, 390, 90, ["{self.boss->isEmpty() or", "self.employer = self.boss.employer}"], "../../index.html#/classifier/constraint", CLASSES["Constraint"]["definition"])
     svg.add('<path class="note-link" d="M 250 300 L 195 190"/>')
     return svg

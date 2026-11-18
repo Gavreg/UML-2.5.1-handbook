@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="830" viewBox="0 0 1200 830" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.4">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="830" viewBox="0 0 1400 830" role="img" aria-labelledby="diagram-title diagram-description" data-figure="7.4">
   <title id="diagram-title">Рисунок 7.4 — Привязки шаблонов</title>
   <desc id="diagram-description">Метаклассы TemplateParameterSubstitution, TemplateBinding и связанные элементы шаблонов.</desc>
   <defs>
@@ -16,7 +16,7 @@
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
   .attribute, .operation { font-size: 14px; }
-  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -34,7 +34,7 @@
   .example-association-group:hover .end-dot { fill: #1e3a8a; }
   .association-end { cursor: help; }</style>
   </defs>
-  <rect class="background" width="1200" height="830"/>
+  <rect class="background" width="1400" height="830"/>
   <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
 <rect class="class-box" x="540" y="30" width="120" height="45"/>
 <line class="class-divider" x1="540" y1="62" x2="660" y2="62"/>
@@ -51,9 +51,9 @@
 <text class="class-name abstract" x="155.0" y="308" text-anchor="middle">ParameterableElement</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameterSubstitution" href="../../index.html#/classifier/templateparametersubstitution" target="_top" aria-label="TemplateParameterSubstitution — открыть описание класса"><title>TemplateParameterSubstitution. Связывает фактический параметр с формальным TemplateParameter в рамках привязки шаблона.</title>
-<rect class="class-box" x="600" y="130" width="330" height="290"/>
-<line class="class-divider" x1="600" y1="162" x2="930" y2="162"/>
-<text class="class-name" x="765.0" y="153" text-anchor="middle">TemplateParameterSubstitution</text>
+<rect class="class-box" x="800" y="130" width="330" height="290"/>
+<line class="class-divider" x1="800" y1="162" x2="1130" y2="162"/>
+<text class="class-name" x="965.0" y="153" text-anchor="middle">TemplateParameterSubstitution</text>
 </a>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="50" y="540" width="220" height="65"/>
@@ -66,77 +66,77 @@
 <text class="class-name" x="200.0" y="703" text-anchor="middle">TemplateSignature</text>
 </a>
 <a class="class-node" data-classifier="TemplateBinding" href="../../index.html#/classifier/templatebinding" target="_top" aria-label="TemplateBinding — открыть описание класса"><title>TemplateBinding. DirectedRelationship между TemplateableElement и шаблоном, задающий подстановки фактических параметров вместо формальных.</title>
-<rect class="class-box" x="650" y="520" width="220" height="225"/>
-<line class="class-divider" x1="650" y1="552" x2="870" y2="552"/>
-<text class="class-name" x="760.0" y="543" text-anchor="middle">TemplateBinding</text>
+<rect class="class-box" x="850" y="520" width="220" height="225"/>
+<line class="class-divider" x1="850" y1="552" x2="1070" y2="552"/>
+<text class="class-name" x="960.0" y="543" text-anchor="middle">TemplateBinding</text>
 </a>
 <a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
-<rect class="class-box" x="640" y="770" width="240" height="45"/>
-<line class="class-divider" x1="640" y1="802" x2="880" y2="802"/>
-<text class="class-name abstract" x="760.0" y="793" text-anchor="middle">DirectedRelationship</text>
+<rect class="class-box" x="840" y="770" width="240" height="45"/>
+<line class="class-divider" x1="840" y1="802" x2="1080" y2="802"/>
+<text class="class-name abstract" x="960.0" y="793" text-anchor="middle">DirectedRelationship</text>
 </a>
-<path class="generalization-line" d="M 765 130 V 90 H 600 V 75" data-child="TemplateParameterSubstitution" data-parent="Element" marker-end="url(#generalization)"/>
-<path class="generalization-line" d="M 760 745 V 770" data-child="TemplateBinding" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 965 130 V 90 H 600 V 75" data-child="TemplateParameterSubstitution" data-parent="Element" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 960 745 V 770" data-child="TemplateBinding" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
 <a class="association-link" href="../../index.html#/association/a-formal-templateparametersubstitution" target="_top" aria-label="Открыть описание ассоциации A_formal_templateParameterSubstitution">
 <g class="association-group" id="A_formal_templateParameterSubstitution"><title>Связывает TemplateParameterSubstitution с формальным TemplateParameter.</title>
-<path class="association" d="M 270 165 H 600" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 165 H 600" aria-hidden="true"/>
-<circle class="end-dot" cx="600" cy="165" r="3"/>
+<path class="association" d="M 270 165 H 800" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 165 H 800" aria-hidden="true"/>
+<circle class="end-dot" cx="800" cy="165" r="3"/>
 <text class="association-end" x="282" y="150"><title>Соответствующий формальный параметр.</title>+ formal</text>
-<text class="association-end" x="588" y="150" text-anchor="end"><title>templateParameterSubstitution. Связывает TemplateParameterSubstitution с формальным TemplateParameter.</title>+ templateParameterSubstitution</text>
+<text class="association-end" x="788" y="150" text-anchor="end"><title>templateParameterSubstitution. Связывает TemplateParameterSubstitution с формальным TemplateParameter.</title>+ templateParameterSubstitution</text>
 <text class="association-label" x="282" y="189">1</text>
-<text class="association-label" x="588" y="189" text-anchor="end">*</text>
+<text class="association-label" x="788" y="189" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-actual-templateparametersubstitution" target="_top" aria-label="Открыть описание ассоциации A_actual_templateParameterSubstitution">
 <g class="association-group" id="A_actual_templateParameterSubstitution"><title>Связывает TemplateParameterSubstitution с фактическим ParameterableElement.</title>
-<path class="association" d="M 270 315 H 600" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 315 H 600" aria-hidden="true"/>
-<circle class="end-dot" cx="600" cy="315" r="3"/>
+<path class="association" d="M 270 315 H 800" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 315 H 800" aria-hidden="true"/>
+<circle class="end-dot" cx="800" cy="315" r="3"/>
 <text class="association-end" x="282" y="300"><title>Фактический параметр подстановки.</title>+ actual</text>
-<text class="association-end" x="588" y="300" text-anchor="end"><title>templateParameterSubstitution. Связывает TemplateParameterSubstitution с фактическим ParameterableElement.</title>+ templateParameterSubstitution</text>
+<text class="association-end" x="788" y="300" text-anchor="end"><title>templateParameterSubstitution. Связывает TemplateParameterSubstitution с фактическим ParameterableElement.</title>+ templateParameterSubstitution</text>
 <text class="association-label" x="282" y="339">1</text>
-<text class="association-label" x="588" y="339" text-anchor="end">*</text>
+<text class="association-label" x="788" y="339" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-ownedactual-owningtemplateparametersubstitution" target="_top" aria-label="Открыть описание ассоциации A_ownedActual_owningTemplateParameterSubstitution">
 <g class="association-group" id="A_ownedActual_owningTemplateParameterSubstitution"><title>Специализация A_actual_templateParameterSubstitution для фактического параметра, принадлежащего подстановке.</title>
-<path class="association" d="M 270 395 H 600" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 395 H 600" aria-hidden="true"/>
-<polygon class="composition" points="600,395 592,387 584,395 592,403"/>
+<path class="association" d="M 270 395 H 800" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 270 395 H 800" aria-hidden="true"/>
+<polygon class="composition" points="800,395 792,387 784,395 792,403"/>
 <text class="association-end" x="282" y="420"><title>owningTemplateParameterSubstitution. Специализация A_actual_templateParameterSubstitution для фактического параметра, принадлежащего подстановке.</title>+ owningTemplateParameterSubstitution</text>
-<text class="association-end" x="580" y="375" text-anchor="end"><title>Принадлежащий подстановке фактический параметр.</title>+ ownedActual</text>
+<text class="association-end" x="780" y="375" text-anchor="end"><title>Принадлежащий подстановке фактический параметр.</title>+ ownedActual</text>
 <text class="association-label" x="282" y="495">0..1</text>
 <text class="association-label" x="282" y="470">{subsets owner, redefines templateParameterSubstitution}</text>
-<text class="association-label" x="580" y="350" text-anchor="end">{subsets ownedElement, actual}</text>
-<text class="association-label" x="580" y="430" text-anchor="end">*</text>
+<text class="association-label" x="780" y="350" text-anchor="end">{subsets ownedElement, actual}</text>
+<text class="association-label" x="780" y="430" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-parametersubstitution-templatebinding" target="_top" aria-label="Открыть описание ассоциации A_parameterSubstitution_templateBinding">
 <g class="association-group" id="A_parameterSubstitution_templateBinding"><title>Связывает TemplateBinding с принадлежащими ему TemplateParameterSubstitutions.</title>
-<path class="association" d="M 765 420 V 520" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 765 420 V 520" aria-hidden="true"/>
-<polygon class="composition" points="765,520 757,512 765,504 773,512"/><circle class="end-dot" cx="765" cy="420" r="3"/>
-<text class="association-end" x="753" y="493" text-anchor="end"><title>Привязка, владеющая подстановкой.</title>+ templateBinding</text>
-<text class="association-end" x="785" y="443"><title>Подстановки параметров, принадлежащие привязке.</title>+ parameterSubstitution</text>
-<text class="association-label" x="753" y="443" text-anchor="end">{subsets owner}</text>
-<text class="association-label" x="753" y="468" text-anchor="end">1</text>
-<text class="association-label" x="785" y="493">{subsets ownedElement}</text>
-<text class="association-label" x="785" y="468">*</text>
+<path class="association" d="M 965 420 V 520" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 965 420 V 520" aria-hidden="true"/>
+<polygon class="composition" points="965,520 957,512 965,504 973,512"/><circle class="end-dot" cx="965" cy="420" r="3"/>
+<text class="association-end" x="953" y="493" text-anchor="end"><title>Привязка, владеющая подстановкой.</title>+ templateBinding</text>
+<text class="association-end" x="985" y="443"><title>Подстановки параметров, принадлежащие привязке.</title>+ parameterSubstitution</text>
+<text class="association-label" x="953" y="443" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="953" y="468" text-anchor="end">1</text>
+<text class="association-label" x="985" y="493">{subsets ownedElement}</text>
+<text class="association-label" x="985" y="468">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-templatebinding-boundelement" target="_top" aria-label="Открыть описание ассоциации A_templateBinding_boundElement">
 <g class="association-group" id="A_templateBinding_boundElement"><title>Связывает TemplateableElement с его TemplateBindings.</title>
-<path class="association" d="M 270 570 H 650" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 270 570 H 650" aria-hidden="true"/>
-<polygon class="composition" points="270,570 278,562 286,570 278,578"/><circle class="end-dot" cx="650" cy="570" r="3"/>
+<path class="association" d="M 270 570 H 850" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 270 570 H 850" aria-hidden="true"/>
+<polygon class="composition" points="270,570 278,562 286,570 278,578"/><circle class="end-dot" cx="850" cy="570" r="3"/>
 <text class="association-end" x="282" y="555"><title>Элемент, к которому применяется привязка.</title>+ boundElement</text>
-<text class="association-end" x="638" y="555" text-anchor="end"><title>Необязательные привязки элемента к шаблонам.</title>+ templateBinding</text>
+<text class="association-end" x="838" y="555" text-anchor="end"><title>Необязательные привязки элемента к шаблонам.</title>+ templateBinding</text>
 <text class="association-label" x="282" y="530">{subsets source, owner}</text>
 <text class="association-label" x="282" y="605">1</text>
-<text class="association-label" x="638" y="510" text-anchor="end">{subsets directedRelationship, ownedElement}</text>
-<text class="association-label" x="638" y="594" text-anchor="end">*</text>
+<text class="association-label" x="838" y="510" text-anchor="end">{subsets directedRelationship, ownedElement}</text>
+<text class="association-label" x="838" y="594" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-signature-templatebinding" target="_top" aria-label="Открыть описание ассоциации A_signature_templateBinding">
 <g class="association-group" id="A_signature_templateBinding"><title>Связывает TemplateSignature целевого шаблона с TemplateBindings.</title>
-<path class="association" d="M 300 700 H 650" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 300 700 H 650" aria-hidden="true"/>
-<circle class="end-dot" cx="650" cy="700" r="3"/>
+<path class="association" d="M 300 700 H 850" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 300 700 H 850" aria-hidden="true"/>
+<circle class="end-dot" cx="850" cy="700" r="3"/>
 <text class="association-end" x="312" y="685"><title>Подпись целевого шаблона.</title>+ signature</text>
-<text class="association-end" x="638" y="685" text-anchor="end"><title>templateBinding. Связывает TemplateSignature целевого шаблона с TemplateBindings.</title>+ templateBinding</text>
+<text class="association-end" x="838" y="685" text-anchor="end"><title>templateBinding. Связывает TemplateSignature целевого шаблона с TemplateBindings.</title>+ templateBinding</text>
 <text class="association-label" x="312" y="660">{subsets target}</text>
 <text class="association-label" x="312" y="724">1</text>
-<text class="association-label" x="638" y="660" text-anchor="end">{subsets directedRelationship}</text>
-<text class="association-label" x="638" y="724" text-anchor="end">*</text>
+<text class="association-label" x="838" y="660" text-anchor="end">{subsets directedRelationship}</text>
+<text class="association-label" x="838" y="724" text-anchor="end">*</text>
 </g></a>
 </svg>

@@ -61,16 +61,11 @@ SVG_GEOMETRY_SCRIPT = r"""
   const horizontalGap = ex;
   const verticalGap = ex / 2;
   const associationLabel = label => Boolean(label.element.closest("g.association-group"));
-  const className = document.querySelector("text.class-name");
   const endLabels = [...document.querySelectorAll(".association-group text, .example-association-group text")];
-  if (className && endLabels.length) {
-    const classFontSize = parseFloat(getComputedStyle(className).fontSize);
+  if (endLabels.length) {
     const endFontSizes = endLabels.map(label => parseFloat(getComputedStyle(label).fontSize));
-    if (endFontSizes.some(size => Math.abs(size - endFontSizes[0]) > 0.01)) {
-      errors.push(`association end font sizes differ: ${[...new Set(endFontSizes)].join(", ")}`);
-    }
-    if (endFontSizes.some(size => size > classFontSize * 0.7 + 0.01)) {
-      errors.push(`association end font size ${endFontSizes[0]} exceeds 0.7 of class font size ${classFontSize}`);
+    if (endFontSizes.some(size => Math.abs(size - 14) > 0.01)) {
+      errors.push(`association end font sizes must be 14 px: ${[...new Set(endFontSizes)].join(", ")}`);
     }
   }
 
@@ -242,6 +237,7 @@ SVG_GEOMETRY_SCRIPT = r"""
     const length = path.getTotalLength();
     const origins = [path.getPointAtLength(0), path.getPointAtLength(length)];
     for (const label of group.querySelectorAll("text")) {
+      if (label.getAttribute("text-anchor") === "middle") continue;
       const box = label.getBBox();
       const distances = origins.map(origin => distanceToBox(origin, box));
       if (Math.min(...distances) > ex * 6) continue;

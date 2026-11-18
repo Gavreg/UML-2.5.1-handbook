@@ -16,7 +16,7 @@
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
   .attribute, .operation { font-size: 14px; }
-  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -189,7 +189,7 @@
 <text class="association-end" x="940" y="910" text-anchor="end"><title>Пространство имён, выполняющее импорт.</title>+ importingNamespace</text>
 <text class="association-label" x="432" y="722">{subsets directedRelationship, ownedElement}</text>
 <text class="association-label" x="432" y="747">*</text>
-<text class="association-label" x="940" y="865" text-anchor="end">{subsets source, owner}</text>
+<text class="association-label" x="940" y="870" text-anchor="end">{subsets source, owner}</text>
 <text class="association-label" x="940" y="949" text-anchor="end">1</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-importedpackage-packageimport" target="_top" aria-label="Открыть описание ассоциации A_importedPackage_packageImport">

@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.tmp-*/
+.diagram-contact-sheet.png
+.uml-*.png
+.DS_Store
+Thumbs.db

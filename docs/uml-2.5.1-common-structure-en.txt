@@ -1,0 +1,2605 @@
+
+
+===== PRINTED PAGE 21 / PDF PAGE 63 =====
+
+7
+Common Structure
+7.1
+Summary
+This clause specifies the basic modeling concepts underlying all structural modeling in UML. Many of the metaclasses 
+defined here are abstract, providing the base for specialized, concrete classes defined in subsequent clauses. However, 
+in order to provide examples of how these basic concepts are applied in UML, it is necessary to use these concrete 
+modeling constructs, even though they are specified in later clauses. Appropriate forward references are provided as 
+necessary.
+7.2
+Root
+7.2.1
+Summary
+The root concepts of Element and Relationship provide the basis for all other modeling concepts in UML.
+7.2.2
+Abstract Syntax
+Relationship
+Element
+DirectedRelationship
+Comment
++ body : String [0..1]
+*
++ /directedRelationship
+1..*
++ /source
+{readOnly, union, subsets relationship}
+{readOnly, union, subsets
+relatedElement}
+*
++ /directedRelationship
+1..*
++ /target
+{readOnly, union, subsets relationship}
+{readOnly, union, subsets
+relatedElement}
+*
++ comment
+*
++ annotatedElement
+0..1
++ /owner
+*
++ /ownedElement
+{readOnly, union}
+{readOnly, union}
+*
++ /relationship
+1..*
++ /relatedElement
+{readOnly, union}
+{readOnly, union}
+0..1
++ owningElement
+*
++ ownedComment
+{subsets owner}
+{subsets ownedElement}
+Figure 7.1  Root
+Unified Modeling Language 2.5.1
+21
+
+
+===== PRINTED PAGE 22 / PDF PAGE 64 =====
+
+7.2.3
+Semantics
+7.2.3.1
+Elements
+An Element is a constituent of a model. Descendants of Element provide semantics appropriate to the concept they 
+represent.
+Every Element has the inherent capability of owning other Elements. When an Element is removed from a model, all its
+ownedElements are also necessarily removed from the model. The abstract syntax for each kind of Element specifies 
+what other kind of Elements it may own. Every Element in a model must be owned by exactly one other Element of that
+model, with the exception of the top-level Packages of the model (see also Clause 12 on Packages).
+7.2.3.2
+Comments
+Every kind of Element may own Comments. The ownedComments for an Element add no semantics but may represent 
+information useful to the reader of the model.
+7.2.3.3
+Relationships
+A Relationship is an Element that specifies some kind of relationship between other Elements. Descendants of 
+Relationship provide semantics appropriate to the concept they represent.
+A DirectedRelationship represents a Relationship between a collection of source model elements and a collection of 
+target model elements. A DirectedRelationship is said to be directed from the source elements to the target elements.
+7.2.4
+Notation
+There is no general notation for Element, Relationships, and DirectedRelationships. The descendants of these classes 
+define their own notation. For Relationships, in most cases the notation is a variation on a line drawn between the 
+relatedElements. For DirectedRelationships, the line is usually directed in some way from the source(s) to the target(s).
+A Comment is shown as a rectangle with the upper right corner bent (this is also known as a “note symbol”). The 
+rectangle contains the body of the Comment. The connection to each annotatedElement is shown by a separate dashed 
+line. The dashed line connecting the note symbol to the annotatedElement(s) may be suppressed if it is clear from the 
+context, or not important in this diagram.
+7.2.5
+Examples
+Figure 7.2  Comment notation
+7.3
+Templates
+7.3.1
+Summary
+Templates are model Elements that are parameterized by other model Elements. This sub clause specifies the general 
+concepts applicable to all kinds of templates. Further details of specific kinds of templates allowed in UML are 
+discussed in later sub clauses, including Classifier templates (see sub clause 9.3), Operation templates (see sub clause 
+9.6) and Package templates (see sub clause 12.2).
+22
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 23 / PDF PAGE 65 =====
+
+7.3.2
+Abstract Syntax
+TemplateParameter
+TemplateSignature
+TemplateableElement
+ParameterableElement
+Element
+Element
+*
++ templateSignature
+1..*
++ parameter
+{ordered}
+1
++ signature
+*
++ ownedParameter
+{subsets templateSignature,
+subsets owner}
+{ordered, subsets ownedElement,
+subsets parameter}
+1
++ template
+0..1
++ ownedTemplateSignature
+{subsets owner}
+{subsets ownedElement}
+0..1
++ owningTemplateParameter
+0..1
++ ownedParameteredElement
+{subsets templateParameter,
+subsets owner}
+{subsets ownedElement,
+subsets parameteredElement}
+0..1
++ templateParameter
+1
++ parameteredElement
+0..1
++ templateParameter
+0..1
++ ownedDefault
+{subsets owner, redefines
+templateParameter}
+{subsets ownedElement,
+subsets default}
+*
++ templateParameter
+0..1
++ default
+Figure 7.3  Templates
+TemplateParameterSubstitution
+TemplateParameter
+ParameterableElement
+TemplateBinding
+TemplateableElement
+TemplateSignature
+Element
+DirectedRelationship
+*
++ templateParameterSubstitution
+1
++ formal
+*
++ owningTemplateParameterSubstitution
+0..1
++ ownedActual
+{subsets owner, redefines
+templateParameterSubstitution}
+{subsets ownedElement,
+subsets actual}
+*
++ templateParameterSubstitution
+1
++ actual
+1
++ templateBinding
+*
++ parameterSubstitution
+{subsets owner}
+{subsets ownedElement}
+1
++ boundElement
+*
++ templateBinding
+{subsets source,
+subsets owner}
+{subsets ownedElement, subsets
+directedRelationship}
+*
++ templateBinding
+1
++ signature
+{subsets directedRelationship}
+{subsets target}
+Figure 7.4  Template bindings
+Unified Modeling Language 2.5.1
+23
+
+
+===== PRINTED PAGE 24 / PDF PAGE 66 =====
+
+7.3.3
+Semantics
+7.3.3.1
+Templates
+A TemplateableElement is an Element that can optionally be defined as a template and bound to other templates. A 
+template is a TemplateableElement that is parameterized using a TemplateSignature. Such a template can be used to 
+generate other model Elements using TemplateBinding relationships.
+A template cannot be used in the same manner as a non-template Element of the same kind (e.g., a template Class 
+cannot be used as the type of a TypedElement). The template Element can only be used to generate bound Elements or 
+as part of the specification of another template (e.g., a template Class may specialize another template Class).
+The TemplateSignature of a template defines a set of TemplateParameters that may be bound to actual model Elements 
+in a bound element for the template. A bound element is a TemplateableElement that has one or more such 
+TemplateBindings.
+A completely bound element is a bound element all of whose TemplateBindings bind all the TemplateParameter of the 
+template being bound. A completely bound element is an ordinary element and can be used in the same manner as a 
+non-bound (and non-template) element of the same kind. For example, a completely bound element of a Class template 
+may be used as the type of a Typed Element.
+A partially bound element is a bound element at least one of whose TemplateBindings does not bind a 
+TemplateParameter of the template being bound. A partially bound element is still considered to be a template, 
+parameterized by the remaining TemplateParameters left unbound by its TemplateBindings.
+7.3.3.2
+Template Signatures
+The TemplateParameters for a TemplateSignature specify the formal parameters that will be substituted by actual 
+parameters (or the default) in a binding. A TemplateParameter is defined in terms of a ParameterableElement contained 
+within the template that owns the TemplateSignature of which the TemplateParameter is a part. Such an element is said 
+to be exposed by the TemplateParameter.
+An exposed ParameterableElement may be owned, directly or indirectly, by the template or it may be owned by the 
+TemplateParameter itself, in situations in which the element does not otherwise have an ownership association within 
+the template model. In either case, the ParameterableElement is meaningful only within the context of the template—it 
+will be effectively replaced by an actual Element in the context of a binding. Thus, a ParameterableElement exposed by 
+a TemplateParameter cannot be referenced outside its owning template or other templates that have access to the 
+internals of the original template (e.g., if the template is specialized). Subclasses of TemplateSignature can also add 
+additional rules that constrain what sort of ParameterableElement can be used for a TemplateParameter in the context of
+a particular kind of template.
+A TemplateParameter may also reference a ParameterableElement as the default for this formal parameter in any 
+TemplateBinding that does not provide an explicit TemplateParameterSubstitution for the parameter. Similarly to an 
+exposed ParameterableElement, a default ParameterableElement may be owned either directly by the template or by the
+TemplateParameter itself. The TemplateParameter may own this default ParameterableElement even in situations where 
+the exposed ParameterableElement is not owned by the TemplateParameter.
+7.3.3.3
+Template Bindings
+A TemplateBinding is a relationship between a TemplateableElement and a template that specifies the substitutions of 
+actual ParameterableElements for the formal TemplateParameters of the template. A TemplateParameterSubstitution 
+specifies the actual parameter to be substituted for a formal TemplateParameter within the context of a TemplateBinding. 
+If no actual parameter is specified in this binding for a formal parameter, then the default ParameterableElement for that 
+formal TemplateParameter (if specified) is used.
+A bound element may have multiple bindings, possibly to the same template. In addition, the bound element may 
+contain elements other than the bindings. The details of how the expansions of multiple bindings, and any other 
+Elements owned by the bound element, are combined together to fully specify the bound element are specific to the 
+subclasses of TemplateableElement. The general principle is that one evaluates the bindings in isolation to produce 
+24
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 25 / PDF PAGE 67 =====
+
+intermediate results (one for each binding), which are then merged to produce the final result. It is the way the merging 
+is done that is specific to each kind of TemplateableElement.
+A TemplateableElement may contain both a TemplateSignature and TemplateBindings. Thus a TemplateableElement 
+may be both a template and a bound element.
+A conforming tool may require that all formal TemplateParameters must be bound as part of a TemplateBinding 
+(complete binding) or may allow just a subset of the formal TemplateParameters to be bound (partial binding). In the 
+case of complete binding, the bound element may have its own TemplateSignature, and the TemplateParameters from 
+this can be provided as actual parameters of the TemplateBinding. In the case of partial binding, the unbound formal 
+TemplateParameters act as formal TemplateParameters of the bound element, which is thus still a template.
+NOTE. A TemplateParameter with a default can never be unbound, as it has an implicit binding to the default, even if an 
+explicit TemplateParameterSubstitution is not given for it.
+7.3.3.4
+Bound Element Semantics
+ATemplateBinding implies that the bound element has the same well-formedness constraints and semantics as if the 
+contents of the template owning the target TemplateSignature were copied into the bound element, substituting any 
+ParameterableElements exposed as formal TemplateParameters by the corresponding ParameterableElements specified 
+as actual template parameters in the TemplateBinding. However, a bound element does not explicitly contain the model 
+Elements implied by expanding the templates to which it binds. Nevertheless, it is possible to define an expanded 
+bound element that results from actually applying the TemplateParameterSubstitution for a bound element to the target 
+templates.
+Formally, an expanded bound element for a bound element with a single TemplateBinding and no Elements other than 
+from that binding is constructed as follows:
+1
+Copy the template associated with the TemplateSignature that is the target of the TemplateBinding. For the 
+present purposes, a copy of a model Element is an instance of the same metaclass as the original model 
+Element, with:
+a
+Values for all composite properties (owned attributes and owned association ends) that are copies (in 
+the same sense) of the corresponding values from the original Element.
+b
+Values for all non-composite properties that are the same as the corresponding values from the 
+original Element, except that references to Elements owned (directly or indirectly) by the original 
+Element are replaced with references to the copies of those Elements created as specified above and 
+references to the original Element itself are replaced by references to the copy.
+2
+If the copy specializes any Elements that are templates, then redirect the Generalization relationships to 
+equivalent bound elements for the general elements, using the same TemplateBinding. If the copy is an 
+Operation that has an associated method that is also a template, then replace that method with an equivalent 
+bound element using the same template binding.
+NOTE. It is necessary for the method of a template Operation to also be a template, presumably with 
+TemplateParameters corresponding to those of the Operation. In particular, Operation TemplateParameters are 
+typically used to parameterize the types of Operation Parameters, but the method of an Operation does not 
+directly reference the Parameters of the Operation that specifies it. Rather, the method has its own 
+ownedParameter list, which should match that of the Operation (see sub clause 13.2). The types of the method 
+Parameters thus need to be separately templated to match the template parameterization of the Operation.
+3
+For each Element owned directly or indirectly by the copy, replace any reference to the parameteredElement of
+a TemplateParameter of the copy with a reference to the actual Element associated with the parameter in the 
+TemplateBinding. If an actual Element has a TemplateBinding itself, then reference the equivalent bound 
+element.
+4
+Remove all TemplateParameters that are referenced in the TemplateBinding from the TemplateSignature of the 
+copy. If this would remove all TemplateParameters from the TemplateSignature, then remove the 
+TemplateSignature entirely.
+Unified Modeling Language 2.5.1
+25
+
+
+===== PRINTED PAGE 26 / PDF PAGE 68 =====
+
+If a bound element has more than one TemplateBinding, then a specific expanded bound element can be defined based 
+on each TemplateBinding. The overall expanded bound element is then constructed by merging all the 
+TemplateBinding-specific expanded bound elements with any other Elements contained by the original bound element. 
+As noted previously, how this merging is performed depends on the kind of TemplateableElement being bound.
+Including a bound element in a model does not automatically require that the corresponding expanded bound element be
+included in the model. However, if the expanded bound element constructed as given above violates any well-
+formedness constraints, then the original bound element is also considered to not be well formed.
+On the other hand, if the bound element is for a Namespace template, then it may be necessary to be able to refer to 
+members of the bound element considered as a Namespace itself. For example, for a bound element of a Class template, 
+it may be necessary to reference Operations of that Class, e.g., from a CallOperationAction.
+NOTE. Referencing the Operation from the template is not sufficient, as each bound element of the template Class is to 
+be considered to have its own effective copy of the Operations of the template.
+In order to accommodate a situation like this, it is allowable to include in a model the expanded bound element for a 
+bound element in addition to the bound element itself. In this case, the expanded bound element must have a realization 
+dependency (see sub clause 7.7) to the bound element that it is expanding. The expanded bound element must be 
+constructed (either manually by the modeler or automatically by a tool) according to the rules given above. References 
+then made as usual from other model elements to visible members of the expanded bound element are considered to be 
+semantically equivalent to effective references made to the corresponding implicit members of the original bound 
+element. Any relationships made directly to the expanded bound element are semantically equivalent to relationships 
+made to the bound element itself.
+7.3.4
+Notation
+If a TemplateableElement has TemplateParameters, a small dashed rectangle is superimposed on the symbol for the 
+TemplateableElement, typically on the upper right-hand corner of the notation (if possible). The dashed rectangle 
+contains a list of the formal TemplateParameters. The parameter list must not be empty, although it may be suppressed 
+in the presentation. Any other compartments in the notation of the TemplateableElement appear as normal.
+The formal TemplateParameter list may be shown as a comma-separated list, or it may be one formal 
+TemplateParameter per line. The general notation for a TemplateParameter is a string displayed within the 
+TemplateParameter list for the template:
+<template-parameter> ::= <template-param-name> [‘:’ <parameter-kind> ] [‘=’ <default>]
+where <parameter-kind> is the name of the metaclass for the exposed element. The syntax of <template-param-name> 
+and <default> depend on the kind of ParameteredElement for this TemplateParameter.
+A bound element has the same graphical notation as other Elements of that kind. A TemplateBinding is shown as a 
+dashed arrow with the tail on the bound element and the arrowhead on the template and the keyword «bind». The 
+binding information may be displayed as a comma-separated list of template parameter substitutions:
+<template-param-substitution> ::= <template-param-name> ‘->’ <actual-template-parameter>
+where the syntax of <template-param-name> is the name or qualifiedName of the parameteredElement of the formal 
+TemplateParameter and the kind of <actual-template-parameter> depends upon the kind of ParameteredElement for 
+that TemplateParameter.
+An alternative presentation for the bindings for a bound element is to include the binding information within the 
+notation for the bound element. The name of the bound element is extended to contain binding expressions with the 
+following syntax:
+[<element-name> ‘:’] <binding-expression> [‘,’ <binding-expression>]*
+<binding-expression> ::= <template-element-name> ‘<‘ <template-param-substitution> [‘,’<template-param-
+substitution]*‘>’
+26
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 27 / PDF PAGE 69 =====
+
+and <template-param-substitution> is defined as above.
+7.4
+Namespaces
+7.4.1
+Summary
+A Namespace is an Element in a model that contains a set of NamedElements that can be identified by name. Packages 
+(see Clause 12) are Namespaces whose specific purpose is to contain other NamedElements in order to organize a 
+model, but many other kinds of model Elements are also Namespaces, including Classifiers (see sub clause 9.2), which 
+contain named Features and nested Classifiers, and BehavioralFeatures (see sub clause 9.4), which contain named 
+Parameters.
+7.4.2
+Abstract Syntax
+Element
+ElementImport
++ alias : String [0..1]
++ visibility : VisibilityKind = public
+NamedElement
++ name : String [0..1]
++ /qualifiedName : String [0..1] {readOnly}
++ visibility : VisibilityKind [0..1]
+Namespace
+PackageableElement
++ visibility : VisibilityKind [0..1] = public {redefines visibility}
+PackageImport
++ visibility : VisibilityKind = public
+DirectedRelationship
+Package
+«enumeration»
+VisibilityKind
+public
+private
+protected
+package
+ParameterableElement
+StringExpression
+Constraint
+*
++ namespace
+*
++ /importedMember
+{subsets memberNamespace}
+{readOnly, subsets member}
+1
++ importingNamespace
+*
++ elementImport
+{subsets source,
+subsets owner}
+{subsets ownedElement, subsets
+directedRelationship}
+1
++ importingNamespace
+*
++ packageImport
+{subsets source,
+subsets owner}
+{subsets ownedElement, subsets
+directedRelationship}
+*
++ import
+1
++ importedElement
+{subsets directedRelationship}
+{subsets target}
+*
++ packageImport
+1
++ importedPackage
+{subsets directedRelationship}
+{subsets target}
+0..1
++ namedElement
+0..1
++ nameExpression
+{subsets owner}
+{subsets ownedElement}
+0..1
++ context
+*
++ ownedRule
+{subsets namespace}
+{subsets ownedMember}
+*
++ /memberNamespace
+*
++ /member
+{readOnly, union}
+{readOnly, union}
+0..1
++ /namespace
+*
++ /ownedMember
+{readOnly, union, subsets
+memberNamespace,
+subsets owner}
+{readOnly, union, subsets member,
+subsets ownedElement}
+Figure 7.5  Namespaces
+7.4.3
+Semantics
+7.4.3.1
+Namespaces
+A Namespace provides a container for NamedElements, which are called its ownedMembers. A Namespace may also 
+import NamedElements from other Namespaces, in which case these, along with the ownedMembers, are members of the 
+importing Namespace. If a member of a Namespace with the name N is a NamedElement with the name x, then the 
+member can be referred to by a qualified name of the form N::x.
+Unified Modeling Language 2.5.1
+27
+
+
+===== PRINTED PAGE 28 / PDF PAGE 70 =====
+
+When a distinction is necessary, a simple name that is not qualified with Namespace names may be referred to as an 
+unqualified name. Within a Namespace, unqualified names may be used to refer to the members of that Namespace and 
+to outer names that are not hidden. An outer name is the name of a NamedElement that may be referenced using an 
+unqualified name in an immediately enclosing Namespace. An outer name is hidden unless it is distinguishable from all 
+members of the inner Namespace. (See the discussion on distinguishability below under “Named Elements”.)
+As a Namespace is itself a NamedElement, the fully qualified name of a NamedElement may include multiple 
+Namespace names, such as N1::N2::x.
+The ownedRule Constraints for a Namespace represent well-formedness rules for the constrained elements (see sub 
+clause 7.6 on Constraints). These constraints are evaluated when determining if the constrained elements are well-
+formed.
+7.4.3.2
+Named Elements
+A NamedElement is an Element in a model that may have a name. The name may be used for identification of the 
+NamedElement within Namespaces where its name is accessible.
+NOTE. The name of a NamedElement is optional, which provides for the possibility of the absence of a name (which is 
+different from the empty name).
+NamedElements may appear within a Namespace according to rules that specify how one NamedElement is 
+distinguishable from another. The default rule is that two members are distinguishable if they have different names or if 
+they have the same names, but their metaclasses are different and neither is a (direct or indirect) subclass of the other. 
+This rule may be overridden for particular cases, such as Operations that are distinguished by their signature (see sub 
+clause 9.6).
+The visibility of a NamedElement provides a means to constrain the usage of the Element, either in Namespaces or in 
+access to the Element. It is intended for use in conjunction with import, generalization, and access mechanisms.
+A NamedElement may, in addition to having an explicit name, be associated with a StringExpression (see sub clause 8.3)
+that may be used to specify a calculated name for the NamedElement. In a template (see sub clause 7.3), a 
+NamedElement may have an associated StringExpression whose subexpressions may be ParameteredElements exposed 
+by TemplateParameters. When the template is bound, the exposed subexpressions are substituted with the actuals 
+substituted for the TemplateParameters. The value of the StringExpression is then a string resulting from concatenating 
+the values of the subexpression, which then provides the name of the NamedElement.
+A NamedElement may have both a name and a nameExpression associated with it. In this case, the name can be used as an
+alias for the NamedElement, which may be used, for example, in referencing the element in a Constraint expression. 
+(This avoids the need to use StringExpressions in textual surface notation, which is often cumbersome, although it does 
+not preclude it.)
+7.4.3.3
+Packageable Elements and Imports
+A PackageableElement is a NamedElement that may be owned directly by a Package (see Clause 12 on Packages). Any 
+such element may serve as a TemplateParameter (see sub clause 7.3 on Templates).
+An ElementImport is a DirectedRelationship between an importing Namespace and a PackageableElement. It adds the 
+name of the PackageableElement to the importing Namespace. The visibility of the ElementImport may be either the 
+same or more restricted than that of the imported element.
+In case of a name clash with an outer name (an element that is defined in an enclosing Namespace that is available using
+its unqualified name in enclosed Namespaces) in the importing Namespace, the outer name is hidden by an 
+ElementImport, and the unqualified name refers to the imported element. The outer name can be accessed using its 
+qualified name.
+A PackageImport is a DirectedRelationship between an importing Namespace and a Package, indicating that the 
+importing Namespace adds the names of the members of the Package to its own Namespace. Conceptually, a Package 
+import is equivalent to having an ElementImport to each individual member of the imported Namespace, unless there is 
+28
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 29 / PDF PAGE 71 =====
+
+a separately-defined ElementImport. If there is an ElementImport for an Element, then this takes precedence over a 
+potential import of the same Element via a PackageImport.
+If indistinguishable Elements would be imported into a Namespace as a consequence of ElementImports or 
+PackageImports, the Elements are not added to the importing Namespace and the names of those Elements must be 
+qualified in order to be used in that Namespace. If the name of an imported Element is indistinguishable from an 
+Element owned by the importing Namespace, that Element is not added to the importing Namespace and the name of 
+that Element must be qualified in order to be used.
+An Element that is publicly imported is a public member of the importing Namespace. This means that, if the 
+Namespace is a Package, a PackageImport of it by another Namespace will result in the further import of those publicly 
+imported members into the other Namespace, in addition to the public ownedMembers of the Package.
+NOTE. A Namespace may not import itself, nor may it import any of its own ownedMembers. This means that it is not 
+possible for a NamedElement to acquire an alias in its owning Namespace.
+7.4.4
+Notation
+7.4.4.1
+Namespaces
+There is no general notation for Namespaces. Specific kinds of Namespace have their own specific notation.
+Conforming tools may optionally allow the “circle-plus” notation defined in sub clause 12.2.4 to show Package 
+membership to also be used to show membership in other kinds of Namespaces (for example, to show nestedClassifiers 
+and ownedBehaviors of Classes).
+7.4.4.2
+Name Expressions
+The nameExpression associated with a NamedElement can be shown in two ways, depending on whether an alias is 
+required or not. Both notations are illustrated in Figure 7.6.
+
+No alias: The StringExpression appears as the name of the model Element.
+
+With alias: Both the StringExpression and the alias are shown wherever the name usually appears. The alias is 
+given first and the StringExpression underneath.
+In both cases the StringExpression appears between “$” signs. The specification of Expressions in UML supports the 
+use of alternative string expression languages in the abstract syntax—they have to have String as their type and can be 
+some structure of operator Expressions with operands. The notation for this is discussed in sub clause 8.3 on Expressions.
+In the context of templates, subexpressions of a StringExpression (usually LiteralStrings) that are parametered in a 
+template are shown between angle brackets.
+7.4.4.3
+Imports
+A PackageImport or ElementImport is shown using a dashed arrow with an open arrowhead from the importing 
+Namespace to the imported Package or Element. The keyword «import» is shown near the dashed arrow if the visibility 
+is public; otherwise, the keyword «access» is shown to indicate private visibility. The alias may be shown after or below 
+the keyword «import». If the imported element for an ElementImport is a Package, the keyword may optionally be 
+preceded by “element”, i.e., «element import».
+As an alternative to the dashed arrow, it is possible to show a PackageImport or ElementImport by having a text that 
+uniquely identifies the imported Package or Element within curly brackets either below or after the name of the 
+Namespace. The textual syntax for a PackageImport is:
+‘{import ’ <qualified-name> ‘}’ | ‘{access ’ <qualified-name> ‘}’
+The textual syntax for an ElementImport is:
+ ‘{element import’ <qualified-name> ‘}’ | ‘{element access ’ <qualified-name> ‘}’
+Unified Modeling Language 2.5.1
+29
+
+
+===== PRINTED PAGE 30 / PDF PAGE 72 =====
+
+Optionally, the alias, if any, may be shown as well:
+‘{element import ’ <qualified-name> ‘ as ’ <alias> ‘}’ | ‘{element access ’ <qualified-name> ‘as’ <alias> ‘}’
+7.4.5
+ Examples
+7.4.5.1
+Name Expressions
+Figure 7.6 shows a ResourceAllocation Package template where the first two formal TemplateParameters are 
+StringExpression parameters. These formal TemplateParameters are used within the Package template to name some of 
+the Classes and Association ends. The figure also shows a bound Package (named TrainingAdmin) that has two 
+bindings to this ResourceAllocation template. The first binding substitutes the string “Instructor” for Resource, the 
+string “Qualification” for ResourceKind, and the Class TrainingAdminSystem for System. The second binding 
+substitutes the string “Facility” for Resource, the string “FacilitySpecification” for ResourceKind, and the Class 
+TrainingAdminSystem is again substituted for System.
+The result of the binding includes Classes Instructor, Qualification, and InstructorAllocation as well as Classes Facility, 
+FacilitySpecification, and FacilityAllocation. The associations are similarly replicated.
+NOTE. Request will have two attributes derived from the single “the<ResourceKind>” attribute (shown here by an 
+arrow), namely theQualification and theFacilitySpecification.
+30
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 31 / PDF PAGE 73 =====
+
+ResourceAllocation
+Resource: StringExpression, 
+ResourceKind: StringExpression,  
+System
+$<Resource>$
+Allocation 
+$<Resource>Allocation$
+$<ResourceKind>$
+Request
+TimeSlot
+System
+*
+allocation 
+$a<Resource>Allocation$
+$a<Resource>$
+*
+1
+resource
+request
+1
+*
+request
+*
+$a<ResourceKind>$
+1
+$the<ResourceKind>$
+1
+timeSlot
+1
+*
+resource
+kind
+TrainingAdmin
+«bind» 
+Resource -> "Instructor", 
+ResourceKind -> "Qualification", 
+System -> TrainingAdminSystem
+«bind» 
+Resource -> "Facility", 
+ResourceKind -> "FacilitySpecification", 
+System -> TrainingAdminSystem
+Figure 7.6  Template package with string parameters
+7.4.5.2
+Imports
+The ElementImport shown in Figure 7.7 allows Elements in the Package Program to refer by name to the DataType 
+Time in Types without qualification. However, they still need to refer explicitly to Types::Integer, as this Element is not 
+imported. The DataType String is imported into the Program Package but it is not publicly visible as a member of 
+Program outside of that Package, and it cannot be further imported from the Program Package by other Namespaces.
+Figure 7.7  Example of element import
+Unified Modeling Language 2.5.1
+31
+
+
+===== PRINTED PAGE 32 / PDF PAGE 74 =====
+
+In Figure 7.8, the ElementImport is combined with aliasing, meaning that the DataType Types::Real will be referred to 
+by name as Double in the package Shapes.
+Figure 7.8  Example of element import with aliasing
+In Figure 7.9, a number of PackageImports are shown. The public members of Types are imported into ShoppingCart 
+and then further imported into WebShop. However, the members of Auxiliary are only privately imported by 
+ShoppingCart and cannot be referenced using unqualified names from WebShop.
+Figure 7.9  Examples of public and private package imports
+7.5
+Types and Multiplicity
+7.5.1
+Summary
+Types and multiplicity are used in the declaration of Elements that contain values, in order to constrain the kind and 
+number of values that may be contained.
+32
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 33 / PDF PAGE 75 =====
+
+7.5.2
+Abstract Syntax
+Element
+MultiplicityElement
++ isOrdered : Boolean = false
++ isUnique : Boolean = true
++ /lower : Integer
++ /upper : UnlimitedNatural
+Type
+TypedElement
+ValueSpecification
+NamedElement
+PackageableElement
+0..1
++ owningLower
+0..1
++ lowerValue
+{subsets owner}
+{subsets ownedElement}
+0..1
++ owningUpper
+0..1
++ upperValue
+{subsets owner}
+{subsets ownedElement}
+*
++ typedElement
+0..1
++ type
+Figure 7.10  Abstract syntax of types and multiplicity elements
+7.5.3
+Semantics
+7.5.3.1
+Types and Typed Elements
+A Type specifies a set of allowed values known as the instances of the Type. Depending on the kind of Type, instances 
+of the Type may be created or destroyed over time. However, the rules for what constitutes an instance of the Type 
+remain fixed by the definition of that Type. All Types in UML are Classifiers (see Clause 9).
+A TypedElement is a NamedElement that, in some way, represents particular values. Depending on the kind of 
+TypedElement, the actual values that it represents may change over time. Examples of kinds of TypedElement include 
+ValueSpecification, which directly specifies a collection of values (see Clause 8), and StructuralFeature, which 
+represents values held as part of the structure of the instances of the Classifier that owns it (see sub clause 9.4).
+If a TypedElement has an associated Type, then any value represented by the TypedElement (at any point in time) shall 
+be an instance of the given Type. A TypeElement with no associated Type may represent any value.
+7.5.3.2
+Multiplicities
+A MultiplicityElement is an Element that may be instantiated in some way to represent a collection of values. 
+Depending on the kind of MultiplicityElement, the values in the collection may change over time. Examples of kinds of 
+MultiplicityElement include StructuralFeature, which has values in the context of an instance of the Classifier that owns
+it (see sub clause 9.4) and Variable, which has values in the context of the execution of an Activity (see sub clause 15.2).
+The cardinality of a collection is the number of values contained in that collection. The multiplicity of a 
+MultiplicityElement specifies valid cardinalities of the collection it represents. The multiplicity is a constraint on the 
+cardinality, which shall not be less than the lower bound and not greater than the upper bound specified for the 
+multiplicity (unless the multiplicity is unlimited, in which case there is no constraint on the upper bound).
+The lower and upper bounds for the multiplicity of a MultiplicityElement are specified by ValueSpecifications (see 
+Clause 8), which must evaluate to an Integer value for the lowerBound and an UnlimitedNatural value for the 
+Unified Modeling Language 2.5.1
+33
+
+
+===== PRINTED PAGE 34 / PDF PAGE 76 =====
+
+upperBound (see Clause 21 on Primitive Types). A MultiplicityElement is unlimited if its upperBound has the 
+UnlimitedNatural value of unlimited (“*”). A MultiplicityElement is multivalued if it has an upperBound greater than 1 
+(including unbounded). A MultiplicityElement that is not multivalued can represent at most a single value.
+A MultiplicityElement can define a multiplicity both of whose bounds are zero. This restricts the allowed cardinality to 
+be 0; that is, it requires that an instantiation of this element contain no values. This is useful in the context of 
+Generalizations (see sub clause 9.2) to constrain the cardinalities of a more general Classifier. It applies to (but is not 
+limited to) redefining properties existing in more general Classifiers.
+If the MultiplicityElement is specified as ordered (i.e., isOrdered is true), then the collection of values in an instantiation 
+of this Element is ordered. This ordering implies that there is a mapping from positive integers to the elements of the 
+collection of values. If a MultiplicityElement is not multivalued, then the value for isOrdered has no semantic effect.
+If the MultiplicityElement is specified as unordered (i.e., isOrdered is false), then no assumptions can be made about the 
+order of the values in an instantiation of this Element.
+If the MultiplicityElement is specified as unique (i.e., isUnique is true), then the collection of values in an instantiation of
+this Element must be unique. That is, no two values in the collection may be equal, where equality of objects (instances 
+of Classes) is based on object identity while equality of data values (instances of DataTypes) and Signal instances is 
+based on value (see also sub clauses 10.2, 10.3, and 11.4 on DataTypes, Signals and Classes, respectively ). If a 
+MultiplicityElement is not multivalued, then the value for isUnique has no semantic effect.
+Taken together, the isOrdered and isUnique properties can be used to specify that the collection of values in an 
+instantiation of a MultiplicityElement is of one of four types. Table 7.1shows the traditional names given to each of 
+these collection types.
+Table 7.1  Collection types for MultiplicityElements
+isOrdered
+isUnique
+Collection Type
+false
+true
+Set
+true
+true
+OrderedSet
+false
+false
+Bag
+true
+false
+Sequence
+7.5.4
+Notation
+7.5.4.1
+Multiplicity Element
+The specific notation for a MultiplicityElement is defined for each concrete kind of MultiplicityElement. In general, the 
+notation will include a multiplicity specification, which is shown as a text string containing the bounds of the 
+multiplicity and a notation for showing the optional ordering and uniqueness specifications.
+The multiplicity bounds may be shown in the format:
+<lower-bound> ‘..’ <upper-bound>
+where <lower-bound> is a ValueSpecification of type Integer and <upper-bound> is a ValueSpecification of type 
+UnlimitedNatural. The star character (*) is used as part of a multiplicity specification to represent an unlimited upper 
+bound.
+If the multiplicity is associated with a MultiplicityElement whose notation is a text string (such as an attribute), the 
+multiplicity string is placed within square brackets ([ ]) as part of that text string.
+If the multiplicity is associated with a MultiplicityElement that appears as a symbol (such as an Association end), the 
+multiplicity string is displayed without square brackets and may be placed near the symbol for the element.
+34
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 35 / PDF PAGE 77 =====
+
+If the lower bound is equal to the upper bound, then an alternate notation is to use a string containing just the upper 
+bound. For example, “1” is semantically equivalent to “1..1” multiplicity. A multiplicity with zero as the lower bound 
+and an unspecified upper bound may use the alternative notation containing a single star “*” instead of “0..*” 
+multiplicity.
+The specific notation for the ordering and uniqueness specifications may vary depending on the specific kind of 
+MultiplicityElement. A general notation is to use a textual annotation containing “ordered” or “unordered” to define the 
+ordering, and “unique” or “nonunique” to define the uniqueness.
+The following BNF defines the general syntax for a multiplicity string, including support order and uniqueness 
+designators:
+<multiplicity> ::= <multiplicity-range> [ [ ‘{‘ <order-designator> [‘,’ <uniqueness-designator> ] ‘}’ ] | 
+[ ‘{‘ <uniqueness-designator> [‘,’ <order-designator> ] ‘}’ ] ]
+<multiplicity-range> ::= [ <lower> ‘..’ ] <upper>
+<lower> ::= <value-specification>
+<upper> ::= <value-specification>
+<order-designator> ::= ‘ordered’ | ‘unordered’
+<uniqueness-designator> ::= ‘unique’ | ‘nonunique’
+See also Clause 8 on the textual notation for ValueSpecifications.
+7.5.5
+Examples
+Figure 7.11 shows two multiplicity strings as part of attribute specifications within a class symbol.
+Figure 7.11  Multiplicity within a textual specification
+Figure 7.12 shows two multiplicity strings as part of the specification of two association ends.
+Figure 7.12  Multiplicity as an adornment to a symbol
+7.6
+Constraints
+7.6.1
+Summary
+A Constraint is an assertion that indicates a restriction that must be satisfied by any valid realization of the model 
+containing the Constraint. A Constraint is attached to a set of constrainedElements, and it represents additional semantic 
+information about those Elements.
+Unified Modeling Language 2.5.1
+35
+
+
+===== PRINTED PAGE 36 / PDF PAGE 78 =====
+
+7.6.2
+Abstract Syntax
+Constraint
+ValueSpecification
+PackageableElement
+Element
+Namespace
+0..1
++ owningConstraint
+1
++ specification
+{subsets owner}
+{subsets ownedElement}
+*
++ constraint
+*
++ constrainedElement
+{ordered}
+0..1
++ context
+*
++ ownedRule
+{subsets namespace}
+{subsets ownedMember}
+Figure 7.13  Abstract Syntax of Constraints
+7.6.3
+Semantics
+The specification of a Constraint is given by a ValueSpecification (see Clause 8) of type Boolean. The computation of 
+the specification may reference the constrainedElements of the Constraint and also the context of the Constraint. 
+In general there are many possible kinds of context for a Constraint.  The context of the Constraint determines when the 
+Constraint specification is evaluated. For example, a Constraint that is a precondition of an Operation is evaluated at the 
+start of the invocation of the Operation, while a Constraint that is a postcondition is evaluated at the conclusion of the 
+invocation (see sub clause 9.6 on Operations).
+A Constraint is evaluated by evaluating its specification. If the specification evaluates to true, then the Constraint is 
+satisfied at that time. If the specification evaluates to false, then the Constraint is not satisfied, and the realization of the 
+model in which the evaluation occurs is not valid.
+7.6.4
+Notation
+Certain kinds of Constraints are predefined in UML, others may be user-defined. The specification of a user-defined 
+Constraint is often expressed as a text string in some language, whose syntax and interpretation is as defined by that 
+language. In some situations, a formal language (such as OCL) or a programming language (such as Java) may be 
+appropriate, in other situations natural language may be used. Such a specification may be represented as an 
+OpaqueExpression with the appropriate language and body (see sub clause 8.3). The Constraint may then be notated 
+textually within braces ({}) according to the following BNF:
+<constraint> ::= ‘{‘ [ <name> ‘:’ ] <boolean-expression> ‘ }’
+where <name> is the name of the Constraint and <boolean-expression> is the appropriate textual notation for the 
+Constraint specification.
+Most generally, the constraint string is placed in a note symbol and attached to each of the symbols for the 
+constrainedElements by dashed lines. (See Figure 7.14 for an example.)
+For a Constraint that applies to a single constrainedElement (such as a single Class or Association), the constraint string 
+may be directly placed near the symbol for the constrainedElement, preferably near the name, if any. A tool shall make it 
+possible to determine the constrainedElement.
+For an Element whose notation is a text string (such as an attribute, etc.), the constraint string may follow the Element 
+text string. The Element so annotated is then the single constrainedElement of the Constraint. (Figure 7.15 shows a 
+Constraint string that follows an attribute within a Class symbol.)
+For a Constraint that applies to two Elements (such as two Classes or two Associations), the Constraint may be shown 
+as a dashed line between the Elements labeled by the constraint string. (See Figure 7.16 for an example.)
+If the Constraint is shown as a dashed line between two Elements, then an arrowhead may be placed on one end. The 
+direction of the arrow is relevant information within the Constraint. The Element at the tail of the arrow is mapped to 
+36
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 37 / PDF PAGE 79 =====
+
+the first position and the element at the head of the arrow is mapped to the second position in the constrainedElement 
+collection.
+For three or more paths of the same kind (such as Generalization paths or Association paths), the constraint string may 
+be attached to a dashed line crossing all of the paths.
+7.6.5
+Examples
+Figure 7.14 shows an example of a Constraint in a note symbol.
+Figure 7.14  Constraint in a note symbol
+Figure 7.15 shows a constraint string attached to an attribute.
+Figure 7.15  Constraint attached to an attribute
+Figure 7.16 shows an {xor} constraint between two associations.
+Figure 7.16  {xor} constraint
+7.7
+Dependencies
+7.7.1
+Summary
+A Dependency signifies a supplier/client relationship between model elements where the modification of a supplier may
+impact the client model elements.
+Unified Modeling Language 2.5.1
+37
+
+
+===== PRINTED PAGE 38 / PDF PAGE 80 =====
+
+7.7.2
+Abstract Syntax
+Abstraction
+Dependency
+Realization
+Usage
+PackageableElement
+DirectedRelationship
+NamedElement
+OpaqueExpression
+1..*
++ client
+*
++ /clientDependency
+{subsets source}
+{subsets directedRelationship}
+*
++ supplierDependency
+1..*
++ supplier
+{subsets directedRelationship}
+{subsets target}
+0..1
++ abstraction
+0..1
++ mapping
+{subsets owner}
+{subsets ownedElement}
+Figure 7.17  Abstract syntax of dependencies
+7.7.3
+Semantics
+7.7.3.1
+Dependency
+A Dependency implies that the semantics of the clients are not complete without the suppliers. The presence of 
+Dependency relationships in a model does not have any runtime semantic implications. The semantics are all given in 
+terms of the NamedElements that participate in the relationship, not in terms of their instances.
+7.7.3.2
+Usage
+A Usage is a Dependency in which one NamedElement requires another NamedElement (or set of NamedElements) for 
+its full implementation or operation. The Usage does not specify how the client uses the supplier other than the fact that 
+the supplier is used by the definition or implementation of the client.
+7.7.3.3
+Abstraction
+An Abstraction is a Dependency that relates two NamedElements or sets of NamedElements that represent the same 
+concept at different levels of abstraction or from different viewpoints. The relationship may be defined as a mapping 
+between the suppliers and the clients. Depending on the specific stereotype of Abstraction, the mapping may be formal or 
+informal, and it may be unidirectional or bidirectional. Abstraction has predefined stereotypes (such as «Derive», 
+«Refine», and «Trace») that are defined in the Standard Profile (see Clause 22). If an Abstraction has more than one 
+client, the supplier maps into the set of clients as a group. For example, an analysis-level Class might be split into several 
+design-level Classes. The situation is similar if there is more than one supplier.
+7.7.3.4
+Realization
+Realization is a specialized Abstraction dependency between two sets of NamedElements, one representing a 
+specification (the supplier) and the other representing an implementation of that specification (the client). Realization can 
+be used to model stepwise refinement, optimizations, transformations, templates, model synthesis, framework 
+composition, etc. A Realization signifies that the set of clients is an implementation of the set of suppliers, which serves 
+38
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 39 / PDF PAGE 81 =====
+
+as the specification. The meaning of “implementation” is not strictly defined, but rather implies a more refined or 
+elaborate form in respect to a certain modeling context. It is possible to specify a mapping between the specification and
+implementation elements, although this is not necessarily computable.
+7.7.4
+Notation
+A Dependency is shown as a dashed arrow between two model Elements. The model Element at the tail of the arrow 
+(the client) depends on the model Element at the arrowhead (the supplier). The arrow may be labeled with an optional 
+keyword or stereotype and an optional name (see Figure 7.18).
+NamedElement-1
+NamedElement-2
+«keywordOrStereotypeName»  
+dependencyName
+Figure 7.18  Notation for a Dependency between two elements
+It is possible to have a set of Elements for the client or supplier. In this case, one or more arrows with their tails on the 
+clients are connected to the tails of one or more arrows with their heads on the suppliers. A small dot can be placed on the 
+junction if desired. A note on the Dependency should be attached at the junction point.
+A Usage is shown as a Dependency with a «use» keyword attached to it.
+An Abstraction is shown as a Dependency with an «abstraction» keyword or the specific predefined stereotype attached 
+to it.
+A Realization is shown as a dashed line with a triangular arrowhead at the end that corresponds to the realized Element.
+7.7.5
+Examples
+In Figure 7.19, the CarFactory Class has a Dependency on the Car Class. In this case, the Dependency is a Usage with 
+the standard stereotype «Instantiate» applied, indicating that an instance of the CarFactory Class creates instances of the
+Car Class.
+CarFactory
+Car
+«Instantiate» 
+Figure 7.19  An example of an «Instantiate» Dependency
+In Figure 7.20, an Order Class requires the Line Item Class for its full implementation.
+Figure 7.20  An example of a «use» Dependency
+Figure 7.21 illustrates an example in which the Business class is realized by a combination of Owner and Employee 
+classes.
+Unified Modeling Language 2.5.1
+39
+
+
+===== PRINTED PAGE 40 / PDF PAGE 82 =====
+
+Figure 7.21  An example of a realization Dependency
+7.8
+Classifier Descriptions
+7.8.1
+Abstraction [Class]
+7.8.1.1
+Description
+An Abstraction is a Relationship that relates two Elements or sets of Elements that represent the same concept at 
+different levels of abstraction or from different viewpoints.
+7.8.1.2
+Diagrams
+Dependencies, Artifacts
+7.8.1.3
+Generalizations
+Dependency
+7.8.1.4
+Specializations
+Realization, Manifestation
+7.8.1.5
+Association Ends
+
+♦ mapping : OpaqueExpression [0..1]{subsets Element::ownedElement} (opposite 
+A_mapping_abstraction::abstraction)
+An OpaqueExpression that states the abstraction relationship between the supplier(s) and the client(s). In some 
+cases, such as derivation, it is usually formal and unidirectional; in other cases, such as trace, it is usually 
+informal and bidirectional. The mapping expression is optional and may be omitted if the precise relationship 
+between the Elements is not specified.
+7.8.2
+Comment [Class]
+7.8.2.1
+Description
+A Comment is a textual annotation that can be attached to a set of Elements.
+7.8.2.2
+Diagrams
+Root
+7.8.2.3
+Generalizations
+Element
+40
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 41 / PDF PAGE 83 =====
+
+7.8.2.4
+Attributes
+
+body : String [0..1]
+Specifies a string that is the comment.
+7.8.2.5
+Association Ends
+
+annotatedElement : Element [0..*] (opposite A_annotatedElement_comment::comment)
+References the Element(s) being commented.
+7.8.3
+Constraint [Class]
+7.8.3.1
+Description
+A Constraint is a condition or restriction expressed in natural language text or in a machine readable language for the 
+purpose of declaring some of the semantics of an Element or set of Elements.
+7.8.3.2
+Diagrams
+Namespaces, Constraints, Intervals, Use Cases, Behavior State Machines, Protocol State Machines, 
+Interactions, Fragments, Behaviors, Features, Operations, Actions
+7.8.3.3
+Generalizations
+PackageableElement
+7.8.3.4
+Specializations
+IntervalConstraint, InteractionConstraint
+7.8.3.5
+Association Ends
+
+constrainedElement : Element [0..*]{ordered} (opposite A_constrainedElement_constraint::constraint)
+The ordered set of Elements referenced by this Constraint.
+
+context : Namespace [0..1]{subsets NamedElement::namespace} (opposite Namespace::ownedRule)
+Specifies the Namespace that owns the Constraint.
+
+♦ specification : ValueSpecification [1..1]{subsets Element::ownedElement} (opposite 
+A_specification_owningConstraint::owningConstraint)
+A condition that must be true when evaluated in order for the Constraint to be satisfied.
+7.8.3.6
+Constraints
+
+boolean_value
+The ValueSpecification for a Constraint must evaluate to a Boolean value.
+Cannot be expressed in OCL
+
+no_side_effects
+Evaluating the ValueSpecification for a Constraint must not have side effects.
+Cannot be expressed in OCL
+Unified Modeling Language 2.5.1
+41
+
+
+===== PRINTED PAGE 42 / PDF PAGE 84 =====
+
+
+not_apply_to_self
+A Constraint cannot be applied to itself.
+inv: not constrainedElement->includes(self)
+7.8.4
+Dependency [Class]
+7.8.4.1
+Description
+A Dependency is a Relationship that signifies that a single model Element or a set of model Elements requires other 
+model Elements for their specification or implementation. This means that the complete semantics of the client 
+Element(s) are either semantically or structurally dependent on the definition of the supplier Element(s).
+7.8.4.2
+Diagrams
+Dependencies, Collaborations, Deployments
+7.8.4.3
+Generalizations
+DirectedRelationship, PackageableElement
+7.8.4.4
+Specializations
+Abstraction, Usage, Deployment
+7.8.4.5
+Association Ends
+
+client : NamedElement [1..*]{subsets DirectedRelationship::source} (opposite 
+NamedElement::clientDependency)
+The Element(s) dependent on the supplier Element(s). In some cases (such as a trace Abstraction) the 
+assignment of direction (that is, the designation of the client Element) is at the discretion of the modeler and is 
+a stipulation.
+
+supplier : NamedElement [1..*]{subsets DirectedRelationship::target} (opposite 
+A_supplier_supplierDependency::supplierDependency)
+The Element(s) on which the client Element(s) depend in some respect. The modeler may stipulate a sense of 
+Dependency direction suitable for their domain.
+7.8.5
+DirectedRelationship [Abstract Class]
+7.8.5.1
+Description
+A DirectedRelationship represents a relationship between a collection of source model Elements and a collection of 
+target model Elements.
+7.8.5.2
+Diagrams
+Root, Template Bindings, Namespaces, Dependencies, Use Cases, Packages, Profiles, Information Flows, 
+Classifiers
+7.8.5.3
+Generalizations
+Relationship
+42
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 43 / PDF PAGE 85 =====
+
+7.8.5.4
+Specializations
+Dependency, ElementImport, PackageImport, TemplateBinding, Extend, Include, ProtocolConformance, 
+PackageMerge, ProfileApplication, InformationFlow, Generalization
+7.8.5.5
+Association Ends
+
+/source : Element [1..*]{union, subsets Relationship::relatedElement} (opposite 
+A_source_directedRelationship::directedRelationship)
+Specifies the source Element(s) of the DirectedRelationship.
+
+/target : Element [1..*]{union, subsets Relationship::relatedElement} (opposite 
+A_target_directedRelationship::directedRelationship)
+Specifies the target Element(s) of the DirectedRelationship.
+7.8.6
+Element [Abstract Class]
+7.8.6.1
+Description
+An Element is a constituent of a model. As such, it has the capability of owning other Elements.
+7.8.6.2
+Diagrams
+Root, Template Bindings, Templates, Namespaces, Types, Constraints, Activity Groups, Executable Nodes, 
+Profiles, Instances, Link End Data, Structured Actions
+7.8.6.3
+Specializations
+Comment, MultiplicityElement, NamedElement, ParameterableElement, Relationship, TemplateableElement, 
+TemplateParameter, TemplateParameterSubstitution, TemplateSignature, ExceptionHandler, Image, Slot, 
+Clause, LinkEndData, QualifierValue
+7.8.6.4
+Association Ends
+
+♦ ownedComment : Comment [0..*]{subsets Element::ownedElement} (opposite 
+A_ownedComment_owningElement::owningElement)
+The Comments owned by this Element.
+
+♦ /ownedElement : Element [0..*]{union} (opposite Element::owner)
+The Elements owned by this Element.
+
+/owner : Element [0..1]{union} (opposite Element::ownedElement)
+The Element that owns this Element.
+7.8.6.5
+Operations
+
+allOwnedElements() : Element [0..*]
+The query allOwnedElements() gives all of the direct and indirect ownedElements of an Element.
+body: ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))->asSet()
+
+mustBeOwned() : Boolean
+The query mustBeOwned() indicates whether Elements of this type must have an owner. Subclasses of 
+Element that do not require an owner must override this operation.
+Unified Modeling Language 2.5.1
+43
+
+
+===== PRINTED PAGE 44 / PDF PAGE 86 =====
+
+body: true
+7.8.6.6
+Constraints
+
+has_owner
+Elements that must be owned must have an owner.
+inv: mustBeOwned() implies owner->notEmpty()
+
+not_own_self
+An element may not directly or indirectly own itself.
+inv: not allOwnedElements()->includes(self)
+7.8.7
+ElementImport [Class]
+7.8.7.1
+Description
+An ElementImport identifies a NamedElement in a Namespace other than the one that owns that NamedElement and 
+allows the NamedElement to be referenced using an unqualified name in the Namespace owning the ElementImport.
+7.8.7.2
+Diagrams
+Namespaces, Profiles
+7.8.7.3
+Generalizations
+DirectedRelationship
+7.8.7.4
+Attributes
+
+alias : String [0..1]
+Specifies the name that should be added to the importing Namespace in lieu of the name of the imported 
+PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, 
+no alias is used.
+
+visibility : VisibilityKind [1..1] = public
+Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the 
+importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the 
+importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will
+not.
+7.8.7.5
+Association Ends
+
+importedElement : PackageableElement [1..1]{subsets DirectedRelationship::target} (opposite 
+A_importedElement_import::import)
+Specifies the PackageableElement whose name is to be added to a Namespace.
+
+importingNamespace : Namespace [1..1]{subsets DirectedRelationship::source, subsets Element::owner} 
+(opposite Namespace::elementImport)
+Specifies the Namespace that imports a PackageableElement from another Namespace.
+44
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 45 / PDF PAGE 87 =====
+
+7.8.7.6
+Operations
+
+getName() : String
+The query getName() returns the name under which the imported PackageableElement will be known in the 
+importing namespace.
+body: if alias->notEmpty() then
+  alias
+else
+  importedElement.name
+endif
+7.8.7.7
+Constraints
+
+imported_element_is_public
+An importedElement has either public visibility or no visibility at all.
+inv: importedElement.visibility <> null implies importedElement.visibility = 
+VisibilityKind::public
+
+visibility_public_or_private
+The visibility of an ElementImport is either public or private.
+inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private
+7.8.8
+MultiplicityElement [Abstract Class]
+7.8.8.1
+Description
+A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending 
+with a (possibly infinite) upper bound. A MultiplicityElement embeds this information to specify the allowable 
+cardinalities for an instantiation of the Element.
+7.8.8.2
+Diagrams
+Types, Activities, Structured Classifiers, Features, Actions
+7.8.8.3
+Generalizations
+Element
+7.8.8.4
+Specializations
+Variable, ConnectorEnd, Parameter, StructuralFeature, Pin
+7.8.8.5
+Attributes
+
+isOrdered : Boolean [1..1] = false
+For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this 
+MultiplicityElement are sequentially ordered.
+
+isUnique : Boolean [1..1] = true
+For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this 
+MultiplicityElement are unique.
+
+/lower : Integer [1..1]
+The lower bound of the multiplicity interval.
+Unified Modeling Language 2.5.1
+45
+
+
+===== PRINTED PAGE 46 / PDF PAGE 88 =====
+
+
+/upper : UnlimitedNatural [1..1]
+The upper bound of the multiplicity interval.
+7.8.8.6
+Association Ends
+
+♦ lowerValue : ValueSpecification [0..1]{subsets Element::ownedElement} (opposite 
+A_lowerValue_owningLower::owningLower)
+The specification of the lower bound for this multiplicity.
+
+♦ upperValue : ValueSpecification [0..1]{subsets Element::ownedElement} (opposite 
+A_upperValue_owningUpper::owningUpper)
+The specification of the upper bound for this multiplicity.
+7.8.8.7
+Operations
+
+compatibleWith(other : MultiplicityElement) : Boolean
+The operation compatibleWith takes another multiplicity as input. It returns true if the other multiplicity is 
+wider than, or the same as, self.
+body: (other.lowerBound() <= self.lowerBound()) and ((other.upperBound() = *) or 
+(self.upperBound() <= other.upperBound()))
+
+includesMultiplicity(M : MultiplicityElement) : Boolean
+The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the 
+specified multiplicity.
+pre: self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()-
+>notEmpty() and M.lowerBound()->notEmpty()
+body: (self.lowerBound() <= M.lowerBound()) and (self.upperBound() >= M.upperBound())
+
+is(lowerbound : Integer, upperbound : UnlimitedNatural) : Boolean
+The operation is determines if the upper and lower bound of the ranges are the ones given.
+body: lowerbound = self.lowerBound() and upperbound = self.upperBound()
+
+isMultivalued() : Boolean
+The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.
+pre: upperBound()->notEmpty()
+body: upperBound() > 1
+
+lower() : Integer [0..1]
+The derived lower attribute must equal the lowerBound.
+body: lowerBound()
+
+lowerBound() : Integer [1..1]
+The query lowerBound() returns the lower bound of the multiplicity as an integer, which is the integerValue of 
+lowerValue, if this is given, and 1 otherwise.
+body: if (lowerValue=null or lowerValue.integerValue()=null) then 1 else 
+lowerValue.integerValue() endif
+
+upper() : UnlimitedNatural [0..1]
+The derived upper attribute must equal the upperBound.
+46
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 47 / PDF PAGE 89 =====
+
+body: upperBound()
+
+upperBound() : UnlimitedNatural [1..1]
+The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited 
+natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
+body: if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else 
+upperValue.unlimitedValue() endif
+7.8.8.8
+Constraints
+
+upper_ge_lower
+The upper bound must be greater than or equal to the lower bound.
+inv: upperBound() >= lowerBound()
+
+lower_ge_0
+The lower bound must be a non-negative integer literal.
+inv: lowerBound() >= 0
+
+value_specification_no_side_effects
+If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification 
+must not have side effects.
+Cannot be expressed in OCL
+
+value_specification_constant
+If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a 
+constant expression.
+Cannot be expressed in OCL
+
+lower_is_integer
+If it is not empty, then lowerValue must have an Integer value.
+inv: lowerValue <> null implies lowerValue.integerValue() <> null
+
+upper_is_unlimitedNatural
+If it is not empty, then upperValue must have an UnlimitedNatural value.
+inv: upperValue <> null implies upperValue.unlimitedValue() <> null
+7.8.9
+NamedElement [Abstract Class]
+7.8.9.1
+Description
+A NamedElement is an Element in a model that may have a name. The name may be given directly and/or via the use of
+a StringExpression.
+7.8.9.2
+Diagrams
+Namespaces, Types, Dependencies, Activity Groups, Time, Use Cases, Collaborations, Behavior State 
+Machines, Interactions, Messages, Lifelines, Occurrences, Fragments, Information Flows, Deployments, 
+Events, Classifiers
+Unified Modeling Language 2.5.1
+47
+
+
+===== PRINTED PAGE 48 / PDF PAGE 90 =====
+
+7.8.9.3
+Generalizations
+Element
+7.8.9.4
+Specializations
+Namespace, PackageableElement, TypedElement, ActivityGroup, Trigger, Extend, Include, CollaborationUse, 
+Vertex, GeneralOrdering, InteractionFragment, Lifeline, Message, MessageEnd, DeployedArtifact, 
+DeploymentTarget, ParameterSet, RedefinableElement
+7.8.9.5
+Attributes
+
+name : String [0..1]
+The name of the NamedElement.
+
+/qualifiedName : String [0..1]
+A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is 
+constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with 
+the name of the NamedElement itself.
+
+visibility : VisibilityKind [0..1]
+Determines whether and how the NamedElement is visible outside its owning Namespace.
+7.8.9.6
+Association Ends
+
+/clientDependency : Dependency [0..*]{subsets A_source_directedRelationship::directedRelationship} 
+(opposite Dependency::client)
+Indicates the Dependencies that reference this NamedElement as a client.
+
+♦ nameExpression : StringExpression [0..1]{subsets Element::ownedElement} (opposite 
+A_nameExpression_namedElement::namedElement)
+The StringExpression used to define the name of this NamedElement.
+
+/namespace : Namespace [0..1]{union, subsets A_member_memberNamespace::memberNamespace, subsets 
+Element::owner} (opposite Namespace::ownedMember)
+Specifies the Namespace that owns the NamedElement.
+7.8.9.7
+Operations
+
+allNamespaces() : Namespace [0..*]{ordered}
+The query allNamespaces() gives the sequence of Namespaces in which the NamedElement is nested, working 
+outwards.
+body: if owner.oclIsKindOf(TemplateParameter) and
+  owner.oclAsType(TemplateParameter).signature.template.oclIsKindOf(Namespace) then
+    let enclosingNamespace : Namespace =
+      owner.oclAsType(TemplateParameter).signature.template.oclAsType(Namespace) in
+        enclosingNamespace.allNamespaces()->prepend(enclosingNamespace)
+else
+  if namespace->isEmpty()
+    then OrderedSet{}
+  else
+    namespace.allNamespaces()->prepend(namespace)
+  endif
+endif
+48
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 49 / PDF PAGE 91 =====
+
+
+allOwningPackages() : Package [0..*]
+The query allOwningPackages() returns the set of all the enclosing Namespaces of this NamedElement, 
+working outwards, that are Packages, up to but not including the first such Namespace that is not a Package.
+body: if namespace.oclIsKindOf(Package)
+then
+  let owningPackage : Package = namespace.oclAsType(Package) in
+    owningPackage->union(owningPackage.allOwningPackages())
+else
+  null
+endif
+
+isDistinguishableFrom(n : NamedElement, ns : Namespace) : Boolean
+The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a 
+Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a 
+kind of the other or (b) they have different names.
+body: (self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
+    ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
+
+qualifiedName() : String
+When a NamedElement has a name, and all of its containing Namespaces have a name, the qualifiedName is 
+constructed from the name of the NamedElement and the names of the containing Namespaces.
+body: if self.name <> null and self.allNamespaces()->select( ns | ns.name=null )->isEmpty()
+then
+    self.allNamespaces()->iterate( ns : Namespace; agg: String = self.name | 
+ns.name.concat(self.separator()).concat(agg))
+else
+   null
+endif
+
+separator() : String
+The query separator() gives the string that is used to separate names when constructing a qualifiedName.
+body: '::'
+
+clientDependency() : Dependency [0..*]
+body: Dependency.allInstances()->select(d | d.client->includes(self))
+7.8.9.8
+Constraints
+
+visibility_needs_ownership
+If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is 
+not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides 
+mustBeOwned()) may have a visibility.
+inv: (namespace = null and owner <> null) implies visibility = null
+
+has_qualified_name
+When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed 
+from the name of the NamedElement and the names of the containing Namespaces.
+inv: (name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
+  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | 
+ns.name.concat(self.separator()).concat(agg))
+Unified Modeling Language 2.5.1
+49
+
+
+===== PRINTED PAGE 50 / PDF PAGE 92 =====
+
+
+has_no_qualified_name
+If there is no name, or one of the containing Namespaces has no name, there is no qualifiedName.
+inv: name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies 
+qualifiedName = null
+7.8.10
+Namespace [Abstract Class]
+7.8.10.1
+Description
+A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by 
+name.
+7.8.10.2
+Diagrams
+Namespaces, Constraints, Behavior State Machines, Packages, Fragments, Classifiers, Features, Structured 
+Actions
+7.8.10.3
+Generalizations
+NamedElement
+7.8.10.4
+Specializations
+Region, State, Transition, Package, InteractionOperand, BehavioralFeature, Classifier, StructuredActivityNode
+7.8.10.5
+Association Ends
+
+♦ elementImport : ElementImport [0..*]{subsets Element::ownedElement, subsets 
+A_source_directedRelationship::directedRelationship} (opposite ElementImport::importingNamespace)
+References the ElementImports owned by the Namespace.
+
+/importedMember : PackageableElement [0..*]{subsets Namespace::member} (opposite 
+A_importedMember_namespace::namespace)
+References the PackageableElements that are members of this Namespace as a result of either PackageImports 
+or ElementImports.
+
+/member : NamedElement [0..*]{union} (opposite A_member_memberNamespace::memberNamespace)
+A collection of NamedElements identifiable within the Namespace, either by being owned or by being 
+introduced by importing or inheritance.
+
+♦ /ownedMember : NamedElement [0..*]{union, subsets Namespace::member, subsets 
+Element::ownedElement} (opposite NamedElement::namespace)
+A collection of NamedElements owned by the Namespace.
+
+♦ ownedRule : Constraint [0..*]{subsets Namespace::ownedMember} (opposite Constraint::context)
+Specifies a set of Constraints owned by this Namespace.
+
+♦ packageImport : PackageImport [0..*]{subsets Element::ownedElement, subsets 
+A_source_directedRelationship::directedRelationship} (opposite PackageImport::importingNamespace)
+References the PackageImports owned by the Namespace.
+50
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 51 / PDF PAGE 93 =====
+
+7.8.10.6
+Operations
+
+excludeCollisions(imps : PackageableElement [0..*]) : PackageableElement [0..*]
+The query excludeCollisions() excludes from a set of PackageableElements any that would not be 
+distinguishable from each other in this Namespace.
+body: imps->reject(imp1  | imps->exists(imp2 | not imp1.isDistinguishableFrom(imp2, self)))
+
+getNamesOfMember(element : NamedElement) : String [0..*]
+The query getNamesOfMember() gives a set of all of the names that a member would have in a Namespace, 
+taking importing into account. In general a member can have multiple names in a Namespace if it is imported 
+more than once with different aliases.
+body: if self.ownedMember ->includes(element)
+then Set{element.name}
+else let elementImports : Set(ElementImport) = self.elementImport->select(ei | 
+ei.importedElement = element) in
+  if elementImports->notEmpty()
+  then
+     elementImports->collect(el | el.getName())->asSet()
+  else
+     self.packageImport->select(pi | 
+pi.importedPackage.visibleMembers().oclAsType(NamedElement)->includes(element))-> collect(pi
+| pi.importedPackage.getNamesOfMember(element))->asSet()
+  endif
+endif
+
+importMembers(imps : PackageableElement [0..*]) : PackageableElement [0..*]
+The query importMembers() defines which of a set of PackageableElements are actually imported into the 
+Namespace. This excludes hidden ones, i.e., those which have names that conflict with names of 
+ownedMembers, and it also excludes PackageableElements that would have the indistinguishable names when 
+imported.
+body: self.excludeCollisions(imps)->select(imp | self.ownedMember->forAll(mem | 
+imp.isDistinguishableFrom(mem, self)))
+
+importedMember() : PackageableElement [0..*]
+The importedMember property is derived as the PackageableElements that are members of this Namespace as 
+a result of either PackageImports or ElementImports.
+body: self.importMembers(elementImport.importedElement->asSet()-
+>union(packageImport.importedPackage->collect(p | p.visibleMembers()))->asSet())
+
+membersAreDistinguishable() : Boolean
+The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are 
+distinguishable within it.
+body: member->forAll( memb |
+   member->excluding(memb)->forAll(other |
+       memb.isDistinguishableFrom(other, self)))
+7.8.10.7
+Constraints
+
+members_distinguishable
+All the members of a Namespace are distinguishable within it.
+inv: membersAreDistinguishable()
+Unified Modeling Language 2.5.1
+51
+
+
+===== PRINTED PAGE 52 / PDF PAGE 94 =====
+
+
+cannot_import_self
+A Namespace cannot have a PackageImport to itself.
+inv: packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
+
+cannot_import_ownedMembers
+A Namespace cannot have an ElementImport to one of its ownedMembers.
+inv: elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
+7.8.11
+PackageImport [Class]
+7.8.11.1
+Description
+A PackageImport is a Relationship that imports all the non-private members of a Package into the Namespace owning 
+the PackageImport, so that those Elements may be referred to by their unqualified names in the importingNamespace.
+7.8.11.2
+Diagrams
+Namespaces, Profiles
+7.8.11.3
+Generalizations
+DirectedRelationship
+7.8.11.4
+Attributes
+
+visibility : VisibilityKind [1..1] = public
+Specifies the visibility of the imported PackageableElements within the importingNamespace, i.e., whether 
+imported Elements will in turn be visible to other Namespaces. If the PackageImport is public, the imported 
+Elements will be visible outside the importingNamespace, while, if the PackageImport is private, they will not.
+7.8.11.5
+Association Ends
+
+importedPackage : Package [1..1]{subsets DirectedRelationship::target} (opposite 
+A_importedPackage_packageImport::packageImport)
+Specifies the Package whose members are imported into a Namespace.
+
+importingNamespace : Namespace [1..1]{subsets DirectedRelationship::source, subsets Element::owner} 
+(opposite Namespace::packageImport)
+Specifies the Namespace that imports the members from a Package.
+7.8.11.6
+Constraints
+
+public_or_private
+The visibility of a PackageImport is either public or private.
+inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private
+7.8.12
+PackageableElement [Abstract Class]
+7.8.12.1
+Description
+A PackageableElement is a NamedElement that may be owned directly by a Package. A PackageableElement is also 
+able to serve as the parameteredElement of a TemplateParameter.
+52
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 53 / PDF PAGE 95 =====
+
+7.8.12.2
+Diagrams
+Namespaces, Types, Constraints, Dependencies, Literals, Time, Components, Packages, Information Flows, 
+Deployments, Artifacts, Events, Instances, Generalization Sets
+7.8.12.3
+Generalizations
+ParameterableElement, NamedElement
+7.8.12.4
+Specializations
+Constraint, Dependency, Type, Event, Observation, ValueSpecification, Package, InformationFlow, 
+GeneralizationSet, InstanceSpecification
+7.8.12.5
+Attributes
+
+visibility : VisibilityKind [0..1] = public
+A PackageableElement must have a visibility specified if it is owned by a Namespace. The default visibility is 
+public.
+7.8.12.6
+Constraints
+
+namespace_needs_visibility
+A PackageableElement owned by a Namespace must have a visibility.
+inv: visibility = null implies namespace = null
+7.8.13
+ParameterableElement [Abstract Class]
+7.8.13.1
+Description
+A ParameterableElement is an Element that can be exposed as a formal TemplateParameter for a template, or specified 
+as an actual parameter in a binding of a template.
+7.8.13.2
+Diagrams
+Template Bindings, Templates, Namespaces, Structured Classifiers, Properties, Operations
+7.8.13.3
+Generalizations
+Element
+7.8.13.4
+Specializations
+PackageableElement, ConnectableElement, Operation
+7.8.13.5
+Association Ends
+
+owningTemplateParameter : TemplateParameter [0..1]{subsets ParameterableElement::templateParameter, 
+subsets Element::owner} (opposite TemplateParameter::ownedParameteredElement)
+The formal TemplateParameter that owns this ParameterableElement.
+
+templateParameter : TemplateParameter [0..1] (opposite TemplateParameter::parameteredElement)
+The TemplateParameter that exposes this ParameterableElement as a formal parameter.
+Unified Modeling Language 2.5.1
+53
+
+
+===== PRINTED PAGE 54 / PDF PAGE 96 =====
+
+7.8.13.6
+Operations
+
+isCompatibleWith(p : ParameterableElement) : Boolean
+The query isCompatibleWith() determines if this ParameterableElement is compatible with the specified 
+ParameterableElement. By default, this ParameterableElement is compatible with another 
+ParameterableElement p if the kind of this ParameterableElement is the same as or a subtype of the kind of p. 
+Subclasses of ParameterableElement should override this operation to specify different compatibility 
+constraints.
+body: self.oclIsKindOf(p.oclType())
+
+isTemplateParameter() : Boolean
+The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal 
+TemplateParameter.
+body: templateParameter->notEmpty()
+7.8.14
+Realization [Class]
+7.8.14.1
+Description
+Realization is a specialized Abstraction relationship between two sets of model Elements, one representing a 
+specification (the supplier) and the other represents an implementation of the latter (the client). Realization can be used 
+to model stepwise refinement, optimizations, transformations, templates, model synthesis, framework composition, etc.
+7.8.14.2
+Diagrams
+Dependencies, Components, Interfaces, Classifiers
+7.8.14.3
+Generalizations
+Abstraction
+7.8.14.4
+Specializations
+ComponentRealization, InterfaceRealization, Substitution
+7.8.15
+Relationship [Abstract Class]
+7.8.15.1
+Description
+Relationship is an abstract concept that specifies some kind of relationship between Elements.
+7.8.15.2
+Diagrams
+Root, Associations, Information Flows
+7.8.15.3
+Generalizations
+Element
+7.8.15.4
+Specializations
+DirectedRelationship, Association
+54
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 55 / PDF PAGE 97 =====
+
+7.8.15.5
+Association Ends
+
+/relatedElement : Element [1..*]{union} (opposite A_relatedElement_relationship::relationship)
+Specifies the elements related by the Relationship.
+7.8.16
+TemplateBinding [Class]
+7.8.16.1
+Description
+A TemplateBinding is a DirectedRelationship between a TemplateableElement and a template. A TemplateBinding 
+specifies the TemplateParameterSubstitutions of actual parameters for the formal parameters of the template.
+7.8.16.2
+Diagrams
+Template Bindings
+7.8.16.3
+Generalizations
+DirectedRelationship
+7.8.16.4
+Association Ends
+
+boundElement : TemplateableElement [1..1]{subsets DirectedRelationship::source, subsets Element::owner} 
+(opposite TemplateableElement::templateBinding)
+The TemplateableElement that is bound by this TemplateBinding.
+
+♦ parameterSubstitution : TemplateParameterSubstitution [0..*]{subsets Element::ownedElement} (opposite 
+TemplateParameterSubstitution::templateBinding)
+The TemplateParameterSubstitutions owned by this TemplateBinding.
+
+signature : TemplateSignature [1..1]{subsets DirectedRelationship::target} (opposite 
+A_signature_templateBinding::templateBinding)
+The TemplateSignature for the template that is the target of this TemplateBinding.
+7.8.16.5
+Constraints
+
+parameter_substitution_formal
+Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
+inv: parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
+
+one_parameter_substitution
+A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter 
+of the target TemplateSignature.
+inv: signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size()
+<= 1)
+7.8.17
+TemplateParameter [Class]
+7.8.17.1
+Description
+A TemplateParameter exposes a ParameterableElement as a formal parameter of a template.
+Unified Modeling Language 2.5.1
+55
+
+
+===== PRINTED PAGE 56 / PDF PAGE 98 =====
+
+7.8.17.2
+Diagrams
+Template Bindings, Templates, Structured Classifiers, Classifier Templates, Operations
+7.8.17.3
+Generalizations
+Element
+7.8.17.4
+Specializations
+ConnectableElementTemplateParameter, ClassifierTemplateParameter, OperationTemplateParameter
+7.8.17.5
+Association Ends
+
+default : ParameterableElement [0..1] (opposite A_default_templateParameter::templateParameter)
+The ParameterableElement that is the default for this formal TemplateParameter.
+
+♦ ownedDefault : ParameterableElement [0..1]{subsets Element::ownedElement, subsets 
+TemplateParameter::default} (opposite A_ownedDefault_templateParameter::templateParameter)
+The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
+
+♦ ownedParameteredElement : ParameterableElement [0..1]{subsets Element::ownedElement, subsets 
+TemplateParameter::parameteredElement} (opposite ParameterableElement::owningTemplateParameter)
+The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the 
+parameteredElement.
+
+parameteredElement : ParameterableElement [1..1] (opposite ParameterableElement::templateParameter)
+The ParameterableElement exposed by this TemplateParameter.
+
+signature : TemplateSignature [1..1]{subsets A_parameter_templateSignature::templateSignature, subsets 
+Element::owner} (opposite TemplateSignature::ownedParameter)
+The TemplateSignature that owns this TemplateParameter.
+7.8.17.6
+Constraints
+
+must_be_compatible
+The default must be compatible with the formal TemplateParameter.
+inv: default <> null implies default.isCompatibleWith(parameteredElement)
+7.8.18
+TemplateParameterSubstitution [Class]
+7.8.18.1
+Description
+A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template 
+binding.
+7.8.18.2
+Diagrams
+Template Bindings
+7.8.18.3
+Generalizations
+Element
+56
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 57 / PDF PAGE 99 =====
+
+7.8.18.4
+Association Ends
+
+actual : ParameterableElement [1..1] (opposite 
+A_actual_templateParameterSubstitution::templateParameterSubstitution)
+The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+
+formal : TemplateParameter [1..1] (opposite 
+A_formal_templateParameterSubstitution::templateParameterSubstitution)
+The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+
+♦ ownedActual : ParameterableElement [0..1]{subsets Element::ownedElement, subsets 
+TemplateParameterSubstitution::actual} (opposite 
+A_ownedActual_owningTemplateParameterSubstitution::owningTemplateParameterSubstitution)
+The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+
+templateBinding : TemplateBinding [1..1]{subsets Element::owner} (opposite 
+TemplateBinding::parameterSubstitution)
+The TemplateBinding that owns this TemplateParameterSubstitution.
+7.8.18.5
+Constraints
+
+must_be_compatible
+The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual 
+ParameterableElement for a Class TemplateParameter must be a Class.
+inv: actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))
+7.8.19
+TemplateSignature [Class]
+7.8.19.1
+Description
+A Template Signature bundles the set of formal TemplateParameters for a template.
+7.8.19.2
+Diagrams
+Template Bindings, Templates, Classifier Templates
+7.8.19.3
+Generalizations
+Element
+7.8.19.4
+Specializations
+RedefinableTemplateSignature
+7.8.19.5
+Association Ends
+
+♦ ownedParameter : TemplateParameter [0..*]{ordered, subsets Element::ownedElement, subsets 
+TemplateSignature::parameter} (opposite TemplateParameter::signature)
+The formal parameters that are owned by this TemplateSignature.
+
+parameter : TemplateParameter [1..*]{ordered} (opposite A_parameter_templateSignature::templateSignature)
+The ordered set of all formal TemplateParameters for this TemplateSignature.
+Unified Modeling Language 2.5.1
+57
+
+
+===== PRINTED PAGE 58 / PDF PAGE 100 =====
+
+
+template : TemplateableElement [1..1]{subsets Element::owner} (opposite 
+TemplateableElement::ownedTemplateSignature)
+The TemplateableElement that owns this TemplateSignature.
+7.8.19.6
+Constraints
+
+own_elements
+Parameters must own the ParameterableElements they parameter or those ParameterableElements must be 
+owned by the TemplateableElement being templated.
+inv: template.ownedElement->includesAll(parameter.parameteredElement->asSet() - 
+parameter.ownedParameteredElement->asSet())
+
+unique_parameters
+The names of the parameters of a TemplateSignature are unique.
+inv: parameter->forAll( p1, p2 | (p1 <> p2 and 
+p1.parameteredElement.oclIsKindOf(NamedElement) and 
+p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
+   p1.parameteredElement.oclAsType(NamedElement).name <> 
+p2.parameteredElement.oclAsType(NamedElement).name)
+7.8.20
+TemplateableElement [Abstract Class]
+7.8.20.1
+Description
+A TemplateableElement is an Element that can optionally be defined as a template and bound to other templates.
+7.8.20.2
+Diagrams
+Template Bindings, Templates, Expressions, Packages, Classifiers, Classifier Templates, Operations
+7.8.20.3
+Generalizations
+Element
+7.8.20.4
+Specializations
+StringExpression, Package, Classifier, Operation
+7.8.20.5
+Association Ends
+
+♦ ownedTemplateSignature : TemplateSignature [0..1]{subsets Element::ownedElement} (opposite 
+TemplateSignature::template)
+The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a 
+TemplateableElement has a TemplateSignature, then it is a template.
+
+♦ templateBinding : TemplateBinding [0..*]{subsets Element::ownedElement, subsets 
+A_source_directedRelationship::directedRelationship} (opposite TemplateBinding::boundElement)
+The optional TemplateBindings from this TemplateableElement to one or more templates.
+7.8.20.6
+Operations
+
+isTemplate() : Boolean
+The query isTemplate() returns whether this TemplateableElement is actually a template.
+body: ownedTemplateSignature <> null
+58
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 59 / PDF PAGE 101 =====
+
+
+parameterableElements() : ParameterableElement [0..*]
+The query parameterableElements() returns the set of ParameterableElements that may be used as the 
+parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all 
+the ownedElements. Subclasses may override this operation if they choose to restrict the set of 
+ParameterableElements.
+body: self.allOwnedElements()-
+>select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet()
+7.8.21
+Type [Abstract Class]
+7.8.21.1
+Description
+A Type constrains the values represented by a TypedElement.
+7.8.21.2
+Diagrams
+Types, Associations, Packages, Classifiers, Features, Operations
+7.8.21.3
+Generalizations
+PackageableElement
+7.8.21.4
+Specializations
+Classifier
+7.8.21.5
+Attributes
+7.8.21.6
+Association Ends
+
+package : Package [0..1]{subsets A_packagedElement_owningPackage::owningPackage} (opposite 
+Package::ownedType)
+Specifies the owning Package of this Type, if any.
+7.8.21.7
+Operations
+
+conformsTo(other : Type) : Boolean
+The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform 
+to each other. This query is intended to be redefined for specific conformance situations.
+body: false
+7.8.22
+TypedElement [Abstract Class]
+7.8.22.1
+Description
+A TypedElement is a NamedElement that may have a Type specified for it.
+7.8.22.2
+Diagrams
+Types, Object Nodes, Literals, Structured Classifiers, Features
+7.8.22.3
+Generalizations
+NamedElement
+Unified Modeling Language 2.5.1
+59
+
+
+===== PRINTED PAGE 60 / PDF PAGE 102 =====
+
+7.8.22.4
+Specializations
+ObjectNode, ValueSpecification, ConnectableElement, StructuralFeature
+7.8.22.5
+Association Ends
+
+type : Type [0..1] (opposite A_type_typedElement::typedElement)
+The type of the TypedElement.
+7.8.23
+Usage [Class]
+7.8.23.1
+Description
+A Usage is a Dependency in which the client Element requires the supplier Element (or set of Elements) for its full 
+implementation or operation.
+7.8.23.2
+Diagrams
+Dependencies
+7.8.23.3
+Generalizations
+Dependency
+7.8.24
+VisibilityKind [Enumeration]
+7.8.24.1
+Description
+VisibilityKind is an enumeration type that defines literals to determine the visibility of Elements in a model.
+7.8.24.2
+Diagrams
+
+Namespaces
+7.8.24.3
+Literals
+
+public
+A Named Element with public visibility is visible to all elements that can access the contents of the Namespace
+that owns it.
+
+private
+A NamedElement with private visibility is only visible inside the Namespace that owns it.
+
+protected
+A NamedElement with protected visibility is visible to Elements that have a generalization relationship to the 
+Namespace that owns it.
+
+package
+A NamedElement with package visibility is visible to all Elements within the nearest enclosing Package (given
+that other owning Elements have proper visibility). Outside the nearest enclosing Package, a NamedElement 
+marked as having package visibility is not visible. Only NamedElements that are not owned by Packages can 
+be marked as having package visibility.
+60
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 61 / PDF PAGE 103 =====
+
+7.9
+Association Descriptions
+7.9.1
+A_actual_templateParameterSubstitution [Association]
+7.9.1.1
+Diagrams
+Template Bindings
+7.9.1.2
+Specializations
+A_ownedActual_owningTemplateParameterSubstitution
+7.9.1.3
+Owned Ends
+
+templateParameterSubstitution : TemplateParameterSubstitution [0..*] (opposite 
+TemplateParameterSubstitution::actual)
+7.9.2
+A_annotatedElement_comment [Association]
+7.9.2.1
+Diagrams
+Root
+7.9.2.2
+Owned Ends
+
+comment : Comment [0..*] (opposite Comment::annotatedElement)
+7.9.3
+A_clientDependency_client [Association]
+7.9.3.1
+Diagrams
+Dependencies
+7.9.3.2
+Member Ends
+
+NamedElement::clientDependency
+
+Dependency::client
+7.9.4
+A_constrainedElement_constraint [Association]
+7.9.4.1
+Diagrams
+Constraints
+7.9.4.2
+Owned Ends
+
+constraint : Constraint [0..*] (opposite Constraint::constrainedElement)
+7.9.5
+A_default_templateParameter [Association]
+7.9.5.1
+Diagrams
+Templates
+Unified Modeling Language 2.5.1
+61
+
+
+===== PRINTED PAGE 62 / PDF PAGE 104 =====
+
+7.9.5.2
+Specializations
+A_ownedDefault_templateParameter
+7.9.5.3
+Owned Ends
+
+templateParameter : TemplateParameter [0..*] (opposite TemplateParameter::default)
+7.9.6
+A_elementImport_importingNamespace [Association]
+7.9.6.1
+Diagrams
+Namespaces
+7.9.6.2
+Member Ends
+
+Namespace::elementImport
+
+ElementImport::importingNamespace
+7.9.7
+A_formal_templateParameterSubstitution [Association]
+7.9.7.1
+Diagrams
+Template Bindings
+7.9.7.2
+Owned Ends
+
+templateParameterSubstitution : TemplateParameterSubstitution [0..*] (opposite 
+TemplateParameterSubstitution::formal)
+7.9.8
+A_importedElement_import [Association]
+7.9.8.1
+Diagrams
+Namespaces
+7.9.8.2
+Owned Ends
+
+import : ElementImport [0..*]{subsets A_target_directedRelationship::directedRelationship} (opposite 
+ElementImport::importedElement)
+7.9.9
+A_importedMember_namespace [Association]
+7.9.9.1
+Diagrams
+Namespaces
+7.9.9.2
+Owned Ends
+
+namespace : Namespace [0..*]{subsets A_member_memberNamespace::memberNamespace} (opposite 
+Namespace::importedMember)
+62
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 63 / PDF PAGE 105 =====
+
+7.9.10
+A_importedPackage_packageImport [Association]
+7.9.10.1
+Diagrams
+Namespaces
+7.9.10.2
+Owned Ends
+
+packageImport : PackageImport [0..*]{subsets A_target_directedRelationship::directedRelationship} (opposite
+PackageImport::importedPackage)
+7.9.11
+A_lowerValue_owningLower [Association]
+7.9.11.1
+Diagrams
+Types
+7.9.11.2
+Owned Ends
+
+owningLower : MultiplicityElement [0..1]{subsets Element::owner} (opposite 
+MultiplicityElement::lowerValue)
+7.9.12
+A_mapping_abstraction [Association]
+7.9.12.1
+Diagrams
+Dependencies
+7.9.12.2
+Owned Ends
+
+abstraction : Abstraction [0..1]{subsets Element::owner} (opposite Abstraction::mapping)
+7.9.13
+A_member_memberNamespace [Association]
+7.9.13.1
+Diagrams
+Namespaces
+7.9.13.2
+Owned Ends
+
+/memberNamespace : Namespace [0..*]{union} (opposite Namespace::member)
+7.9.14
+A_nameExpression_namedElement [Association]
+7.9.14.1
+Diagrams
+Namespaces
+7.9.14.2
+Owned Ends
+
+namedElement : NamedElement [0..1]{subsets Element::owner} (opposite NamedElement::nameExpression)
+Unified Modeling Language 2.5.1
+63
+
+
+===== PRINTED PAGE 64 / PDF PAGE 106 =====
+
+7.9.15
+A_ownedActual_owningTemplateParameterSubstitution [Association]
+7.9.15.1
+Diagrams
+Template Bindings
+7.9.15.2
+Generalizations
+A_actual_templateParameterSubstitution
+7.9.15.3
+Owned Ends
+
+owningTemplateParameterSubstitution : TemplateParameterSubstitution [0..1]{subsets Element::owner, 
+redefines A_actual_templateParameterSubstitution::templateParameterSubstitution} (opposite 
+TemplateParameterSubstitution::ownedActual)
+7.9.16
+A_ownedComment_owningElement [Association]
+7.9.16.1
+Diagrams
+Root
+7.9.16.2
+Owned Ends
+
+owningElement : Element [0..1]{subsets Element::owner} (opposite Element::ownedComment)
+7.9.17
+A_ownedDefault_templateParameter [Association]
+7.9.17.1
+Diagrams
+Templates
+7.9.17.2
+Generalizations
+A_default_templateParameter
+7.9.17.3
+Owned Ends
+
+templateParameter : TemplateParameter [0..1]{subsets Element::owner, redefines 
+A_default_templateParameter::templateParameter} (opposite TemplateParameter::ownedDefault)
+7.9.18
+A_ownedElement_owner [Association]
+7.9.18.1
+Diagrams
+Root
+7.9.18.2
+Member Ends
+
+Element::ownedElement
+
+Element::owner
+64
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 65 / PDF PAGE 107 =====
+
+7.9.19
+A_ownedMember_namespace [Association]
+7.9.19.1
+Diagrams
+Namespaces
+7.9.19.2
+Member Ends
+
+Namespace::ownedMember
+
+NamedElement::namespace
+7.9.20
+A_ownedParameter_signature [Association]
+7.9.20.1
+Diagrams
+Templates
+7.9.20.2
+Member Ends
+
+TemplateSignature::ownedParameter
+
+TemplateParameter::signature
+7.9.21
+A_ownedParameteredElement_owningTemplateParameter [Association]
+7.9.21.1
+Diagrams
+Templates
+7.9.21.2
+Member Ends
+
+TemplateParameter::ownedParameteredElement
+
+ParameterableElement::owningTemplateParameter
+7.9.22
+A_ownedRule_context [Association]
+7.9.22.1
+Diagrams
+Namespaces, Constraints
+7.9.22.2
+Member Ends
+
+Namespace::ownedRule
+
+Constraint::context
+7.9.23
+A_ownedTemplateSignature_template [Association]
+7.9.23.1
+Diagrams
+Templates
+Unified Modeling Language 2.5.1
+65
+
+
+===== PRINTED PAGE 66 / PDF PAGE 108 =====
+
+7.9.23.2
+Member Ends
+
+TemplateableElement::ownedTemplateSignature
+
+TemplateSignature::template
+7.9.24
+A_packageImport_importingNamespace [Association]
+7.9.24.1
+Diagrams
+Namespaces
+7.9.24.2
+Member Ends
+
+Namespace::packageImport
+
+PackageImport::importingNamespace
+7.9.25
+A_parameterSubstitution_templateBinding [Association]
+7.9.25.1
+Diagrams
+Template Bindings
+7.9.25.2
+Member Ends
+
+TemplateBinding::parameterSubstitution
+
+TemplateParameterSubstitution::templateBinding
+7.9.26
+A_parameter_templateSignature [Association]
+7.9.26.1
+Diagrams
+Templates
+7.9.26.2
+Owned Ends
+
+templateSignature : TemplateSignature [0..*] (opposite TemplateSignature::parameter)
+7.9.27
+A_parameteredElement_templateParameter [Association]
+7.9.27.1
+Diagrams
+Templates
+7.9.27.2
+Member Ends
+
+TemplateParameter::parameteredElement
+
+ParameterableElement::templateParameter
+66
+Unified Modeling Language 2.5.1
+
+
+===== PRINTED PAGE 67 / PDF PAGE 109 =====
+
+7.9.28
+A_relatedElement_relationship [Association]
+7.9.28.1
+Diagrams
+Root
+7.9.28.2
+Owned Ends
+
+/relationship : Relationship [0..*]{union} (opposite Relationship::relatedElement)
+7.9.29
+A_signature_templateBinding [Association]
+7.9.29.1
+Diagrams
+Template Bindings
+7.9.29.2
+Owned Ends
+
+templateBinding : TemplateBinding [0..*]{subsets A_target_directedRelationship::directedRelationship} 
+(opposite TemplateBinding::signature)
+7.9.30
+A_source_directedRelationship [Association]
+7.9.30.1
+Diagrams
+Root
+7.9.30.2
+Owned Ends
+
+/directedRelationship : DirectedRelationship [0..*]{union, subsets 
+A_relatedElement_relationship::relationship} (opposite DirectedRelationship::source)
+7.9.31
+A_specification_owningConstraint [Association]
+7.9.31.1
+Diagrams
+Constraints
+7.9.31.2
+Specializations
+A_specification_intervalConstraint
+7.9.31.3
+Owned Ends
+
+owningConstraint : Constraint [0..1]{subsets Element::owner} (opposite Constraint::specification)
+7.9.32
+A_supplier_supplierDependency [Association]
+7.9.32.1
+Diagrams
+Dependencies
+Unified Modeling Language 2.5.1
+67
+
+
+===== PRINTED PAGE 68 / PDF PAGE 110 =====
+
+7.9.32.2
+Owned Ends
+
+supplierDependency : Dependency [0..*]{subsets A_target_directedRelationship::directedRelationship} 
+(opposite Dependency::supplier)
+Indicates the dependencies that reference the supplier.
+7.9.33
+A_target_directedRelationship [Association]
+7.9.33.1
+Diagrams
+Root
+7.9.33.2
+Owned Ends
+
+/directedRelationship : DirectedRelationship [0..*]{union, subsets 
+A_relatedElement_relationship::relationship} (opposite DirectedRelationship::target)
+7.9.34
+A_templateBinding_boundElement [Association]
+7.9.34.1
+Diagrams
+Template Bindings
+7.9.34.2
+Member Ends
+
+TemplateableElement::templateBinding
+
+TemplateBinding::boundElement
+7.9.35
+A_type_typedElement [Association]
+7.9.35.1
+Diagrams
+Types
+7.9.35.2
+Owned Ends
+
+typedElement : TypedElement [0..*] (opposite TypedElement::type)
+7.9.36
+A_upperValue_owningUpper [Association]
+7.9.36.1
+Diagrams
+Types
+7.9.36.2
+Owned Ends
+
+owningUpper : MultiplicityElement [0..1]{subsets Element::owner} (opposite 
+MultiplicityElement::upperValue)
+68
+Unified Modeling Language 2.5.1

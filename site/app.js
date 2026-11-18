@@ -117,11 +117,24 @@
       </li>`).join("")}</ul></section>`;
   }
 
+  function subsetDiagramLink(reference, name) {
+    const owner = reference.owner;
+    const associationName = owner?.type === "association"
+      ? owner.name
+      : xmiData.classes[owner?.name]?.direct.find(property => property.id === reference.id)?.association;
+    const association = associationByName.get(associationName);
+    const diagramId = association ? associationFigures(association)[0] : "";
+    return diagramId
+      ? `<a href="#/diagram/${slug(diagramId)}">${escapeHtml(name)}</a>`
+      : "";
+  }
+
   function propertySignature(property) {
     const modifierStart = property.signature.indexOf(" {");
     if (modifierStart < 0) return escapeHtml(property.signature);
     const references = [...(property.subsettedProperties || []), ...(property.redefinedProperties || [])];
     if (!references.length) return escapeHtml(property.signature);
+    const subsettedNames = new Set((property.subsettedProperties || []).map(reference => reference.name));
     const referencesByName = new Map();
     references.forEach(reference => {
       if (!referencesByName.has(reference.name)) referencesByName.set(reference.name, reference);
@@ -131,6 +144,10 @@
     const modifiers = property.signature.slice(modifierStart + 2, -1);
     const linkedModifiers = escapeHtml(modifiers).replace(pattern, name => {
       const reference = referencesByName.get(name);
+      if (subsettedNames.has(name)) {
+        const diagramLink = subsetDiagramLink(reference, name);
+        if (diagramLink) return diagramLink;
+      }
       const owner = reference.owner;
       if (owner?.type === "classifier" && classifierByName.has(owner.name)) {
         return `<a href="#/classifier/${slug(owner.name)}">${escapeHtml(name)}</a>`;

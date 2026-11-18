@@ -263,6 +263,27 @@ INHERITANCE_GEOMETRY_SCRIPT = r"""
       }
     }
   }
+
+  const classifierName = document.querySelector(".original-name")?.textContent.split(" [")[0];
+  const classData = window.UML_XMI_DATA.classes[classifierName];
+  const properties = [...(classData?.direct || []), ...(classData?.inherited || [])];
+  const propertyRows = [...document.querySelectorAll(".property-list .detail-item")];
+  for (const property of properties) {
+    const row = propertyRows.find(item => item.querySelector("code")?.textContent === property.signature);
+    for (const reference of property.subsettedProperties || []) {
+      const owner = reference.owner;
+      const associationName = owner?.type === "association" ? owner.name
+        : window.UML_XMI_DATA.classes[owner?.name]?.direct.find(item => item.id === reference.id)?.association;
+      const association = window.UML_DATA.associations.find(item => item.name === associationName);
+      const diagram = window.UML_DATA.diagrams.find(item => item.en === association?.diagrams[0]);
+      if (!diagram) continue;
+      const expectedHref = `#/diagram/${diagram.id.replace(/\./g, "-")}`;
+      const link = [...(row?.querySelectorAll("code a") || [])].find(item => item.textContent === reference.name);
+      if (link?.getAttribute("href") !== expectedHref) {
+        errors.push(`subsets ${property.signature} must link ${reference.name} to ${expectedHref}`);
+      }
+    }
+  }
   document.documentElement.setAttribute("data-inheritance-errors", [...new Set(errors)].join(" | "));
 })();
 """

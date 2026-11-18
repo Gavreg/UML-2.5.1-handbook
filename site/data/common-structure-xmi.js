@@ -14,7 +14,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -30,6 +42,18 @@ window.UML_XMI_DATA = {
             "source"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -44,6 +68,18 @@ window.UML_XMI_DATA = {
             "target"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -58,6 +94,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -72,6 +120,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -84,6 +144,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -98,6 +160,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -110,6 +184,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -122,6 +198,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -135,6 +213,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -151,6 +241,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -163,6 +274,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -177,6 +290,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -189,6 +314,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -203,6 +330,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -218,6 +357,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -230,6 +390,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -245,7 +407,9 @@ window.UML_XMI_DATA = {
           "association": "A_annotatedElement_comment",
           "owner": "Comment",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Comment-body",
@@ -256,7 +420,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "Comment",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -272,6 +438,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -284,6 +462,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -296,6 +476,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -311,7 +493,9 @@ window.UML_XMI_DATA = {
           "association": "A_constrainedElement_constraint",
           "owner": "Constraint",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Constraint-context",
@@ -324,7 +508,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "namespace"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Constraint-specification",
@@ -337,7 +533,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -352,6 +560,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -368,6 +588,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -380,6 +621,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -394,6 +637,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -406,6 +661,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -418,6 +675,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -432,6 +691,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -444,6 +715,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -458,6 +731,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -473,6 +758,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -485,6 +791,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -502,7 +810,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "source"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Dependency-supplier",
@@ -515,7 +835,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -531,6 +863,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -545,6 +889,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -557,6 +913,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -571,6 +929,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -583,6 +953,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -595,6 +967,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -608,6 +982,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -624,6 +1010,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -636,6 +1043,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -650,6 +1059,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -662,6 +1083,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -676,6 +1099,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -691,6 +1126,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -703,6 +1159,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -720,7 +1178,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relatedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "DirectedRelationship-target",
@@ -733,7 +1203,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relatedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -747,6 +1229,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -761,6 +1245,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -773,6 +1269,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -785,6 +1283,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -802,7 +1302,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Element-ownedElement",
@@ -813,7 +1325,9 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "Element",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Element-owner",
@@ -824,7 +1338,9 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "Element",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": []
@@ -840,7 +1356,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "ElementImport",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "ElementImport-importedElement",
@@ -853,7 +1371,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "ElementImport-importingNamespace",
@@ -867,7 +1397,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "ElementImport-visibility",
@@ -878,7 +1429,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "ElementImport",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -894,6 +1447,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -908,6 +1473,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -920,6 +1497,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -934,6 +1513,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -946,6 +1537,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -958,6 +1551,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -973,7 +1568,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "MultiplicityElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "MultiplicityElement-isUnique",
@@ -984,7 +1581,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "MultiplicityElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "MultiplicityElement-lower",
@@ -995,7 +1594,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "MultiplicityElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "MultiplicityElement-lowerValue",
@@ -1008,7 +1609,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "MultiplicityElement-upper",
@@ -1019,7 +1632,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "MultiplicityElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "MultiplicityElement-upperValue",
@@ -1032,7 +1647,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1048,6 +1675,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1060,6 +1699,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1072,6 +1713,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -1089,7 +1732,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-name",
@@ -1100,7 +1755,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "NamedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-nameExpression",
@@ -1113,7 +1770,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-namespace",
@@ -1127,7 +1796,28 @@ window.UML_XMI_DATA = {
             "memberNamespace",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-qualifiedName",
@@ -1138,7 +1828,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "NamedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-visibility",
@@ -1149,7 +1841,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "NamedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1165,6 +1859,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1177,6 +1883,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1189,6 +1897,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -1207,7 +1917,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Namespace-importedMember",
@@ -1220,7 +1951,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "member"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Namespace-member",
@@ -1231,7 +1974,9 @@ window.UML_XMI_DATA = {
           "association": "A_member_memberNamespace",
           "owner": "Namespace",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Namespace-ownedMember",
@@ -1245,7 +1990,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "member"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Namespace-ownedRule",
@@ -1258,7 +2024,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedMember"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Namespace-packageImport",
@@ -1272,7 +2050,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1288,6 +2087,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1300,6 +2111,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1314,6 +2127,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1329,6 +2154,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1341,6 +2187,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1353,6 +2201,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1367,6 +2217,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1379,6 +2241,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1391,6 +2255,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -1408,7 +2274,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "PackageImport-importingNamespace",
@@ -1422,7 +2300,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "PackageImport-visibility",
@@ -1433,7 +2332,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "PackageImport",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1449,6 +2350,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -1463,6 +2376,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -1475,6 +2400,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -1489,6 +2416,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1501,6 +2440,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1513,6 +2454,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -1530,6 +2473,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ]
         }
       ],
@@ -1547,6 +2502,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -1559,6 +2535,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -1573,6 +2551,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1585,6 +2575,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1597,6 +2589,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1611,6 +2605,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1623,6 +2629,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1637,6 +2645,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1652,6 +2672,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1664,6 +2705,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -1682,7 +2725,28 @@ window.UML_XMI_DATA = {
             "owner",
             "templateParameter"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "ParameterableElement-templateParameter",
@@ -1693,7 +2757,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameteredElement_templateParameter",
           "owner": "ParameterableElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1709,6 +2775,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1721,6 +2799,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1733,6 +2813,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -1752,6 +2834,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Abstraction"
         },
         {
@@ -1766,6 +2860,18 @@ window.UML_XMI_DATA = {
             "source"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -1780,6 +2886,18 @@ window.UML_XMI_DATA = {
             "target"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -1794,6 +2912,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -1808,6 +2938,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -1820,6 +2962,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -1834,6 +2978,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1846,6 +3002,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1858,6 +3016,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -1871,6 +3031,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -1887,6 +3059,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -1899,6 +3092,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -1913,6 +3108,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1925,6 +3132,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1939,6 +3148,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1954,6 +3175,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -1966,6 +3208,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -1981,7 +3225,9 @@ window.UML_XMI_DATA = {
           "association": "A_relatedElement_relationship",
           "owner": "Relationship",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -1997,6 +3243,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2009,6 +3267,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2021,6 +3281,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2039,7 +3301,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateBinding-parameterSubstitution",
@@ -2052,7 +3335,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateBinding-signature",
@@ -2065,7 +3360,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2081,6 +3388,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -2095,6 +3414,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -2107,6 +3438,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -2121,6 +3454,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2133,6 +3478,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2145,6 +3492,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2160,7 +3509,9 @@ window.UML_XMI_DATA = {
           "association": "A_default_templateParameter",
           "owner": "TemplateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameter-ownedDefault",
@@ -2174,7 +3525,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "default"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameter-default",
+              "name": "default",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameter-ownedParameteredElement",
@@ -2188,7 +3560,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "parameteredElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameter-parameteredElement",
+              "name": "parameteredElement",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameter-parameteredElement",
@@ -2199,7 +3592,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameteredElement_templateParameter",
           "owner": "TemplateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameter-signature",
@@ -2213,7 +3608,28 @@ window.UML_XMI_DATA = {
             "templateSignature",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_parameter_templateSignature-templateSignature",
+              "name": "templateSignature",
+              "type": "TemplateSignature",
+              "owner": {
+                "type": "association",
+                "name": "A_parameter_templateSignature"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2229,6 +3645,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2241,6 +3669,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2253,6 +3683,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2268,7 +3700,9 @@ window.UML_XMI_DATA = {
           "association": "A_actual_templateParameterSubstitution",
           "owner": "TemplateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameterSubstitution-formal",
@@ -2279,7 +3713,9 @@ window.UML_XMI_DATA = {
           "association": "A_formal_templateParameterSubstitution",
           "owner": "TemplateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameterSubstitution-ownedActual",
@@ -2293,7 +3729,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "actual"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameterSubstitution-actual",
+              "name": "actual",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameterSubstitution"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameterSubstitution-templateBinding",
@@ -2306,7 +3763,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2322,6 +3791,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2334,6 +3815,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2346,6 +3829,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2364,7 +3849,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "parameter"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateSignature-parameter",
+              "name": "parameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateSignature"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateSignature-parameter",
@@ -2375,7 +3881,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameter_templateSignature",
           "owner": "TemplateSignature",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateSignature-template",
@@ -2388,7 +3896,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2404,6 +3924,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2416,6 +3948,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2428,6 +3962,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2445,7 +3981,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateableElement-templateBinding",
@@ -2459,7 +4007,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2475,6 +4044,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2487,6 +4068,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2499,6 +4082,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2516,7 +4101,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owningPackage"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_packagedElement_owningPackage-owningPackage",
+              "name": "owningPackage",
+              "type": "Package",
+              "owner": {
+                "type": "association",
+                "name": "A_packagedElement_owningPackage"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2531,6 +4128,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -2547,6 +4156,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -2559,6 +4189,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -2573,6 +4205,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2585,6 +4229,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2597,6 +4243,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2611,6 +4259,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2623,6 +4283,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2637,6 +4299,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2652,6 +4326,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2664,6 +4359,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -2679,7 +4376,9 @@ window.UML_XMI_DATA = {
           "association": "A_type_typedElement",
           "owner": "TypedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -2695,6 +4394,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2707,6 +4418,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2721,6 +4434,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2736,6 +4461,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2748,6 +4494,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2760,6 +4508,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2774,6 +4524,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2786,6 +4548,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2798,6 +4562,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         }
       ]
@@ -2817,6 +4583,18 @@ window.UML_XMI_DATA = {
             "source"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -2831,6 +4609,18 @@ window.UML_XMI_DATA = {
             "target"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Dependency"
         },
         {
@@ -2845,6 +4635,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -2859,6 +4661,18 @@ window.UML_XMI_DATA = {
             "relatedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "DirectedRelationship"
         },
         {
@@ -2871,6 +4685,8 @@ window.UML_XMI_DATA = {
           "owner": "Relationship",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Relationship"
         },
         {
@@ -2885,6 +4701,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2897,6 +4725,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2909,6 +4739,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -2922,6 +4754,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -2938,6 +4782,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -2950,6 +4815,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -2964,6 +4831,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2976,6 +4855,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -2990,6 +4871,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3005,6 +4898,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3017,6 +4931,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         }
       ]
@@ -3034,7 +4950,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Expression-symbol",
@@ -3045,7 +4973,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "Expression",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -3059,6 +4989,8 @@ window.UML_XMI_DATA = {
           "owner": "TypedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "TypedElement"
         },
         {
@@ -3073,6 +5005,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3085,6 +5029,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3099,6 +5045,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3114,6 +5072,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3126,6 +5105,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3140,6 +5121,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3152,6 +5145,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3164,6 +5159,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3177,6 +5174,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -3193,6 +5202,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3205,6 +5235,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         }
       ]
@@ -3220,7 +5252,9 @@ window.UML_XMI_DATA = {
           "association": "A_behavior_opaqueExpression",
           "owner": "OpaqueExpression",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "OpaqueExpression-body",
@@ -3231,7 +5265,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "OpaqueExpression",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "OpaqueExpression-language",
@@ -3242,7 +5278,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "OpaqueExpression",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "OpaqueExpression-result",
@@ -3253,7 +5291,9 @@ window.UML_XMI_DATA = {
           "association": "A_result_opaqueExpression",
           "owner": "OpaqueExpression",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -3267,6 +5307,8 @@ window.UML_XMI_DATA = {
           "owner": "TypedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "TypedElement"
         },
         {
@@ -3281,6 +5323,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3293,6 +5347,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3307,6 +5363,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3322,6 +5390,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3334,6 +5423,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3348,6 +5439,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3360,6 +5463,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3372,6 +5477,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3385,6 +5492,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -3401,6 +5520,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3413,6 +5553,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         }
       ]
@@ -3430,7 +5572,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "StringExpression-subExpression",
@@ -3443,7 +5597,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -3459,6 +5625,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "TemplateableElement"
         },
         {
@@ -3474,6 +5652,27 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "TemplateableElement"
         },
         {
@@ -3488,6 +5687,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3500,6 +5711,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3512,6 +5725,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3526,6 +5741,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Expression"
         },
         {
@@ -3538,6 +5765,8 @@ window.UML_XMI_DATA = {
           "owner": "Expression",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Expression"
         },
         {
@@ -3550,6 +5779,8 @@ window.UML_XMI_DATA = {
           "owner": "TypedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "TypedElement"
         },
         {
@@ -3564,6 +5795,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3576,6 +5819,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3590,6 +5835,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3605,6 +5862,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3617,6 +5895,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3630,6 +5910,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -3646,6 +5938,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3658,6 +5971,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         }
       ]
@@ -3675,6 +5990,8 @@ window.UML_XMI_DATA = {
           "owner": "TypedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "TypedElement"
         },
         {
@@ -3689,6 +6006,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3701,6 +6030,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3715,6 +6046,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3730,6 +6073,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3742,6 +6106,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -3756,6 +6122,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3768,6 +6146,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3780,6 +6160,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3793,6 +6175,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -3809,6 +6203,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3821,6 +6236,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         }
       ]
@@ -3836,7 +6253,9 @@ window.UML_XMI_DATA = {
           "association": null,
           "owner": "Package",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Package-nestedPackage",
@@ -3849,7 +6268,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "packagedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Package-packagedElement",
+              "name": "packagedElement",
+              "type": "PackageableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Package"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-nestingPackage",
@@ -3862,7 +6293,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owningPackage"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_packagedElement_owningPackage-owningPackage",
+              "name": "owningPackage",
+              "type": "Package",
+              "owner": {
+                "type": "association",
+                "name": "A_packagedElement_owningPackage"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-ownedStereotype",
@@ -3875,7 +6318,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "packagedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Package-packagedElement",
+              "name": "packagedElement",
+              "type": "PackageableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Package"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-ownedType",
@@ -3888,7 +6343,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "packagedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Package-packagedElement",
+              "name": "packagedElement",
+              "type": "PackageableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Package"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-packageMerge",
@@ -3902,7 +6369,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-packagedElement",
@@ -3915,7 +6403,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedMember"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Package-profileApplication",
@@ -3929,7 +6429,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ],
       "inherited": [
@@ -3944,6 +6465,18 @@ window.UML_XMI_DATA = {
           "subsets": [],
           "redefines": [
             "visibility"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "NamedElement-visibility",
+              "name": "visibility",
+              "type": "VisibilityKind",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
           ],
           "inheritedFrom": "PackageableElement"
         },
@@ -3960,6 +6493,27 @@ window.UML_XMI_DATA = {
             "templateParameter"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3972,6 +6526,8 @@ window.UML_XMI_DATA = {
           "owner": "ParameterableElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "ParameterableElement"
         },
         {
@@ -3986,6 +6542,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -3998,6 +6566,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -4010,6 +6580,8 @@ window.UML_XMI_DATA = {
           "owner": "Element",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Element"
         },
         {
@@ -4024,6 +6596,18 @@ window.UML_XMI_DATA = {
             "directedRelationship"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -4036,6 +6620,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -4050,6 +6636,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -4065,6 +6663,27 @@ window.UML_XMI_DATA = {
             "owner"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -4077,6 +6696,8 @@ window.UML_XMI_DATA = {
           "owner": "NamedElement",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "NamedElement"
         },
         {
@@ -4091,6 +6712,18 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "TemplateableElement"
         },
         {
@@ -4106,6 +6739,27 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "TemplateableElement"
         },
         {
@@ -4121,6 +6775,27 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         },
         {
@@ -4135,6 +6810,18 @@ window.UML_XMI_DATA = {
             "member"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         },
         {
@@ -4147,6 +6834,8 @@ window.UML_XMI_DATA = {
           "owner": "Namespace",
           "subsets": [],
           "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         },
         {
@@ -4162,6 +6851,27 @@ window.UML_XMI_DATA = {
             "member"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         },
         {
@@ -4176,6 +6886,18 @@ window.UML_XMI_DATA = {
             "ownedMember"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         },
         {
@@ -4191,6 +6913,27 @@ window.UML_XMI_DATA = {
             "ownedElement"
           ],
           "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [],
           "inheritedFrom": "Namespace"
         }
       ]
@@ -4208,7 +6951,9 @@ window.UML_XMI_DATA = {
           "association": "A_actual_templateParameterSubstitution",
           "owner": "A_actual_templateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_actual_templateParameterSubstitution-templateParameterSubstitution",
@@ -4219,7 +6964,9 @@ window.UML_XMI_DATA = {
           "association": "A_actual_templateParameterSubstitution",
           "owner": "A_actual_templateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4234,7 +6981,9 @@ window.UML_XMI_DATA = {
           "association": "A_annotatedElement_comment",
           "owner": "A_annotatedElement_comment",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_annotatedElement_comment-comment",
@@ -4245,7 +6994,9 @@ window.UML_XMI_DATA = {
           "association": "A_annotatedElement_comment",
           "owner": "A_annotatedElement_comment",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4262,7 +7013,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Dependency-client",
@@ -4275,7 +7038,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "source"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4290,7 +7065,9 @@ window.UML_XMI_DATA = {
           "association": "A_constrainedElement_constraint",
           "owner": "A_constrainedElement_constraint",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_constrainedElement_constraint-constraint",
@@ -4301,7 +7078,9 @@ window.UML_XMI_DATA = {
           "association": "A_constrainedElement_constraint",
           "owner": "A_constrainedElement_constraint",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4316,7 +7095,9 @@ window.UML_XMI_DATA = {
           "association": "A_default_templateParameter",
           "owner": "A_default_templateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_default_templateParameter-templateParameter",
@@ -4327,7 +7108,9 @@ window.UML_XMI_DATA = {
           "association": "A_default_templateParameter",
           "owner": "A_default_templateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4345,7 +7128,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "ElementImport-importingNamespace",
@@ -4359,7 +7163,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4374,7 +7199,9 @@ window.UML_XMI_DATA = {
           "association": "A_formal_templateParameterSubstitution",
           "owner": "A_formal_templateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_formal_templateParameterSubstitution-templateParameterSubstitution",
@@ -4385,7 +7212,9 @@ window.UML_XMI_DATA = {
           "association": "A_formal_templateParameterSubstitution",
           "owner": "A_formal_templateParameterSubstitution",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4402,7 +7231,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_importedElement_import-import",
@@ -4415,7 +7256,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_target_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_target_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4432,7 +7285,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "member"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_importedMember_namespace-namespace",
@@ -4445,7 +7310,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "memberNamespace"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4462,7 +7339,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_importedPackage_packageImport-packageImport",
@@ -4475,7 +7364,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_target_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_target_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4492,7 +7393,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_lowerValue_owningLower-owningLower",
@@ -4505,7 +7418,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4522,7 +7447,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_mapping_abstraction-abstraction",
@@ -4535,7 +7472,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4550,7 +7499,9 @@ window.UML_XMI_DATA = {
           "association": "A_member_memberNamespace",
           "owner": "A_member_memberNamespace",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_member_memberNamespace-memberNamespace",
@@ -4561,7 +7512,9 @@ window.UML_XMI_DATA = {
           "association": "A_member_memberNamespace",
           "owner": "A_member_memberNamespace",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4578,7 +7531,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_nameExpression_namedElement-namedElement",
@@ -4591,7 +7556,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4609,7 +7586,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "actual"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameterSubstitution-actual",
+              "name": "actual",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameterSubstitution"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_ownedActual_owningTemplateParameterSubstitution-owningTemplateParameterSubstitution",
@@ -4624,6 +7622,28 @@ window.UML_XMI_DATA = {
           ],
           "redefines": [
             "templateParameterSubstitution"
+          ],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [
+            {
+              "id": "A_actual_templateParameterSubstitution-templateParameterSubstitution",
+              "name": "templateParameterSubstitution",
+              "type": "TemplateParameterSubstitution",
+              "owner": {
+                "type": "association",
+                "name": "A_actual_templateParameterSubstitution"
+              }
+            }
           ]
         }
       ]
@@ -4641,7 +7661,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_ownedComment_owningElement-owningElement",
@@ -4654,7 +7686,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4672,7 +7716,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "default"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameter-default",
+              "name": "default",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_ownedDefault_templateParameter-templateParameter",
@@ -4687,6 +7752,28 @@ window.UML_XMI_DATA = {
           ],
           "redefines": [
             "templateParameter"
+          ],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": [
+            {
+              "id": "A_default_templateParameter-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "association",
+                "name": "A_default_templateParameter"
+              }
+            }
           ]
         }
       ]
@@ -4702,7 +7789,9 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "A_ownedElement_owner",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "Element-owner",
@@ -4713,7 +7802,9 @@ window.UML_XMI_DATA = {
           "association": "A_ownedElement_owner",
           "owner": "A_ownedElement_owner",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4731,7 +7822,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "member"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "NamedElement-namespace",
@@ -4745,7 +7857,28 @@ window.UML_XMI_DATA = {
             "memberNamespace",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4763,7 +7896,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "parameter"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateSignature-parameter",
+              "name": "parameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateSignature"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameter-signature",
@@ -4777,7 +7931,28 @@ window.UML_XMI_DATA = {
             "templateSignature",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_parameter_templateSignature-templateSignature",
+              "name": "templateSignature",
+              "type": "TemplateSignature",
+              "owner": {
+                "type": "association",
+                "name": "A_parameter_templateSignature"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4795,7 +7970,28 @@ window.UML_XMI_DATA = {
             "ownedElement",
             "parameteredElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "TemplateParameter-parameteredElement",
+              "name": "parameteredElement",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "ParameterableElement-owningTemplateParameter",
@@ -4809,7 +8005,28 @@ window.UML_XMI_DATA = {
             "owner",
             "templateParameter"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4826,7 +8043,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedMember"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "Constraint-context",
@@ -4839,7 +8068,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "namespace"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4856,7 +8097,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateSignature-template",
@@ -4869,7 +8122,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4887,7 +8152,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "PackageImport-importingNamespace",
@@ -4901,7 +8187,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4918,7 +8225,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateParameterSubstitution-templateBinding",
@@ -4931,7 +8250,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4946,7 +8277,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameter_templateSignature",
           "owner": "A_parameter_templateSignature",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_parameter_templateSignature-templateSignature",
@@ -4957,7 +8290,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameter_templateSignature",
           "owner": "A_parameter_templateSignature",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4972,7 +8307,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameteredElement_templateParameter",
           "owner": "A_parameteredElement_templateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "ParameterableElement-templateParameter",
@@ -4983,7 +8320,9 @@ window.UML_XMI_DATA = {
           "association": "A_parameteredElement_templateParameter",
           "owner": "A_parameteredElement_templateParameter",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -4998,7 +8337,9 @@ window.UML_XMI_DATA = {
           "association": "A_relatedElement_relationship",
           "owner": "A_relatedElement_relationship",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_relatedElement_relationship-relationship",
@@ -5009,7 +8350,9 @@ window.UML_XMI_DATA = {
           "association": "A_relatedElement_relationship",
           "owner": "A_relatedElement_relationship",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5026,7 +8369,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_signature_templateBinding-templateBinding",
@@ -5039,7 +8394,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_target_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_target_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5056,7 +8423,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relatedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_source_directedRelationship-directedRelationship",
@@ -5069,7 +8448,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_relatedElement_relationship-relationship",
+              "name": "relationship",
+              "type": "Relationship",
+              "owner": {
+                "type": "association",
+                "name": "A_relatedElement_relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5086,7 +8477,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_specification_owningConstraint-owningConstraint",
@@ -5099,7 +8502,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5116,7 +8531,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "target"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_supplier_supplierDependency-supplierDependency",
@@ -5129,7 +8556,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "directedRelationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_target_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_target_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5146,7 +8585,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relatedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Relationship-relatedElement",
+              "name": "relatedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_target_directedRelationship-directedRelationship",
@@ -5159,7 +8610,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "relationship"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_relatedElement_relationship-relationship",
+              "name": "relationship",
+              "type": "Relationship",
+              "owner": {
+                "type": "association",
+                "name": "A_relatedElement_relationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5177,7 +8640,28 @@ window.UML_XMI_DATA = {
             "directedRelationship",
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "TemplateBinding-boundElement",
@@ -5191,7 +8675,28 @@ window.UML_XMI_DATA = {
             "source",
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5206,7 +8711,9 @@ window.UML_XMI_DATA = {
           "association": "A_type_typedElement",
           "owner": "A_type_typedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         },
         {
           "id": "A_type_typedElement-typedElement",
@@ -5217,7 +8724,9 @@ window.UML_XMI_DATA = {
           "association": "A_type_typedElement",
           "owner": "A_type_typedElement",
           "subsets": [],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
         }
       ]
     },
@@ -5234,7 +8743,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "ownedElement"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         },
         {
           "id": "A_upperValue_owningUpper-owningUpper",
@@ -5247,7 +8768,19 @@ window.UML_XMI_DATA = {
           "subsets": [
             "owner"
           ],
-          "redefines": []
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
         }
       ]
     }

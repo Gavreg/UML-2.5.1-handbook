@@ -206,10 +206,31 @@ class XmiModel:
             for element in self.root.iter()
             if element.get(XMI_NS + "type") == "uml:Association"
         }
+        self.property_owners = {
+            prop.get(XMI_NS + "id"): {"type": "classifier", "name": name}
+            for name, classifier in self.classes.items()
+            for prop in classifier.findall("ownedAttribute")
+        }
+        self.property_owners.update({
+            prop.get(XMI_NS + "id"): {"type": "association", "name": name}
+            for name, association in self.associations.items()
+            for prop in association.findall("ownedEnd")
+        })
         self.missing_descriptions = []
 
     def property_name(self, element_id):
         return self.elements[element_id].get("name")
+
+    def property_references(self, prop, tag):
+        return [
+            {
+                "id": item.get(XMI_NS + "idref"),
+                "name": self.property_name(item.get(XMI_NS + "idref")),
+                "type": property_type(self.elements[item.get(XMI_NS + "idref")]),
+                "owner": self.property_owners.get(item.get(XMI_NS + "idref")),
+            }
+            for item in prop.findall(tag)
+        ]
 
     def modifiers(self, prop):
         result = []
@@ -263,6 +284,8 @@ class XmiModel:
             "owner": owner,
             "subsets": subsets,
             "redefines": redefines,
+            "subsettedProperties": self.property_references(prop, "subsettedProperty"),
+            "redefinedProperties": self.property_references(prop, "redefinedProperty"),
         }
 
     def direct_properties(self, class_name, descriptions):

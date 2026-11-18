@@ -37,6 +37,7 @@
     "'": "&#039;"
   })[character]);
 
+  const escapeRegExp = value => String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const classifierByName = new Map(data.classifiers.map(item => [item.name, item]));
   const associationByName = new Map(data.associations.map(item => [item.name, item]));
@@ -59,7 +60,7 @@
   const metamodelNames = [...classifierByName.keys(), ...associationByName.keys()]
     .sort((first, second) => second.length - first.length);
   const metamodelNamePattern = new RegExp(
-    `(^|[^A-Za-z0-9_])(${metamodelNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})(?![A-Za-z0-9_])`,
+    `(^|[^A-Za-z0-9_])(${metamodelNames.map(escapeRegExp).join("|")})(?![A-Za-z0-9_])`,
     "g"
   );
 
@@ -116,10 +117,39 @@
       </li>`).join("")}</ul></section>`;
   }
 
+  function propertySignature(property) {
+    const modifierStart = property.signature.indexOf(" {");
+    if (modifierStart < 0) return escapeHtml(property.signature);
+    const references = [...(property.subsettedProperties || []), ...(property.redefinedProperties || [])];
+    if (!references.length) return escapeHtml(property.signature);
+    const referencesByName = new Map();
+    references.forEach(reference => {
+      if (!referencesByName.has(reference.name)) referencesByName.set(reference.name, reference);
+    });
+    const names = [...referencesByName.keys()].sort((first, second) => second.length - first.length);
+    const pattern = new RegExp(`\\b(${names.map(escapeRegExp).join("|")})\\b`, "g");
+    const modifiers = property.signature.slice(modifierStart + 2, -1);
+    const linkedModifiers = escapeHtml(modifiers).replace(pattern, name => {
+      const reference = referencesByName.get(name);
+      const owner = reference.owner;
+      if (owner?.type === "classifier" && classifierByName.has(owner.name)) {
+        return `<a href="#/classifier/${slug(owner.name)}">${escapeHtml(name)}</a>`;
+      }
+      if (owner?.type === "association" && associationByName.has(owner.name)) {
+        return `<a href="#/association/${slug(owner.name)}">${escapeHtml(name)}</a>`;
+      }
+      if (classifierByName.has(reference.type)) {
+        return `<a href="#/classifier/${slug(reference.type)}">${escapeHtml(name)}</a>`;
+      }
+      return escapeHtml(name);
+    });
+    return `${escapeHtml(property.signature.slice(0, modifierStart))} {${linkedModifiers}}`;
+  }
+
   function propertyList(properties, currentName = "") {
     return `<ul class="detail-list property-list">${properties.map(property => `
       <li class="detail-item">
-        <code>${escapeHtml(property.signature)}</code>
+        <code>${propertySignature(property)}</code>
         <div class="property-meta">
           ${property.association ? associationLink(property.association) : ""}
           ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}

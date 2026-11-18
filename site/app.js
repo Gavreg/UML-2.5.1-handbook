@@ -2,6 +2,7 @@
   "use strict";
 
   const data = window.UML_DATA;
+  const xmiData = window.UML_XMI_DATA;
   const content = document.getElementById("content");
   const navigation = document.getElementById("navigation");
   const sidebar = document.getElementById("sidebar");
@@ -87,6 +88,27 @@
         <code>${escapeHtml(item[key] || item.name)}</code>
         ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ""}
       </li>`).join("")}</ul></section>`;
+  }
+
+  function propertyList(properties) {
+    return `<ul class="detail-list property-list">${properties.map(property => `
+      <li class="detail-item">
+        <code>${escapeHtml(property.signature)}</code>
+        <div class="property-meta">
+          ${property.association ? associationLink(property.association) : ""}
+          ${property.inverse ? `<span>Обратный конец</span>` : ""}
+          ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}
+        </div>
+        <p>${escapeHtml(property.description)}</p>
+      </li>`).join("")}</ul>`;
+  }
+
+  function propertySection(title, properties, collapsible = false, note = "Включены обычные атрибуты и обе стороны показанных в разделе 7 ассоциаций. Сигнатуры сверены с нормативным XMI.") {
+    if (!properties || !properties.length) return "";
+    const content = propertyList(properties);
+    return `<section>${collapsible
+      ? `<details class="inherited-properties"><summary><span>${title}</span><span class="property-count">${properties.length}</span></summary>${content}</details>`
+      : `<h2>${title} <span class="property-count">${properties.length}</span></h2><p class="section-note">${escapeHtml(note)}</p>${content}`}</section>`;
   }
 
   function relatedFigures(ids = []) {
@@ -186,7 +208,7 @@
       <div class="definition"><span class="definition-label">Содержание раздела</span><p>${escapeHtml(section.summary)}</p></div>
       ${section.semantics ? `<section><h2>Семантика</h2><p>${escapeHtml(section.semantics)}</p></section>` : ""}
       ${section.notation ? `<section><h2>Нотация</h2><p>${escapeHtml(section.notation)}</p></section>` : ""}
-      ${isClassifiers ? `<section><h2>Классификаторы раздела</h2><div class="object-list">${data.classifiers.map(item => objectRow(item, "classifier")).join("")}</div></section>` : ""}
+      ${isClassifiers ? `<section><h2>Классификаторы раздела</h2><div class="object-list">${data.classifiers.filter(item => item.section.startsWith("7.8.")).map(item => objectRow(item, "classifier")).join("")}</div></section>` : ""}
       ${isAssociations ? `<section><h2>Ассоциации раздела</h2><div class="object-list">${data.associations.map(item => objectRow(item, "association")).join("")}</div></section>` : ""}
       ${section.figures.length ? `<section><h2>Абстрактный синтаксис и примеры</h2>${section.figures.map(figureCard).join("")}</section>` : ""}
       ${sourceLink(section.page)}`;
@@ -195,9 +217,15 @@
   function renderClassifier(id) {
     const item = data.classifiers.find(entry => slug(entry.name) === id);
     if (!item) return renderNotFound();
+    const xmi = xmiData.classes[item.name];
+    const directProperties = xmi ? xmi.direct : [...(item.attributes || []), ...(item.ends || [])];
+    const figures = data.diagrams.filter(diagram => diagram.related.includes(item.name)).map(diagram => diagram.id);
+    const inCommonStructure = item.section.startsWith("7.8.");
     document.title = `${item.name} — ${item.ru} — UML 2.5.1`;
     return `
-      ${breadcrumbs([{ label: "7 Common Structure" }, { label: "7.8 Классификаторы", href: "#/section/7-8" }, { label: item.name }])}
+      ${breadcrumbs(inCommonStructure
+        ? [{ label: "7 Common Structure" }, { label: "7.8 Классификаторы", href: "#/section/7-8" }, { label: item.name }]
+        : [{ label: "Связанные классификаторы" }, { label: item.name }])}
       <p class="eyebrow">${kindLabels[item.kind]} · раздел ${item.section}</p>
       <h1>${escapeHtml(item.ru)}</h1>
       <p class="original-name" lang="en">${escapeHtml(item.name)} [${escapeHtml(item.kind)}]</p>
@@ -205,12 +233,12 @@
       <div class="definition"><span class="definition-label">Определение</span><p>${escapeHtml(item.definition)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations)}</section>` : ""}
       ${item.specializations ? `<section><h2>Специализации</h2>${linkList(item.specializations)}</section>` : ""}
-      ${detailSection("Атрибуты", item.attributes)}
-      ${detailSection("Концы ассоциаций", item.ends)}
+      ${propertySection("Атрибуты", directProperties)}
+      ${propertySection("Унаследованные атрибуты", xmi?.inherited, true)}
       ${detailSection("Операции", item.operations)}
       ${detailSection("Ограничения", item.constraints, "name")}
       ${detailSection("Литералы", item.literals, "name")}
-      ${relatedFigures(item.figures)}
+      ${relatedFigures(figures)}
       ${sourceLink(item.page)}`;
   }
 
@@ -222,7 +250,7 @@
     const item = data.associations.find(entry => slug(entry.name) === id);
     if (!item) return renderNotFound();
     document.title = `${item.name} — UML 2.5.1`;
-    const ends = item.ends.map(end => ({ signature: end }));
+    const ends = xmiData.associations[item.name]?.ends || item.ends.map(end => ({ signature: end }));
     return `
       ${breadcrumbs([{ label: "7 Common Structure" }, { label: "7.9 Ассоциации", href: "#/section/7-9" }, { label: item.name }])}
       <p class="eyebrow">Ассоциация · раздел ${item.section}</p>
@@ -232,7 +260,7 @@
       <div class="definition"><span class="definition-label">Определение</span><p>${escapeHtml(item.definition)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations, "association")}</section>` : ""}
       ${item.specializations ? `<section><h2>Специализации</h2>${linkList(item.specializations, "association")}</section>` : ""}
-      ${detailSection("Концы ассоциации", ends)}
+      ${propertySection("Концы ассоциации", ends, false, "Типы, кратность и другие характеристики обоих концов сверены с нормативным XMI.")}
       <section><h2>Диаграммы в спецификации</h2><div class="meta-row">${item.diagrams.map(name => `<span class="meta-tag">${escapeHtml(name)}</span>`).join("")}</div></section>
       ${relatedFigures(associationFigures(item))}
       ${sourceLink(item.page)}`;
@@ -276,14 +304,14 @@
       subtitle: item.ru,
       type: `${kindLabels[item.kind]} · ${item.section}`,
       href: `#/classifier/${slug(item.name)}`,
-      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${(item.generalizations || []).join(" ")} ${(item.specializations || []).join(" ")}`
+      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${(item.generalizations || []).join(" ")} ${(item.specializations || []).join(" ")} ${(xmiData.classes[item.name]?.direct || []).map(property => `${property.signature} ${property.description}`).join(" ")}`
     })),
     ...data.associations.map(item => ({
       title: item.name,
       subtitle: item.ru,
       type: `Ассоциация · ${item.section}`,
       href: `#/association/${slug(item.name)}`,
-      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${item.ends.join(" ")}`
+      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${(xmiData.associations[item.name]?.ends || []).map(property => `${property.signature} ${property.description}`).join(" ")}`
     })),
     ...data.diagrams.map(item => ({
       title: `Рисунок ${item.id} — ${item.title}`,

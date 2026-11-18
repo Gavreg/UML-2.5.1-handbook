@@ -1,0 +1,349 @@
+"""
+Name: sync_xmi_properties.py
+Purpose: Generate classifier and association properties from the normative UML 2.5.1 XMI.
+Interface: python scripts/sync_xmi_properties.py [--check]
+Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI.
+Requires: Python 3; docs/UML-2.5.1.xmi and site/data/common-structure.js.
+"""
+
+from argparse import ArgumentParser
+from copy import deepcopy
+import json
+from pathlib import Path
+import re
+import xml.etree.ElementTree as ET
+
+
+ROOT = Path(__file__).resolve().parent.parent
+XMI = ROOT / "docs" / "UML-2.5.1.xmi"
+DATA = ROOT / "site" / "data" / "common-structure.js"
+OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
+XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
+UML_NS = "{http://www.omg.org/spec/UML/20131001}"
+
+PROPERTY_TRANSLATIONS = {
+    "A_actual_templateParameterSubstitution-templateParameterSubstitution": "Подстановки, в которых элемент выступает фактическим параметром.",
+    "A_annotatedElement_comment-comment": "Комментарии, присоединённые к элементу.",
+    "A_constrainedElement_constraint-constraint": "Ограничения, применяемые к элементу.",
+    "A_default_templateParameter-templateParameter": "Параметры шаблона, для которых элемент задан как значение по умолчанию.",
+    "A_formal_templateParameterSubstitution-templateParameterSubstitution": "Подстановки, в которых параметр выступает формальным параметром.",
+    "A_importedElement_import-import": "Импорты, добавляющие элемент в пространство имён.",
+    "A_importedMember_namespace-namespace": "Пространства имён, в которые элемент добавлен импортом.",
+    "A_importedPackage_packageImport-packageImport": "Импорты, добавляющие членов пакета в пространство имён.",
+    "A_lowerValue_owningLower-owningLower": "Элемент кратности, которому принадлежит спецификация нижней границы.",
+    "A_mapping_abstraction-abstraction": "Абстрагирование, которому принадлежит выражение отображения.",
+    "A_member_memberNamespace-memberNamespace": "Пространства имён, членом которых является элемент.",
+    "A_nameExpression_namedElement-namedElement": "Именованный элемент, имя которого задаёт выражение.",
+    "A_ownedActual_owningTemplateParameterSubstitution-owningTemplateParameterSubstitution": "Подстановка, владеющая фактическим параметром.",
+    "A_ownedComment_owningElement-owningElement": "Элемент, владеющий комментарием.",
+    "A_ownedDefault_templateParameter-templateParameter": "Параметр шаблона, владеющий значением по умолчанию.",
+    "A_parameter_templateSignature-templateSignature": "Подписи, включающие параметр шаблона.",
+    "A_relatedElement_relationship-relationship": "Отношения, в которых участвует элемент.",
+    "A_signature_templateBinding-templateBinding": "Привязки, использующие подпись целевого шаблона.",
+    "A_source_directedRelationship-directedRelationship": "Направленные отношения, для которых элемент является источником.",
+    "A_specification_owningConstraint-owningConstraint": "Ограничение, владеющее спецификацией условия.",
+    "A_supplier_supplierDependency-supplierDependency": "Зависимости, которые ссылаются на элемент как на поставщика.",
+    "A_target_directedRelationship-directedRelationship": "Направленные отношения, для которых элемент является целью.",
+    "A_type_typedElement-typedElement": "Типизированные элементы, для которых задан этот тип.",
+    "A_upperValue_owningUpper-owningUpper": "Элемент кратности, которому принадлежит спецификация верхней границы.",
+    "Expression-operand": "Упорядоченная последовательность спецификаций значений-операндов.",
+    "Expression-symbol": "Символ, связанный с этим узлом дерева выражения.",
+    "OpaqueExpression-behavior": "Поведение UML, задающее вычисление выражения.",
+    "OpaqueExpression-body": "Текстовое определение поведения выражения, возможно на нескольких языках.",
+    "OpaqueExpression-language": "Языки текстовых определений; порядок языков соответствует порядку строк body. Если языки не указаны, они могут следовать из выражения или контекста.",
+    "OpaqueExpression-result": "Единственный возвращаемый параметр поведения, значения которого являются результатом вычисления выражения.",
+    "Package-URI": "Идентификатор пакета, соответствующий правилам синтаксиса URI.",
+    "Package-nestedPackage": "Вложенные пакеты, принадлежащие этому пакету.",
+    "Package-nestingPackage": "Пакет, владеющий этим пакетом.",
+    "Package-ownedStereotype": "Стереотипы, принадлежащие пакету.",
+    "Package-ownedType": "Типы, принадлежащие пакету.",
+    "Package-packageMerge": "Операции слияния пакетов, принадлежащие этому пакету.",
+    "Package-packagedElement": "Упаковываемые элементы, принадлежащие пакету.",
+    "Package-profileApplication": "Применения профилей, показывающие, какие профили применены к пакету.",
+    "StringExpression-owningExpression": "Строковое выражение, частью которого является данное подвыражение.",
+    "StringExpression-subExpression": "Строковые подвыражения, образующие данное выражение.",
+}
+
+
+def classifier_blocks(text):
+    block = text.split("const classifiers = [", 1)[1].split("const associations = [", 1)[0]
+    starts = list(re.finditer(r'^    \{\n      name: "([A-Za-z]+)",\n      ru:', block, re.MULTILINE))
+    for index, match in enumerate(starts):
+        end = starts[index + 1].start() if index + 1 < len(starts) else len(block)
+        yield match.group(1), block[match.start():end]
+
+
+def curated_descriptions(text):
+    result = {}
+    for classifier, block in classifier_blocks(text):
+        for signature, description in re.findall(
+            r'\{ signature: "([^"]+)", description: "([^"]*)" \}', block
+        ):
+            name = signature.split(":", 1)[0].strip().lstrip("/")
+            if "(" not in name:
+                result[f"{classifier}-{name}"] = description
+    return result
+
+
+def diagram_classifiers(text):
+    block = text.split("const diagrams = [", 1)[1].split("return {", 1)[0]
+    names = []
+    for related in re.findall(r"related: \[([^]]*)\]", block):
+        for name in re.findall(r'"([A-Za-z]+)"', related):
+            if name not in names:
+                names.append(name)
+    return names
+
+
+def association_names(text):
+    block = text.split("const associations = [", 1)[1].split("const diagrams = [", 1)[0]
+    return re.findall(r'name: "(A_[A-Za-z_]+)"', block)
+
+
+def value(element, default):
+    if element is None:
+        return default
+    return element.get("value", default)
+
+
+def property_type(prop):
+    if prop.get("type"):
+        return prop.get("type")
+    type_element = prop.find("type")
+    if type_element is not None:
+        return type_element.get("href", "").rsplit("#", 1)[-1]
+    raise ValueError(f"Property {prop.get(XMI_NS + 'id')} has no type")
+
+
+def default_value(prop):
+    default = prop.find("defaultValue")
+    if default is None:
+        return None
+    if default.get("value") is not None:
+        return default.get("value")
+    if default.get("instance"):
+        return default.get("instance").rsplit("-", 1)[-1]
+    default_types = {
+        "uml:LiteralBoolean": "false",
+        "uml:LiteralInteger": "0",
+        "uml:LiteralUnlimitedNatural": "1",
+    }
+    return default_types.get(default.get(XMI_NS + "type"))
+
+
+class XmiModel:
+    def __init__(self, path):
+        self.root = ET.parse(path).getroot()
+        self.elements = {
+            element.get(XMI_NS + "id"): element
+            for element in self.root.iter()
+            if element.get(XMI_NS + "id")
+        }
+        self.classes = {
+            element.get("name"): element
+            for element in self.root.iter()
+            if element.get(XMI_NS + "type") == "uml:Class"
+        }
+        self.associations = {
+            element.get("name"): element
+            for element in self.root.iter()
+            if element.get(XMI_NS + "type") == "uml:Association"
+        }
+        self.missing_descriptions = []
+
+    def property_name(self, element_id):
+        return self.elements[element_id].get("name")
+
+    def modifiers(self, prop):
+        result = []
+        if prop.get("isOrdered") == "true":
+            result.append("ordered")
+        if prop.get("isUnique") == "false":
+            result.append("nonunique")
+        if prop.get("isReadOnly") == "true":
+            result.append("readOnly")
+        if prop.get("isDerivedUnion") == "true":
+            result.append("union")
+        subsets = [self.property_name(item.get(XMI_NS + "idref")) for item in prop.findall("subsettedProperty")]
+        redefines = [self.property_name(item.get(XMI_NS + "idref")) for item in prop.findall("redefinedProperty")]
+        if subsets:
+            result.append("subsets " + ", ".join(subsets))
+        if redefines:
+            result.append("redefines " + ", ".join(redefines))
+        return result, subsets, redefines
+
+    def signature(self, prop):
+        name = prop.get("name")
+        if prop.get("isDerived") == "true":
+            name = "/" + name
+        lower_element = prop.find("lowerValue")
+        upper_element = prop.find("upperValue")
+        lower = value(lower_element, "0" if lower_element is not None else "1")
+        upper = value(upper_element, "1")
+        signature = f"{name} : {property_type(prop)} [{lower}..{upper}]"
+        default = default_value(prop)
+        if default is not None:
+            signature += f" = {default}"
+        modifiers, _, _ = self.modifiers(prop)
+        if modifiers:
+            signature += " {" + ", ".join(modifiers) + "}"
+        return signature
+
+    def property(self, prop, descriptions, owner, inverse=False):
+        prop_id = prop.get(XMI_NS + "id")
+        description = descriptions.get(prop_id) or PROPERTY_TRANSLATIONS.get(prop_id)
+        if not description:
+            self.missing_descriptions.append(prop_id)
+            description = ""
+        _, subsets, redefines = self.modifiers(prop)
+        return {
+            "id": prop_id,
+            "name": prop.get("name"),
+            "signature": self.signature(prop),
+            "description": description,
+            "type": property_type(prop),
+            "association": prop.get("association"),
+            "inverse": inverse,
+            "owner": owner,
+            "subsets": subsets,
+            "redefines": redefines,
+        }
+
+    def direct_properties(self, class_name, descriptions, clause7_associations):
+        classifier = self.classes[class_name]
+        properties = [
+            self.property(prop, descriptions, class_name)
+            for prop in classifier.findall("ownedAttribute")
+        ]
+        owned_ids = {prop["id"] for prop in properties}
+        for association_name in clause7_associations:
+            association = self.associations[association_name]
+            for end_ref in association.findall("memberEnd"):
+                prop = self.elements[end_ref.get(XMI_NS + "idref")]
+                prop_id = prop.get(XMI_NS + "id")
+                if prop.get("type") == class_name and prop_id not in owned_ids:
+                    properties.append(self.property(prop, descriptions, class_name, inverse=True))
+                    owned_ids.add(prop_id)
+        return properties
+
+    def generalizations(self, class_name):
+        return [
+            item.get("general")
+            for item in self.classes[class_name].findall("generalization")
+        ]
+
+    def inherited_properties(self, class_name, direct_by_class):
+        inherited = []
+        seen = set()
+        redefined_ids = set()
+
+        def collect_redefinitions(name):
+            for prop in self.classes[name].findall("ownedAttribute"):
+                redefined_ids.update(
+                    item.get(XMI_NS + "idref")
+                    for item in prop.findall("redefinedProperty")
+                )
+            for parent in self.generalizations(name):
+                collect_redefinitions(parent)
+
+        collect_redefinitions(class_name)
+
+        def visit(parent):
+            for prop in direct_by_class[parent]:
+                if prop["id"] in redefined_ids or prop["id"] in seen:
+                    continue
+                item = deepcopy(prop)
+                item["inheritedFrom"] = parent
+                inherited.append(item)
+                seen.add(prop["id"])
+            for grandparent in self.generalizations(parent):
+                visit(grandparent)
+
+        for parent in self.generalizations(class_name):
+            visit(parent)
+        return inherited
+
+    def association_ends(self, association_name, descriptions):
+        association = self.associations[association_name]
+        result = []
+        for end_ref in association.findall("memberEnd"):
+            prop = self.elements[end_ref.get(XMI_NS + "idref")]
+            result.append(self.property(prop, descriptions, association_name))
+        return result
+
+
+def generate():
+    text = DATA.read_text(encoding="utf-8")
+    model = XmiModel(XMI)
+    descriptions = curated_descriptions(text)
+    class_names = diagram_classifiers(text)
+    association_list = association_names(text)
+
+    enumeration_names = {
+        element.get("name")
+        for element in model.root.iter()
+        if element.get(XMI_NS + "type") == "uml:Enumeration"
+    }
+    missing_classes = [
+        name for name in class_names
+        if name not in model.classes and name not in enumeration_names
+    ]
+    if missing_classes:
+        raise ValueError(f"Diagram classifiers absent from XMI: {missing_classes}")
+    class_names = [name for name in class_names if name in model.classes]
+    missing_associations = [name for name in association_list if name not in model.associations]
+    if missing_associations:
+        raise ValueError(f"Associations absent from XMI: {missing_associations}")
+
+    required_classes = set()
+
+    def require_with_ancestors(name):
+        if name in required_classes:
+            return
+        required_classes.add(name)
+        for parent in model.generalizations(name):
+            require_with_ancestors(parent)
+
+    for name in class_names:
+        require_with_ancestors(name)
+    direct_by_class = {
+        name: model.direct_properties(name, descriptions, association_list)
+        for name in required_classes
+    }
+    classes = {}
+    for name in class_names:
+        classes[name] = {
+            "direct": direct_by_class[name],
+            "inherited": model.inherited_properties(name, direct_by_class),
+        }
+    associations = {
+        name: {"ends": model.association_ends(name, descriptions)}
+        for name in association_list
+    }
+    if model.missing_descriptions:
+        missing = sorted(set(model.missing_descriptions))
+        raise ValueError("Missing Russian property descriptions:\n" + "\n".join(missing))
+    payload = {
+        "source": "OMG UML 2.5.1, formal/17-12-05, UML.xmi (20161101)",
+        "classes": classes,
+        "associations": associations,
+    }
+    return "window.UML_XMI_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
+
+
+def main():
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="Check that the generated file is up to date")
+    args = parser.parse_args()
+    expected = generate()
+    if args.check:
+        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
+            raise SystemExit("Generated XMI data is out of date; run python scripts/sync_xmi_properties.py")
+        print("XMI property data: OK")
+        return
+    OUTPUT.write_text(expected, encoding="utf-8")
+    print(f"Generated {OUTPUT.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

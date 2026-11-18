@@ -12,6 +12,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 
 
@@ -19,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 INDEX = SITE / "index.html"
 DATA = SITE / "data" / "common-structure.js"
+XMI_DATA = SITE / "data" / "common-structure-xmi.js"
 
 
 class ResourceParser(HTMLParser):
@@ -80,7 +82,7 @@ def find_browser(explicit):
 
 def check_static():
     errors = []
-    for path in (INDEX, DATA, SITE / "app.js", SITE / "styles.css"):
+    for path in (INDEX, DATA, XMI_DATA, SITE / "app.js", SITE / "styles.css"):
         if not path.is_file():
             errors.append(f"Missing file: {path.relative_to(ROOT)}")
 
@@ -100,13 +102,23 @@ def check_static():
             errors.append(f"Empty image: {image.name}")
 
     all_routes = routes()
-    expected = (3, 9, 24, 36, 21)
+    expected = (3, 9, 28, 36, 21)
     if len(all_routes) != sum(expected):
         errors.append(f"Route extraction mismatch: {len(all_routes)} routes")
 
     app = (SITE / "app.js").read_text(encoding="utf-8")
     if "fetch(" in app:
         errors.append("fetch() is not allowed for core offline data")
+
+    sync = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "sync_xmi_properties.py"), "--check"],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if sync.returncode:
+        errors.append(f"XMI data check failed: {sync.stdout}{sync.stderr}")
     return errors, all_routes
 
 

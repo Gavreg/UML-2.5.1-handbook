@@ -526,6 +526,46 @@ window.UML_DATA = (() => {
         { name: "package", description: "Элемент виден внутри ближайшего вмещающего пакета при соблюдении видимости остальных владельцев." }
       ],
       figures: ["7.5"]
+    },
+    {
+      name: "OpaqueExpression",
+      ru: "Непрозрачное выражение",
+      kind: "Class",
+      section: "8.6.16",
+      page: 86,
+      definition: "ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.",
+      generalizations: ["ValueSpecification"],
+      figures: ["7.17"]
+    },
+    {
+      name: "StringExpression",
+      ru: "Строковое выражение",
+      kind: "Class",
+      section: "8.6.17",
+      page: 88,
+      definition: "Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.",
+      generalizations: ["Expression", "TemplateableElement"],
+      figures: ["7.5"]
+    },
+    {
+      name: "ValueSpecification",
+      ru: "Спецификация значения",
+      kind: "Abstract Class",
+      section: "8.6.22",
+      page: 91,
+      definition: "Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.",
+      generalizations: ["TypedElement", "PackageableElement"],
+      figures: ["7.10", "7.13"]
+    },
+    {
+      name: "Package",
+      ru: "Пакет",
+      kind: "Class",
+      section: "12.4.5",
+      page: 276,
+      definition: "Элемент для группировки других элементов и предоставления им пространства имён; может использоваться как шаблон и применять профили.",
+      generalizations: ["PackageableElement", "TemplateableElement", "Namespace"],
+      figures: ["7.5", "7.10"]
     }
   ];
 
@@ -721,20 +761,20 @@ window.UML_DATA = (() => {
     { id: "7.1", title: "Корневые понятия", en: "Root", section: "7.2", page: 21, related: ["Element", "Relationship", "DirectedRelationship", "Comment"] },
     { id: "7.2", title: "Обозначение комментария", en: "Comment notation", section: "7.2", page: 22, related: ["Comment"] },
     { id: "7.3", title: "Шаблоны", en: "Templates", section: "7.3", page: 23, related: ["TemplateParameter", "TemplateSignature", "TemplateableElement", "ParameterableElement", "Element"] },
-    { id: "7.4", title: "Привязки шаблонов", en: "Template bindings", section: "7.3", page: 23, related: ["TemplateBinding", "TemplateParameterSubstitution", "TemplateParameter", "ParameterableElement", "TemplateableElement", "TemplateSignature"] },
-    { id: "7.5", title: "Пространства имён", en: "Namespaces", section: "7.4", page: 27, related: ["Namespace", "NamedElement", "ElementImport", "PackageImport", "PackageableElement", "ParameterableElement", "VisibilityKind"] },
+    { id: "7.4", title: "Привязки шаблонов", en: "Template bindings", section: "7.3", page: 23, related: ["TemplateBinding", "TemplateParameterSubstitution", "TemplateParameter", "ParameterableElement", "TemplateableElement", "TemplateSignature", "DirectedRelationship", "Element"] },
+    { id: "7.5", title: "Пространства имён", en: "Namespaces", section: "7.4", page: 27, related: ["Namespace", "NamedElement", "ElementImport", "PackageImport", "PackageableElement", "ParameterableElement", "VisibilityKind", "DirectedRelationship", "Element", "StringExpression", "Constraint", "Package"] },
     { id: "7.6", title: "Пакет-шаблон со строковыми параметрами", en: "Template package with string parameters", section: "7.4", page: 31, related: ["TemplateParameter", "TemplateBinding"] },
     { id: "7.7", title: "Пример импорта элемента", en: "Example of element import", section: "7.4", page: 31, related: ["ElementImport"] },
     { id: "7.8", title: "Импорт элемента с псевдонимом", en: "Example of element import with aliasing", section: "7.4", page: 32, related: ["ElementImport"] },
     { id: "7.9", title: "Открытый и закрытый импорт пакетов", en: "Examples of public and private package imports", section: "7.4", page: 32, related: ["PackageImport"] },
-    { id: "7.10", title: "Абстрактный синтаксис типов и кратности", en: "Abstract syntax of types and multiplicity elements", section: "7.5", page: 33, related: ["Type", "TypedElement", "MultiplicityElement", "NamedElement", "PackageableElement"] },
+    { id: "7.10", title: "Абстрактный синтаксис типов и кратности", en: "Abstract syntax of types and multiplicity elements", section: "7.5", page: 33, related: ["Type", "TypedElement", "MultiplicityElement", "NamedElement", "PackageableElement", "Element", "ValueSpecification", "Package"] },
     { id: "7.11", title: "Кратность в текстовой спецификации", en: "Multiplicity within a textual specification", section: "7.5", page: 35, related: ["MultiplicityElement"] },
     { id: "7.12", title: "Кратность как дополнение к обозначению", en: "Multiplicity as an adornment to a symbol", section: "7.5", page: 35, related: ["MultiplicityElement"] },
-    { id: "7.13", title: "Абстрактный синтаксис ограничений", en: "Abstract Syntax of Constraints", section: "7.6", page: 36, related: ["Constraint", "Namespace", "PackageableElement"] },
+    { id: "7.13", title: "Абстрактный синтаксис ограничений", en: "Abstract Syntax of Constraints", section: "7.6", page: 36, related: ["Constraint", "Namespace", "PackageableElement", "Element", "ValueSpecification"] },
     { id: "7.14", title: "Ограничение в примечании", en: "Constraint in a note symbol", section: "7.6", page: 37, related: ["Constraint"] },
     { id: "7.15", title: "Ограничение, связанное с атрибутом", en: "Constraint attached to an attribute", section: "7.6", page: 37, related: ["Constraint"] },
     { id: "7.16", title: "Ограничение {xor}", en: "{xor} constraint", section: "7.6", page: 37, related: ["Constraint"] },
-    { id: "7.17", title: "Абстрактный синтаксис зависимостей", en: "Abstract syntax of dependencies", section: "7.7", page: 38, related: ["Dependency", "DirectedRelationship", "PackageableElement", "Abstraction", "Realization", "Usage"] },
+    { id: "7.17", title: "Абстрактный синтаксис зависимостей", en: "Abstract syntax of dependencies", section: "7.7", page: 38, related: ["Dependency", "DirectedRelationship", "PackageableElement", "Abstraction", "Realization", "Usage", "NamedElement", "OpaqueExpression"] },
     { id: "7.18", title: "Dependency между двумя элементами", en: "Notation for a Dependency between two elements", section: "7.7", page: 39, related: ["Dependency", "NamedElement"] },
     { id: "7.19", title: "Пример зависимости «Instantiate»", en: "An example of an «Instantiate» Dependency", section: "7.7", page: 39, related: ["Dependency"] },
     { id: "7.20", title: "Пример зависимости «use»", en: "An example of a «use» Dependency", section: "7.7", page: 39, related: ["Usage"] },

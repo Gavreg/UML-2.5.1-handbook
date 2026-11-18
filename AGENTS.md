@@ -24,7 +24,8 @@
 - `scripts/render_common_structure_diagrams.py` — повторное создание справочных PNG из PDF; требует PyMuPDF.
 - `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21; ссылки и подсказки строятся по данным справочника и XMI.
 - `scripts/sync_xmi_properties.py` — генерация и проверка свойств по нормативному XMI; русские описания отсутствующих свойств задаются в самом скрипте.
-- `scripts/validate_site.py` — статическая проверка, контроль синхронизации с XMI и генератором SVG, геометрическая проверка всех 21 диаграмм и иерархий наследования, проверка всех маршрутов через локальный Chrome или Edge.
+- `scripts/check_svg_overlaps.py` — отдельная геометрическая проверка SVG: перекрытия текста, отступы подписей, соединения линий и наконечники; сообщает координаты конфликтующих элементов.
+- `scripts/validate_site.py` — статическая проверка, контроль синхронизации с XMI и генератором SVG, запуск геометрической проверки всех 21 диаграмм и иерархий наследования, проверка всех маршрутов через локальный Chrome или Edge.
 
 ### Команды проверки
 
@@ -33,6 +34,7 @@ python scripts/sync_xmi_properties.py
 python scripts/sync_xmi_properties.py --check
 python scripts/generate_common_structure_svg.py
 python scripts/generate_common_structure_svg.py --check
+python scripts/check_svg_overlaps.py
 python scripts/validate_site.py
 python scripts/render_common_structure_diagrams.py
 ```

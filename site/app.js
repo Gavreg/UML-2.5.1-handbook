@@ -96,14 +96,13 @@
         <code>${escapeHtml(property.signature)}</code>
         <div class="property-meta">
           ${property.association ? associationLink(property.association) : ""}
-          ${property.inverse ? `<span>Обратный конец</span>` : ""}
           ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}
         </div>
         <p>${escapeHtml(property.description)}</p>
       </li>`).join("")}</ul>`;
   }
 
-  function propertySection(title, properties, collapsible = false, note = "Включены все обычные атрибуты и обе стороны всех ассоциаций нормативной XMI-модели.") {
+  function propertySection(title, properties, collapsible = false, note = "Включены обычные атрибуты и концы ассоциаций, которыми класс владеет по нормативной XMI-модели.") {
     if (!properties || !properties.length) return "";
     const content = propertyList(properties);
     return `<section>${collapsible

@@ -237,8 +237,26 @@ SVG_GEOMETRY_SCRIPT = r"""
     }
   }
 
+  for (const link of document.querySelectorAll('a[href*="#/classifier/"]')) {
+    const title = link.querySelector(":scope > title");
+    if (!title?.textContent.trim() || title.textContent.includes("открыть описание")) {
+      errors.push("class link has no definition tooltip");
+    }
+  }
+  for (const group of document.querySelectorAll("g.association-group")) {
+    if (!group.closest("a.association-link")) errors.push("association group has no link");
+    const ends = [...group.querySelectorAll("text.association-end")];
+    if (ends.length !== 2) errors.push(`association must have two described end labels: ${group.id}`);
+    for (const end of ends) {
+      if (!end.querySelector(":scope > title")?.textContent.trim()) {
+        errors.push(`association end has no description tooltip: ${end.textContent.trim()}`);
+      }
+    }
+  }
+
   for (const path of document.querySelectorAll("path.association")) {
     if (!path.closest("g.association-group")) errors.push("association has no hover group");
+    if (!path.closest("a.association-link")) errors.push("association has no link");
     const length = path.getTotalLength();
     const start = path.getPointAtLength(0);
     const end = path.getPointAtLength(length);

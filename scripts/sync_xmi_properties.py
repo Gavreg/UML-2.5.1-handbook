@@ -252,7 +252,7 @@ class XmiModel:
             signature += " {" + ", ".join(modifiers) + "}"
         return signature
 
-    def property(self, prop, descriptions, owner, inverse=False):
+    def property(self, prop, descriptions, owner):
         prop_id = prop.get(XMI_NS + "id")
         description = descriptions.get(prop_id) or PROPERTY_TRANSLATIONS.get(prop_id)
         if not description:
@@ -266,7 +266,6 @@ class XmiModel:
             "description": description,
             "type": property_type(prop),
             "association": prop.get("association"),
-            "inverse": inverse,
             "owner": owner,
             "subsets": subsets,
             "redefines": redefines,
@@ -274,19 +273,10 @@ class XmiModel:
 
     def direct_properties(self, class_name, descriptions):
         classifier = self.classes[class_name]
-        properties = [
+        return [
             self.property(prop, descriptions, class_name)
             for prop in classifier.findall("ownedAttribute")
         ]
-        owned_ids = {prop["id"] for prop in properties}
-        for association in self.associations.values():
-            for end_ref in association.findall("memberEnd"):
-                prop = self.elements[end_ref.get(XMI_NS + "idref")]
-                prop_id = prop.get(XMI_NS + "id")
-                if prop.get("type") == class_name and prop_id not in owned_ids:
-                    properties.append(self.property(prop, descriptions, class_name, inverse=True))
-                    owned_ids.add(prop_id)
-        return properties
 
     def generalizations(self, class_name):
         return [

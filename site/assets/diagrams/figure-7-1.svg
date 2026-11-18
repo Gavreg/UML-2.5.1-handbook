@@ -33,7 +33,7 @@
   <g aria-label="Ассоциации и обобщения">
     <path class="association" d="M 479 103 H 933 V 476 H 770" marker-start="url(#navigation-start)"/>
     <path class="association" d="M 479 183 H 698 V 467" marker-end="url(#navigation)"/>
-    <path class="association" d="M 479 259 H 622 V 310 H 465 V 304" marker-end="url(#navigation)"/>
+    <path class="association" d="M 479 259 H 622 V 334 H 465 V 304" marker-end="url(#navigation)"/>
 
     <path class="association" d="M 343 103 H 51 V 658 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
     <path class="association" d="M 343 199 H 121 V 742 H 368" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>

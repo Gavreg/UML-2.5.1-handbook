@@ -262,6 +262,29 @@ SVG_GEOMETRY_SCRIPT = r"""
   for (const path of document.querySelectorAll("path.generalization-line[marker-end]")) {
     if (path.getAttribute("marker-end") !== "url(#generalization)") errors.push("nonstandard generalization marker");
   }
+
+  const terminalRun = (path, atEnd) => {
+    const length = path.getTotalLength();
+    const origin = path.getPointAtLength(atEnd ? length : 0);
+    const next = path.getPointAtLength(atEnd ? length - 1 : 1);
+    const runX = next.x - origin.x;
+    const runY = next.y - origin.y;
+    const runLength = Math.hypot(runX, runY);
+    const unitX = runX / runLength;
+    const unitY = runY / runLength;
+    let run = 1;
+    for (let distance = 2; distance < length; distance += 1) {
+      const point = path.getPointAtLength(atEnd ? length - distance : distance);
+      const cross = Math.abs((point.x - origin.x) * unitY - (point.y - origin.y) * unitX);
+      if (cross > 0.25) break;
+      run = distance;
+    }
+    return run;
+  };
+  for (const path of document.querySelectorAll("path.association, path.generalization-line")) {
+    if (path.getAttribute("marker-start") && terminalRun(path, false) < 12) errors.push("insufficient straight segment before start marker");
+    if (path.getAttribute("marker-end") && terminalRun(path, true) < 12) errors.push("insufficient straight segment before end marker");
+  }
   document.documentElement.setAttribute("data-geometry-errors", [...new Set(errors)].join(" | "));
 })();
 """

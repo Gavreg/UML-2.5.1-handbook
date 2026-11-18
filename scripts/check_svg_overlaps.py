@@ -20,10 +20,13 @@ SITE = ROOT / "site"
 SVG_GEOMETRY_SCRIPT = r"""
 (() => {
   const errors = [];
+  const directText = element => [...element.childNodes]
+    .filter(node => node.nodeType === Node.TEXT_NODE)
+    .map(node => node.textContent).join("").trim();
   const labels = [...document.querySelectorAll("text")].map((element, index) => ({
     element,
     box: element.getBBox(),
-    name: element.textContent.trim() || `text ${index}`
+    name: directText(element) || `text ${index}`
   }));
   const classBoxes = [...document.querySelectorAll("rect.class-box")].map(element => ({
     element,
@@ -58,6 +61,18 @@ SVG_GEOMETRY_SCRIPT = r"""
   const horizontalGap = ex;
   const verticalGap = ex / 2;
   const associationLabel = label => Boolean(label.element.closest("g.association-group"));
+  const className = document.querySelector("text.class-name");
+  const endLabels = [...document.querySelectorAll(".association-group text, .example-association-group text")];
+  if (className && endLabels.length) {
+    const classFontSize = parseFloat(getComputedStyle(className).fontSize);
+    const endFontSizes = endLabels.map(label => parseFloat(getComputedStyle(label).fontSize));
+    if (endFontSizes.some(size => Math.abs(size - endFontSizes[0]) > 0.01)) {
+      errors.push(`association end font sizes differ: ${[...new Set(endFontSizes)].join(", ")}`);
+    }
+    if (endFontSizes.some(size => size > classFontSize * 0.7 + 0.01)) {
+      errors.push(`association end font size ${endFontSizes[0]} exceeds 0.7 of class font size ${classFontSize}`);
+    }
+  }
 
   for (let first = 0; first < labels.length; first += 1) {
     for (let second = first + 1; second < labels.length; second += 1) {
@@ -92,7 +107,7 @@ SVG_GEOMETRY_SCRIPT = r"""
       const box = expanded(label.box, gapX, gapY);
       for (let distance = 0; distance <= length; distance += 1) {
         if (inside(line.getPointAtLength(distance), box, 0)) {
-          errors.push(`text/line: ${label.name} [${formatBox(label.box)}]`);
+          errors.push(`text/line: ${label.name} [${formatBox(label.box)}]; ${line.getAttribute("class")} ${line.getAttribute("d") || ""}`);
           break;
         }
       }
@@ -170,8 +185,13 @@ SVG_GEOMETRY_SCRIPT = r"""
       errors.push(`association end labels assigned to the same end: ${group.id}`);
     }
     for (const placement of placements) {
-      const { role, box, origin, next, horizontal } = placement;
-      const name = role.textContent.trim();
+      const { role, box, origin, next, horizontal, endIndex } = placement;
+      const name = directText(role);
+      const ownDistance = distanceToBox(origin, box);
+      const oppositeDistance = distanceToBox(origins[1 - endIndex], box);
+      if (oppositeDistance < ownDistance + horizontalGap) {
+        errors.push(`association end description is too close to opposite end: ${group.id} / ${name}`);
+      }
       if (horizontal) {
         const toRight = next.x > origin.x;
         const gap = toRight ? box.x - origin.x : origin.x - box.x - box.width;
@@ -201,14 +221,33 @@ SVG_GEOMETRY_SCRIPT = r"""
     }
     for (const label of group.querySelectorAll("text.association-label")) {
       const box = label.getBBox();
-      const placement = placements.reduce((nearest, candidate) => {
-        const labelCenter = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
-        return distanceToBox(labelCenter, candidate.box) < distanceToBox(labelCenter, nearest.box)
-          ? candidate : nearest;
-      });
-      const endIndex = placement.endIndex;
-      if (placement.nameGap > axialGap(origins[endIndex], box, placement.horizontal) + 0.75) {
-        errors.push(`association end name is farther than its modifier: ${placement.role.textContent.trim()} / ${label.textContent.trim()}`);
+      const distances = origins.map(origin => distanceToBox(origin, box));
+      const endIndex = distances[0] <= distances[1] ? 0 : 1;
+      const placement = placements.find(candidate => candidate.endIndex === endIndex);
+      const ownDistance = distances[endIndex];
+      const oppositeDistance = distances[1 - endIndex];
+      if (oppositeDistance < ownDistance + horizontalGap) {
+        errors.push(`association end description is too close to opposite end: ${group.id} / ${label.textContent.trim()}`);
+      }
+      const modifierGap = axialGap(origins[endIndex], box, placement.horizontal);
+      if (placement.nameGap > modifierGap + 1.25) {
+        errors.push(`association end name is farther than its modifier: ${directText(placement.role)} / ${label.textContent.trim()} [name=${placement.nameGap.toFixed(1)}, modifier=${modifierGap.toFixed(1)}]`);
+      }
+    }
+  }
+
+  for (const group of document.querySelectorAll("g.example-association-group")) {
+    const path = group.querySelector("path.example-association");
+    if (!path) continue;
+    const length = path.getTotalLength();
+    const origins = [path.getPointAtLength(0), path.getPointAtLength(length)];
+    for (const label of group.querySelectorAll("text")) {
+      const box = label.getBBox();
+      const distances = origins.map(origin => distanceToBox(origin, box));
+      if (Math.min(...distances) > ex * 6) continue;
+      const endIndex = distances[0] <= distances[1] ? 0 : 1;
+      if (distances[1 - endIndex] < distances[endIndex] + horizontalGap) {
+        errors.push(`association end description is too close to opposite end: example / ${label.textContent.trim()}`);
       }
     }
   }

@@ -65,7 +65,8 @@ STYLE = """
   text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
-  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }
@@ -235,17 +236,17 @@ def figure_7_2():
 
 
 def figure_7_3():
-    svg = Svg("7.3", "Шаблоны", "Метаклассы TemplateSignature, TemplateParameter, TemplateableElement и ParameterableElement, их обобщения и ассоциации.", 1300, 840)
+    svg = Svg("7.3", "Шаблоны", "Метаклассы TemplateSignature, TemplateParameter, TemplateableElement и ParameterableElement, их обобщения и ассоциации.", 1300, 940)
     class_node(svg, "Element", 590, 30, 120, 45)
     class_node(svg, "TemplateSignature", 130, 170, 200, 60)
     class_node(svg, "TemplateableElement", 900, 170, 230, 60)
-    class_node(svg, "TemplateParameter", 130, 400, 200, 310)
-    class_node(svg, "ParameterableElement", 900, 400, 240, 310)
-    class_node(svg, "Element", 590, 765, 120, 45)
+    class_node(svg, "TemplateParameter", 130, 500, 200, 310)
+    class_node(svg, "ParameterableElement", 900, 500, 240, 310)
+    class_node(svg, "Element", 590, 865, 120, 45)
     generalization(svg, "M 230 170 V 100 H 650 V 75", child="TemplateSignature", parent="Element")
     generalization(svg, "M 1015 170 V 100 H 650", False)
-    generalization(svg, "M 230 710 V 745 H 650 V 765", child="TemplateParameter", parent="Element")
-    generalization(svg, "M 1020 710 V 745 H 650", False)
+    generalization(svg, "M 230 810 V 845 H 650 V 865", child="TemplateParameter", parent="Element")
+    generalization(svg, "M 1020 810 V 845 H 650", False)
 
     association(svg, "A_ownedTemplateSignature_template", "M 330 195 H 900",
         ("TemplateSignature", "template", "+ template", 350, 175, "start"),
@@ -253,40 +254,40 @@ def figure_7_3():
         ' marker-start="url(#navigation-start)"', dot(330, 195) + diamond(900, 195, "left"),
         [("{subsets owner}", 350, 150, "start"), ("0..1", 350, 225, "start"),
          ("{subsets ownedElement}", 880, 150, "end"), ("1", 880, 225, "end")])
-    association(svg, "A_ownedParameter_signature", "M 190 230 V 400",
+    association(svg, "A_ownedParameter_signature", "M 190 230 V 500",
         ("TemplateParameter", "signature", "+ signature", 170, 253, "end"),
-        ("TemplateSignature", "ownedParameter", "+ ownedParameter", 160, 390, "end"),
-        ' marker-end="url(#navigation)"', diamond(190, 230, "down") + dot(190, 400),
+        ("TemplateSignature", "ownedParameter", "+ ownedParameter", 160, 490, "end"),
+        ' marker-end="url(#navigation)"', diamond(190, 230, "down") + dot(190, 500),
         [("{subsets templateSignature,", 178, 278, "end"), ("subsets owner}", 178, 298, "end"), ("1", 178, 320, "end"),
-         ("{ordered, subsets ownedElement,", 178, 345, "end"), ("subsets parameter}", 178, 365, "end"), ("1..*", 40, 435, "end")])
-    association(svg, "A_parameter_templateSignature", "M 275 230 V 400",
+         ("{ordered, subsets ownedElement,", 178, 445, "end"), ("subsets parameter}", 178, 465, "end"), ("1..*", 40, 535, "end")])
+    association(svg, "A_parameter_templateSignature", "M 275 230 V 500",
         ("TemplateParameter", "templateSignature", "+ templateSignature", 287, 253, "start"),
-        ("TemplateSignature", "parameter", "+ parameter", 340, 377, "start"),
+        ("TemplateSignature", "parameter", "+ parameter", 340, 477, "start"),
         ' marker-end="url(#navigation)"', dot(275, 230),
-        [("0..1", 287, 278, "start"), ("{ordered}", 287, 323, "start"), ("1..*", 340, 360, "start")])
+        [("0..1", 287, 278, "start"), ("{ordered}", 287, 323, "start"), ("1..*", 340, 460, "start")])
 
-    association(svg, "A_ownedParameteredElement_owningTemplateParameter", "M 330 440 H 900",
-        ("ParameterableElement", "owningTemplateParameter", "+ owningTemplateParameter", 350, 425, "start"),
-        ("TemplateParameter", "ownedParameteredElement", "+ ownedParameteredElement", 880, 415, "end"),
-        ' marker-start="url(#navigation-start)"', dot(330, 440) + diamond(900, 440, "left"),
-        [("{subsets owner, templateParameter}", 350, 405, "start"), ("0..1", 350, 464, "start"),
-         ("{subsets ownedElement, parameteredElement}", 880, 390, "end"), ("0..1", 880, 475, "end")])
-    association(svg, "A_parameteredElement_templateParameter", "M 330 530 H 900",
-        ("ParameterableElement", "templateParameter", "+ templateParameter", 350, 515, "start"),
-        ("TemplateParameter", "parameteredElement", "+ parameteredElement", 880, 515, "end"),
-        ' marker-start="url(#navigation-start)"', dot(330, 530) + dot(900, 530),
-        [("0..1", 350, 554, "start"), ("1", 880, 554, "end")])
-    association(svg, "A_default_templateParameter", "M 330 600 H 900",
-        ("ParameterableElement", "default", "+ default", 350, 585, "start"),
-        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 585, "end"),
-        ' marker-end="url(#navigation)"', dot(330, 600),
-        [("0..1", 350, 630, "start"), ("0..1", 880, 630, "end")])
-    association(svg, "A_ownedDefault_templateParameter", "M 330 700 H 900",
-        ("ParameterableElement", "ownedDefault", "+ ownedDefault", 350, 680, "start"),
-        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 680, "end"),
-        ' marker-end="url(#navigation)"', diamond(330, 700, "right"),
-        [("{subsets ownedElement, default}", 350, 650, "start"), ("0..1", 350, 735, "start"),
-         ("{subsets owner, redefines templateParameter}", 880, 650, "end"), ("0..1", 880, 735, "end")])
+    association(svg, "A_ownedParameteredElement_owningTemplateParameter", "M 330 540 H 900",
+        ("ParameterableElement", "owningTemplateParameter", "+ owningTemplateParameter", 350, 525, "start"),
+        ("TemplateParameter", "ownedParameteredElement", "+ ownedParameteredElement", 880, 515, "end"),
+        ' marker-start="url(#navigation-start)"', dot(330, 540) + diamond(900, 540, "left"),
+        [("{subsets owner, templateParameter}", 350, 505, "start"), ("0..1", 350, 564, "start"),
+         ("{subsets ownedElement, parameteredElement}", 880, 490, "end"), ("0..1", 880, 575, "end")])
+    association(svg, "A_parameteredElement_templateParameter", "M 330 630 H 900",
+        ("ParameterableElement", "templateParameter", "+ templateParameter", 350, 615, "start"),
+        ("TemplateParameter", "parameteredElement", "+ parameteredElement", 880, 615, "end"),
+        ' marker-start="url(#navigation-start)"', dot(330, 630) + dot(900, 630),
+        [("0..1", 350, 654, "start"), ("1", 880, 654, "end")])
+    association(svg, "A_default_templateParameter", "M 330 700 H 900",
+        ("ParameterableElement", "default", "+ default", 350, 685, "start"),
+        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 685, "end"),
+        ' marker-end="url(#navigation)"', dot(330, 700),
+        [("0..1", 350, 730, "start"), ("0..1", 880, 730, "end")])
+    association(svg, "A_ownedDefault_templateParameter", "M 330 800 H 900",
+        ("ParameterableElement", "ownedDefault", "+ ownedDefault", 350, 780, "start"),
+        ("TemplateParameter", "templateParameter", "+ templateParameter", 880, 780, "end"),
+        ' marker-end="url(#navigation)"', diamond(330, 800, "right"),
+        [("{subsets ownedElement, default}", 350, 750, "start"), ("0..1", 350, 835, "start"),
+         ("{subsets owner, redefines templateParameter}", 880, 750, "end"), ("0..1", 880, 835, "end")])
     return svg
 
 
@@ -339,7 +340,7 @@ def figure_7_4():
 
 
 def figure_7_5():
-    svg = Svg("7.5", "Пространства имён", "Метамодель пространств имён, импорта элементов и пакетов, видимости и ограничений.", 1400, 1080)
+    svg = Svg("7.5", "Пространства имён", "Метамодель пространств имён, импорта элементов и пакетов, видимости и ограничений.", 1400, 1180)
     class_node(svg, "Element", 620, 30, 120, 45)
     class_node(svg, "NamedElement", 300, 145, 360, 145, ["+ name : String [0..1]", "+ /qualifiedName : String [0..1] {readOnly}", "+ visibility : VisibilityKind [0..1]"])
     class_node(svg, "Namespace", 250, 470, 220, 190)
@@ -347,16 +348,16 @@ def figure_7_5():
     class_node(svg, "VisibilityKind", 1130, 30, 180, 150, ["public", "private", "protected", "package"], stereotype="«enumeration»")
     class_node(svg, "ParameterableElement", 980, 260, 230, 50)
     class_node(svg, "PackageableElement", 960, 350, 260, 70, ["+ visibility : VisibilityKind [0..1] = public"])
-    class_node(svg, "ElementImport", 960, 540, 240, 90, ["+ alias : String [0..1]", "+ visibility : VisibilityKind = public"])
-    class_node(svg, "DirectedRelationship", 960, 675, 240, 50)
-    class_node(svg, "PackageImport", 960, 790, 240, 90, ["+ visibility : VisibilityKind = public"])
+    class_node(svg, "ElementImport", 960, 640, 240, 90, ["+ alias : String [0..1]", "+ visibility : VisibilityKind = public"])
+    class_node(svg, "DirectedRelationship", 960, 775, 240, 50)
+    class_node(svg, "PackageImport", 960, 890, 240, 90, ["+ visibility : VisibilityKind = public"])
     class_node(svg, "Constraint", 700, 920, 180, 55)
-    class_node(svg, "Package", 1120, 1000, 150, 55)
+    class_node(svg, "Package", 1120, 1100, 150, 55)
     generalization(svg, "M 480 145 V 100 H 680 V 75", child="NamedElement", parent="Element")
     generalization(svg, "M 360 470 V 290", child="Namespace", parent="NamedElement")
     generalization(svg, "M 1090 350 V 310", child="PackageableElement", parent="ParameterableElement")
-    generalization(svg, "M 1080 630 V 675", child="ElementImport", parent="DirectedRelationship")
-    generalization(svg, "M 1080 790 V 725", child="PackageImport", parent="DirectedRelationship")
+    generalization(svg, "M 1080 730 V 775", child="ElementImport", parent="DirectedRelationship")
+    generalization(svg, "M 1080 890 V 825", child="PackageImport", parent="DirectedRelationship")
 
     association(svg, "A_member_memberNamespace", "M 300 180 H 20 V 500 H 250",
         ("NamedElement", "member", "+ /member", 288, 165, "end"),
@@ -382,30 +383,30 @@ def figure_7_5():
         "", dot(470, 500),
         [("{readOnly, subsets member}", 482, 460, "start"), ("*", 482, 524, "start"),
          ("{subsets memberNamespace}", 940, 345, "end"), ("0..1", 940, 409, "end")])
-    association(svg, "A_importedElement_import", "M 1120 420 V 540",
+    association(svg, "A_importedElement_import", "M 1120 420 V 640",
         ("ElementImport", "importedElement", "+ importedElement", 1132, 443, "start"),
-        ("PackageableElement", "import", "+ import", 1132, 525, "start"),
-        ' marker-start="url(#navigation-start)"', dot(1120, 540),
+        ("PackageableElement", "import", "+ import", 1132, 625, "start"),
+        ' marker-start="url(#navigation-start)"', dot(1120, 640),
         [("{subsets target}", 1132, 463, "start"), ("1", 1132, 483, "start"),
-         ("{subsets directedRelationship}", 1132, 500, "start"), ("*", 1212, 580, "start")])
-    association(svg, "A_elementImport_importingNamespace", "M 470 575 H 960",
+         ("{subsets directedRelationship}", 1132, 600, "start"), ("*", 1212, 680, "start")])
+    association(svg, "A_elementImport_importingNamespace", "M 470 575 H 750 V 675 H 960",
         ("Namespace", "elementImport", "+ elementImport", 482, 560, "start"),
-        ("ElementImport", "importingNamespace", "+ importingNamespace", 940, 560, "end"),
-        ' marker-end="url(#navigation)"', diamond(470, 575, "right") + dot(960, 575),
+        ("ElementImport", "importingNamespace", "+ importingNamespace", 940, 660, "end"),
+        ' marker-end="url(#navigation)"', diamond(470, 575, "right") + dot(960, 675),
         [("{subsets directedRelationship, ownedElement}", 482, 540, "start"), ("*", 482, 605, "start"),
-         ("{subsets source, owner}", 940, 515, "end"), ("1", 940, 599, "end")])
-    association(svg, "A_packageImport_importingNamespace", "M 420 660 V 825 H 960",
+         ("{subsets source, owner}", 940, 615, "end"), ("1", 940, 699, "end")])
+    association(svg, "A_packageImport_importingNamespace", "M 420 660 V 850 H 948 V 925 H 960",
         ("Namespace", "packageImport", "+ packageImport", 432, 697, "start"),
-        ("PackageImport", "importingNamespace", "+ importingNamespace", 940, 810, "end"),
-        ' marker-end="url(#navigation)"', diamond(420, 660, "down") + dot(960, 825),
+        ("PackageImport", "importingNamespace", "+ importingNamespace", 940, 910, "end"),
+        ' marker-end="url(#navigation)"', diamond(420, 660, "down") + dot(960, 925),
         [("{subsets directedRelationship, ownedElement}", 432, 722, "start"), ("*", 432, 747, "start"),
-         ("{subsets source, owner}", 940, 765, "end"), ("1", 940, 849, "end")])
-    association(svg, "A_importedPackage_packageImport", "M 1195 880 V 1000",
-        ("PackageImport", "packageImport", "+ packageImport", 1183, 904, "end"),
-        ("PackageImport", "importedPackage", "+ importedPackage", 1207, 975, "start"),
-        ' marker-end="url(#navigation)"', dot(1195, 880),
-        [("{subsets directedRelationship}", 1183, 929, "end"), ("*", 1183, 954, "end"),
-         ("{subsets target}", 1207, 925, "start"), ("1", 1220, 950, "start")])
+         ("{subsets source, owner}", 940, 865, "end"), ("1", 940, 949, "end")])
+    association(svg, "A_importedPackage_packageImport", "M 1195 980 V 1100",
+        ("PackageImport", "packageImport", "+ packageImport", 1183, 1004, "end"),
+        ("PackageImport", "importedPackage", "+ importedPackage", 1207, 1075, "start"),
+        ' marker-end="url(#navigation)"', dot(1195, 980),
+        [("{subsets directedRelationship}", 1183, 1029, "end"), ("*", 1183, 1054, "end"),
+         ("{subsets target}", 1207, 1025, "start"), ("1", 1220, 1050, "start")])
     association(svg, "A_ownedRule_context", "M 300 660 V 947 H 700",
         ("Constraint", "context", "+ context", 288, 697, "end"),
         ("Namespace", "ownedRule", "+ ownedRule", 688, 932, "end"),

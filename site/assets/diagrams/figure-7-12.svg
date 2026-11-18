@@ -15,7 +15,8 @@
   text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
   .class-name { font-weight: 700; }
   .abstract { font-style: italic; }
-  .attribute, .operation, .association-label, .example-label { font-size: 14px; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 11px; }
   .end-dot, .composition { fill: #111111; }
   .dependency-line, .note-link { stroke-dasharray: 7 5; }
   .template-signature { stroke-dasharray: 4 3; }

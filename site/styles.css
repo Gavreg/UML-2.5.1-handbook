@@ -705,6 +705,115 @@ h3 {
   white-space: nowrap;
 }
 
+.spec-subsection {
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+.spec-section-number {
+  display: inline-block;
+  min-width: 64px;
+  margin-right: 10px;
+  color: var(--text-muted);
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: .65em;
+  font-weight: 500;
+  letter-spacing: 0;
+  vertical-align: .12em;
+}
+
+.subsection-original {
+  margin: -10px 0 18px 74px;
+  font-size: 13px;
+}
+
+.spec-note {
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.spec-note strong {
+  color: var(--heading);
+}
+
+.spec-steps,
+.spec-substeps {
+  padding-left: 28px;
+}
+
+.spec-steps > li {
+  margin: 14px 0;
+  padding-left: 6px;
+}
+
+.spec-substeps {
+  margin-top: 8px;
+}
+
+.syntax-block,
+.formal-expression pre {
+  margin: 12px 0 18px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  background: var(--code);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  white-space: pre-wrap;
+  overflow-wrap: normal;
+}
+
+.syntax-block code,
+.formal-expression code {
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.formal-expression {
+  margin-top: 12px;
+}
+
+.formal-expression-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.formal-expression pre {
+  margin: 4px 0 0;
+}
+
+.spec-table-wrapper {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+}
+
+.spec-table caption {
+  margin-bottom: 8px;
+  color: var(--heading);
+  font-weight: 650;
+  text-align: left;
+}
+
+.spec-table th,
+.spec-table td {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.spec-table th {
+  background: var(--surface-subtle);
+  color: var(--heading);
+}
+
 .detail-list {
   margin: 0;
   padding: 0;

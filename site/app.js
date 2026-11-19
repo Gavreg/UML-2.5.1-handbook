@@ -3,6 +3,7 @@
 
   const data = window.UML_DATA;
   const xmiData = window.UML_XMI_DATA;
+  const contentData = window.UML_CONTENT;
   const content = document.getElementById("content");
   const navigation = document.getElementById("navigation");
   const sidebar = document.getElementById("sidebar");
@@ -108,13 +109,71 @@
     </a>`;
   }
 
+  function specParagraphs(paragraphs = []) {
+    return paragraphs.map(paragraph => `<p>${metamodelDescription(paragraph)}</p>`).join("");
+  }
+
+  function specNotes(notes = []) {
+    return notes.map(note => `<p class="notice spec-note"><strong>Примечание.</strong> ${metamodelDescription(note)}</p>`).join("");
+  }
+
+  function syntaxBlock(value) {
+    return value ? `<pre class="syntax-block"><code>${escapeHtml(value)}</code></pre>` : "";
+  }
+
+  function formalExpression(label, value) {
+    return value ? `<div class="formal-expression"><span class="formal-expression-label">${label}</span><pre><code>${escapeHtml(value)}</code></pre></div>` : "";
+  }
+
+  function renderSpecSubsection(subsection) {
+    const level = Math.min(6, subsection.id.split(".").length - 1);
+    const steps = subsection.steps ? `<ol class="spec-steps">${subsection.steps.map(step => `<li>
+      <p>${metamodelDescription(step.text)}</p>
+      ${step.substeps ? `<ol class="spec-substeps" type="a">${step.substeps.map(substep => `<li>${metamodelDescription(substep)}</li>`).join("")}</ol>` : ""}
+      ${specNotes(step.notes)}
+    </li>`).join("")}</ol>` : "";
+    const table = subsection.table ? `<div class="spec-table-wrapper"><table class="spec-table">
+      <caption>${escapeHtml(subsection.table.caption)}</caption>
+      <thead><tr>${subsection.table.columns.map(column => `<th scope="col">${escapeHtml(column)}</th>`).join("")}</tr></thead>
+      <tbody>${subsection.table.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+    </table></div>` : "";
+    return `<section class="spec-subsection" id="section-${slug(subsection.id)}">
+      <h${level}><span class="spec-section-number">${subsection.id}</span>${escapeHtml(subsection.title)}</h${level}>
+      <p class="original-name subsection-original" lang="en">${escapeHtml(subsection.en)}</p>
+      ${specParagraphs(subsection.paragraphs)}
+      ${specNotes(subsection.notes)}
+      ${specParagraphs(subsection.afterNotes)}
+      ${subsection.bullets ? `<ul>${subsection.bullets.map(item => `<li>${metamodelDescription(item)}</li>`).join("")}</ul>` : ""}
+      ${specParagraphs(subsection.afterBullets)}
+      ${steps}
+      ${specParagraphs(subsection.afterSteps)}
+      ${specNotes(subsection.notesAfterSteps)}
+      ${syntaxBlock(subsection.code)}
+      ${specParagraphs(subsection.afterCode)}
+      ${(subsection.additionalCode || []).map(syntaxBlock).join("")}
+      ${specParagraphs(subsection.finalParagraphs)}
+      ${syntaxBlock(subsection.finalCode)}
+      ${specParagraphs(subsection.closingParagraphs)}
+      ${table}
+      ${(subsection.figures || []).map(figureCard).join("")}
+    </section>`;
+  }
+
   function detailSection(title, items, key = "signature", currentName = "") {
     if (!items || !items.length) return "";
     return `<section><h2>${title}</h2><ul class="detail-list">${items.map(item => `
       <li class="detail-item">
         <code>${escapeHtml(item[key] || item.name)}</code>
         ${item.description ? `<p>${metamodelDescription(item.description, currentName)}</p>` : ""}
+        ${formalExpression("Предусловие (OCL)", item.pre)}
+        ${formalExpression("Тело операции (OCL)", item.body)}
+        ${formalExpression("Ограничение (OCL)", item.ocl)}
       </li>`).join("")}</ul></section>`;
+  }
+
+  function classifierDetails(item, kind, key) {
+    const overrides = contentData.classifiers[item.name]?.[kind] || {};
+    return (item[kind] || []).map(entry => ({ ...entry, ...(overrides[entry[key] || entry.name] || {}) }));
   }
 
   function subsetDiagramLink(reference, name) {
@@ -164,15 +223,19 @@
   }
 
   function propertyList(properties, currentName = "") {
-    return `<ul class="detail-list property-list">${properties.map(property => `
-      <li class="detail-item">
-        <code>${propertySignature(property)}</code>
-        <div class="property-meta">
-          ${property.association ? associationLink(property.association) : ""}
-          ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}
-        </div>
-        <p>${metamodelDescription(property.description, currentName)}</p>
-      </li>`).join("")}</ul>`;
+    return `<ul class="detail-list property-list">${properties.map(property => {
+      const owner = typeof property.owner === "string" ? property.owner : currentName;
+      const description = contentData.classifiers[owner]?.properties?.[property.name] || property.description;
+      return `
+        <li class="detail-item">
+          <code>${propertySignature(property)}</code>
+          <div class="property-meta">
+            ${property.association ? associationLink(property.association) : ""}
+            ${property.inheritedFrom ? `<span>Объявлено в ${classifierLink(property.inheritedFrom)}</span>` : ""}
+          </div>
+          <p>${metamodelDescription(description, currentName)}</p>
+        </li>`;
+    }).join("")}</ul>`;
   }
 
   function propertySection(title, properties, currentName = "", collapsible = false, note = "Включены обычные атрибуты и концы ассоциаций, которыми класс владеет по нормативной XMI-модели.") {
@@ -282,17 +345,20 @@
     document.title = `${section.id} ${section.title} — UML 2.5.1`;
     const isClassifiers = section.id === "7.8";
     const isAssociations = section.id === "7.9";
+    const fullContent = contentData.sections[section.id];
     return `
       ${breadcrumbs([{ label: "7 Common Structure" }, { label: `${section.id} ${section.title}` }])}
       <p class="eyebrow">Раздел ${section.id} · стр. ${section.page}</p>
       <h1>${escapeHtml(section.title)}</h1>
       <p class="original-name" lang="en">${escapeHtml(section.en)}</p>
-      <div class="definition"><span class="definition-label">Содержание раздела</span><p>${metamodelDescription(section.summary)}</p></div>
-      ${section.semantics ? `<section><h2>Семантика</h2><p>${metamodelDescription(section.semantics)}</p></section>` : ""}
-      ${section.notation ? `<section><h2>Нотация</h2><p>${metamodelDescription(section.notation)}</p></section>` : ""}
+      ${fullContent
+        ? `${specParagraphs(fullContent.paragraphs)}${(fullContent.subsections || []).map(renderSpecSubsection).join("")}`
+        : `<div class="definition"><span class="definition-label">Содержание раздела</span><p>${metamodelDescription(section.summary)}</p></div>
+          ${section.semantics ? `<section><h2>Семантика</h2><p>${metamodelDescription(section.semantics)}</p></section>` : ""}
+          ${section.notation ? `<section><h2>Нотация</h2><p>${metamodelDescription(section.notation)}</p></section>` : ""}`}
       ${isClassifiers ? `<section><h2>Классификаторы раздела</h2><div class="object-list">${data.classifiers.filter(item => item.section.startsWith("7.8.")).map(item => objectRow(item, "classifier")).join("")}</div></section>` : ""}
       ${isAssociations ? `<section><h2>Ассоциации раздела</h2><div class="object-list">${data.associations.map(item => objectRow(item, "association")).join("")}</div></section>` : ""}
-      ${section.figures.length ? `<section><h2>Абстрактный синтаксис и примеры</h2>${section.figures.map(figureCard).join("")}</section>` : ""}
+      ${!fullContent && section.figures.length ? `<section><h2>Абстрактный синтаксис и примеры</h2>${section.figures.map(figureCard).join("")}</section>` : ""}
       ${sourceLink(section.page)}`;
   }
 
@@ -410,6 +476,7 @@
     const directProperties = xmi ? xmi.direct : [...(item.attributes || []), ...(item.ends || [])];
     const figures = data.diagrams.filter(diagram => diagram.related.includes(item.name)).map(diagram => diagram.id);
     const inCommonStructure = item.section.startsWith("7.8.");
+    const itemContent = contentData.classifiers[item.name] || {};
     document.title = `${item.name} — ${item.ru} — UML 2.5.1`;
     return `
       ${breadcrumbs(inCommonStructure
@@ -420,14 +487,14 @@
       <p class="original-name" lang="en">${escapeHtml(item.name)} [${escapeHtml(item.kind)}]</p>
       ${inheritanceDiagram(item)}
       <div class="meta-row"><span class="kind-tag">${kindLabels[item.kind]}</span><span class="meta-tag">OMG UML 2.5.1, стр. ${item.page}</span></div>
-      <div class="definition"><span class="definition-label">Определение</span><p>${metamodelDescription(item.definition, item.name)}</p></div>
+      <div class="definition"><span class="definition-label">Определение</span><p>${metamodelDescription(itemContent.definition || item.definition, item.name)}</p></div>
       ${item.generalizations ? `<section><h2>Обобщения</h2>${linkList(item.generalizations)}</section>` : ""}
       ${item.specializations ? `<section><h2>Специализации</h2>${linkList(item.specializations)}</section>` : ""}
       ${propertySection("Атрибуты", directProperties, item.name)}
       ${propertySection("Унаследованные атрибуты", xmi?.inherited, item.name, true)}
-      ${detailSection("Операции", item.operations, "signature", item.name)}
-      ${detailSection("Ограничения", item.constraints, "name", item.name)}
-      ${detailSection("Литералы", item.literals, "name", item.name)}
+      ${detailSection("Операции", classifierDetails(item, "operations", "signature"), "signature", item.name)}
+      ${detailSection("Ограничения", classifierDetails(item, "constraints", "name"), "name", item.name)}
+      ${detailSection("Литералы", classifierDetails(item, "literals", "name"), "name", item.name)}
       ${relatedFigures(figures)}
       ${sourceLink(item.page)}`;
   }
@@ -487,14 +554,14 @@
       subtitle: item.en,
       type: `Раздел ${item.id}`,
       href: `#/section/${slug(item.id)}`,
-      text: `${item.id} ${item.title} ${item.en} ${item.summary} ${item.semantics || ""} ${item.notation || ""}`
+      text: `${item.id} ${item.title} ${item.en} ${item.summary} ${item.semantics || ""} ${item.notation || ""} ${JSON.stringify(contentData.sections[item.id] || "")}`
     })),
     ...data.classifiers.map(item => ({
       title: item.name,
       subtitle: item.ru,
       type: `${kindLabels[item.kind]} · ${item.section}`,
       href: `#/classifier/${slug(item.name)}`,
-      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${(item.generalizations || []).join(" ")} ${(item.specializations || []).join(" ")} ${(xmiData.classes[item.name]?.direct || []).map(property => `${property.signature} ${property.description}`).join(" ")}`
+      text: `${item.name} ${item.ru} ${item.section} ${item.definition} ${(item.generalizations || []).join(" ")} ${(item.specializations || []).join(" ")} ${(xmiData.classes[item.name]?.direct || []).map(property => `${property.signature} ${property.description}`).join(" ")} ${JSON.stringify(contentData.classifiers[item.name] || "")}`
     })),
     ...data.associations.map(item => ({
       title: item.name,

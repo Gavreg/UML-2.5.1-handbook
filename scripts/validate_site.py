@@ -24,6 +24,8 @@ SITE = ROOT / "site"
 INDEX = SITE / "index.html"
 DATA = SITE / "data" / "common-structure.js"
 XMI_DATA = SITE / "data" / "common-structure-xmi.js"
+CONTENT_DATA = SITE / "data" / "common-structure-content.js"
+SOURCE_TEXT = ROOT / "docs" / "uml-2.5.1-common-structure-en.txt"
 
 
 class ResourceParser(HTMLParser):
@@ -79,7 +81,7 @@ def diagram_vectors():
 
 def check_static():
     errors = []
-    for path in (INDEX, DATA, XMI_DATA, SITE / "app.js", SITE / "styles.css"):
+    for path in (INDEX, DATA, XMI_DATA, CONTENT_DATA, SITE / "app.js", SITE / "styles.css"):
         if not path.is_file():
             errors.append(f"Missing file: {path.relative_to(ROOT)}")
 
@@ -121,6 +123,20 @@ def check_static():
     app = (SITE / "app.js").read_text(encoding="utf-8")
     if "fetch(" in app:
         errors.append("fetch() is not allowed for core offline data")
+
+    source_text = SOURCE_TEXT.read_text(encoding="utf-8")
+    expected_subsections = list(dict.fromkeys(re.findall(r"^(7\.[1-7](?:\.\d+)+)$", source_text, re.MULTILINE)))
+    content_text = CONTENT_DATA.read_text(encoding="utf-8")
+    actual_subsections = re.findall(r'\{ id: "(7\.[1-7](?:\.\d+)+)"', content_text)
+    missing_subsections = [item for item in expected_subsections if item not in actual_subsections]
+    if missing_subsections:
+        errors.append(f"Missing translated subsections: {', '.join(missing_subsections)}")
+    if len(actual_subsections) != len(expected_subsections):
+        errors.append(f"Subsection count mismatch: {len(actual_subsections)} instead of {len(expected_subsections)}")
+    source_invariants = len(re.findall(r"^inv:", source_text, re.MULTILINE))
+    content_invariants = content_text.count('ocl: "inv:')
+    if content_invariants != source_invariants:
+        errors.append(f"OCL invariant count mismatch: {content_invariants} instead of {source_invariants}")
 
     sync = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "sync_xmi_properties.py"), "--check"],

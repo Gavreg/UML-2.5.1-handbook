@@ -92,9 +92,9 @@
 <polygon class="composition" points="430,475 438,467 446,475 438,483"/><circle class="end-dot" cx="790" cy="475" r="3"/>
 <text class="association-end" x="442" y="460"><title>owningLower. Связывает ValueSpecification нижней границы с владеющим MultiplicityElement.</title>+ owningLower</text>
 <text class="association-end" x="770" y="460" text-anchor="end"><title>Спецификация нижней границы.</title>+ lowerValue</text>
-<text class="association-label" x="442" y="435">{subsets owner}</text>
+<text class="association-label" x="442" y="444">{subsets owner}</text>
 <text class="association-label" x="442" y="505">0..1</text>
-<text class="association-label" x="770" y="435" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="770" y="444" text-anchor="end">{subsets ownedElement}</text>
 <text class="association-label" x="770" y="505" text-anchor="end">0..1</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-uppervalue-owningupper" target="_top" aria-label="Открыть описание ассоциации A_upperValue_owningUpper">
@@ -103,9 +103,9 @@
 <polygon class="composition" points="430,575 438,567 446,575 438,583"/><circle class="end-dot" cx="790" cy="575" r="3"/>
 <text class="association-end" x="442" y="560"><title>owningUpper. Связывает ValueSpecification верхней границы с владеющим MultiplicityElement.</title>+ owningUpper</text>
 <text class="association-end" x="770" y="560" text-anchor="end"><title>Спецификация верхней границы.</title>+ upperValue</text>
-<text class="association-label" x="442" y="535">{subsets owner}</text>
+<text class="association-label" x="442" y="544">{subsets owner}</text>
 <text class="association-label" x="442" y="605">0..1</text>
-<text class="association-label" x="770" y="535" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="770" y="544" text-anchor="end">{subsets ownedElement}</text>
 <text class="association-label" x="770" y="605" text-anchor="end">0..1</text>
 </g></a>
 </svg>

@@ -219,6 +219,10 @@ SVG_GEOMETRY_SCRIPT = r"""
       const distances = origins.map(origin => distanceToBox(origin, box));
       const endIndex = distances[0] <= distances[1] ? 0 : 1;
       const placement = placements.find(candidate => candidate.endIndex === endIndex);
+      if (!placement) {
+        errors.push(`association end label has no matching role: ${group.id} / ${label.textContent.trim()}`);
+        continue;
+      }
       const ownDistance = distances[endIndex];
       const oppositeDistance = distances[1 - endIndex];
       if (oppositeDistance < ownDistance + horizontalGap) {

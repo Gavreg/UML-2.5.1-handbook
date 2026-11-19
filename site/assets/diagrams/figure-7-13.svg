@@ -36,14 +36,14 @@
   </defs>
   <rect class="background" width="1250" height="430"/>
   <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
-<rect class="class-box" x="440" y="30" width="200" height="50"/>
-<line class="class-divider" x1="440" y1="62" x2="640" y2="62"/>
-<text class="class-name abstract" x="540.0" y="53" text-anchor="middle">PackageableElement</text>
+<rect class="class-box" x="560" y="30" width="200" height="50"/>
+<line class="class-divider" x1="560" y1="62" x2="760" y2="62"/>
+<text class="class-name abstract" x="660.0" y="53" text-anchor="middle">PackageableElement</text>
 </a>
 <a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
-<rect class="class-box" x="400" y="130" width="240" height="190"/>
-<line class="class-divider" x1="400" y1="162" x2="640" y2="162"/>
-<text class="class-name" x="520.0" y="153" text-anchor="middle">Constraint</text>
+<rect class="class-box" x="520" y="130" width="240" height="190"/>
+<line class="class-divider" x1="520" y1="162" x2="760" y2="162"/>
+<text class="class-name" x="640.0" y="153" text-anchor="middle">Constraint</text>
 </a>
 <a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
 <rect class="class-box" x="40" y="190" width="150" height="55"/>
@@ -51,46 +51,46 @@
 <text class="class-name abstract" x="115.0" y="213" text-anchor="middle">Namespace</text>
 </a>
 <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
-<rect class="class-box" x="880" y="115" width="140" height="55"/>
-<line class="class-divider" x1="880" y1="147" x2="1020" y2="147"/>
-<text class="class-name abstract" x="950.0" y="138" text-anchor="middle">Element</text>
+<rect class="class-box" x="960" y="115" width="140" height="55"/>
+<line class="class-divider" x1="960" y1="147" x2="1100" y2="147"/>
+<text class="class-name abstract" x="1030.0" y="138" text-anchor="middle">Element</text>
 </a>
 <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
-<rect class="class-box" x="970" y="280" width="230" height="65"/>
-<line class="class-divider" x1="970" y1="312" x2="1200" y2="312"/>
-<text class="class-name abstract" x="1085.0" y="303" text-anchor="middle">ValueSpecification</text>
+<rect class="class-box" x="1000" y="280" width="230" height="65"/>
+<line class="class-divider" x1="1000" y1="312" x2="1230" y2="312"/>
+<text class="class-name abstract" x="1115.0" y="303" text-anchor="middle">ValueSpecification</text>
 </a>
-<path class="generalization-line" d="M 520 130 V 80" data-child="Constraint" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 640 130 V 80" data-child="Constraint" data-parent="PackageableElement" marker-end="url(#generalization)"/>
 <a class="association-link" href="../../index.html#/association/a-constrainedelement-constraint" target="_top" aria-label="Открыть описание ассоциации A_constrainedElement_constraint">
 <g class="association-group" id="A_constrainedElement_constraint"><title>Связывает constrainedElement с применяемыми Constraints.</title>
-<path class="association" d="M 640 155 H 880" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 640 155 H 880" aria-hidden="true"/>
-<circle class="end-dot" cx="640" cy="155" r="3"/>
-<text class="association-end" x="652" y="140"><title>constraint. Связывает constrainedElement с применяемыми Constraints.</title>+ constraint</text>
-<text class="association-end" x="860" y="115" text-anchor="end"><title>Упорядоченное множество элементов, к которым применяется ограничение.</title>+ constrainedElement</text>
-<text class="association-label" x="652" y="185">*</text>
-<text class="association-label" x="860" y="90" text-anchor="end">{ordered}</text>
-<text class="association-label" x="860" y="185" text-anchor="end">*</text>
+<path class="association" d="M 760 155 H 960" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 760 155 H 960" aria-hidden="true"/>
+<circle class="end-dot" cx="760" cy="155" r="3"/>
+<text class="association-end" x="772" y="140"><title>constraint. Связывает constrainedElement с применяемыми Constraints.</title>+ constraint</text>
+<text class="association-end" x="948" y="115" text-anchor="end"><title>Упорядоченное множество элементов, к которым применяется ограничение.</title>+ constrainedElement</text>
+<text class="association-label" x="772" y="185">*</text>
+<text class="association-label" x="948" y="99" text-anchor="end">{ordered}</text>
+<text class="association-label" x="948" y="185" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-ownedrule-context" target="_top" aria-label="Открыть описание ассоциации A_ownedRule_context">
 <g class="association-group" id="A_ownedRule_context"><title>Связывает Namespace с принадлежащими ему Constraints и их контекстом.</title>
-<path class="association" d="M 190 225 H 400"/><path class="association-hitbox" d="M 190 225 H 400" aria-hidden="true"/>
-<polygon class="composition" points="190,225 198,217 206,225 198,233"/><circle class="end-dot" cx="400" cy="225" r="3"/>
+<path class="association" d="M 190 225 H 520"/><path class="association-hitbox" d="M 190 225 H 520" aria-hidden="true"/>
+<polygon class="composition" points="190,225 198,217 206,225 198,233"/><circle class="end-dot" cx="520" cy="225" r="3"/>
 <text class="association-end" x="202" y="210"><title>Пространство имён, владеющее ограничением.</title>+ context</text>
-<text class="association-end" x="388" y="210" text-anchor="end"><title>Ограничения, принадлежащие пространству имён.</title>+ ownedRule</text>
-<text class="association-label" x="202" y="180">{subsets namespace}</text>
+<text class="association-end" x="508" y="210" text-anchor="end"><title>Ограничения, принадлежащие пространству имён.</title>+ ownedRule</text>
+<text class="association-label" x="202" y="194">{subsets namespace}</text>
 <text class="association-label" x="202" y="255">0..1</text>
-<text class="association-label" x="388" y="155" text-anchor="end">{subsets ownedMember}</text>
-<text class="association-label" x="388" y="249" text-anchor="end">*</text>
+<text class="association-label" x="508" y="194" text-anchor="end">{subsets ownedMember}</text>
+<text class="association-label" x="508" y="249" text-anchor="end">*</text>
 </g></a>
 <a class="association-link" href="../../index.html#/association/a-specification-owningconstraint" target="_top" aria-label="Открыть описание ассоциации A_specification_owningConstraint">
 <g class="association-group" id="A_specification_owningConstraint"><title>Связывает ValueSpecification с Constraint, которому принадлежит условие.</title>
-<path class="association" d="M 640 285 H 970" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 640 285 H 970" aria-hidden="true"/>
-<polygon class="composition" points="640,285 648,277 656,285 648,293"/>
-<text class="association-end" x="652" y="270"><title>owningConstraint. Связывает ValueSpecification с Constraint, которому принадлежит условие.</title>+ owningConstraint</text>
-<text class="association-end" x="960" y="245" text-anchor="end"><title>Условие, которое должно быть истинным для выполнения ограничения.</title>+ specification</text>
-<text class="association-label" x="652" y="220">{subsets owner}</text>
-<text class="association-label" x="652" y="315">0..1</text>
-<text class="association-label" x="960" y="350" text-anchor="end">{subsets ownedElement}</text>
-<text class="association-label" x="940" y="380" text-anchor="end">1</text>
+<path class="association" d="M 760 285 H 1000" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 760 285 H 1000" aria-hidden="true"/>
+<polygon class="composition" points="760,285 768,277 776,285 768,293"/>
+<text class="association-end" x="772" y="270"><title>owningConstraint. Связывает ValueSpecification с Constraint, которому принадлежит условие.</title>+ owningConstraint</text>
+<text class="association-end" x="990" y="245" text-anchor="end"><title>Условие, которое должно быть истинным для выполнения ограничения.</title>+ specification</text>
+<text class="association-label" x="772" y="254">{subsets owner}</text>
+<text class="association-label" x="772" y="315">0..1</text>
+<text class="association-label" x="990" y="350" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="970" y="366" text-anchor="end">1</text>
 </g></a>
 </svg>

@@ -1,6 +1,6 @@
 """
 Name: check_spec_completeness.py
-Purpose: Compare Clause 7 coverage with the extracted OMG source and verify generated Russian content.
+Purpose: Compare Clause 7 and Clause 8 coverage with the extracted OMG sources and verify generated Russian content.
 Interface: python scripts/check_spec_completeness.py
 Goal: Detect missing sections, classifiers, associations, figures, OCL expressions or dropped translated strings.
 Requires: Python 3 standard library; run scripts/build_site.py first.
@@ -13,7 +13,11 @@ import re
 from handbook_data import ROOT, assigned_literal, load_handbook, slug
 
 
-SOURCE_TEXT = ROOT / "docs" / "uml-2.5.1-common-structure-en.txt"
+SOURCES = {
+    "7": ROOT / "docs" / "uml-2.5.1-common-structure-en.txt",
+    "8": ROOT / "docs" / "uml-2.5.1-values-en.txt",
+}
+CATALOGS = {"7": ("7.8", "7.9"), "8": ("8.6", "8.7")}
 PAGES = ROOT / "site" / "data" / "common-structure-pages.js"
 
 
@@ -55,11 +59,15 @@ def source_object_map(source, prefix):
     }
 
 
-def source_classifier_blocks(source):
-    matches = list(re.finditer(r"^(7\.8\.\d+)\n([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE))
-    for index, match in enumerate(matches):
-        end = matches[index + 1].start() if index + 1 < len(matches) else source.find("\n7.9\n", match.end())
-        yield match.group(2), source[match.start():end]
+def source_classifier_blocks(sources):
+    for clause, source in sources.items():
+        classifier_prefix, association_prefix = CATALOGS[clause]
+        matches = list(re.finditer(
+            rf"^({re.escape(classifier_prefix)}\.\d+)\n([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE
+        ))
+        for index, match in enumerate(matches):
+            end = matches[index + 1].start() if index + 1 < len(matches) else source.find(f"\n{association_prefix}\n", match.end())
+            yield match.group(2), source[match.start():end]
 
 
 def check_subset_links(data, xmi, pages):
@@ -67,6 +75,7 @@ def check_subset_links(data, xmi, pages):
     diagram_by_name = {
         "Root": "7.1", "Templates": "7.3", "Template Bindings": "7.4", "Namespaces": "7.5",
         "Types": "7.10", "Constraints": "7.13", "Dependencies": "7.17",
+        "Literals": "8.1", "Expressions": "8.2", "Time": "8.3", "Intervals": "8.4",
     }
     associations = {item["name"]: item for item in data["associations"]}
     classifiers = {item["name"]: item for item in data["classifiers"]}
@@ -101,20 +110,31 @@ def check_subset_links(data, xmi, pages):
 
 def check_completeness():
     data, xmi, content = load_handbook()
-    source = SOURCE_TEXT.read_text(encoding="utf-8")
+    sources = {clause: path.read_text(encoding="utf-8") for clause, path in SOURCES.items()}
     generated = assigned_literal(PAGES)
     pages = generated["pages"]
     errors = []
 
-    expected_sections = list(dict.fromkeys(re.findall(r"^(7\.[1-9])$", source, re.MULTILINE)))
+    expected_sections = []
+    for clause, source in sources.items():
+        expected_sections.extend(dict.fromkeys(re.findall(rf"^({clause}\.[1-9])$", source, re.MULTILINE)))
     actual_sections = [item["id"] for item in data["sections"]]
     if actual_sections != expected_sections:
         errors.append(f"Clause sections differ: {actual_sections} instead of {expected_sections}")
-    for section in expected_sections[:7]:
+    narrative_sections = [
+        section for section in expected_sections
+        if section not in {catalog for catalogs in CATALOGS.values() for catalog in catalogs}
+    ]
+    for section in narrative_sections:
         if section not in content["sections"]:
             errors.append(f"Missing translated section: {section}")
 
-    expected_subsections = list(dict.fromkeys(re.findall(r"^(7\.[1-7](?:\.\d+)+)$", source, re.MULTILINE)))
+    expected_subsections = []
+    for clause, source in sources.items():
+        narrative_depth = max(int(section.split(".")[1]) for section in expected_sections if section.startswith(clause + ".") and section not in CATALOGS[clause])
+        expected_subsections.extend(dict.fromkeys(
+            re.findall(rf"^({clause}\.[1-{narrative_depth}](?:\.\d+)+)$", source, re.MULTILINE)
+        ))
     actual_subsections = [
         subsection["id"]
         for section in content["sections"].values()
@@ -129,20 +149,25 @@ def check_completeness():
     if len(actual_subsections) != len(set(actual_subsections)):
         errors.append("Duplicate translated subsection identifiers")
 
-    for prefix, key in (("7.8", "classifiers"), ("7.9", "associations")):
-        expected_objects = source_object_map(source, prefix)
-        actual_objects = {item["section"]: item["name"] for item in data[key] if item["section"].startswith(prefix + ".")}
-        if actual_objects != expected_objects:
-            missing_objects = sorted(set(expected_objects.items()) - set(actual_objects.items()))
-            extra_objects = sorted(set(actual_objects.items()) - set(expected_objects.items()))
-            errors.append(f"{key} differ from source; missing={missing_objects}, extra={extra_objects}")
+    for clause, source in sources.items():
+        classifier_prefix, association_prefix = CATALOGS[clause]
+        for prefix, key in ((classifier_prefix, "classifiers"), (association_prefix, "associations")):
+            expected_objects = source_object_map(source, prefix)
+            actual_objects = {item["section"]: item["name"] for item in data[key] if item["section"].startswith(prefix + ".")}
+            if actual_objects != expected_objects:
+                missing_objects = sorted(set(expected_objects.items()) - set(actual_objects.items()))
+                extra_objects = sorted(set(actual_objects.items()) - set(expected_objects.items()))
+                errors.append(f"{key} differ from source; missing={missing_objects}, extra={extra_objects}")
 
-    expected_figures = sorted(set(re.findall(r"^Figure (7\.\d+)\s", source, re.MULTILINE)), key=lambda value: int(value.split(".")[1]))
+    expected_figures = []
+    for clause, source in sources.items():
+        expected_figures.extend(dict.fromkeys(re.findall(rf"^Figure ({clause}\.\d+)\s", source, re.MULTILINE)))
+    expected_figures.sort(key=lambda value: [int(part) for part in value.split(".")])
     actual_figures = [item["id"] for item in data["diagrams"]]
     if actual_figures != expected_figures:
         errors.append(f"Figures differ: {actual_figures} instead of {expected_figures}")
 
-    for classifier_name, block in source_classifier_blocks(source):
+    for classifier_name, block in source_classifier_blocks(sources):
         classifier_content = content["classifiers"].get(classifier_name, {})
         for field, marker in (("ocl", "inv:"), ("body", "body:"), ("pre", "pre:")):
             source_count = len(re.findall(rf"^{re.escape(marker)}", block, re.MULTILINE))

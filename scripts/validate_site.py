@@ -1,6 +1,6 @@
 """
 Name: validate_site.py
-Purpose: Validate generated offline UML handbook pages, Python SVG geometry and every hash route in Clause 7.
+Purpose: Validate generated offline UML handbook pages, Python SVG geometry and every hash route in Clauses 7-8.
 Interface: python scripts/validate_site.py [--browser PATH] [--static-only]
 Goal: Detect stale generated data, missing content, invalid SVG geometry, broken links and browser JavaScript errors.
 Requires: Python 3, Pillow; Chrome or Edge only for final browser rendering checks.
@@ -87,8 +87,9 @@ def check_static():
             errors.append(f"Missing resource: {resource}")
 
     images = sorted((SITE / "assets" / "diagrams").glob("figure-*.png"))
-    if len(images) != 21:
-        errors.append(f"Expected 21 diagram screenshots, found {len(images)}")
+    expected_diagrams = len(data["diagrams"])
+    if len(images) != expected_diagrams:
+        errors.append(f"Expected {expected_diagrams} diagram screenshots, found {len(images)}")
     for image in images:
         if image.stat().st_size < 100:
             errors.append(f"Empty image: {image.name}")
@@ -96,8 +97,8 @@ def check_static():
     all_routes = routes(data)
     known_routes = {item[0] for item in all_routes} | {"#/", "#content"}
     vectors = diagram_vectors(data)
-    if len(vectors) != 21:
-        errors.append(f"Expected 21 vector diagrams, found {len(vectors)}")
+    if len(vectors) != expected_diagrams:
+        errors.append(f"Expected {expected_diagrams} vector diagrams, found {len(vectors)}")
     for vector in vectors:
         vector_path = SITE / vector
         if not vector_path.is_file():
@@ -109,8 +110,9 @@ def check_static():
             if route not in known_routes:
                 errors.append(f"Broken SVG link in {vector}: {route}")
 
-    if len(all_routes) != 98:
-        errors.append(f"Route extraction mismatch: {len(all_routes)} routes")
+    expected_routes = len(base_routes(data)) + 1
+    if len(all_routes) != expected_routes:
+        errors.append(f"Route extraction mismatch: {len(all_routes)} routes instead of {expected_routes}")
     app = (SITE / "app.js").read_text(encoding="utf-8")
     if "fetch(" in app:
         errors.append("fetch() is not allowed for core offline data")

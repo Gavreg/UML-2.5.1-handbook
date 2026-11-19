@@ -1,9 +1,9 @@
 """
 Name: render_common_structure_diagrams.py
-Purpose: Render the 21 figures in UML 2.5.1 Clause 7 as lossless PNG screenshots.
+Purpose: Render the 26 figures in UML 2.5.1 Clauses 7-8 as lossless PNG screenshots.
 Interface: python scripts/render_common_structure_diagrams.py [--pdf PATH] [--output-dir PATH]
 Goal: Preserve the original OMG diagram artwork while making it available to the offline handbook.
-Source: OMG Unified Modeling Language 2.5.1, formal/17-12-05, printed pages 21-40.
+Source: OMG Unified Modeling Language 2.5.1, formal/17-12-05, printed pages 21-40 and 69-78.
 Requires: Python 3 and PyMuPDF.
 """
 
@@ -35,6 +35,11 @@ FIGURES = {
     "7.19": (39, (50, 440, 545, 487)),
     "7.20": (39, (50, 542, 545, 606)),
     "7.21": (40, (50, 50, 545, 168)),
+    "8.1": (69, (55, 305, 440, 548)),
+    "8.2": (71, (60, 95, 465, 320)),
+    "8.3": (74, (60, 90, 425, 445)),
+    "8.4": (77, (60, 80, 545, 378)),
+    "8.5": (78, (50, 420, 560, 625)),
 }
 
 

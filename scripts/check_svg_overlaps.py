@@ -646,7 +646,7 @@ def find_browser(explicit=None):
 
 def main():
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument("svg", nargs="*", type=Path, help="SVG files; by default all Clause 7 diagrams")
+    parser.add_argument("svg", nargs="*", type=Path, help="SVG files; by default all handbook diagrams")
     args = parser.parse_args()
     sources = args.svg or sorted((SITE / "assets" / "diagrams").glob("figure-*.svg"))
     missing = [source for source in sources if not source.is_file()]

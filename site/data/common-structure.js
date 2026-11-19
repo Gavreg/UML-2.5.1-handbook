@@ -83,6 +83,70 @@ window.UML_DATA = (() => {
       page: 61,
       summary: "Справочные описания 36 ассоциаций раздела Common Structure и их концов.",
       figures: []
+    },
+    {
+      id: "8.1",
+      title: "Обзор",
+      en: "Summary",
+      page: 69,
+      summary: "Раздел описывает спецификацию значений. ValueSpecification — элемент модели, семантически возвращающий ноль или более значений; тип и количество значений должны подходить контексту использования.",
+      figures: []
+    },
+    {
+      id: "8.2",
+      title: "Литералы",
+      en: "Literals",
+      page: 69,
+      summary: "LiteralSpecification — ValueSpecification, задающая литеральное значение. Для каждого стандартного примитивного типа UML есть свой вид LiteralSpecification с текстовой нотацией, плюс литерал «null» для отсутствия значения.",
+      semantics: "Шесть видов LiteralSpecifications: LiteralNull явно моделирует отсутствие значения; LiteralString, LiteralInteger, LiteralBoolean, LiteralUnlimitedNatural и LiteralReal задают постоянные значения соответствующих примитивных типов.",
+      notation: "LiteralSpecifications записываются текстом: «null», строка в двойных кавычках, последовательность цифр, «true»/«false», цифры или «*», десятичная или экспоненциальная запись вещественного числа.",
+      figures: ["8.1"]
+    },
+    {
+      id: "8.3",
+      title: "Выражения",
+      en: "Expressions",
+      page: 70,
+      summary: "Expressions — ValueSpecifications, задающие значения, получаемые вычислением.",
+      semantics: "Expression образует дерево из символа и операндов. StringExpression конкатенирует строковые операнды или подвыражения и используется для имён NamedElements в шаблонах. OpaqueExpression задаёт вычисление через UML Behavior или текст на языке, отличном от UML.",
+      notation: "Expression без операндов записывается своим символом; с операндами — символом со скобками. Для OpaqueExpression выводится тело body, перед которым может указываться язык в фигурных скобках, например {OCL}.",
+      figures: ["8.2"]
+    },
+    {
+      id: "8.4",
+      title: "Время",
+      en: "Time",
+      page: 73,
+      summary: "Подраздел определяет TimeExpressions и Durations, возвращающие значения на основе простой модели времени, пригодной, когда сложные аспекты измерения времени можно безопасно игнорировать.",
+      semantics: "Время — координата, упорядочивающая события; duration — промежуток между двумя событиями. Observation наблюдает события входа и выхода NamedElement: TimeObservation фиксирует момент события, DurationObservation измеряет длительность между событиями. TimeExpression и Duration вычисляются по expr или по единственному наблюдению.",
+      notation: "Observation обозначается прямой линией, присоединённой к наблюдаемому NamedElement, с именем у свободного конца. TimeExpression и Duration записываются текстом своего expr либо именем наблюдения.",
+      figures: ["8.3"]
+    },
+    {
+      id: "8.5",
+      title: "Интервалы",
+      en: "Intervals",
+      page: 76,
+      summary: "Interval — ValueSpecification, задающая диапазон между двумя ValueSpecifications: min и max. Специализации TimeInterval и DurationInterval применяются во временных ограничениях.",
+      semantics: "Значение Interval — множество значений от min до max включительно. IntervalConstraint утверждает, что значения constrainedElements попадают в этот диапазон; TimeConstraint и DurationConstraint используют TimeInterval и DurationInterval.",
+      notation: "Interval записывается текстом «<min-value>..<max-value>». TimeConstraint и DurationConstraint могут изображаться специальной графической нотацией, зависящей от вида диаграммы.",
+      figures: ["8.4", "8.5"]
+    },
+    {
+      id: "8.6",
+      title: "Описания классификаторов",
+      en: "Classifier Descriptions",
+      page: 79,
+      summary: "Справочные описания 22 классификаторов раздела Values: определения, наследование, атрибуты, концы ассоциаций, операции и ограничения.",
+      figures: []
+    },
+    {
+      id: "8.7",
+      title: "Описания ассоциаций",
+      en: "Association Descriptions",
+      page: 92,
+      summary: "Справочные описания 19 ассоциаций раздела Values и их концов.",
+      figures: []
     }
   ];
 
@@ -528,6 +592,46 @@ window.UML_DATA = (() => {
       figures: ["7.5"]
     },
     {
+      name: "Duration",
+      ru: "Длительность",
+      kind: "Class",
+      section: "8.6.1",
+      page: 79,
+      definition: "ValueSpecification, задающая временное расстояние между двумя моментами времени.",
+      generalizations: ["ValueSpecification"],
+      figures: ["8.3", "8.4"]
+    },
+    {
+      name: "DurationConstraint",
+      ru: "Ограничение длительности",
+      kind: "Class",
+      section: "8.6.2",
+      page: 79,
+      definition: "Constraint, ссылающийся на DurationInterval.",
+      generalizations: ["IntervalConstraint"],
+      figures: ["8.4"]
+    },
+    {
+      name: "DurationInterval",
+      ru: "Интервал длительности",
+      kind: "Class",
+      section: "8.6.3",
+      page: 80,
+      definition: "Interval, задающий диапазон между двумя значениями длительности, заданными Durations.",
+      generalizations: ["Interval"],
+      figures: ["8.4"]
+    },
+    {
+      name: "DurationObservation",
+      ru: "Наблюдение длительности",
+      kind: "Class",
+      section: "8.6.4",
+      page: 80,
+      definition: "Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.",
+      generalizations: ["Observation"],
+      figures: ["8.3"]
+    },
+    {
       name: "Expression",
       ru: "Выражение",
       kind: "Class",
@@ -536,7 +640,116 @@ window.UML_DATA = (() => {
       definition: "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
       generalizations: ["ValueSpecification"],
       specializations: ["StringExpression"],
-      figures: []
+      figures: ["8.2"]
+    },
+    {
+      name: "Interval",
+      ru: "Интервал",
+      kind: "Class",
+      section: "8.6.6",
+      page: 82,
+      definition: "ValueSpecification, задающая диапазон значений между двумя ValueSpecifications — нижней границей min и верхней границей max.",
+      generalizations: ["ValueSpecification"],
+      specializations: ["DurationInterval", "TimeInterval"],
+      figures: ["8.4"]
+    },
+    {
+      name: "IntervalConstraint",
+      ru: "Интервальное ограничение",
+      kind: "Class",
+      section: "8.6.7",
+      page: 82,
+      definition: "Constraint, спецификация которого задаётся Interval.",
+      generalizations: ["Constraint"],
+      specializations: ["DurationConstraint", "TimeConstraint"],
+      figures: ["8.4"]
+    },
+    {
+      name: "LiteralBoolean",
+      ru: "Литерал Boolean",
+      kind: "Class",
+      section: "8.6.8",
+      page: 83,
+      definition: "LiteralSpecification, задающая постоянное значение примитивного типа Boolean.",
+      generalizations: ["LiteralSpecification"],
+      attributes: [{ signature: "value : Boolean = false", description: "Заданное значение Boolean." }],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralInteger",
+      ru: "Литерал Integer",
+      kind: "Class",
+      section: "8.6.9",
+      page: 83,
+      definition: "LiteralSpecification, задающая постоянное значение примитивного типа Integer.",
+      generalizations: ["LiteralSpecification"],
+      attributes: [{ signature: "value : Integer = 0", description: "Заданное значение Integer." }],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralNull",
+      ru: "Литерал Null",
+      kind: "Class",
+      section: "8.6.10",
+      page: 84,
+      definition: "LiteralSpecification, явно моделирующая отсутствие значения.",
+      generalizations: ["LiteralSpecification"],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralReal",
+      ru: "Литерал Real",
+      kind: "Class",
+      section: "8.6.11",
+      page: 84,
+      definition: "LiteralSpecification, задающая постоянное значение примитивного типа Real.",
+      generalizations: ["LiteralSpecification"],
+      attributes: [{ signature: "value : Real", description: "Заданное значение Real." }],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralSpecification",
+      ru: "Спецификация литерала",
+      kind: "Abstract Class",
+      section: "8.6.12",
+      page: 85,
+      definition: "ValueSpecification, задающая литеральное — явно обозначенное — значение.",
+      generalizations: ["ValueSpecification"],
+      specializations: ["LiteralBoolean", "LiteralInteger", "LiteralNull", "LiteralReal", "LiteralString", "LiteralUnlimitedNatural"],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralString",
+      ru: "Литерал String",
+      kind: "Class",
+      section: "8.6.13",
+      page: 85,
+      definition: "LiteralSpecification, задающая постоянное значение примитивного типа String.",
+      generalizations: ["LiteralSpecification"],
+      attributes: [{ signature: "value : String [0..1]", description: "Заданное значение String." }],
+      figures: ["8.1"]
+    },
+    {
+      name: "LiteralUnlimitedNatural",
+      ru: "Литерал UnlimitedNatural",
+      kind: "Class",
+      section: "8.6.14",
+      page: 86,
+      definition: "LiteralSpecification, задающая постоянное значение примитивного типа UnlimitedNatural.",
+      generalizations: ["LiteralSpecification"],
+      attributes: [{ signature: "value : UnlimitedNatural = 0", description: "Заданное значение UnlimitedNatural." }],
+      figures: ["8.1"]
+    },
+    {
+      name: "Observation",
+      ru: "Наблюдение",
+      kind: "Abstract Class",
+      section: "8.6.15",
+      page: 86,
+      definition: "PackageableElement, обозначающий наблюдение событий, которые могут происходить относительно другой части модели.",
+      generalizations: ["PackageableElement"],
+      specializations: ["DurationObservation", "TimeObservation"],
+      figures: ["8.3"]
     },
     {
       name: "OpaqueExpression",
@@ -546,7 +759,7 @@ window.UML_DATA = (() => {
       page: 86,
       definition: "ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.",
       generalizations: ["ValueSpecification"],
-      figures: ["7.17"]
+      figures: ["7.17", "8.2"]
     },
     {
       name: "StringExpression",
@@ -556,7 +769,49 @@ window.UML_DATA = (() => {
       page: 88,
       definition: "Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.",
       generalizations: ["Expression", "TemplateableElement"],
-      figures: ["7.5"]
+      figures: ["7.5", "8.2"]
+    },
+    {
+      name: "TimeConstraint",
+      ru: "Ограничение времени",
+      kind: "Class",
+      section: "8.6.18",
+      page: 89,
+      definition: "IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.",
+      generalizations: ["IntervalConstraint"],
+      attributes: [{ signature: "firstEvent : Boolean [0..1] = true", description: "Определяет, привязано ли начало интервала к событию входа (true) или выхода (false) единственного constrainedElement." }],
+      figures: ["8.4"]
+    },
+    {
+      name: "TimeExpression",
+      ru: "Выражение времени",
+      kind: "Class",
+      section: "8.6.19",
+      page: 90,
+      definition: "ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.",
+      generalizations: ["ValueSpecification"],
+      figures: ["8.3", "8.4"]
+    },
+    {
+      name: "TimeInterval",
+      ru: "Интервал времени",
+      kind: "Class",
+      section: "8.6.20",
+      page: 90,
+      definition: "Interval, задающий диапазон между двумя моментами времени, заданными TimeExpressions.",
+      generalizations: ["Interval"],
+      figures: ["8.4"]
+    },
+    {
+      name: "TimeObservation",
+      ru: "Наблюдение времени",
+      kind: "Class",
+      section: "8.6.21",
+      page: 91,
+      definition: "Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.",
+      generalizations: ["Observation"],
+      attributes: [{ signature: "firstEvent : Boolean = true", description: "Определяет, наблюдается событие входа (true) или выхода (false)." }],
+      figures: ["8.3"]
     },
     {
       name: "ValueSpecification",
@@ -566,7 +821,8 @@ window.UML_DATA = (() => {
       page: 91,
       definition: "Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.",
       generalizations: ["TypedElement", "PackageableElement"],
-      figures: ["7.10", "7.13"]
+      specializations: ["Duration", "Expression", "Interval", "LiteralSpecification", "OpaqueExpression", "TimeExpression"],
+      figures: ["7.10", "7.13", "8.1", "8.2", "8.3", "8.4"]
     },
     {
       name: "Package",
@@ -765,6 +1021,111 @@ window.UML_DATA = (() => {
       name: "A_upperValue_owningUpper", ru: "Владелец верхней границы", section: "7.9.36", page: 68,
       definition: "Связывает ValueSpecification верхней границы с владеющим MultiplicityElement.",
       diagrams: ["Types"], ends: ["MultiplicityElement::upperValue", "owningUpper : MultiplicityElement [0..1]"]
+    },
+    {
+      name: "A_behavior_opaqueExpression", ru: "Поведение непрозрачного выражения", section: "8.7.1", page: 92,
+      definition: "Связывает OpaqueExpression с Behavior, задающим вычисление его значений.",
+      diagrams: ["Expressions"], ends: ["OpaqueExpression::behavior", "opaqueExpression : OpaqueExpression [0..*]"]
+    },
+    {
+      name: "A_event_durationObservation", ru: "События наблюдения длительности", section: "8.7.2", page: 93,
+      definition: "Связывает DurationObservation с NamedElements, между событиями входа или выхода которых измеряется длительность.",
+      diagrams: ["Time"], ends: ["DurationObservation::event", "durationObservation : DurationObservation [0..*]"]
+    },
+    {
+      name: "A_event_timeObservation", ru: "Событие наблюдения времени", section: "8.7.3", page: 93,
+      definition: "Связывает TimeObservation с NamedElement, событие входа или выхода которого наблюдается.",
+      diagrams: ["Time"], ends: ["TimeObservation::event", "timeObservation : TimeObservation [0..*]"]
+    },
+    {
+      name: "A_expr_duration", ru: "Выражение длительности", section: "8.7.4", page: 93,
+      definition: "Связывает Duration с ValueSpecification, вычисляющей её значение.",
+      diagrams: ["Time"], ends: ["Duration::expr", "duration : Duration [0..1] {subsets owner}"]
+    },
+    {
+      name: "A_expr_timeExpression", ru: "Выражение времени", section: "8.7.5", page: 93,
+      definition: "Связывает TimeExpression с ValueSpecification, вычисляющей её значение.",
+      diagrams: ["Time"], ends: ["TimeExpression::expr", "timeExpression : TimeExpression [0..1] {subsets owner}"]
+    },
+    {
+      name: "A_max_durationInterval", ru: "Максимум интервала длительности", section: "8.7.6", page: 93,
+      definition: "Связывает DurationInterval с Duration, задающей его верхнюю границу.",
+      diagrams: ["Intervals"], generalizations: ["A_max_interval"],
+      ends: ["DurationInterval::max", "durationInterval : DurationInterval [0..*]"]
+    },
+    {
+      name: "A_max_interval", ru: "Максимум интервала", section: "8.7.7", page: 94,
+      definition: "Связывает Interval с ValueSpecification, задающей его верхнюю границу.",
+      diagrams: ["Intervals"], specializations: ["A_max_timeInterval", "A_max_durationInterval"],
+      ends: ["Interval::max", "interval : Interval [0..*]"]
+    },
+    {
+      name: "A_max_timeInterval", ru: "Максимум интервала времени", section: "8.7.8", page: 94,
+      definition: "Связывает TimeInterval с TimeExpression, задающим его верхнюю границу.",
+      diagrams: ["Intervals"], generalizations: ["A_max_interval"],
+      ends: ["TimeInterval::max", "timeInterval : TimeInterval [0..*]"]
+    },
+    {
+      name: "A_min_durationInterval", ru: "Минимум интервала длительности", section: "8.7.9", page: 94,
+      definition: "Связывает DurationInterval с Duration, задающей его нижнюю границу.",
+      diagrams: ["Intervals"], generalizations: ["A_min_interval"],
+      ends: ["DurationInterval::min", "durationInterval : DurationInterval [0..*]"]
+    },
+    {
+      name: "A_min_interval", ru: "Минимум интервала", section: "8.7.10", page: 94,
+      definition: "Связывает Interval с ValueSpecification, задающей его нижнюю границу.",
+      diagrams: ["Intervals"], specializations: ["A_min_timeInterval", "A_min_durationInterval"],
+      ends: ["Interval::min", "interval : Interval [0..*]"]
+    },
+    {
+      name: "A_min_timeInterval", ru: "Минимум интервала времени", section: "8.7.11", page: 95,
+      definition: "Связывает TimeInterval с TimeExpression, задающим его нижнюю границу.",
+      diagrams: ["Intervals"], generalizations: ["A_min_interval"],
+      ends: ["TimeInterval::min", "timeInterval : TimeInterval [0..*]"]
+    },
+    {
+      name: "A_observation_duration", ru: "Наблюдения длительности", section: "8.7.12", page: 95,
+      definition: "Связывает Duration с Observations, участвующими в вычислении её значения.",
+      diagrams: ["Time"], ends: ["Duration::observation", "duration : Duration [0..1]"]
+    },
+    {
+      name: "A_observation_timeExpression", ru: "Наблюдения выражения времени", section: "8.7.13", page: 95,
+      definition: "Связывает TimeExpression с Observations, участвующими в вычислении его значения.",
+      diagrams: ["Time"], ends: ["TimeExpression::observation", "timeExpression : TimeExpression [0..1]"]
+    },
+    {
+      name: "A_operand_expression", ru: "Операнды выражения", section: "8.7.14", page: 95,
+      definition: "Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.",
+      diagrams: ["Expressions"], ends: ["Expression::operand", "expression : Expression [0..1] {subsets owner}"]
+    },
+    {
+      name: "A_result_opaqueExpression", ru: "Результат непрозрачного выражения", section: "8.7.15", page: 96,
+      definition: "Связывает OpaqueExpression с возвращаемым Parameter её Behavior, значения которого являются результатом вычисления.",
+      diagrams: ["Expressions"], ends: ["OpaqueExpression::result", "opaqueExpression : OpaqueExpression [0..*]"]
+    },
+    {
+      name: "A_specification_durationConstraint", ru: "Спецификация ограничения длительности", section: "8.7.16", page: 96,
+      definition: "Связывает DurationConstraint с DurationInterval, задающим его условие.",
+      diagrams: ["Intervals"], generalizations: ["A_specification_intervalConstraint"],
+      ends: ["DurationConstraint::specification", "durationConstraint : DurationConstraint [0..1]"]
+    },
+    {
+      name: "A_specification_intervalConstraint", ru: "Спецификация интервального ограничения", section: "8.7.17", page: 96,
+      definition: "Связывает IntervalConstraint с Interval, задающим его условие.",
+      diagrams: ["Intervals"], generalizations: ["A_specification_owningConstraint"],
+      specializations: ["A_specification_timeConstraint", "A_specification_durationConstraint"],
+      ends: ["IntervalConstraint::specification", "intervalConstraint : IntervalConstraint [0..1]"]
+    },
+    {
+      name: "A_specification_timeConstraint", ru: "Спецификация ограничения времени", section: "8.7.18", page: 96,
+      definition: "Связывает TimeConstraint с TimeInterval, задающим его условие.",
+      diagrams: ["Intervals"], generalizations: ["A_specification_intervalConstraint"],
+      ends: ["TimeConstraint::specification", "timeConstraint : TimeConstraint [0..1]"]
+    },
+    {
+      name: "A_subExpression_owningExpression", ru: "Подвыражения строкового выражения", section: "8.7.19", page: 97,
+      definition: "Связывает StringExpression с принадлежащими ему подвыражениями, образующими его значение.",
+      diagrams: ["Expressions"], ends: ["StringExpression::subExpression", "StringExpression::owningExpression"]
     }
   ];
 
@@ -789,7 +1150,12 @@ window.UML_DATA = (() => {
     { id: "7.18", title: "Dependency между двумя элементами", en: "Notation for a Dependency between two elements", section: "7.7", page: 39, related: ["Dependency", "NamedElement"] },
     { id: "7.19", title: "Пример зависимости «Instantiate»", en: "An example of an «Instantiate» Dependency", section: "7.7", page: 39, related: ["Dependency"] },
     { id: "7.20", title: "Пример зависимости «use»", en: "An example of a «use» Dependency", section: "7.7", page: 39, related: ["Usage"] },
-    { id: "7.21", title: "Пример зависимости Realization", en: "An example of a realization Dependency", section: "7.7", page: 40, related: ["Realization"] }
+    { id: "7.21", title: "Пример зависимости Realization", en: "An example of a realization Dependency", section: "7.7", page: 40, related: ["Realization"] },
+    { id: "8.1", title: "Литералы", en: "Literals", section: "8.2", page: 69, related: ["TypedElement", "PackageableElement", "ValueSpecification", "LiteralSpecification", "LiteralNull", "LiteralInteger", "LiteralUnlimitedNatural", "LiteralString", "LiteralBoolean", "LiteralReal"] },
+    { id: "8.2", title: "Выражения", en: "Expressions", section: "8.3", page: 71, related: ["ValueSpecification", "Expression", "OpaqueExpression", "StringExpression", "Parameter", "Behavior", "TemplateableElement"] },
+    { id: "8.3", title: "Время и длительность", en: "Time and Duration", section: "8.4", page: 74, related: ["ValueSpecification", "TimeExpression", "Duration", "PackageableElement", "Observation", "TimeObservation", "DurationObservation", "NamedElement"] },
+    { id: "8.4", title: "Интервалы", en: "Intervals", section: "8.5", page: 77, related: ["ValueSpecification", "Interval", "TimeInterval", "DurationInterval", "TimeExpression", "Duration", "Constraint", "IntervalConstraint", "TimeConstraint", "DurationConstraint"] },
+    { id: "8.5", title: "Пример DurationConstraints и TimeConstraints", en: "Example of DurationConstraints and TimeConstraints", section: "8.5", page: 78, related: ["DurationConstraint", "TimeConstraint", "DurationObservation", "TimeObservation", "Duration", "TimeExpression"] }
   ].map(diagram => ({
     ...diagram,
     image: `assets/diagrams/figure-${diagram.id.replace(".", "-")}.png`,

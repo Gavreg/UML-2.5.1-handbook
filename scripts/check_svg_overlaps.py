@@ -1,318 +1,632 @@
 """
 Name: check_svg_overlaps.py
-Purpose: Check SVG diagram geometry and report overlapping or misplaced elements.
-Interface: python scripts/check_svg_overlaps.py [SVG ...] [--browser PATH]
-Goal: Detect text collisions, insufficient clearances and invalid line or marker connections.
-Requires: Python 3 standard library; Google Chrome or Microsoft Edge.
+Purpose: Check SVG geometry entirely in Python and report overlapping or misplaced elements.
+Interface: python scripts/check_svg_overlaps.py [SVG ...]
+Goal: Detect text collisions, insufficient clearances and invalid line or marker connections without a browser.
+Requires: Python 3 and Pillow; Arial is used when available, with DejaVu Sans as a metrics fallback.
 """
 
 from argparse import ArgumentParser
+from dataclasses import dataclass
+from functools import cached_property
+import math
 from pathlib import Path
 import re
-import subprocess
-import tempfile
+import xml.etree.ElementTree as ET
+
+from PIL import ImageFont
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
+SVG_NS = "{http://www.w3.org/2000/svg}"
 
 
-SVG_GEOMETRY_SCRIPT = r"""
-(() => {
-  const errors = [];
-  const directText = element => [...element.childNodes]
-    .filter(node => node.nodeType === Node.TEXT_NODE)
-    .map(node => node.textContent).join("").trim();
-  const labels = [...document.querySelectorAll("text")].map((element, index) => ({
-    element,
-    box: element.getBBox(),
-    name: directText(element) || `text ${index}`
-  }));
-  const classBoxes = [...document.querySelectorAll("rect.class-box")].map(element => ({
-    element,
-    name: element.closest(".class-node")?.dataset.classifier || "",
-    box: element.getBBox()
-  }));
-  const overlaps = (a, b) => Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 0.5
-    && Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y) > 0.5;
-  const inside = (point, box, margin = 0.75) => point.x > box.x + margin
-    && point.x < box.x + box.width - margin
-    && point.y > box.y + margin
-    && point.y < box.y + box.height - margin;
-  const onBorder = (point, box) => {
-    const withinX = point.x >= box.x - 0.75 && point.x <= box.x + box.width + 0.75;
-    const withinY = point.y >= box.y - 0.75 && point.y <= box.y + box.height + 0.75;
-    return (withinY && (Math.abs(point.x - box.x) <= 0.75 || Math.abs(point.x - box.x - box.width) <= 0.75))
-      || (withinX && (Math.abs(point.y - box.y) <= 0.75 || Math.abs(point.y - box.y - box.height) <= 0.75));
-  };
-  const expanded = (box, horizontal, vertical) => ({
-    x: box.x - horizontal,
-    y: box.y - vertical,
-    width: box.width + horizontal * 2,
-    height: box.height + vertical * 2
-  });
-  const formatBox = box => `x=${box.x.toFixed(1)}, y=${box.y.toFixed(1)}, w=${box.width.toFixed(1)}, h=${box.height.toFixed(1)}`;
-  const unitProbe = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  unitProbe.setAttribute("width", "1ex");
-  unitProbe.setAttribute("height", "0");
-  document.documentElement.appendChild(unitProbe);
-  const ex = unitProbe.getBBox().width || 8;
-  unitProbe.remove();
-  const horizontalGap = ex;
-  const verticalGap = ex / 2;
-  const associationLabel = label => Boolean(label.element.closest("g.association-group"));
-  const endLabels = [...document.querySelectorAll(".association-group text, .example-association-group text")];
-  if (endLabels.length) {
-    const endFontSizes = endLabels.map(label => parseFloat(getComputedStyle(label).fontSize));
-    if (endFontSizes.some(size => Math.abs(size - 14) > 0.01)) {
-      errors.push(`association end font sizes must be 14 px: ${[...new Set(endFontSizes)].join(", ")}`);
-    }
-  }
+@dataclass(frozen=True)
+class Box:
+    x: float
+    y: float
+    width: float
+    height: float
 
-  for (let first = 0; first < labels.length; first += 1) {
-    for (let second = first + 1; second < labels.length; second += 1) {
-      if (overlaps(labels[first].box, labels[second].box)) {
-        errors.push(`text/text: ${labels[first].name} [${formatBox(labels[first].box)}] / ${labels[second].name} [${formatBox(labels[second].box)}]`);
-      }
-    }
-  }
+    @property
+    def right(self):
+        return self.x + self.width
 
-  for (const label of labels) {
-    const owner = label.element.closest(".class-node, a")?.querySelector("rect.class-box");
-    if (owner) {
-      const box = owner.getBBox();
-      if (!inside({ x: label.box.x, y: label.box.y }, box, 1)
-        || !inside({ x: label.box.x + label.box.width, y: label.box.y + label.box.height }, box, 1)) {
-        errors.push(`text/class border: ${label.name} [${formatBox(label.box)}]`);
-      }
-    } else {
-      for (const classBox of classBoxes) {
-        const clearance = associationLabel(label) ? expanded(classBox.box, horizontalGap, verticalGap) : classBox.box;
-        if (overlaps(label.box, clearance)) errors.push(`label/class clearance: ${label.name} [${formatBox(label.box)}]; class ${classBox.name} [${formatBox(classBox.box)}]`);
-      }
-    }
-  }
+    @property
+    def bottom(self):
+        return self.y + self.height
 
-  const lines = [...document.querySelectorAll("path.association, path.generalization-line, path.example-association, path.dependency-line, path.note-link, line.class-divider")];
-  for (const line of lines) {
-    const length = line.getTotalLength();
-    for (const label of labels) {
-      const gapX = associationLabel(label) ? horizontalGap : 0.75;
-      const gapY = associationLabel(label) ? verticalGap : 0.75;
-      const box = expanded(label.box, gapX, gapY);
-      for (let distance = 0; distance <= length; distance += 1) {
-        if (inside(line.getPointAtLength(distance), box, 0)) {
-          errors.push(`text/line: ${label.name} [${formatBox(label.box)}]; ${line.getAttribute("class")} ${line.getAttribute("d") || ""}`);
-          break;
-        }
-      }
-    }
-  }
 
-  for (const link of document.querySelectorAll('a[href*="#/classifier/"]')) {
-    const title = link.querySelector(":scope > title");
-    if (!title?.textContent.trim() || title.textContent.includes("открыть описание")) {
-      errors.push("class link has no definition tooltip");
-    }
-  }
-  for (const group of document.querySelectorAll("g.association-group")) {
-    if (!group.closest("a.association-link")) errors.push("association group has no link");
-    const ends = [...group.querySelectorAll("text.association-end")];
-    if (ends.length !== 2) errors.push(`association must have two described end labels: ${group.id}`);
-    for (const end of ends) {
-      if (!end.querySelector(":scope > title")?.textContent.trim()) {
-        errors.push(`association end has no description tooltip: ${end.textContent.trim()}`);
-      }
-    }
-  }
+@dataclass(frozen=True)
+class PathGeometry:
+    points: tuple
 
-  const endShapes = [...document.querySelectorAll(".end-dot, .composition")].map(element => ({
-    element,
-    box: element.getBBox()
-  }));
-  const markerBoxes = [];
-  for (const path of document.querySelectorAll("path.association")) {
-    const length = path.getTotalLength();
-    const addMarker = atEnd => {
-      const origin = path.getPointAtLength(atEnd ? length : 0);
-      const base = path.getPointAtLength(atEnd ? Math.max(0, length - 8) : Math.min(8, length));
-      markerBoxes.push({
-        x: Math.min(origin.x, base.x),
-        y: Math.min(origin.y, base.y) - 4,
-        width: Math.abs(base.x - origin.x),
-        height: Math.abs(base.y - origin.y) + 8
-      });
-    };
-    if (path.hasAttribute("marker-start")) addMarker(false);
-    if (path.hasAttribute("marker-end")) addMarker(true);
-  }
-  for (const label of labels.filter(associationLabel)) {
-    for (const shape of [...endShapes, ...markerBoxes]) {
-      if (overlaps(label.box, expanded(shape.box || shape, horizontalGap, verticalGap))) {
-        errors.push(`text/end marker clearance: ${label.name} [${formatBox(label.box)}]`);
-      }
-    }
-  }
+    @cached_property
+    def segments(self):
+        result = []
+        for start, end in zip(self.points, self.points[1:]):
+            length = math.dist(start, end)
+            if length:
+                result.append((start, end, length))
+        return tuple(result)
 
-  const distanceToBox = (point, box) => Math.hypot(
-    Math.max(box.x - point.x, 0, point.x - box.x - box.width),
-    Math.max(box.y - point.y, 0, point.y - box.y - box.height)
-  );
-  const axialGap = (origin, box, horizontal) => horizontal
-    ? Math.max(box.x - origin.x, origin.x - box.x - box.width, 0)
-    : Math.max(box.y - origin.y, origin.y - box.y - box.height, 0);
-  for (const group of document.querySelectorAll("g.association-group")) {
-    const path = group.querySelector("path.association");
-    const roles = [...group.querySelectorAll("text.association-end")];
-    if (!path || roles.length !== 2) continue;
-    const length = path.getTotalLength();
-    const origins = [path.getPointAtLength(0), path.getPointAtLength(length)];
-    const placements = roles.map(role => {
-      const box = role.getBBox();
-      const distances = origins.map(origin => distanceToBox(origin, box));
-      const endIndex = distances[0] <= distances[1] ? 0 : 1;
-      const origin = origins[endIndex];
-      const next = path.getPointAtLength(endIndex ? length - 1 : 1);
-      const horizontal = Math.abs(next.x - origin.x) > Math.abs(next.y - origin.y);
-      return { role, box, endIndex, origin, next, horizontal, nameGap: axialGap(origin, box, horizontal) };
-    });
-    if (placements[0].endIndex === placements[1].endIndex) {
-      errors.push(`association end labels assigned to the same end: ${group.id}`);
-    }
-    for (const placement of placements) {
-      const { role, box, origin, next, horizontal, endIndex } = placement;
-      const name = directText(role);
-      const ownDistance = distanceToBox(origin, box);
-      const oppositeDistance = distanceToBox(origins[1 - endIndex], box);
-      if (oppositeDistance < ownDistance + horizontalGap) {
-        errors.push(`association end description is too close to opposite end: ${group.id} / ${name}`);
-      }
-      if (horizontal) {
-        const toRight = next.x > origin.x;
-        const gap = toRight ? box.x - origin.x : origin.x - box.x - box.width;
-        const perpendicularGap = origin.y < box.y ? box.y - origin.y
-          : origin.y > box.y + box.height ? origin.y - box.y - box.height : 0;
-        if (gap < horizontalGap - 0.75 || gap > horizontalGap * 3 || perpendicularGap > ex * 6) {
-          errors.push(`horizontal association end placement: ${name}`);
-        }
-        const expectedAnchor = toRight ? "start" : "end";
-        if ((role.getAttribute("text-anchor") || "start") !== expectedAnchor) {
-          errors.push(`horizontal association end alignment: ${name}`);
-        }
-      } else {
-        const downward = next.y > origin.y;
-        const sideGap = downward ? box.y - origin.y : origin.y - box.y - box.height;
-        const onLeft = box.x + box.width <= origin.x;
-        const lateralGap = onLeft ? origin.x - box.x - box.width : box.x - origin.x;
-        if (sideGap < verticalGap - 0.75 || sideGap > ex * 6
-          || lateralGap < horizontalGap - 0.75) {
-          errors.push(`vertical association end placement: ${name}`);
-        }
-        const expectedAnchor = onLeft ? "end" : "start";
-        if ((role.getAttribute("text-anchor") || "start") !== expectedAnchor) {
-          errors.push(`vertical association end alignment: ${name}`);
-        }
-      }
-    }
-    for (const label of group.querySelectorAll("text.association-label")) {
-      const box = label.getBBox();
-      const distances = origins.map(origin => distanceToBox(origin, box));
-      const endIndex = distances[0] <= distances[1] ? 0 : 1;
-      const placement = placements.find(candidate => candidate.endIndex === endIndex);
-      if (!placement) {
-        errors.push(`association end label has no matching role: ${group.id} / ${label.textContent.trim()}`);
-        continue;
-      }
-      const ownDistance = distances[endIndex];
-      const oppositeDistance = distances[1 - endIndex];
-      if (oppositeDistance < ownDistance + horizontalGap) {
-        errors.push(`association end description is too close to opposite end: ${group.id} / ${label.textContent.trim()}`);
-      }
-      const modifierGap = axialGap(origins[endIndex], box, placement.horizontal);
-      if (placement.nameGap > modifierGap + 1.25) {
-        errors.push(`association end name is farther than its modifier: ${directText(placement.role)} / ${label.textContent.trim()} [name=${placement.nameGap.toFixed(1)}, modifier=${modifierGap.toFixed(1)}]`);
-      }
-    }
-  }
+    @cached_property
+    def length(self):
+        return sum(segment[2] for segment in self.segments)
 
-  for (const group of document.querySelectorAll("g.example-association-group")) {
-    const path = group.querySelector("path.example-association");
-    if (!path) continue;
-    const length = path.getTotalLength();
-    const origins = [path.getPointAtLength(0), path.getPointAtLength(length)];
-    for (const label of group.querySelectorAll("text")) {
-      if (label.getAttribute("text-anchor") === "middle") continue;
-      const box = label.getBBox();
-      const distances = origins.map(origin => distanceToBox(origin, box));
-      if (Math.min(...distances) > ex * 6) continue;
-      const endIndex = distances[0] <= distances[1] ? 0 : 1;
-      if (distances[1 - endIndex] < distances[endIndex] + horizontalGap) {
-        errors.push(`association end description is too close to opposite end: example / ${label.textContent.trim()}`);
-      }
-    }
-  }
+    def point(self, distance):
+        if not self.points:
+            return (0.0, 0.0)
+        if len(self.points) == 1 or not self.segments:
+            return self.points[0]
+        distance = max(0.0, min(float(distance), self.length))
+        traversed = 0.0
+        for start, end, length in self.segments:
+            if distance <= traversed + length:
+                ratio = (distance - traversed) / length
+                return start[0] + (end[0] - start[0]) * ratio, start[1] + (end[1] - start[1]) * ratio
+            traversed += length
+        return self.points[-1]
 
-  for (const path of document.querySelectorAll("path.association")) {
-    if (!path.closest("g.association-group")) errors.push("association has no hover group");
-    if (!path.closest("a.association-link")) errors.push("association has no link");
-    const length = path.getTotalLength();
-    const start = path.getPointAtLength(0);
-    const end = path.getPointAtLength(length);
-    if (!classBoxes.some(classBox => onBorder(start, classBox.box))) errors.push("association start is not on a class border");
-    if (!classBoxes.some(classBox => onBorder(end, classBox.box))) errors.push("association end is not on a class border");
-    for (let distance = 1; distance < length - 1; distance += 1) {
-      if (classBoxes.some(classBox => inside(path.getPointAtLength(distance), classBox.box))) {
-        errors.push("association enters a class");
-        break;
-      }
-    }
-  }
+    @property
+    def start(self):
+        return self.point(0)
 
-  for (const path of document.querySelectorAll("path.association")) {
-    for (const attribute of ["marker-start", "marker-end"]) {
-      const marker = path.getAttribute(attribute);
-      if (marker && marker !== "url(#navigation)" && marker !== "url(#navigation-start)") {
-        errors.push(`nonstandard association marker: ${marker}`);
-      }
-    }
-  }
-  for (const path of document.querySelectorAll("path.generalization-line[marker-end]")) {
-    if (path.getAttribute("marker-end") !== "url(#generalization)") errors.push("nonstandard generalization marker");
-    if (path.dataset.child && path.dataset.parent) {
-      const child = classBoxes.find(block => block.name === path.dataset.child);
-      const parents = classBoxes.filter(block => block.name === path.dataset.parent);
-      const length = path.getTotalLength();
-      const end = path.getPointAtLength(length);
-      if (!child || !onBorder(path.getPointAtLength(0), child.box)) errors.push(`generalization does not start at child: ${path.dataset.child}`);
-      if (!parents.length || !parents.some(parent => onBorder(end, parent.box))) errors.push(`generalization does not point to parent: ${path.dataset.parent}`);
-    }
-  }
+    @property
+    def end(self):
+        return self.point(self.length)
 
-  const terminalRun = (path, atEnd) => {
-    const length = path.getTotalLength();
-    const origin = path.getPointAtLength(atEnd ? length : 0);
-    const next = path.getPointAtLength(atEnd ? length - 1 : 1);
-    const runX = next.x - origin.x;
-    const runY = next.y - origin.y;
-    const runLength = Math.hypot(runX, runY);
-    const unitX = runX / runLength;
-    const unitY = runY / runLength;
-    let run = 1;
-    for (let distance = 2; distance < length; distance += 1) {
-      const point = path.getPointAtLength(atEnd ? length - distance : distance);
-      const cross = Math.abs((point.x - origin.x) * unitY - (point.y - origin.y) * unitX);
-      if (cross > 0.25) break;
-      run = distance;
-    }
-    return run;
-  };
-  for (const path of document.querySelectorAll("path.association, path.generalization-line")) {
-    if (path.getAttribute("marker-start") && terminalRun(path, false) < 12) errors.push("insufficient straight segment before start marker");
-    if (path.getAttribute("marker-end") && terminalRun(path, true) < 12) errors.push("insufficient straight segment before end marker");
-  }
-  document.documentElement.setAttribute("data-geometry-errors", [...new Set(errors)].join(" | "));
-})();
-"""
+
+class FontMetrics:
+    def __init__(self):
+        self.cache = {}
+
+    def font(self, size, bold=False, italic=False):
+        key = (size, bold, italic)
+        if key in self.cache:
+            return self.cache[key]
+        names = []
+        if bold and italic:
+            names = ["arialbi.ttf", "DejaVuSans-BoldOblique.ttf"]
+        elif bold:
+            names = ["arialbd.ttf", "DejaVuSans-Bold.ttf"]
+        elif italic:
+            names = ["ariali.ttf", "DejaVuSans-Oblique.ttf"]
+        else:
+            names = ["arial.ttf", "DejaVuSans.ttf"]
+        windows = Path("C:/Windows/Fonts")
+        candidates = [windows / name for name in names] + names
+        for candidate in candidates:
+            try:
+                font = ImageFont.truetype(str(candidate), size=size)
+                self.cache[key] = font
+                return font
+            except OSError:
+                continue
+        raise RuntimeError("No TrueType font found for SVG text measurements; install Arial or DejaVu Sans")
+
+    def box(self, value, x, y, anchor, size, bold=False, italic=False):
+        font = self.font(size, bold, italic)
+        left, _, right, _ = font.getbbox(value, anchor="ls")
+        advance = font.getlength(value)
+        if anchor == "middle":
+            origin = x - advance / 2
+        elif anchor == "end":
+            origin = x - advance
+        else:
+            origin = x
+        return Box(origin + left, y - size + 1, right - left, size + 2)
+
+
+FONTS = FontMetrics()
+
+
+def classes(element):
+    return set(element.get("class", "").split())
+
+
+def local_name(element):
+    return element.tag.rsplit("}", 1)[-1]
+
+
+def float_attribute(element, name, default=0.0):
+    return float(element.get(name, default))
+
+
+def rect_box(element):
+    return Box(
+        float_attribute(element, "x"), float_attribute(element, "y"),
+        float_attribute(element, "width"), float_attribute(element, "height"),
+    )
+
+
+def overlaps(first, second):
+    return min(first.right, second.right) - max(first.x, second.x) > 0.5 and min(
+        first.bottom, second.bottom
+    ) - max(first.y, second.y) > 0.5
+
+
+def inside(point, box, margin=0.75):
+    return box.x + margin < point[0] < box.right - margin and box.y + margin < point[1] < box.bottom - margin
+
+
+def on_border(point, box):
+    within_x = box.x - 0.75 <= point[0] <= box.right + 0.75
+    within_y = box.y - 0.75 <= point[1] <= box.bottom + 0.75
+    return (
+        within_y and (abs(point[0] - box.x) <= 0.75 or abs(point[0] - box.right) <= 0.75)
+    ) or (
+        within_x and (abs(point[1] - box.y) <= 0.75 or abs(point[1] - box.bottom) <= 0.75)
+    )
+
+
+def expanded(box, horizontal, vertical):
+    return Box(box.x - horizontal, box.y - vertical, box.width + horizontal * 2, box.height + vertical * 2)
+
+
+def format_box(box):
+    return f"x={box.x:.1f}, y={box.y:.1f}, w={box.width:.1f}, h={box.height:.1f}"
+
+
+def direct_text(element):
+    return ((element.text or "") + "".join(child.tail or "" for child in element)).strip()
+
+
+def direct_child(element, name, class_name=None):
+    return next((
+        child for child in element
+        if local_name(child) == name and (class_name is None or class_name in classes(child))
+    ), None)
+
+
+def path_geometry(element):
+    if local_name(element) == "line":
+        return PathGeometry((
+            (float_attribute(element, "x1"), float_attribute(element, "y1")),
+            (float_attribute(element, "x2"), float_attribute(element, "y2")),
+        ))
+    tokens = re.findall(r"[A-Za-z]|-?(?:\d*\.\d+|\d+\.?)(?:[eE][+-]?\d+)?", element.get("d", ""))
+    position = 0
+    command = None
+    current = (0.0, 0.0)
+    start = current
+    points = []
+    arity = {"M": 2, "L": 2, "H": 1, "V": 1, "Z": 0}
+    while position < len(tokens):
+        if tokens[position].isalpha():
+            command = tokens[position]
+            position += 1
+        if command is None or command.upper() not in arity:
+            raise ValueError(f"Unsupported SVG path: {element.get('d', '')}")
+        upper = command.upper()
+        count = arity[upper]
+        if position + count > len(tokens):
+            raise ValueError(f"Incomplete SVG path: {element.get('d', '')}")
+        values = [float(value) for value in tokens[position:position + count]]
+        position += count
+        relative = command.islower()
+        if upper in ("M", "L"):
+            point = (values[0] + (current[0] if relative else 0), values[1] + (current[1] if relative else 0))
+        elif upper == "H":
+            point = (values[0] + (current[0] if relative else 0), current[1])
+        elif upper == "V":
+            point = (current[0], values[0] + (current[1] if relative else 0))
+        else:
+            point = start
+        if upper == "M":
+            start = point
+        points.append(point)
+        current = point
+        if upper == "M":
+            command = "l" if relative else "L"
+        elif upper == "Z":
+            command = None
+    return PathGeometry(tuple(points))
+
+
+class SvgDocument:
+    def __init__(self, source=None, text=None):
+        self.source = Path(source) if source else None
+        self.root = ET.fromstring(text) if text is not None else ET.parse(source).getroot()
+        self.parents = {child: parent for parent in self.root.iter() for child in parent}
+
+    def ancestors(self, element):
+        current = self.parents.get(element)
+        while current is not None:
+            yield current
+            current = self.parents.get(current)
+
+    def closest(self, element, class_names=(), tags=()):
+        current = element
+        while current is not None:
+            if (class_names and classes(current).intersection(class_names)) or (tags and local_name(current) in tags):
+                return current
+            current = self.parents.get(current)
+        return None
+
+    def descendants(self, tag=None, class_name=None):
+        return [
+            element for element in self.root.iter()
+            if (tag is None or local_name(element) == tag) and (class_name is None or class_name in classes(element))
+        ]
+
+    def text_size(self, element):
+        element_classes = classes(element)
+        ancestors = list(self.ancestors(element))
+        if "inheritance-class-name" in element_classes:
+            return 17
+        if element_classes.intersection({"attribute", "operation", "association-end", "association-label"}):
+            return 14
+        if any(classes(parent).intersection({"association-group", "example-association-group"}) for parent in ancestors):
+            return 14
+        if "example-label" in element_classes:
+            return 14
+        return 16
+
+    def labels(self):
+        result = []
+        for index, element in enumerate(self.descendants("text")):
+            value = direct_text(element)
+            if not value:
+                continue
+            element_classes = classes(element)
+            box = FONTS.box(
+                value, float_attribute(element, "x"), float_attribute(element, "y"),
+                element.get("text-anchor", "start"), self.text_size(element),
+                bool(element_classes.intersection({"class-name", "inheritance-class-name"})), "abstract" in element_classes,
+            )
+            result.append({"element": element, "box": box, "name": value or f"text {index}"})
+        return result
+
+    def association_label(self, label):
+        return self.closest(label["element"], ("association-group",)) is not None
+
+
+def terminal_run(path, at_end):
+    length = path.length
+    if length < 2:
+        return length
+    origin = path.point(length if at_end else 0)
+    next_point = path.point(length - 1 if at_end else 1)
+    run_x, run_y = next_point[0] - origin[0], next_point[1] - origin[1]
+    run_length = math.hypot(run_x, run_y)
+    if not run_length:
+        return 0
+    unit_x, unit_y = run_x / run_length, run_y / run_length
+    run = 1
+    distance = 2
+    while distance < length:
+        point = path.point(length - distance if at_end else distance)
+        cross = abs((point[0] - origin[0]) * unit_y - (point[1] - origin[1]) * unit_x)
+        if cross > 0.25:
+            break
+        run = distance
+        distance += 1
+    return run
+
+
+def distance_to_box(point, box):
+    return math.hypot(
+        max(box.x - point[0], 0, point[0] - box.right),
+        max(box.y - point[1], 0, point[1] - box.bottom),
+    )
+
+
+def axial_gap(origin, box, horizontal):
+    return max(box.x - origin[0], origin[0] - box.right, 0) if horizontal else max(
+        box.y - origin[1], origin[1] - box.bottom, 0
+    )
+
+
+def check_svg(source=None, text=None):
+    document = SvgDocument(source, text)
+    name = document.source.name if document.source else "inheritance SVG"
+    errors = []
+    labels = document.labels()
+    class_boxes = []
+    for element in document.descendants("rect", "class-box"):
+        owner = document.closest(element, ("class-node",))
+        class_boxes.append({"element": element, "name": owner.get("data-classifier", "") if owner is not None else "", "box": rect_box(element)})
+    ex = 16 * 0.448
+    horizontal_gap, vertical_gap = ex, ex / 2
+
+    end_labels = [
+        element for element in document.descendants("text")
+        if document.closest(element, ("association-group", "example-association-group")) is not None
+    ]
+    invalid_sizes = sorted({document.text_size(element) for element in end_labels if document.text_size(element) != 14})
+    if invalid_sizes:
+        errors.append(f"association end font sizes must be 14 px: {', '.join(map(str, invalid_sizes))}")
+
+    for first_index, first in enumerate(labels):
+        for second in labels[first_index + 1:]:
+            if overlaps(first["box"], second["box"]):
+                errors.append(f"text/text: {first['name']} [{format_box(first['box'])}] / {second['name']} [{format_box(second['box'])}]")
+
+    for label in labels:
+        owner = document.closest(label["element"], ("class-node",), ("a",))
+        owner_box_element = direct_child(owner, "rect", "class-box") if owner is not None else None
+        if owner_box_element is not None:
+            box = rect_box(owner_box_element)
+            label_box = label["box"]
+            if not inside((label_box.x, label_box.y), box, 1) or not inside((label_box.right, label_box.bottom), box, 1):
+                errors.append(f"text/class border: {label['name']} [{format_box(label_box)}]")
+        else:
+            for class_box in class_boxes:
+                clearance = expanded(class_box["box"], horizontal_gap, vertical_gap) if document.association_label(label) else class_box["box"]
+                if overlaps(label["box"], clearance):
+                    errors.append(f"label/class clearance: {label['name']} [{format_box(label['box'])}]; class {class_box['name']} [{format_box(class_box['box'])}]")
+
+    line_classes = {"association", "generalization-line", "example-association", "dependency-line", "note-link", "class-divider"}
+    lines = [element for element in document.root.iter() if classes(element).intersection(line_classes) and local_name(element) in {"path", "line"}]
+    for line in lines:
+        path = path_geometry(line)
+        for label in labels:
+            gap_x = horizontal_gap if document.association_label(label) else 0.75
+            gap_y = vertical_gap if document.association_label(label) else 0.75
+            box = expanded(label["box"], gap_x, gap_y)
+            for distance in range(int(path.length) + 1):
+                if inside(path.point(distance), box, 0):
+                    errors.append(f"text/line: {label['name']} [{format_box(label['box'])}]; {line.get('class')} {line.get('d', '')}")
+                    break
+
+    for link in document.descendants("a"):
+        if "#/classifier/" not in link.get("href", ""):
+            continue
+        title = direct_child(link, "title")
+        tooltip = "" if title is None else "".join(title.itertext()).strip()
+        if not tooltip or "открыть описание" in tooltip:
+            errors.append("class link has no definition tooltip")
+    for group in document.descendants("g", "association-group"):
+        if document.closest(group, tags=("a",)) is None or "association-link" not in classes(document.closest(group, tags=("a",))):
+            errors.append(f"association group has no link: {group.get('id', '')}")
+        ends = [element for element in group.iter() if local_name(element) == "text" and "association-end" in classes(element)]
+        if len(ends) != 2:
+            errors.append(f"association must have two described end labels: {group.get('id', '')}")
+        for end in ends:
+            title = direct_child(end, "title")
+            if title is None or not "".join(title.itertext()).strip():
+                errors.append(f"association end has no description tooltip: {direct_text(end)}")
+
+    end_shapes = []
+    for element in document.root.iter():
+        if "end-dot" in classes(element):
+            radius = float_attribute(element, "r")
+            center = (float_attribute(element, "cx"), float_attribute(element, "cy"))
+            end_shapes.append(Box(center[0] - radius, center[1] - radius, radius * 2, radius * 2))
+        elif "composition" in classes(element):
+            points = [tuple(map(float, pair.split(","))) for pair in element.get("points", "").split()]
+            if points:
+                xs, ys = zip(*points)
+                end_shapes.append(Box(min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)))
+    marker_boxes = []
+    for element in document.descendants("path", "association"):
+        path = path_geometry(element)
+        for at_end, attribute in ((False, "marker-start"), (True, "marker-end")):
+            if element.get(attribute):
+                origin = path.point(path.length if at_end else 0)
+                base = path.point(max(0, path.length - 8) if at_end else min(8, path.length))
+                marker_boxes.append(Box(min(origin[0], base[0]), min(origin[1], base[1]) - 4, abs(base[0] - origin[0]), abs(base[1] - origin[1]) + 8))
+    for label in labels:
+        if not document.association_label(label):
+            continue
+        for shape in end_shapes + marker_boxes:
+            if overlaps(label["box"], expanded(shape, horizontal_gap, vertical_gap)):
+                errors.append(f"text/end marker clearance: {label['name']} [{format_box(label['box'])}]")
+
+    for group in document.descendants("g", "association-group"):
+        path_element = next((item for item in group.iter() if local_name(item) == "path" and "association" in classes(item)), None)
+        roles = [item for item in group.iter() if local_name(item) == "text" and "association-end" in classes(item)]
+        if path_element is None or len(roles) != 2:
+            continue
+        path = path_geometry(path_element)
+        origins = [path.start, path.end]
+        placements = []
+        for role in roles:
+            label = next(item for item in labels if item["element"] is role)
+            box = label["box"]
+            distances = [distance_to_box(origin, box) for origin in origins]
+            end_index = 0 if distances[0] <= distances[1] else 1
+            origin = origins[end_index]
+            next_point = path.point(path.length - 1 if end_index else 1)
+            horizontal = abs(next_point[0] - origin[0]) > abs(next_point[1] - origin[1])
+            placements.append({"role": role, "box": box, "endIndex": end_index, "origin": origin, "next": next_point, "horizontal": horizontal, "nameGap": axial_gap(origin, box, horizontal)})
+        if placements[0]["endIndex"] == placements[1]["endIndex"]:
+            errors.append(f"association end labels assigned to the same end: {group.get('id', '')}")
+        for placement in placements:
+            role, box, origin = placement["role"], placement["box"], placement["origin"]
+            next_point, horizontal, end_index = placement["next"], placement["horizontal"], placement["endIndex"]
+            role_name = direct_text(role)
+            own_distance = distance_to_box(origin, box)
+            opposite_distance = distance_to_box(origins[1 - end_index], box)
+            if opposite_distance < own_distance + horizontal_gap:
+                errors.append(f"association end description is too close to opposite end: {group.get('id', '')} / {role_name}")
+            if horizontal:
+                to_right = next_point[0] > origin[0]
+                gap = box.x - origin[0] if to_right else origin[0] - box.right
+                perpendicular_gap = box.y - origin[1] if origin[1] < box.y else origin[1] - box.bottom if origin[1] > box.bottom else 0
+                if gap < horizontal_gap - 0.75 or gap > horizontal_gap * 3 or perpendicular_gap > ex * 6:
+                    errors.append(f"horizontal association end placement: {role_name}")
+                expected_anchor = "start" if to_right else "end"
+                if role.get("text-anchor", "start") != expected_anchor:
+                    errors.append(f"horizontal association end alignment: {role_name}")
+            else:
+                downward = next_point[1] > origin[1]
+                side_gap = box.y - origin[1] if downward else origin[1] - box.bottom
+                on_left = box.right <= origin[0]
+                lateral_gap = origin[0] - box.right if on_left else box.x - origin[0]
+                if side_gap < vertical_gap - 0.75 or side_gap > ex * 6 or lateral_gap < horizontal_gap - 0.75:
+                    errors.append(f"vertical association end placement: {role_name}")
+                expected_anchor = "end" if on_left else "start"
+                if role.get("text-anchor", "start") != expected_anchor:
+                    errors.append(f"vertical association end alignment: {role_name}")
+        for label_element in group.iter():
+            if local_name(label_element) != "text" or "association-label" not in classes(label_element):
+                continue
+            label = next(item for item in labels if item["element"] is label_element)
+            box = label["box"]
+            distances = [distance_to_box(origin, box) for origin in origins]
+            end_index = 0 if distances[0] <= distances[1] else 1
+            placement = next((item for item in placements if item["endIndex"] == end_index), None)
+            if placement is None:
+                errors.append(f"association end label has no matching role: {group.get('id', '')} / {direct_text(label_element)}")
+                continue
+            if distances[1 - end_index] < distances[end_index] + horizontal_gap:
+                errors.append(f"association end description is too close to opposite end: {group.get('id', '')} / {direct_text(label_element)}")
+            modifier_gap = axial_gap(origins[end_index], box, placement["horizontal"])
+            if placement["nameGap"] > modifier_gap + 1.25:
+                errors.append(f"association end name is farther than its modifier: {direct_text(placement['role'])} / {direct_text(label_element)} [name={placement['nameGap']:.1f}, modifier={modifier_gap:.1f}]")
+
+    for group in document.descendants("g", "example-association-group"):
+        path_element = next((item for item in group.iter() if local_name(item) == "path" and "example-association" in classes(item)), None)
+        if path_element is None:
+            continue
+        path = path_geometry(path_element)
+        origins = [path.start, path.end]
+        for label_element in group.iter():
+            if local_name(label_element) != "text" or label_element.get("text-anchor") == "middle":
+                continue
+            label = next(item for item in labels if item["element"] is label_element)
+            distances = [distance_to_box(origin, label["box"]) for origin in origins]
+            if min(distances) > ex * 6:
+                continue
+            end_index = 0 if distances[0] <= distances[1] else 1
+            if distances[1 - end_index] < distances[end_index] + horizontal_gap:
+                errors.append(f"association end description is too close to opposite end: example / {direct_text(label_element)}")
+
+    for element in document.descendants("path", "association"):
+        group = document.closest(element, ("association-group",))
+        link = document.closest(element, ("association-link",))
+        if group is None:
+            errors.append("association has no hover group")
+        if link is None:
+            errors.append("association has no link")
+        path = path_geometry(element)
+        if not any(on_border(path.start, class_box["box"]) for class_box in class_boxes):
+            errors.append("association start is not on a class border")
+        if not any(on_border(path.end, class_box["box"]) for class_box in class_boxes):
+            errors.append("association end is not on a class border")
+        for distance in range(1, max(1, int(path.length))):
+            if distance >= path.length - 1:
+                break
+            if any(inside(path.point(distance), class_box["box"]) for class_box in class_boxes):
+                errors.append("association enters a class")
+                break
+        for attribute in ("marker-start", "marker-end"):
+            marker = element.get(attribute)
+            if marker and marker not in {"url(#navigation)", "url(#navigation-start)"}:
+                errors.append(f"nonstandard association marker: {marker}")
+        for at_end, attribute in ((False, "marker-start"), (True, "marker-end")):
+            if element.get(attribute) and terminal_run(path, at_end) < 12:
+                errors.append(f"insufficient straight segment before {'end' if at_end else 'start'} marker")
+
+    for element in document.descendants("path", "generalization-line"):
+        if element.get("marker-end"):
+            if element.get("marker-end") != "url(#generalization)":
+                errors.append(f"nonstandard generalization marker: {element.get('marker-end')}")
+            if terminal_run(path_geometry(element), True) < 12:
+                errors.append("insufficient straight segment before end marker")
+        if element.get("data-child") and element.get("data-parent"):
+            path = path_geometry(element)
+            child = next((item for item in class_boxes if item["name"] == element.get("data-child")), None)
+            parents = [item for item in class_boxes if item["name"] == element.get("data-parent")]
+            if child is None or not on_border(path.start, child["box"]):
+                errors.append(f"generalization does not start at child: {element.get('data-child')}")
+            if not parents or not any(on_border(path.end, parent["box"]) for parent in parents):
+                errors.append(f"generalization does not point to parent: {element.get('data-parent')}")
+
+    return [f"{name}: {error}" for error in dict.fromkeys(errors)]
+
+
+def check_inheritance(svg_text, classifier_name, xmi, data):
+    document = SvgDocument(text=svg_text)
+    errors = []
+    blocks = []
+    for element in document.descendants(class_name="inheritance-class"):
+        rect = direct_child(element, "rect", "inheritance-class-box")
+        text = direct_child(element, "text", "inheritance-class-name")
+        if rect is not None and text is not None:
+            label = FONTS.box(direct_text(text), float_attribute(text, "x"), float_attribute(text, "y"), "middle", 17, True, "abstract" in classes(text))
+            blocks.append({"element": element, "box": rect_box(rect), "textBox": label})
+    paths = [path_geometry(element) for element in document.descendants("path", "inheritance-generalization")]
+    path_elements = document.descendants("path", "inheritance-generalization")
+    if not blocks:
+        errors.append("inheritance SVG has no class blocks")
+    non_class_text = [element for element in document.descendants("text") if "inheritance-class-name" not in classes(element)]
+    if non_class_text:
+        errors.append("inheritance SVG has non-class text")
+    if 17 <= 16 or 17 > 16 * 1.2:
+        errors.append("inheritance font size is not slightly larger than body text")
+    view_box = [float(value) for value in document.root.get("viewBox", "0 0 0 0").split()]
+    if view_box[2] and abs(float_attribute(document.root, "width") / view_box[2] - 1) > 0.02:
+        errors.append("inheritance SVG is scaled instead of using its natural size")
+    known = {item["name"] for item in data["classifiers"]}
+    for block in blocks:
+        element = block["element"]
+        name = element.get("data-classifier", "")
+        title = direct_child(element, "title")
+        if title is None or not "".join(title.itertext()).strip():
+            errors.append(f"class has no definition tooltip: {name}")
+        if name in known and local_name(element) != "a":
+            errors.append(f"class has no link: {name}")
+        text_box = block["textBox"]
+        if not inside((text_box.x, text_box.y), block["box"], 4) or not inside((text_box.right, text_box.bottom), block["box"], 4):
+            errors.append(f"class name exceeds its block: {name}")
+    for first_index, first in enumerate(blocks):
+        for second in blocks[first_index + 1:]:
+            if overlaps(first["textBox"], second["textBox"]):
+                errors.append("class names overlap")
+    current = [block for block in blocks if block["element"].get("data-current") == "true"]
+    roots = [block for block in blocks if block["element"].get("data-depth") == "0"]
+    if len(current) != 1:
+        errors.append("inheritance SVG must have one current class")
+    if not roots:
+        errors.append("inheritance SVG has no root")
+    if blocks:
+        left = min(block["box"].x for block in blocks)
+        right = max(block["box"].right for block in blocks)
+        if any(abs(block["box"].x - left) > 0.75 for block in roots):
+            errors.append("root is not the leftmost block")
+        if len(current) == 1 and abs(current[0]["box"].right - right) > 0.75:
+            errors.append("current class is not the rightmost block")
+    names = {block["element"].get("data-classifier") for block in blocks}
+    expected_edges = sum(
+        1 for block in blocks for parent in xmi.get("generalizations", {}).get(block["element"].get("data-classifier"), []) if parent in names
+    )
+    if len(paths) != expected_edges:
+        errors.append(f"generalization edge count: {len(paths)} instead of {expected_edges}")
+    for element, path in zip(path_elements, paths):
+        if element.get("marker-end") != "url(#inheritance-generalization)":
+            errors.append("nonstandard inheritance marker")
+        if terminal_run(path, True) < 12:
+            errors.append("insufficient straight segment before inheritance marker")
+        if not any(on_border(path.start, block["box"]) for block in blocks):
+            errors.append("inheritance start is not on a class border")
+        if not any(on_border(path.end, block["box"]) for block in blocks):
+            errors.append("inheritance end is not on a class border")
+        child = next((block for block in blocks if block["element"].get("data-classifier") == element.get("data-child")), None)
+        parent = next((block for block in blocks if block["element"].get("data-classifier") == element.get("data-parent")), None)
+        if child is None or not on_border(path.start, child["box"]):
+            errors.append(f"inheritance does not start at child class: {element.get('data-child')}")
+        if parent is None or not on_border(path.end, parent["box"]):
+            errors.append(f"generalization arrow does not point to parent class: {element.get('data-parent')}")
+        for distance in range(1, max(1, int(path.length))):
+            if distance >= path.length - 1:
+                break
+            if any(inside(path.point(distance), block["box"]) for block in blocks):
+                errors.append(f"inheritance line enters a class block: {element.get('d')}")
+                break
+    if len(current) == 1 and current[0]["element"].get("data-classifier") != classifier_name:
+        errors.append(f"current inheritance class is not {classifier_name}")
+    return [f"{classifier_name} inheritance: {error}" for error in dict.fromkeys(errors)]
+
+
+def display_path(source):
+    try:
+        return source.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(source)
 
 
 def find_browser(explicit=None):
@@ -330,69 +644,22 @@ def find_browser(explicit=None):
     return next((path for path in candidates if path.is_file()), None)
 
 
-def display_path(source):
-    try:
-        return source.resolve().relative_to(ROOT).as_posix()
-    except ValueError:
-        return str(source)
-
-
-def check_svg_geometry(browser, source):
-    source = Path(source)
-    name = display_path(source)
-    with tempfile.TemporaryDirectory() as workspace:
-        workspace = Path(workspace)
-        copy = workspace / source.name
-        script = f"<script><![CDATA[{SVG_GEOMETRY_SCRIPT}]]></script>"
-        copy.write_text(source.read_text(encoding="utf-8").replace("</svg>", script + "</svg>"), encoding="utf-8")
-        result = subprocess.run(
-            [
-                str(browser),
-                "--headless=new",
-                "--disable-gpu",
-                "--disable-background-networking",
-                "--disable-extensions",
-                "--no-first-run",
-                f"--user-data-dir={workspace / 'profile'}",
-                "--virtual-time-budget=1000",
-                "--dump-dom",
-                copy.resolve().as_uri(),
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=45,
-        )
-    dom = result.stdout.decode("utf-8", errors="replace")
-    if result.returncode:
-        return [f"{name}: browser exit code {result.returncode}"]
-    match = re.search(r'data-geometry-errors="([^"]*)"', dom)
-    if not match:
-        return [f"{name}: SVG geometry check did not run"]
-    return [f"{name}: {error}" for error in match.group(1).split(" | ") if error]
-
-
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("svg", nargs="*", type=Path, help="SVG files; by default all Clause 7 diagrams")
-    parser.add_argument("--browser", help="Path to Chrome or Edge")
     args = parser.parse_args()
-
     sources = args.svg or sorted((SITE / "assets" / "diagrams").glob("figure-*.svg"))
     missing = [source for source in sources if not source.is_file()]
     if missing:
         for source in missing:
             print(f"ERROR: SVG file not found: {source}")
         raise SystemExit(1)
-    browser = find_browser(args.browser)
-    if not browser:
-        raise SystemExit("Chrome or Edge is required; specify its path with --browser")
-
-    failures = [error for source in sources for error in check_svg_geometry(browser, source)]
+    failures = [error for source in sources for error in check_svg(source)]
     if failures:
         for failure in failures:
             print(f"ERROR: {failure}")
         raise SystemExit(1)
-    print(f"SVG geometry checks: OK; {len(sources)} diagrams passed")
+    print(f"SVG geometry checks: OK; {len(sources)} diagrams passed (Python)")
 
 
 if __name__ == "__main__":

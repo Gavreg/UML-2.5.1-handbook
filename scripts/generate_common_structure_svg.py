@@ -1,9 +1,9 @@
 """
 Name: generate_common_structure_svg.py
-Purpose: Generate interactive vector versions of all 21 figures in UML 2.5.1 Clause 7.
+Purpose: Generate interactive vector versions of 25 figures in UML 2.5.1 Clauses 7 and 8.
 Interface: python scripts/generate_common_structure_svg.py [--output-dir PATH] [--check]
 Goal: Preserve OMG semantics and notation while adding local links, tooltips and consistent geometry.
-Sources: docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
+Sources: site/docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
 Requires: Python 3 standard library.
 """
 
@@ -34,9 +34,9 @@ ASSOCIATION_BLOCK = DATA_TEXT.split("const associations = [", 1)[1].split("const
 CLASSES = {
     match.group(1): {"kind": match.group(2), "definition": quoted(match.group(3))}
     for match in re.finditer(
-        r'name: "([A-Za-z]+)".*?kind: "([^"]+)".*?definition: "((?:\\.|[^"\\])*)"',
+        r'^      name: "([A-Za-z]+)".*?kind: "([^"]+)".*?definition: "((?:\\.|[^"\\])*)"',
         CLASS_BLOCK,
-        re.S,
+        re.S | re.M,
     )
 }
 ASSOCIATIONS = {
@@ -83,6 +83,11 @@ STYLE = """
   .association-group:hover .end-dot, .association-group:hover .composition,
   .example-association-group:hover .end-dot { fill: #1e3a8a; }
   .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }
 """.strip()
 
 
@@ -107,6 +112,7 @@ class Svg:
     <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
     <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
     <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
     <style>{STYLE}</style>
   </defs>
   <rect class="background" width="{self.width}" height="{self.height}"/>
@@ -120,6 +126,12 @@ def text(value, x, y, anchor="start", css="", title=""):
     anchor_attr = f' text-anchor="{anchor}"' if anchor != "start" else ""
     tooltip = f"<title>{escape(title)}</title>" if title else ""
     return f'<text{class_attr} x="{x}" y="{y}"{anchor_attr}>{tooltip}{escape(value)}</text>'
+
+
+def classifier_label(svg, value, x, y, classifier, anchor="start", css=""):
+    known = CLASSES[classifier]
+    href = f'../../index.html#/classifier/{slug(classifier)}'
+    svg.add(f'<a href="{href}" target="_top" aria-label="{escape(classifier)} — открыть описание класса"><title>{escape(classifier)}. {escape(known["definition"])}</title>{text(value, x, y, anchor, css)}</a>')
 
 
 def class_node(svg, name, x, y, width, height, attributes=None, operations=None, stereotype="", example=False, tooltip=""):
@@ -684,67 +696,224 @@ def figure_8_1():
 
 
 def figure_8_2():
-    svg = Svg("8.2", "Выражения", "Expression, OpaqueExpression и StringExpression как ValueSpecifications; ассоциации для operand, subExpression/owningExpression, behavior и result.", 1400, 780)
-    class_node(svg, "ValueSpecification", 700, 40, 250, 60)
-    class_node(svg, "Expression", 250, 220, 230, 75, attributes=["+ symbol : String [0..1]"])
-    class_node(svg, "OpaqueExpression", 830, 205, 350, 110, attributes=["+ body : String [*] {ordered, nonunique}", "+ language : String [*] {ordered}"])
-    class_node(svg, "StringExpression", 250, 470, 250, 65)
-    class_node(svg, "Behavior", 840, 480, 170, 55, example=True)
-    class_node(svg, "Parameter", 1110, 480, 170, 55, example=True)
-    class_node(svg, "TemplateableElement", 250, 650, 260, 55)
+    svg = Svg("8.2", "Выражения", "Expression, OpaqueExpression и StringExpression как ValueSpecifications; ассоциации для operand, subExpression/owningExpression, behavior и result.", 1400, 800)
+    class_node(svg, "ValueSpecification", 700, 80, 250, 60)
+    class_node(svg, "Expression", 250, 260, 230, 75, attributes=["+ symbol : String [0..1]"])
+    class_node(svg, "OpaqueExpression", 830, 245, 350, 110, attributes=["+ body : String [*] {ordered, nonunique}", "+ language : String [*] {ordered}"])
+    class_node(svg, "StringExpression", 250, 510, 250, 65)
+    class_node(svg, "Behavior", 840, 520, 170, 55, example=True)
+    class_node(svg, "Parameter", 1110, 520, 170, 55, example=True)
+    class_node(svg, "TemplateableElement", 250, 690, 260, 55)
+    generalization(svg, "M 365 260 V 200 H 825 V 140", child="Expression", parent="ValueSpecification")
+    generalization(svg, "M 1005 245 V 200 H 825 V 140", marker=False, child="OpaqueExpression", parent="ValueSpecification")
+    generalization(svg, "M 375 510 V 420 H 365 V 335", child="StringExpression", parent="Expression")
+    generalization(svg, "M 300 575 V 670 H 375 V 690", child="StringExpression", parent="TemplateableElement")
 
-    # Generalizations: Expression and OpaqueExpression → ValueSpecification via bus
-    generalization(svg, f"M {250 + 115} 220 V 160 H 825 V 100", child="Expression", parent="ValueSpecification")
-    generalization(svg, f"M {830 + 175} 205 V 160 H 825 V 100", marker=False, child="OpaqueExpression", parent="ValueSpecification")
-    # StringExpression → Expression
-    generalization(svg, f"M {250 + 125} 470 V 380 H {250 + 115} V 295", child="StringExpression", parent="Expression")
-    # StringExpression → TemplateableElement
-    generalization(svg, f"M {250 + 125} 535 V 700 H {250 + 130}", False, child="StringExpression", parent="TemplateableElement")
+    association(svg, "A_operand_expression", "M 250 300 H 170 V 110 H 700",
+        ("Expression", "expression", "+ expression", 230, 340, "end"),
+        ("ValueSpecification", "operand", "+ operand", 680, 70, "end"),
+        ' marker-end="url(#navigation)"', diamond(250, 300, "left") + dot(700, 110),
+        [("{subsets owner}", 230, 356, "end"), ("0..1", 230, 372, "end"),
+         ("{ordered, subsets ownedElement}", 680, 44, "end"), ("*", 680, 28, "end")])
 
-    # A_operand_expression: Expression → ValueSpecification composition (up-left loop)
-    association(svg, "A_operand_expression",
-        f"M 265 260 L 170 260 L 170 40",
-        ("Expression", "expression", "+ expression", 240, 280, "start"),
-        ("ValueSpecification", "operand", "+ operand", 845, 108, "end"),
-        markers='',
-        decorations=diamond(265, 260, "right"))
-    # Multi-line labels for A_operand_expression (16px spacing)
-    svg.add(text("{subsets owner}", 240, 296, "start", "association-end"))
-    svg.add(text("0..1", 240, 312, "start", "association-end"))
-    svg.add(text("{ordered,", 845, 124, "end", "association-end"))
-    svg.add(text("subsets ownedElement}", 845, 140, "end", "association-end"))
-    svg.add(text("*", 845, 156, "end", "association-end"))
+    association(svg, "A_subExpression_owningExpression", "M 375 575 V 650 H 700 V 530 H 500",
+        ("StringExpression", "subExpression", "+ subExpression", 395, 600, "start"),
+        ("StringExpression", "owningExpression", "+ owningExpression", 520, 490, "start"),
+        "", diamond(500, 530, "right") + dot(375, 575),
+        [("{ordered, subsets ownedElement}", 395, 616, "start"), ("*", 395, 632, "start"),
+         ("{subsets owner}", 520, 474, "start"), ("0..1", 520, 458, "start")])
 
-    # A_subExpression_owningExpression: StringExpression self-loop (left side)
-    association(svg, "A_subExpression_owningExpression",
-        f"M 240 502 L 70 502 L 70 436 H 240",
-        ("StringExpression", "owningExpression", "+ owningExpression", 160, 518, "end"),
-        ("StringExpression", "subExpression", "+ subExpression", 62, 448, "start"),
-        markers='',
-        decorations=diamond(240, 502, "down"))
-    # Multi-line labels for A_subExpression_owningExpression (16px spacing)
-    svg.add(text("{subsets owner}", 160, 534, "end", "association-end"))
-    svg.add(text("0..1", 160, 550, "end", "association-end"))
-    svg.add(text("{ordered,", 62, 464, "start", "association-end"))
-    svg.add(text("subsets ownedElement}", 62, 480, "start", "association-end"))
-    svg.add(text("*", 62, 496, "start", "association-end"))
+    association(svg, "A_behavior_opaqueExpression", "M 900 355 V 520",
+        ("OpaqueExpression", "opaqueExpression", "+ opaqueExpression", 920, 375, "start"),
+        ("OpaqueExpression", "behavior", "+ behavior", 820, 500, "end"),
+        ' marker-end="url(#navigation)"', dot(900, 355),
+        [("*", 920, 391, "start"), ("0..1", 820, 484, "end")])
 
-    # A_behavior_opaqueExpression: OpaqueExpression → Behavior (vertical down)
-    association(svg, "A_behavior_opaqueExpression",
-        f"M 840 315 V 472",
-        ("OpaqueExpression", "behavior", "+ behavior", 795, 344, "end"),
-        ("Behavior", "opaqueExpression", "+ opaqueExpression", 795, 468, "end"),
-        markers=' marker-end="url(#navigation)"')
-    svg.add(text("0..1", 795, 360, "end", "association-end"))
+    association(svg, "A_result_opaqueExpression", "M 1155 355 V 520",
+        ("OpaqueExpression", "opaqueExpression", "+ opaqueExpression", 1175, 375, "start"),
+        ("OpaqueExpression", "result", "+ /result", 1090, 500, "end"),
+        ' marker-end="url(#navigation)"', dot(1155, 355),
+        [("*", 1175, 391, "start"), ("{readOnly}", 1090, 484, "end"), ("0..1", 1090, 468, "end")])
+    return svg
 
-    # A_result_opaqueExpression: OpaqueExpression → Parameter (vertical down)
-    association(svg, "A_result_opaqueExpression",
-        f"M 1155 315 V 472",
-        ("OpaqueExpression", "result", "+ opaqueExpression", 1160, 344, "start"),
-        ("Parameter", "/result", "{readOnly}", 1160, 468, "start"),
-        markers=' marker-end="url(#navigation)"')
-    svg.add(text("*", 1160, 360, "start", "association-end"))
-    svg.add(text("+ /result", 1160, 484, "start", "association-end"))
+
+def figure_8_3():
+    svg = Svg("8.3", "Время и длительность", "TimeExpression, Duration и Observations; выражения, наблюдения и события NamedElement.", 1400, 1060)
+    class_node(svg, "ValueSpecification", 575, 50, 250, 60)
+    class_node(svg, "TimeExpression", 150, 280, 230, 60)
+    class_node(svg, "Duration", 1020, 280, 200, 60)
+    class_node(svg, "PackageableElement", 575, 400, 250, 60)
+    class_node(svg, "Observation", 575, 580, 250, 60)
+    class_node(svg, "TimeObservation", 170, 790, 280, 75, attributes=["+ firstEvent : Boolean = true"])
+    class_node(svg, "DurationObservation", 950, 790, 300, 75, attributes=["+ firstEvent : Boolean [0..2]"])
+    class_node(svg, "NamedElement", 575, 950, 250, 60)
+    generalization(svg, "M 320 280 V 200 H 700 V 110", child="TimeExpression", parent="ValueSpecification")
+    generalization(svg, "M 1070 280 V 200 H 700 V 110", marker=False, child="Duration", parent="ValueSpecification")
+    generalization(svg, "M 700 580 V 460", child="Observation", parent="PackageableElement")
+    generalization(svg, "M 310 790 V 720 H 700 V 640", child="TimeObservation", parent="Observation")
+    generalization(svg, "M 1100 790 V 720 H 700 V 640", marker=False, child="DurationObservation", parent="Observation")
+
+    association(svg, "A_expr_timeExpression", "M 200 280 V 160 H 575 V 80",
+        ("TimeExpression", "timeExpression", "+ timeExpression", 180, 260, "end"),
+        ("ValueSpecification", "expr", "+ expr", 555, 96, "end"),
+        ' marker-end="url(#navigation)"', diamond(200, 280, "up") + dot(575, 80),
+        [("{subsets owner}", 180, 244, "end"), ("0..1", 180, 228, "end"),
+         ("{subsets ownedElement}", 555, 113, "end"), ("0..1", 555, 129, "end")])
+
+    association(svg, "A_expr_duration", "M 1120 280 V 160 H 825 V 80",
+        ("Duration", "duration", "+ duration", 1140, 260, "start"),
+        ("ValueSpecification", "expr", "+ expr", 845, 96, "start"),
+        ' marker-end="url(#navigation)"', diamond(1120, 280, "up") + dot(825, 80),
+        [("{subsets owner}", 1140, 244, "start"), ("0..1", 1140, 228, "start"),
+         ("{subsets ownedElement}", 845, 113, "start"), ("0..1", 845, 129, "start")])
+
+    association(svg, "A_observation_timeExpression", "M 265 340 V 600 H 575",
+        ("TimeExpression", "timeExpression", "+ timeExpression", 245, 365, "end"),
+        ("Observation", "observation", "+ observation", 555, 580, "end"),
+        ' marker-end="url(#navigation)"', dot(265, 340) + dot(575, 600),
+        [("0..1", 245, 381, "end"), ("*", 555, 564, "end")])
+
+    association(svg, "A_observation_duration", "M 1120 340 V 520 H 825 V 600",
+        ("Duration", "duration", "+ duration", 1140, 365, "start"),
+        ("Observation", "observation", "+ observation", 845, 580, "start"),
+        ' marker-end="url(#navigation)"', dot(1120, 340) + dot(825, 600),
+        [("0..1", 1140, 381, "start"), ("*", 845, 564, "start")])
+
+    association(svg, "A_event_timeObservation", "M 310 865 V 980 H 575",
+        ("TimeObservation", "timeObservation", "+ timeObservation", 290, 890, "end"),
+        ("NamedElement", "event", "+ event", 555, 960, "end"),
+        ' marker-end="url(#navigation)"', dot(310, 865) + dot(575, 980),
+        [("*", 290, 906, "end"), ("1", 555, 944, "end")])
+
+    association(svg, "A_event_durationObservation", "M 1100 865 V 980 H 825",
+        ("DurationObservation", "durationObservation", "+ durationObservation", 1120, 890, "start"),
+        ("NamedElement", "event", "+ event", 845, 960, "start"),
+        ' marker-end="url(#navigation)"', dot(1100, 865) + dot(825, 980),
+        [("*", 1120, 906, "start"), ("{ordered}", 845, 944, "start"), ("1..2", 845, 928, "start")])
+    return svg
+
+
+def figure_8_4():
+    svg = Svg("8.4", "Интервалы", "Interval и IntervalConstraint с их специализациями для времени и длительности; границы min/max и спецификации ограничений.", 1800, 1160)
+    class_node(svg, "ValueSpecification", 650, 40, 250, 60)
+    class_node(svg, "Interval", 650, 250, 230, 60)
+    class_node(svg, "Constraint", 1350, 40, 180, 55)
+    class_node(svg, "IntervalConstraint", 1300, 250, 250, 60)
+    class_node(svg, "TimeInterval", 480, 500, 230, 60)
+    class_node(svg, "TimeConstraint", 1250, 500, 300, 75, attributes=["+ firstEvent : Boolean [0..1] = true"])
+    class_node(svg, "DurationInterval", 50, 800, 260, 60)
+    class_node(svg, "DurationConstraint", 1250, 800, 320, 75, attributes=["+ firstEvent : Boolean [0..2]"])
+    class_node(svg, "TimeExpression", 480, 1080, 230, 60)
+    class_node(svg, "Duration", 50, 1080, 200, 60)
+    generalization(svg, "M 765 250 V 100", child="Interval", parent="ValueSpecification")
+    generalization(svg, "M 1425 250 V 95", child="IntervalConstraint", parent="Constraint")
+    generalization(svg, "M 595 500 V 380 H 740 V 310", child="TimeInterval", parent="Interval")
+    generalization(svg, "M 180 800 V 420 H 700 V 310", child="DurationInterval", parent="Interval")
+    generalization(svg, "M 1400 500 V 400 H 1390 V 310", child="TimeConstraint", parent="IntervalConstraint")
+    generalization(svg, "M 1410 800 H 1650 V 400 H 1430 V 310", child="DurationConstraint", parent="IntervalConstraint")
+
+    association(svg, "A_min_interval", "M 700 250 V 100",
+        ("Interval", "interval", "+ interval", 680, 230, "end"),
+        ("ValueSpecification", "min", "+ min", 680, 120, "end"),
+        ' marker-end="url(#navigation)"', diamond(700, 250, "up") + dot(700, 100),
+        [("*", 680, 206, "end"), ("1", 680, 136, "end")])
+
+    association(svg, "A_max_interval", "M 830 250 V 100",
+        ("Interval", "interval", "+ interval", 850, 230, "start"),
+        ("ValueSpecification", "max", "+ max", 850, 120, "start"),
+        ' marker-end="url(#navigation)"', diamond(830, 250, "up") + dot(830, 100),
+        [("*", 850, 206, "start"), ("1", 850, 136, "start")])
+
+    association(svg, "A_specification_intervalConstraint", "M 1300 280 H 880",
+        ("IntervalConstraint", "intervalConstraint", "+ intervalConstraint", 1280, 250, "end"),
+        ("Interval", "specification", "+ specification", 900, 300, "start"),
+        ' marker-end="url(#navigation)"', diamond(1300, 280, "left") + dot(880, 280),
+        [("{redefines owningConstraint}", 1280, 234, "end"), ("0..1", 1280, 218, "end"),
+         ("{redefines specification}", 900, 316, "start"), ("1", 900, 332, "start")])
+
+    association(svg, "A_min_timeInterval", "M 540 560 V 1080",
+        ("TimeInterval", "timeInterval", "+ timeInterval", 520, 585, "end"),
+        ("TimeExpression", "min", "+ min", 520, 1060, "end"),
+        ' marker-end="url(#navigation)"', diamond(540, 560, "down") + dot(540, 1080),
+        [("*", 520, 601, "end"), ("{redefines interval}", 520, 617, "end"),
+         ("{redefines min}", 520, 1044, "end"), ("1", 520, 1028, "end")])
+
+    association(svg, "A_max_timeInterval", "M 650 560 V 1080",
+        ("TimeInterval", "timeInterval", "+ timeInterval", 670, 585, "start"),
+        ("TimeExpression", "max", "+ max", 670, 1060, "start"),
+        ' marker-end="url(#navigation)"', diamond(650, 560, "down") + dot(650, 1080),
+        [("*", 670, 601, "start"), ("{redefines interval}", 670, 617, "start"),
+         ("{redefines max}", 670, 1044, "start"), ("1", 670, 1028, "start")])
+
+    association(svg, "A_specification_timeConstraint", "M 1250 537 H 710",
+        ("TimeConstraint", "timeConstraint", "+ timeConstraint", 1230, 517, "end"),
+        ("TimeInterval", "specification", "+ specification", 730, 517, "start"),
+        ' marker-end="url(#navigation)"', diamond(1250, 537, "left") + dot(710, 537),
+        [("{redefines intervalConstraint}", 1230, 501, "end"), ("0..1", 1230, 485, "end"),
+         ("{redefines specification}", 730, 501, "start"), ("1", 730, 485, "start")])
+
+    association(svg, "A_min_durationInterval", "M 120 860 V 1080",
+        ("DurationInterval", "durationInterval", "+ durationInterval", 100, 885, "end"),
+        ("Duration", "min", "+ min", 100, 1060, "end"),
+        ' marker-end="url(#navigation)"', diamond(120, 860, "down") + dot(120, 1080),
+        [("*", 100, 901, "end"), ("{redefines interval}", 100, 917, "end"),
+         ("{redefines min}", 100, 1044, "end"), ("1", 100, 1028, "end")])
+
+    association(svg, "A_max_durationInterval", "M 240 860 V 1080",
+        ("DurationInterval", "durationInterval", "+ durationInterval", 260, 885, "start"),
+        ("Duration", "max", "+ max", 260, 1060, "start"),
+        ' marker-end="url(#navigation)"', diamond(240, 860, "down") + dot(240, 1080),
+        [("*", 260, 901, "start"), ("{redefines interval}", 260, 917, "start"),
+         ("{redefines max}", 260, 1044, "start"), ("1", 260, 1028, "start")])
+
+    association(svg, "A_specification_durationConstraint", "M 1250 837 H 310",
+        ("DurationConstraint", "durationConstraint", "+ durationConstraint", 1230, 817, "end"),
+        ("DurationInterval", "specification", "+ specification", 330, 817, "start"),
+        ' marker-end="url(#navigation)"', diamond(1250, 837, "left") + dot(310, 837),
+        [("{redefines intervalConstraint}", 1230, 801, "end"), ("0..1", 1230, 785, "end"),
+         ("{redefines specification}", 330, 801, "start"), ("1", 330, 785, "start")])
+    return svg
+
+
+def figure_8_5():
+    svg = Svg("8.5", "Пример DurationConstraints и TimeConstraints", "Диаграмма последовательности UserAccepted с DurationObservation, TimeObservation и ограничениями длительности и времени.", 1300, 680)
+    svg.add('<path class="sequence-frame" d="M 250 40 H 830 L 950 100 V 640 H 250 Z M 830 40 V 100 H 950"/>')
+    svg.add(text("sd UserAccepted", 275, 75, css="class-name"))
+    for name, x, width in ((":User", 350, 130), (":ACSystem", 700, 140)):
+        svg.add(f'<g class="class-node" data-classifier="{name}"><title>Экземпляр участника диаграммы последовательности {name}.</title>')
+        svg.add(f'<rect class="class-box" x="{x}" y="110" width="{width}" height="60"/>')
+        svg.add(text(name, x + width / 2, 147, "middle", "class-name"))
+        svg.add('</g>')
+    svg.add('<path class="sequence-lifeline" d="M 415 170 V 600 M 770 170 V 600"/>')
+
+    svg.add('<path class="sequence-message" d="M 415 250 H 770" marker-end="url(#navigation)"/>')
+    svg.add(text("Code", 590, 230, "middle"))
+    classifier_label(svg, "d=duration", 650, 215, "DurationObservation")
+    svg.add('<path class="sequence-observation" d="M 640 222 L 675 250"/>')
+
+    svg.add('<path class="sequence-constraint" d="M 390 250 V 350" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>')
+    classifier_label(svg, "{d..3*d}", 300, 320, "DurationConstraint")
+
+    svg.add('<path class="sequence-message" d="M 770 360 H 415" marker-end="url(#navigation)"/>')
+    svg.add(text("CardOut {0..13}", 590, 340, "middle"))
+    classifier_label(svg, "t=now", 790, 340, "TimeObservation")
+    svg.add('<path class="sequence-message" d="M 415 440 L 770 360" marker-end="url(#navigation)"/>')
+    svg.add(text("OK", 590, 420, "middle"))
+    classifier_label(svg, "{t..t+3}", 300, 450, "TimeConstraint")
+
+    svg.add('<path class="sequence-message" d="M 770 510 H 900" marker-end="url(#navigation)"/>')
+    svg.add(text("Unlock", 835, 490, "middle"))
+
+    classifier_label(svg, "DurationObservation", 980, 200, "DurationObservation", css="annotation-label")
+    classifier_label(svg, "with Duration", 980, 220, "Duration", css="annotation-label")
+    svg.add('<path class="annotation-line" d="M 970 210 L 720 245" marker-end="url(#annotation)"/>')
+    classifier_label(svg, "DurationConstraint", 30, 280, "DurationConstraint", css="annotation-label")
+    svg.add('<path class="annotation-line" d="M 220 285 L 285 310" marker-end="url(#annotation)"/>')
+    classifier_label(svg, "TimeConstraint", 30, 470, "TimeConstraint", css="annotation-label")
+    svg.add('<path class="annotation-line" d="M 220 465 L 285 445" marker-end="url(#annotation)"/>')
+    classifier_label(svg, "TimeObservation", 980, 350, "TimeObservation", css="annotation-label")
+    classifier_label(svg, "with TimeExpression", 980, 370, "TimeExpression", css="annotation-label")
+    svg.add('<path class="annotation-line" d="M 970 360 H 805" marker-end="url(#annotation)"/>')
     return svg
 
 
@@ -771,6 +940,9 @@ FIGURE_BUILDERS = {
     "7.21": figure_7_21,
     "8.1": figure_8_1,
     "8.2": figure_8_2,
+    "8.3": figure_8_3,
+    "8.4": figure_8_4,
+    "8.5": figure_8_5,
 }
 
 

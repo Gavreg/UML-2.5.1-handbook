@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.2">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.2">
   <title id="diagram-title">Рисунок 8.2 — Выражения</title>
   <desc id="diagram-description">Expression, OpaqueExpression и StringExpression как ValueSpecifications; ассоциации для operand, subExpression/owningExpression, behavior и result.</desc>
   <defs>
     <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
     <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
     <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
     <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
   .class-box, .package-box, .note-box, .association, .generalization-line,
   .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
@@ -32,90 +33,95 @@
   .dependency-group:hover text { fill: #1e3a8a; }
   .association-group:hover .end-dot, .association-group:hover .composition,
   .example-association-group:hover .end-dot { fill: #1e3a8a; }
-  .association-end { cursor: help; }</style>
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
   </defs>
-  <rect class="background" width="1400" height="780"/>
+  <rect class="background" width="1400" height="800"/>
   <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
-<rect class="class-box" x="700" y="40" width="250" height="60"/>
-<line class="class-divider" x1="700" y1="72" x2="950" y2="72"/>
-<text class="class-name abstract" x="825.0" y="63" text-anchor="middle">ValueSpecification</text>
+<rect class="class-box" x="700" y="80" width="250" height="60"/>
+<line class="class-divider" x1="700" y1="112" x2="950" y2="112"/>
+<text class="class-name abstract" x="825.0" y="103" text-anchor="middle">ValueSpecification</text>
 </a>
 <a class="class-node" data-classifier="Expression" href="../../index.html#/classifier/expression" target="_top" aria-label="Expression — открыть описание класса"><title>Expression. Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.</title>
-<rect class="class-box" x="250" y="220" width="230" height="75"/>
-<line class="class-divider" x1="250" y1="252" x2="480" y2="252"/>
-<text class="class-name" x="365.0" y="243" text-anchor="middle">Expression</text>
-<text class="attribute" x="260" y="274">+ symbol : String [0..1]</text>
+<rect class="class-box" x="250" y="260" width="230" height="75"/>
+<line class="class-divider" x1="250" y1="292" x2="480" y2="292"/>
+<text class="class-name" x="365.0" y="283" text-anchor="middle">Expression</text>
+<text class="attribute" x="260" y="314">+ symbol : String [0..1]</text>
 </a>
 <a class="class-node" data-classifier="OpaqueExpression" href="../../index.html#/classifier/opaqueexpression" target="_top" aria-label="OpaqueExpression — открыть описание класса"><title>OpaqueExpression. ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.</title>
-<rect class="class-box" x="830" y="205" width="350" height="110"/>
-<line class="class-divider" x1="830" y1="237" x2="1180" y2="237"/>
-<text class="class-name" x="1005.0" y="228" text-anchor="middle">OpaqueExpression</text>
-<text class="attribute" x="840" y="259">+ body : String [*] {ordered, nonunique}</text>
-<text class="attribute" x="840" y="280">+ language : String [*] {ordered}</text>
+<rect class="class-box" x="830" y="245" width="350" height="110"/>
+<line class="class-divider" x1="830" y1="277" x2="1180" y2="277"/>
+<text class="class-name" x="1005.0" y="268" text-anchor="middle">OpaqueExpression</text>
+<text class="attribute" x="840" y="299">+ body : String [*] {ordered, nonunique}</text>
+<text class="attribute" x="840" y="320">+ language : String [*] {ordered}</text>
 </a>
 <a class="class-node" data-classifier="StringExpression" href="../../index.html#/classifier/stringexpression" target="_top" aria-label="StringExpression — открыть описание класса"><title>StringExpression. Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.</title>
-<rect class="class-box" x="250" y="470" width="250" height="65"/>
-<line class="class-divider" x1="250" y1="502" x2="500" y2="502"/>
-<text class="class-name" x="375.0" y="493" text-anchor="middle">StringExpression</text>
+<rect class="class-box" x="250" y="510" width="250" height="65"/>
+<line class="class-divider" x1="250" y1="542" x2="500" y2="542"/>
+<text class="class-name" x="375.0" y="533" text-anchor="middle">StringExpression</text>
 </a>
 <g class="class-node" data-classifier="Behavior"><title>Behavior. Пример класса Behavior.</title>
-<rect class="class-box" x="840" y="480" width="170" height="55"/>
-<line class="class-divider" x1="840" y1="512" x2="1010" y2="512"/>
-<text class="class-name" x="925.0" y="503" text-anchor="middle">Behavior</text>
+<rect class="class-box" x="840" y="520" width="170" height="55"/>
+<line class="class-divider" x1="840" y1="552" x2="1010" y2="552"/>
+<text class="class-name" x="925.0" y="543" text-anchor="middle">Behavior</text>
 </g>
 <g class="class-node" data-classifier="Parameter"><title>Parameter. Пример класса Parameter.</title>
-<rect class="class-box" x="1110" y="480" width="170" height="55"/>
-<line class="class-divider" x1="1110" y1="512" x2="1280" y2="512"/>
-<text class="class-name" x="1195.0" y="503" text-anchor="middle">Parameter</text>
+<rect class="class-box" x="1110" y="520" width="170" height="55"/>
+<line class="class-divider" x1="1110" y1="552" x2="1280" y2="552"/>
+<text class="class-name" x="1195.0" y="543" text-anchor="middle">Parameter</text>
 </g>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
-<rect class="class-box" x="250" y="650" width="260" height="55"/>
-<line class="class-divider" x1="250" y1="682" x2="510" y2="682"/>
-<text class="class-name abstract" x="380.0" y="673" text-anchor="middle">TemplateableElement</text>
+<rect class="class-box" x="250" y="690" width="260" height="55"/>
+<line class="class-divider" x1="250" y1="722" x2="510" y2="722"/>
+<text class="class-name abstract" x="380.0" y="713" text-anchor="middle">TemplateableElement</text>
 </a>
-<path class="generalization-line" d="M 365 220 V 160 H 825 V 100" data-child="Expression" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
-<path class="generalization-line" d="M 1005 205 V 160 H 825 V 100" data-child="OpaqueExpression" data-parent="ValueSpecification"/>
-<path class="generalization-line" d="M 375 470 V 380 H 365 V 295" data-child="StringExpression" data-parent="Expression" marker-end="url(#generalization)"/>
-<path class="generalization-line" d="M 375 535 V 700 H 380" data-child="StringExpression" data-parent="TemplateableElement"/>
+<path class="generalization-line" d="M 365 260 V 200 H 825 V 140" data-child="Expression" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1005 245 V 200 H 825 V 140" data-child="OpaqueExpression" data-parent="ValueSpecification"/>
+<path class="generalization-line" d="M 375 510 V 420 H 365 V 335" data-child="StringExpression" data-parent="Expression" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 300 575 V 670 H 375 V 690" data-child="StringExpression" data-parent="TemplateableElement" marker-end="url(#generalization)"/>
 <a class="association-link" href="../../index.html#/association/a-operand-expression" target="_top" aria-label="Открыть описание ассоциации A_operand_expression">
 <g class="association-group" id="A_operand_expression"><title>Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.</title>
-<path class="association" d="M 265 260 L 170 260 L 170 40"/><path class="association-hitbox" d="M 265 260 L 170 260 L 170 40" aria-hidden="true"/>
-<polygon class="composition" points="265,260 273,252 281,260 273,268"/>
-<text class="association-end" x="240" y="280"><title>expression. Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.</title>+ expression</text>
-<text class="association-end" x="845" y="108" text-anchor="end"><title>operand. Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.</title>+ operand</text>
+<path class="association" d="M 250 300 H 170 V 110 H 700" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 250 300 H 170 V 110 H 700" aria-hidden="true"/>
+<polygon class="composition" points="250,300 242,292 234,300 242,308"/><circle class="end-dot" cx="700" cy="110" r="3"/>
+<text class="association-end" x="230" y="340" text-anchor="end"><title>expression. Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.</title>+ expression</text>
+<text class="association-end" x="680" y="70" text-anchor="end"><title>operand. Связывает Expression с упорядоченной последовательностью ValueSpecifications-операндов.</title>+ operand</text>
+<text class="association-label" x="230" y="356" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="230" y="372" text-anchor="end">0..1</text>
+<text class="association-label" x="680" y="44" text-anchor="end">{ordered, subsets ownedElement}</text>
+<text class="association-label" x="680" y="28" text-anchor="end">*</text>
 </g></a>
-<text class="association-end" x="240" y="296">{subsets owner}</text>
-<text class="association-end" x="240" y="312">0..1</text>
-<text class="association-end" x="845" y="124" text-anchor="end">{ordered,</text>
-<text class="association-end" x="845" y="140" text-anchor="end">subsets ownedElement}</text>
-<text class="association-end" x="845" y="156" text-anchor="end">*</text>
 <a class="association-link" href="../../index.html#/association/a-subexpression-owningexpression" target="_top" aria-label="Открыть описание ассоциации A_subExpression_owningExpression">
 <g class="association-group" id="A_subExpression_owningExpression"><title>Связывает StringExpression с принадлежащими ему подвыражениями, образующими его значение.</title>
-<path class="association" d="M 240 502 L 70 502 L 70 436 H 240"/><path class="association-hitbox" d="M 240 502 L 70 502 L 70 436 H 240" aria-hidden="true"/>
-<polygon class="composition" points="240,502 232,510 240,518 248,510"/>
-<text class="association-end" x="160" y="518" text-anchor="end"><title>Строковое выражение, частью которого является данное StringExpression как subExpression.</title>+ owningExpression</text>
-<text class="association-end" x="62" y="448"><title>Строковые подвыражения, составляющие данное выражение.</title>+ subExpression</text>
+<path class="association" d="M 375 575 V 650 H 700 V 530 H 500"/><path class="association-hitbox" d="M 375 575 V 650 H 700 V 530 H 500" aria-hidden="true"/>
+<polygon class="composition" points="500,530 508,522 516,530 508,538"/><circle class="end-dot" cx="375" cy="575" r="3"/>
+<text class="association-end" x="395" y="600"><title>Строковые подвыражения, составляющие данное выражение.</title>+ subExpression</text>
+<text class="association-end" x="520" y="490"><title>Строковое выражение, частью которого является данное StringExpression как subExpression.</title>+ owningExpression</text>
+<text class="association-label" x="395" y="616">{ordered, subsets ownedElement}</text>
+<text class="association-label" x="395" y="632">*</text>
+<text class="association-label" x="520" y="474">{subsets owner}</text>
+<text class="association-label" x="520" y="458">0..1</text>
 </g></a>
-<text class="association-end" x="160" y="534" text-anchor="end">{subsets owner}</text>
-<text class="association-end" x="160" y="550" text-anchor="end">0..1</text>
-<text class="association-end" x="62" y="464">{ordered,</text>
-<text class="association-end" x="62" y="480">subsets ownedElement}</text>
-<text class="association-end" x="62" y="496">*</text>
 <a class="association-link" href="../../index.html#/association/a-behavior-opaqueexpression" target="_top" aria-label="Открыть описание ассоциации A_behavior_opaqueExpression">
 <g class="association-group" id="A_behavior_opaqueExpression"><title>Связывает OpaqueExpression с Behavior, задающим вычисление его значений.</title>
-<path class="association" d="M 840 315 V 472" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 840 315 V 472" aria-hidden="true"/>
-
-<text class="association-end" x="795" y="344" text-anchor="end"><title>Поведение UML, задающее вычисление выражения.</title>+ behavior</text>
-<text class="association-end" x="795" y="468" text-anchor="end"><title>opaqueExpression. Связывает OpaqueExpression с Behavior, задающим вычисление его значений.</title>+ opaqueExpression</text>
+<path class="association" d="M 900 355 V 520" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 900 355 V 520" aria-hidden="true"/>
+<circle class="end-dot" cx="900" cy="355" r="3"/>
+<text class="association-end" x="920" y="375"><title>opaqueExpression. Связывает OpaqueExpression с Behavior, задающим вычисление его значений.</title>+ opaqueExpression</text>
+<text class="association-end" x="820" y="500" text-anchor="end"><title>Поведение UML, задающее вычисление выражения.</title>+ behavior</text>
+<text class="association-label" x="920" y="391">*</text>
+<text class="association-label" x="820" y="484" text-anchor="end">0..1</text>
 </g></a>
-<text class="association-end" x="795" y="360" text-anchor="end">0..1</text>
 <a class="association-link" href="../../index.html#/association/a-result-opaqueexpression" target="_top" aria-label="Открыть описание ассоциации A_result_opaqueExpression">
 <g class="association-group" id="A_result_opaqueExpression"><title>Связывает OpaqueExpression с возвращаемым Parameter её Behavior, значения которого являются результатом вычисления.</title>
-<path class="association" d="M 1155 315 V 472" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1155 315 V 472" aria-hidden="true"/>
-
-<text class="association-end" x="1160" y="344"><title>Если OpaqueExpression задано через UML Behavior, относится к возвращаемому Parameter этого Behavior.</title>+ opaqueExpression</text>
-<text class="association-end" x="1160" y="468"><title>/result. Связывает OpaqueExpression с возвращаемым Parameter её Behavior, значения которого являются результатом вычисления.</title>{readOnly}</text>
+<path class="association" d="M 1155 355 V 520" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1155 355 V 520" aria-hidden="true"/>
+<circle class="end-dot" cx="1155" cy="355" r="3"/>
+<text class="association-end" x="1175" y="375"><title>opaqueExpression. Связывает OpaqueExpression с возвращаемым Parameter её Behavior, значения которого являются результатом вычисления.</title>+ opaqueExpression</text>
+<text class="association-end" x="1090" y="500" text-anchor="end"><title>Если OpaqueExpression задано через UML Behavior, относится к возвращаемому Parameter этого Behavior.</title>+ /result</text>
+<text class="association-label" x="1175" y="391">*</text>
+<text class="association-label" x="1090" y="484" text-anchor="end">{readOnly}</text>
+<text class="association-label" x="1090" y="468" text-anchor="end">0..1</text>
 </g></a>
-<text class="association-end" x="1160" y="360">*</text>
-<text class="association-end" x="1160" y="484">+ /result</text>
 </svg>

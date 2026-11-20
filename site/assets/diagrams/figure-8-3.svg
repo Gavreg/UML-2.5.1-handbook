@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1060" viewBox="0 0 1400 1060" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.3">
+  <title id="diagram-title">Рисунок 8.3 — Время и длительность</title>
+  <desc id="diagram-description">TimeExpression, Duration и Observations; выражения, наблюдения и события NamedElement.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1400" height="1060"/>
+  <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="575" y="50" width="250" height="60"/>
+<line class="class-divider" x1="575" y1="82" x2="825" y2="82"/>
+<text class="class-name abstract" x="700.0" y="73" text-anchor="middle">ValueSpecification</text>
+</a>
+<a class="class-node" data-classifier="TimeExpression" href="../../index.html#/classifier/timeexpression" target="_top" aria-label="TimeExpression — открыть описание класса"><title>TimeExpression. ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.</title>
+<rect class="class-box" x="150" y="280" width="230" height="60"/>
+<line class="class-divider" x1="150" y1="312" x2="380" y2="312"/>
+<text class="class-name" x="265.0" y="303" text-anchor="middle">TimeExpression</text>
+</a>
+<a class="class-node" data-classifier="Duration" href="../../index.html#/classifier/duration" target="_top" aria-label="Duration — открыть описание класса"><title>Duration. ValueSpecification, задающая временное расстояние между двумя моментами времени.</title>
+<rect class="class-box" x="1020" y="280" width="200" height="60"/>
+<line class="class-divider" x1="1020" y1="312" x2="1220" y2="312"/>
+<text class="class-name" x="1120.0" y="303" text-anchor="middle">Duration</text>
+</a>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="575" y="400" width="250" height="60"/>
+<line class="class-divider" x1="575" y1="432" x2="825" y2="432"/>
+<text class="class-name abstract" x="700.0" y="423" text-anchor="middle">PackageableElement</text>
+</a>
+<a class="class-node" data-classifier="Observation" href="../../index.html#/classifier/observation" target="_top" aria-label="Observation — открыть описание класса"><title>Observation. PackageableElement, обозначающий наблюдение событий, которые могут происходить относительно другой части модели.</title>
+<rect class="class-box" x="575" y="580" width="250" height="60"/>
+<line class="class-divider" x1="575" y1="612" x2="825" y2="612"/>
+<text class="class-name abstract" x="700.0" y="603" text-anchor="middle">Observation</text>
+</a>
+<a class="class-node" data-classifier="TimeObservation" href="../../index.html#/classifier/timeobservation" target="_top" aria-label="TimeObservation — открыть описание класса"><title>TimeObservation. Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.</title>
+<rect class="class-box" x="170" y="790" width="280" height="75"/>
+<line class="class-divider" x1="170" y1="822" x2="450" y2="822"/>
+<text class="class-name" x="310.0" y="813" text-anchor="middle">TimeObservation</text>
+<text class="attribute" x="180" y="844">+ firstEvent : Boolean = true</text>
+</a>
+<a class="class-node" data-classifier="DurationObservation" href="../../index.html#/classifier/durationobservation" target="_top" aria-label="DurationObservation — открыть описание класса"><title>DurationObservation. Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.</title>
+<rect class="class-box" x="950" y="790" width="300" height="75"/>
+<line class="class-divider" x1="950" y1="822" x2="1250" y2="822"/>
+<text class="class-name" x="1100.0" y="813" text-anchor="middle">DurationObservation</text>
+<text class="attribute" x="960" y="844">+ firstEvent : Boolean [0..2]</text>
+</a>
+<a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="575" y="950" width="250" height="60"/>
+<line class="class-divider" x1="575" y1="982" x2="825" y2="982"/>
+<text class="class-name abstract" x="700.0" y="973" text-anchor="middle">NamedElement</text>
+</a>
+<path class="generalization-line" d="M 320 280 V 200 H 700 V 110" data-child="TimeExpression" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1070 280 V 200 H 700 V 110" data-child="Duration" data-parent="ValueSpecification"/>
+<path class="generalization-line" d="M 700 580 V 460" data-child="Observation" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 310 790 V 720 H 700 V 640" data-child="TimeObservation" data-parent="Observation" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1100 790 V 720 H 700 V 640" data-child="DurationObservation" data-parent="Observation"/>
+<a class="association-link" href="../../index.html#/association/a-expr-timeexpression" target="_top" aria-label="Открыть описание ассоциации A_expr_timeExpression">
+<g class="association-group" id="A_expr_timeExpression"><title>Связывает TimeExpression с ValueSpecification, вычисляющей её значение.</title>
+<path class="association" d="M 200 280 V 160 H 575 V 80" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 200 280 V 160 H 575 V 80" aria-hidden="true"/>
+<polygon class="composition" points="200,280 192,272 200,264 208,272"/><circle class="end-dot" cx="575" cy="80" r="3"/>
+<text class="association-end" x="180" y="260" text-anchor="end"><title>timeExpression. Связывает TimeExpression с ValueSpecification, вычисляющей её значение.</title>+ timeExpression</text>
+<text class="association-end" x="555" y="96" text-anchor="end"><title>expr. Связывает TimeExpression с ValueSpecification, вычисляющей её значение.</title>+ expr</text>
+<text class="association-label" x="180" y="244" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="180" y="228" text-anchor="end">0..1</text>
+<text class="association-label" x="555" y="113" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="555" y="129" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-expr-duration" target="_top" aria-label="Открыть описание ассоциации A_expr_duration">
+<g class="association-group" id="A_expr_duration"><title>Связывает Duration с ValueSpecification, вычисляющей её значение.</title>
+<path class="association" d="M 1120 280 V 160 H 825 V 80" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1120 280 V 160 H 825 V 80" aria-hidden="true"/>
+<polygon class="composition" points="1120,280 1112,272 1120,264 1128,272"/><circle class="end-dot" cx="825" cy="80" r="3"/>
+<text class="association-end" x="1140" y="260"><title>duration. Связывает Duration с ValueSpecification, вычисляющей её значение.</title>+ duration</text>
+<text class="association-end" x="845" y="96"><title>expr. Связывает Duration с ValueSpecification, вычисляющей её значение.</title>+ expr</text>
+<text class="association-label" x="1140" y="244">{subsets owner}</text>
+<text class="association-label" x="1140" y="228">0..1</text>
+<text class="association-label" x="845" y="113">{subsets ownedElement}</text>
+<text class="association-label" x="845" y="129">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-observation-timeexpression" target="_top" aria-label="Открыть описание ассоциации A_observation_timeExpression">
+<g class="association-group" id="A_observation_timeExpression"><title>Связывает TimeExpression с Observations, участвующими в вычислении его значения.</title>
+<path class="association" d="M 265 340 V 600 H 575" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 265 340 V 600 H 575" aria-hidden="true"/>
+<circle class="end-dot" cx="265" cy="340" r="3"/><circle class="end-dot" cx="575" cy="600" r="3"/>
+<text class="association-end" x="245" y="365" text-anchor="end"><title>timeExpression. Связывает TimeExpression с Observations, участвующими в вычислении его значения.</title>+ timeExpression</text>
+<text class="association-end" x="555" y="580" text-anchor="end"><title>observation. Связывает TimeExpression с Observations, участвующими в вычислении его значения.</title>+ observation</text>
+<text class="association-label" x="245" y="381" text-anchor="end">0..1</text>
+<text class="association-label" x="555" y="564" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-observation-duration" target="_top" aria-label="Открыть описание ассоциации A_observation_duration">
+<g class="association-group" id="A_observation_duration"><title>Связывает Duration с Observations, участвующими в вычислении её значения.</title>
+<path class="association" d="M 1120 340 V 520 H 825 V 600" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1120 340 V 520 H 825 V 600" aria-hidden="true"/>
+<circle class="end-dot" cx="1120" cy="340" r="3"/><circle class="end-dot" cx="825" cy="600" r="3"/>
+<text class="association-end" x="1140" y="365"><title>duration. Связывает Duration с Observations, участвующими в вычислении её значения.</title>+ duration</text>
+<text class="association-end" x="845" y="580"><title>observation. Связывает Duration с Observations, участвующими в вычислении её значения.</title>+ observation</text>
+<text class="association-label" x="1140" y="381">0..1</text>
+<text class="association-label" x="845" y="564">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-event-timeobservation" target="_top" aria-label="Открыть описание ассоциации A_event_timeObservation">
+<g class="association-group" id="A_event_timeObservation"><title>Связывает TimeObservation с NamedElement, событие входа или выхода которого наблюдается.</title>
+<path class="association" d="M 310 865 V 980 H 575" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 310 865 V 980 H 575" aria-hidden="true"/>
+<circle class="end-dot" cx="310" cy="865" r="3"/><circle class="end-dot" cx="575" cy="980" r="3"/>
+<text class="association-end" x="290" y="890" text-anchor="end"><title>timeObservation. Связывает TimeObservation с NamedElement, событие входа или выхода которого наблюдается.</title>+ timeObservation</text>
+<text class="association-end" x="555" y="960" text-anchor="end"><title>event. Связывает TimeObservation с NamedElement, событие входа или выхода которого наблюдается.</title>+ event</text>
+<text class="association-label" x="290" y="906" text-anchor="end">*</text>
+<text class="association-label" x="555" y="944" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-event-durationobservation" target="_top" aria-label="Открыть описание ассоциации A_event_durationObservation">
+<g class="association-group" id="A_event_durationObservation"><title>Связывает DurationObservation с NamedElements, между событиями входа или выхода которых измеряется длительность.</title>
+<path class="association" d="M 1100 865 V 980 H 825" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1100 865 V 980 H 825" aria-hidden="true"/>
+<circle class="end-dot" cx="1100" cy="865" r="3"/><circle class="end-dot" cx="825" cy="980" r="3"/>
+<text class="association-end" x="1120" y="890"><title>durationObservation. Связывает DurationObservation с NamedElements, между событиями входа или выхода которых измеряется длительность.</title>+ durationObservation</text>
+<text class="association-end" x="845" y="960"><title>event. Связывает DurationObservation с NamedElements, между событиями входа или выхода которых измеряется длительность.</title>+ event</text>
+<text class="association-label" x="1120" y="906">*</text>
+<text class="association-label" x="845" y="944">{ordered}</text>
+<text class="association-label" x="845" y="928">1..2</text>
+</g></a>
+</svg>

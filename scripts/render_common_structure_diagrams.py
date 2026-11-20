@@ -48,7 +48,7 @@ def main():
     parser.add_argument(
         "--pdf",
         type=Path,
-        default=Path("docs/omg-uml-2.5.1-formal-17-12-05.pdf"),
+        default=Path("site/docs/omg-uml-2.5.1-formal-17-12-05.pdf"),
     )
     parser.add_argument(
         "--output-dir",

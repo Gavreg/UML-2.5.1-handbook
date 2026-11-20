@@ -6,6 +6,7 @@
     <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
     <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
     <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
     <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
   .class-box, .package-box, .note-box, .association, .generalization-line,
   .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
@@ -32,7 +33,12 @@
   .dependency-group:hover text { fill: #1e3a8a; }
   .association-group:hover .end-dot, .association-group:hover .composition,
   .example-association-group:hover .end-dot { fill: #1e3a8a; }
-  .association-end { cursor: help; }</style>
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
   </defs>
   <rect class="background" width="800" height="330"/>
   <g class="package-node"><title>Пакет Program.</title>

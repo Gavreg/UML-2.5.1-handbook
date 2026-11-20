@@ -3,7 +3,7 @@ Name: sync_xmi_properties.py
 Purpose: Generate classifier and association properties from the normative UML 2.5.1 XMI.
 Interface: python scripts/sync_xmi_properties.py [--check]
 Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI.
-Requires: Python 3; docs/UML-2.5.1.xmi and site/data/common-structure.js.
+Requires: Python 3; site/docs/UML-2.5.1.xmi and site/data/common-structure.js.
 """
 
 from argparse import ArgumentParser
@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parent.parent
-XMI = ROOT / "docs" / "UML-2.5.1.xmi"
+XMI = ROOT / "site" / "docs" / "UML-2.5.1.xmi"
 DATA = ROOT / "site" / "data" / "common-structure.js"
 OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
 XMI_DIR = ROOT / "site" / "data" / "xmi"

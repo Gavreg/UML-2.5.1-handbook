@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1160" viewBox="0 0 1800 1160" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.4">
+  <title id="diagram-title">Рисунок 8.4 — Интервалы</title>
+  <desc id="diagram-description">Interval и IntervalConstraint с их специализациями для времени и длительности; границы min/max и спецификации ограничений.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1800" height="1160"/>
+  <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="650" y="40" width="250" height="60"/>
+<line class="class-divider" x1="650" y1="72" x2="900" y2="72"/>
+<text class="class-name abstract" x="775.0" y="63" text-anchor="middle">ValueSpecification</text>
+</a>
+<a class="class-node" data-classifier="Interval" href="../../index.html#/classifier/interval" target="_top" aria-label="Interval — открыть описание класса"><title>Interval. ValueSpecification, задающая диапазон значений между двумя ValueSpecifications — нижней границей min и верхней границей max.</title>
+<rect class="class-box" x="650" y="250" width="230" height="60"/>
+<line class="class-divider" x1="650" y1="282" x2="880" y2="282"/>
+<text class="class-name" x="765.0" y="273" text-anchor="middle">Interval</text>
+</a>
+<a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
+<rect class="class-box" x="1350" y="40" width="180" height="55"/>
+<line class="class-divider" x1="1350" y1="72" x2="1530" y2="72"/>
+<text class="class-name" x="1440.0" y="63" text-anchor="middle">Constraint</text>
+</a>
+<a class="class-node" data-classifier="IntervalConstraint" href="../../index.html#/classifier/intervalconstraint" target="_top" aria-label="IntervalConstraint — открыть описание класса"><title>IntervalConstraint. Constraint, спецификация которого задаётся Interval.</title>
+<rect class="class-box" x="1300" y="250" width="250" height="60"/>
+<line class="class-divider" x1="1300" y1="282" x2="1550" y2="282"/>
+<text class="class-name" x="1425.0" y="273" text-anchor="middle">IntervalConstraint</text>
+</a>
+<a class="class-node" data-classifier="TimeInterval" href="../../index.html#/classifier/timeinterval" target="_top" aria-label="TimeInterval — открыть описание класса"><title>TimeInterval. Interval, задающий диапазон между двумя моментами времени, заданными TimeExpressions.</title>
+<rect class="class-box" x="480" y="500" width="230" height="60"/>
+<line class="class-divider" x1="480" y1="532" x2="710" y2="532"/>
+<text class="class-name" x="595.0" y="523" text-anchor="middle">TimeInterval</text>
+</a>
+<a class="class-node" data-classifier="TimeConstraint" href="../../index.html#/classifier/timeconstraint" target="_top" aria-label="TimeConstraint — открыть описание класса"><title>TimeConstraint. IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.</title>
+<rect class="class-box" x="1250" y="500" width="300" height="75"/>
+<line class="class-divider" x1="1250" y1="532" x2="1550" y2="532"/>
+<text class="class-name" x="1400.0" y="523" text-anchor="middle">TimeConstraint</text>
+<text class="attribute" x="1260" y="554">+ firstEvent : Boolean [0..1] = true</text>
+</a>
+<a class="class-node" data-classifier="DurationInterval" href="../../index.html#/classifier/durationinterval" target="_top" aria-label="DurationInterval — открыть описание класса"><title>DurationInterval. Interval, задающий диапазон между двумя значениями длительности, заданными Durations.</title>
+<rect class="class-box" x="50" y="800" width="260" height="60"/>
+<line class="class-divider" x1="50" y1="832" x2="310" y2="832"/>
+<text class="class-name" x="180.0" y="823" text-anchor="middle">DurationInterval</text>
+</a>
+<a class="class-node" data-classifier="DurationConstraint" href="../../index.html#/classifier/durationconstraint" target="_top" aria-label="DurationConstraint — открыть описание класса"><title>DurationConstraint. Constraint, ссылающийся на DurationInterval.</title>
+<rect class="class-box" x="1250" y="800" width="320" height="75"/>
+<line class="class-divider" x1="1250" y1="832" x2="1570" y2="832"/>
+<text class="class-name" x="1410.0" y="823" text-anchor="middle">DurationConstraint</text>
+<text class="attribute" x="1260" y="854">+ firstEvent : Boolean [0..2]</text>
+</a>
+<a class="class-node" data-classifier="TimeExpression" href="../../index.html#/classifier/timeexpression" target="_top" aria-label="TimeExpression — открыть описание класса"><title>TimeExpression. ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.</title>
+<rect class="class-box" x="480" y="1080" width="230" height="60"/>
+<line class="class-divider" x1="480" y1="1112" x2="710" y2="1112"/>
+<text class="class-name" x="595.0" y="1103" text-anchor="middle">TimeExpression</text>
+</a>
+<a class="class-node" data-classifier="Duration" href="../../index.html#/classifier/duration" target="_top" aria-label="Duration — открыть описание класса"><title>Duration. ValueSpecification, задающая временное расстояние между двумя моментами времени.</title>
+<rect class="class-box" x="50" y="1080" width="200" height="60"/>
+<line class="class-divider" x1="50" y1="1112" x2="250" y2="1112"/>
+<text class="class-name" x="150.0" y="1103" text-anchor="middle">Duration</text>
+</a>
+<path class="generalization-line" d="M 765 250 V 100" data-child="Interval" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1425 250 V 95" data-child="IntervalConstraint" data-parent="Constraint" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 595 500 V 380 H 740 V 310" data-child="TimeInterval" data-parent="Interval" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 180 800 V 420 H 700 V 310" data-child="DurationInterval" data-parent="Interval" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1400 500 V 400 H 1390 V 310" data-child="TimeConstraint" data-parent="IntervalConstraint" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1410 800 H 1650 V 400 H 1430 V 310" data-child="DurationConstraint" data-parent="IntervalConstraint" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-min-interval" target="_top" aria-label="Открыть описание ассоциации A_min_interval">
+<g class="association-group" id="A_min_interval"><title>Связывает Interval с ValueSpecification, задающей его нижнюю границу.</title>
+<path class="association" d="M 700 250 V 100" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 700 250 V 100" aria-hidden="true"/>
+<polygon class="composition" points="700,250 692,242 700,234 708,242"/><circle class="end-dot" cx="700" cy="100" r="3"/>
+<text class="association-end" x="680" y="230" text-anchor="end"><title>interval. Связывает Interval с ValueSpecification, задающей его нижнюю границу.</title>+ interval</text>
+<text class="association-end" x="680" y="120" text-anchor="end"><title>min. Связывает Interval с ValueSpecification, задающей его нижнюю границу.</title>+ min</text>
+<text class="association-label" x="680" y="206" text-anchor="end">*</text>
+<text class="association-label" x="680" y="136" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-max-interval" target="_top" aria-label="Открыть описание ассоциации A_max_interval">
+<g class="association-group" id="A_max_interval"><title>Связывает Interval с ValueSpecification, задающей его верхнюю границу.</title>
+<path class="association" d="M 830 250 V 100" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 830 250 V 100" aria-hidden="true"/>
+<polygon class="composition" points="830,250 822,242 830,234 838,242"/><circle class="end-dot" cx="830" cy="100" r="3"/>
+<text class="association-end" x="850" y="230"><title>interval. Связывает Interval с ValueSpecification, задающей его верхнюю границу.</title>+ interval</text>
+<text class="association-end" x="850" y="120"><title>max. Связывает Interval с ValueSpecification, задающей его верхнюю границу.</title>+ max</text>
+<text class="association-label" x="850" y="206">*</text>
+<text class="association-label" x="850" y="136">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-specification-intervalconstraint" target="_top" aria-label="Открыть описание ассоциации A_specification_intervalConstraint">
+<g class="association-group" id="A_specification_intervalConstraint"><title>Связывает IntervalConstraint с Interval, задающим его условие.</title>
+<path class="association" d="M 1300 280 H 880" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1300 280 H 880" aria-hidden="true"/>
+<polygon class="composition" points="1300,280 1292,272 1284,280 1292,288"/><circle class="end-dot" cx="880" cy="280" r="3"/>
+<text class="association-end" x="1280" y="250" text-anchor="end"><title>intervalConstraint. Связывает IntervalConstraint с Interval, задающим его условие.</title>+ intervalConstraint</text>
+<text class="association-end" x="900" y="300"><title>specification. Связывает IntervalConstraint с Interval, задающим его условие.</title>+ specification</text>
+<text class="association-label" x="1280" y="234" text-anchor="end">{redefines owningConstraint}</text>
+<text class="association-label" x="1280" y="218" text-anchor="end">0..1</text>
+<text class="association-label" x="900" y="316">{redefines specification}</text>
+<text class="association-label" x="900" y="332">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-min-timeinterval" target="_top" aria-label="Открыть описание ассоциации A_min_timeInterval">
+<g class="association-group" id="A_min_timeInterval"><title>Связывает TimeInterval с TimeExpression, задающим его нижнюю границу.</title>
+<path class="association" d="M 540 560 V 1080" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 540 560 V 1080" aria-hidden="true"/>
+<polygon class="composition" points="540,560 532,568 540,576 548,568"/><circle class="end-dot" cx="540" cy="1080" r="3"/>
+<text class="association-end" x="520" y="585" text-anchor="end"><title>timeInterval. Связывает TimeInterval с TimeExpression, задающим его нижнюю границу.</title>+ timeInterval</text>
+<text class="association-end" x="520" y="1060" text-anchor="end"><title>min. Связывает TimeInterval с TimeExpression, задающим его нижнюю границу.</title>+ min</text>
+<text class="association-label" x="520" y="601" text-anchor="end">*</text>
+<text class="association-label" x="520" y="617" text-anchor="end">{redefines interval}</text>
+<text class="association-label" x="520" y="1044" text-anchor="end">{redefines min}</text>
+<text class="association-label" x="520" y="1028" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-max-timeinterval" target="_top" aria-label="Открыть описание ассоциации A_max_timeInterval">
+<g class="association-group" id="A_max_timeInterval"><title>Связывает TimeInterval с TimeExpression, задающим его верхнюю границу.</title>
+<path class="association" d="M 650 560 V 1080" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 650 560 V 1080" aria-hidden="true"/>
+<polygon class="composition" points="650,560 642,568 650,576 658,568"/><circle class="end-dot" cx="650" cy="1080" r="3"/>
+<text class="association-end" x="670" y="585"><title>timeInterval. Связывает TimeInterval с TimeExpression, задающим его верхнюю границу.</title>+ timeInterval</text>
+<text class="association-end" x="670" y="1060"><title>max. Связывает TimeInterval с TimeExpression, задающим его верхнюю границу.</title>+ max</text>
+<text class="association-label" x="670" y="601">*</text>
+<text class="association-label" x="670" y="617">{redefines interval}</text>
+<text class="association-label" x="670" y="1044">{redefines max}</text>
+<text class="association-label" x="670" y="1028">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-specification-timeconstraint" target="_top" aria-label="Открыть описание ассоциации A_specification_timeConstraint">
+<g class="association-group" id="A_specification_timeConstraint"><title>Связывает TimeConstraint с TimeInterval, задающим его условие.</title>
+<path class="association" d="M 1250 537 H 710" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1250 537 H 710" aria-hidden="true"/>
+<polygon class="composition" points="1250,537 1242,529 1234,537 1242,545"/><circle class="end-dot" cx="710" cy="537" r="3"/>
+<text class="association-end" x="1230" y="517" text-anchor="end"><title>timeConstraint. Связывает TimeConstraint с TimeInterval, задающим его условие.</title>+ timeConstraint</text>
+<text class="association-end" x="730" y="517"><title>specification. Связывает TimeConstraint с TimeInterval, задающим его условие.</title>+ specification</text>
+<text class="association-label" x="1230" y="501" text-anchor="end">{redefines intervalConstraint}</text>
+<text class="association-label" x="1230" y="485" text-anchor="end">0..1</text>
+<text class="association-label" x="730" y="501">{redefines specification}</text>
+<text class="association-label" x="730" y="485">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-min-durationinterval" target="_top" aria-label="Открыть описание ассоциации A_min_durationInterval">
+<g class="association-group" id="A_min_durationInterval"><title>Связывает DurationInterval с Duration, задающей его нижнюю границу.</title>
+<path class="association" d="M 120 860 V 1080" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 120 860 V 1080" aria-hidden="true"/>
+<polygon class="composition" points="120,860 112,868 120,876 128,868"/><circle class="end-dot" cx="120" cy="1080" r="3"/>
+<text class="association-end" x="100" y="885" text-anchor="end"><title>durationInterval. Связывает DurationInterval с Duration, задающей его нижнюю границу.</title>+ durationInterval</text>
+<text class="association-end" x="100" y="1060" text-anchor="end"><title>min. Связывает DurationInterval с Duration, задающей его нижнюю границу.</title>+ min</text>
+<text class="association-label" x="100" y="901" text-anchor="end">*</text>
+<text class="association-label" x="100" y="917" text-anchor="end">{redefines interval}</text>
+<text class="association-label" x="100" y="1044" text-anchor="end">{redefines min}</text>
+<text class="association-label" x="100" y="1028" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-max-durationinterval" target="_top" aria-label="Открыть описание ассоциации A_max_durationInterval">
+<g class="association-group" id="A_max_durationInterval"><title>Связывает DurationInterval с Duration, задающей его верхнюю границу.</title>
+<path class="association" d="M 240 860 V 1080" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 240 860 V 1080" aria-hidden="true"/>
+<polygon class="composition" points="240,860 232,868 240,876 248,868"/><circle class="end-dot" cx="240" cy="1080" r="3"/>
+<text class="association-end" x="260" y="885"><title>durationInterval. Связывает DurationInterval с Duration, задающей его верхнюю границу.</title>+ durationInterval</text>
+<text class="association-end" x="260" y="1060"><title>max. Связывает DurationInterval с Duration, задающей его верхнюю границу.</title>+ max</text>
+<text class="association-label" x="260" y="901">*</text>
+<text class="association-label" x="260" y="917">{redefines interval}</text>
+<text class="association-label" x="260" y="1044">{redefines max}</text>
+<text class="association-label" x="260" y="1028">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-specification-durationconstraint" target="_top" aria-label="Открыть описание ассоциации A_specification_durationConstraint">
+<g class="association-group" id="A_specification_durationConstraint"><title>Связывает DurationConstraint с DurationInterval, задающим его условие.</title>
+<path class="association" d="M 1250 837 H 310" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 1250 837 H 310" aria-hidden="true"/>
+<polygon class="composition" points="1250,837 1242,829 1234,837 1242,845"/><circle class="end-dot" cx="310" cy="837" r="3"/>
+<text class="association-end" x="1230" y="817" text-anchor="end"><title>durationConstraint. Связывает DurationConstraint с DurationInterval, задающим его условие.</title>+ durationConstraint</text>
+<text class="association-end" x="330" y="817"><title>specification. Связывает DurationConstraint с DurationInterval, задающим его условие.</title>+ specification</text>
+<text class="association-label" x="1230" y="801" text-anchor="end">{redefines intervalConstraint}</text>
+<text class="association-label" x="1230" y="785" text-anchor="end">0..1</text>
+<text class="association-label" x="330" y="801">{redefines specification}</text>
+<text class="association-label" x="330" y="785">1</text>
+</g></a>
+</svg>

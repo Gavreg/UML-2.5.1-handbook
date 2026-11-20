@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="680" viewBox="0 0 1300 680" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.5">
+  <title id="diagram-title">Рисунок 8.5 — Пример DurationConstraints и TimeConstraints</title>
+  <desc id="diagram-description">Диаграмма последовательности UserAccepted с DurationObservation, TimeObservation и ограничениями длительности и времени.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1300" height="680"/>
+  <path class="sequence-frame" d="M 250 40 H 830 L 950 100 V 640 H 250 Z M 830 40 V 100 H 950"/>
+<text class="class-name" x="275" y="75">sd UserAccepted</text>
+<g class="class-node" data-classifier=":User"><title>Экземпляр участника диаграммы последовательности :User.</title>
+<rect class="class-box" x="350" y="110" width="130" height="60"/>
+<text class="class-name" x="415.0" y="147" text-anchor="middle">:User</text>
+</g>
+<g class="class-node" data-classifier=":ACSystem"><title>Экземпляр участника диаграммы последовательности :ACSystem.</title>
+<rect class="class-box" x="700" y="110" width="140" height="60"/>
+<text class="class-name" x="770.0" y="147" text-anchor="middle">:ACSystem</text>
+</g>
+<path class="sequence-lifeline" d="M 415 170 V 600 M 770 170 V 600"/>
+<path class="sequence-message" d="M 415 250 H 770" marker-end="url(#navigation)"/>
+<text x="590" y="230" text-anchor="middle">Code</text>
+<a href="../../index.html#/classifier/durationobservation" target="_top" aria-label="DurationObservation — открыть описание класса"><title>DurationObservation. Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.</title><text x="650" y="215">d=duration</text></a>
+<path class="sequence-observation" d="M 640 222 L 675 250"/>
+<path class="sequence-constraint" d="M 390 250 V 350" marker-start="url(#navigation-start)" marker-end="url(#navigation)"/>
+<a href="../../index.html#/classifier/durationconstraint" target="_top" aria-label="DurationConstraint — открыть описание класса"><title>DurationConstraint. Constraint, ссылающийся на DurationInterval.</title><text x="300" y="320">{d..3*d}</text></a>
+<path class="sequence-message" d="M 770 360 H 415" marker-end="url(#navigation)"/>
+<text x="590" y="340" text-anchor="middle">CardOut {0..13}</text>
+<a href="../../index.html#/classifier/timeobservation" target="_top" aria-label="TimeObservation — открыть описание класса"><title>TimeObservation. Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.</title><text x="790" y="340">t=now</text></a>
+<path class="sequence-message" d="M 415 440 L 770 360" marker-end="url(#navigation)"/>
+<text x="590" y="420" text-anchor="middle">OK</text>
+<a href="../../index.html#/classifier/timeconstraint" target="_top" aria-label="TimeConstraint — открыть описание класса"><title>TimeConstraint. IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.</title><text x="300" y="450">{t..t+3}</text></a>
+<path class="sequence-message" d="M 770 510 H 900" marker-end="url(#navigation)"/>
+<text x="835" y="490" text-anchor="middle">Unlock</text>
+<a href="../../index.html#/classifier/durationobservation" target="_top" aria-label="DurationObservation — открыть описание класса"><title>DurationObservation. Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.</title><text class="annotation-label" x="980" y="200">DurationObservation</text></a>
+<a href="../../index.html#/classifier/duration" target="_top" aria-label="Duration — открыть описание класса"><title>Duration. ValueSpecification, задающая временное расстояние между двумя моментами времени.</title><text class="annotation-label" x="980" y="220">with Duration</text></a>
+<path class="annotation-line" d="M 970 210 L 720 245" marker-end="url(#annotation)"/>
+<a href="../../index.html#/classifier/durationconstraint" target="_top" aria-label="DurationConstraint — открыть описание класса"><title>DurationConstraint. Constraint, ссылающийся на DurationInterval.</title><text class="annotation-label" x="30" y="280">DurationConstraint</text></a>
+<path class="annotation-line" d="M 220 285 L 285 310" marker-end="url(#annotation)"/>
+<a href="../../index.html#/classifier/timeconstraint" target="_top" aria-label="TimeConstraint — открыть описание класса"><title>TimeConstraint. IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.</title><text class="annotation-label" x="30" y="470">TimeConstraint</text></a>
+<path class="annotation-line" d="M 220 465 L 285 445" marker-end="url(#annotation)"/>
+<a href="../../index.html#/classifier/timeobservation" target="_top" aria-label="TimeObservation — открыть описание класса"><title>TimeObservation. Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.</title><text class="annotation-label" x="980" y="350">TimeObservation</text></a>
+<a href="../../index.html#/classifier/timeexpression" target="_top" aria-label="TimeExpression — открыть описание класса"><title>TimeExpression. ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.</title><text class="annotation-label" x="980" y="370">with TimeExpression</text></a>
+<path class="annotation-line" d="M 970 360 H 805" marker-end="url(#annotation)"/>
+</svg>

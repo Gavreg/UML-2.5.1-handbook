@@ -117,7 +117,7 @@ class HandbookRenderer:
         return '<nav class="breadcrumbs" aria-label="Хлебные крошки">' + "".join(parts) + "</nav>"
 
     def source_link(self, page):
-        return f'''<a class="source-link" href="../docs/omg-uml-2.5.1-formal-17-12-05.pdf#page={page + 42}" target="_blank" rel="noopener">
+        return f'''<a class="source-link" href="docs/omg-uml-2.5.1-formal-17-12-05.pdf#page={page + 42}" target="_blank" rel="noopener">
           Открыть оригинал, стр. {page}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
         </a>'''

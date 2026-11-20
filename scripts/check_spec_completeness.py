@@ -14,8 +14,8 @@ from handbook_data import ROOT, load_handbook, load_pages, slug
 
 
 SOURCES = {
-    "7": ROOT / "docs" / "uml-2.5.1-common-structure-en.txt",
-    "8": ROOT / "docs" / "uml-2.5.1-values-en.txt",
+    "7": ROOT / "site" / "docs" / "uml-2.5.1-common-structure-en.txt",
+    "8": ROOT / "site" / "docs" / "uml-2.5.1-values-en.txt",
 }
 CATALOGS = {"7": ("7.8", "7.9"), "8": ("8.6", "8.7")}
 PAGES = ROOT / "site" / "data" / "common-structure-pages.js"

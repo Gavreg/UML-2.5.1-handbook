@@ -13,10 +13,11 @@ import json
 from pathlib import Path
 import re
 
+from handbook_data import load_xmi
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "site" / "data" / "common-structure.js"
-XMI_PATH = ROOT / "site" / "data" / "common-structure-xmi.js"
 
 
 def slug(value):
@@ -46,8 +47,7 @@ ASSOCIATIONS = {
         re.S,
     )
 }
-XMI_TEXT = XMI_PATH.read_text(encoding="utf-8")
-XMI = json.loads(re.search(r"=\s*(\{.*\});?\s*$", XMI_TEXT, re.S).group(1))
+XMI = load_xmi()
 PROPERTY_DESCRIPTIONS = {}
 for class_name, class_data in XMI["classes"].items():
     for group in ("direct", "inherited"):

@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 XMI = ROOT / "docs" / "UML-2.5.1.xmi"
 DATA = ROOT / "site" / "data" / "common-structure.js"
 OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
+XMI_DIR = ROOT / "site" / "data" / "xmi"
 XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
 UML_NS = "{http://www.omg.org/spec/UML/20131001}"
 
@@ -426,7 +427,7 @@ def generate():
         raise ValueError("Missing Russian property descriptions:\n" + "\n".join(missing))
     payload = {
         "source": "OMG UML 2.5.1, formal/17-12-05, UML.xmi (20161101)",
-        "classes": classes,
+        "classes": {},
         "associations": associations,
         "generalizations": {
             name: model.generalizations(name)
@@ -437,21 +438,46 @@ def generate():
             for name in sorted(required_classes)
         },
     }
-    return "window.UML_XMI_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
+    base_content = "window.UML_XMI_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
+    class_entries = [(name, classes[name]) for name in class_names if name in required_classes]
+    return base_content, class_entries
 
 
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check that the generated file is up to date")
     args = parser.parse_args()
-    expected = generate()
+    base_content, class_entries = generate()
     if args.check:
-        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
-            raise SystemExit("Generated XMI data is out of date; run python scripts/sync_xmi_properties.py")
+        ok = True
+        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != base_content:
+            print(f"Base file {OUTPUT.relative_to(ROOT)} is out of date")
+            ok = False
+        for name, data in class_entries:
+            fpath = XMI_DIR / f"{name}.js"
+            expected = f'window.UML_XMI_DATA.classes["{name}"] = ' + json.dumps(data, ensure_ascii=False, indent=2) + ";\n"
+            if not fpath.is_file() or fpath.read_text(encoding="utf-8") != expected:
+                print(f"Fragment {fpath.relative_to(ROOT)} is out of date")
+                ok = False
+        for fpath in sorted(XMI_DIR.glob("*.js")):
+            stem = fpath.stem
+            if not any(name == stem for name, _ in class_entries):
+                print(f"Stale fragment to remove: {fpath.relative_to(ROOT)}")
+                ok = False
+        if not ok:
+            raise SystemExit("XMI data is out of date; run python scripts/sync_xmi_properties.py")
         print("XMI property data: OK")
         return
-    OUTPUT.write_text(expected, encoding="utf-8")
-    print(f"Generated {OUTPUT.relative_to(ROOT)}")
+    XMI_DIR.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(base_content, encoding="utf-8")
+    for name, data in class_entries:
+        fpath = XMI_DIR / f"{name}.js"
+        fpath.write_text(f'window.UML_XMI_DATA.classes["{name}"] = ' + json.dumps(data, ensure_ascii=False, indent=2) + ";\n", encoding="utf-8")
+    existing = {f.stem for f in XMI_DIR.glob("*.js")}
+    required = {name for name, _ in class_entries}
+    for stale in existing - required:
+        (XMI_DIR / f"{stale}.js").unlink()
+    print(f"Generated {OUTPUT.relative_to(ROOT)} + {len(class_entries)} fragments in {XMI_DIR.relative_to(ROOT)}/")
 
 
 if __name__ == "__main__":

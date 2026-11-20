@@ -15,7 +15,36 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DATA = SITE / "data" / "common-structure.js"
 XMI_DATA = SITE / "data" / "common-structure-xmi.js"
-CONTENT_DATA = SITE / "data" / "common-structure-content.js"
+XMI_DIR = SITE / "data" / "xmi"
+CONTENT_DIR = SITE / "data" / "content"
+PAGES_DATA = SITE / "data" / "common-structure-pages.js"
+PAGES_DIR = SITE / "data" / "pages"
+PAGE_FRAGMENTS = (
+    "sections-7.js", "sections-8.js",
+    "classifiers-7.js", "classifiers-8.js", "classifiers-external.js",
+    "associations-7.js", "associations-8.js",
+    "diagrams-7.js", "diagrams-8.js",
+)
+
+
+def _load_content_from_fragments():
+    """Merge content fragments into one {sections, classifiers} dict."""
+    content = {"sections": {}, "classifiers": {}}
+    fragment_files = [
+        ("sections-7.js", "Object.assign(window.UML_CONTENT.sections,"),
+        ("sections-8.js", "Object.assign(window.UML_CONTENT.sections,"),
+        ("classifiers-7.js", "Object.assign(window.UML_CONTENT.classifiers,"),
+        ("classifiers-8.js", "Object.assign(window.UML_CONTENT.classifiers,"),
+    ]
+    for fname, marker in fragment_files:
+        fpath = CONTENT_DIR / fname
+        if not fpath.exists():
+            raise FileNotFoundError(f"Missing fragment: {fname}")
+        merged = assigned_literal(fpath, marker)
+        target_key = "sections" if "sections" in fname else "classifiers"
+        content[target_key].update(merged)
+
+    return content
 
 
 class JsLiteralParser:
@@ -144,6 +173,27 @@ def slug(value):
     return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", value.lower()))
 
 
+def load_xmi():
+    """Return full XMI data by merging base file with per-class fragments."""
+    base = assigned_literal(XMI_DATA)
+    classes = {}
+    for fpath in sorted(XMI_DIR.glob("*.js")):
+        marker = f'window.UML_XMI_DATA.classes["{fpath.stem}"] ='
+        classes[fpath.stem] = assigned_literal(fpath, marker)
+    base["classes"] = classes
+    return base
+
+
+def load_pages():
+    result = assigned_literal(PAGES_DATA)
+    for name in PAGE_FRAGMENTS:
+        path = PAGES_DIR / name
+        result["pages"].update(assigned_literal(path, "Object.assign(window.UML_PAGES.pages,"))
+        result["titles"].update(assigned_literal(path, "Object.assign(window.UML_PAGES.titles,"))
+        result["searchItems"].extend(assigned_literal(path, "window.UML_PAGES.searchItems.push(..."))
+    return result
+
+
 def load_handbook():
     text = DATA.read_text(encoding="utf-8")
     data = {}
@@ -154,7 +204,7 @@ def load_handbook():
         stem = diagram["id"].replace(".", "-")
         diagram["image"] = f"assets/diagrams/figure-{stem}.png"
         diagram["vector"] = f"assets/diagrams/figure-{stem}.svg"
-    return data, assigned_literal(XMI_DATA), assigned_literal(CONTENT_DATA)
+    return data, load_xmi(), _load_content_from_fragments()
 
 
 def base_routes(data):

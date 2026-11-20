@@ -14,7 +14,16 @@ import re
 from handbook_data import ROOT, SITE, base_routes, load_handbook, slug
 
 
+PAGES_DIR = SITE / "data" / "pages"
+FRAGMENT_NAMES = [
+    "sections-7", "sections-8",
+    "classifiers-7", "classifiers-8", "classifiers-external",
+    "associations-7", "associations-8",
+    "diagrams-7", "diagrams-8",
+]
+
 OUTPUT = SITE / "data" / "common-structure-pages.js"
+
 KIND_LABELS = {
     "Class": "Класс",
     "Abstract Class": "Абстрактный класс",
@@ -649,23 +658,93 @@ class HandbookRenderer:
         }
 
 
+
+def _fragment_key(route, clauses):
+    parts = route.split("/")
+    if len(parts) < 3:
+        return None
+    kind = {
+        "section": "sections",
+        "classifier": "classifiers",
+        "association": "associations",
+        "diagram": "diagrams",
+    }.get(parts[1])
+    return f"{kind}-{clauses[route]}" if kind else None
+
+
+def _fragment_js(pages, titles, search_items):
+    return (
+        "Object.assign(window.UML_PAGES.pages, " + json.dumps(pages, ensure_ascii=False, indent=2) + ");\n"
+        + "Object.assign(window.UML_PAGES.titles, " + json.dumps(titles, ensure_ascii=False, indent=2) + ");\n"
+        + "window.UML_PAGES.searchItems.push(..." + json.dumps(search_items, ensure_ascii=False, indent=2) + ");\n"
+    )
+
+
 def generate():
-    renderer = HandbookRenderer(*load_handbook())
-    return "window.UML_PAGES = " + json.dumps(renderer.build(), ensure_ascii=False, indent=2) + ";\n"
+    data, xmi, content = load_handbook()
+    full = HandbookRenderer(data, xmi, content).build()
+    clauses = {}
+    for kind, items, name in (
+        ("section", data["sections"], "id"),
+        ("classifier", data["classifiers"], "name"),
+        ("association", data["associations"], "name"),
+        ("diagram", data["diagrams"], "id"),
+    ):
+        for item in items:
+            section = item["id"] if kind in ("section", "diagram") else item["section"]
+            if kind == "classifier" and item["name"] == "Package":
+                section = "external"
+            clauses[f"#/{kind}/{slug(item[name])}"] = section.split(".", 1)[0]
+    base = {
+        "pages": {route: full["pages"][route] for route in ("#/", "#/diagrams")},
+        "titles": {route: full["titles"][route] for route in ("#/", "#/diagrams")},
+        "notFound": full["notFound"],
+        "navigation": full["navigation"],
+        "searchItems": [],
+    }
+    groups = {
+        name: {"pages": {}, "titles": {}, "searchItems": []}
+        for name in FRAGMENT_NAMES
+    }
+    for route, _ in base_routes(data):
+        name = _fragment_key(route, clauses)
+        if name:
+            groups[name]["pages"][route] = full["pages"][route]
+            groups[name]["titles"][route] = full["titles"][route]
+    for item in full["searchItems"]:
+        groups[_fragment_key(item["href"], clauses)]["searchItems"].append(item)
+    base_text = "window.UML_PAGES = " + json.dumps(base, ensure_ascii=False, indent=2) + ";\n"
+    fragments = [
+        (f"{name}.js", _fragment_js(groups[name]["pages"], groups[name]["titles"], groups[name]["searchItems"]))
+        for name in FRAGMENT_NAMES
+    ]
+    return base_text, fragments
 
 
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check that generated pages and routes are current")
     args = parser.parse_args()
-    expected = generate()
+    base_text, fragments = generate()
+    expected = {OUTPUT: base_text}
+    expected.update({PAGES_DIR / name: text for name, text in fragments})
     if args.check:
-        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
+        outdated = [
+            path.relative_to(ROOT)
+            for path, text in expected.items()
+            if not path.is_file() or path.read_text(encoding="utf-8") != text
+        ]
+        stale = set(PAGES_DIR.glob("*.js")) - set(expected) if PAGES_DIR.is_dir() else set()
+        if outdated or stale:
             raise SystemExit("Generated pages are out of date; run python scripts/build_site.py")
         print(f"Generated pages and routes: OK ({len(base_routes(load_handbook()[0]))} routes)")
         return
-    OUTPUT.write_text(expected, encoding="utf-8")
-    print(f"Generated {OUTPUT.relative_to(ROOT)} ({len(base_routes(load_handbook()[0]))} routes)")
+    PAGES_DIR.mkdir(parents=True, exist_ok=True)
+    for path, text in expected.items():
+        path.write_text(text, encoding="utf-8")
+    for path in set(PAGES_DIR.glob("*.js")) - set(expected):
+        path.unlink()
+    print(f"Generated {OUTPUT.relative_to(ROOT)} + {len(fragments)} fragments ({len(base_routes(load_handbook()[0]))} routes)")
 
 
 if __name__ == "__main__":

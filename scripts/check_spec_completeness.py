@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 
-from handbook_data import ROOT, assigned_literal, load_handbook, slug
+from handbook_data import ROOT, load_handbook, load_pages, slug
 
 
 SOURCES = {
@@ -111,7 +111,7 @@ def check_subset_links(data, xmi, pages):
 def check_completeness():
     data, xmi, content = load_handbook()
     sources = {clause: path.read_text(encoding="utf-8") for clause, path in SOURCES.items()}
-    generated = assigned_literal(PAGES)
+    generated = load_pages()
     pages = generated["pages"]
     errors = []
 

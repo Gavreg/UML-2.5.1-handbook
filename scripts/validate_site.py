@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 from check_spec_completeness import check_completeness
 from check_svg_overlaps import check_inheritance, check_svg, find_browser
-from handbook_data import ROOT, SITE, assigned_literal, base_routes, load_handbook
+from handbook_data import ROOT, SITE, base_routes, load_handbook, load_pages
 
 
 INDEX = SITE / "index.html"
@@ -126,7 +126,7 @@ def check_static():
             errors.append(f"{script} failed: {result.stdout}{result.stderr}")
 
     if PAGES.is_file():
-        generated = assigned_literal(PAGES)
+        generated = load_pages()
         for route, page in generated["pages"].items():
             if route not in known_routes:
                 errors.append(f"Unexpected generated route: {route}")

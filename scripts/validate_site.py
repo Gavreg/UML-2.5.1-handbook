@@ -1,6 +1,6 @@
 """
 Name: validate_site.py
-Purpose: Validate generated offline UML handbook pages, Python SVG geometry and every hash route in Clauses 7-8.
+Purpose: Validate generated offline UML handbook pages, Python SVG geometry and every hash route in Clauses 7-9.
 Interface: python scripts/validate_site.py [--browser PATH] [--static-only]
 Goal: Detect stale generated data, missing content, invalid SVG geometry, broken links and browser JavaScript errors.
 Requires: Python 3, Pillow; Chrome or Edge only for final browser rendering checks.
@@ -148,7 +148,7 @@ def check_static():
     return errors, all_routes, data, xmi, generated
 
 
-def check_route(browser, route, expected, known_routes):
+def check_route(browser, route, expected, known_routes, placeholder_routes):
     with tempfile.TemporaryDirectory() as profile:
         result = subprocess.run(
             [
@@ -175,7 +175,7 @@ def check_route(browser, route, expected, known_routes):
         return f"{route or '#/'}: missing expected text {expected!r}"
     if "<h1" not in dom:
         return f"{route or '#/'}: missing h1"
-    if route.startswith("#/classifier/"):
+    if route.startswith("#/classifier/") and route not in placeholder_routes:
         if 'class="inheritance-svg"' not in dom:
             return f"{route}: missing inheritance SVG"
         if 'data-current="true"' not in dom:
@@ -209,6 +209,8 @@ def main():
     geometry_failures = [error for vector in vectors for error in check_svg(SITE / vector)]
     if generated:
         for item in data["classifiers"]:
+            if item.get("placeholder"):
+                continue
             route = f"#/classifier/{re.sub(r'[^a-z0-9]+', '-', item['name'].lower())}"
             page = generated["pages"][route]
             match = re.search(r'<svg class="inheritance-svg".*?</svg>', page, re.DOTALL)
@@ -220,7 +222,8 @@ def main():
         for failure in geometry_failures:
             print(f"ERROR: {failure}")
         raise SystemExit(1)
-    print(f"Python SVG geometry checks: OK; {len(vectors)} figures and {len(data['classifiers'])} inheritance diagrams passed")
+    inheritance_count = sum(not item.get("placeholder") for item in data["classifiers"])
+    print(f"Python SVG geometry checks: OK; {len(vectors)} figures and {inheritance_count} inheritance diagrams passed")
 
     if args.static_only:
         return
@@ -230,7 +233,15 @@ def main():
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         known_routes = {item[0] for item in all_routes} | {"#/", "#content"}
-        failures = list(executor.map(lambda item: check_route(browser, *item, known_routes), all_routes))
+        placeholder_routes = {
+            f"#/classifier/{item['name'].lower()}"
+            for item in data["classifiers"]
+            if item.get("placeholder")
+        }
+        failures = list(executor.map(
+            lambda item: check_route(browser, *item, known_routes, placeholder_routes),
+            all_routes,
+        ))
     failures = [failure for failure in failures if failure]
     if failures:
         for failure in failures:

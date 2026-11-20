@@ -1,6 +1,6 @@
 """
 Name: check_spec_completeness.py
-Purpose: Compare Clause 7 and Clause 8 coverage with the extracted OMG sources and verify generated Russian content.
+Purpose: Compare Clauses 7-8 coverage, verify the Clause 9 skeleton and check generated Russian content.
 Interface: python scripts/check_spec_completeness.py
 Goal: Detect missing sections, classifiers, associations, figures, OCL expressions or dropped translated strings.
 Requires: Python 3 standard library; run scripts/build_site.py first.
@@ -17,7 +17,11 @@ SOURCES = {
     "7": ROOT / "site" / "docs" / "uml-2.5.1-common-structure-en.txt",
     "8": ROOT / "site" / "docs" / "uml-2.5.1-values-en.txt",
 }
+SKELETON_SOURCES = {
+    "9": ROOT / "site" / "docs" / "omg-uml-2.5.1-formal-17-12-05.txt",
+}
 CATALOGS = {"7": ("7.8", "7.9"), "8": ("8.6", "8.7")}
+SKELETON_CATALOGS = {"9": ("9.9", "9.10")}
 PAGES = ROOT / "site" / "data" / "common-structure-pages.js"
 
 
@@ -108,6 +112,60 @@ def check_subset_links(data, xmi, pages):
     return errors
 
 
+def check_skeleton(data, content):
+    errors = []
+    for clause, path in SKELETON_SOURCES.items():
+        source = path.read_text(encoding="utf-8").replace("\f", "")
+        source = source[source.index(f"\n{clause} Classification\n"):]
+        source = source[:source.index("\n10 Simple Classifiers\n")]
+        classifier_prefix, association_prefix = SKELETON_CATALOGS[clause]
+        expected_sections = list(dict.fromkeys(re.findall(
+            rf"^({clause}\.(?:[1-9]|10))\s+[A-Z]", source, re.MULTILINE
+        )))
+        actual_sections = [item["id"] for item in data["sections"] if item["id"].startswith(clause + ".")]
+        if actual_sections != expected_sections:
+            errors.append(f"Clause {clause} sections differ: {actual_sections} instead of {expected_sections}")
+
+        expected_subsections = list(dict.fromkeys(re.findall(
+            rf"^({clause}\.[1-8](?:\.\d+)+)\s+[A-Z]", source, re.MULTILINE
+        )))
+        actual_subsections = [
+            subsection["id"]
+            for section_id, section in content["sections"].items()
+            if section_id.startswith(clause + ".")
+            for subsection in section.get("subsections", [])
+        ]
+        if actual_subsections != expected_subsections:
+            errors.append(f"Clause {clause} subsections differ: {actual_subsections} instead of {expected_subsections}")
+
+        for prefix, key in ((classifier_prefix, "classifiers"), (association_prefix, "associations")):
+            matches = re.findall(
+                rf"^({re.escape(prefix)}\.\d+)\s+([A-Za-z_][A-Za-z0-9_]*) \[([^\n]+)\]$",
+                source,
+                re.MULTILINE,
+            )
+            expected_objects = {
+                section: (name, kind) if key == "classifiers" else name
+                for section, name, kind in matches
+            }
+            actual_objects = {
+                item["section"]: (item["name"], item["kind"]) if key == "classifiers" else item["name"]
+                for item in data[key]
+                if item["section"].startswith(prefix + ".")
+            }
+            if actual_objects != expected_objects:
+                missing = sorted(set(expected_objects.items()) - set(actual_objects.items()))
+                extra = sorted(set(actual_objects.items()) - set(expected_objects.items()))
+                errors.append(f"Clause {clause} {key} differ from source; missing={missing}, extra={extra}")
+            for item in data[key]:
+                if item["section"].startswith(clause + ".") and not item.get("placeholder"):
+                    errors.append(f"Clause {clause} skeleton item is not marked as placeholder: {item['name']}")
+        for section in data["sections"]:
+            if section["id"].startswith(clause + ".") and not section.get("placeholder"):
+                errors.append(f"Clause {clause} skeleton section is not marked as placeholder: {section['id']}")
+    return errors
+
+
 def check_completeness():
     data, xmi, content = load_handbook()
     sources = {clause: path.read_text(encoding="utf-8") for clause, path in SOURCES.items()}
@@ -118,7 +176,7 @@ def check_completeness():
     expected_sections = []
     for clause, source in sources.items():
         expected_sections.extend(dict.fromkeys(re.findall(rf"^({clause}\.[1-9])$", source, re.MULTILINE)))
-    actual_sections = [item["id"] for item in data["sections"]]
+    actual_sections = [item["id"] for item in data["sections"] if item["id"].split(".")[0] in sources]
     if actual_sections != expected_sections:
         errors.append(f"Clause sections differ: {actual_sections} instead of {expected_sections}")
     narrative_sections = [
@@ -137,7 +195,8 @@ def check_completeness():
         ))
     actual_subsections = [
         subsection["id"]
-        for section in content["sections"].values()
+        for section_id, section in content["sections"].items()
+        if section_id.split(".")[0] in sources
         for subsection in section.get("subsections", [])
     ]
     missing = [item for item in expected_subsections if item not in actual_subsections]
@@ -163,7 +222,7 @@ def check_completeness():
     for clause, source in sources.items():
         expected_figures.extend(dict.fromkeys(re.findall(rf"^Figure ({clause}\.\d+)\s", source, re.MULTILINE)))
     expected_figures.sort(key=lambda value: [int(part) for part in value.split(".")])
-    actual_figures = [item["id"] for item in data["diagrams"]]
+    actual_figures = [item["id"] for item in data["diagrams"] if item["id"].split(".")[0] in sources]
     if actual_figures != expected_figures:
         errors.append(f"Figures differ: {actual_figures} instead of {expected_figures}")
 
@@ -200,6 +259,7 @@ def check_completeness():
                 errors.append(f"Generated classifier {classifier_name} lost {path}: {normalized(value)[:120]}")
 
     errors.extend(check_subset_links(data, xmi, pages))
+    errors.extend(check_skeleton(data, content))
     return errors, {
         "sections": len(actual_sections),
         "subsections": len(actual_subsections),

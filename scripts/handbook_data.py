@@ -14,15 +14,16 @@ import re
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DATA = SITE / "data" / "common-structure.js"
+CLASSIFICATION_DATA = SITE / "data" / "classification.js"
 XMI_DATA = SITE / "data" / "common-structure-xmi.js"
 XMI_DIR = SITE / "data" / "xmi"
 CONTENT_DIR = SITE / "data" / "content"
 PAGES_DATA = SITE / "data" / "common-structure-pages.js"
 PAGES_DIR = SITE / "data" / "pages"
 PAGE_FRAGMENTS = (
-    "sections-7.js", "sections-8.js",
-    "classifiers-7.js", "classifiers-8.js", "classifiers-external.js",
-    "associations-7.js", "associations-8.js",
+    "sections-7.js", "sections-8.js", "sections-9.js",
+    "classifiers-7.js", "classifiers-8.js", "classifiers-9.js", "classifiers-external.js",
+    "associations-7.js", "associations-8.js", "associations-9.js",
     "diagrams-7.js", "diagrams-8.js",
 )
 
@@ -33,6 +34,7 @@ def _load_content_from_fragments():
     fragment_files = [
         ("sections-7.js", "Object.assign(window.UML_CONTENT.sections,"),
         ("sections-8.js", "Object.assign(window.UML_CONTENT.sections,"),
+        ("sections-9.js", "Object.assign(window.UML_CONTENT.sections,"),
         ("classifiers-7.js", "Object.assign(window.UML_CONTENT.classifiers,"),
         ("classifiers-8.js", "Object.assign(window.UML_CONTENT.classifiers,"),
     ]
@@ -195,11 +197,14 @@ def load_pages():
 
 
 def load_handbook():
-    text = DATA.read_text(encoding="utf-8")
     data = {}
     for name in ("sections", "classifiers", "associations", "diagrams"):
-        marker = f"const {name} ="
-        data[name] = parse_literal(text, text.index(marker) + len(marker))
+        data[name] = []
+    for path in (DATA, CLASSIFICATION_DATA):
+        text = path.read_text(encoding="utf-8")
+        for name in data:
+            marker = f"const {name} ="
+            data[name].extend(parse_literal(text, text.index(marker) + len(marker)))
     for diagram in data["diagrams"]:
         stem = diagram["id"].replace(".", "-")
         diagram["image"] = f"assets/diagrams/figure-{stem}.png"

@@ -1,0 +1,93 @@
+window.UML_CLASSIFICATION_DATA = (() => {
+  const sections = [
+    { id: "9.1", title: "Обзор", en: "Summary", page: 99, summary: "", figures: [], placeholder: true },
+    { id: "9.2", title: "Классификаторы", en: "Classifiers", page: 99, summary: "", figures: [], placeholder: true },
+    { id: "9.3", title: "Шаблоны классификаторов", en: "Classifier Templates", page: 103, summary: "", figures: [], placeholder: true },
+    { id: "9.4", title: "Характеристики", en: "Features", page: 107, summary: "", figures: [], placeholder: true },
+    { id: "9.5", title: "Свойства", en: "Properties", page: 111, summary: "", figures: [], placeholder: true },
+    { id: "9.6", title: "Операции", en: "Operations", page: 116, summary: "", figures: [], placeholder: true },
+    { id: "9.7", title: "Наборы обобщений", en: "Generalization Sets", page: 119, summary: "", figures: [], placeholder: true },
+    { id: "9.8", title: "Экземпляры", en: "Instances", page: 126, summary: "", figures: [], placeholder: true },
+    { id: "9.9", title: "Описания классификаторов", en: "Classifier Descriptions", page: 129, summary: "", figures: [], placeholder: true },
+    { id: "9.10", title: "Описания ассоциаций", en: "Association Descriptions", page: 157, summary: "", figures: [], placeholder: true }
+  ];
+
+  const classifiers = [
+    { name: "AggregationKind", ru: "Вид агрегирования", kind: "Enumeration", section: "9.9.1", page: 129, placeholder: true },
+    { name: "BehavioralFeature", ru: "Поведенческая характеристика", kind: "Abstract Class", section: "9.9.2", page: 130, placeholder: true },
+    { name: "CallConcurrencyKind", ru: "Вид параллелизма вызова", kind: "Enumeration", section: "9.9.3", page: 131, placeholder: true },
+    { name: "Classifier", ru: "Классификатор", kind: "Abstract Class", section: "9.9.4", page: 132, placeholder: true },
+    { name: "ClassifierTemplateParameter", ru: "Параметр шаблона классификатора", kind: "Class", section: "9.9.5", page: 136, placeholder: true },
+    { name: "Feature", ru: "Характеристика", kind: "Abstract Class", section: "9.9.6", page: 138, placeholder: true },
+    { name: "Generalization", ru: "Обобщение", kind: "Class", section: "9.9.7", page: 138, placeholder: true },
+    { name: "GeneralizationSet", ru: "Набор обобщений", kind: "Class", section: "9.9.8", page: 139, placeholder: true },
+    { name: "InstanceSpecification", ru: "Спецификация экземпляра", kind: "Class", section: "9.9.9", page: 140, placeholder: true },
+    { name: "InstanceValue", ru: "Значение экземпляра", kind: "Class", section: "9.9.10", page: 141, placeholder: true },
+    { name: "Operation", ru: "Операция", kind: "Class", section: "9.9.11", page: 141, placeholder: true },
+    { name: "OperationTemplateParameter", ru: "Параметр шаблона операции", kind: "Class", section: "9.9.12", page: 144, placeholder: true },
+    { name: "Parameter", ru: "Параметр", kind: "Class", section: "9.9.13", page: 145, placeholder: true },
+    { name: "ParameterDirectionKind", ru: "Вид направления параметра", kind: "Enumeration", section: "9.9.14", page: 147, placeholder: true },
+    { name: "ParameterEffectKind", ru: "Вид эффекта параметра", kind: "Enumeration", section: "9.9.15", page: 147, placeholder: true },
+    { name: "ParameterSet", ru: "Набор параметров", kind: "Class", section: "9.9.16", page: 148, placeholder: true },
+    { name: "Property", ru: "Свойство", kind: "Class", section: "9.9.17", page: 149, placeholder: true },
+    { name: "RedefinableElement", ru: "Переопределяемый элемент", kind: "Abstract Class", section: "9.9.18", page: 153, placeholder: true },
+    { name: "RedefinableTemplateSignature", ru: "Переопределяемая подпись шаблона", kind: "Class", section: "9.9.19", page: 154, placeholder: true },
+    { name: "Slot", ru: "Слот", kind: "Class", section: "9.9.20", page: 155, placeholder: true },
+    { name: "StructuralFeature", ru: "Структурная характеристика", kind: "Abstract Class", section: "9.9.21", page: 156, placeholder: true },
+    { name: "Substitution", ru: "Подстановка", kind: "Class", section: "9.9.22", page: 156, placeholder: true }
+  ];
+
+  const associations = [
+    { name: "A_attribute_classifier", ru: "Атрибуты классификатора", section: "9.10.1", page: 157, placeholder: true },
+    { name: "A_bodyCondition_bodyContext", ru: "Условие тела и его контекст", section: "9.10.2", page: 157, placeholder: true },
+    { name: "A_classifier_instanceSpecification", ru: "Классификаторы спецификации экземпляра", section: "9.10.3", page: 157, placeholder: true },
+    { name: "A_classifier_templateParameter_parameteredElement", ru: "Параметр шаблона классификатора", section: "9.10.4", page: 157, placeholder: true },
+    { name: "A_collaborationUse_classifier", ru: "Использования кооперации классификатора", section: "9.10.5", page: 157, placeholder: true },
+    { name: "A_condition_parameterSet", ru: "Условия набора параметров", section: "9.10.6", page: 158, placeholder: true },
+    { name: "A_constrainingClassifier_classifierTemplateParameter", ru: "Ограничивающие классификаторы параметра шаблона", section: "9.10.7", page: 158, placeholder: true },
+    { name: "A_contract_substitution", ru: "Контракт подстановки", section: "9.10.8", page: 158, placeholder: true },
+    { name: "A_defaultValue_owningParameter", ru: "Значение параметра по умолчанию", section: "9.10.9", page: 158, placeholder: true },
+    { name: "A_defaultValue_owningProperty", ru: "Значение свойства по умолчанию", section: "9.10.10", page: 159, placeholder: true },
+    { name: "A_definingFeature_slot", ru: "Определяющая характеристика слота", section: "9.10.11", page: 159, placeholder: true },
+    { name: "A_extendedSignature_redefinableTemplateSignature", ru: "Расширенные подписи переопределяемой подписи", section: "9.10.12", page: 159, placeholder: true },
+    { name: "A_feature_featuringClassifier", ru: "Характеристики классификатора", section: "9.10.13", page: 159, placeholder: true },
+    { name: "A_general_classifier", ru: "Общие классификаторы классификатора", section: "9.10.14", page: 159, placeholder: true },
+    { name: "A_general_generalization", ru: "Общий классификатор обобщения", section: "9.10.15", page: 160, placeholder: true },
+    { name: "A_generalizationSet_generalization", ru: "Набор обобщений", section: "9.10.16", page: 160, placeholder: true },
+    { name: "A_generalization_specific", ru: "Обобщения конкретного классификатора", section: "9.10.17", page: 160, placeholder: true },
+    { name: "A_inheritedMember_inheritingClassifier", ru: "Унаследованные члены классификатора", section: "9.10.18", page: 160, placeholder: true },
+    { name: "A_inheritedParameter_redefinableTemplateSignature", ru: "Унаследованные параметры подписи шаблона", section: "9.10.19", page: 160, placeholder: true },
+    { name: "A_instance_instanceValue", ru: "Экземпляр значения экземпляра", section: "9.10.20", page: 161, placeholder: true },
+    { name: "A_method_specification", ru: "Методы спецификации", section: "9.10.21", page: 161, placeholder: true },
+    { name: "A_operation_templateParameter_parameteredElement", ru: "Параметр шаблона операции", section: "9.10.22", page: 161, placeholder: true },
+    { name: "A_opposite_property", ru: "Противоположные свойства", section: "9.10.23", page: 161, placeholder: true },
+    { name: "A_ownedParameterSet_behavioralFeature", ru: "Наборы параметров поведенческой характеристики", section: "9.10.24", page: 162, placeholder: true },
+    { name: "A_ownedParameter_operation", ru: "Параметры операции", section: "9.10.25", page: 162, placeholder: true },
+    { name: "A_ownedParameter_ownerFormalParam", ru: "Параметры владельца формальных параметров", section: "9.10.26", page: 162, placeholder: true },
+    { name: "A_ownedTemplateSignature_classifier", ru: "Подпись шаблона классификатора", section: "9.10.27", page: 162, placeholder: true },
+    { name: "A_ownedUseCase_classifier", ru: "Варианты использования классификатора", section: "9.10.28", page: 162, placeholder: true },
+    { name: "A_parameterSet_parameter", ru: "Наборы параметров параметра", section: "9.10.29", page: 163, placeholder: true },
+    { name: "A_postcondition_postContext", ru: "Постусловия контекста", section: "9.10.30", page: 163, placeholder: true },
+    { name: "A_powertypeExtent_powertype", ru: "Область powertype", section: "9.10.31", page: 163, placeholder: true },
+    { name: "A_precondition_preContext", ru: "Предусловия контекста", section: "9.10.32", page: 163, placeholder: true },
+    { name: "A_qualifier_associationEnd", ru: "Квалификаторы конца ассоциации", section: "9.10.33", page: 163, placeholder: true },
+    { name: "A_raisedException_behavioralFeature", ru: "Исключения поведенческой характеристики", section: "9.10.34", page: 164, placeholder: true },
+    { name: "A_raisedException_operation", ru: "Исключения операции", section: "9.10.35", page: 164, placeholder: true },
+    { name: "A_redefinedClassifier_classifier", ru: "Переопределённые классификаторы", section: "9.10.36", page: 164, placeholder: true },
+    { name: "A_redefinedElement_redefinableElement", ru: "Переопределённые элементы", section: "9.10.37", page: 164, placeholder: true },
+    { name: "A_redefinedOperation_operation", ru: "Переопределённые операции", section: "9.10.38", page: 164, placeholder: true },
+    { name: "A_redefinedProperty_property", ru: "Переопределённые свойства", section: "9.10.39", page: 165, placeholder: true },
+    { name: "A_redefinitionContext_redefinableElement", ru: "Контексты переопределения", section: "9.10.40", page: 165, placeholder: true },
+    { name: "A_representation_classifier", ru: "Представление классификатора", section: "9.10.41", page: 165, placeholder: true },
+    { name: "A_slot_owningInstance", ru: "Слоты экземпляра", section: "9.10.42", page: 165, placeholder: true },
+    { name: "A_specification_owningInstanceSpec", ru: "Спецификация экземпляра", section: "9.10.43", page: 166, placeholder: true },
+    { name: "A_subsettedProperty_property", ru: "Подмножества свойств", section: "9.10.44", page: 166, placeholder: true },
+    { name: "A_substitution_substitutingClassifier", ru: "Подстановки классификатора", section: "9.10.45", page: 166, placeholder: true },
+    { name: "A_type_operation", ru: "Тип операции", section: "9.10.46", page: 166, placeholder: true },
+    { name: "A_value_owningSlot", ru: "Значения слота", section: "9.10.47", page: 166, placeholder: true }
+  ];
+
+  const diagrams = [];
+
+  return { sections, classifiers, associations, diagrams };
+})();

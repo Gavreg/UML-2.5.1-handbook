@@ -3,7 +3,7 @@ Name: build_site.py
 Purpose: Build every handbook page, hash route, navigation block and search record in Python.
 Interface: python scripts/build_site.py [--check]
 Goal: Keep JavaScript limited to browser interaction while generating deterministic offline page content.
-Requires: Python 3 standard library and the existing site/data/common-structure*.js data files.
+Requires: Python 3 standard library and the existing site/data/common-structure*.js and classification.js data files.
 """
 
 from argparse import ArgumentParser
@@ -16,9 +16,9 @@ from handbook_data import ROOT, SITE, base_routes, load_handbook, slug
 
 PAGES_DIR = SITE / "data" / "pages"
 FRAGMENT_NAMES = [
-    "sections-7", "sections-8",
-    "classifiers-7", "classifiers-8", "classifiers-external",
-    "associations-7", "associations-8",
+    "sections-7", "sections-8", "sections-9",
+    "classifiers-7", "classifiers-8", "classifiers-9", "classifiers-external",
+    "associations-7", "associations-8", "associations-9",
     "diagrams-7", "diagrams-8",
 ]
 
@@ -45,12 +45,15 @@ DIAGRAM_BY_NAME = {
 CLAUSES = {
     "7": {"label": "7 Common Structure", "title": "Общая структура", "en": "Common Structure"},
     "8": {"label": "8 Values", "title": "Значения", "en": "Values"},
+    "9": {"label": "9 Classification", "title": "Классификация", "en": "Classification"},
 }
 CATALOG_SECTIONS = {
     "7.8": ("classifier", "Классификаторы раздела"),
     "8.6": ("classifier", "Классификаторы раздела"),
+    "9.9": ("classifier", "Классификаторы раздела"),
     "7.9": ("association", "Ассоциации раздела"),
     "8.7": ("association", "Ассоциации раздела"),
+    "9.10": ("association", "Ассоциации раздела"),
 }
 CATALOG_TITLES = {"classifier": "Классификаторы", "association": "Ассоциации"}
 
@@ -350,7 +353,7 @@ class HandbookRenderer:
                 cards.append(f'''<article class="link-card"><a class="link-card-heading" href="#/section/{slug(section["id"])}">
                   <span class="link-card-top"><span class="link-card-number">{section["id"]}</span><span aria-hidden="true">→</span></span>
                   <strong>{escape(section["title"])}</strong><small>{escape(section["en"])}</small></a>
-                  <p>{self.description(section["summary"])}</p></article>''')
+                  {f'<p>{self.description(section["summary"])}</p>' if section.get("summary") else ""}</article>''')
             catalogs = [
                 section for section in self.data["sections"]
                 if section["id"].startswith(clause_id + ".") and section["id"] in CATALOG_SECTIONS
@@ -376,7 +379,7 @@ class HandbookRenderer:
         diagrams_count = len(self.data["diagrams"])
         return f'''<p class="eyebrow">OMG UML 2.5.1 · formal/17-12-05</p>
           <h1>Метамодель UML.<br>От базовых понятий — к деталям.</h1>
-          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает раздел 7 «Common Structure» и раздел 8 «Values».</p>
+          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает разделы 7 «Common Structure» и 8 «Values»; для раздела 9 «Classification» создан каркас страниц.</p>
           <div class="meta-row"><span class="meta-tag">Онлайн и офлайн</span><span class="meta-tag">Без внешних зависимостей</span><span class="meta-tag">Исходная нумерация OMG</span></div>
           <div class="stats" aria-label="Охват справочника"><div class="stat"><strong>{sections_count}</strong><span>{self.plural(sections_count, "подраздел", "подраздела", "подразделов")}</span></div>
             <div class="stat"><strong>{classifiers_count}</strong><span>{self.plural(classifiers_count, "классификатор", "классификатора", "классификаторов")}</span></div>
@@ -386,7 +389,11 @@ class HandbookRenderer:
 
     def render_section(self, section):
         full = self.content["sections"].get(section["id"])
-        if full:
+        if section.get("placeholder"):
+            body = "".join(
+                self.render_spec_subsection(item) for item in (full or {}).get("subsections", [])
+            )
+        elif full:
             body = self.spec_paragraphs(full.get("paragraphs")) + "".join(
                 self.render_spec_subsection(item) for item in full.get("subsections", [])
             )
@@ -411,7 +418,7 @@ class HandbookRenderer:
         clause = CLAUSES[section["id"].split(".")[0]]
         return f'''{self.breadcrumbs([{"label": clause["label"]}, {"label": f'{section["id"]} {section["title"]}'}])}
           <p class="eyebrow">Раздел {section["id"]} · стр. {section["page"]}</p><h1>{escape(section["title"])}</h1>
-          <p class="original-name" lang="en">{escape(section["en"])}</p>{body}{classifier_catalog}{association_catalog}{figures}{self.source_link(section["page"])}'''
+          <p class="original-name" lang="en">{escape(section["en"])}</p>{body}{classifier_catalog}{association_catalog}{figures}{"" if section.get("placeholder") else self.source_link(section["page"])}'''
 
     def inheritance_diagram(self, item):
         nodes = {}
@@ -525,6 +532,9 @@ class HandbookRenderer:
             crumbs = [{"label": clause["label"]}, {"label": f"{catalog_prefix} Классификаторы", "href": f"#/section/{slug(catalog_prefix)}"}, {"label": item["name"]}]
         else:
             crumbs = [{"label": "Связанные классификаторы"}, {"label": item["name"]}]
+        if item.get("placeholder"):
+            return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">{KIND_LABELS[item["kind"]]} · раздел {item["section"]}</p>
+              <h1>{escape(item["ru"])}</h1><p class="original-name" lang="en">{escape(item["name"])} [{escape(item["kind"])}]</p>'''
         generalizations = f'<section><h2>Обобщения</h2>{self.link_list(item["generalizations"])}</section>' if item.get("generalizations") else ""
         specializations = f'<section><h2>Специализации</h2>{self.link_list(item["specializations"])}</section>' if item.get("specializations") else ""
         return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">{KIND_LABELS[item["kind"]]} · раздел {item["section"]}</p>
@@ -541,15 +551,19 @@ class HandbookRenderer:
           {self.related_figures(figures)}{self.source_link(item["page"])}'''
 
     def render_association(self, item):
+        catalog_prefix = item["section"].rsplit(".", 1)[0]
+        clause = CLAUSES[catalog_prefix.split(".")[0]]
+        crumbs = [{"label": clause["label"]}, {"label": f"{catalog_prefix} Ассоциации", "href": f"#/section/{slug(catalog_prefix)}"}, {"label": item["name"]}]
+        if item.get("placeholder"):
+            return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">Ассоциация · раздел {item["section"]}</p><h1>{escape(item["ru"])}</h1>
+              <p class="original-name" lang="en">{escape(item["name"])} [Association]</p>'''
         ends = self.xmi["associations"].get(item["name"], {}).get("ends")
         if ends is None:
             ends = [{"signature": end} for end in item["ends"]]
         generalizations = f'<section><h2>Обобщения</h2>{self.link_list(item["generalizations"], "association")}</section>' if item.get("generalizations") else ""
         specializations = f'<section><h2>Специализации</h2>{self.link_list(item["specializations"], "association")}</section>' if item.get("specializations") else ""
         tags = "".join(f'<span class="meta-tag">{escape(name)}</span>' for name in item["diagrams"])
-        catalog_prefix = item["section"].rsplit(".", 1)[0]
-        clause = CLAUSES[catalog_prefix.split(".")[0]]
-        return f'''{self.breadcrumbs([{"label": clause["label"]}, {"label": f"{catalog_prefix} Ассоциации", "href": f"#/section/{slug(catalog_prefix)}"}, {"label": item["name"]}])}
+        return f'''{self.breadcrumbs(crumbs)}
           <p class="eyebrow">Ассоциация · раздел {item["section"]}</p><h1>{escape(item["ru"])}</h1>
           <p class="original-name" lang="en">{escape(item["name"])} [Association]</p>
           <div class="meta-row"><span class="kind-tag">Ассоциация</span><span class="meta-tag">OMG UML 2.5.1, стр. {item["page"]}</span></div>
@@ -599,7 +613,7 @@ class HandbookRenderer:
             result.append({
                 "title": item["title"], "subtitle": item["en"], "type": f'Раздел {item["id"]}',
                 "href": f'#/section/{slug(item["id"])}',
-                "text": f'{item["id"]} {item["title"]} {item["en"]} {item["summary"]} {item.get("semantics", "")} {item.get("notation", "")} {json.dumps(self.content["sections"].get(item["id"], ""), ensure_ascii=False)}',
+                "text": f'{item["id"]} {item["title"]} {item["en"]} {item.get("summary", "")} {item.get("semantics", "")} {item.get("notation", "")} {json.dumps(self.content["sections"].get(item["id"], ""), ensure_ascii=False)}',
             })
         for item in self.data["classifiers"]:
             properties = self.xmi["classes"].get(item["name"], {}).get("direct", [])
@@ -607,7 +621,7 @@ class HandbookRenderer:
             result.append({
                 "title": item["name"], "subtitle": item["ru"], "type": f'{KIND_LABELS[item["kind"]]} · {item["section"]}',
                 "href": f'#/classifier/{slug(item["name"])}',
-                "text": f'{item["name"]} {item["ru"]} {item["section"]} {item["definition"]} {" ".join(item.get("generalizations", []))} {" ".join(item.get("specializations", []))} {property_text} {json.dumps(self.content["classifiers"].get(item["name"], ""), ensure_ascii=False)}',
+                "text": f'{item["name"]} {item["ru"]} {item["section"]} {item.get("definition", "")} {" ".join(item.get("generalizations", []))} {" ".join(item.get("specializations", []))} {property_text} {json.dumps(self.content["classifiers"].get(item["name"], ""), ensure_ascii=False)}',
             })
         for item in self.data["associations"]:
             ends = self.xmi["associations"].get(item["name"], {}).get("ends", [])
@@ -615,7 +629,7 @@ class HandbookRenderer:
             result.append({
                 "title": item["name"], "subtitle": item["ru"], "type": f'Ассоциация · {item["section"]}',
                 "href": f'#/association/{slug(item["name"])}',
-                "text": f'{item["name"]} {item["ru"]} {item["section"]} {item["definition"]} {end_text}',
+                "text": f'{item["name"]} {item["ru"]} {item["section"]} {item.get("definition", "")} {end_text}',
             })
         for item in self.data["diagrams"]:
             result.append({

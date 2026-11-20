@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Интерактивный русскоязычный справочник по метамодели OMG UML 2.5.1. Раздел 7 — Common Structure.">
+  <meta name="description" content="Интерактивный русскоязычный справочник по метамодели OMG UML 2.5.1. Разделы 7–8 и каркас раздела 9.">
   <title>UML 2.5.1 — интерактивный справочник</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data/common-structure.js" defer></script>
+  <script src="data/classification.js" defer></script>
   <script src="data/common-structure-xmi.js" defer></script>
   <script src="data/xmi/Abstraction.js" defer></script>
   <script src="data/xmi/Comment.js" defer></script>
@@ -57,16 +58,20 @@
   <script src="data/common-structure-content.js" defer></script>
   <script src="data/content/sections-7.js" defer></script>
   <script src="data/content/sections-8.js" defer></script>
+  <script src="data/content/sections-9.js" defer></script>
   <script src="data/content/classifiers-7.js" defer></script>
   <script src="data/content/classifiers-8.js" defer></script>
   <script src="data/common-structure-pages.js" defer></script>
   <script src="data/pages/sections-7.js" defer></script>
   <script src="data/pages/sections-8.js" defer></script>
+  <script src="data/pages/sections-9.js" defer></script>
   <script src="data/pages/classifiers-7.js" defer></script>
   <script src="data/pages/classifiers-8.js" defer></script>
+  <script src="data/pages/classifiers-9.js" defer></script>
   <script src="data/pages/classifiers-external.js" defer></script>
   <script src="data/pages/associations-7.js" defer></script>
   <script src="data/pages/associations-8.js" defer></script>
+  <script src="data/pages/associations-9.js" defer></script>
   <script src="data/pages/diagrams-7.js" defer></script>
   <script src="data/pages/diagrams-8.js" defer></script>
   <script src="app.js" defer></script>
@@ -84,7 +89,7 @@
     <form class="search" id="search-form" role="search" autocomplete="off">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
       <label class="visually-hidden" for="search-input">Поиск по справочнику</label>
-      <input id="search-input" type="search" placeholder="Поиск по разделу 7…" aria-controls="search-suggestions" aria-expanded="false">
+      <input id="search-input" type="search" placeholder="Поиск по справочнику…" aria-controls="search-suggestions" aria-expanded="false">
       <kbd>Ctrl K</kbd>
       <div class="search-suggestions" id="search-suggestions" hidden></div>
     </form>

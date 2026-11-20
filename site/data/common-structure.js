@@ -599,6 +599,11 @@ window.UML_DATA = (() => {
       page: 79,
       definition: "ValueSpecification, задающая временное расстояние между двумя моментами времени.",
       generalizations: ["ValueSpecification"],
+      properties: [
+        { signature: "expr : ValueSpecification [0..1]", description: "Спецификация значения, вычисляющая длительность." },
+        { signature: "observation : Observation [0..*]", description: "Наблюдения, участвующие в вычислении значения Duration." }
+      ],
+      constraints: [{ name: "no_expr_requires_observation" }],
       figures: ["8.3", "8.4"]
     },
     {
@@ -609,7 +614,8 @@ window.UML_DATA = (() => {
       page: 79,
       definition: "Constraint, ссылающийся на DurationInterval.",
       generalizations: ["IntervalConstraint"],
-      figures: ["8.4"]
+      properties: [{ signature: "firstEvent : Boolean [0..2]", description: "Значение первого события наблюдения входа/выхода." }],
+      constraints: [{ name: "first_event_multiplicity" }, { name: "has_one_or_two_constrainedElements" }]
     },
     {
       name: "DurationInterval",
@@ -629,7 +635,8 @@ window.UML_DATA = (() => {
       page: 80,
       definition: "Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.",
       generalizations: ["Observation"],
-      figures: ["8.3"]
+      properties: [{ signature: "firstEvent : Boolean [0..2]", description: "Значение первого события наблюдения входа/выхода." }],
+      constraints: [{ name: "first_event_multiplicity" }]
     },
     {
       name: "Expression",
@@ -673,6 +680,10 @@ window.UML_DATA = (() => {
       definition: "LiteralSpecification, задающая постоянное значение примитивного типа Boolean.",
       generalizations: ["LiteralSpecification"],
       attributes: [{ signature: "value : Boolean = false", description: "Заданное значение Boolean." }],
+      operations: [
+        { signature: "booleanValue() : Boolean {redefines ValueSpecification::booleanValue()}", description: "Запрос booleanValue() возвращает заданное значение Boolean." },
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -684,6 +695,10 @@ window.UML_DATA = (() => {
       definition: "LiteralSpecification, задающая постоянное значение примитивного типа Integer.",
       generalizations: ["LiteralSpecification"],
       attributes: [{ signature: "value : Integer = 0", description: "Заданное значение Integer." }],
+      operations: [
+        { signature: "integerValue() : Integer {redefines ValueSpecification::integerValue()}", description: "Запрос integerValue() возвращает заданное значение Integer." },
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -694,6 +709,10 @@ window.UML_DATA = (() => {
       page: 84,
       definition: "LiteralSpecification, явно моделирующая отсутствие значения.",
       generalizations: ["LiteralSpecification"],
+      operations: [
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." },
+        { signature: "isNull() : Boolean {redefines ValueSpecification::isNull()}", description: "Запрос isNull() возвращает true." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -705,6 +724,10 @@ window.UML_DATA = (() => {
       definition: "LiteralSpecification, задающая постоянное значение примитивного типа Real.",
       generalizations: ["LiteralSpecification"],
       attributes: [{ signature: "value : Real", description: "Заданное значение Real." }],
+      operations: [
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." },
+        { signature: "realValue() : Real {redefines ValueSpecification::realValue()}", description: "Запрос realValue() возвращает заданное значение Real." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -727,6 +750,10 @@ window.UML_DATA = (() => {
       definition: "LiteralSpecification, задающая постоянное значение примитивного типа String.",
       generalizations: ["LiteralSpecification"],
       attributes: [{ signature: "value : String [0..1]", description: "Заданное значение String." }],
+      operations: [
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." },
+        { signature: "stringValue() : String {redefines ValueSpecification::stringValue()}", description: "Запрос stringValue() возвращает заданное значение String." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -738,6 +765,10 @@ window.UML_DATA = (() => {
       definition: "LiteralSpecification, задающая постоянное значение примитивного типа UnlimitedNatural.",
       generalizations: ["LiteralSpecification"],
       attributes: [{ signature: "value : UnlimitedNatural = 0", description: "Заданное значение UnlimitedNatural." }],
+      operations: [
+        { signature: "isComputable() : Boolean {redefines ValueSpecification::isComputable()}", description: "Запрос isComputable() переопределён как true." },
+        { signature: "unlimitedValue() : UnlimitedNatural {redefines ValueSpecification::unlimitedValue()}", description: "Запрос unlimitedValue() возвращает заданное значение UnlimitedNatural." }
+      ],
       figures: ["8.1"]
     },
     {
@@ -759,6 +790,24 @@ window.UML_DATA = (() => {
       page: 86,
       definition: "ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.",
       generalizations: ["ValueSpecification"],
+      properties: [
+        { signature: "body : String [0..*]", description: "Текстовое определение поведения OpaqueExpression, возможно на нескольких языках." },
+        { signature: "language : String [0..*]", description: "Языки, используемые для выражения текстовых тел OpaqueExpression." },
+        { signature: "behavior : Behavior [0..1]", description: "Поведение UML, задающее вычисление выражения." },
+        { signature: "/result : Parameter [0..1]", description: "Если OpaqueExpression задано через UML Behavior, относится к возвращаемому Parameter этого Behavior." }
+      ],
+      operations: [
+        { signature: "isIntegral() : Boolean", description: "Определяет, предназначено ли выражение для получения Integer." },
+        { signature: "isNonNegative() : Boolean", pre: "self.isIntegral()", description: "Определяет, имеет ли целочисленное выражение неотрицательное значение." },
+        { signature: "isPositive() : Boolean", pre: "self.isIntegral()", description: "Определяет, имеет ли целочисленное выражение положительное значение." },
+        { signature: "result() : Parameter [0..1]", description: "Деривация для OpaqueExpression::/result" },
+        { signature: "value() : Integer", pre: "self.isIntegral()", description: "Возвращает целочисленное значение для выражения, предназначенного для его получения." }
+      ],
+      constraints: [
+        { name: "language_body_size", description: "Если language не пуст, размеры массивов body и language должны совпадать." },
+        { name: "one_return_result_parameter", description: "Поведение должно иметь ровно один возвращаемый результат-параметр." },
+        { name: "only_in_or_return_parameters", description: "Поведение может иметь только non-stream in или return параметры." }
+      ],
       figures: ["7.17", "8.2"]
     },
     {
@@ -769,6 +818,17 @@ window.UML_DATA = (() => {
       page: 88,
       definition: "Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.",
       generalizations: ["Expression", "TemplateableElement"],
+      properties: [
+        { signature: "owningExpression : StringExpression [0..1]", description: "Строковое выражение, частью которого является данное StringExpression как subExpression." },
+        { signature: "subExpression : StringExpression [0..*] {ordered}", description: "Строковые подвыражения, составляющие данное выражение." }
+      ],
+      operations: [
+        { signature: "stringValue() : String {redefines ValueSpecification::stringValue()}", description: "Возвращает строку, полученную конкатенацией всех компонентных строк операндов или subExpressions." }
+      ],
+      constraints: [
+        { name: "operands", description: "Все операнды StringExpression должны быть LiteralStrings." },
+        { name: "subexpressions", description: "Если у StringExpression есть подвыражения, он не может иметь операндов и наоборот." }
+      ],
       figures: ["7.5", "8.2"]
     },
     {
@@ -780,6 +840,7 @@ window.UML_DATA = (() => {
       definition: "IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.",
       generalizations: ["IntervalConstraint"],
       attributes: [{ signature: "firstEvent : Boolean [0..1] = true", description: "Определяет, привязано ли начало интервала к событию входа (true) или выхода (false) единственного constrainedElement." }],
+      constraints: [{ name: "has_one_constrainedElement" }],
       figures: ["8.4"]
     },
     {
@@ -790,6 +851,11 @@ window.UML_DATA = (() => {
       page: 90,
       definition: "ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.",
       generalizations: ["ValueSpecification"],
+      properties: [
+        { signature: "expr : ValueSpecification [0..1]", description: "ValueSpecification, вычисляющее значение TimeExpression." },
+        { signature: "observation : Observation [0..*]", description: "Ссылается на Observations, участвующие в вычислении значения TimeExpression." }
+      ],
+      constraints: [{ name: "no_expr_requires_observation" }],
       figures: ["8.3", "8.4"]
     },
     {
@@ -822,6 +888,16 @@ window.UML_DATA = (() => {
       definition: "Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.",
       generalizations: ["TypedElement", "PackageableElement"],
       specializations: ["Duration", "Expression", "Interval", "LiteralSpecification", "OpaqueExpression", "TimeExpression"],
+      operations: [
+        { signature: "booleanValue() : Boolean [0..1]", description: "Возвращает единственное Boolean значение, когда оно может быть вычислено." },
+        { signature: "integerValue() : Integer [0..1]", description: "Возвращает единственное Integer значение, когда оно может быть вычислено." },
+        { signature: "isCompatibleWith(p : ParameterableElement) : Boolean {redefines ParameterableElement::isCompatibleWith()}", description: "Определяет, совместим ли этот ValueSpecification с указанным ParameterableElement." },
+        { signature: "isComputable() : Boolean", description: "Определяет, может ли спецификация значения быть вычислена в модели." },
+        { signature: "isNull() : Boolean", description: "Возвращает true, когда можно вычислить, что значение равно null." },
+        { signature: "realValue() : Real [0..1]", description: "Возвращает единственное Real значение, когда оно может быть вычислено." },
+        { signature: "stringValue() : String [0..1]", description: "Возвращает единственное String значение, когда оно может быть вычислено." },
+        { signature: "unlimitedValue() : UnlimitedNatural [0..1]", description: "Возвращает единственное UnlimitedNatural значение, когда оно может быть вычислено." }
+      ],
       figures: ["7.10", "7.13", "8.1", "8.2", "8.3", "8.4"]
     },
     {

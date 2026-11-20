@@ -280,7 +280,150 @@ window.UML_CONTENT = {
           "На рисунке 7.21 показан пример, в котором класс Business реализуется сочетанием классов Owner и Employee."
         ], figures: ["7.19", "7.20", "7.21"] }
       ]
-    }
+    },
+    "8.1": {
+      paragraphs: [
+        "Этот раздел описывает спецификацию значений. В целом, ValueSpecification — это элемент модели, который семантически порождает ноль или более значений. Тип и количество значений должны соответствовать контексту, в котором используется ValueSpecification (как определяется ограничениями в этом контексте).",
+        "Следующие подразделы описывают различные виды ValueSpecifications, доступные в UML."
+      ]
+    },
+    "8.2": {
+      subsections: [
+        { id: "8.2.1", title: "Обзор", en: "Summary", paragraphs: [
+          "LiteralSpecification — это ValueSpecification, задающая буквальное значение. Для каждого из стандартных PrimitiveTypes UML существует свой вид LiteralSpecification с соответствующим текстовым буквальным обозначением, а также литерал «null», представляющий «отсутствие значения»."
+        ] },
+        { id: "8.2.2", title: "Абстрактный синтаксис", en: "Abstract Syntax", figures: ["8.1"] },
+        { id: "8.2.3", title: "Семантика", en: "Semantics", paragraphs: [
+          "Существует шесть видов LiteralSpecifications:"
+        ], steps: [
+          { text: "LiteralNull предназначен для явного моделирования отсутствия значения. В контексте MultiplicityElement с нижней границей кратности 0 это соответствует пустому множеству (т. е. множеству без значений). Это эквивалентно отсутствию указания значений для элемента." },
+          { text: "LiteralString задаёт константное значение PrimitiveType String. Хотя String определён как последовательность символов, значения String считаются в UML примитивными, поэтому их внутренняя структура не задаётся как часть семантики UML." },
+          { text: "LiteralInteger задаёт константное значение PrimitiveType Integer." },
+          { text: "LiteralBoolean задаёт константное значение PrimitiveType Boolean." },
+          { text: "LiteralUnlimitedNatural задаёт константное значение PrimitiveType UnlimitedNatural." },
+          { text: "LiteralReal задаёт константное значение PrimitiveType Real. См. также раздел 21 для дальнейшего обсуждения стандартных примитивных типов UML." }
+        ] },
+        { id: "8.2.4", title: "Нотация", en: "Notation", paragraphs: [
+          "LiteralSpecifications обозначаются текстовым образом."
+        ], bullets: [
+          "Обозначение LiteralNull зависит от контекста использования. Часто встречается слово «null». Другие обозначения описаны отдельно для конкретных случаев применения.",
+          "LiteralString изображается последовательностью символов в двойных кавычках. Значение String — это последовательность символов, не включая кавычки. Используемый набор символов не определён.",
+          "LiteralInteger изображается последовательностью цифр, представляющих десятичную запись значения Integer.",
+          "LiteralBoolean изображается словом «true» или словом «false», соответствующим его значению.",
+          "LiteralUnlimitedNatural изображается либо последовательностью цифр, либо звёздочкой (*), при этом звёздочка обозначает неограниченное значение. Обратите внимание, что «неограниченное» означает отсутствие ограничения на значение некоторого элемента (например, верхнюю границу кратности), а не значение «бесконечность».",
+          "LiteralReal изображается в десятичной или научной нотации. Десятичная нотация состоит из необязательного знака (+/−), за которым следуют ноль или более цифр, затем необязательно точка (.) и одна или более цифр. Научная нотация состоит из десятичной нотации, за которой следуют буква «e» или «E» и показатель степени, представляющий необязательный знак и одну или более цифр. Научная нотация выражает действительное число, равное значению десятичной нотации до показателя степени, умноженному на 10 в степени показателя."
+        ], afterBullets: [
+          "Эта нотация определяется следующими правилами EBNF:"
+        ], code: "<natural-literal> ::= ('0'..'9')+\n<decimal-literal> ::= ['+' | '-' ] <natural-literal> | ['+' | '-' ] [<natural-literal>] '.' <natural-literal>\n<real-literal> ::= <decimal-literal> [ ('e' | 'E') ['+' | '-' ] <natural-literal> ]" }
+      ]
+    },
+    "8.3": {
+      subsections: [
+        { id: "8.3.1", title: "Обзор", en: "Summary", paragraphs: ["Expressions — это ValueSpecifications, задающие значения, получаемые в результате вычисления."] },
+        { id: "8.3.2", title: "Абстрактный синтаксис", en: "Abstract Syntax", figures: ["8.2"] },
+        { id: "8.3.3", title: "Семантика", en: "Semantics" },
+        { id: "8.3.3.1", title: "Выражения", en: "Expressions", paragraphs: [
+          "Expression задаётся древовидной структурой. Каждый узел этого дерева состоит из символа и необязательного набора операндов. Если операндов нет, Expression представляет терминальный узел. Если операнды есть, Expression представляет оператор, заданный символом, применённый к этим операндам.",
+          "Expression вычисляется путём предварительного вычисления каждого из его операндов с последующим выполнением операции, обозначенной символом Expression, над полученными значениями операндов. Однако фактическая интерпретация символа зависит от контекста использования Expression, и спецификация не предоставляет стандартных определений символов. Соответствующий спецификации инструмент может определять конкретный набор символов, для которых он предоставляет интерпретации, либо просто рассматривает все Expressions как неинтерпретируемые."
+        ] },
+        { id: "8.3.3.2", title: "Строковые выражения", en: "String Expressions", paragraphs: [
+          "StringExpression — это Expression, задающий значение String, получаемое конкатенацией списка подстрок. Подстроки задаются либо списком операндов LiteralString, либо списком subExpressions типа StringExpression, но смешивать эти два способа не допускается. Значение String для StringExpression получается конкатенацией в заданном порядке значений String либо operands, либо subExpressions, в зависимости от того, что задано.",
+          "StringExpressions предназначены для задания имён NamedElements в контексте Templates. Как всё StringExpression, так и одно или несколько его subExpressions могут использоваться как ParameterableElements для TemplateParameters, позволяя параметризовать имя NamedElement внутри шаблона. Дополнительное обсуждение см. в семантике NamedElements в подразделе 7.4.3."
+        ] },
+        { id: "8.3.3.3", title: "Непрозрачные выражения", en: "Opaque Expressions", paragraphs: [
+          "OpaqueExpression задаёт вычисление набора значений либо с помощью UML Behavior, либо на основе текстового оператора на языке, отличном от UML.",
+          "OpaqueExpression может иметь body, состоящее из последовательности текстовых Strings, представляющих альтернативные способы вычисления значений OpaqueExpression. Соответствующая последовательность language Strings может использоваться для указания языков, на которых должна интерпретироваться каждая из body Strings. Языки сопоставляются body Strings по порядку. Спецификация UML не определяет, как body Strings интерпретируются относительно какого-либо языка, хотя другие спецификации могут определять конкретные language Strings для обозначения интерпретации в соответствии с этими спецификациями (например, «OCL» для выражений, интерпретируемых согласно спецификации OCL). Отметим также, что указывать языки не обязательно. Если они не указаны, интерпретация любых body Strings должна неявно определяться формой тел или контекстом использования OpaqueExpression.",
+          "OpaqueExpression также может быть задано UML Behavior (см. подраздел 13.2), ограниченным только входными Parameters и возвращаемым Parameter. Значения OpaqueExpression получаются вызовом Behavior и возвратом значений из возвращаемого Parameter. Входные Parameters могут использоваться для передачи данных в Behavior. Однако фактически передаваемые данные зависят от контекста использования OpaqueExpression. Например, Parameters могут предоставлять данные о событии поведению OpaqueExpression, используемого в качестве охранного условия ActivityEdge или спецификации охранного условия Transition. Точный механизм этого в спецификации далее не определяется, но для вычисления OpaqueExpression, behavior которого имеет один или несколько входных Parameters, инструмент должен предоставлять механизм определения значений всех входных Parameters как зависящую от инструмента функцию OpaqueExpression и его behavior. Такое behavior может также получать доступ к данным через элементы своего поведенческого описания, например считывая значения атрибутов контекстного объекта.",
+          "Если OpaqueExpression имеет более одной body String или behavior в дополнение к одной или нескольким body Strings, то для вычисления OpaqueExpression может использоваться любое из тел или behavior. Спецификация UML не определяет, как делается этот выбор."
+        ] },
+        { id: "8.3.4", title: "Нотация", en: "Notation" },
+        { id: "8.3.4.1", title: "Выражения", en: "Expressions", paragraphs: [
+          "Expression без операндов обозначается просто своим символом (в отличие от StringLiteral символ не заключается в кавычки). Expression с операндами может обозначаться своим символом, за которым следуют круглые скобки, содержащие его операнды в порядке следования через запятую. Однако в конкретных контекстах соответствующий спецификации инструмент может допускать специальные обозначения, включая инфиксные операторы.",
+          "Нотация использования StringExpressions с NamedElements приведена в подразделе 7.4.4."
+        ] },
+        { id: "8.3.4.2", title: "Непрозрачные выражения", en: "Opaque Expressions", paragraphs: [
+          "Если OpaqueExpression имеет одну или несколько body Strings, они используются для отображения OpaqueExpression в контексте содержащего его элемента. Спецификация UML не определяет синтаксис таких Strings, но если для body String указан соответствующий язык, соответствующий спецификации инструмент может обеспечивать соблюдение синтаксиса этого языка. Инструмент также может ограничивать допустимые языки или принимать конкретный язык по умолчанию.",
+          "Если для OpaqueExpression указаны языки, имя языка может отображаться в фигурных скобках ({}) перед соответствующей body String. Однако отображать языки OpaqueExpression не обязательно.",
+          "Если язык имеет спецификацию, определяющую его имя, имя языка, используемое в OpaqueExpression, должно быть записано с теми же буквами и регистром, что и в спецификации языка. Например, следует использовать «OCL», а не «ocl»."
+        ] },
+        { id: "8.3.5", title: "Примеры", en: "Examples" },
+        { id: "8.3.5.1", title: "Выражения", en: "Expressions", code: "xor\nelse\nplus(x,1)\nx+1" },
+        { id: "8.3.5.2", title: "Непрозрачные выражения", en: "Opaque Expressions", code: "a > 0\n{OCL} i > j and self.size > i\naverage hours worked per week" }
+      ]
+    },
+    "8.4": {
+      subsections: [
+        { id: "8.4.1", title: "Обзор", en: "Summary", paragraphs: [
+          "В этом подразделе определяются TimeExpressions и Durations, порождающие значения на основе простой модели времени. Эта простая модель времени предназначена как приближение для ситуаций, в которых более сложные аспекты времени и его измерения можно безопасно игнорировать. Например, во многих распределённых системах нет глобального понятия времени, а есть только понятие локального времени относительно каждого распределённого элемента системы. Эта относительность времени не учитывается в простой модели времени, как и эффекты, возникающие из-за несовершенных часов с конечным разрешением, переполнений, дрейфа, смещения и т. п. Предполагается, что приложения, для которых такие характеристики существенны, будут использовать более сложную модель времени, предоставляемую соответствующим профилем."
+        ] },
+        { id: "8.4.2", title: "Абстрактный синтаксис", en: "Abstract Syntax", figures: ["8.3"] },
+        { id: "8.4.3", title: "Семантика", en: "Semantics" },
+        { id: "8.4.3.1", title: "Время", en: "Time", paragraphs: [
+          "Структурные конструкции моделирования UML используются для моделирования свойств сущностей в конкретные моменты времени. В отличие от них, поведенческие конструкции моделирования используются для моделирования изменения этих свойств с течением времени. Событие — это спецификация чего-либо, что может произойти в конкретный момент времени, когда происходит нечто значимое относительно моделируемых свойств и поведений, например изменение значения Property или начало выполнения Activity.",
+          "Время в этой концепции — это просто координата, упорядочивающая возникновение событий. Каждому возникновению события можно присвоить значение временной координаты и на этом основании сказать, что оно произошло раньше, позже или одновременно с другим возникновением события.",
+          "Duration — это период времени между двумя возникновениями событий, вычисляемый как разность временных координат этих событий. Если Element модели имеет поведенческий эффект, этот эффект может происходить в течение некоторого duration. Начальное событие этого duration называется входом в элемент, а конечное событие — выходом из Element."
+        ] },
+        { id: "8.4.3.2", title: "Наблюдения", en: "Observations", paragraphs: [
+          "Observation обозначает наблюдение за событиями, которые могут происходить относительно некоторой другой части модели. Observation выполняется для NamedElement внутри модели. Интерес представляют события входа в указанный NamedElement и выхода из него. Если указанный NamedElement не является поведенческим элементом, длительность между входом в NamedElement и выходом из него считается равной нулю, но в остальном спецификация не определяет, какие конкретные события наблюдаются для Element.",
+          "Существует два вида Observations: TimeObservations и DurationObservations.",
+          "TimeObservation наблюдает либо вход в конкретный NamedElement, либо выход из него. Если firstEvent равно true, наблюдается событие входа, иначе наблюдается событие выхода. Результат TimeObservation — время, в которое происходит наблюдаемое событие.",
+          "DurationObservation наблюдает длительность относительно одного или двух NamedElements. Если наблюдается один элемент, наблюдаемая длительность находится между последовательными возникновениями событий входа в элемент и выхода из него. Если наблюдаются два элемента, длительность находится либо между событием входа в первый элемент или выхода из него и последующим событием входа во второй элемент или выхода из него. В последнем случае для DurationObservation должны быть также заданы два соответствующих значения firstEvent, так что если firstEvent=true для наблюдаемого элемента, наблюдается событие входа, иначе наблюдается событие выхода."
+        ] },
+        { id: "8.4.3.3", title: "TimeExpression", en: "TimeExpression", paragraphs: [
+          "TimeExpression — это ValueSpecification, вычисляемое в значение временной координаты для момента времени, возможно, относительно некоторого заданного набора наблюдений.",
+          "Если TimeExpression имеет expr, оно вычисляется для получения результата TimeExpression. expr должно вычисляться в единственное значение, но UML не определяет конкретный тип или единицы измерения, которые должно иметь это значение. expr может ссылаться на observations, связанные с TimeExpression, но стандартная нотация для таких ссылок не определена. Если TimeExpression имеет expr, но не имеет observations, expr вычисляется в константу времени.",
+          "Если TimeExpression не имеет expr, оно должно иметь единственное TimeObservation, и результат этого наблюдения является значением TimeExpression."
+        ] },
+        { id: "8.4.3.4", title: "Duration", en: "Duration", paragraphs: [
+          "Duration — это ValueSpecification, вычисляемое в значение некоторой длительности во времени, возможно, относительно некоторого заданного набора наблюдений.",
+          "Если Duration имеет expr, оно вычисляется для получения результата DurationExpression. expr должно вычисляться в единственное значение, но UML не определяет конкретный тип или единицы измерения, которые должно иметь это значение. expr может ссылаться на observations, связанные с Duration, но стандартная нотация для таких ссылок не определена. Если Duration имеет expr, но не имеет observations, expr вычисляется в константу длительности.",
+          "Если Duration не имеет expr, оно должно иметь единственное DurationObservation, и результат этого наблюдения является значением Duration."
+        ] },
+        { id: "8.4.4", title: "Нотация", en: "Notation" },
+        { id: "8.4.4.1", title: "Наблюдения", en: "Observations", paragraphs: [
+          "Observation может обозначаться прямой линией, присоединённой к NamedElement, на который оно ссылается. Observation получает имя, отображаемое рядом с неприсоединённым концом линии. Дополнительные соглашения о нотации Observations приведены в других местах спецификации относительно конструкций моделирования, в которых они обычно используются (например, Interactions, см. подраздел 17.2)."
+        ] },
+        { id: "8.4.4.2", title: "Выражения времени и длительности", en: "Time Expressions and Durations", paragraphs: [
+          "TimeExpression или Duration обозначается текстовым представлением своего expr, если оно имеется (см. подраздел 8.3.5). Представление является формулой для вычисления значения времени или длительности, которая может включать имена связанных Observations и константы. Если TimeExpression или Duration не имеет expr, оно просто представляется своим единственным связанным Observation.",
+          "Duration — это значение относительного времени, задаваемое в зависящем от реализации текстовом формате. Часто Duration является неотрицательным целочисленным выражением, представляющим количество единиц времени («time ticks»), которые могут пройти в течение этой длительности."
+        ] },
+        { id: "8.4.5", title: "Примеры", en: "Examples", paragraphs: [
+          "Время часто представляется числовой координатой; в этом случае expr TimeExpression должно вычисляться в числовое значение, единицы измерения которого могут предполагаться по соглашению в модели (например, время всегда задаётся в секундах). В качестве альтернативы DataTypes могут использоваться для моделирования значений времени с конкретными единицами измерения (например, Second, Day и т. д.), и тогда expr TimeExpression должно иметь соответствующий один из этих типов.",
+          "Duration — это значение относительного времени и как таковое часто представляется неотрицательным числом, например целым Integer, выражающим количество единиц времени («time ticks») на эталонных часах, прошедших в течение длительности. В этом случае expr DurationExpression должно вычисляться в неотрицательное числовое значение. Значение Duration может также использоваться для представления значения временной координаты как Duration, прошедшего с некоторого фиксированного «начала» времени.",
+          "См. также рисунок 8.5 в подразделе 8.5.5."
+        ] }
+      ]
+    },
+    "8.5": {
+      subsections: [
+        { id: "8.5.1", title: "Обзор", en: "Summary", paragraphs: [
+          "Interval — это диапазон между двумя значениями, предназначенный прежде всего для использования в Constraints, которые утверждают, что некоторый другой Element имеет значение в заданном диапазоне. Intervals могут быть определены для значений любого типа, но особенно полезны для значений времени и длительности как часть соответствующих TimeConstraints и DurationConstraints."
+        ] },
+        { id: "8.5.2", title: "Абстрактный синтаксис", en: "Abstract Syntax", figures: ["8.4"] },
+        { id: "8.5.3", title: "Семантика", en: "Semantics" },
+        { id: "8.5.3.1", title: "Интервалы", en: "Intervals", paragraphs: [
+          "Interval — это ValueSpecification, задаваемое с помощью двух других ValueSpecifications: min и max. Interval вычисляется путём предварительного вычисления каждого из составляющих его ValueSpecifications, каждое из которых должно вычисляться в единственное значение. Значение Interval — это диапазон от значения min до значения max, то есть множество всех значений, больших или равных значению min и меньших или равных значению max (которое может быть пустым множеством). Отметим, что хотя синтаксически для min и max Interval допускаются любые ValueSpecifications любого типа, стандартная семантическая интерпретация задана только для Intervals, у которых ValueSpecifications min и max имеют один и тот же тип и для этого типа определён полный порядок.",
+          "Существует две специализации Interval для использования с временными ограничениями. TimeInterval задаёт диапазон между двумя значениями времени, заданными TimeExpressions. DurationInterval задаёт диапазон между двумя значениями длительности, заданными Durations."
+        ] },
+        { id: "8.5.3.2", title: "IntervalConstraint", en: "IntervalConstraint", paragraphs: [
+          "IntervalConstraint определяет Constraint, specification которого задано Interval (см. также подраздел 7.6 о Constraints). Утверждается, что constrainedElements IntervalConstraint имеют значения в диапазоне, заданном Interval этого IntervalConstraint. Если constrainedElement имеет значение вне этого диапазона, IntervalConstraint нарушается. Если какой-либо constrainedElement нельзя интерпретировать как имеющий значение или его значение имеет не тот же тип, что и диапазон, заданный IntervalConstraint, IntervalConstraint не имеет стандартной семантической интерпретации.",
+          "Существует две специализации IntervalConstraint для задания временных ограничений. TimeConstraint определяет IntervalConstraint для единственного constrainedElement, в котором ограничивающий Interval является TimeInterval. DurationConstraint определяет IntervalConstraint для одного или двух constrainedElements, в котором ограничивающий Interval является DurationInterval. Если имеется два constrainedElements, начало наблюдаемой длительности может находиться между событием в первом constrainedElement и событием во втором."
+        ] },
+        { id: "8.5.4", title: "Нотация", en: "Notation" },
+        { id: "8.5.4.1", title: "Интервалы", en: "Intervals", paragraphs: [
+          "Interval обозначается текстуально текстовыми представлениями двух его ValueSpecifications, разделёнными «..»:"
+        ], code: "<interval> ::= <min-value> ‘ ..’ <max-value>", afterCode: [
+          "TimeInterval изображается нотацией Interval, где каждый элемент ValueSpecification является TimeExpression. DurationInterval изображается нотацией Interval, где каждый элемент ValueSpecification является Duration. (См. подраздел 8.4.4 о нотации TimeExpressions и Durations.)"
+        ] },
+        { id: "8.5.4.2", title: "Интервальные ограничения", en: "Interval Constraints", paragraphs: [
+          "IntervalConstraint изображается как аннотация своего constrainedElement. Для IntervalConstraint может использоваться общая нотация Constraints (см. подраздел 7.6.4), с текстовым обозначением specification Interval, как указано выше. Специальные нотационные конструкции определены для TimeConstraints и DurationConstraints, как описано ниже.",
+          "TimeConstraint для единственного constrainedElement может изображаться небольшой линией между графическим представлением constrainedElement и текстовым представлением TimeInterval для TimeConstraint. DurationConstraint также может изображаться графической нотацией, связывающей его constrainedElements. Однако используемая нотация зависит от типа диаграммы, на которой появляется DurationConstraint (см. подраздел 17.8 о нотации на Sequence Diagrams и подраздел 17.11 о нотации на Timing Diagrams)."
+        ] },
+        { id: "8.5.5", title: "Примеры", en: "Examples", paragraphs: [
+          "На рисунке 8.5 показаны DurationConstraints, связанные с длительностью Message и с длительностью между двумя OccurrenceSpecifications. Он также показывает TimeConstraint, связанное с получением Message. (См. также подраздел 17.2.5.)"
+        ], figures: ["8.5"] }
+      ]
+    },
   },
   classifiers: {
     Abstraction: {
@@ -301,9 +444,18 @@ window.UML_CONTENT = {
         specification: "Условие, которое при вычислении должно быть истинным, чтобы Constraint выполнялся."
       },
       constraints: {
-        boolean_value: { description: "ValueSpecification для Constraint должно вычисляться в значение Boolean.", ocl: "Не выражается на OCL." },
-        no_side_effects: { description: "Вычисление ValueSpecification для Constraint не должно иметь побочных эффектов.", ocl: "Не выражается на OCL." },
-        not_apply_to_self: { description: "Constraint не может применяться к самому себе.", ocl: "inv: not constrainedElement->includes(self)" }
+        boolean_value: {
+          description: "ValueSpecification для Constraint должно вычисляться в значение Boolean.",
+          ocl: "Не выражается на OCL."
+        },
+        no_side_effects: {
+          description: "Вычисление ValueSpecification для Constraint не должно иметь побочных эффектов.",
+          ocl: "Не выражается на OCL."
+        },
+        not_apply_to_self: {
+          description: "Constraint не может применяться к самому себе.",
+          ocl: "inv: not constrainedElement->includes(self)"
+        }
       }
     },
     Dependency: {
@@ -336,8 +488,14 @@ window.UML_CONTENT = {
         }
       },
       constraints: {
-        has_owner: { description: "Elements, которые должны иметь владельца, должны иметь владельца.", ocl: "inv: mustBeOwned() implies owner->notEmpty()" },
-        not_own_self: { description: "Element не может прямо или косвенно владеть самим собой.", ocl: "inv: not allOwnedElements()->includes(self)" }
+        has_owner: {
+          description: "Elements, которые должны иметь владельца, должны иметь владельца.",
+          ocl: "inv: mustBeOwned() implies owner->notEmpty()"
+        },
+        not_own_self: {
+          description: "Element не может прямо или косвенно владеть самим собой.",
+          ocl: "inv: not allOwnedElements()->includes(self)"
+        }
       }
     },
     ElementImport: {
@@ -354,8 +512,14 @@ window.UML_CONTENT = {
         }
       },
       constraints: {
-        imported_element_is_public: { description: "importedElement имеет либо открытую видимость, либо вообще не имеет видимости.", ocl: "inv: importedElement.visibility <> null implies importedElement.visibility =\n  VisibilityKind::public" },
-        visibility_public_or_private: { description: "visibility ElementImport может быть только public или private.", ocl: "inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private" }
+        imported_element_is_public: {
+          description: "importedElement имеет либо открытую видимость, либо вообще не имеет видимости.",
+          ocl: "inv: importedElement.visibility <> null implies importedElement.visibility =\n  VisibilityKind::public"
+        },
+        visibility_public_or_private: {
+          description: "visibility ElementImport может быть только public или private.",
+          ocl: "inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private"
+        }
       }
     },
     MultiplicityElement: {
@@ -404,12 +568,30 @@ window.UML_CONTENT = {
         }
       },
       constraints: {
-        upper_ge_lower: { description: "Верхняя граница должна быть больше нижней или равна ей.", ocl: "inv: upperBound() >= lowerBound()" },
-        lower_ge_0: { description: "Нижняя граница должна быть неотрицательным целочисленным литералом.", ocl: "inv: lowerBound() >= 0" },
-        value_specification_no_side_effects: { description: "Если для lowerValue или upperValue используется нелитеральное ValueSpecification, вычисление этой спецификации не должно иметь побочных эффектов.", ocl: "Не выражается на OCL." },
-        value_specification_constant: { description: "Если для lowerValue или upperValue используется нелитеральное ValueSpecification, эта спецификация должна быть константным выражением.", ocl: "Не выражается на OCL." },
-        lower_is_integer: { description: "Если lowerValue задано, оно должно иметь значение Integer.", ocl: "inv: lowerValue <> null implies lowerValue.integerValue() <> null" },
-        upper_is_unlimitedNatural: { description: "Если upperValue задано, оно должно иметь значение UnlimitedNatural.", ocl: "inv: upperValue <> null implies upperValue.unlimitedValue() <> null" }
+        upper_ge_lower: {
+          description: "Верхняя граница должна быть больше нижней или равна ей.",
+          ocl: "inv: upperBound() >= lowerBound()"
+        },
+        lower_ge_0: {
+          description: "Нижняя граница должна быть неотрицательным целочисленным литералом.",
+          ocl: "inv: lowerBound() >= 0"
+        },
+        value_specification_no_side_effects: {
+          description: "Если для lowerValue или upperValue используется нелитеральное ValueSpecification, вычисление этой спецификации не должно иметь побочных эффектов.",
+          ocl: "Не выражается на OCL."
+        },
+        value_specification_constant: {
+          description: "Если для lowerValue или upperValue используется нелитеральное ValueSpecification, эта спецификация должна быть константным выражением.",
+          ocl: "Не выражается на OCL."
+        },
+        lower_is_integer: {
+          description: "Если lowerValue задано, оно должно иметь значение Integer.",
+          ocl: "inv: lowerValue <> null implies lowerValue.integerValue() <> null"
+        },
+        upper_is_unlimitedNatural: {
+          description: "Если upperValue задано, оно должно иметь значение UnlimitedNatural.",
+          ocl: "inv: upperValue <> null implies upperValue.unlimitedValue() <> null"
+        }
       }
     },
     NamedElement: {
@@ -447,9 +629,18 @@ window.UML_CONTENT = {
         }
       },
       constraints: {
-        visibility_needs_ownership: { description: "Если NamedElement принадлежит чему-либо, отличному от Namespace, он не имеет visibility. Element, не принадлежащий ничему, — а следовательно, должен быть Package, поскольку только этот вид NamedElement переопределяет mustBeOwned(), — может иметь visibility.", ocl: "inv: (namespace = null and owner <> null) implies visibility = null" },
-        has_qualified_name: { description: "Когда имя задано и все содержащие Namespaces имеют имена, qualifiedName строится из имени NamedElement и имён содержащих Namespaces.", ocl: "inv: (name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies\n  qualifiedName = allNamespaces()->iterate(ns : Namespace; agg : String = name |\n    ns.name.concat(self.separator()).concat(agg))" },
-        has_no_qualified_name: { description: "Если имя отсутствует или один из содержащих Namespaces не имеет имени, qualifiedName отсутствует.", ocl: "inv: name = null or allNamespaces()->select(ns | ns.name = null)->notEmpty() implies\n  qualifiedName = null" }
+        visibility_needs_ownership: {
+          description: "Если NamedElement принадлежит чему-либо, отличному от Namespace, он не имеет visibility. Element, не принадлежащий ничему, — а следовательно, должен быть Package, поскольку только этот вид NamedElement переопределяет mustBeOwned(), — может иметь visibility.",
+          ocl: "inv: (namespace = null and owner <> null) implies visibility = null"
+        },
+        has_qualified_name: {
+          description: "Когда имя задано и все содержащие Namespaces имеют имена, qualifiedName строится из имени NamedElement и имён содержащих Namespaces.",
+          ocl: "inv: (name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies\n  qualifiedName = allNamespaces()->iterate(ns : Namespace; agg : String = name |\n    ns.name.concat(self.separator()).concat(agg))"
+        },
+        has_no_qualified_name: {
+          description: "Если имя отсутствует или один из содержащих Namespaces не имеет имени, qualifiedName отсутствует.",
+          ocl: "inv: name = null or allNamespaces()->select(ns | ns.name = null)->notEmpty() implies\n  qualifiedName = null"
+        }
       }
     },
     Namespace: {
@@ -484,9 +675,18 @@ window.UML_CONTENT = {
         }
       },
       constraints: {
-        members_distinguishable: { description: "Все члены Namespace различимы внутри него.", ocl: "inv: membersAreDistinguishable()" },
-        cannot_import_self: { description: "Namespace не может иметь PackageImport к самому себе.", ocl: "inv: packageImport.importedPackage.oclAsType(Namespace)->excludes(self)" },
-        cannot_import_ownedMembers: { description: "Namespace не может иметь ElementImport к одному из своих ownedMembers.", ocl: "inv: elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)" }
+        members_distinguishable: {
+          description: "Все члены Namespace различимы внутри него.",
+          ocl: "inv: membersAreDistinguishable()"
+        },
+        cannot_import_self: {
+          description: "Namespace не может иметь PackageImport к самому себе.",
+          ocl: "inv: packageImport.importedPackage.oclAsType(Namespace)->excludes(self)"
+        },
+        cannot_import_ownedMembers: {
+          description: "Namespace не может иметь ElementImport к одному из своих ownedMembers.",
+          ocl: "inv: elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)"
+        }
       }
     },
     PackageImport: {
@@ -496,7 +696,10 @@ window.UML_CONTENT = {
         importingNamespace: "Задаёт Namespace, импортирующий члены из Package."
       },
       constraints: {
-        public_or_private: { description: "visibility PackageImport может быть только public или private.", ocl: "inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private" }
+        public_or_private: {
+          description: "visibility PackageImport может быть только public или private.",
+          ocl: "inv: visibility = VisibilityKind::public or visibility = VisibilityKind::private"
+        }
       }
     },
     PackageableElement: {
@@ -504,7 +707,10 @@ window.UML_CONTENT = {
         visibility: "PackageableElement должен иметь заданную visibility, если принадлежит Namespace. Видимость по умолчанию — public."
       },
       constraints: {
-        namespace_needs_visibility: { description: "PackageableElement, принадлежащий Namespace, должен иметь visibility.", ocl: "inv: visibility = null implies namespace = null" }
+        namespace_needs_visibility: {
+          description: "PackageableElement, принадлежащий Namespace, должен иметь visibility.",
+          ocl: "inv: visibility = null implies namespace = null"
+        }
       }
     },
     ParameterableElement: {
@@ -535,8 +741,14 @@ window.UML_CONTENT = {
         signature: "TemplateSignature шаблона, являющегося целью этой TemplateBinding."
       },
       constraints: {
-        parameter_substitution_formal: { description: "Каждая parameterSubstitution должна ссылаться на формальный TemplateParameter целевой TemplateSignature.", ocl: "inv: parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))" },
-        one_parameter_substitution: { description: "TemplateBinding содержит не более одной TemplateParameterSubstitution для каждого формального TemplateParameter целевой TemplateSignature.", ocl: "inv: signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size()\n  <= 1)" }
+        parameter_substitution_formal: {
+          description: "Каждая parameterSubstitution должна ссылаться на формальный TemplateParameter целевой TemplateSignature.",
+          ocl: "inv: parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))"
+        },
+        one_parameter_substitution: {
+          description: "TemplateBinding содержит не более одной TemplateParameterSubstitution для каждого формального TemplateParameter целевой TemplateSignature.",
+          ocl: "inv: signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size()\n  <= 1)"
+        }
       }
     },
     TemplateParameter: {
@@ -548,7 +760,10 @@ window.UML_CONTENT = {
         signature: "TemplateSignature, владеющая этим TemplateParameter."
       },
       constraints: {
-        must_be_compatible: { description: "Значение по умолчанию должно быть совместимо с формальным TemplateParameter.", ocl: "inv: default <> null implies default.isCompatibleWith(parameteredElement)" }
+        must_be_compatible: {
+          description: "Значение по умолчанию должно быть совместимо с формальным TemplateParameter.",
+          ocl: "inv: default <> null implies default.isCompatibleWith(parameteredElement)"
+        }
       }
     },
     TemplateParameterSubstitution: {
@@ -559,7 +774,10 @@ window.UML_CONTENT = {
         templateBinding: "TemplateBinding, владеющая этой TemplateParameterSubstitution."
       },
       constraints: {
-        must_be_compatible: { description: "Фактический ParameterableElement должен быть совместим с формальным TemplateParameter; например, фактический ParameterableElement для Class TemplateParameter должен быть Class.", ocl: "inv: actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))" }
+        must_be_compatible: {
+          description: "Фактический ParameterableElement должен быть совместим с формальным TemplateParameter; например, фактический ParameterableElement для Class TemplateParameter должен быть Class.",
+          ocl: "inv: actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))"
+        }
       }
     },
     TemplateSignature: {
@@ -569,8 +787,14 @@ window.UML_CONTENT = {
         template: "TemplateableElement, владеющий этой TemplateSignature."
       },
       constraints: {
-        own_elements: { description: "Параметры должны владеть ParameterableElements, которые они параметризуют, либо эти ParameterableElements должны принадлежать TemplateableElement, превращаемому в шаблон.", ocl: "inv: template.ownedElement->includesAll(parameter.parameteredElement->asSet() -\n  parameter.ownedParameteredElement->asSet())" },
-        unique_parameters: { description: "Имена параметров TemplateSignature уникальны.", ocl: "inv: parameter->forAll(p1, p2 | (p1 <> p2 and\n  p1.parameteredElement.oclIsKindOf(NamedElement) and\n  p2.parameteredElement.oclIsKindOf(NamedElement)) implies\n    p1.parameteredElement.oclAsType(NamedElement).name <>\n    p2.parameteredElement.oclAsType(NamedElement).name)" }
+        own_elements: {
+          description: "Параметры должны владеть ParameterableElements, которые они параметризуют, либо эти ParameterableElements должны принадлежать TemplateableElement, превращаемому в шаблон.",
+          ocl: "inv: template.ownedElement->includesAll(parameter.parameteredElement->asSet() -\n  parameter.ownedParameteredElement->asSet())"
+        },
+        unique_parameters: {
+          description: "Имена параметров TemplateSignature уникальны.",
+          ocl: "inv: parameter->forAll(p1, p2 | (p1 <> p2 and\n  p1.parameteredElement.oclIsKindOf(NamedElement) and\n  p2.parameteredElement.oclIsKindOf(NamedElement)) implies\n    p1.parameteredElement.oclAsType(NamedElement).name <>\n    p2.parameteredElement.oclAsType(NamedElement).name)"
+        }
       }
     },
     TemplateableElement: {
@@ -612,6 +836,324 @@ window.UML_CONTENT = {
         protected: "NamedElement с защищённой видимостью виден Elements, имеющим отношение обобщения к владеющему Namespace.",
         package: "NamedElement с пакетной видимостью виден всем Elements внутри ближайшего вмещающего Package при условии, что другие владеющие Elements имеют соответствующую видимость. Вне ближайшего вмещающего Package NamedElement с пакетной видимостью не виден. Пакетная видимость может назначаться только NamedElements, не принадлежащим Packages."
       }
+    },
+    Duration: {
+      definition: "Duration — это ValueSpecification, задающее временное расстояние между двумя моментами времени.",
+      properties: {
+        expr: "ValueSpecification, вычисляемое в значение Duration.",
+        observation: "Ссылается на Observations, участвующие в вычислении значения Duration."
+      },
+      constraints: {
+        no_expr_requires_observation: {
+          description: "Если Duration не имеет expr, оно должно иметь единственное observation, являющееся DurationObservation.",
+          ocl: "inv: expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))"
+        }
+      }
+    },
+    DurationConstraint: {
+      definition: "DurationConstraint — это Constraint, ссылающееся на DurationInterval.",
+      properties: {
+        firstEvent: "Значение firstEvent[i] связано с constrainedElement[i] (где i равно 1 или 2). Если firstEvent[i] истинно, соответствующее наблюдаемое событие — первый момент времени, когда выполнение входит в constrainedElement[i]. Если firstEvent[i] ложно, соответствующее наблюдаемое событие — последний момент времени, когда выполнение находится внутри constrainedElement[i].",
+        specification: "DurationInterval, ограничивающий длительность."
+      },
+      constraints: {
+        first_event_multiplicity: {
+          description: "Кратность firstEvent должна быть равна 2, если кратность constrainedElement равна 2. В противном случае кратность firstEvent равна 0.",
+          ocl: "inv: if (constrainedElement->size() = 2)\n  then (firstEvent->size() = 2) else (firstEvent->size() = 0)\nendif"
+        },
+        has_one_or_two_constrainedElements: {
+          description: "DurationConstraint имеет один или два constrainedElements.",
+          ocl: "inv: constrainedElement->size() = 1 or constrainedElement->size()=2"
+        }
+      }
+    },
+    DurationInterval: {
+      definition: "DurationInterval определяет диапазон между двумя Durations.",
+      properties: {
+        max: "Ссылается на Duration, обозначающее максимальное значение диапазона.",
+        min: "Ссылается на Duration, обозначающее минимальное значение диапазона."
+      }
+    },
+    DurationObservation: {
+      definition: "DurationObservation — это ссылка на длительность во время выполнения. Оно указывает NamedElement(s) модели, за которыми следует наблюдать, и должно ли наблюдение происходить при входе в этот NamedElement или при выходе из него.",
+      properties: {
+        firstEvent: "Значение firstEvent[i] связано с event[i] (где i равно 1 или 2). Если firstEvent[i] истинно, соответствующее наблюдаемое событие — первый момент времени, когда выполнение входит в event[i]. Если firstEvent[i] ложно, соответствующее наблюдаемое событие — момент времени, когда выполнение выходит из event[i].",
+        event: "DurationObservation определяется как длительность между входом в один event Element или выходом из него во время выполнения либо между входом/выходом одного event Element и входом/выходом второго."
+      },
+      constraints: {
+        first_event_multiplicity: {
+          description: "Кратность firstEvent должна быть равна 2, если кратность event равна 2. В противном случае кратность firstEvent равна 0.",
+          ocl: "inv: if (event->size() = 2)\n  then (firstEvent->size() = 2) else (firstEvent->size() = 0)\nendif"
+        }
+      }
+    },
+    Expression: {
+      definition: "Expression представляет узел дерева выражения, который может быть нетерминальным или терминальным. Оно определяет symbol и имеет возможно пустую последовательность operands, являющихся ValueSpecifications. При вычислении в контексте оно обозначает (возможно пустое) множество значений.",
+      properties: {
+        symbol: "Символ, связанный с этим узлом в дереве выражения.",
+        operand: "Задаёт последовательность operand ValueSpecifications."
+      }
+    },
+    Interval: {
+      definition: "Interval определяет диапазон между двумя ValueSpecifications.",
+      properties: {
+        max: "Ссылается на ValueSpecification, обозначающее максимальное значение диапазона.",
+        min: "Ссылается на ValueSpecification, обозначающее минимальное значение диапазона."
+      }
+    },
+    IntervalConstraint: {
+      definition: "IntervalConstraint — это Constraint, задаваемое Interval.",
+      properties: {
+        specification: "Interval, задающий условие IntervalConstraint."
+      }
+    },
+    LiteralBoolean: {
+      definition: "LiteralBoolean — это спецификация значения Boolean.",
+      properties: {
+        value: "Заданное значение Boolean."
+      },
+      operations: {
+        "booleanValue() : Boolean {redefines ValueSpecification::booleanValue()}": {
+          description: "Запрос booleanValue() возвращает значение.",
+          body: "value"
+        },
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        }
+      }
+    },
+    LiteralInteger: {
+      definition: "LiteralInteger — это спецификация значения Integer.",
+      properties: {
+        value: "Заданное значение Integer."
+      },
+      operations: {
+        "integerValue() : Integer {redefines ValueSpecification::integerValue()}": {
+          description: "Запрос integerValue() возвращает значение.",
+          body: "value"
+        },
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        }
+      }
+    },
+    LiteralNull: {
+      definition: "LiteralNull задаёт отсутствие значения.",
+      operations: {
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        },
+        "isNull() : Boolean {redefines ValueSpecification::isNull()}": {
+          description: "Запрос isNull() возвращает true.",
+          body: "true"
+        }
+      }
+    },
+    LiteralReal: {
+      definition: "LiteralReal — это спецификация значения Real.",
+      properties: {
+        value: "Заданное значение Real."
+      },
+      operations: {
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        },
+        "realValue() : Real {redefines ValueSpecification::realValue()}": {
+          description: "Запрос realValue() возвращает значение.",
+          body: "value"
+        }
+      }
+    },
+    LiteralSpecification: {
+      definition: "LiteralSpecification идентифицирует моделируемую литеральную константу."
+    },
+    LiteralString: {
+      definition: "LiteralString — это спецификация значения String.",
+      properties: {
+        value: "Заданное значение String."
+      },
+      operations: {
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        },
+        "stringValue() : String {redefines ValueSpecification::stringValue()}": {
+          description: "Запрос stringValue() возвращает значение.",
+          body: "value"
+        }
+      }
+    },
+    LiteralUnlimitedNatural: {
+      definition: "LiteralUnlimitedNatural — это спецификация числа UnlimitedNatural.",
+      properties: {
+        value: "Заданное значение UnlimitedNatural."
+      },
+      operations: {
+        "isComputable() : Boolean {redefines ValueSpecification::isComputable()}": {
+          description: "Запрос isComputable() переопределён как true.",
+          body: "true"
+        },
+        "unlimitedValue() : UnlimitedNatural {redefines ValueSpecification::unlimitedValue()}": {
+          description: "Запрос unlimitedValue() возвращает значение.",
+          body: "value"
+        }
+      }
+    },
+    Observation: {
+      definition: "Observation задаёт значение, определяемое наблюдением за событием или событиями, происходящими относительно других Elements модели."
+    },
+    OpaqueExpression: {
+      definition: "OpaqueExpression — это ValueSpecification, задающее вычисление коллекции значений либо с помощью UML Behavior, либо на основе текстового оператора на языке, отличном от UML.",
+      properties: {
+        body: "Текстовое определение поведения OpaqueExpression, возможно, на нескольких языках.",
+        language: "Задаёт языки, используемые для выражения текстовых тел OpaqueExpression. Языки сопоставляются body Strings по порядку. Интерпретация body зависит от языков. Если языки не указаны, они могут быть неявно определены телом выражения или контекстом.",
+        behavior: "Задаёт поведение OpaqueExpression как UML Behavior.",
+        result: "Если OpaqueExpression задано с помощью UML Behavior, это свойство ссылается на единственный обязательный возвращаемый Parameter этого Behavior. Когда Behavior завершает выполнение, значения этого Parameter дают результат вычисления OpaqueExpression."
+      },
+      operations: {
+        "isIntegral() : Boolean": {
+          description: "Запрос isIntegral() определяет, предназначено ли выражение для получения Integer.",
+          body: "false"
+        },
+        "isNonNegative() : Boolean": {
+          description: "Запрос isNonNegative() определяет, имеет ли целочисленное выражение неотрицательное значение.",
+          pre: "self.isIntegral()",
+          body: "false"
+        },
+        "isPositive() : Boolean": {
+          description: "Запрос isPositive() определяет, имеет ли целочисленное выражение положительное значение.",
+          pre: "self.isIntegral()",
+          body: "false"
+        },
+        "result() : Parameter [0..1]": {
+          description: "Деривация для OpaqueExpression::/result.",
+          body: "if behavior = null then\nnull\nelse\nbehavior.ownedParameter->first()\nendif"
+        },
+        "value() : Integer": {
+          description: "Запрос value() возвращает целочисленное значение для выражения, предназначенного для его получения.",
+          pre: "self.isIntegral()",
+          body: "0"
+        }
+      },
+      constraints: {
+        language_body_size: {
+          description: "Если атрибут language не пуст, размеры массивов body и language должны совпадать.",
+          ocl: "inv: language->notEmpty() implies (_'body'->size() = language->size())"
+        },
+        one_return_result_parameter: {
+          description: "behavior должно иметь ровно один возвращаемый результат-параметр.",
+          ocl: "inv: behavior <> null implies\n   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1"
+        },
+        only_in_or_return_parameters: {
+          description: "behavior может иметь только непотоковые входные или возвращаемые параметры.",
+          ocl: "inv: behavior <> null implies behavior.ownedParameter->forAll(not isStream and\n(direction=ParameterDirectionKind::in or direction=ParameterDirectionKind::return))"
+        }
+      }
+    },
+    StringExpression: {
+      definition: "StringExpression — это Expression, задающее значение String, получаемое конкатенацией последовательности operands со значениями String или последовательности subExpressions, некоторые из которых могут быть параметрами шаблона.",
+      properties: {
+        owningExpression: "StringExpression, для которого это StringExpression является subExpression.",
+        subExpression: "StringExpressions, составляющие это StringExpression."
+      },
+      operations: {
+        "stringValue() : String {redefines ValueSpecification::stringValue()}": {
+          description: "Запрос stringValue() возвращает String, полученную конкатенацией в заданном порядке всех компонентных значений String всех operands или subExpressions, входящих в StringExpression.",
+          body: "if subExpression->notEmpty()\nthen subExpression->iterate(se; stringValue: String = '' | \nstringValue.concat(se.stringValue()))\nelse operand->iterate(op; stringValue: String = '' | stringValue.concat(op.stringValue()))\nendif"
+        }
+      },
+      constraints: {
+        operands: {
+          description: "Все operands StringExpression должны быть LiteralStrings.",
+          ocl: "inv: operand->forAll (oclIsKindOf (LiteralString))"
+        },
+        subexpressions: {
+          description: "Если StringExpression имеет подвыражения, оно не может иметь operands, и наоборот (это позволяет избежать необходимости определять порядок сопоставления между operands и subexpressions).",
+          ocl: "inv: if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif"
+        }
+      }
+    },
+    TimeConstraint: {
+      definition: "TimeConstraint — это Constraint, ссылающееся на TimeInterval.",
+      properties: {
+        firstEvent: "Значение firstEvent связано с constrainedElement. Если firstEvent истинно, соответствующее наблюдаемое событие — первый момент времени, когда выполнение входит в constrainedElement. Если firstEvent ложно, соответствующее наблюдаемое событие — последний момент времени, когда выполнение находится внутри constrainedElement.",
+        specification: "TimeInterval, ограничивающий длительность."
+      },
+      constraints: {
+        has_one_constrainedElement: {
+          description: "TimeConstraint имеет один constrainedElement.",
+          ocl: "inv: constrainedElement->size() = 1"
+        }
+      }
+    },
+    TimeExpression: {
+      definition: "TimeExpression — это ValueSpecification, представляющее значение времени.",
+      properties: {
+        expr: "ValueSpecification, вычисляемое в значение TimeExpression.",
+        observation: "Ссылается на Observations, участвующие в вычислении значения TimeExpression."
+      },
+      constraints: {
+        no_expr_requires_observation: {
+          description: "Если TimeExpression не имеет expr, оно должно иметь единственное observation, являющееся TimeObservation.",
+          ocl: "inv: expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))"
+        }
+      }
+    },
+    TimeInterval: {
+      definition: "TimeInterval определяет диапазон между двумя TimeExpressions.",
+      properties: {
+        max: "Ссылается на TimeExpression, обозначающее максимальное значение диапазона.",
+        min: "Ссылается на TimeExpression, обозначающее минимальное значение диапазона."
+      }
+    },
+    TimeObservation: {
+      definition: "TimeObservation — это ссылка на момент времени во время выполнения. Оно указывает NamedElement модели, за которым следует наблюдать, и должно ли наблюдение происходить при входе в этот NamedElement или при выходе из него.",
+      properties: {
+        firstEvent: "Значение firstEvent связано с event. Если firstEvent истинно, соответствующее наблюдаемое событие — первый момент времени, когда выполнение входит в event Element. Если firstEvent ложно, соответствующее наблюдаемое событие — момент времени, когда выполнение выходит из event Element.",
+        event: "TimeObservation определяется входом в event Element или выходом из него во время выполнения."
+      }
+    },
+    ValueSpecification: {
+      definition: "ValueSpecification — это спецификация (возможно пустого) множества значений. ValueSpecification является ParameterableElement, который может быть представлен как формальный TemplateParameter и предоставлен как фактический параметр при привязке шаблона.",
+      operations: {
+        "booleanValue() : Boolean [0..1]": {
+          description: "Запрос booleanValue() возвращает единственное значение Boolean, если его можно вычислить.",
+          body: "null"
+        },
+        "integerValue() : Integer [0..1]": {
+          description: "Запрос integerValue() возвращает единственное значение Integer, если его можно вычислить.",
+          body: "null"
+        },
+        "isCompatibleWith(p : ParameterableElement) : Boolean {redefines ParameterableElement::isCompatibleWith()}": {
+          description: "Запрос isCompatibleWith() определяет, совместимо ли это ValueSpecification с указанным ParameterableElement. Это ValueSpecification совместимо с ParameterableElement p, если вид этого ValueSpecification совпадает с видом p или является его подтипом. Кроме того, если p является TypedElement, тип этого ValueSpecification должен соответствовать типу p.",
+          body: "self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypedElement) implies\nself.type.conformsTo(p.oclAsType(TypedElement).type))"
+        },
+        "isComputable() : Boolean": {
+          description: "Запрос isComputable() определяет, может ли спецификация значения быть вычислена в модели. Эта операция не может быть полностью определена на OCL. Ожидается, что соответствующая спецификации реализация возвращает true для этой операции для всех ValueSpecifications, которые она может вычислить, и вычисляет все те, для которых операция истинна. Ожидается, что соответствующая спецификации реализация может вычислить по меньшей мере значения всех LiteralSpecifications.",
+          body: "false"
+        },
+        "isNull() : Boolean": {
+          description: "Запрос isNull() возвращает true, если можно вычислить, что значение равно null.",
+          body: "false"
+        },
+        "realValue() : Real [0..1]": {
+          description: "Запрос realValue() возвращает единственное значение Real, если его можно вычислить.",
+          body: "null"
+        },
+        "stringValue() : String [0..1]": {
+          description: "Запрос stringValue() возвращает единственное значение String, если его можно вычислить.",
+          body: "null"
+        },
+        "unlimitedValue() : UnlimitedNatural [0..1]": {
+          description: "Запрос unlimitedValue() возвращает единственное значение UnlimitedNatural, если его можно вычислить.",
+          body: "null"
+        }
+      }
     }
   }
+
 };

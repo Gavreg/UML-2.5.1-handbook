@@ -1,0 +1,1458 @@
+===== PRINTED PAGE 69 / PDF PAGE 111 =====
+
+8
+Values
+8.1
+Summary
+This clause describes the specification of values. In general, a ValueSpecification is a model element that is considered 
+semantically to yield zero or more values. The type and number of values shall be suitable for the context in which the 
+ValueSpecification is used (as determined by the constraints given in that context).
+The following sub clauses describe the various kinds of ValueSpecifications available in UML.
+8.2
+Literals
+8.2.1
+Summary
+A LiteralSpecification is a ValueSpecification that specifies a literal value. There is a different kind of 
+LiteralSpecification for each of the UML standard PrimitiveTypes, with a corresponding textual literal notation, plus a 
+“null” literal that represents the “lack of a value.”
+8.2.2
+Abstract Syntax
+ValueSpecification
+TypedElement
+PackageableElement
+LiteralSpecification
+LiteralString
++ value : String [0..1]
+LiteralBoolean
++ value : Boolean = false
+LiteralNull
+LiteralUnlimitedNatural
++ value : UnlimitedNatural = 0
+LiteralInteger
++ value : Integer = 0
+LiteralReal
++ value : Real
+Figure 8.1  Literals
+8.2.3
+Semantics
+There are six kinds of LiteralSpecifications:
+1
+A LiteralNull is intended to be used to explicitly model the lack of a value. In the context of a 
+MultiplicityElement with a multiplicity lower bound of 0, this corresponds to the empty set (i.e., a set of no 
+values). It is equivalent to specifying no values for the Element.
+2
+A LiteralString specifies a constant value of the PrimitiveType String. Though a String is specified as a 
+sequence of characters, String values are considered to be primitive in UML, so their internal structure is not 
+specified as part of UML semantics.
+Unified Modeling Language 2.5.1
+69
+
+===== PRINTED PAGE 70 / PDF PAGE 112 =====
+
+3
+A LiteralInteger specifies a constant value of the PrimitiveType Integer.
+4
+A LiteralBoolean specifies a constant value of the PrimitiveType Boolean.
+5
+A LiteralUnlimitedNatural specifies a constant value of the PrimitiveType UnlimitedNatural.
+6
+A LiteralReal specifies a constant value of the PrimitiveType Real.
+See also Clause 21 for further discussion of the standard UML primitive types.
+8.2.4
+Notation
+LiteralSpecifications are notated textually.
+
+The notation for a LiteralNull varies depending on where it is used. It often appears as the word “null.” Other 
+notations are described elsewhere for specific uses.
+
+A LiteralString is shown as a sequence of characters within double quotes. The String value is the sequence of 
+characters, not including the quotes. The character set used is unspecified.
+
+A LiteralInteger is shown as a sequence of digits representing the decimal numeral for the Integer value.
+
+A LiteralBoolean is shown as either the word “true” or the word “false,” corresponding to its value.
+
+A LiteralUnlimitedNatural is shown either as a sequence of digits or as an asterisk (*), where an asterisk 
+denotes unlimited. Note that “unlimited” denotes the lack of a limit on the value of some element (such as a 
+multiplicity upper bound), not a value of “infinity.”
+
+A LiteralReal is shown in decimal notation or scientific notation. Decimal notation consists of an optional sign 
+character (+/-) followed by zero or more digits followed optionally by a dot (.) followed by one or more digits. 
+Scientific notation consists of decimal notation followed by either the letter “e” or “E” and an exponent 
+consisting of an optional sign character followed by one or more digits. The scientific notation expresses a real 
+number equal to that given by the decimal notation before the exponent, times 10 raised to the power of the 
+exponent.
+This notation is specified by the following EBNF rules:
+<natural-literal> ::= ('0'..'9')+
+<decimal-literal> ::= ['+' | '-' ] <natural-literal> | ['+' | '-' ] [<natural-literal>] '.' <natural-literal>
+<real-literal> ::= <decimal-literal> [ ('e' | 'E') ['+' | '-' ] <natural-literal> ]
+8.3
+Expressions
+8.3.1
+Summary
+Expressions are ValueSpecifications that specify values resulting from a computation.
+70
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 71 / PDF PAGE 113 =====
+
+8.3.2
+Abstract Syntax
+ValueSpecification
+OpaqueExpression
++ body : String [*] {ordered, nonunique}
++ language : String [*] {ordered}
+Expression
++ symbol : String [0..1]
+StringExpression
+Behavior
+TemplateableElement
+Parameter
+0..1
++ expression
+*
++ operand
+{subsets owner}
+{ordered, subsets ownedElement}
+0..1
++ owningExpression
+*
++ subExpression
+{subsets owner}
+{ordered, subsets ownedElement}
+*
++ opaqueExpression
+0..1
++ behavior
+*
++ opaqueExpression
+0..1
++ /result
+{readOnly}
+Figure 8.2  Expressions
+8.3.3
+Semantics
+8.3.3.1
+Expressions
+An Expression is specified as a tree structure. Each node in this tree structure consists of a symbol and an optional set of 
+operands. If there are no operands, the Expression represents a terminal node. If there are operands, the Expression 
+represents the operator given by the symbol applied to those operands.
+An Expression is evaluated by first evaluating each of its operands and then performing the operation denoted by the 
+Expression symbol to the resulting operand values. However, the actual interpretation of the symbol depends on the 
+context of use of the Expression and this specification does not provide any standard symbol definitions. A conforming 
+tool may define a specific set of symbols for which it provides interpretations or it may simply treat all Expressions as 
+uninterpreted.
+8.3.3.2
+String Expressions
+A StringExpression is an Expression that specifies a String value that is derived by concatenating a list of substrings. 
+The substrings are given as either a list of LiteralString operands or as a list of StringExpression subExpressions (but it is 
+not allowed to mix the two). The String value of a StringExpression is obtained by concatenating, in order, the String 
+values of either the operands or the subExpressions, depending on which is given.
+StringExpressions are intended to be used to specify the names of NamedElements in the context of Templates. Either 
+the entire StringExpression or one or more of its subExpressions may be used as the ParameterableElements of 
+TemplateParameters, allowing the name of a NamedElement to be parameterized within a template. See the semantics 
+of NamedElements in sub clause 7.4.3 for further discussion of this.
+8.3.3.3
+Opaque Expressions
+An OpaqueExpression specifies the computation of a set of values either in terms of a UML Behavior or based on a 
+textual statement in a language other than UML.
+Unified Modeling Language 2.5.1
+71
+
+===== PRINTED PAGE 72 / PDF PAGE 114 =====
+
+An OpaqueExpression may have a body that consists of a sequence of text Strings representing alternative means of 
+computing the values of the OpaqueExpression. A corresponding sequence of language Strings may be used to specify 
+the languages in which each of the body Strings is to be interpreted. Languages are matched to body Strings by order. 
+The UML specification does not define how body Strings are interpreted relative to any language, though other 
+specifications may define specific language Strings to be used to indicate interpretation with respect to those 
+specifications (e.g., “OCL” for expressions to be interpreted according to the OCL specification). Note also that it is not 
+required to specify the languages. If they are unspecified, then the interpretation of any body Strings must be determined 
+implicitly from the form of the bodies or the context of use of the OpaqueExpression.
+An OpaqueExpression may also be defined by a UML Behavior (see sub clause 13.2) that is restricted to have only in 
+Parameters and a return Parameter. The values of the OpaqueExpression are given by invoking the Behavior and 
+returning the values on the return Parameter. The in Parameters may be used to pass data into the Behavior. However, 
+what data is actually passed in is dependent on the context of the use of the OpaqueExpression. For example, the 
+Parameters could provide event data to the behavior of an OpaqueExpression used as a guard on an ActivityEdge or the 
+specification of a guard on a Transition. The exact mechanism for this is not further defined in this specification, but, to 
+evaluate an OpaqueExpression whose behavior has one or more input Parameters, a tool must provide a mechanism to 
+determine the values of all input Parameters as a tool-specific function of the OpaqueExpression and of its behavior. 
+Such a behavior may also access data through elements of its behavioral description, such as by reading attribute values 
+of a context object.
+If an OpaqueExpression has more than one body String, or a behavior in addition to one or more body Strings, then any 
+one of the bodies or the behavior may be used to evaluate the OpaqueExpression. The UML specification does not 
+determine how this choice is made.
+8.3.4
+Notation
+8.3.4.1
+Expressions
+An Expression with no operands is notated simply by its symbol (unlike a StringLiteral, the symbol is not enclosed in 
+quotes). An Expression with operands may be notated by its symbol, followed by round parentheses containing its 
+operands in order, separated by commas. However, in particular contexts, a conforming tool may permit special 
+notations, including infix operators.
+See sub clause 7.4.4 for the notation of the use of StringExpressions with NamedElements.
+8.3.4.2
+Opaque Expressions
+If an OpaqueExpression has one or more body Strings, then these are used to display the OpaqueExpression in the 
+context of its containing element. The UML Specification does not define the syntax of such Strings, but, if a 
+corresponding language is given for a body String, a conforming tool may enforce the syntax of that language. A 
+conforming tool may also restrict the languages allowed or assume a particular default language.
+If languages are specified for an OpaqueExpression, then a language name may be displayed in braces ({}) before the 
+body String to which it corresponds. It is not required, however, that the languages of an OpaqueExpression be displayed.
+If a language has a specification that defines its language name, then the language name used in an OpaqueExpression 
+should be spelled and capitalized exactly as it appears in the specification for the language. For example, use “OCL,” 
+not “ocl.”
+8.3.5
+Examples
+8.3.5.1
+Expressions
+xor
+else
+plus(x,1)
+72
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 73 / PDF PAGE 115 =====
+
+x+1
+8.3.5.2
+Opaque Expressions
+a > 0
+{OCL} i > j and self.size > i
+average hours worked per week
+8.4
+Time
+8.4.1
+Summary
+This sub clause defines TimeExpressions and Durations that produce values based on a simple model of time. This 
+simple model of time is intended as an approximation for situations in which the more complex aspects of time and time
+measurement can safely be ignored. For example, in many distributed systems there is no global notion of time, only the
+notion of local time relative to each distributed element of the system. This relativity of time is not accounted for in the 
+simple time model, nor are the effects resulting from imperfect clocks with finite resolution, overflows, drift, skew, etc. 
+It is assumed that applications for which such characteristics are relevant will use a more sophisticated model of time 
+provided by an appropriate profile.
+Unified Modeling Language 2.5.1
+73
+
+===== PRINTED PAGE 74 / PDF PAGE 116 =====
+
+8.4.2
+Abstract Syntax
+ValueSpecification
+PackageableElement
+TimeExpression
+NamedElement
+DurationObservation
++ firstEvent : Boolean [0..2]
+Duration
+Observation
+TimeObservation
++ firstEvent : Boolean = true
+0..1
++ timeExpression
+*
++ observation
+*
++ timeObservation
+1
++ event
+0..1
++ timeExpression
+0..1
++ expr
+{subsets owner}
+{subsets ownedElement}
+0..1
++ duration
+0..1
++ expr
+{subsets owner}
+{subsets ownedElement}
+*
++ durationObservation
+1..2
++ event
+{ordered}
+0..1
++ duration
+*
++ observation
+Figure 8.3  Time and Duration
+8.4.3
+Semantics
+8.4.3.1
+Time
+The structural modeling constructs of UML are used to model the properties of entities at specific points in time. In 
+contrast, behavioral modeling constructs are used to model how these properties change over time. An event is a 
+specification of something that may occur at a specific point in time when something of interest happens relative to the 
+properties and behaviors being modeled, such as the change in value of a Property or the beginning of execution of an 
+Activity.
+Time in this conception is simply a coordinate that orders the occurrence of events. Every event occurrence can be given
+a time coordinate value and, based on this, can be said to be before, after or at the same time as another event 
+occurrence.
+A duration is the period of time between two event occurrences, computed as the difference of the time coordinates of 
+those events. If a model Element has a behavioral effect, then this effect may occur over some duration. The starting 
+event of this duration is known as entering the element and the ending event is known as exiting the Element.
+74
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 75 / PDF PAGE 117 =====
+
+8.4.3.2
+Observations
+An Observation denotes the observation of events that may occur relative to some other part of a model. An 
+Observation is made on a NamedElement within the model. The events of interest are when the reference 
+NamedElement is entered and exited. If the referenced NamedElement is not a behavioral element, then the duration 
+between entering and exiting the NamedElement is considered to be zero, but this specification does not otherwise 
+define what specific events are observed on the Element.
+There are two kinds of Observations, TimeObservations and DurationObservations.
+A TimeObservation observes either entering or exiting a specific NamedElement. If firstEvent is true, then it is the entry 
+event that is observed, otherwise the exit event is observed. The result of a TimeObservation is the time at which the 
+observed event occurs.
+A DurationObservation observes a duration relative to either one or two NamedElements. If a single element is 
+observed, then the observed duration is between sequential occurrences of the entry and exit events of the element. If 
+two elements are observed, then the duration is between either the entry or the exit event of the first element and a 
+subsequent entry or exit event of the second element. In the latter case, two corresponding firstEvent values must also be 
+given for the DurationObservation, such that, if firstEvent=true for an observed element, then it is the entry event that is 
+observed, otherwise it is the exit event that is observed.
+8.4.3.3
+TimeExpression
+A TimeExpression is a ValueSpecification that evaluates to the time coordinate for an instant in time, possibly relative 
+to some given set of observations.
+If the TimeExpression has an expr, then this is evaluated to produce the result of the TimeExpression. The expr must 
+evaluate to a single value, but UML does not define any specific type or units that the value must have. The expr may 
+reference the observations associated with the TimeExpression but no standard notation is defined for such references. If 
+the TimeExpression has an expr but no observations, then the expr evaluates to a time constant.
+If the TimeExpression does not have an expr, then it must have a single TimeObservation and the result of that 
+observation is the value of the TimeExpression.
+8.4.3.4
+Duration
+A Duration is a ValueSpecification that evaluates to some duration in time, possibly relative to some given set of 
+observations.
+If the Duration has an expr, then this is evaluated to produce the result of the DurationExpression. The expr must 
+evaluate to a single value, but UML does not define any specific type or units that the value must have. The expr may 
+reference the observations associated with the Duration but no standard notation is defined for such references. If the 
+Duration has an expr but no observations, then the expr evaluates to a duration constant.
+If the Duration does not have an expr, then it must have a single DurationObservation and the result of that observation is 
+the value of the Duration.
+8.4.4
+Notation
+8.4.4.1
+Observations
+An Observation may be denoted by a straight line attached to the NamedElement it references. The Observation is given
+a name that is shown close to the unattached end of the line. Additional notation conventions on Observations are given 
+elsewhere relative to the modeling constructs in which they are typically used (such as Interactions, see sub clause 
+17.2).
+Unified Modeling Language 2.5.1
+75
+
+===== PRINTED PAGE 76 / PDF PAGE 118 =====
+
+8.4.4.2
+Time Expressions and Durations
+A TimeExpression or Duration is denoted by the textual representation of its expr, if it has one (see sub clause 8.3.5). 
+The representation is of a formula for computing the time or duration value, which may include the names of related 
+Observations and constants. If a TimeExpression or Duration does not have an expr, then it is simply represented by its 
+single associated Observation.
+A Duration is a value of relative time given in an implementation specific textual format. Often a Duration is a non-
+negative integer expression representing the number of “time ticks” which may elapse during this duration.
+8.4.5
+Examples
+Time is often represented using a numeric coordinate, in which case the expr of a TimeExpression should evaluate to a 
+numeric value, the units of which may be assumed by convention in a model (e.g., times are always in seconds). 
+Alternatively, DataTypes may be used to model time values with specific units (e.g., Second, Day, etc.) and the expr of a
+TimeExpression should then have the appropriate one of those types.
+A Duration is a value of relative time and, as such, is often represented as a non-negative number, such as an Integer 
+count of the number of “time ticks” on a reference clock that elapsed during the duration. In this case, the expr of a 
+DurationExpression should evaluate to a non-negative numeric value. A Duration value may also be used to represent a 
+time coordinate value as a Duration since some fixed “origin” of time.
+See also Figure 8.5 in sub clause 8.5.5.
+8.5
+Intervals
+8.5.1
+Summary
+An Interval is a range between two values, primarily for use in Constraints that assert that some other Element has a 
+value in the given range. Intervals can be defined for any type of value, but they are especially useful for time and 
+duration values as part of corresponding TimeConstraints and DurationConstraints.
+76
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 77 / PDF PAGE 119 =====
+
+8.5.2
+Abstract Syntax
+TimeInterval
+DurationConstraint
++ firstEvent : Boolean [0..2]
+TimeExpression
+ValueSpecification
+Constraint
+IntervalConstraint
+TimeConstraint
++ firstEvent : Boolean [0..1] = true
+Duration
+Interval
+DurationInterval
+*
++ durationInterval
+1
++ min
+{redefines interval}
+{redefines min}
+0..1
++ intervalConstraint
+1
++ specification
+{redefines owningConstraint}
+{redefines specification}
+*
++ durationInterval
+1
++ max
+{redefines interval}
+{redefines max}
+*
++ timeInterval
+1
++ max
+{redefines interval}
+{redefines max}
+*
++ interval
+1
++ min
+*
++ interval
+1
++ max
+*
++ timeInterval
+1
++ min
+{redefines interval}
+{redefines min}
+0..1
++ durationConstraint
+1
++ specification
+{redefines intervalConstraint}
+{redefines specification}
+0..1
++ timeConstraint
+1
++ specification
+{redefines intervalConstraint}
+{redefines specification}
+Figure 8.4  Intervals
+8.5.3
+Semantics
+8.5.3.1
+Intervals
+An Interval is a ValueSpecification specified using two other ValueSpecifications, the min and the max. An Interval is 
+evaluated by first evaluating each of its constituent ValueSpecifications, which must each evaluate to a single value. The
+value of the Interval is then the range from the min value to the max value—that is, the set of all values greater than or 
+equal to the min value and less than or equal to the max value (which may be the empty set). Note that, while 
+syntactically any ValueSpecifications of any type are allowed for the min and max of an Interval, a standard semantic 
+interpretation is only given for Intervals for which the min and max ValueSpecifications have the same type and that type
+has a total ordering defined on it.
+There are two specializations of Interval for use with timing constraints. A TimeInterval specifies the range between two
+time values given by TimeExpressions. A DurationInterval specifies the range between two duration values given by 
+Durations.
+8.5.3.2
+IntervalConstraint
+An IntervalConstraint defines a Constraint whose specification is given by an Interval (see also sub clause 7.6 on 
+Constraints). The constrainedElements of an IntervalConstraint are asserted to have values that are within the range 
+specified by the Interval of the IntervalConstraint. If a constrainedElement has a value outside this range, then the 
+IntervalConstraint is violated. If any constrainedElement cannot be interpreted to have a value, or its value is not the same
+type as the range given by the IntervalConstraint, then the IntervalConstraint has no standard semantic interpretation.
+There are two specializations of IntervalConstraint for use in specifying timing constraints. A TimeConstraint defines an
+IntervalConstraint on a single constrainedElement in which the constraining Interval is a TimeInterval. A 
+DurationConstraint defines an IntervalConstraint on either one or two constrainedElements in which the constraining 
+Unified Modeling Language 2.5.1
+77
+
+===== PRINTED PAGE 78 / PDF PAGE 120 =====
+
+Interval is a DurationInterval. If there are two constrainedElements, then the start of the duration being observed may be 
+between an event in the first constrainedElement and an event in the second.
+8.5.4
+Notation
+8.5.4.1
+Intervals
+An Interval is denoted textually by the textual representation of its two ValueSpecifications separated by “..”:
+<interval> ::= <min-value> ‘ ..’ <max-value>
+A TimeInterval is shown with the notation of Interval where each ValueSpecification element is a TimeExpression. A 
+DurationInterval is shown using the notation of Interval where each ValueSpecification element is a Duration. (See sub 
+clause 8.4.4 on the notation for TimeExpressions and Durations.)
+8.5.4.2
+Interval Constraints
+An IntervalConstraint is shown as an annotation of its constrainedElement. The general notation for Constraints (see sub 
+clause 7.6.4) may be used for an IntervalConstraint, with the specification Interval denoted textually as above. Special 
+notational constructs are defined for TimeConstraints and DurationConstraints, as given below.
+A TimeConstraint of a single constrainedElement may be shown as a small line between the graphical representation of 
+the constrainedElement and the textual representation of the TimeInterval of TimeConstraint. A DurationConstraint may 
+also be shown using a graphical notation relating its constrainedElements. However, the notation used is specific to the 
+diagram type on which the DurationConstraint appears (see sub clause 17.8 for the notation on Sequence Diagrams and 
+sub clause 17.11 for the notation on Timing Diagrams).
+8.5.5
+Examples
+Figure 8.5 shows a DurationConstraints associated with the duration of a Message and with the duration between two 
+OccurrenceSpecifications. It also shows a TimeConstraint associated with the reception of a Message. (See also sub 
+clause 17.2.5.)
+Figure 8.5  Example of DurationConstraints and TimeConstraints
+78
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 79 / PDF PAGE 121 =====
+
+8.6
+Classifier Descriptions
+8.6.1
+Duration [Class]
+8.6.1.1
+Description
+A Duration is a ValueSpecification that specifies the temporal distance between two time instants.
+8.6.1.2
+Diagrams
+Time, Intervals
+8.6.1.3
+Generalizations
+ValueSpecification
+8.6.1.4
+Association Ends
+
+♦ expr : ValueSpecification [0..1]{subsets Element::ownedElement} (opposite A_expr_duration::duration)
+A ValueSpecification that evaluates to the value of the Duration.
+
+observation : Observation [0..*] (opposite A_observation_duration::duration)
+Refers to the Observations that are involved in the computation of the Duration value.
+8.6.1.5
+Constraints
+
+no_expr_requires_observation
+If a Duration has no expr, then it must have a single observation that is a DurationObservation.
+inv: expr = null implies (observation->size() = 1 and observation-
+>forAll(oclIsKindOf(DurationObservation)))
+8.6.2
+DurationConstraint [Class]
+8.6.2.1
+Description
+A DurationConstraint is a Constraint that refers to a DurationInterval.
+8.6.2.2
+Diagrams
+Intervals
+8.6.2.3
+Generalizations
+IntervalConstraint
+8.6.2.4
+Attributes
+
+firstEvent : Boolean [0..2]
+The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the 
+corresponding observation event is the first time instant the execution enters constrainedElement[i]. If 
+firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within 
+constrainedElement[i].
+Unified Modeling Language 2.5.1
+79
+
+===== PRINTED PAGE 80 / PDF PAGE 122 =====
+
+8.6.2.5
+Association Ends
+
+♦ specification : DurationInterval [1..1]{redefines IntervalConstraint::specification} (opposite 
+A_specification_durationConstraint::durationConstraint)
+The DurationInterval constraining the duration.
+8.6.2.6
+Constraints
+
+first_event_multiplicity
+The multiplicity of firstEvent must be 2 if the multiplicity of constrainedElement is 2. Otherwise the 
+multiplicity of firstEvent is 0.
+inv: if (constrainedElement->size() = 2)
+  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
+endif
+
+has_one_or_two_constrainedElements
+A DurationConstraint has either one or two constrainedElements.
+inv: constrainedElement->size() = 1 or constrainedElement->size()=2
+8.6.3
+DurationInterval [Class]
+8.6.3.1
+Description
+A DurationInterval defines the range between two Durations.
+8.6.3.2
+Diagrams
+Intervals
+8.6.3.3
+Generalizations
+Interval
+8.6.3.4
+Association Ends
+
+max : Duration [1..1]{redefines Interval::max} (opposite A_max_durationInterval::durationInterval)
+Refers to the Duration denoting the maximum value of the range.
+
+min : Duration [1..1]{redefines Interval::min} (opposite A_min_durationInterval::durationInterval)
+Refers to the Duration denoting the minimum value of the range.
+8.6.4
+DurationObservation [Class]
+8.6.4.1
+Description
+A DurationObservation is a reference to a duration during an execution. It points out the NamedElement(s) in the model
+to observe and whether the observations are when this NamedElement is entered or when it is exited.
+8.6.4.2
+Diagrams
+Time
+80
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 81 / PDF PAGE 123 =====
+
+8.6.4.3
+Generalizations
+Observation
+8.6.4.4
+Attributes
+
+firstEvent : Boolean [0..2]
+The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding
+observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the 
+corresponding observation event is the time instant the execution exits event[i].
+8.6.4.5
+Association Ends
+
+event : NamedElement [1..2]{ordered} (opposite A_event_durationObservation::durationObservation)
+The DurationObservation is determined as the duration between the entering or exiting of a single event 
+Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
+8.6.4.6
+Constraints
+
+first_event_multiplicity
+The multiplicity of firstEvent must be 2 if the multiplicity of event is 2. Otherwise the multiplicity of firstEvent
+is 0.
+inv: if (event->size() = 2)
+  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
+endif
+8.6.5
+Expression [Class]
+8.6.5.1
+Description
+An Expression represents a node in an expression tree, which may be non-terminal or terminal. It defines a symbol, and 
+has a possibly empty sequence of operands that are ValueSpecifications. It denotes a (possibly empty) set of values 
+when evaluated in a context.
+8.6.5.2
+Diagrams
+Expressions
+8.6.5.3
+Generalizations
+ValueSpecification
+8.6.5.4
+Specializations
+StringExpression
+8.6.5.5
+Attributes
+
+symbol : String [0..1]
+The symbol associated with this node in the expression tree.
+Unified Modeling Language 2.5.1
+81
+
+===== PRINTED PAGE 82 / PDF PAGE 124 =====
+
+8.6.5.6
+Association Ends
+
+♦ operand : ValueSpecification [0..*]{ordered, subsets Element::ownedElement} (opposite 
+A_operand_expression::expression)
+Specifies a sequence of operand ValueSpecifications.
+8.6.6
+Interval [Class]
+8.6.6.1
+Description
+An Interval defines the range between two ValueSpecifications.
+8.6.6.2
+Diagrams
+Intervals
+8.6.6.3
+Generalizations
+ValueSpecification
+8.6.6.4
+Specializations
+DurationInterval, TimeInterval
+8.6.6.5
+Association Ends
+
+max : ValueSpecification [1..1] (opposite A_max_interval::interval)
+Refers to the ValueSpecification denoting the maximum value of the range.
+
+min : ValueSpecification [1..1] (opposite A_min_interval::interval)
+Refers to the ValueSpecification denoting the minimum value of the range.
+8.6.7
+IntervalConstraint [Class]
+8.6.7.1
+Description
+An IntervalConstraint is a Constraint that is specified by an Interval.
+8.6.7.2
+Diagrams
+Intervals
+8.6.7.3
+Generalizations
+Constraint
+8.6.7.4
+Specializations
+DurationConstraint, TimeConstraint
+8.6.7.5
+Association Ends
+
+♦ specification : Interval [1..1]{redefines Constraint::specification} (opposite 
+A_specification_intervalConstraint::intervalConstraint)
+The Interval that specifies the condition of the IntervalConstraint.
+82
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 83 / PDF PAGE 125 =====
+
+8.6.8
+LiteralBoolean [Class]
+8.6.8.1
+Description
+A LiteralBoolean is a specification of a Boolean value.
+8.6.8.2
+Diagrams
+Literals
+8.6.8.3
+Generalizations
+LiteralSpecification
+8.6.8.4
+Attributes
+
+value : Boolean [1..1] = false
+The specified Boolean value.
+8.6.8.5
+Operations
+
+booleanValue() : Boolean {redefines ValueSpecification::booleanValue()}
+The query booleanValue() gives the value.
+body: value
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+body: true
+8.6.9
+LiteralInteger [Class]
+8.6.9.1
+Description
+A LiteralInteger is a specification of an Integer value.
+8.6.9.2
+Diagrams
+Literals
+8.6.9.3
+Generalizations
+LiteralSpecification
+8.6.9.4
+Attributes
+
+value : Integer [1..1] = 0
+The specified Integer value.
+8.6.9.5
+Operations
+
+integerValue() : Integer {redefines ValueSpecification::integerValue()}
+The query integerValue() gives the value.
+Unified Modeling Language 2.5.1
+83
+
+===== PRINTED PAGE 84 / PDF PAGE 126 =====
+
+body: value
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+body: true
+8.6.10
+LiteralNull [Class]
+8.6.10.1
+Description
+A LiteralNull specifies the lack of a value.
+8.6.10.2
+Diagrams
+Literals
+8.6.10.3
+Generalizations
+LiteralSpecification
+8.6.10.4
+Operations
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+body: true
+
+isNull() : Boolean {redefines ValueSpecification::isNull()}
+The query isNull() returns true.
+body: true
+8.6.11
+LiteralReal [Class]
+8.6.11.1
+Description
+A LiteralReal is a specification of a Real value.
+8.6.11.2
+Diagrams
+Literals
+8.6.11.3
+Generalizations
+LiteralSpecification
+8.6.11.4
+Attributes
+
+value : Real [1..1]
+The specified Real value.
+8.6.11.5
+Operations
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+84
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 85 / PDF PAGE 127 =====
+
+body: true
+
+realValue() : Real {redefines ValueSpecification::realValue()}
+The query realValue() gives the value.
+body: value
+8.6.12
+LiteralSpecification [Abstract Class]
+8.6.12.1
+Description
+A LiteralSpecification identifies a literal constant being modeled.
+8.6.12.2
+Diagrams
+Literals
+8.6.12.3
+Generalizations
+ValueSpecification
+8.6.12.4
+Specializations
+LiteralBoolean, LiteralInteger, LiteralNull, LiteralReal, LiteralString, LiteralUnlimitedNatural
+8.6.13
+LiteralString [Class]
+8.6.13.1
+Description
+A LiteralString is a specification of a String value.
+8.6.13.2
+Diagrams
+Literals
+8.6.13.3
+Generalizations
+LiteralSpecification
+8.6.13.4
+Attributes
+
+value : String [0..1]
+The specified String value.
+8.6.13.5
+Operations
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+body: true
+
+stringValue() : String {redefines ValueSpecification::stringValue()}
+The query stringValue() gives the value.
+body: value
+Unified Modeling Language 2.5.1
+85
+
+===== PRINTED PAGE 86 / PDF PAGE 128 =====
+
+8.6.14
+LiteralUnlimitedNatural [Class]
+8.6.14.1
+Description
+A LiteralUnlimitedNatural is a specification of an UnlimitedNatural number.
+8.6.14.2
+Diagrams
+Literals
+8.6.14.3
+Generalizations
+LiteralSpecification
+8.6.14.4
+Attributes
+
+value : UnlimitedNatural [1..1] = 0
+The specified UnlimitedNatural value.
+8.6.14.5
+Operations
+
+isComputable() : Boolean {redefines ValueSpecification::isComputable()}
+The query isComputable() is redefined to be true.
+body: true
+
+unlimitedValue() : UnlimitedNatural {redefines ValueSpecification::unlimitedValue()}
+The query unlimitedValue() gives the value.
+body: value
+8.6.15
+Observation [Abstract Class]
+8.6.15.1
+Description
+Observation specifies a value determined by observing an event or events that occur relative to other model Elements.
+8.6.15.2
+Diagrams
+Time
+8.6.15.3
+Generalizations
+PackageableElement
+8.6.15.4
+Specializations
+DurationObservation, TimeObservation
+8.6.16
+OpaqueExpression [Class]
+8.6.16.1
+Description
+An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of 
+a UML Behavior or based on a textual statement in a language other than UML
+86
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 87 / PDF PAGE 129 =====
+
+8.6.16.2
+Diagrams
+Expressions, Dependencies
+8.6.16.3
+Generalizations
+ValueSpecification
+8.6.16.4
+Attributes
+
+body : String [0..*]
+A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
+
+language : String [0..*]
+Specifies the languages used to express the textual bodies of the OpaqueExpression. Languages are matched to
+body Strings by order. The interpretation of the body depends on the languages. If the languages are 
+unspecified, they may be implicit from the expression body or the context.
+8.6.16.5
+Association Ends
+
+behavior : Behavior [0..1] (opposite A_behavior_opaqueExpression::opaqueExpression)
+Specifies the behavior of the OpaqueExpression as a UML Behavior.
+
+/result : Parameter [0..1]{} (opposite A_result_opaqueExpression::opaqueExpression)
+If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return 
+Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the 
+result of evaluating the OpaqueExpression.
+8.6.16.6
+Operations
+
+isIntegral() : Boolean
+The query isIntegral() tells whether an expression is intended to produce an Integer.
+body: false
+
+isNonNegative() : Boolean
+The query isNonNegative() tells whether an integer expression has a non-negative value.
+pre: self.isIntegral()
+body: false
+
+isPositive() : Boolean
+The query isPositive() tells whether an integer expression has a positive value.
+pre: self.isIntegral()
+body: false
+
+result() : Parameter [0..1]
+Derivation for OpaqueExpression::/result
+body: if behavior = null then
+null
+else
+behavior.ownedParameter->first()
+endif
+Unified Modeling Language 2.5.1
+87
+
+===== PRINTED PAGE 88 / PDF PAGE 130 =====
+
+
+value() : Integer
+The query value() gives an integer value for an expression intended to produce one.
+pre: self.isIntegral()
+body: 0
+8.6.16.7
+Constraints
+
+language_body_size
+If the language attribute is not empty, then the size of the body and language arrays must be the same.
+inv: language->notEmpty() implies (_'body'->size() = language->size())
+
+one_return_result_parameter
+The behavior must have exactly one return result parameter.
+inv: behavior <> null implies
+   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
+
+only_in_or_return_parameters
+The behavior may only have non-stream in or return parameters.
+inv: behavior <> null implies behavior.ownedParameter->forAll(not isStream and
+(direction=ParameterDirectionKind::in or direction=ParameterDirectionKind::return))
+8.6.17
+StringExpression [Class]
+8.6.17.1
+Description
+A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of 
+operands with String values or a sequence of subExpressions, some of which might be template parameters.
+8.6.17.2
+Diagrams
+Expressions, Namespaces
+8.6.17.3
+Generalizations
+TemplateableElement, Expression
+8.6.17.4
+Association Ends
+
+owningExpression : StringExpression [0..1]{subsets Element::owner} (opposite 
+StringExpression::subExpression)
+The StringExpression of which this StringExpression is a subExpression.
+
+♦ subExpression : StringExpression [0..*]{ordered, subsets Element::ownedElement} (opposite 
+StringExpression::owningExpression)
+The StringExpressions that constitute this StringExpression.
+8.6.17.5
+Operations
+
+stringValue() : String {redefines ValueSpecification::stringValue()}
+The query stringValue() returns the String resulting from concatenating, in order, all the component String 
+values of all the operands or subExpressions that are part of the StringExpression.
+88
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 89 / PDF PAGE 131 =====
+
+body: if subExpression->notEmpty()
+then subExpression->iterate(se; stringValue: String = '' | 
+stringValue.concat(se.stringValue()))
+else operand->iterate(op; stringValue: String = '' | stringValue.concat(op.stringValue()))
+endif
+8.6.17.6
+Constraints
+
+operands
+All the operands of a StringExpression must be LiteralStrings
+inv: operand->forAll (oclIsKindOf (LiteralString))
+
+subexpressions
+If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of 
+having to define a collating sequence between operands and subexpressions).
+inv: if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
+8.6.18
+TimeConstraint [Class]
+8.6.18.1
+Description
+A TimeConstraint is a Constraint that refers to a TimeInterval.
+8.6.18.2
+Diagrams
+Intervals
+8.6.18.3
+Generalizations
+IntervalConstraint
+8.6.18.4
+Attributes
+
+firstEvent : Boolean [0..1] = true
+The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding 
+observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, 
+then the corresponding observation event is the last time instant the execution is within the 
+constrainedElement.
+8.6.18.5
+Association Ends
+
+♦ specification : TimeInterval [1..1]{redefines IntervalConstraint::specification} (opposite 
+A_specification_timeConstraint::timeConstraint)
+TheTimeInterval constraining the duration.
+8.6.18.6
+Constraints
+
+has_one_constrainedElement
+A TimeConstraint has one constrainedElement.
+inv: constrainedElement->size() = 1
+Unified Modeling Language 2.5.1
+89
+
+===== PRINTED PAGE 90 / PDF PAGE 132 =====
+
+8.6.19
+TimeExpression [Class]
+8.6.19.1
+Description
+A TimeExpression is a ValueSpecification that represents a time value.
+8.6.19.2
+Diagrams
+Time, Intervals, Events
+8.6.19.3
+Generalizations
+ValueSpecification
+8.6.19.4
+Association Ends
+
+♦ expr : ValueSpecification [0..1]{subsets Element::ownedElement} (opposite 
+A_expr_timeExpression::timeExpression)
+A ValueSpecification that evaluates to the value of the TimeExpression.
+
+observation : Observation [0..*] (opposite A_observation_timeExpression::timeExpression)
+Refers to the Observations that are involved in the computation of the TimeExpression value.
+8.6.19.5
+Constraints
+
+no_expr_requires_observation
+If a TimeExpression has no expr, then it must have a single observation that is a TimeObservation.
+inv: expr = null implies (observation->size() = 1 and observation-
+>forAll(oclIsKindOf(TimeObservation)))
+8.6.20
+TimeInterval [Class]
+8.6.20.1
+Description
+A TimeInterval defines the range between two TimeExpressions.
+8.6.20.2
+Diagrams
+Intervals
+8.6.20.3
+Generalizations
+Interval
+8.6.20.4
+Association Ends
+
+max : TimeExpression [1..1]{redefines Interval::max} (opposite A_max_timeInterval::timeInterval)
+Refers to the TimeExpression denoting the maximum value of the range.
+
+min : TimeExpression [1..1]{redefines Interval::min} (opposite A_min_timeInterval::timeInterval)
+Refers to the TimeExpression denoting the minimum value of the range.
+90
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 91 / PDF PAGE 133 =====
+
+8.6.21
+TimeObservation [Class]
+8.6.21.1
+Description
+A TimeObservation is a reference to a time instant during an execution. It points out the NamedElement in the model to 
+observe and whether the observation is when this NamedElement is entered or when it is exited.
+8.6.21.2
+Diagrams
+Time
+8.6.21.3
+Generalizations
+Observation
+8.6.21.4
+Attributes
+
+firstEvent : Boolean [1..1] = true
+The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is 
+the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding 
+observation event is the time instant the execution exits the event Element.
+8.6.21.5
+Association Ends
+
+event : NamedElement [1..1] (opposite A_event_timeObservation::timeObservation)
+The TimeObservation is determined by the entering or exiting of the event Element during execution.
+8.6.22
+ValueSpecification [Abstract Class]
+8.6.22.1
+Description
+A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a 
+ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the 
+binding of a template.
+8.6.22.2
+Diagrams
+Expressions, Literals, Time, Intervals, Object Nodes, Activities, Control Nodes, Messages, Lifelines, 
+Fragments, Interaction Uses, Types, Constraints, Events, Features, Properties, Instances, Actions, Object 
+Actions
+8.6.22.3
+Generalizations
+TypedElement, PackageableElement
+8.6.22.4
+Specializations
+Duration, Expression, Interval, LiteralSpecification, OpaqueExpression, TimeExpression, InstanceValue
+8.6.22.5
+Operations
+
+booleanValue() : Boolean [0..1]
+The query booleanValue() gives a single Boolean value when one can be computed.
+body: null
+Unified Modeling Language 2.5.1
+91
+
+===== PRINTED PAGE 92 / PDF PAGE 134 =====
+
+
+integerValue() : Integer [0..1]
+The query integerValue() gives a single Integer value when one can be computed.
+body: null
+
+isCompatibleWith(p : ParameterableElement) : Boolean {redefines 
+ParameterableElement::isCompatibleWith()}
+The query isCompatibleWith() determines if this ValueSpecification is compatible with the specified 
+ParameterableElement. This ValueSpecification is compatible with ParameterableElement p if the kind of this 
+ValueSpecification is the same as or a subtype of the kind of p. Further, if p is a TypedElement, then the type of
+this ValueSpecification must be conformant with the type of p.
+body: self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypedElement) implies
+self.type.conformsTo(p.oclAsType(TypedElement).type))
+
+isComputable() : Boolean
+The query isComputable() determines whether a value specification can be computed in a model. This 
+operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this 
+operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is
+true. A conforming implementation is expected to be able to compute at least the value of all 
+LiteralSpecifications.
+body: false
+
+isNull() : Boolean
+The query isNull() returns true when it can be computed that the value is null.
+body: false
+
+realValue() : Real [0..1]
+The query realValue() gives a single Real value when one can be computed.
+body: null
+
+stringValue() : String [0..1]
+The query stringValue() gives a single String value when one can be computed.
+body: null
+
+unlimitedValue() : UnlimitedNatural [0..1]
+The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
+body: null
+8.7
+Association Descriptions
+8.7.1
+A_behavior_opaqueExpression [Association]
+8.7.1.1
+Diagrams
+Expressions
+92
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 93 / PDF PAGE 135 =====
+
+8.7.1.2
+Owned Ends
+
+opaqueExpression : OpaqueExpression [0..*] (opposite OpaqueExpression::behavior)
+8.7.2
+A_event_durationObservation [Association]
+8.7.2.1
+Diagrams
+Time
+8.7.2.2
+Owned Ends
+
+durationObservation : DurationObservation [0..*] (opposite DurationObservation::event)
+8.7.3
+A_event_timeObservation [Association]
+8.7.3.1
+Diagrams
+Time
+8.7.3.2
+Owned Ends
+
+timeObservation : TimeObservation [0..*] (opposite TimeObservation::event)
+8.7.4
+A_expr_duration [Association]
+8.7.4.1
+Diagrams
+Time
+8.7.4.2
+Owned Ends
+
+duration : Duration [0..1]{subsets Element::owner} (opposite Duration::expr)
+8.7.5
+A_expr_timeExpression [Association]
+8.7.5.1
+Diagrams
+Time
+8.7.5.2
+Owned Ends
+
+timeExpression : TimeExpression [0..1]{subsets Element::owner} (opposite TimeExpression::expr)
+8.7.6
+A_max_durationInterval [Association]
+8.7.6.1
+Diagrams
+Intervals
+8.7.6.2
+Generalizations
+A_max_interval
+Unified Modeling Language 2.5.1
+93
+
+===== PRINTED PAGE 94 / PDF PAGE 136 =====
+
+8.7.6.3
+Owned Ends
+
+durationInterval : DurationInterval [0..*]{redefines A_max_interval::interval} (opposite 
+DurationInterval::max)
+8.7.7
+A_max_interval [Association]
+8.7.7.1
+Diagrams
+Intervals
+8.7.7.2
+Specializations
+A_max_timeInterval, A_max_durationInterval
+8.7.7.3
+Owned Ends
+
+interval : Interval [0..*] (opposite Interval::max)
+8.7.8
+A_max_timeInterval [Association]
+8.7.8.1
+Diagrams
+Intervals
+8.7.8.2
+Generalizations
+A_max_interval
+8.7.8.3
+Owned Ends
+
+timeInterval : TimeInterval [0..*]{redefines A_max_interval::interval} (opposite TimeInterval::max)
+8.7.9
+A_min_durationInterval [Association]
+8.7.9.1
+Diagrams
+Intervals
+8.7.9.2
+Generalizations
+A_min_interval
+8.7.9.3
+Owned Ends
+
+durationInterval : DurationInterval [0..*]{redefines A_min_interval::interval} (opposite DurationInterval::min)
+8.7.10
+A_min_interval [Association]
+8.7.10.1
+Diagrams
+Intervals
+94
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 95 / PDF PAGE 137 =====
+
+8.7.10.2
+Specializations
+A_min_timeInterval, A_min_durationInterval
+8.7.10.3
+Owned Ends
+
+interval : Interval [0..*] (opposite Interval::min)
+8.7.11
+A_min_timeInterval [Association]
+8.7.11.1
+Diagrams
+Intervals
+8.7.11.2
+Generalizations
+A_min_interval
+8.7.11.3
+Owned Ends
+
+timeInterval : TimeInterval [0..*]{redefines A_min_interval::interval} (opposite TimeInterval::min)
+8.7.12
+A_observation_duration [Association]
+8.7.12.1
+Diagrams
+Time
+8.7.12.2
+Owned Ends
+
+duration : Duration [0..1] (opposite Duration::observation)
+8.7.13
+A_observation_timeExpression [Association]
+8.7.13.1
+Diagrams
+Time
+8.7.13.2
+Owned Ends
+
+timeExpression : TimeExpression [0..1] (opposite TimeExpression::observation)
+8.7.14
+A_operand_expression [Association]
+8.7.14.1
+Diagrams
+Expressions
+8.7.14.2
+Owned Ends
+
+expression : Expression [0..1]{subsets Element::owner} (opposite Expression::operand)
+Unified Modeling Language 2.5.1
+95
+
+===== PRINTED PAGE 96 / PDF PAGE 138 =====
+
+8.7.15
+A_result_opaqueExpression [Association]
+8.7.15.1
+Diagrams
+Expressions
+8.7.15.2
+Owned Ends
+
+opaqueExpression : OpaqueExpression [0..*] (opposite OpaqueExpression::result)
+8.7.16
+A_specification_durationConstraint [Association]
+8.7.16.1
+Diagrams
+Intervals
+8.7.16.2
+Generalizations
+A_specification_intervalConstraint
+8.7.16.3
+Owned Ends
+
+durationConstraint : DurationConstraint [0..1]{redefines 
+A_specification_intervalConstraint::intervalConstraint} (opposite DurationConstraint::specification)
+8.7.17
+A_specification_intervalConstraint [Association]
+8.7.17.1
+Diagrams
+Intervals
+8.7.17.2
+Generalizations
+A_specification_owningConstraint
+8.7.17.3
+Specializations
+A_specification_timeConstraint, A_specification_durationConstraint
+8.7.17.4
+Owned Ends
+
+intervalConstraint : IntervalConstraint [0..1]{redefines A_specification_owningConstraint::owningConstraint} 
+(opposite IntervalConstraint::specification)
+8.7.18
+A_specification_timeConstraint [Association]
+8.7.18.1
+Diagrams
+Intervals
+8.7.18.2
+Generalizations
+A_specification_intervalConstraint
+96
+Unified Modeling Language 2.5.1
+
+===== PRINTED PAGE 97 / PDF PAGE 139 =====
+
+8.7.18.3
+Owned Ends
+
+timeConstraint : TimeConstraint [0..1]{redefines A_specification_intervalConstraint::intervalConstraint} 
+(opposite TimeConstraint::specification)
+8.7.19
+A_subExpression_owningExpression [Association]
+8.7.19.1
+Diagrams
+Expressions
+8.7.19.2
+Member Ends
+
+StringExpression::subExpression
+
+StringExpression::owningExpression
+Unified Modeling Language 2.5.1
+97

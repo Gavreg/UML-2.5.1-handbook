@@ -13,6 +13,8 @@
   --border-strong: #b9c7dc;
   --focus: #7c3aed;
   --code: #edf1f7;
+  --diagram-background: #ffffff;
+  --diagram-filter: none;
   --shadow: 0 12px 32px rgb(16 36 74 / 12%);
   --header-height: 72px;
   --sidebar-width: 304px;
@@ -35,6 +37,8 @@
   --border-strong: #52647e;
   --focus: #c4b5fd;
   --code: #111a27;
+  --diagram-background: #000000;
+  --diagram-filter: invert(1) hue-rotate(180deg);
   --shadow: 0 12px 32px rgb(0 0 0 / 28%);
 }
 
@@ -950,7 +954,7 @@ h3 {
 .figure-link {
   display: block;
   padding: 18px;
-  background: #ffffff;
+  background: var(--diagram-background);
   cursor: zoom-in;
 }
 
@@ -958,6 +962,14 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.figure-link > img,
+.diagram-object,
+.diagram-preview img,
+.diagram-full > img,
+.inheritance-svg {
+  filter: var(--diagram-filter);
 }
 
 .figure-caption {
@@ -1037,7 +1049,7 @@ h3 {
   place-items: center;
   min-height: 180px;
   padding: 16px;
-  background: #ffffff;
+  background: var(--diagram-background);
 }
 
 .diagram-preview img {
@@ -1071,7 +1083,7 @@ h3 {
 
 .inheritance-diagram {
   overflow-x: auto;
-  background: #ffffff;
+  background: var(--diagram-background);
   border: 1px solid var(--border);
   border-radius: 6px;
 }
@@ -1129,7 +1141,7 @@ h3 {
 .diagram-full {
   margin: 28px 0 20px;
   padding: 24px;
-  background: #ffffff;
+  background: var(--diagram-background);
   border: 1px solid var(--border);
   border-radius: 6px;
   overflow-x: auto;
@@ -1500,6 +1512,11 @@ mark {
   .content {
     max-width: none;
     padding: 0;
+  }
+
+  :root[data-theme="dark"] {
+    --diagram-background: #ffffff;
+    --diagram-filter: none;
   }
 
   body {

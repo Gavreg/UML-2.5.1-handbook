@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" role="img" aria-labelledby="diagram-title diagram-description" data-figure="8.1">
+  <title id="diagram-title">Рисунок 8.1 — Литералы</title>
+  <desc id="diagram-description">Иерархия наследования ValueSpecification: TypedElement и PackageableElement как родители ValueSpecification; LiteralSpecification как потомок ValueSpecification; шесть подтипов Literal — LiteralNull, LiteralInteger, LiteralUnlimitedNatural, LiteralString, LiteralBoolean, LiteralReal.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }</style>
+  </defs>
+  <rect class="background" width="1200" height="730"/>
+  <a class="class-node" data-classifier="TypedElement" href="../../index.html#/classifier/typedelement" target="_top" aria-label="TypedElement — открыть описание класса"><title>TypedElement. NamedElement, для которого может быть задан Type.</title>
+<rect class="class-box" x="120" y="40" width="200" height="60"/>
+<line class="class-divider" x1="120" y1="72" x2="320" y2="72"/>
+<text class="class-name abstract" x="220.0" y="63" text-anchor="middle">TypedElement</text>
+</a>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="780" y="40" width="240" height="60"/>
+<line class="class-divider" x1="780" y1="72" x2="1020" y2="72"/>
+<text class="class-name abstract" x="900.0" y="63" text-anchor="middle">PackageableElement</text>
+</a>
+<a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="425" y="170" width="250" height="65"/>
+<line class="class-divider" x1="425" y1="202" x2="675" y2="202"/>
+<text class="class-name abstract" x="550.0" y="193" text-anchor="middle">ValueSpecification</text>
+</a>
+<path class="generalization-line" d="M 550 170 V 130 H 850 V 100" data-child="ValueSpecification" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 425 170 V 130 H 220 V 100" data-child="ValueSpecification" data-parent="TypedElement" marker-end="url(#generalization)"/>
+<a class="class-node" data-classifier="LiteralSpecification" href="../../index.html#/classifier/literalspecification" target="_top" aria-label="LiteralSpecification — открыть описание класса"><title>LiteralSpecification. ValueSpecification, задающая литеральное — явно обозначенное — значение.</title>
+<rect class="class-box" x="425" y="300" width="250" height="65"/>
+<line class="class-divider" x1="425" y1="332" x2="675" y2="332"/>
+<text class="class-name abstract" x="550.0" y="323" text-anchor="middle">LiteralSpecification</text>
+</a>
+<path class="generalization-line" d="M 550 300 V 270 H 550 V 235" data-child="LiteralSpecification" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
+<a class="class-node" data-classifier="LiteralNull" href="../../index.html#/classifier/literalnull" target="_top" aria-label="LiteralNull — открыть описание класса"><title>LiteralNull. LiteralSpecification, явно моделирующая отсутствие значения.</title>
+<rect class="class-box" x="25" y="480" width="150" height="55"/>
+<line class="class-divider" x1="25" y1="512" x2="175" y2="512"/>
+<text class="class-name" x="100.0" y="503" text-anchor="middle">LiteralNull</text>
+</a>
+<path class="generalization-line" d="M 100 480 V 420 H 550 V 365" data-child="LiteralNull" data-parent="LiteralSpecification" marker-end="url(#generalization)"/>
+<a class="class-node" data-classifier="LiteralInteger" href="../../index.html#/classifier/literalinteger" target="_top" aria-label="LiteralInteger — открыть описание класса"><title>LiteralInteger. LiteralSpecification, задающая постоянное значение примитивного типа Integer.</title>
+<rect class="class-box" x="205" y="480" width="210" height="70"/>
+<line class="class-divider" x1="205" y1="512" x2="415" y2="512"/>
+<text class="class-name" x="310.0" y="503" text-anchor="middle">LiteralInteger</text>
+<text class="attribute" x="215" y="534">+ value : Integer = 0</text>
+</a>
+<path class="generalization-line" d="M 310 480 V 420 H 550 V 365" data-child="LiteralInteger" data-parent="LiteralSpecification"/>
+<a class="class-node" data-classifier="LiteralUnlimitedNatural" href="../../index.html#/classifier/literalunlimitednatural" target="_top" aria-label="LiteralUnlimitedNatural — открыть описание класса"><title>LiteralUnlimitedNatural. LiteralSpecification, задающая постоянное значение примитивного типа UnlimitedNatural.</title>
+<rect class="class-box" x="445" y="480" width="285" height="70"/>
+<line class="class-divider" x1="445" y1="512" x2="730" y2="512"/>
+<text class="class-name" x="587.5" y="503" text-anchor="middle">LiteralUnlimitedNatural</text>
+<text class="attribute" x="455" y="534">+ value : UnlimitedNatural = 0</text>
+</a>
+<path class="generalization-line" d="M 587.5 480 V 420 H 550 V 365" data-child="LiteralUnlimitedNatural" data-parent="LiteralSpecification"/>
+<a class="class-node" data-classifier="LiteralString" href="../../index.html#/classifier/literalstring" target="_top" aria-label="LiteralString — открыть описание класса"><title>LiteralString. LiteralSpecification, задающая постоянное значение примитивного типа String.</title>
+<rect class="class-box" x="180" y="590" width="200" height="70"/>
+<line class="class-divider" x1="180" y1="622" x2="380" y2="622"/>
+<text class="class-name" x="280.0" y="613" text-anchor="middle">LiteralString</text>
+<text class="attribute" x="190" y="644">+ value : String [0..1]</text>
+</a>
+<path class="generalization-line" d="M 190 590 V 420 H 550 V 365" data-child="LiteralString" data-parent="LiteralSpecification"/>
+<a class="class-node" data-classifier="LiteralBoolean" href="../../index.html#/classifier/literalboolean" target="_top" aria-label="LiteralBoolean — открыть описание класса"><title>LiteralBoolean. LiteralSpecification, задающая постоянное значение примитивного типа Boolean.</title>
+<rect class="class-box" x="410" y="590" width="220" height="70"/>
+<line class="class-divider" x1="410" y1="622" x2="630" y2="622"/>
+<text class="class-name" x="520.0" y="613" text-anchor="middle">LiteralBoolean</text>
+<text class="attribute" x="420" y="644">+ value : Boolean = false</text>
+</a>
+<path class="generalization-line" d="M 425 590 V 420 H 550 V 365" data-child="LiteralBoolean" data-parent="LiteralSpecification"/>
+<a class="class-node" data-classifier="LiteralReal" href="../../index.html#/classifier/literalreal" target="_top" aria-label="LiteralReal — открыть описание класса"><title>LiteralReal. LiteralSpecification, задающая постоянное значение примитивного типа Real.</title>
+<rect class="class-box" x="670" y="590" width="180" height="70"/>
+<line class="class-divider" x1="670" y1="622" x2="850" y2="622"/>
+<text class="class-name" x="760.0" y="613" text-anchor="middle">LiteralReal</text>
+<text class="attribute" x="680" y="644">+ value : Real</text>
+</a>
+<path class="generalization-line" d="M 760 590 V 420 H 550 V 365" data-child="LiteralReal" data-parent="LiteralSpecification"/>
+</svg>

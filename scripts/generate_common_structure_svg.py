@@ -659,6 +659,95 @@ def figure_7_21():
     return svg
 
 
+def figure_8_1():
+    svg = Svg("8.1", "Литералы", "Иерархия наследования ValueSpecification: TypedElement и PackageableElement как родители ValueSpecification; LiteralSpecification как потомок ValueSpecification; шесть подтипов Literal — LiteralNull, LiteralInteger, LiteralUnlimitedNatural, LiteralString, LiteralBoolean, LiteralReal.", 1200, 730)
+    class_node(svg, "TypedElement", 120, 40, 200, 60)
+    class_node(svg, "PackageableElement", 780, 40, 240, 60)
+    class_node(svg, "ValueSpecification", 425, 170, 250, 65)
+    generalization(svg, f"M {425 + 125} 170 V 130 H 850 V 100", child="ValueSpecification", parent="PackageableElement")
+    generalization(svg, "M 425 170 V 130 H 220 V 100", child="ValueSpecification", parent="TypedElement")
+    class_node(svg, "LiteralSpecification", 425, 300, 250, 65)
+    generalization(svg, f"M {425 + 125} 300 V 270 H {425 + 125} V 235", child="LiteralSpecification", parent="ValueSpecification")
+    class_node(svg, "LiteralNull", 25, 480, 150, 55)
+    generalization(svg, "M 100 480 V 420 H 550 V 365", marker=True, child="LiteralNull", parent="LiteralSpecification")
+    class_node(svg, "LiteralInteger", 205, 480, 210, 70, attributes=["+ value : Integer = 0"])
+    generalization(svg, "M 310 480 V 420 H 550 V 365", marker=False, child="LiteralInteger", parent="LiteralSpecification")
+    class_node(svg, "LiteralUnlimitedNatural", 445, 480, 285, 70, attributes=["+ value : UnlimitedNatural = 0"])
+    generalization(svg, "M 587.5 480 V 420 H 550 V 365", marker=False, child="LiteralUnlimitedNatural", parent="LiteralSpecification")
+    class_node(svg, "LiteralString", 180, 590, 200, 70, attributes=["+ value : String [0..1]"])
+    generalization(svg, "M 190 590 V 420 H 550 V 365", marker=False, child="LiteralString", parent="LiteralSpecification")
+    class_node(svg, "LiteralBoolean", 410, 590, 220, 70, attributes=["+ value : Boolean = false"])
+    generalization(svg, "M 425 590 V 420 H 550 V 365", marker=False, child="LiteralBoolean", parent="LiteralSpecification")
+    class_node(svg, "LiteralReal", 670, 590, 180, 70, attributes=["+ value : Real"])
+    generalization(svg, "M 760 590 V 420 H 550 V 365", marker=False, child="LiteralReal", parent="LiteralSpecification")
+    return svg
+
+
+def figure_8_2():
+    svg = Svg("8.2", "Выражения", "Expression, OpaqueExpression и StringExpression как ValueSpecifications; ассоциации для operand, subExpression/owningExpression, behavior и result.", 1400, 780)
+    class_node(svg, "ValueSpecification", 700, 40, 250, 60)
+    class_node(svg, "Expression", 250, 220, 230, 75, attributes=["+ symbol : String [0..1]"])
+    class_node(svg, "OpaqueExpression", 830, 205, 350, 110, attributes=["+ body : String [*] {ordered, nonunique}", "+ language : String [*] {ordered}"])
+    class_node(svg, "StringExpression", 250, 470, 250, 65)
+    class_node(svg, "Behavior", 840, 480, 170, 55, example=True)
+    class_node(svg, "Parameter", 1110, 480, 170, 55, example=True)
+    class_node(svg, "TemplateableElement", 250, 650, 260, 55)
+
+    # Generalizations: Expression and OpaqueExpression → ValueSpecification via bus
+    generalization(svg, f"M {250 + 115} 220 V 160 H 825 V 100", child="Expression", parent="ValueSpecification")
+    generalization(svg, f"M {830 + 175} 205 V 160 H 825 V 100", marker=False, child="OpaqueExpression", parent="ValueSpecification")
+    # StringExpression → Expression
+    generalization(svg, f"M {250 + 125} 470 V 380 H {250 + 115} V 295", child="StringExpression", parent="Expression")
+    # StringExpression → TemplateableElement
+    generalization(svg, f"M {250 + 125} 535 V 700 H {250 + 130}", False, child="StringExpression", parent="TemplateableElement")
+
+    # A_operand_expression: Expression → ValueSpecification composition (up-left loop)
+    association(svg, "A_operand_expression",
+        f"M 265 260 L 170 260 L 170 40",
+        ("Expression", "expression", "+ expression", 240, 280, "start"),
+        ("ValueSpecification", "operand", "+ operand", 845, 108, "end"),
+        markers='',
+        decorations=diamond(265, 260, "right"))
+    # Multi-line labels for A_operand_expression (16px spacing)
+    svg.add(text("{subsets owner}", 240, 296, "start", "association-end"))
+    svg.add(text("0..1", 240, 312, "start", "association-end"))
+    svg.add(text("{ordered,", 845, 124, "end", "association-end"))
+    svg.add(text("subsets ownedElement}", 845, 140, "end", "association-end"))
+    svg.add(text("*", 845, 156, "end", "association-end"))
+
+    # A_subExpression_owningExpression: StringExpression self-loop (left side)
+    association(svg, "A_subExpression_owningExpression",
+        f"M 240 502 L 70 502 L 70 436 H 240",
+        ("StringExpression", "owningExpression", "+ owningExpression", 160, 518, "end"),
+        ("StringExpression", "subExpression", "+ subExpression", 62, 448, "start"),
+        markers='',
+        decorations=diamond(240, 502, "down"))
+    # Multi-line labels for A_subExpression_owningExpression (16px spacing)
+    svg.add(text("{subsets owner}", 160, 534, "end", "association-end"))
+    svg.add(text("0..1", 160, 550, "end", "association-end"))
+    svg.add(text("{ordered,", 62, 464, "start", "association-end"))
+    svg.add(text("subsets ownedElement}", 62, 480, "start", "association-end"))
+    svg.add(text("*", 62, 496, "start", "association-end"))
+
+    # A_behavior_opaqueExpression: OpaqueExpression → Behavior (vertical down)
+    association(svg, "A_behavior_opaqueExpression",
+        f"M 840 315 V 472",
+        ("OpaqueExpression", "behavior", "+ behavior", 795, 344, "end"),
+        ("Behavior", "opaqueExpression", "+ opaqueExpression", 795, 468, "end"),
+        markers=' marker-end="url(#navigation)"')
+    svg.add(text("0..1", 795, 360, "end", "association-end"))
+
+    # A_result_opaqueExpression: OpaqueExpression → Parameter (vertical down)
+    association(svg, "A_result_opaqueExpression",
+        f"M 1155 315 V 472",
+        ("OpaqueExpression", "result", "+ opaqueExpression", 1160, 344, "start"),
+        ("Parameter", "/result", "{readOnly}", 1160, 468, "start"),
+        markers=' marker-end="url(#navigation)"')
+    svg.add(text("*", 1160, 360, "start", "association-end"))
+    svg.add(text("+ /result", 1160, 484, "start", "association-end"))
+    return svg
+
+
 FIGURE_BUILDERS = {
     "7.2": figure_7_2,
     "7.3": figure_7_3,
@@ -680,6 +769,8 @@ FIGURE_BUILDERS = {
     "7.19": figure_7_19,
     "7.20": figure_7_20,
     "7.21": figure_7_21,
+    "8.1": figure_8_1,
+    "8.2": figure_8_2,
 }
 
 

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="690" viewBox="0 0 1160 690" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.22">
+  <title id="diagram-title">Рисунок 9.22 — Варианты обозначения наборов обобщений</title>
+  <desc id="diagram-description">Четыре варианта нотации: отдельные наконечники с именами наборов, общий наконечник, пунктирная линия через стрелки; абстрактный класс Person со специализациями Woman, Man и Employee.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1160" height="690"/>
+  <g class="class-node" data-classifier="Person"><title>Person. Пример: абстрактный класс Person (человек), специализируется классами Woman, Man и Employee.</title>
+<rect class="class-box" x="300" y="40" width="120" height="50"/>
+<line class="class-divider" x1="300" y1="72" x2="420" y2="72"/>
+<text class="class-name abstract" x="360.0" y="63" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Woman"><title>Woman. Пример: специализация Person — женщина.</title>
+<rect class="class-box" x="130" y="230" width="120" height="50"/>
+<line class="class-divider" x1="130" y1="262" x2="250" y2="262"/>
+<text class="class-name" x="190.0" y="253" text-anchor="middle">Woman</text>
+</g>
+<g class="class-node" data-classifier="Man"><title>Man. Пример: специализация Person — мужчина.</title>
+<rect class="class-box" x="300" y="230" width="120" height="50"/>
+<line class="class-divider" x1="300" y1="262" x2="420" y2="262"/>
+<text class="class-name" x="360.0" y="253" text-anchor="middle">Man</text>
+</g>
+<g class="class-node" data-classifier="Employee"><title>Employee. Пример: специализация Person — работник.</title>
+<rect class="class-box" x="470" y="230" width="130" height="50"/>
+<line class="class-divider" x1="470" y1="262" x2="600" y2="262"/>
+<text class="class-name" x="535.0" y="253" text-anchor="middle">Employee</text>
+</g>
+<path class="generalization-line" d="M 190 230 L 335 90" data-child="Woman" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 360 230 V 90" data-child="Man" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 535 230 L 385 90" data-child="Employee" data-parent="Person" marker-end="url(#generalization)"/>
+<text class="association-label" x="265" y="150" text-anchor="end"><title>Имя набора обобщений «gender»: специализации Woman и Man.</title>gender</text>
+<text class="association-label" x="345" y="185" text-anchor="end"><title>Имя набора обобщений «gender»: специализации Woman и Man.</title>gender</text>
+<text class="association-label" x="449" y="128"><title>Имя набора обобщений «employment status»: специализация Employee.</title>employment</text>
+<text class="association-label" x="449" y="144"><title>Имя набора обобщений «employment status»: специализация Employee.</title>status</text>
+<g class="class-node" data-classifier="Person"><title>Person. Пример: абстрактный класс Person (человек), специализируется классами Woman, Man и Employee.</title>
+<rect class="class-box" x="850" y="40" width="120" height="50"/>
+<line class="class-divider" x1="850" y1="72" x2="970" y2="72"/>
+<text class="class-name abstract" x="910.0" y="63" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Woman"><title>Woman. Пример: специализация Person — женщина.</title>
+<rect class="class-box" x="700" y="230" width="120" height="50"/>
+<line class="class-divider" x1="700" y1="262" x2="820" y2="262"/>
+<text class="class-name" x="760.0" y="253" text-anchor="middle">Woman</text>
+</g>
+<g class="class-node" data-classifier="Man"><title>Man. Пример: специализация Person — мужчина.</title>
+<rect class="class-box" x="700" y="300" width="120" height="50"/>
+<line class="class-divider" x1="700" y1="332" x2="820" y2="332"/>
+<text class="class-name" x="760.0" y="323" text-anchor="middle">Man</text>
+</g>
+<g class="class-node" data-classifier="Employee"><title>Employee. Пример: специализация Person — работник.</title>
+<rect class="class-box" x="990" y="230" width="130" height="50"/>
+<line class="class-divider" x1="990" y1="262" x2="1120" y2="262"/>
+<text class="class-name" x="1055.0" y="253" text-anchor="middle">Employee</text>
+</g>
+<path class="generalization-line" d="M 820 255 H 865 V 90" data-child="Woman+Man" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 820 345 H 865" data-child="Man" data-parent="Person"/>
+<path class="generalization-line" d="M 1055 230 L 935 90" data-child="Employee" data-parent="Person" marker-end="url(#generalization)"/>
+<text class="association-label" x="852" y="140" text-anchor="end"><title>Имя набора обобщений «gender»: специализации Woman и Man.</title>gender</text>
+<text class="association-label" x="989" y="126"><title>Имя набора обобщений «employment status»: специализация Employee.</title>employment</text>
+<text class="association-label" x="989" y="142"><title>Имя набора обобщений «employment status»: специализация Employee.</title>status</text>
+<g class="class-node" data-classifier="Person"><title>Person. Пример: абстрактный класс Person (человек), специализируется классами Woman, Man и Employee.</title>
+<rect class="class-box" x="300" y="400" width="120" height="50"/>
+<line class="class-divider" x1="300" y1="432" x2="420" y2="432"/>
+<text class="class-name abstract" x="360.0" y="423" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Woman"><title>Woman. Пример: специализация Person — женщина.</title>
+<rect class="class-box" x="130" y="590" width="120" height="50"/>
+<line class="class-divider" x1="130" y1="622" x2="250" y2="622"/>
+<text class="class-name" x="190.0" y="613" text-anchor="middle">Woman</text>
+</g>
+<g class="class-node" data-classifier="Man"><title>Man. Пример: специализация Person — мужчина.</title>
+<rect class="class-box" x="300" y="590" width="120" height="50"/>
+<line class="class-divider" x1="300" y1="622" x2="420" y2="622"/>
+<text class="class-name" x="360.0" y="613" text-anchor="middle">Man</text>
+</g>
+<g class="class-node" data-classifier="Employee"><title>Employee. Пример: специализация Person — работник.</title>
+<rect class="class-box" x="470" y="590" width="130" height="50"/>
+<line class="class-divider" x1="470" y1="622" x2="600" y2="622"/>
+<text class="class-name" x="535.0" y="613" text-anchor="middle">Employee</text>
+</g>
+<path class="generalization-line" d="M 190 590 L 335 450" data-child="Woman" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 360 590 V 450" data-child="Man" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 535 590 L 385 450" data-child="Employee" data-parent="Person" marker-end="url(#generalization)"/>
+<g><title>Пунктирная линия объединяет обобщения со своими наконечниками в один набор GeneralizationSet.</title><path class="dependency-line" d="M 285 490 H 380"/></g>
+<text class="association-label" x="285" y="470" text-anchor="end"><title>Имя набора обобщений «gender»: специализации Woman и Man.</title>gender</text>
+<text class="association-label" x="428" y="468"><title>Имя набора обобщений «employment status»: специализация Employee.</title>employment</text>
+<text class="association-label" x="428" y="484"><title>Имя набора обобщений «employment status»: специализация Employee.</title>status</text>
+<g class="class-node" data-classifier="Person"><title>Person. Пример: абстрактный класс Person (человек), специализируется классами Woman, Man и Employee.</title>
+<rect class="class-box" x="850" y="400" width="120" height="50"/>
+<line class="class-divider" x1="850" y1="432" x2="970" y2="432"/>
+<text class="class-name abstract" x="910.0" y="423" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Woman"><title>Woman. Пример: специализация Person — женщина.</title>
+<rect class="class-box" x="700" y="590" width="120" height="50"/>
+<line class="class-divider" x1="700" y1="622" x2="820" y2="622"/>
+<text class="class-name" x="760.0" y="613" text-anchor="middle">Woman</text>
+</g>
+<g class="class-node" data-classifier="Man"><title>Man. Пример: специализация Person — мужчина.</title>
+<rect class="class-box" x="880" y="590" width="120" height="50"/>
+<line class="class-divider" x1="880" y1="622" x2="1000" y2="622"/>
+<text class="class-name" x="940.0" y="613" text-anchor="middle">Man</text>
+</g>
+<g class="class-node" data-classifier="Employee"><title>Employee. Пример: специализация Person — работник.</title>
+<rect class="class-box" x="1060" y="590" width="130" height="50"/>
+<line class="class-divider" x1="1060" y1="622" x2="1190" y2="622"/>
+<text class="class-name" x="1125.0" y="613" text-anchor="middle">Employee</text>
+</g>
+<path class="generalization-line" d="M 760 590 L 905 450" data-child="Woman" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 940 590 V 450" data-child="Man" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1125 590 L 955 450" data-child="Employee" data-parent="Person" marker-end="url(#generalization)"/>
+<g><title>Пунктирная линия объединяет обобщения со своими наконечниками в один набор GeneralizationSet.</title><path class="dependency-line" d="M 855 490 H 960"/></g>
+</svg>

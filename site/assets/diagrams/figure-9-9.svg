@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="1280" viewBox="0 0 2300 1280" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.9">
+  <title id="diagram-title">Рисунок 9.9 — Характеристики</title>
+  <desc id="diagram-description">Абстрактный синтаксис Feature, StructuralFeature, BehavioralFeature, Parameter и ParameterSet.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="2300" height="1280"/>
+  <a class="class-node" data-classifier="RedefinableElement" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
+<rect class="class-box" x="600" y="30" width="250" height="60"/>
+<line class="class-divider" x1="600" y1="62" x2="850" y2="62"/>
+<text class="class-name abstract" x="725.0" y="53" text-anchor="middle">RedefinableElement</text>
+</a>
+<a class="class-node" data-classifier="CallConcurrencyKind" href="../../index.html#/classifier/callconcurrencykind" target="_top" aria-label="CallConcurrencyKind — открыть описание класса"><title>CallConcurrencyKind. Перечисление, задающее семантику параллельных вызовов BehavioralFeature.</title>
+<rect class="class-box" x="950" y="30" width="250" height="130"/>
+<line class="class-divider" x1="950" y1="80" x2="1200" y2="80"/>
+<text x="1075.0" y="49" text-anchor="middle">enumeration</text>
+<text class="class-name" x="1075.0" y="71" text-anchor="middle">CallConcurrencyKind</text>
+<text class="attribute" x="960" y="102">sequential</text>
+<text class="attribute" x="960" y="123">guarded</text>
+<text class="attribute" x="960" y="144">concurrent</text>
+</a>
+<a class="class-node" data-classifier="ParameterDirectionKind" href="../../index.html#/classifier/parameterdirectionkind" target="_top" aria-label="ParameterDirectionKind — открыть описание класса"><title>ParameterDirectionKind. Перечисление, задающее литералы для спецификации направления параметров.</title>
+<rect class="class-box" x="1300" y="30" width="250" height="150"/>
+<line class="class-divider" x1="1300" y1="80" x2="1550" y2="80"/>
+<text x="1425.0" y="49" text-anchor="middle">enumeration</text>
+<text class="class-name" x="1425.0" y="71" text-anchor="middle">ParameterDirectionKind</text>
+<text class="attribute" x="1310" y="102">in</text>
+<text class="attribute" x="1310" y="123">inout</text>
+<text class="attribute" x="1310" y="144">out</text>
+<text class="attribute" x="1310" y="165">return</text>
+</a>
+<a class="class-node" data-classifier="ParameterEffectKind" href="../../index.html#/classifier/parametereffectkind" target="_top" aria-label="ParameterEffectKind — открыть описание класса"><title>ParameterEffectKind. Перечисление, задающее эффект поведения на значения, передаваемые в параметры или из них.</title>
+<rect class="class-box" x="1700" y="30" width="250" height="150"/>
+<line class="class-divider" x1="1700" y1="80" x2="1950" y2="80"/>
+<text x="1825.0" y="49" text-anchor="middle">enumeration</text>
+<text class="class-name" x="1825.0" y="71" text-anchor="middle">ParameterEffectKind</text>
+<text class="attribute" x="1710" y="102">create</text>
+<text class="attribute" x="1710" y="123">read</text>
+<text class="attribute" x="1710" y="144">update</text>
+<text class="attribute" x="1710" y="165">delete</text>
+</a>
+<a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="60" y="260" width="180" height="60"/>
+<line class="class-divider" x1="60" y1="292" x2="240" y2="292"/>
+<text class="class-name abstract" x="150.0" y="283" text-anchor="middle">Classifier</text>
+</a>
+<a class="class-node" data-classifier="Feature" href="../../index.html#/classifier/feature" target="_top" aria-label="Feature — открыть описание класса"><title>Feature. Объявляет поведенческую или структурную характеристику классификаторов.</title>
+<rect class="class-box" x="600" y="250" width="240" height="80"/>
+<line class="class-divider" x1="600" y1="282" x2="840" y2="282"/>
+<text class="class-name abstract" x="720.0" y="273" text-anchor="middle">Feature</text>
+<text class="attribute" x="610" y="304">+ isStatic : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="MultiplicityElement" href="../../index.html#/classifier/multiplicityelement" target="_top" aria-label="MultiplicityElement — открыть описание класса"><title>MultiplicityElement. Содержит определение включительного интервала неотрицательных целых чисел и задаёт допустимые кардинальности для экземпляра элемента.</title>
+<rect class="class-box" x="50" y="400" width="220" height="60"/>
+<line class="class-divider" x1="50" y1="432" x2="270" y2="432"/>
+<text class="class-name abstract" x="160.0" y="423" text-anchor="middle">MultiplicityElement</text>
+</a>
+<a class="class-node" data-classifier="TypedElement" href="../../index.html#/classifier/typedelement" target="_top" aria-label="TypedElement — открыть описание класса"><title>TypedElement. NamedElement, для которого может быть задан Type.</title>
+<rect class="class-box" x="350" y="350" width="180" height="60"/>
+<line class="class-divider" x1="350" y1="382" x2="530" y2="382"/>
+<text class="class-name abstract" x="440.0" y="373" text-anchor="middle">TypedElement</text>
+</a>
+<a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
+<rect class="class-box" x="800" y="350" width="180" height="60"/>
+<line class="class-divider" x1="800" y1="382" x2="980" y2="382"/>
+<text class="class-name abstract" x="890.0" y="373" text-anchor="middle">Namespace</text>
+</a>
+<a class="class-node" data-classifier="MultiplicityElement" href="../../index.html#/classifier/multiplicityelement" target="_top" aria-label="MultiplicityElement — открыть описание класса"><title>MultiplicityElement. Содержит определение включительного интервала неотрицательных целых чисел и задаёт допустимые кардинальности для экземпляра элемента.</title>
+<rect class="class-box" x="1450" y="300" width="220" height="60"/>
+<line class="class-divider" x1="1450" y1="332" x2="1670" y2="332"/>
+<text class="class-name abstract" x="1560.0" y="323" text-anchor="middle">MultiplicityElement</text>
+</a>
+<a class="class-node" data-classifier="TypedElement" href="../../index.html#/classifier/typedelement" target="_top" aria-label="TypedElement — открыть описание класса"><title>TypedElement. NamedElement, для которого может быть задан Type.</title>
+<rect class="class-box" x="1750" y="250" width="180" height="60"/>
+<line class="class-divider" x1="1750" y1="282" x2="1930" y2="282"/>
+<text class="class-name abstract" x="1840.0" y="273" text-anchor="middle">TypedElement</text>
+</a>
+<g class="class-node" data-classifier="ConnectableElement"><title>ConnectableElement. Пример класса ConnectableElement.</title>
+<rect class="class-box" x="2000" y="300" width="240" height="60"/>
+<line class="class-divider" x1="2000" y1="332" x2="2240" y2="332"/>
+<text class="class-name" x="2120.0" y="323" text-anchor="middle">ConnectableElement</text>
+</g>
+<a class="class-node" data-classifier="StructuralFeature" href="../../index.html#/classifier/structuralfeature" target="_top" aria-label="StructuralFeature — открыть описание класса"><title>StructuralFeature. Типизированная характеристика классификатора, специфицирующая структуру экземпляров классификатора.</title>
+<rect class="class-box" x="300" y="550" width="240" height="70"/>
+<line class="class-divider" x1="300" y1="582" x2="540" y2="582"/>
+<text class="class-name abstract" x="420.0" y="573" text-anchor="middle">StructuralFeature</text>
+<text class="attribute" x="310" y="604">+ isReadOnly : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="BehavioralFeature" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
+<rect class="class-box" x="720" y="500" width="330" height="130"/>
+<line class="class-divider" x1="720" y1="532" x2="1050" y2="532"/>
+<text class="class-name abstract" x="885.0" y="523" text-anchor="middle">BehavioralFeature</text>
+<text class="attribute" x="730" y="554">+ concurrency : CallConcurrencyKind = sequential</text>
+<text class="attribute" x="730" y="575">+ isAbstract : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="Parameter" href="../../index.html#/classifier/parameter" target="_top" aria-label="Parameter — открыть описание класса"><title>Parameter. Спецификация аргумента, используемого для передачи информации вовнутрь или наружу вызова BehavioralFeature. Параметры могут рассматриваться как ConnectableElements внутри Collaborations.</title>
+<rect class="class-box" x="1700" y="450" width="330" height="400"/>
+<line class="class-divider" x1="1700" y1="482" x2="2030" y2="482"/>
+<text class="class-name" x="1865.0" y="473" text-anchor="middle">Parameter</text>
+<text class="attribute" x="1710" y="504">+ /default : String [0..1]</text>
+<text class="attribute" x="1710" y="525">+ direction : ParameterDirectionKind = in</text>
+<text class="attribute" x="1710" y="546">+ effect : ParameterEffectKind [0..1]</text>
+<text class="attribute" x="1710" y="567">+ isException : Boolean = false</text>
+<text class="attribute" x="1710" y="588">+ isStream : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
+<rect class="class-box" x="650" y="820" width="140" height="60"/>
+<line class="class-divider" x1="650" y1="852" x2="790" y2="852"/>
+<text class="class-name abstract" x="720.0" y="843" text-anchor="middle">Type</text>
+</a>
+<g class="class-node" data-classifier="Behavior"><title>Behavior. Пример класса Behavior.</title>
+<rect class="class-box" x="850" y="820" width="160" height="60"/>
+<line class="class-divider" x1="850" y1="852" x2="1010" y2="852"/>
+<text class="class-name" x="930.0" y="843" text-anchor="middle">Behavior</text>
+</g>
+<a class="class-node" data-classifier="ParameterSet" href="../../index.html#/classifier/parameterset" target="_top" aria-label="ParameterSet — открыть описание класса"><title>ParameterSet. Обозначает альтернативные множества входов или выходов, которые может использовать Behavior.</title>
+<rect class="class-box" x="1100" y="820" width="220" height="70"/>
+<line class="class-divider" x1="1100" y1="852" x2="1320" y2="852"/>
+<text class="class-name" x="1210.0" y="843" text-anchor="middle">ParameterSet</text>
+</a>
+<a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
+<rect class="class-box" x="1100" y="1100" width="180" height="60"/>
+<line class="class-divider" x1="1100" y1="1132" x2="1280" y2="1132"/>
+<text class="class-name" x="1190.0" y="1123" text-anchor="middle">Constraint</text>
+</a>
+<a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="1700" y="1100" width="260" height="60"/>
+<line class="class-divider" x1="1700" y1="1132" x2="1960" y2="1132"/>
+<text class="class-name abstract" x="1830.0" y="1123" text-anchor="middle">ValueSpecification</text>
+</a>
+<path class="generalization-line" d="M 720 250 V 90" data-child="Feature" data-parent="RedefinableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 400 550 L 160 460" data-child="StructuralFeature" data-parent="MultiplicityElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 500 550 L 440 410" data-child="StructuralFeature" data-parent="TypedElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 450 550 L 680 330" data-child="StructuralFeature" data-parent="Feature" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 850 500 L 720 330" data-child="BehavioralFeature" data-parent="Feature" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 900 500 V 410" data-child="BehavioralFeature" data-parent="Namespace" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1750 450 L 1560 360" data-child="Parameter" data-parent="MultiplicityElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1850 450 L 1840 310" data-child="Parameter" data-parent="TypedElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1950 450 L 2120 360" data-child="Parameter" data-parent="ConnectableElement" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-feature-featuringclassifier" target="_top" aria-label="Открыть описание ассоциации A_feature_featuringClassifier">
+<g class="association-group" id="A_feature_featuringClassifier"><title>Связывает характеристику с классификаторами, для которых она является характеристикой.</title>
+<path class="association" d="M 240 290 H 600"/><path class="association-hitbox" d="M 240 290 H 600" aria-hidden="true"/>
+<circle class="end-dot" cx="240" cy="290" r="3"/>
+<text class="association-end" x="260" y="270"><title>featuringClassifier. Связывает характеристику с классификаторами, для которых она является характеристикой.</title>+ /featuringClassifier</text>
+<text class="association-end" x="580" y="270" text-anchor="end"><title>feature. Связывает характеристику с классификаторами, для которых она является характеристикой.</title>+ /feature</text>
+<text class="association-label" x="260" y="250">{readOnly, union,</text>
+<text class="association-label" x="260" y="234">subsets memberNamespace}</text>
+<text class="association-label" x="260" y="218">0..1</text>
+<text class="association-label" x="580" y="250" text-anchor="end">{readOnly, union,</text>
+<text class="association-label" x="580" y="234" text-anchor="end">subsets member}</text>
+<text class="association-label" x="580" y="218" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedparameter-ownerformalparam" target="_top" aria-label="Открыть описание ассоциации A_ownedParameter_ownerFormalParam">
+<g class="association-group" id="A_ownedParameter_ownerFormalParam"><title>Связывает формальный параметр с владеющей им поведенческой характеристикой.</title>
+<path class="association" d="M 1050 520 H 1700"/><path class="association-hitbox" d="M 1050 520 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1050,520 1058,512 1066,520 1058,528"/><circle class="end-dot" cx="1700" cy="520" r="3"/>
+<text class="association-end" x="1070" y="500"><title>ownerFormalParam. Связывает формальный параметр с владеющей им поведенческой характеристикой.</title>+ ownerFormalParam</text>
+<text class="association-end" x="1680" y="500" text-anchor="end"><title>ownedParameter. Связывает формальный параметр с владеющей им поведенческой характеристикой.</title>+ ownedParameter</text>
+<text class="association-label" x="1070" y="480">{subsets namespace}</text>
+<text class="association-label" x="1070" y="464">0..1</text>
+<text class="association-label" x="1680" y="480" text-anchor="end">{ordered, subsets ownedMember}</text>
+<text class="association-label" x="1680" y="464" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedparameterset-behavioralfeature" target="_top" aria-label="Открыть описание ассоциации A_ownedParameterSet_behavioralFeature">
+<g class="association-group" id="A_ownedParameterSet_behavioralFeature"><title>Связывает набор параметров с владеющей им поведенческой характеристикой.</title>
+<path class="association" d="M 1050 620 H 1200 V 820"/><path class="association-hitbox" d="M 1050 620 H 1200 V 820" aria-hidden="true"/>
+<polygon class="composition" points="1050,620 1058,612 1066,620 1058,628"/><circle class="end-dot" cx="1200" cy="820" r="3"/>
+<text class="association-end" x="1070" y="600"><title>behavioralFeature. Связывает набор параметров с владеющей им поведенческой характеристикой.</title>+ behavioralFeature</text>
+<text class="association-end" x="1220" y="782"><title>ownedParameterSet. Связывает набор параметров с владеющей им поведенческой характеристикой.</title>+ ownedParameterSet</text>
+<text class="association-label" x="1070" y="580">{subsets namespace}</text>
+<text class="association-label" x="1070" y="564">0..1</text>
+<text class="association-label" x="1220" y="766">{subsets ownedMember}</text>
+<text class="association-label" x="1220" y="750">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-raisedexception-behavioralfeature" target="_top" aria-label="Открыть описание ассоциации A_raisedException_behavioralFeature">
+<g class="association-group" id="A_raisedException_behavioralFeature"><title>Связывает тип исключения с поведенческими характеристиками, которые могут его возбуждать.</title>
+<path class="association" d="M 780 630 V 820"/><path class="association-hitbox" d="M 780 630 V 820" aria-hidden="true"/>
+<circle class="end-dot" cx="780" cy="630" r="3"/>
+<text class="association-end" x="760" y="668" text-anchor="end"><title>behavioralFeature. Связывает тип исключения с поведенческими характеристиками, которые могут его возбуждать.</title>+ behavioralFeature</text>
+<text class="association-end" x="760" y="792" text-anchor="end"><title>raisedException. Связывает тип исключения с поведенческими характеристиками, которые могут его возбуждать.</title>+ raisedException</text>
+<text class="association-label" x="760" y="684" text-anchor="end">0..1</text>
+<text class="association-label" x="760" y="776" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-method-specification" target="_top" aria-label="Открыть описание ассоциации A_method_specification">
+<g class="association-group" id="A_method_specification"><title>Связывает поведенческую характеристику с поведениями, реализующими её как методы.</title>
+<path class="association" d="M 950 630 V 820"/><path class="association-hitbox" d="M 950 630 V 820" aria-hidden="true"/>
+<circle class="end-dot" cx="950" cy="630" r="3"/>
+<text class="association-end" x="970" y="668"><title>specification. Связывает поведенческую характеристику с поведениями, реализующими её как методы.</title>+ specification</text>
+<text class="association-end" x="970" y="792"><title>method. Связывает поведенческую характеристику с поведениями, реализующими её как методы.</title>+ method</text>
+<text class="association-label" x="970" y="684">0..1</text>
+<text class="association-label" x="970" y="776">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-parameterset-parameter" target="_top" aria-label="Открыть описание ассоциации A_parameterSet_parameter">
+<g class="association-group" id="A_parameterSet_parameter"><title>Связывает параметр с наборами параметров, в которые он входит.</title>
+<path class="association" d="M 1320 840 H 1700"/><path class="association-hitbox" d="M 1320 840 H 1700" aria-hidden="true"/>
+<circle class="end-dot" cx="1700" cy="840" r="3"/>
+<text class="association-end" x="1340" y="820"><title>parameter. Связывает параметр с наборами параметров, в которые он входит.</title>+ parameter</text>
+<text class="association-end" x="1680" y="820" text-anchor="end"><title>parameterSet. Связывает параметр с наборами параметров, в которые он входит.</title>+ parameterSet</text>
+<text class="association-label" x="1340" y="800">1..*</text>
+<text class="association-label" x="1680" y="800" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-condition-parameterset" target="_top" aria-label="Открыть описание ассоциации A_condition_parameterSet">
+<g class="association-group" id="A_condition_parameterSet"><title>Связывает условие набора параметров с владеющим им набором.</title>
+<path class="association" d="M 1200 890 V 1100"/><path class="association-hitbox" d="M 1200 890 V 1100" aria-hidden="true"/>
+<polygon class="composition" points="1200,890 1192,898 1200,906 1208,898"/>
+<text class="association-end" x="1180" y="928" text-anchor="end"><title>parameterSet. Связывает условие набора параметров с владеющим им набором.</title>+ parameterSet</text>
+<text class="association-end" x="1180" y="1072" text-anchor="end"><title>condition. Связывает условие набора параметров с владеющим им набором.</title>+ condition</text>
+<text class="association-label" x="1180" y="944" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="1180" y="960" text-anchor="end">0..1</text>
+<text class="association-label" x="1180" y="1056" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="1180" y="1040" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-defaultvalue-owningparameter" target="_top" aria-label="Открыть описание ассоциации A_defaultValue_owningParameter">
+<g class="association-group" id="A_defaultValue_owningParameter"><title>Связывает значение параметра по умолчанию с владеющим им параметром.</title>
+<path class="association" d="M 1850 850 V 1100"/><path class="association-hitbox" d="M 1850 850 V 1100" aria-hidden="true"/>
+<polygon class="composition" points="1850,850 1842,858 1850,866 1858,858"/>
+<text class="association-end" x="1870" y="888"><title>owningParameter. Связывает значение параметра по умолчанию с владеющим им параметром.</title>+ owningParameter</text>
+<text class="association-end" x="1870" y="1072"><title>defaultValue. Связывает значение параметра по умолчанию с владеющим им параметром.</title>+ defaultValue</text>
+<text class="association-label" x="1870" y="904">{subsets owner}</text>
+<text class="association-label" x="1870" y="920">0..1</text>
+<text class="association-label" x="1870" y="1056">{subsets ownedElement}</text>
+<text class="association-label" x="1870" y="1040">0..1</text>
+</g></a>
+</svg>

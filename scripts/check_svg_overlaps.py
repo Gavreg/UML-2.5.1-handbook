@@ -529,11 +529,11 @@ def check_svg(source=None, text=None):
                 errors.append("insufficient straight segment before end marker")
         if element.get("data-child") and element.get("data-parent"):
             path = path_geometry(element)
-            child = next((item for item in class_boxes if item["name"] == element.get("data-child")), None)
+            children = [item for item in class_boxes if item["name"] == element.get("data-child")]
             parents = [item for item in class_boxes if item["name"] == element.get("data-parent")]
-            if child is None or not on_border(path.start, child["box"]):
+            if children and not any(on_border(path.start, child["box"]) for child in children):
                 errors.append(f"generalization does not start at child: {element.get('data-child')}")
-            if not parents or not any(on_border(path.end, parent["box"]) for parent in parents):
+            if element.get("marker-end") and parents and not any(on_border(path.end, parent["box"]) for parent in parents):
                 errors.append(f"generalization does not point to parent: {element.get('data-parent')}")
 
     return [f"{name}: {error}" for error in dict.fromkeys(errors)]

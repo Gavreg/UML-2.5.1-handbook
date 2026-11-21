@@ -24,7 +24,7 @@ PAGE_FRAGMENTS = (
     "sections-7.js", "sections-8.js", "sections-9.js",
     "classifiers-7.js", "classifiers-8.js", "classifiers-9.js", "classifiers-external.js",
     "associations-7.js", "associations-8.js", "associations-9.js",
-    "diagrams-7.js", "diagrams-8.js",
+    "diagrams-7.js", "diagrams-8.js", "diagrams-9.js",
 )
 
 
@@ -205,10 +205,13 @@ def load_handbook():
         for name in data:
             marker = f"const {name} ="
             data[name].extend(parse_literal(text, text.index(marker) + len(marker)))
+    associations = {item["name"]: item for item in data["associations"]}
     for diagram in data["diagrams"]:
         stem = diagram["id"].replace(".", "-")
         diagram["image"] = f"assets/diagrams/figure-{stem}.png"
         diagram["vector"] = f"assets/diagrams/figure-{stem}.svg"
+        for name in diagram.get("associations", []):
+            associations[name].setdefault("diagrams", []).append(diagram.get("name", diagram["en"]))
     return data, load_xmi(), _load_content_from_fragments()
 
 

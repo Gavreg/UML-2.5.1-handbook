@@ -1,6 +1,6 @@
 """
 Name: check_spec_completeness.py
-Purpose: Compare Clauses 7-8 coverage, verify the Clause 9 skeleton and check generated Russian content.
+Purpose: Compare Clauses 7-9 coverage and check generated Russian content.
 Interface: python scripts/check_spec_completeness.py
 Goal: Detect missing sections, classifiers, associations, figures, OCL expressions or dropped translated strings.
 Requires: Python 3 standard library; run scripts/build_site.py first.
@@ -16,12 +16,9 @@ from handbook_data import ROOT, load_handbook, load_pages, slug
 SOURCES = {
     "7": ROOT / "site" / "docs" / "uml-2.5.1-common-structure-en.txt",
     "8": ROOT / "site" / "docs" / "uml-2.5.1-values-en.txt",
-}
-SKELETON_SOURCES = {
     "9": ROOT / "site" / "docs" / "omg-uml-2.5.1-formal-17-12-05.txt",
 }
-CATALOGS = {"7": ("7.8", "7.9"), "8": ("8.6", "8.7")}
-SKELETON_CATALOGS = {"9": ("9.9", "9.10")}
+CATALOGS = {"7": ("7.8", "7.9"), "8": ("8.6", "8.7"), "9": ("9.9", "9.10")}
 PAGES = ROOT / "site" / "data" / "common-structure-pages.js"
 
 
@@ -45,6 +42,14 @@ def html_text(value):
     return normalized("".join(parser.parts))
 
 
+def read_source(clause, path):
+    source = path.read_text(encoding="utf-8").replace("\f", "")
+    if clause == "9":
+        source = source[source.index("\n9 Classification\n"):]
+        source = source[:source.index("\n10 Simple Classifiers\n")]
+    return source
+
+
 def leaf_strings(value, path=""):
     if isinstance(value, dict):
         for key, item in value.items():
@@ -59,7 +64,7 @@ def leaf_strings(value, path=""):
 def source_object_map(source, prefix):
     return {
         match.group(1): match.group(2)
-        for match in re.finditer(rf"^({re.escape(prefix)}\.\d+)\n([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE)
+        for match in re.finditer(rf"^({re.escape(prefix)}\.\d+)\s+([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE)
     }
 
 
@@ -67,10 +72,10 @@ def source_classifier_blocks(sources):
     for clause, source in sources.items():
         classifier_prefix, association_prefix = CATALOGS[clause]
         matches = list(re.finditer(
-            rf"^({re.escape(classifier_prefix)}\.\d+)\n([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE
+            rf"^({re.escape(classifier_prefix)}\.\d+)\s+([A-Za-z_][A-Za-z0-9_]*) \[[^\n]+\]$", source, re.MULTILINE
         ))
         for index, match in enumerate(matches):
-            end = matches[index + 1].start() if index + 1 < len(matches) else source.find(f"\n{association_prefix}\n", match.end())
+            end = matches[index + 1].start() if index + 1 < len(matches) else source.find(f"\n{association_prefix}", match.end())
             yield match.group(2), source[match.start():end]
 
 
@@ -80,6 +85,8 @@ def check_subset_links(data, xmi, pages):
         "Root": "7.1", "Templates": "7.3", "Template Bindings": "7.4", "Namespaces": "7.5",
         "Types": "7.10", "Constraints": "7.13", "Dependencies": "7.17",
         "Literals": "8.1", "Expressions": "8.2", "Time": "8.3", "Intervals": "8.4",
+        "Classifiers": "9.1", "Classifier Templates": "9.4", "Features": "9.9",
+        "Properties": "9.10", "Operations": "9.13", "Generalization Sets": "9.14", "Instances": "9.27",
     }
     associations = {item["name"]: item for item in data["associations"]}
     classifiers = {item["name"]: item for item in data["classifiers"]}
@@ -112,70 +119,18 @@ def check_subset_links(data, xmi, pages):
     return errors
 
 
-def check_skeleton(data, content):
-    errors = []
-    for clause, path in SKELETON_SOURCES.items():
-        source = path.read_text(encoding="utf-8").replace("\f", "")
-        source = source[source.index(f"\n{clause} Classification\n"):]
-        source = source[:source.index("\n10 Simple Classifiers\n")]
-        classifier_prefix, association_prefix = SKELETON_CATALOGS[clause]
-        expected_sections = list(dict.fromkeys(re.findall(
-            rf"^({clause}\.(?:[1-9]|10))\s+[A-Z]", source, re.MULTILINE
-        )))
-        actual_sections = [item["id"] for item in data["sections"] if item["id"].startswith(clause + ".")]
-        if actual_sections != expected_sections:
-            errors.append(f"Clause {clause} sections differ: {actual_sections} instead of {expected_sections}")
-
-        expected_subsections = list(dict.fromkeys(re.findall(
-            rf"^({clause}\.[1-8](?:\.\d+)+)\s+[A-Z]", source, re.MULTILINE
-        )))
-        actual_subsections = [
-            subsection["id"]
-            for section_id, section in content["sections"].items()
-            if section_id.startswith(clause + ".")
-            for subsection in section.get("subsections", [])
-        ]
-        if actual_subsections != expected_subsections:
-            errors.append(f"Clause {clause} subsections differ: {actual_subsections} instead of {expected_subsections}")
-
-        for prefix, key in ((classifier_prefix, "classifiers"), (association_prefix, "associations")):
-            matches = re.findall(
-                rf"^({re.escape(prefix)}\.\d+)\s+([A-Za-z_][A-Za-z0-9_]*) \[([^\n]+)\]$",
-                source,
-                re.MULTILINE,
-            )
-            expected_objects = {
-                section: (name, kind) if key == "classifiers" else name
-                for section, name, kind in matches
-            }
-            actual_objects = {
-                item["section"]: (item["name"], item["kind"]) if key == "classifiers" else item["name"]
-                for item in data[key]
-                if item["section"].startswith(prefix + ".")
-            }
-            if actual_objects != expected_objects:
-                missing = sorted(set(expected_objects.items()) - set(actual_objects.items()))
-                extra = sorted(set(actual_objects.items()) - set(expected_objects.items()))
-                errors.append(f"Clause {clause} {key} differ from source; missing={missing}, extra={extra}")
-            for item in data[key]:
-                if item["section"].startswith(clause + ".") and not item.get("placeholder"):
-                    errors.append(f"Clause {clause} skeleton item is not marked as placeholder: {item['name']}")
-        for section in data["sections"]:
-            if section["id"].startswith(clause + ".") and not section.get("placeholder"):
-                errors.append(f"Clause {clause} skeleton section is not marked as placeholder: {section['id']}")
-    return errors
-
-
 def check_completeness():
     data, xmi, content = load_handbook()
-    sources = {clause: path.read_text(encoding="utf-8") for clause, path in SOURCES.items()}
+    sources = {clause: read_source(clause, path) for clause, path in SOURCES.items()}
     generated = load_pages()
     pages = generated["pages"]
     errors = []
 
     expected_sections = []
     for clause, source in sources.items():
-        expected_sections.extend(dict.fromkeys(re.findall(rf"^({clause}\.[1-9])$", source, re.MULTILINE)))
+        expected_sections.extend(dict.fromkeys(re.findall(
+            rf"^({clause}\.(?:[1-9]|10))(?:\s+[A-Z][^\n]*)?$", source, re.MULTILINE
+        )))
     actual_sections = [item["id"] for item in data["sections"] if item["id"].split(".")[0] in sources]
     if actual_sections != expected_sections:
         errors.append(f"Clause sections differ: {actual_sections} instead of {expected_sections}")
@@ -191,7 +146,7 @@ def check_completeness():
     for clause, source in sources.items():
         narrative_depth = max(int(section.split(".")[1]) for section in expected_sections if section.startswith(clause + ".") and section not in CATALOGS[clause])
         expected_subsections.extend(dict.fromkeys(
-            re.findall(rf"^({clause}\.[1-{narrative_depth}](?:\.\d+)+)$", source, re.MULTILINE)
+            re.findall(rf"^({clause}\.[1-{narrative_depth}](?:\.\d+)+)(?:\s+[A-Z][^\n]*)?$", source, re.MULTILINE)
         ))
     actual_subsections = [
         subsection["id"]
@@ -225,15 +180,34 @@ def check_completeness():
     actual_figures = [item["id"] for item in data["diagrams"] if item["id"].split(".")[0] in sources]
     if actual_figures != expected_figures:
         errors.append(f"Figures differ: {actual_figures} instead of {expected_figures}")
+    assigned_figures = [
+        figure
+        for section in data["sections"]
+        for figure in section.get("figures", [])
+        if figure.split(".")[0] in sources
+    ]
+    figure_order = {figure: index for index, figure in enumerate(actual_figures)}
+    assigned_figures.sort(key=lambda value: figure_order.get(value, -1))
+    if assigned_figures != actual_figures:
+        errors.append("Each figure must be assigned to exactly one handbook section")
 
+    classifiers = {item["name"]: item for item in data["classifiers"]}
     for classifier_name, block in source_classifier_blocks(sources):
         classifier_content = content["classifiers"].get(classifier_name, {})
         for field, marker in (("ocl", "inv:"), ("body", "body:"), ("pre", "pre:")):
-            source_count = len(re.findall(rf"^{re.escape(marker)}", block, re.MULTILINE))
-            entries = classifier_content.get("constraints", {}) if field == "ocl" else classifier_content.get("operations", {})
+            source_count = len(re.findall(rf"^[ \t]*{re.escape(marker)}", block, re.MULTILINE))
+            kind = "constraints" if field == "ocl" else "operations"
+            key = "name" if field == "ocl" else "signature"
+            entries = []
+            for entry in classifiers[classifier_name].get(kind, []):
+                merged = dict(entry)
+                override = classifier_content.get(kind, {}).get(entry.get(key), {})
+                if isinstance(override, dict):
+                    merged.update(override)
+                entries.append(merged)
             translated_count = sum(
-                1 for entry in entries.values()
-                if isinstance(entry, dict) and entry.get(field) and (
+                1 for entry in entries
+                if entry.get(field) and (
                     field != "ocl" or str(entry[field]).lstrip().startswith(marker)
                 )
             )
@@ -259,7 +233,6 @@ def check_completeness():
                 errors.append(f"Generated classifier {classifier_name} lost {path}: {normalized(value)[:120]}")
 
     errors.extend(check_subset_links(data, xmi, pages))
-    errors.extend(check_skeleton(data, content))
     return errors, {
         "sections": len(actual_sections),
         "subsections": len(actual_subsections),

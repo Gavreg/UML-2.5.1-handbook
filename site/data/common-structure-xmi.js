@@ -2679,14 +2679,2293 @@ window.UML_XMI_DATA = {
           "redefinedProperties": []
         }
       ]
+    },
+    "A_attribute_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-attribute",
+          "name": "attribute",
+          "signature": "/attribute : Property [0..*] {ordered, readOnly, union, subsets redefinableElement, feature}",
+          "description": "Все свойства, являющиеся прямыми (то есть не унаследованными и не импортированными) атрибутами классификатора.",
+          "type": "Property",
+          "association": "A_attribute_classifier",
+          "owner": "A_attribute_classifier",
+          "subsets": [
+            "redefinableElement",
+            "feature"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinitionContext_redefinableElement"
+              }
+            },
+            {
+              "id": "Classifier-feature",
+              "name": "feature",
+              "type": "Feature",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_attribute_classifier-classifier",
+          "name": "classifier",
+          "signature": "/classifier : Classifier [0..1] {readOnly, union, subsets featuringClassifier, redefinitionContext}",
+          "description": "Классификатор, для которого свойство является атрибутом.",
+          "type": "Classifier",
+          "association": "A_attribute_classifier",
+          "owner": "A_attribute_classifier",
+          "subsets": [
+            "featuringClassifier",
+            "redefinitionContext"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Feature-featuringClassifier",
+              "name": "featuringClassifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "Feature"
+              }
+            },
+            {
+              "id": "RedefinableElement-redefinitionContext",
+              "name": "redefinitionContext",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_bodyCondition_bodyContext": {
+      "ends": [
+        {
+          "id": "Operation-bodyCondition",
+          "name": "bodyCondition",
+          "signature": "bodyCondition : Constraint [0..1] {subsets ownedRule}",
+          "description": "Необязательное ограничение на значения результата вызова операции.",
+          "type": "Constraint",
+          "association": "A_bodyCondition_bodyContext",
+          "owner": "A_bodyCondition_bodyContext",
+          "subsets": [
+            "ownedRule"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedRule",
+              "name": "ownedRule",
+              "type": "Constraint",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_bodyCondition_bodyContext-bodyContext",
+          "name": "bodyContext",
+          "signature": "bodyContext : Operation [0..1] {subsets context}",
+          "description": "Операция, задающая условие на значения результата своего вызова.",
+          "type": "Operation",
+          "association": "A_bodyCondition_bodyContext",
+          "owner": "A_bodyCondition_bodyContext",
+          "subsets": [
+            "context"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Constraint-context",
+              "name": "context",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "Constraint"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_classifier_instanceSpecification": {
+      "ends": [
+        {
+          "id": "InstanceSpecification-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..*]",
+          "description": "Классификатор или классификаторы представленного экземпляра. Если задано несколько классификаторов, экземпляр классифицирован всеми ими.",
+          "type": "Classifier",
+          "association": "A_classifier_instanceSpecification",
+          "owner": "A_classifier_instanceSpecification",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_classifier_instanceSpecification-instanceSpecification",
+          "name": "instanceSpecification",
+          "signature": "instanceSpecification : InstanceSpecification [0..*]",
+          "description": "Спецификации экземпляров, классифицированные этим классификатором.",
+          "type": "InstanceSpecification",
+          "association": "A_classifier_instanceSpecification",
+          "owner": "A_classifier_instanceSpecification",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_classifier_templateParameter_parameteredElement": {
+      "ends": [
+        {
+          "id": "Classifier-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : ClassifierTemplateParameter [0..1] {redefines templateParameter}",
+          "description": "Параметр шаблона классификатора, который предоставляет этот элемент как формальный параметр.",
+          "type": "ClassifierTemplateParameter",
+          "association": "A_classifier_templateParameter_parameteredElement",
+          "owner": "A_classifier_templateParameter_parameteredElement",
+          "subsets": [],
+          "redefines": [
+            "templateParameter"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ClassifierTemplateParameter-parameteredElement",
+          "name": "parameteredElement",
+          "signature": "parameteredElement : Classifier [1..1] {redefines parameteredElement}",
+          "description": "Классификатор, предоставляемый этим параметром шаблона классификатора.",
+          "type": "Classifier",
+          "association": "A_classifier_templateParameter_parameteredElement",
+          "owner": "A_classifier_templateParameter_parameteredElement",
+          "subsets": [],
+          "redefines": [
+            "parameteredElement"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "TemplateParameter-parameteredElement",
+              "name": "parameteredElement",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_collaborationUse_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-collaborationUse",
+          "name": "collaborationUse",
+          "signature": "collaborationUse : CollaborationUse [0..*] {subsets ownedElement}",
+          "description": "Использования кооперации, принадлежащие классификатору.",
+          "type": "CollaborationUse",
+          "association": "A_collaborationUse_classifier",
+          "owner": "A_collaborationUse_classifier",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_collaborationUse_classifier-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..1] {subsets owner}",
+          "description": "Классификатор, владеющий использованием кооперации.",
+          "type": "Classifier",
+          "association": "A_collaborationUse_classifier",
+          "owner": "A_collaborationUse_classifier",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_condition_parameterSet": {
+      "ends": [
+        {
+          "id": "ParameterSet-condition",
+          "name": "condition",
+          "signature": "condition : Constraint [0..*] {subsets ownedElement}",
+          "description": "Ограничение, определяющее возможность начала или завершения выполнения со значениями параметров набора.",
+          "type": "Constraint",
+          "association": "A_condition_parameterSet",
+          "owner": "A_condition_parameterSet",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_condition_parameterSet-parameterSet",
+          "name": "parameterSet",
+          "signature": "parameterSet : ParameterSet [0..1] {subsets owner}",
+          "description": "Набор параметров, владеющий условием.",
+          "type": "ParameterSet",
+          "association": "A_condition_parameterSet",
+          "owner": "A_condition_parameterSet",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_constrainingClassifier_classifierTemplateParameter": {
+      "ends": [
+        {
+          "id": "ClassifierTemplateParameter-constrainingClassifier",
+          "name": "constrainingClassifier",
+          "signature": "constrainingClassifier : Classifier [0..*]",
+          "description": "Классификаторы, ограничивающие аргумент, который может использоваться для параметра. Если атрибут allowSubstitutable равен true, может быть подставлен любой классификатор, совместимый с этим ограничивающим классификатором; иначе это должен быть этот классификатор или одна из его специализаций. Если свойство пусто, ограничений на классификатор, используемый как аргумент, нет.",
+          "type": "Classifier",
+          "association": "A_constrainingClassifier_classifierTemplateParameter",
+          "owner": "A_constrainingClassifier_classifierTemplateParameter",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_constrainingClassifier_classifierTemplateParameter-classifierTemplateParameter",
+          "name": "classifierTemplateParameter",
+          "signature": "classifierTemplateParameter : ClassifierTemplateParameter [0..*]",
+          "description": "Параметры шаблона классификатора, которые ограничивает этот классификатор.",
+          "type": "ClassifierTemplateParameter",
+          "association": "A_constrainingClassifier_classifierTemplateParameter",
+          "owner": "A_constrainingClassifier_classifierTemplateParameter",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_contract_substitution": {
+      "ends": [
+        {
+          "id": "Substitution-contract",
+          "name": "contract",
+          "signature": "contract : Classifier [1..1] {subsets supplier}",
+          "description": "Контракт, которому следует подставляющий классификатор.",
+          "type": "Classifier",
+          "association": "A_contract_substitution",
+          "owner": "A_contract_substitution",
+          "subsets": [
+            "supplier"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Dependency-supplier",
+              "name": "supplier",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Dependency"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_contract_substitution-substitution",
+          "name": "substitution",
+          "signature": "substitution : Substitution [0..*] {subsets supplierDependency}",
+          "description": "Подстановки, контрактом которых служит этот классификатор.",
+          "type": "Substitution",
+          "association": "A_contract_substitution",
+          "owner": "A_contract_substitution",
+          "subsets": [
+            "supplierDependency"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_supplier_supplierDependency-supplierDependency",
+              "name": "supplierDependency",
+              "type": "Dependency",
+              "owner": {
+                "type": "association",
+                "name": "A_supplier_supplierDependency"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_defaultValue_owningParameter": {
+      "ends": [
+        {
+          "id": "Parameter-defaultValue",
+          "name": "defaultValue",
+          "signature": "defaultValue : ValueSpecification [0..1] {subsets ownedElement}",
+          "description": "Спецификация значения, используемого, если аргумент параметра не передан.",
+          "type": "ValueSpecification",
+          "association": "A_defaultValue_owningParameter",
+          "owner": "A_defaultValue_owningParameter",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_defaultValue_owningParameter-owningParameter",
+          "name": "owningParameter",
+          "signature": "owningParameter : Parameter [0..1] {subsets owner}",
+          "description": "Параметр, владеющий значением по умолчанию.",
+          "type": "Parameter",
+          "association": "A_defaultValue_owningParameter",
+          "owner": "A_defaultValue_owningParameter",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_defaultValue_owningProperty": {
+      "ends": [
+        {
+          "id": "Property-defaultValue",
+          "name": "defaultValue",
+          "signature": "defaultValue : ValueSpecification [0..1] {subsets ownedElement}",
+          "description": "Спецификация значения по умолчанию свойства при создании экземпляра владеющего классификатора.",
+          "type": "ValueSpecification",
+          "association": "A_defaultValue_owningProperty",
+          "owner": "A_defaultValue_owningProperty",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_defaultValue_owningProperty-owningProperty",
+          "name": "owningProperty",
+          "signature": "owningProperty : Property [0..1] {subsets owner}",
+          "description": "Свойство, владеющее значением по умолчанию.",
+          "type": "Property",
+          "association": "A_defaultValue_owningProperty",
+          "owner": "A_defaultValue_owningProperty",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_definingFeature_slot": {
+      "ends": [
+        {
+          "id": "Slot-definingFeature",
+          "name": "definingFeature",
+          "signature": "definingFeature : StructuralFeature [1..1]",
+          "description": "Структурная характеристика, задающая значения, которые может хранить слот.",
+          "type": "StructuralFeature",
+          "association": "A_definingFeature_slot",
+          "owner": "A_definingFeature_slot",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_definingFeature_slot-slot",
+          "name": "slot",
+          "signature": "slot : Slot [0..*]",
+          "description": "Слоты, значения которых задаёт эта определяющая характеристика.",
+          "type": "Slot",
+          "association": "A_definingFeature_slot",
+          "owner": "A_definingFeature_slot",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_extendedSignature_redefinableTemplateSignature": {
+      "ends": [
+        {
+          "id": "RedefinableTemplateSignature-extendedSignature",
+          "name": "extendedSignature",
+          "signature": "extendedSignature : RedefinableTemplateSignature [0..*] {subsets redefinedElement}",
+          "description": "Подписи шаблонов, расширяемые этой переопределяемой подписью шаблона.",
+          "type": "RedefinableTemplateSignature",
+          "association": "A_extendedSignature_redefinableTemplateSignature",
+          "owner": "A_extendedSignature_redefinableTemplateSignature",
+          "subsets": [
+            "redefinedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "RedefinableElement-redefinedElement",
+              "name": "redefinedElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_extendedSignature_redefinableTemplateSignature-redefinableTemplateSignature",
+          "name": "redefinableTemplateSignature",
+          "signature": "redefinableTemplateSignature : RedefinableTemplateSignature [0..*] {subsets redefinableElement}",
+          "description": "Переопределяемые подписи шаблонов, расширяемые этой подписью.",
+          "type": "RedefinableTemplateSignature",
+          "association": "A_extendedSignature_redefinableTemplateSignature",
+          "owner": "A_extendedSignature_redefinableTemplateSignature",
+          "subsets": [
+            "redefinableElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinedElement_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinedElement_redefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_feature_featuringClassifier": {
+      "ends": [
+        {
+          "id": "Classifier-feature",
+          "name": "feature",
+          "signature": "/feature : Feature [0..*] {readOnly, union, subsets member}",
+          "description": "Задаёт каждую характеристику, непосредственно определённую в классификаторе. Члены классификатора типа Feature могут в неё не входить, например унаследованные характеристики.",
+          "type": "Feature",
+          "association": "A_feature_featuringClassifier",
+          "owner": "A_feature_featuringClassifier",
+          "subsets": [
+            "member"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Feature-featuringClassifier",
+          "name": "featuringClassifier",
+          "signature": "/featuringClassifier : Classifier [0..1] {readOnly, union, subsets memberNamespace}",
+          "description": "Классификаторы, характеристикой которых является эта Feature.",
+          "type": "Classifier",
+          "association": "A_feature_featuringClassifier",
+          "owner": "A_feature_featuringClassifier",
+          "subsets": [
+            "memberNamespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_general_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-general",
+          "name": "general",
+          "signature": "/general : Classifier [0..*]",
+          "description": "Обобщающие классификаторы для этого классификатора.",
+          "type": "Classifier",
+          "association": "A_general_classifier",
+          "owner": "A_general_classifier",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_general_classifier-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..*]",
+          "description": "Классификаторы, обобщаемые этим классификатором.",
+          "type": "Classifier",
+          "association": "A_general_classifier",
+          "owner": "A_general_classifier",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_general_generalization": {
+      "ends": [
+        {
+          "id": "Generalization-general",
+          "name": "general",
+          "signature": "general : Classifier [1..1] {subsets target}",
+          "description": "Общий классификатор в отношении обобщения.",
+          "type": "Classifier",
+          "association": "A_general_generalization",
+          "owner": "A_general_generalization",
+          "subsets": [
+            "target"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-target",
+              "name": "target",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_general_generalization-generalization",
+          "name": "generalization",
+          "signature": "generalization : Generalization [0..*] {subsets directedRelationship}",
+          "description": "Обобщения, общим классификатором которых служит этот классификатор.",
+          "type": "Generalization",
+          "association": "A_general_generalization",
+          "owner": "A_general_generalization",
+          "subsets": [
+            "directedRelationship"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_target_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_target_directedRelationship"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_generalizationSet_generalization": {
+      "ends": [
+        {
+          "id": "Generalization-generalizationSet",
+          "name": "generalizationSet",
+          "signature": "generalizationSet : GeneralizationSet [0..*]",
+          "description": "Наборы обобщений, членом которых является это обобщение. Обобщение может входить во множество наборов обобщений.",
+          "type": "GeneralizationSet",
+          "association": "A_generalizationSet_generalization",
+          "owner": "A_generalizationSet_generalization",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "GeneralizationSet-generalization",
+          "name": "generalization",
+          "signature": "generalization : Generalization [0..*]",
+          "description": "Обозначает экземпляры обобщения, являющиеся членами этого набора обобщений.",
+          "type": "Generalization",
+          "association": "A_generalizationSet_generalization",
+          "owner": "A_generalizationSet_generalization",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_generalization_specific": {
+      "ends": [
+        {
+          "id": "Classifier-generalization",
+          "name": "generalization",
+          "signature": "generalization : Generalization [0..*] {subsets directedRelationship, ownedElement}",
+          "description": "Отношения обобщения этого классификатора. Эти обобщения ведут к более общим классификаторам в иерархии обобщений.",
+          "type": "Generalization",
+          "association": "A_generalization_specific",
+          "owner": "A_generalization_specific",
+          "subsets": [
+            "directedRelationship",
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_source_directedRelationship-directedRelationship",
+              "name": "directedRelationship",
+              "type": "DirectedRelationship",
+              "owner": {
+                "type": "association",
+                "name": "A_source_directedRelationship"
+              }
+            },
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Generalization-specific",
+          "name": "specific",
+          "signature": "specific : Classifier [1..1] {subsets source, owner}",
+          "description": "Конкретный (специализирующий) классификатор в отношении обобщения.",
+          "type": "Classifier",
+          "association": "A_generalization_specific",
+          "owner": "A_generalization_specific",
+          "subsets": [
+            "source",
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "DirectedRelationship-source",
+              "name": "source",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "DirectedRelationship"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_inheritedMember_inheritingClassifier": {
+      "ends": [
+        {
+          "id": "Classifier-inheritedMember",
+          "name": "inheritedMember",
+          "signature": "/inheritedMember : NamedElement [0..*] {readOnly, subsets member}",
+          "description": "Элементы, унаследованные классификатором от общих классификаторов.",
+          "type": "NamedElement",
+          "association": "A_inheritedMember_inheritingClassifier",
+          "owner": "A_inheritedMember_inheritingClassifier",
+          "subsets": [
+            "member"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-member",
+              "name": "member",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_inheritedMember_inheritingClassifier-inheritingClassifier",
+          "name": "inheritingClassifier",
+          "signature": "inheritingClassifier : Classifier [0..*] {subsets memberNamespace}",
+          "description": "Классификаторы, унаследовавшие этот элемент.",
+          "type": "Classifier",
+          "association": "A_inheritedMember_inheritingClassifier",
+          "owner": "A_inheritedMember_inheritingClassifier",
+          "subsets": [
+            "memberNamespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_member_memberNamespace-memberNamespace",
+              "name": "memberNamespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "association",
+                "name": "A_member_memberNamespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_inheritedParameter_redefinableTemplateSignature": {
+      "ends": [
+        {
+          "id": "RedefinableTemplateSignature-inheritedParameter",
+          "name": "inheritedParameter",
+          "signature": "/inheritedParameter : TemplateParameter [0..*] {readOnly, subsets parameter}",
+          "description": "Формальные параметры расширяемых сигнатур шаблонов.",
+          "type": "TemplateParameter",
+          "association": "A_inheritedParameter_redefinableTemplateSignature",
+          "owner": "A_inheritedParameter_redefinableTemplateSignature",
+          "subsets": [
+            "parameter"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "TemplateSignature-parameter",
+              "name": "parameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateSignature"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_inheritedParameter_redefinableTemplateSignature-redefinableTemplateSignature",
+          "name": "redefinableTemplateSignature",
+          "signature": "redefinableTemplateSignature : RedefinableTemplateSignature [0..*] {subsets templateSignature}",
+          "description": "Переопределяемые подписи шаблонов, унаследовавшие этот формальный параметр.",
+          "type": "RedefinableTemplateSignature",
+          "association": "A_inheritedParameter_redefinableTemplateSignature",
+          "owner": "A_inheritedParameter_redefinableTemplateSignature",
+          "subsets": [
+            "templateSignature"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_parameter_templateSignature-templateSignature",
+              "name": "templateSignature",
+              "type": "TemplateSignature",
+              "owner": {
+                "type": "association",
+                "name": "A_parameter_templateSignature"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_instance_instanceValue": {
+      "ends": [
+        {
+          "id": "InstanceValue-instance",
+          "name": "instance",
+          "signature": "instance : InstanceSpecification [1..1]",
+          "description": "Спецификация экземпляра, представляющая заданное значение.",
+          "type": "InstanceSpecification",
+          "association": "A_instance_instanceValue",
+          "owner": "A_instance_instanceValue",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_instance_instanceValue-instanceValue",
+          "name": "instanceValue",
+          "signature": "instanceValue : InstanceValue [0..*]",
+          "description": "Значения экземпляра, ссылающиеся на эту спецификацию экземпляра.",
+          "type": "InstanceValue",
+          "association": "A_instance_instanceValue",
+          "owner": "A_instance_instanceValue",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_method_specification": {
+      "ends": [
+        {
+          "id": "BehavioralFeature-method",
+          "name": "method",
+          "signature": "method : Behavior [0..*]",
+          "description": "Поведение, реализующее поведенческую характеристику. Для данной пары Classifier (как владельца Behavior) и BehavioralFeature (как спецификации Behavior) может существовать не более одного Behavior.",
+          "type": "Behavior",
+          "association": "A_method_specification",
+          "owner": "A_method_specification",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Behavior-specification",
+          "name": "specification",
+          "signature": "specification : BehavioralFeature [0..1]",
+          "description": "Обозначает поведенческую характеристику, которую реализует поведение. Она должна принадлежать BehavioredClassifier, владеющему поведением, или быть им унаследована. Параметры поведенческой характеристики и реализующего поведения должны совпадать. Спецификация поведению не обязательна; в этом случае оно либо является classifierBehavior некоторого BehavioredClassifier, либо может вызываться только другим поведением этого классификатора.",
+          "type": "BehavioralFeature",
+          "association": "A_method_specification",
+          "owner": "A_method_specification",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_operation_templateParameter_parameteredElement": {
+      "ends": [
+        {
+          "id": "Operation-templateParameter",
+          "name": "templateParameter",
+          "signature": "templateParameter : OperationTemplateParameter [0..1] {redefines templateParameter}",
+          "description": "Параметр шаблона операции, который предоставляет этот элемент как формальный параметр.",
+          "type": "OperationTemplateParameter",
+          "association": "A_operation_templateParameter_parameteredElement",
+          "owner": "A_operation_templateParameter_parameteredElement",
+          "subsets": [],
+          "redefines": [
+            "templateParameter"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "ParameterableElement-templateParameter",
+              "name": "templateParameter",
+              "type": "TemplateParameter",
+              "owner": {
+                "type": "classifier",
+                "name": "ParameterableElement"
+              }
+            }
+          ]
+        },
+        {
+          "id": "OperationTemplateParameter-parameteredElement",
+          "name": "parameteredElement",
+          "signature": "parameteredElement : Operation [1..1] {redefines parameteredElement}",
+          "description": "Операция, предоставляемая этим параметром шаблона операции.",
+          "type": "Operation",
+          "association": "A_operation_templateParameter_parameteredElement",
+          "owner": "A_operation_templateParameter_parameteredElement",
+          "subsets": [],
+          "redefines": [
+            "parameteredElement"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "TemplateParameter-parameteredElement",
+              "name": "parameteredElement",
+              "type": "ParameterableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateParameter"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_opposite_property": {
+      "ends": [
+        {
+          "id": "Property-opposite",
+          "name": "opposite",
+          "signature": "/opposite : Property [0..1]",
+          "description": "Когда свойство является одним из концов бинарной ассоциации, даёт другой её конец.",
+          "type": "Property",
+          "association": "A_opposite_property",
+          "owner": "A_opposite_property",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_opposite_property-property",
+          "name": "property",
+          "signature": "property : Property [0..1]",
+          "description": "Свойства, для которых это свойство является противоположным концом.",
+          "type": "Property",
+          "association": "A_opposite_property",
+          "owner": "A_opposite_property",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedParameterSet_behavioralFeature": {
+      "ends": [
+        {
+          "id": "BehavioralFeature-ownedParameterSet",
+          "name": "ownedParameterSet",
+          "signature": "ownedParameterSet : ParameterSet [0..*] {subsets ownedMember}",
+          "description": "Наборы параметров, принадлежащие этой поведенческой характеристике.",
+          "type": "ParameterSet",
+          "association": "A_ownedParameterSet_behavioralFeature",
+          "owner": "A_ownedParameterSet_behavioralFeature",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedParameterSet_behavioralFeature-behavioralFeature",
+          "name": "behavioralFeature",
+          "signature": "behavioralFeature : BehavioralFeature [0..1] {subsets namespace}",
+          "description": "Поведенческая характеристика, владеющая набором параметров.",
+          "type": "BehavioralFeature",
+          "association": "A_ownedParameterSet_behavioralFeature",
+          "owner": "A_ownedParameterSet_behavioralFeature",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedParameter_operation": {
+      "ends": [
+        {
+          "id": "Operation-ownedParameter",
+          "name": "ownedParameter",
+          "signature": "ownedParameter : Parameter [0..*] {ordered, redefines ownedParameter}",
+          "description": "Параметры, принадлежащие этой операции.",
+          "type": "Parameter",
+          "association": "A_ownedParameter_operation",
+          "owner": "A_ownedParameter_operation",
+          "subsets": [],
+          "redefines": [
+            "ownedParameter"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "BehavioralFeature-ownedParameter",
+              "name": "ownedParameter",
+              "type": "Parameter",
+              "owner": {
+                "type": "classifier",
+                "name": "BehavioralFeature"
+              }
+            }
+          ]
+        },
+        {
+          "id": "Parameter-operation",
+          "name": "operation",
+          "signature": "operation : Operation [0..1] {subsets ownerFormalParam}",
+          "description": "Операция, владеющая этим параметром.",
+          "type": "Operation",
+          "association": "A_ownedParameter_operation",
+          "owner": "A_ownedParameter_operation",
+          "subsets": [
+            "ownerFormalParam"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_ownedParameter_ownerFormalParam-ownerFormalParam",
+              "name": "ownerFormalParam",
+              "type": "BehavioralFeature",
+              "owner": {
+                "type": "association",
+                "name": "A_ownedParameter_ownerFormalParam"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedParameter_ownerFormalParam": {
+      "ends": [
+        {
+          "id": "BehavioralFeature-ownedParameter",
+          "name": "ownedParameter",
+          "signature": "ownedParameter : Parameter [0..*] {ordered, subsets ownedMember}",
+          "description": "Упорядоченное множество формальных параметров этой поведенческой характеристики.",
+          "type": "Parameter",
+          "association": "A_ownedParameter_ownerFormalParam",
+          "owner": "A_ownedParameter_ownerFormalParam",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedParameter_ownerFormalParam-ownerFormalParam",
+          "name": "ownerFormalParam",
+          "signature": "ownerFormalParam : BehavioralFeature [0..1] {subsets namespace}",
+          "description": "Поведенческая характеристика, владеющая формальным параметром.",
+          "type": "BehavioralFeature",
+          "association": "A_ownedParameter_ownerFormalParam",
+          "owner": "A_ownedParameter_ownerFormalParam",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedTemplateSignature_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-ownedTemplateSignature",
+          "name": "ownedTemplateSignature",
+          "signature": "ownedTemplateSignature : RedefinableTemplateSignature [0..1] {subsets redefinableElement, redefines ownedTemplateSignature}",
+          "description": "Необязательная переопределяемая подпись шаблона, задающая формальные параметры шаблона.",
+          "type": "RedefinableTemplateSignature",
+          "association": "A_ownedTemplateSignature_classifier",
+          "owner": "A_ownedTemplateSignature_classifier",
+          "subsets": [
+            "redefinableElement"
+          ],
+          "redefines": [
+            "ownedTemplateSignature"
+          ],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinitionContext_redefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [
+            {
+              "id": "TemplateableElement-ownedTemplateSignature",
+              "name": "ownedTemplateSignature",
+              "type": "TemplateSignature",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateableElement"
+              }
+            }
+          ]
+        },
+        {
+          "id": "RedefinableTemplateSignature-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [1..1] {subsets redefinitionContext, redefines template}",
+          "description": "Классификатор, владеющий этой переопределяемой подписью шаблона.",
+          "type": "Classifier",
+          "association": "A_ownedTemplateSignature_classifier",
+          "owner": "A_ownedTemplateSignature_classifier",
+          "subsets": [
+            "redefinitionContext"
+          ],
+          "redefines": [
+            "template"
+          ],
+          "subsettedProperties": [
+            {
+              "id": "RedefinableElement-redefinitionContext",
+              "name": "redefinitionContext",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": [
+            {
+              "id": "TemplateSignature-template",
+              "name": "template",
+              "type": "TemplateableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "TemplateSignature"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_ownedUseCase_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-ownedUseCase",
+          "name": "ownedUseCase",
+          "signature": "ownedUseCase : UseCase [0..*] {subsets ownedMember}",
+          "description": "Варианты использования, принадлежащие этому классификатору.",
+          "type": "UseCase",
+          "association": "A_ownedUseCase_classifier",
+          "owner": "A_ownedUseCase_classifier",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedUseCase_classifier-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..1] {subsets namespace}",
+          "description": "Классификатор, владеющий вариантом использования.",
+          "type": "Classifier",
+          "association": "A_ownedUseCase_classifier",
+          "owner": "A_ownedUseCase_classifier",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_parameterSet_parameter": {
+      "ends": [
+        {
+          "id": "Parameter-parameterSet",
+          "name": "parameterSet",
+          "signature": "parameterSet : ParameterSet [0..*]",
+          "description": "Наборы параметров, содержащие этот параметр. См. ParameterSet.",
+          "type": "ParameterSet",
+          "association": "A_parameterSet_parameter",
+          "owner": "A_parameterSet_parameter",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "ParameterSet-parameter",
+          "name": "parameter",
+          "signature": "parameter : Parameter [1..*]",
+          "description": "Параметры в наборе параметров.",
+          "type": "Parameter",
+          "association": "A_parameterSet_parameter",
+          "owner": "A_parameterSet_parameter",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_postcondition_postContext": {
+      "ends": [
+        {
+          "id": "Operation-postcondition",
+          "name": "postcondition",
+          "signature": "postcondition : Constraint [0..*] {subsets ownedRule}",
+          "description": "Необязательные ограничения на состояние системы после завершения операции.",
+          "type": "Constraint",
+          "association": "A_postcondition_postContext",
+          "owner": "A_postcondition_postContext",
+          "subsets": [
+            "ownedRule"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedRule",
+              "name": "ownedRule",
+              "type": "Constraint",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_postcondition_postContext-postContext",
+          "name": "postContext",
+          "signature": "postContext : Operation [0..1] {subsets context}",
+          "description": "Операция, задающая постусловие.",
+          "type": "Operation",
+          "association": "A_postcondition_postContext",
+          "owner": "A_postcondition_postContext",
+          "subsets": [
+            "context"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Constraint-context",
+              "name": "context",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "Constraint"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_powertypeExtent_powertype": {
+      "ends": [
+        {
+          "id": "Classifier-powertypeExtent",
+          "name": "powertypeExtent",
+          "signature": "powertypeExtent : GeneralizationSet [0..*]",
+          "description": "Наборы обобщений, для которых этот классификатор является powertype.",
+          "type": "GeneralizationSet",
+          "association": "A_powertypeExtent_powertype",
+          "owner": "A_powertypeExtent_powertype",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "GeneralizationSet-powertype",
+          "name": "powertype",
+          "signature": "powertype : Classifier [0..1]",
+          "description": "Обозначает классификатор, определённый как powertype для связанного набора обобщений, если он есть.",
+          "type": "Classifier",
+          "association": "A_powertypeExtent_powertype",
+          "owner": "A_powertypeExtent_powertype",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_precondition_preContext": {
+      "ends": [
+        {
+          "id": "Operation-precondition",
+          "name": "precondition",
+          "signature": "precondition : Constraint [0..*] {subsets ownedRule}",
+          "description": "Необязательные ограничения на состояние системы при вызове операции.",
+          "type": "Constraint",
+          "association": "A_precondition_preContext",
+          "owner": "A_precondition_preContext",
+          "subsets": [
+            "ownedRule"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedRule",
+              "name": "ownedRule",
+              "type": "Constraint",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_precondition_preContext-preContext",
+          "name": "preContext",
+          "signature": "preContext : Operation [0..1] {subsets context}",
+          "description": "Операция, задающая предусловие.",
+          "type": "Operation",
+          "association": "A_precondition_preContext",
+          "owner": "A_precondition_preContext",
+          "subsets": [
+            "context"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Constraint-context",
+              "name": "context",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "Constraint"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_qualifier_associationEnd": {
+      "ends": [
+        {
+          "id": "Property-qualifier",
+          "name": "qualifier",
+          "signature": "qualifier : Property [0..*] {ordered, subsets ownedElement}",
+          "description": "Необязательный упорядоченный список атрибутов-квалификаторов конца.",
+          "type": "Property",
+          "association": "A_qualifier_associationEnd",
+          "owner": "A_qualifier_associationEnd",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Property-associationEnd",
+          "name": "associationEnd",
+          "signature": "associationEnd : Property [0..1] {subsets owner}",
+          "description": "Обозначает необязательный конец ассоциации, владеющий атрибутом-квалификатором.",
+          "type": "Property",
+          "association": "A_qualifier_associationEnd",
+          "owner": "A_qualifier_associationEnd",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_raisedException_behavioralFeature": {
+      "ends": [
+        {
+          "id": "BehavioralFeature-raisedException",
+          "name": "raisedException",
+          "signature": "raisedException : Type [0..*]",
+          "description": "Типы исключений, которые могут возникать при вызове поведенческой характеристики.",
+          "type": "Type",
+          "association": "A_raisedException_behavioralFeature",
+          "owner": "A_raisedException_behavioralFeature",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_raisedException_behavioralFeature-behavioralFeature",
+          "name": "behavioralFeature",
+          "signature": "behavioralFeature : BehavioralFeature [0..*]",
+          "description": "Поведенческие характеристики, при вызове которых может возникнуть это исключение.",
+          "type": "BehavioralFeature",
+          "association": "A_raisedException_behavioralFeature",
+          "owner": "A_raisedException_behavioralFeature",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_raisedException_operation": {
+      "ends": [
+        {
+          "id": "Operation-raisedException",
+          "name": "raisedException",
+          "signature": "raisedException : Type [0..*] {redefines raisedException}",
+          "description": "Типы исключений, которые могут возникать при вызове операции.",
+          "type": "Type",
+          "association": "A_raisedException_operation",
+          "owner": "A_raisedException_operation",
+          "subsets": [],
+          "redefines": [
+            "raisedException"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "BehavioralFeature-raisedException",
+              "name": "raisedException",
+              "type": "Type",
+              "owner": {
+                "type": "classifier",
+                "name": "BehavioralFeature"
+              }
+            }
+          ]
+        },
+        {
+          "id": "A_raisedException_operation-operation",
+          "name": "operation",
+          "signature": "operation : Operation [0..*] {subsets behavioralFeature}",
+          "description": "Операции, при вызове которых может возникнуть это исключение.",
+          "type": "Operation",
+          "association": "A_raisedException_operation",
+          "owner": "A_raisedException_operation",
+          "subsets": [
+            "behavioralFeature"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_raisedException_behavioralFeature-behavioralFeature",
+              "name": "behavioralFeature",
+              "type": "BehavioralFeature",
+              "owner": {
+                "type": "association",
+                "name": "A_raisedException_behavioralFeature"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinedClassifier_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-redefinedClassifier",
+          "name": "redefinedClassifier",
+          "signature": "redefinedClassifier : Classifier [0..*] {subsets redefinedElement}",
+          "description": "Классификаторы, переопределяемые этим классификатором.",
+          "type": "Classifier",
+          "association": "A_redefinedClassifier_classifier",
+          "owner": "A_redefinedClassifier_classifier",
+          "subsets": [
+            "redefinedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "RedefinableElement-redefinedElement",
+              "name": "redefinedElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinedClassifier_classifier-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..*] {subsets redefinableElement}",
+          "description": "Классификаторы, переопределяемые этим классификатором.",
+          "type": "Classifier",
+          "association": "A_redefinedClassifier_classifier",
+          "owner": "A_redefinedClassifier_classifier",
+          "subsets": [
+            "redefinableElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinedElement_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinedElement_redefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinedElement_redefinableElement": {
+      "ends": [
+        {
+          "id": "RedefinableElement-redefinedElement",
+          "name": "redefinedElement",
+          "signature": "/redefinedElement : RedefinableElement [0..*] {readOnly, union}",
+          "description": "Переопределяемые элементы, которые переопределяет этот элемент.",
+          "type": "RedefinableElement",
+          "association": "A_redefinedElement_redefinableElement",
+          "owner": "A_redefinedElement_redefinableElement",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinedElement_redefinableElement-redefinableElement",
+          "name": "redefinableElement",
+          "signature": "/redefinableElement : RedefinableElement [0..*] {readOnly, union}",
+          "description": "Переопределяемые элементы, которые переопределяет этот элемент.",
+          "type": "RedefinableElement",
+          "association": "A_redefinedElement_redefinableElement",
+          "owner": "A_redefinedElement_redefinableElement",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinedOperation_operation": {
+      "ends": [
+        {
+          "id": "Operation-redefinedOperation",
+          "name": "redefinedOperation",
+          "signature": "redefinedOperation : Operation [0..*] {subsets redefinedElement}",
+          "description": "Операции, переопределяемые этой операцией.",
+          "type": "Operation",
+          "association": "A_redefinedOperation_operation",
+          "owner": "A_redefinedOperation_operation",
+          "subsets": [
+            "redefinedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "RedefinableElement-redefinedElement",
+              "name": "redefinedElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinedOperation_operation-operation",
+          "name": "operation",
+          "signature": "operation : Operation [0..*] {subsets redefinableElement}",
+          "description": "Операции, переопределяемые этой операцией.",
+          "type": "Operation",
+          "association": "A_redefinedOperation_operation",
+          "owner": "A_redefinedOperation_operation",
+          "subsets": [
+            "redefinableElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinedElement_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinedElement_redefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinedProperty_property": {
+      "ends": [
+        {
+          "id": "Property-redefinedProperty",
+          "name": "redefinedProperty",
+          "signature": "redefinedProperty : Property [0..*] {subsets redefinedElement}",
+          "description": "Свойства, переопределяемые этим свойством, если есть.",
+          "type": "Property",
+          "association": "A_redefinedProperty_property",
+          "owner": "A_redefinedProperty_property",
+          "subsets": [
+            "redefinedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "RedefinableElement-redefinedElement",
+              "name": "redefinedElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinedProperty_property-property",
+          "name": "property",
+          "signature": "property : Property [0..*] {subsets redefinableElement}",
+          "description": "Свойства, переопределяемые этим свойством.",
+          "type": "Property",
+          "association": "A_redefinedProperty_property",
+          "owner": "A_redefinedProperty_property",
+          "subsets": [
+            "redefinableElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinedElement_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinedElement_redefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinitionContext_redefinableElement": {
+      "ends": [
+        {
+          "id": "RedefinableElement-redefinitionContext",
+          "name": "redefinitionContext",
+          "signature": "/redefinitionContext : Classifier [0..*] {readOnly, union}",
+          "description": "Контексты, в которых этот элемент может быть переопределён.",
+          "type": "Classifier",
+          "association": "A_redefinitionContext_redefinableElement",
+          "owner": "A_redefinitionContext_redefinableElement",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+          "name": "redefinableElement",
+          "signature": "/redefinableElement : RedefinableElement [0..*] {readOnly, union}",
+          "description": "Переопределяемые элементы, контекстом переопределения которых служит этот классификатор.",
+          "type": "RedefinableElement",
+          "association": "A_redefinitionContext_redefinableElement",
+          "owner": "A_redefinitionContext_redefinableElement",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_representation_classifier": {
+      "ends": [
+        {
+          "id": "Classifier-representation",
+          "name": "representation",
+          "signature": "representation : CollaborationUse [0..1] {subsets collaborationUse}",
+          "description": "Использование кооперации, указывающее кооперацию, которая представляет этот классификатор.",
+          "type": "CollaborationUse",
+          "association": "A_representation_classifier",
+          "owner": "A_representation_classifier",
+          "subsets": [
+            "collaborationUse"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-collaborationUse",
+              "name": "collaborationUse",
+              "type": "CollaborationUse",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_representation_classifier-classifier",
+          "name": "classifier",
+          "signature": "classifier : Classifier [0..1] {redefines classifier}",
+          "description": "Классификатор, представление которого задаёт это использование кооперации.",
+          "type": "Classifier",
+          "association": "A_representation_classifier",
+          "owner": "A_representation_classifier",
+          "subsets": [],
+          "redefines": [
+            "classifier"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "A_collaborationUse_classifier-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "association",
+                "name": "A_collaborationUse_classifier"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_slot_owningInstance": {
+      "ends": [
+        {
+          "id": "InstanceSpecification-slot",
+          "name": "slot",
+          "signature": "slot : Slot [0..*] {subsets ownedElement}",
+          "description": "Слот, задающий значение или значения структурной характеристики экземпляра. Спецификация экземпляра может иметь один слот на каждую структурную характеристику своих классификаторов, включая унаследованные характеристики. Необязательно моделировать слот для каждой структурной характеристики; в этом случае спецификация экземпляра является частичным описанием.",
+          "type": "Slot",
+          "association": "A_slot_owningInstance",
+          "owner": "A_slot_owningInstance",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Slot-owningInstance",
+          "name": "owningInstance",
+          "signature": "owningInstance : InstanceSpecification [1..1] {subsets owner}",
+          "description": "Спецификация экземпляра, владеющая этим слотом.",
+          "type": "InstanceSpecification",
+          "association": "A_slot_owningInstance",
+          "owner": "A_slot_owningInstance",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_specification_owningInstanceSpec": {
+      "ends": [
+        {
+          "id": "InstanceSpecification-specification",
+          "name": "specification",
+          "signature": "specification : ValueSpecification [0..1] {subsets ownedElement}",
+          "description": "Спецификация способа вычисления, вывода или построения экземпляра.",
+          "type": "ValueSpecification",
+          "association": "A_specification_owningInstanceSpec",
+          "owner": "A_specification_owningInstanceSpec",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_specification_owningInstanceSpec-owningInstanceSpec",
+          "name": "owningInstanceSpec",
+          "signature": "owningInstanceSpec : InstanceSpecification [0..1] {subsets owner}",
+          "description": "Спецификация экземпляра, владеющая этой спецификацией значения.",
+          "type": "InstanceSpecification",
+          "association": "A_specification_owningInstanceSpec",
+          "owner": "A_specification_owningInstanceSpec",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_subsettedProperty_property": {
+      "ends": [
+        {
+          "id": "Property-subsettedProperty",
+          "name": "subsettedProperty",
+          "signature": "subsettedProperty : Property [0..*]",
+          "description": "Свойства, подмножеством которых это свойство ограничено быть, если есть.",
+          "type": "Property",
+          "association": "A_subsettedProperty_property",
+          "owner": "A_subsettedProperty_property",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_subsettedProperty_property-property",
+          "name": "property",
+          "signature": "property : Property [0..*]",
+          "description": "Свойства, подмножествами которых являются эти свойства.",
+          "type": "Property",
+          "association": "A_subsettedProperty_property",
+          "owner": "A_subsettedProperty_property",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_substitution_substitutingClassifier": {
+      "ends": [
+        {
+          "id": "Classifier-substitution",
+          "name": "substitution",
+          "signature": "substitution : Substitution [0..*] {subsets ownedElement, clientDependency}",
+          "description": "Подстановки, принадлежащие этому классификатору.",
+          "type": "Substitution",
+          "association": "A_substitution_substitutingClassifier",
+          "owner": "A_substitution_substitutingClassifier",
+          "subsets": [
+            "ownedElement",
+            "clientDependency"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "NamedElement-clientDependency",
+              "name": "clientDependency",
+              "type": "Dependency",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Substitution-substitutingClassifier",
+          "name": "substitutingClassifier",
+          "signature": "substitutingClassifier : Classifier [1..1] {subsets client, owner}",
+          "description": "Экземпляры подставляющего классификатора могут подставляться во время выполнения там, где ожидаются экземпляры классификатора контракта.",
+          "type": "Classifier",
+          "association": "A_substitution_substitutingClassifier",
+          "owner": "A_substitution_substitutingClassifier",
+          "subsets": [
+            "client",
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Dependency-client",
+              "name": "client",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Dependency"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_type_operation": {
+      "ends": [
+        {
+          "id": "Operation-type",
+          "name": "type",
+          "signature": "/type : Type [0..1] {readOnly}",
+          "description": "Возвращаемый тип операции, если он есть; выводится из возвращаемого параметра.",
+          "type": "Type",
+          "association": "A_type_operation",
+          "owner": "A_type_operation",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_type_operation-operation",
+          "name": "operation",
+          "signature": "operation : Operation [0..*]",
+          "description": "Операции, возвращаемым типом которых служит этот тип.",
+          "type": "Operation",
+          "association": "A_type_operation",
+          "owner": "A_type_operation",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_value_owningSlot": {
+      "ends": [
+        {
+          "id": "Slot-value",
+          "name": "value",
+          "signature": "value : ValueSpecification [0..*] {ordered, subsets ownedElement}",
+          "description": "Значение или значения, хранящиеся в слоте.",
+          "type": "ValueSpecification",
+          "association": "A_value_owningSlot",
+          "owner": "A_value_owningSlot",
+          "subsets": [
+            "ownedElement"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_value_owningSlot-owningSlot",
+          "name": "owningSlot",
+          "signature": "owningSlot : Slot [0..1] {subsets owner}",
+          "description": "Слот, владеющий этим значением.",
+          "type": "Slot",
+          "association": "A_value_owningSlot",
+          "owner": "A_value_owningSlot",
+          "subsets": [
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
     }
   },
   "generalizations": {
     "Abstraction": [
       "Dependency"
     ],
+    "BehavioralFeature": [
+      "Feature",
+      "Namespace"
+    ],
+    "Classifier": [
+      "Namespace",
+      "Type",
+      "TemplateableElement",
+      "RedefinableElement"
+    ],
+    "ClassifierTemplateParameter": [
+      "TemplateParameter"
+    ],
     "Comment": [
       "Element"
+    ],
+    "ConnectableElement": [
+      "TypedElement",
+      "ParameterableElement"
     ],
     "Constraint": [
       "PackageableElement"
@@ -2694,6 +4973,12 @@ window.UML_XMI_DATA = {
     "Dependency": [
       "DirectedRelationship",
       "PackageableElement"
+    ],
+    "DeployedArtifact": [
+      "NamedElement"
+    ],
+    "DeploymentTarget": [
+      "NamedElement"
     ],
     "DirectedRelationship": [
       "Relationship"
@@ -2715,6 +5000,23 @@ window.UML_XMI_DATA = {
       "DirectedRelationship"
     ],
     "Expression": [
+      "ValueSpecification"
+    ],
+    "Feature": [
+      "RedefinableElement"
+    ],
+    "Generalization": [
+      "DirectedRelationship"
+    ],
+    "GeneralizationSet": [
+      "PackageableElement"
+    ],
+    "InstanceSpecification": [
+      "DeploymentTarget",
+      "PackageableElement",
+      "DeployedArtifact"
+    ],
+    "InstanceValue": [
       "ValueSpecification"
     ],
     "Interval": [
@@ -2759,6 +5061,14 @@ window.UML_XMI_DATA = {
     "OpaqueExpression": [
       "ValueSpecification"
     ],
+    "Operation": [
+      "TemplateableElement",
+      "ParameterableElement",
+      "BehavioralFeature"
+    ],
+    "OperationTemplateParameter": [
+      "TemplateParameter"
+    ],
     "Package": [
       "PackageableElement",
       "TemplateableElement",
@@ -2771,18 +5081,48 @@ window.UML_XMI_DATA = {
       "ParameterableElement",
       "NamedElement"
     ],
+    "Parameter": [
+      "MultiplicityElement",
+      "ConnectableElement"
+    ],
+    "ParameterSet": [
+      "NamedElement"
+    ],
     "ParameterableElement": [
       "Element"
+    ],
+    "Property": [
+      "ConnectableElement",
+      "DeploymentTarget",
+      "StructuralFeature"
     ],
     "Realization": [
       "Abstraction"
     ],
+    "RedefinableElement": [
+      "NamedElement"
+    ],
+    "RedefinableTemplateSignature": [
+      "RedefinableElement",
+      "TemplateSignature"
+    ],
     "Relationship": [
+      "Element"
+    ],
+    "Slot": [
       "Element"
     ],
     "StringExpression": [
       "TemplateableElement",
       "Expression"
+    ],
+    "StructuralFeature": [
+      "MultiplicityElement",
+      "TypedElement",
+      "Feature"
+    ],
+    "Substitution": [
+      "Realization"
     ],
     "TemplateBinding": [
       "DirectedRelationship"
@@ -2827,9 +5167,15 @@ window.UML_XMI_DATA = {
   },
   "classifierDefinitions": {
     "Abstraction": "An Abstraction is a Relationship that relates two Elements or sets of Elements that represent the same concept at different levels of abstraction or from different viewpoints.",
+    "BehavioralFeature": "Поведенческая характеристика — это характеристика классификатора, задающая аспект поведения его экземпляров. Она реализуется поведением. Поведенческая характеристика указывает, что классификатор отвечает на заданный запрос вызовом реализующего её метода.",
+    "Classifier": "Классификатор представляет классификацию экземпляров по их характеристикам.",
+    "ClassifierTemplateParameter": "Параметр шаблона классификатора предоставляет классификатор как формальный параметр шаблона.",
     "Comment": "A Comment is a textual annotation that can be attached to a set of Elements.",
+    "ConnectableElement": "ConnectableElement is an abstract metaclass representing a set of instances that play roles of a StructuredClassifier. ConnectableElements may be joined by attached Connectors and specify configurations of linked instances to be created within an instance of the containing StructuredClassifier.",
     "Constraint": "A Constraint is a condition or restriction expressed in natural language text or in a machine readable language for the purpose of declaring some of the semantics of an Element or set of Elements.",
     "Dependency": "A Dependency is a Relationship that signifies that a single model Element or a set of model Elements requires other model Elements for their specification or implementation. This means that the complete semantics of the client Element(s) are either semantically or structurally dependent on the definition of the supplier Element(s).",
+    "DeployedArtifact": "A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.",
+    "DeploymentTarget": "A deployment target is the location for a deployed artifact.",
     "DirectedRelationship": "A DirectedRelationship represents a relationship between a collection of source model Elements and a collection of target model Elements.",
     "Duration": "A Duration is a ValueSpecification that specifies the temporal distance between two time instants.",
     "DurationConstraint": "A DurationConstraint is a Constraint that refers to a DurationInterval.",
@@ -2838,6 +5184,11 @@ window.UML_XMI_DATA = {
     "Element": "An Element is a constituent of a model. As such, it has the capability of owning other Elements.",
     "ElementImport": "An ElementImport identifies a NamedElement in a Namespace other than the one that owns that NamedElement and allows the NamedElement to be referenced using an unqualified name in the Namespace owning the ElementImport.",
     "Expression": "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
+    "Feature": "Характеристика объявляет поведенческую или структурную характеристику классификаторов.",
+    "Generalization": "Обобщение — таксономическое отношение между более общим и более конкретным классификаторами. Каждый экземпляр конкретного классификатора является также экземпляром общего классификатора. Конкретный классификатор наследует характеристики более общего классификатора. Обобщение принадлежит конкретному классификатору.",
+    "GeneralizationSet": "Набор обобщений — упаковываемый элемент, экземпляры которого представляют множества отношений обобщения.",
+    "InstanceSpecification": "Спецификация экземпляра — элемент модели, представляющий экземпляр в моделируемой системе. Она может выступать как цель развёртывания в отношении развёртывания, если представляет экземпляр узла, а также как развёрнутый артефакт, если представляет экземпляр артефакта.",
+    "InstanceValue": "Значение экземпляра — это спецификация значения, которая идентифицирует экземпляр.",
     "Interval": "An Interval defines the range between two ValueSpecifications.",
     "IntervalConstraint": "An IntervalConstraint is a Constraint that is specified by an Interval.",
     "LiteralBoolean": "A LiteralBoolean is a specification of a Boolean value.",
@@ -2852,13 +5203,23 @@ window.UML_XMI_DATA = {
     "Namespace": "A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by name.",
     "Observation": "Observation specifies a value determined by observing an event or events that occur relative to other model Elements.",
     "OpaqueExpression": "An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML",
+    "Operation": "Операция — поведенческая характеристика классификатора, задающая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать как выполнение поведений-методов, так и другие поведенческие отклики. Операция специализирует TemplateableElement, чтобы поддерживать задание шаблонных операций и связанных операций, и ParameterableElement, чтобы операцию можно было предоставлять как формальный параметр шаблона и передавать как фактический параметр привязки шаблона.",
+    "OperationTemplateParameter": "Параметр шаблона операции предоставляет операцию как формальный параметр шаблона.",
     "Package": "A package can have one or more profile applications to indicate which profiles have been applied. Because a profile is a package, it is possible to apply a profile not only to packages, but also to profiles.\nPackage specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter.\nA package is used to group elements, and provides a namespace for the grouped elements.",
     "PackageImport": "A PackageImport is a Relationship that imports all the non-private members of a Package into the Namespace owning the PackageImport, so that those Elements may be referred to by their unqualified names in the importingNamespace.",
     "PackageableElement": "A PackageableElement is a NamedElement that may be owned directly by a Package. A PackageableElement is also able to serve as the parameteredElement of a TemplateParameter.",
+    "Parameter": "Параметр — спецификация аргумента, используемого для передачи информации на вход или выход при вызове поведенческой характеристики. Параметры можно рассматривать как соединяемые элементы внутри коопераций.",
+    "ParameterSet": "Набор параметров обозначает альтернативные множества входов или выходов, которые поведение может использовать.",
     "ParameterableElement": "A ParameterableElement is an Element that can be exposed as a formal TemplateParameter for a template, or specified as an actual parameter in a binding of a template.",
+    "Property": "Свойство — структурная характеристика. Свойство, связанное отношением ownedAttribute с классификатором (отличным от ассоциации), представляет атрибут и может также представлять конец ассоциации; оно относит экземпляр классификатора к значению или множеству значений типа атрибута. Свойство, связанное отношением memberEnd с ассоциацией, представляет конец ассоциации; тип свойства является типом конца ассоциации. Свойство может выступать как цель развёртывания в отношении развёртывания, что позволяет моделировать развёртывание на иерархических узлах, чьи свойства выполняют роль внутренних частей. Свойство специализирует ParameterableElement, чтобы его можно было предоставлять как формальный параметр шаблона и передавать как фактический параметр привязки шаблона.",
     "Realization": "Realization is a specialized Abstraction relationship between two sets of model Elements, one representing a specification (the supplier) and the other represents an implementation of the latter (the client). Realization can be used to model stepwise refinement, optimizations, transformations, templates, model synthesis, framework composition, etc.",
+    "RedefinableElement": "Переопределяемый элемент — элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (прямо или косвенно) контекстный классификатор.",
+    "RedefinableTemplateSignature": "Переопределяемая подпись шаблона поддерживает добавление формальных параметров шаблона в специализации шаблонного классификатора.",
     "Relationship": "Relationship is an abstract concept that specifies some kind of relationship between Elements.",
+    "Slot": "Слот обозначает, что сущность, смоделированная спецификацией экземпляра, имеет значение или значения для конкретной структурной характеристики.",
     "StringExpression": "A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.",
+    "StructuralFeature": "Структурная характеристика — типизированная характеристика классификатора, задающая структуру экземпляров классификатора.",
+    "Substitution": "Подстановка — отношение между двумя классификаторами, означающее, что подставляющий классификатор соответствует контракту, заданному классификатором контракта. Это означает, что экземпляры подставляющего классификатора могут подставляться во время выполнения там, где ожидаются экземпляры классификатора контракта.",
     "TemplateBinding": "A TemplateBinding is a DirectedRelationship between a TemplateableElement and a template. A TemplateBinding specifies the TemplateParameterSubstitutions of actual parameters for the formal parameters of the template.",
     "TemplateParameter": "A TemplateParameter exposes a ParameterableElement as a formal parameter of a template.",
     "TemplateParameterSubstitution": "A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.",

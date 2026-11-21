@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="390" viewBox="0 0 700 390" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.23">
+  <title id="diagram-title">Рисунок 9.23 — Наборы обобщений и ограничения</title>
+  <desc id="diagram-description">Person специализируется на Woman и Man в покрывающем несовместном наборе {complete, disjoint} и на Employee в непокрывающем наборе {incomplete}.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="700" height="390"/>
+  <g class="class-node" data-classifier="Person"><title>Person. Пример: абстрактный класс Person (человек), специализируется классами Woman, Man и Employee.</title>
+<rect class="class-box" x="280" y="40" width="120" height="50"/>
+<line class="class-divider" x1="280" y1="72" x2="400" y2="72"/>
+<text class="class-name abstract" x="340.0" y="63" text-anchor="middle">Person</text>
+</g>
+<g class="class-node" data-classifier="Woman"><title>Woman. Пример: специализация Person — женщина.</title>
+<rect class="class-box" x="90" y="240" width="120" height="50"/>
+<line class="class-divider" x1="90" y1="272" x2="210" y2="272"/>
+<text class="class-name" x="150.0" y="263" text-anchor="middle">Woman</text>
+</g>
+<g class="class-node" data-classifier="Man"><title>Man. Пример: специализация Person — мужчина.</title>
+<rect class="class-box" x="90" y="310" width="120" height="50"/>
+<line class="class-divider" x1="90" y1="342" x2="210" y2="342"/>
+<text class="class-name" x="150.0" y="333" text-anchor="middle">Man</text>
+</g>
+<g class="class-node" data-classifier="Employee"><title>Employee. Пример: специализация Person — работник.</title>
+<rect class="class-box" x="340" y="240" width="130" height="50"/>
+<line class="class-divider" x1="340" y1="272" x2="470" y2="272"/>
+<text class="class-name" x="405.0" y="263" text-anchor="middle">Employee</text>
+</g>
+<path class="generalization-line" d="M 210 265 L 230 175" data-child="Woman" data-parent="Person"/>
+<path class="generalization-line" d="M 210 335 L 230 175" data-child="Man" data-parent="Person"/>
+<path class="generalization-line" d="M 230 175 L 300 90" data-child="Woman+Man" data-parent="Person" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 405 240 L 345 90" data-child="Employee" data-parent="Person" marker-end="url(#generalization)"/>
+<text class="association-label" x="257" y="130" text-anchor="end"><title>Набор обобщений покрывающий (complete) и несовместный (disjoint): каждый экземпляр относится ровно к одному специальному классификатору.</title>{complete, disjoint}</text>
+<text class="association-label" x="370" y="115"><title>Набор обобщений непокрывающий (incomplete): экземпляр может не иметь специализации из этого набора.</title>{incomplete}</text>
+</svg>

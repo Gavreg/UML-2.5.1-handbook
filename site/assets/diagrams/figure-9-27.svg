@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1100" viewBox="0 0 1280 1100" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.27">
+  <title id="diagram-title">Рисунок 9.27 — Экземпляры</title>
+  <desc id="diagram-description">Абстрактный синтаксис InstanceSpecification: слоты и спецификации значений, ассоциации с Slot, ValueSpecification, InstanceValue и Classifier.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1280" height="1100"/>
+  <g class="class-node" data-classifier="DeploymentTarget"><title>DeploymentTarget. DeploymentTarget. A deployment target is the location for a deployed artifact.</title>
+<rect class="class-box" x="15" y="85" width="180" height="50"/>
+<line class="class-divider" x1="15" y1="117" x2="195" y2="117"/>
+<text class="class-name" x="105.0" y="108" text-anchor="middle">DeploymentTarget</text>
+</g>
+<a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+<rect class="class-box" x="110" y="25" width="220" height="50"/>
+<line class="class-divider" x1="110" y1="57" x2="330" y2="57"/>
+<text class="class-name abstract" x="220.0" y="48" text-anchor="middle">PackageableElement</text>
+</a>
+<g class="class-node" data-classifier="DeployedArtifact"><title>DeployedArtifact. DeployedArtifact. A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.</title>
+<rect class="class-box" x="360" y="85" width="185" height="50"/>
+<line class="class-divider" x1="360" y1="117" x2="545" y2="117"/>
+<text class="class-name" x="452.5" y="108" text-anchor="middle">DeployedArtifact</text>
+</g>
+<a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+<rect class="class-box" x="685" y="60" width="130" height="50"/>
+<line class="class-divider" x1="685" y1="92" x2="815" y2="92"/>
+<text class="class-name abstract" x="750.0" y="83" text-anchor="middle">Element</text>
+</a>
+<a class="class-node" data-classifier="InstanceSpecification" href="../../index.html#/classifier/instancespecification" target="_top" aria-label="InstanceSpecification — открыть описание класса"><title>InstanceSpecification. Элемент модели, представляющий экземпляр в моделируемой системе. InstanceSpecification может выступать DeploymentTarget в отношении Deployment, если представляет экземпляр Node. Он может также выступать DeployedArtifact, если представляет экземпляр Artifact.</title>
+<rect class="class-box" x="120" y="300" width="200" height="380"/>
+<line class="class-divider" x1="120" y1="332" x2="320" y2="332"/>
+<text class="class-name" x="220.0" y="323" text-anchor="middle">InstanceSpecification</text>
+</a>
+<a class="class-node" data-classifier="Slot" href="../../index.html#/classifier/slot" target="_top" aria-label="Slot — открыть описание класса"><title>Slot. Указывает, что сущность, смоделированная InstanceSpecification, имеет значение или значения для конкретной StructuralFeature.</title>
+<rect class="class-box" x="690" y="320" width="120" height="60"/>
+<line class="class-divider" x1="690" y1="352" x2="810" y2="352"/>
+<text class="class-name" x="750.0" y="343" text-anchor="middle">Slot</text>
+</a>
+<a class="class-node" data-classifier="StructuralFeature" href="../../index.html#/classifier/structuralfeature" target="_top" aria-label="StructuralFeature — открыть описание класса"><title>StructuralFeature. Типизированная характеристика классификатора, специфицирующая структуру экземпляров классификатора.</title>
+<rect class="class-box" x="1020" y="315" width="210" height="50"/>
+<line class="class-divider" x1="1020" y1="347" x2="1230" y2="347"/>
+<text class="class-name abstract" x="1125.0" y="338" text-anchor="middle">StructuralFeature</text>
+</a>
+<a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="635" y="600" width="230" height="60"/>
+<line class="class-divider" x1="635" y1="632" x2="865" y2="632"/>
+<text class="class-name abstract" x="750.0" y="623" text-anchor="middle">ValueSpecification</text>
+</a>
+<a class="class-node" data-classifier="InstanceValue" href="../../index.html#/classifier/instancevalue" target="_top" aria-label="InstanceValue — открыть описание класса"><title>InstanceValue. ValueSpecification, идентифицирующая экземпляр.</title>
+<rect class="class-box" x="640" y="745" width="220" height="60"/>
+<line class="class-divider" x1="640" y1="777" x2="860" y2="777"/>
+<text class="class-name" x="750.0" y="768" text-anchor="middle">InstanceValue</text>
+</a>
+<a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="150" y="950" width="140" height="55"/>
+<line class="class-divider" x1="150" y1="982" x2="290" y2="982"/>
+<text class="class-name abstract" x="220.0" y="973" text-anchor="middle">Classifier</text>
+</a>
+<path class="generalization-line" d="M 150 300 L 105 135" data-child="InstanceSpecification" data-parent="DeploymentTarget" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 220 300 V 75" data-child="InstanceSpecification" data-parent="PackageableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 295 300 L 452 135" data-child="InstanceSpecification" data-parent="DeployedArtifact" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 750 320 V 110" data-child="Slot" data-parent="Element" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 750 745 V 660" data-child="InstanceValue" data-parent="ValueSpecification" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-slot-owninginstance" target="_top" aria-label="Открыть описание ассоциации A_slot_owningInstance">
+<g class="association-group" id="A_slot_owningInstance"><title>Связывает слот со спецификацией экземпляра, которой он принадлежит.</title>
+<path class="association" d="M 320 340 H 690"/><path class="association-hitbox" d="M 320 340 H 690" aria-hidden="true"/>
+<polygon class="composition" points="320,340 328,332 336,340 328,348"/><circle class="end-dot" cx="690" cy="340" r="3"/>
+<text class="association-end" x="340" y="320"><title>Спецификация экземпляра, владеющая этим слотом.</title>+ owningInstance</text>
+<text class="association-end" x="670" y="320" text-anchor="end"><title>Слот, задающий значение или значения структурной характеристики экземпляра. Спецификация экземпляра может иметь один слот на каждую структурную характеристику своих классификаторов, включая унаследованные характеристики. Необязательно моделировать слот для каждой структурной характеристики; в этом случае спецификация экземпляра является частичным описанием.</title>+ slot</text>
+<text class="association-label" x="340" y="300">{subsets owner}</text>
+<text class="association-label" x="340" y="284">1</text>
+<text class="association-label" x="670" y="300" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="670" y="284" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-definingfeature-slot" target="_top" aria-label="Открыть описание ассоциации A_definingFeature_slot">
+<g class="association-group" id="A_definingFeature_slot"><title>Связывает определяющую характеристику со слотами, которые она определяет.</title>
+<path class="association" d="M 810 340 H 1020" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 810 340 H 1020" aria-hidden="true"/>
+<circle class="end-dot" cx="810" cy="340" r="3"/>
+<text class="association-end" x="830" y="320"><title>slot. Связывает определяющую характеристику со слотами, которые она определяет.</title>+ slot</text>
+<text class="association-end" x="1000" y="320" text-anchor="end"><title>Структурная характеристика, задающая значения, которые может хранить слот.</title>+ definingFeature</text>
+<text class="association-label" x="830" y="300">*</text>
+<text class="association-label" x="1000" y="300" text-anchor="end">1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-value-owningslot" target="_top" aria-label="Открыть описание ассоциации A_value_owningSlot">
+<g class="association-group" id="A_value_owningSlot"><title>Связывает значение слота со слотом, которому оно принадлежит.</title>
+<path class="association" d="M 750 380 V 600" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 750 380 V 600" aria-hidden="true"/>
+<polygon class="composition" points="750,380 742,388 750,396 758,388"/>
+<text class="association-end" x="770" y="418"><title>owningSlot. Связывает значение слота со слотом, которому оно принадлежит.</title>+ owningSlot</text>
+<text class="association-end" x="770" y="572"><title>value. Связывает значение слота со слотом, которому оно принадлежит.</title>+ value</text>
+<text class="association-label" x="770" y="434">{subsets owner}</text>
+<text class="association-label" x="770" y="450">0..1</text>
+<text class="association-label" x="770" y="556">{ordered, subsets ownedElement}</text>
+<text class="association-label" x="770" y="540">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-specification-owninginstancespec" target="_top" aria-label="Открыть описание ассоциации A_specification_owningInstanceSpec">
+<g class="association-group" id="A_specification_owningInstanceSpec"><title>Связывает спецификацию значения со спецификацией экземпляра, которой она принадлежит.</title>
+<path class="association" d="M 320 630 H 635" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 320 630 H 635" aria-hidden="true"/>
+<polygon class="composition" points="320,630 328,622 336,630 328,638"/><circle class="end-dot" cx="635" cy="630" r="3"/>
+<text class="association-end" x="340" y="610"><title>owningInstanceSpec. Связывает спецификацию значения со спецификацией экземпляра, которой она принадлежит.</title>+ owningInstanceSpec</text>
+<text class="association-end" x="615" y="610" text-anchor="end"><title>specification. Связывает спецификацию значения со спецификацией экземпляра, которой она принадлежит.</title>+ specification</text>
+<text class="association-label" x="340" y="590">{subsets owner}</text>
+<text class="association-label" x="340" y="574">0..1</text>
+<text class="association-label" x="615" y="590" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="615" y="574" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-instance-instancevalue" target="_top" aria-label="Открыть описание ассоциации A_instance_instanceValue">
+<g class="association-group" id="A_instance_instanceValue"><title>Связывает спецификацию экземпляра со значениями экземпляра, которые на неё ссылаются.</title>
+<path class="association" d="M 320 500 H 1040 V 700 H 860 V 775" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 320 500 H 1040 V 700 H 860 V 775" aria-hidden="true"/>
+<circle class="end-dot" cx="320" cy="500" r="3"/>
+<text class="association-end" x="340" y="480"><title>Спецификация экземпляра, представляющая заданное значение.</title>+ instance</text>
+<text class="association-end" x="880" y="747"><title>instanceValue. Связывает спецификацию экземпляра со значениями экземпляра, которые на неё ссылаются.</title>+ instanceValue</text>
+<text class="association-label" x="340" y="460">1</text>
+<text class="association-label" x="880" y="731">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-classifier-instancespecification" target="_top" aria-label="Открыть описание ассоциации A_classifier_instanceSpecification">
+<g class="association-group" id="A_classifier_instanceSpecification"><title>Связывает классификатор со спецификациями экземпляров, которые им классифицированы.</title>
+<path class="association" d="M 220 680 V 950" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 220 680 V 950" aria-hidden="true"/>
+
+<text class="association-end" x="240" y="718"><title>instanceSpecification. Связывает классификатор со спецификациями экземпляров, которые им классифицированы.</title>+ instanceSpecification</text>
+<text class="association-end" x="240" y="922"><title>classifier. Связывает классификатор со спецификациями экземпляров, которые им классифицированы.</title>+ classifier</text>
+<text class="association-label" x="240" y="734">*</text>
+<text class="association-label" x="240" y="906">*</text>
+</g></a>
+</svg>

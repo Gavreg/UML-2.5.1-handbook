@@ -19,7 +19,7 @@ FRAGMENT_NAMES = [
     "sections-7", "sections-8", "sections-9",
     "classifiers-7", "classifiers-8", "classifiers-9", "classifiers-external",
     "associations-7", "associations-8", "associations-9",
-    "diagrams-7", "diagrams-8",
+    "diagrams-7", "diagrams-8", "diagrams-9",
 ]
 
 OUTPUT = SITE / "data" / "common-structure-pages.js"
@@ -41,6 +41,13 @@ DIAGRAM_BY_NAME = {
     "Expressions": "8.2",
     "Time": "8.3",
     "Intervals": "8.4",
+    "Classifiers": "9.1",
+    "Classifier Templates": "9.4",
+    "Features": "9.9",
+    "Properties": "9.10",
+    "Operations": "9.13",
+    "Generalization Sets": "9.14",
+    "Instances": "9.27",
 }
 CLAUSES = {
     "7": {"label": "7 Common Structure", "title": "Общая структура", "en": "Common Structure"},
@@ -379,12 +386,12 @@ class HandbookRenderer:
         diagrams_count = len(self.data["diagrams"])
         return f'''<p class="eyebrow">OMG UML 2.5.1 · formal/17-12-05</p>
           <h1>Метамодель UML.<br>От базовых понятий — к деталям.</h1>
-          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает разделы 7 «Common Structure» и 8 «Values»; для раздела 9 «Classification» создан каркас страниц.</p>
+          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает разделы 7 «Common Structure», 8 «Values» и 9 «Classification».</p>
           <div class="meta-row"><span class="meta-tag">Онлайн и офлайн</span><span class="meta-tag">Без внешних зависимостей</span><span class="meta-tag">Исходная нумерация OMG</span></div>
           <div class="stats" aria-label="Охват справочника"><div class="stat"><strong>{sections_count}</strong><span>{self.plural(sections_count, "подраздел", "подраздела", "подразделов")}</span></div>
             <div class="stat"><strong>{classifiers_count}</strong><span>{self.plural(classifiers_count, "классификатор", "классификатора", "классификаторов")}</span></div>
             <div class="stat"><strong>{diagrams_count}</strong><span>{self.plural(diagrams_count, "рисунок", "рисунка", "рисунков")} из спецификации</span></div></div>
-          <div class="notice">Рисунки разделов 7–8 перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
+          <div class="notice">Рисунки разделов 7–9 перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
           {"".join(groups)}'''
 
     def render_section(self, section):
@@ -411,7 +418,7 @@ class HandbookRenderer:
             rows = "".join(self.object_row(item, "association") for item in self.data["associations"] if item["section"].startswith(section["id"] + "."))
             association_catalog = f'<section><h2>Ассоциации раздела</h2><div class="object-list">{rows}</div></section>'
         figures = ""
-        if not full and section.get("figures"):
+        if (not full or section.get("placeholder")) and section.get("figures"):
             figures = '<section><h2>Абстрактный синтаксис и примеры</h2>' + "".join(
                 self.figure_card(item) for item in section["figures"]
             ) + "</section>"
@@ -534,7 +541,8 @@ class HandbookRenderer:
             crumbs = [{"label": "Связанные классификаторы"}, {"label": item["name"]}]
         if item.get("placeholder"):
             return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">{KIND_LABELS[item["kind"]]} · раздел {item["section"]}</p>
-              <h1>{escape(item["ru"])}</h1><p class="original-name" lang="en">{escape(item["name"])} [{escape(item["kind"])}]</p>'''
+              <h1>{escape(item["ru"])}</h1><p class="original-name" lang="en">{escape(item["name"])} [{escape(item["kind"])}]</p>
+              {self.related_figures(figures)}'''
         generalizations = f'<section><h2>Обобщения</h2>{self.link_list(item["generalizations"])}</section>' if item.get("generalizations") else ""
         specializations = f'<section><h2>Специализации</h2>{self.link_list(item["specializations"])}</section>' if item.get("specializations") else ""
         return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">{KIND_LABELS[item["kind"]]} · раздел {item["section"]}</p>
@@ -556,7 +564,8 @@ class HandbookRenderer:
         crumbs = [{"label": clause["label"]}, {"label": f"{catalog_prefix} Ассоциации", "href": f"#/section/{slug(catalog_prefix)}"}, {"label": item["name"]}]
         if item.get("placeholder"):
             return f'''{self.breadcrumbs(crumbs)}<p class="eyebrow">Ассоциация · раздел {item["section"]}</p><h1>{escape(item["ru"])}</h1>
-              <p class="original-name" lang="en">{escape(item["name"])} [Association]</p>'''
+              <p class="original-name" lang="en">{escape(item["name"])} [Association]</p>
+              {self.related_figures(self.association_figures(item))}'''
         ends = self.xmi["associations"].get(item["name"], {}).get("ends")
         if ends is None:
             ends = [{"signature": end} for end in item["ends"]]
@@ -577,8 +586,8 @@ class HandbookRenderer:
         tiles = "".join(self.diagram_tile(diagram) for diagram in self.data["diagrams"])
         count = len(self.data["diagrams"])
         return f'''{self.breadcrumbs([{"label": "Справочник"}, {"label": "Диаграммы"}])}
-          <p class="eyebrow">Разделы 7–8 · {count} {self.plural(count, "рисунок", "рисунка", "рисунков")}</p><h1>Диаграммы</h1>
-          <p class="lead">Векторные копии рисунков разделов 7 «Common Structure» и 8 «Values». Все материалы сохранены локально и доступны без подключения к сети.</p>
+          <p class="eyebrow">Разделы 7–9 · {count} {self.plural(count, "рисунок", "рисунка", "рисунков")}</p><h1>Диаграммы</h1>
+          <p class="lead">Векторные копии рисунков разделов 7 «Common Structure», 8 «Values» и 9 «Classification». Все материалы сохранены локально и доступны без подключения к сети.</p>
           <div class="diagram-grid">{tiles}</div>'''
 
     def render_diagram(self, diagram):

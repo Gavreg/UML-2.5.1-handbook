@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="390" viewBox="0 0 1100 390" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.16">
+  <title id="diagram-title">Рисунок 9.16 — Наборы обобщений с общей целью</title>
+  <desc id="diagram-description">Стиль «shared target»: линии, сходящиеся к одному наконечнику и подписанные одним именем, образуют один набор GeneralizationSet.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1100" height="390"/>
+  <g class="class-node" data-classifier=" "><title> . Классификатор примера без имени — общий родитель обобщений.</title>
+<rect class="class-box" x="170" y="40" width="130" height="50"/>
+<line class="class-divider" x1="170" y1="72" x2="300" y2="72"/>
+<text class="class-name" x="235.0" y="63" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="30" y="270" width="130" height="50"/>
+<line class="class-divider" x1="30" y1="302" x2="160" y2="302"/>
+<text class="class-name" x="95.0" y="293" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="180" y="270" width="130" height="50"/>
+<line class="class-divider" x1="180" y1="302" x2="310" y2="302"/>
+<text class="class-name" x="245.0" y="293" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="330" y="270" width="130" height="50"/>
+<line class="class-divider" x1="330" y1="302" x2="460" y2="302"/>
+<text class="class-name" x="395.0" y="293" text-anchor="middle"> </text>
+</g>
+<path class="generalization-line" d="M 95 270 L 215 180" data-child="specific-1" data-parent="generic"/>
+<path class="generalization-line" d="M 245 270 L 215 180" data-child="specific-2" data-parent="generic"/>
+<path class="generalization-line" d="M 215 180 V 90" data-child="specific-1+2" data-parent="generic" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 395 270 L 255 90" data-child="specific-3" data-parent="generic" marker-end="url(#generalization)"/>
+<text class="association-label" x="203" y="145" text-anchor="end"><title>Имя набора обобщений: все обобщения с этим именем принадлежат одному GeneralizationSet.</title>GeneralizationSet1</text>
+<text class="association-label" x="310" y="145"><title>Имя набора обобщений: все обобщения с этим именем принадлежат одному GeneralizationSet.</title>GeneralizationSet2</text>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени — общий родитель обобщений.</title>
+<rect class="class-box" x="650" y="40" width="130" height="50"/>
+<line class="class-divider" x1="650" y1="72" x2="780" y2="72"/>
+<text class="class-name" x="715.0" y="63" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="510" y="250" width="130" height="50"/>
+<line class="class-divider" x1="510" y1="282" x2="640" y2="282"/>
+<text class="class-name" x="575.0" y="273" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="510" y="320" width="130" height="50"/>
+<line class="class-divider" x1="510" y1="352" x2="640" y2="352"/>
+<text class="class-name" x="575.0" y="343" text-anchor="middle"> </text>
+</g>
+<g class="class-node" data-classifier=" "><title> . Классификатор примера без имени; участвует в обозначении наборов обобщений.</title>
+<rect class="class-box" x="730" y="250" width="130" height="50"/>
+<line class="class-divider" x1="730" y1="282" x2="860" y2="282"/>
+<text class="class-name" x="795.0" y="273" text-anchor="middle"> </text>
+</g>
+<path class="generalization-line" d="M 820 255 H 865 V 90" data-child="specific-1+2" data-parent="generic" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 820 345 H 865" data-child="specific-2" data-parent="generic"/>
+<path class="generalization-line" d="M 795 250 L 745 90" data-child="specific-3" data-parent="generic" marker-end="url(#generalization)"/>
+<text class="association-label" x="700" y="120" text-anchor="end"><title>Имя набора обобщений: все обобщения с этим именем принадлежат одному GeneralizationSet.</title>GeneralizationSet1</text>
+<text class="association-label" x="900" y="180"><title>Имя набора обобщений: все обобщения с этим именем принадлежат одному GeneralizationSet.</title>GeneralizationSet2</text>
+</svg>

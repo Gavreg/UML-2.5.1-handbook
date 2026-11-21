@@ -9,43 +9,36 @@ Requires: Python 3 standard library.
 
 from argparse import ArgumentParser
 from html import escape
-import json
 from pathlib import Path
 import re
+import xml.etree.ElementTree as ET
 
-from handbook_data import load_xmi
+from handbook_data import load_handbook, load_xmi
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA_PATH = ROOT / "site" / "data" / "common-structure.js"
+XMI_PATH = ROOT / "site" / "docs" / "UML-2.5.1.xmi"
 
 
 def slug(value):
     return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", value.lower()))
 
 
-def quoted(value):
-    return json.loads(f'"{value}"')
-
-
-DATA_TEXT = DATA_PATH.read_text(encoding="utf-8")
-CLASS_BLOCK = DATA_TEXT.split("const classifiers = [", 1)[1].split("const associations = [", 1)[0]
-ASSOCIATION_BLOCK = DATA_TEXT.split("const associations = [", 1)[1].split("const diagrams = [", 1)[0]
+HANDBOOK_DATA = load_handbook()[0]
 CLASSES = {
-    match.group(1): {"kind": match.group(2), "definition": quoted(match.group(3))}
-    for match in re.finditer(
-        r'^      name: "([A-Za-z]+)".*?kind: "([^"]+)".*?definition: "((?:\\.|[^"\\])*)"',
-        CLASS_BLOCK,
-        re.S | re.M,
-    )
+    item["name"]: {
+        "kind": item["kind"],
+        "definition": item.get("definition", ""),
+        "link": True,
+    }
+    for item in HANDBOOK_DATA["classifiers"]
 }
 ASSOCIATIONS = {
-    match.group(1): quoted(match.group(2))
-    for match in re.finditer(
-        r'name: "(A_[A-Za-z_]+)", ru: "(?:\\.|[^"\\])*", section: "(?:\\.|[^"\\])*", page: \d+,\s+definition: "((?:\\.|[^"\\])*)"',
-        ASSOCIATION_BLOCK,
-        re.S,
+    item["name"]: item.get(
+        "definition",
+        f'Ассоциация {item["name"]} из раздела {item["section"]} OMG UML 2.5.1.',
     )
+    for item in HANDBOOK_DATA["associations"]
 }
 XMI = load_xmi()
 PROPERTY_DESCRIPTIONS = {}
@@ -53,6 +46,27 @@ for class_name, class_data in XMI["classes"].items():
     for group in ("direct", "inherited"):
         for prop in class_data.get(group, []):
             PROPERTY_DESCRIPTIONS[(class_name, prop["name"])] = prop["description"]
+
+XMI_NS = "{http://www.omg.org/XMI}"
+for package in ET.parse(XMI_PATH).getroot().iter("packagedElement"):
+    name = package.get("name")
+    if not name:
+        continue
+    comment = package.find("ownedComment")
+    if package.get(XMI_NS + "type") in ("uml:Class", "uml:Enumeration"):
+        if name not in CLASSES:
+            CLASSES[name] = {
+                "kind": "Abstract Class" if package.get("isAbstract") == "true" else "Class",
+                "definition": "",
+                "link": False,
+            }
+        if comment is not None and not CLASSES[name]["definition"]:
+            CLASSES[name]["definition"] = comment.get("body", "")
+    for prop in package.findall("ownedAttribute"):
+        prop_name = prop.get("name")
+        prop_comment = prop.find("ownedComment")
+        if prop_name and prop_comment is not None:
+            PROPERTY_DESCRIPTIONS.setdefault((name, prop_name), prop_comment.get("body", ""))
 
 
 STYLE = """
@@ -130,8 +144,12 @@ def text(value, x, y, anchor="start", css="", title=""):
 
 def classifier_label(svg, value, x, y, classifier, anchor="start", css=""):
     known = CLASSES[classifier]
-    href = f'../../index.html#/classifier/{slug(classifier)}'
-    svg.add(f'<a href="{href}" target="_top" aria-label="{escape(classifier)} — открыть описание класса"><title>{escape(classifier)}. {escape(known["definition"])}</title>{text(value, x, y, anchor, css)}</a>')
+    content = f'<title>{escape(classifier)}. {escape(known["definition"])}</title>{text(value, x, y, anchor, css)}'
+    if known.get("link", True):
+        href = f'../../index.html#/classifier/{slug(classifier)}'
+        svg.add(f'<a href="{href}" target="_top" aria-label="{escape(classifier)} — открыть описание класса">{content}</a>')
+    else:
+        svg.add(f'<g>{content}</g>')
 
 
 def class_node(svg, name, x, y, width, height, attributes=None, operations=None, stereotype="", example=False, tooltip=""):
@@ -142,7 +160,7 @@ def class_node(svg, name, x, y, width, height, attributes=None, operations=None,
     abstract = known and known["kind"] == "Abstract Class"
     header = 50 if stereotype else 32
     href = f'../../index.html#/classifier/{slug(name)}'
-    tag = "g" if example or not known else "a"
+    tag = "g" if example or not known or not known.get("link", True) else "a"
     link_attrs = "" if tag == "g" else f' href="{href}" target="_top" aria-label="{escape(name)} — открыть описание класса"'
     svg.add(f'<{tag} class="class-node" data-classifier="{escape(name)}"{link_attrs}><title>{escape(name)}. {escape(definition)}</title>')
     svg.add(f'<rect class="class-box" x="{x}" y="{y}" width="{width}" height="{height}"/>')
@@ -173,10 +191,10 @@ def generalization(svg, path, marker=True, child="", parent="", dashed=False):
     svg.add(f'<path class="{css}" d="{path}"{data}{marker_attr}/>' )
 
 
-def association(svg, name, path, start, end, markers="", decorations="", labels=None):
+def association(svg, name, path, start, end, markers="", decorations="", labels=None, group_id=None):
     definition = ASSOCIATIONS[name]
     svg.add(f'<a class="association-link" href="../../index.html#/association/{slug(name)}" target="_top" aria-label="Открыть описание ассоциации {escape(name)}">')
-    svg.add(f'<g class="association-group" id="{name}"><title>{escape(definition)}</title>')
+    svg.add(f'<g class="association-group" id="{group_id or name}"><title>{escape(definition)}</title>')
     svg.add(f'<path class="association" d="{path}"{markers}/><path class="association-hitbox" d="{path}" aria-hidden="true"/>')
     svg.add(decorations)
     for owner, prop, label_value, x, y, anchor in (start, end):
@@ -187,8 +205,9 @@ def association(svg, name, path, start, end, markers="", decorations="", labels=
     svg.add('</g></a>')
 
 
-def example_association(svg, path, labels=None, markers=' marker-end="url(#navigation)"', title="Ассоциация между элементами примера."):
+def example_association(svg, path, labels=None, markers=' marker-end="url(#navigation)"', title="Ассоциация между элементами примера.", decorations=""):
     svg.add(f'<g class="example-association-group"><title>{escape(title)}</title><path class="example-association" d="{path}"{markers}/><path class="association-hitbox" d="{path}" aria-hidden="true"/>')
+    svg.add(decorations)
     for label_value, x, y, anchor in labels or []:
         svg.add(text(label_value, x, y, anchor, "example-label"))
     svg.add('</g>')

@@ -57,11 +57,13 @@
 <text class="class-name" x="790.0" y="113" text-anchor="middle">Account</text>
 </g>
 <g class="example-association-group"><title>Покупки клиента: упорядоченное множество без повторов.</title><path class="example-association" d="M 375 120 H 185" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 375 120 H 185" aria-hidden="true"/>
+
 <text class="example-label" x="197" y="105">purchase</text>
 <text class="example-label" x="197" y="144">*</text>
 <text class="example-label" x="197" y="160">{ordered, unique}</text>
 </g>
 <g class="example-association-group"><title>Счета клиента: не более пяти уникальных значений.</title><path class="example-association" d="M 535 120 H 715" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 535 120 H 715" aria-hidden="true"/>
+
 <text class="example-label" x="703" y="105" text-anchor="end">account</text>
 <text class="example-label" x="703" y="160" text-anchor="end">{unique}</text>
 <text class="example-label" x="703" y="144" text-anchor="end">0..5</text>

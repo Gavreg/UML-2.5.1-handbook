@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2050" height="1400" viewBox="0 0 2050 1400" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.10">
+  <title id="diagram-title">Рисунок 9.10 — Свойства</title>
+  <desc id="diagram-description">Абстрактный синтаксис Property, AggregationKind и связей с классификаторами, ассоциациями и значениями.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="2050" height="1400"/>
+  <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="250" y="50" width="240" height="60"/>
+<line class="class-divider" x1="250" y1="82" x2="490" y2="82"/>
+<text class="class-name abstract" x="370.0" y="73" text-anchor="middle">ParameterableElement</text>
+</a>
+<g class="class-node" data-classifier="ConnectableElement"><title>ConnectableElement. Пример класса ConnectableElement.</title>
+<rect class="class-box" x="600" y="50" width="240" height="60"/>
+<line class="class-divider" x1="600" y1="82" x2="840" y2="82"/>
+<text class="class-name" x="720.0" y="73" text-anchor="middle">ConnectableElement</text>
+</g>
+<a class="class-node" data-classifier="StructuralFeature" href="../../index.html#/classifier/structuralfeature" target="_top" aria-label="StructuralFeature — открыть описание класса"><title>StructuralFeature. Типизированная характеристика классификатора, специфицирующая структуру экземпляров классификатора.</title>
+<rect class="class-box" x="930" y="50" width="220" height="60"/>
+<line class="class-divider" x1="930" y1="82" x2="1150" y2="82"/>
+<text class="class-name abstract" x="1040.0" y="73" text-anchor="middle">StructuralFeature</text>
+</a>
+<g class="class-node" data-classifier="DeploymentTarget"><title>DeploymentTarget. Пример класса DeploymentTarget.</title>
+<rect class="class-box" x="1230" y="50" width="220" height="60"/>
+<line class="class-divider" x1="1230" y1="82" x2="1450" y2="82"/>
+<text class="class-name" x="1340.0" y="73" text-anchor="middle">DeploymentTarget</text>
+</g>
+<a class="class-node" data-classifier="AggregationKind" href="../../index.html#/classifier/aggregationkind" target="_top" aria-label="AggregationKind — открыть описание класса"><title>AggregationKind. Перечисление для задания вида агрегации Property.</title>
+<rect class="class-box" x="1600" y="30" width="220" height="150"/>
+<line class="class-divider" x1="1600" y1="80" x2="1820" y2="80"/>
+<text x="1710.0" y="49" text-anchor="middle">enumeration</text>
+<text class="class-name" x="1710.0" y="71" text-anchor="middle">AggregationKind</text>
+<text class="attribute" x="1610" y="102">none</text>
+<text class="attribute" x="1610" y="123">shared</text>
+<text class="attribute" x="1610" y="144">composite</text>
+</a>
+<g class="class-node" data-classifier="Interface"><title>Interface. Пример класса Interface.</title>
+<rect class="class-box" x="50" y="400" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="432" x2="210" y2="432"/>
+<text class="class-name" x="130.0" y="423" text-anchor="middle">Interface</text>
+</g>
+<g class="class-node" data-classifier="DataType"><title>DataType. Пример класса DataType.</title>
+<rect class="class-box" x="50" y="650" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="682" x2="210" y2="682"/>
+<text class="class-name" x="130.0" y="673" text-anchor="middle">DataType</text>
+</g>
+<g class="class-node" data-classifier="Class"><title>Class. Пример класса Class.</title>
+<rect class="class-box" x="50" y="900" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="932" x2="210" y2="932"/>
+<text class="class-name" x="130.0" y="923" text-anchor="middle">Class</text>
+</g>
+<a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="800" y="350" width="350" height="700"/>
+<line class="class-divider" x1="800" y1="382" x2="1150" y2="382"/>
+<text class="class-name" x="975.0" y="373" text-anchor="middle">Property</text>
+<text class="attribute" x="810" y="404">+ aggregation : AggregationKind = none</text>
+<text class="attribute" x="810" y="425">+ /isComposite : Boolean = false</text>
+<text class="attribute" x="810" y="446">+ isDerived : Boolean = false</text>
+<text class="attribute" x="810" y="467">+ isDerivedUnion : Boolean = false</text>
+<text class="attribute" x="810" y="488">+ isID : Boolean = false</text>
+</a>
+<g class="class-node" data-classifier="Association"><title>Association. Пример класса Association.</title>
+<rect class="class-box" x="1700" y="400" width="200" height="220"/>
+<line class="class-divider" x1="1700" y1="432" x2="1900" y2="432"/>
+<text class="class-name" x="1800.0" y="423" text-anchor="middle">Association</text>
+</g>
+<a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+<rect class="class-box" x="1700" y="590" width="260" height="60"/>
+<line class="class-divider" x1="1700" y1="622" x2="1960" y2="622"/>
+<text class="class-name abstract" x="1830.0" y="613" text-anchor="middle">ValueSpecification</text>
+</a>
+<path class="generalization-line" d="M 900 350 H 1060 V 110 H 720" data-child="Property" data-parent="ConnectableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1000 350 H 1080 V 110 H 1040" data-child="Property" data-parent="StructuralFeature" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1100 350 V 110 H 1340" data-child="Property" data-parent="DeploymentTarget" marker-end="url(#generalization)"/>
+<g class="example-association-group"><title>Ассоциация ownedAttribute между Interface и Property.</title><path class="example-association" d="M 210 430 H 800"/><path class="association-hitbox" d="M 210 430 H 800" aria-hidden="true"/>
+<polygon class="composition" points="210,430 218,422 226,430 218,438"/>
+<text class="example-label" x="230" y="410">+ interface</text>
+<text class="example-label" x="230" y="390">{subsets namespace,</text>
+<text class="example-label" x="230" y="374">subsets classifier}</text>
+<text class="example-label" x="230" y="358">0..1</text>
+<text class="example-label" x="780" y="410" text-anchor="end">+ ownedAttribute</text>
+<text class="example-label" x="780" y="390" text-anchor="end">{ordered, subsets attribute,</text>
+<text class="example-label" x="780" y="374" text-anchor="end">subsets ownedMember}</text>
+<text class="example-label" x="780" y="358" text-anchor="end">*</text>
+</g>
+<g class="example-association-group"><title>Ассоциация ownedAttribute между DataType и Property.</title><path class="example-association" d="M 210 680 H 800"/><path class="association-hitbox" d="M 210 680 H 800" aria-hidden="true"/>
+<polygon class="composition" points="210,680 218,672 226,680 218,688"/>
+<text class="example-label" x="230" y="660">+ datatype</text>
+<text class="example-label" x="230" y="640">{subsets namespace,</text>
+<text class="example-label" x="230" y="624">subsets classifier}</text>
+<text class="example-label" x="230" y="608">0..1</text>
+<text class="example-label" x="780" y="660" text-anchor="end">+ ownedAttribute</text>
+<text class="example-label" x="780" y="640" text-anchor="end">{ordered, subsets attribute,</text>
+<text class="example-label" x="780" y="624" text-anchor="end">subsets ownedMember}</text>
+<text class="example-label" x="780" y="608" text-anchor="end">*</text>
+</g>
+<g class="example-association-group"><title>Ассоциация ownedAttribute между Class и Property.</title><path class="example-association" d="M 210 930 H 800"/><path class="association-hitbox" d="M 210 930 H 800" aria-hidden="true"/>
+<polygon class="composition" points="210,930 218,922 226,930 218,938"/>
+<text class="example-label" x="230" y="910">+ class</text>
+<text class="example-label" x="230" y="890">{subsets namespace,</text>
+<text class="example-label" x="230" y="874">subsets structuredClassifier,</text>
+<text class="example-label" x="230" y="858">subsets classifier}</text>
+<text class="example-label" x="230" y="842">0..1</text>
+<text class="example-label" x="780" y="910" text-anchor="end">+ ownedAttribute</text>
+<text class="example-label" x="780" y="890" text-anchor="end">{ordered, subsets attribute,</text>
+<text class="example-label" x="780" y="874" text-anchor="end">subsets ownedMember,</text>
+<text class="example-label" x="780" y="858" text-anchor="end">redefines ownedAttribute}</text>
+<text class="example-label" x="780" y="842" text-anchor="end">*</text>
+</g>
+<g class="example-association-group"><title>Связь Property с владеющей Association.</title><path class="example-association" d="M 1150 450 H 1700"/><path class="association-hitbox" d="M 1150 450 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1700,450 1692,442 1684,450 1692,458"/>
+<text class="example-label" x="1170" y="430">+ ownedEnd</text>
+<text class="example-label" x="1170" y="410">{ordered, subsets feature,</text>
+<text class="example-label" x="1170" y="394">subsets redefinableElement,</text>
+<text class="example-label" x="1170" y="378">subsets memberEnd,</text>
+<text class="example-label" x="1170" y="362">subsets ownedMember}</text>
+<text class="example-label" x="1170" y="346">*</text>
+<text class="example-label" x="1680" y="430" text-anchor="end">+ owningAssociation</text>
+<text class="example-label" x="1680" y="410" text-anchor="end">{subsets featuringClassifier,</text>
+<text class="example-label" x="1680" y="394" text-anchor="end">subsets namespace,</text>
+<text class="example-label" x="1680" y="378" text-anchor="end">subsets association,</text>
+<text class="example-label" x="1680" y="362" text-anchor="end">subsets redefinitionContext}</text>
+<text class="example-label" x="1680" y="346" text-anchor="end">0..1</text>
+</g>
+<g class="example-association-group"><title>Связь Property с Association как memberEnd.</title><path class="example-association" d="M 1150 520 H 1700"/><path class="association-hitbox" d="M 1150 520 H 1700" aria-hidden="true"/>
+<circle class="end-dot" cx="1150" cy="520" r="3"/>
+<text class="example-label" x="1170" y="500">+ memberEnd</text>
+<text class="example-label" x="1170" y="480">{ordered, subsets member}</text>
+<text class="example-label" x="1170" y="464">2..*</text>
+<text class="example-label" x="1680" y="500" text-anchor="end">+ association</text>
+<text class="example-label" x="1680" y="480" text-anchor="end">{subsets memberNamespace}</text>
+<text class="example-label" x="1680" y="464" text-anchor="end">0..1</text>
+</g>
+<a class="association-link" href="../../index.html#/association/a-qualifier-associationend" target="_top" aria-label="Открыть описание ассоциации A_qualifier_associationEnd">
+<g class="association-group" id="A_qualifier_associationEnd"><title>Связывает квалификатор конца ассоциации с концом ассоциации, которому он принадлежит.</title>
+<path class="association" d="M 1150 720 H 1400 V 220 H 800 V 350"/><path class="association-hitbox" d="M 1150 720 H 1400 V 220 H 800 V 350" aria-hidden="true"/>
+<polygon class="composition" points="1150,720 1158,712 1166,720 1158,728"/>
+<text class="association-end" x="1170" y="700"><title>Обозначает необязательный конец ассоциации, владеющий атрибутом-квалификатором.</title>+ associationEnd</text>
+<text class="association-end" x="820" y="322"><title>Необязательный упорядоченный список атрибутов-квалификаторов конца.</title>+ qualifier</text>
+<text class="association-label" x="1170" y="680">{subsets owner}</text>
+<text class="association-label" x="1170" y="664">0..1</text>
+<text class="association-label" x="820" y="306">{ordered, subsets ownedElement}</text>
+<text class="association-label" x="820" y="290">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-opposite-property" target="_top" aria-label="Открыть описание ассоциации A_opposite_property">
+<g class="association-group" id="A_opposite_property"><title>Связывает свойство с противоположным концом той же бинарной ассоциации.</title>
+<path class="association" d="M 1150 800 H 1350 V 170 H 1100 V 350"/><path class="association-hitbox" d="M 1150 800 H 1350 V 170 H 1100 V 350" aria-hidden="true"/>
+
+<text class="association-end" x="1170" y="780"><title>property. Связывает свойство с противоположным концом той же бинарной ассоциации.</title>+ property</text>
+<text class="association-end" x="1120" y="322"><title>/opposite. Связывает свойство с противоположным концом той же бинарной ассоциации.</title>+ /opposite</text>
+<text class="association-label" x="1170" y="760">0..1</text>
+<text class="association-label" x="1120" y="306">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinedproperty-property" target="_top" aria-label="Открыть описание ассоциации A_redefinedProperty_property">
+<g class="association-group" id="A_redefinedProperty_property"><title>Связывает переопределённое свойство со свойствами, которые его переопределяют.</title>
+<path class="association" d="M 1150 880 H 1400 V 1190 H 800 V 1050"/><path class="association-hitbox" d="M 1150 880 H 1400 V 1190 H 800 V 1050" aria-hidden="true"/>
+
+<text class="association-end" x="1170" y="860"><title>property. Связывает переопределённое свойство со свойствами, которые его переопределяют.</title>+ property</text>
+<text class="association-end" x="820" y="1088"><title>Свойства, переопределяемые этим свойством, если есть.</title>+ redefinedProperty</text>
+<text class="association-label" x="1170" y="840">{subsets redefinableElement}</text>
+<text class="association-label" x="1170" y="824">*</text>
+<text class="association-label" x="820" y="1104">{subsets redefinedElement}</text>
+<text class="association-label" x="820" y="1120">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-subsettedproperty-property" target="_top" aria-label="Открыть описание ассоциации A_subsettedProperty_property">
+<g class="association-group" id="A_subsettedProperty_property"><title>Связывает свойство-подмножество со свойствами, которыми оно ограничивается как подмножество.</title>
+<path class="association" d="M 1150 960 H 1500 V 1250 H 1100 V 1050"/><path class="association-hitbox" d="M 1150 960 H 1500 V 1250 H 1100 V 1050" aria-hidden="true"/>
+
+<text class="association-end" x="1170" y="940"><title>property. Связывает свойство-подмножество со свойствами, которыми оно ограничивается как подмножество.</title>+ property</text>
+<text class="association-end" x="1120" y="1088"><title>Свойства, подмножеством которых это свойство ограничено быть, если есть.</title>+ subsettedProperty</text>
+<text class="association-label" x="1170" y="920">{subsets redefinableElement}</text>
+<text class="association-label" x="1170" y="904">*</text>
+<text class="association-label" x="1120" y="1104">{subsets redefinedElement}</text>
+<text class="association-label" x="1120" y="1120">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-defaultvalue-owningproperty" target="_top" aria-label="Открыть описание ассоциации A_defaultValue_owningProperty">
+<g class="association-group" id="A_defaultValue_owningProperty"><title>Связывает значение свойства по умолчанию с владеющим им свойством.</title>
+<path class="association" d="M 1150 620 H 1700"/><path class="association-hitbox" d="M 1150 620 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1150,620 1158,612 1166,620 1158,628"/>
+<text class="association-end" x="1170" y="600"><title>owningProperty. Связывает значение свойства по умолчанию с владеющим им свойством.</title>+ owningProperty</text>
+<text class="association-end" x="1680" y="600" text-anchor="end"><title>defaultValue. Связывает значение свойства по умолчанию с владеющим им свойством.</title>+ defaultValue</text>
+<text class="association-label" x="1170" y="580">{subsets owner}</text>
+<text class="association-label" x="1170" y="564">0..1</text>
+<text class="association-label" x="1680" y="580" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="1680" y="564" text-anchor="end">0..1</text>
+</g></a>
+</svg>

@@ -57,8 +57,10 @@
 <text class="class-name" x="590.0" y="263" text-anchor="middle">Corporation</text>
 </g>
 <g class="example-association-group"><title>Связь Account с Person.</title><path class="example-association" d="M 185 155 L 500 85"/><path class="association-hitbox" d="M 185 155 L 500 85" aria-hidden="true"/>
+
 </g>
 <g class="example-association-group"><title>Связь Account с Corporation.</title><path class="example-association" d="M 185 180 L 500 260"/><path class="association-hitbox" d="M 185 180 L 500 260" aria-hidden="true"/>
+
 </g>
 <path class="note-link" d="M 340 115 V 220"/>
 <text class="class-name" x="352" y="170"><title>Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>{xor}</text>

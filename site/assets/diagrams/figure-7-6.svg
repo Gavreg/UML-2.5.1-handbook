@@ -82,38 +82,47 @@
 <text class="class-name" x="875.0" y="388" text-anchor="middle">System</text>
 </g>
 <g class="example-association-group"><title>Ресурс, участвующий в распределении.</title><path class="example-association" d="M 400 285 H 255" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 400 285 H 255" aria-hidden="true"/>
+
 <text class="example-label" x="330" y="270" text-anchor="middle">resource</text>
 <text class="example-label" x="267" y="309">1</text>
 </g>
 <g class="example-association-group"><title>Ресурсы выбранного вида.</title><path class="example-association" d="M 135 500 V 330" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 135 500 V 330" aria-hidden="true"/>
+
 <text class="example-label" x="147" y="355">resource</text>
 <text class="example-label" x="147" y="475">*</text>
 </g>
 <g class="example-association-group"><title>Вид ресурса запроса.</title><path class="example-association" d="M 480 535 H 265" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 480 535 H 265" aria-hidden="true"/>
+
 <text class="example-label" x="370" y="520" text-anchor="middle">$the&lt;ResourceKind&gt;$</text>
 <text class="example-label" x="277" y="559">1</text>
 </g>
 <g class="example-association-group"><title>Запрос на распределение.</title><path class="example-association" d="M 515 335 V 500" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 515 335 V 500" aria-hidden="true"/>
+
 <text class="example-label" x="527" y="475">1</text>
 </g>
 <g class="example-association-group"><title>Распределения, назначенные системе.</title><path class="example-association" d="M 790 385 H 710 V 285 H 630" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 790 385 H 710 V 285 H 630" aria-hidden="true"/>
+
 <text class="example-label" x="745" y="240" text-anchor="middle">allocation</text>
 <text class="example-label" x="698" y="360" text-anchor="end">$a&lt;Resource&gt;Allocation$</text>
 <text class="example-label" x="642" y="309">*</text>
 </g>
 <g class="example-association-group"><title>Запросы, связанные с системой.</title><path class="example-association" d="M 875 445 V 535 H 660" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 875 445 V 535 H 660" aria-hidden="true"/>
+
 <text class="example-label" x="720" y="520" text-anchor="middle">request</text>
 <text class="example-label" x="672" y="559">*</text>
 </g>
 <g class="example-association-group"><title>Временной интервал распределения.</title><path class="example-association" d="M 370 385 V 350 H 415 V 335" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 370 385 V 350 H 415 V 335" aria-hidden="true"/>
+
 <text class="example-label" x="382" y="340" text-anchor="end">timeSlot</text>
 <text class="example-label" x="427" y="370">1</text>
 </g>
 <g class="example-association-group"><title>Системные ресурсы шаблона.</title><path class="example-association" d="M 167 250 V 215 H 875 V 365" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 167 250 V 215 H 875 V 365" aria-hidden="true"/>
+
 <text class="example-label" x="167" y="200" text-anchor="middle">$a&lt;Resource&gt;$</text>
 <text class="example-label" x="179" y="239">*</text>
 </g>
 <g class="example-association-group"><title>Виды ресурсов, доступные системе.</title><path class="example-association" d="M 167 580 V 675 H 875 V 445" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 167 580 V 675 H 875 V 445" aria-hidden="true"/>
+
 <text class="example-label" x="180" y="660">$a&lt;ResourceKind&gt;$</text>
 <text class="example-label" x="155" y="660" text-anchor="end">*</text>
 </g>

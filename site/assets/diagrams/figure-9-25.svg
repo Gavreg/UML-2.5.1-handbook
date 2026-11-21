@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.25">
+  <title id="diagram-title">Рисунок 9.25 — Другие примеры типов-степеней</title>
+  <desc id="diagram-description">Четыре примера типа-степени: Account/Account Type, Vehicle/Vehicle Type, Disease Occurrence/Disease Classification и Installed Telephone Service/Telephone Service Category.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1400" height="700"/>
+  <g class="class-node" data-classifier="Account"><title>Account. Пример: банковский счёт.</title>
+<rect class="class-box" x="90" y="60" width="130" height="50"/>
+<line class="class-divider" x1="90" y1="92" x2="220" y2="92"/>
+<text class="class-name" x="155.0" y="83" text-anchor="middle">Account</text>
+</g>
+<g class="class-node" data-classifier="Account Type"><title>Account Type. Пример: тип банковского счёта — тип-степень набора обобщений Account.</title>
+<rect class="class-box" x="400" y="60" width="160" height="50"/>
+<line class="class-divider" x1="400" y1="92" x2="560" y2="92"/>
+<text class="class-name" x="480.0" y="83" text-anchor="middle">Account Type</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: счёт относится к типу банковского счёта.</title><path class="example-association" d="M 220 85 H 400"/><path class="association-hitbox" d="M 220 85 H 400" aria-hidden="true"/>
+
+<text class="example-label" x="330" y="71" text-anchor="end">account</text>
+<text class="example-label" x="388" y="71" text-anchor="end">1</text>
+<text class="example-label" x="232" y="107">*</text>
+<text class="example-label" x="232" y="123">account type</text>
+</g>
+<path class="generalization-line" d="M 60 237 H 40 V 160 H 120 V 110" data-child="Account kinds" data-parent="Account" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 60 317 H 40" data-child="Savings Account" data-parent="Account"/>
+<text class="association-label" x="200" y="180"><title>Набор обобщений несовместный (disjoint) и непокрывающий (incomplete): экземпляр относится не более чем к одному специальному классификатору.</title>{disjoint, incomplete}</text>
+<text class="association-label" x="200" y="196"><title>Тип-степень (powertype) набора: каждому виду счёта соответствует экземпляр Account Type.</title>:AccountType</text>
+<g class="class-node" data-classifier="Checking Account"><title>Checking Account. Пример: вид банковского счёта — специализация Account.</title>
+<rect class="class-box" x="60" y="210" width="160" height="55"/>
+<line class="class-divider" x1="60" y1="242" x2="220" y2="242"/>
+<text class="class-name" x="140.0" y="233" text-anchor="middle">Checking Account</text>
+</g>
+<g class="class-node" data-classifier="Savings Account"><title>Savings Account. Пример: вид банковского счёта — специализация Account.</title>
+<rect class="class-box" x="60" y="290" width="160" height="55"/>
+<line class="class-divider" x1="60" y1="322" x2="220" y2="322"/>
+<text class="class-name" x="140.0" y="313" text-anchor="middle">Savings Account</text>
+</g>
+<text class="example-label" x="60" y="380">(a) Пример «банковский счёт / тип счёта»</text>
+<g class="class-node" data-classifier="Vehicle"><title>Vehicle. Пример: транспортное средство.</title>
+<rect class="class-box" x="690" y="60" width="130" height="50"/>
+<line class="class-divider" x1="690" y1="92" x2="820" y2="92"/>
+<text class="class-name" x="755.0" y="83" text-anchor="middle">Vehicle</text>
+</g>
+<g class="class-node" data-classifier="Vehicle Type"><title>Vehicle Type. Пример: тип транспортного средства — тип-степень набора обобщений Vehicle.</title>
+<rect class="class-box" x="1000" y="60" width="160" height="50"/>
+<line class="class-divider" x1="1000" y1="92" x2="1160" y2="92"/>
+<text class="class-name" x="1080.0" y="83" text-anchor="middle">Vehicle Type</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: транспортное средство относится к типу транспорта.</title><path class="example-association" d="M 820 85 H 1000"/><path class="association-hitbox" d="M 820 85 H 1000" aria-hidden="true"/>
+
+<text class="example-label" x="930" y="71" text-anchor="end">vehicle</text>
+<text class="example-label" x="988" y="71" text-anchor="end">1</text>
+<text class="example-label" x="832" y="107">*</text>
+<text class="example-label" x="832" y="123">vehicle type</text>
+</g>
+<path class="generalization-line" d="M 660 237 H 640 V 160 H 720 V 110" data-child="Vehicle kinds" data-parent="Vehicle" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 660 317 H 640" data-child="Car" data-parent="Vehicle"/>
+<text class="association-label" x="800" y="180"><title>Набор обобщений несовместный (disjoint) и непокрывающий (incomplete): экземпляр относится не более чем к одному специальному классификатору.</title>{disjoint, incomplete}</text>
+<text class="association-label" x="800" y="196"><title>Тип-степень (powertype) набора: каждому виду транспорта соответствует экземпляр Vehicle Type.</title>:VehicleType</text>
+<g class="class-node" data-classifier="Truck"><title>Truck. Пример: вид транспортного средства — специализация Vehicle.</title>
+<rect class="class-box" x="660" y="210" width="150" height="55"/>
+<line class="class-divider" x1="660" y1="242" x2="810" y2="242"/>
+<text class="class-name" x="735.0" y="233" text-anchor="middle">Truck</text>
+</g>
+<g class="class-node" data-classifier="Car"><title>Car. Пример: вид транспортного средства — специализация Vehicle.</title>
+<rect class="class-box" x="660" y="290" width="150" height="55"/>
+<line class="class-divider" x1="660" y1="322" x2="810" y2="322"/>
+<text class="class-name" x="735.0" y="313" text-anchor="middle">Car</text>
+</g>
+<text class="example-label" x="660" y="380">(b) Пример «транспортное средство / тип транспорта»</text>
+<g class="class-node" data-classifier="Disease Occurrence"><title>Disease Occurrence. Пример: случай заболевания.</title>
+<rect class="class-box" x="60" y="400" width="200" height="55"/>
+<line class="class-divider" x1="60" y1="432" x2="260" y2="432"/>
+<text class="class-name" x="160.0" y="423" text-anchor="middle">Disease Occurrence</text>
+</g>
+<g class="class-node" data-classifier="Disease Classification"><title>Disease Classification. Пример: классификация заболеваний — тип-степень набора обобщений Disease Occurrence.</title>
+<rect class="class-box" x="400" y="400" width="210" height="55"/>
+<line class="class-divider" x1="400" y1="432" x2="610" y2="432"/>
+<text class="class-name" x="505.0" y="423" text-anchor="middle">Disease Classification</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: случай заболевания относится к классификации.</title><path class="example-association" d="M 260 427 H 400"/><path class="association-hitbox" d="M 260 427 H 400" aria-hidden="true"/>
+
+<text class="example-label" x="360" y="413" text-anchor="end">disease</text>
+<text class="example-label" x="388" y="413" text-anchor="end">1</text>
+<text class="example-label" x="272" y="449">*</text>
+<text class="example-label" x="272" y="465">classification</text>
+</g>
+<path class="generalization-line" d="M 60 567 H 40 V 500 H 130 V 455" data-child="Disease kinds" data-parent="Disease Occurrence" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 60 647 H 40" data-child="Measles" data-parent="Disease Occurrence"/>
+<text class="association-label" x="230" y="510"><title>Набор обобщений несовместный (disjoint) и непокрывающий (incomplete): экземпляр относится не более чем к одному специальному классификатору.</title>{disjoint, incomplete}</text>
+<text class="association-label" x="230" y="526"><title>Тип-степень (powertype) набора: каждой болезни соответствует экземпляр Disease Classification.</title>:DiseaseClassification</text>
+<g class="class-node" data-classifier="ChickenPox"><title>ChickenPox. Пример: вид заболевания — специализация Disease Occurrence.</title>
+<rect class="class-box" x="60" y="540" width="150" height="55"/>
+<line class="class-divider" x1="60" y1="572" x2="210" y2="572"/>
+<text class="class-name" x="135.0" y="563" text-anchor="middle">ChickenPox</text>
+</g>
+<g class="class-node" data-classifier="Measles"><title>Measles. Пример: вид заболевания — специализация Disease Occurrence.</title>
+<rect class="class-box" x="60" y="620" width="150" height="55"/>
+<line class="class-divider" x1="60" y1="652" x2="210" y2="652"/>
+<text class="class-name" x="135.0" y="643" text-anchor="middle">Measles</text>
+</g>
+<text class="example-label" x="60" y="710">(c) Пример «случай заболевания / классификация»</text>
+<g class="class-node" data-classifier="Installed Telephone Service"><title>Installed Telephone Service. Пример: установленная телефонная услуга.</title>
+<rect class="class-box" x="620" y="400" width="260" height="55"/>
+<line class="class-divider" x1="620" y1="432" x2="880" y2="432"/>
+<text class="class-name" x="750.0" y="423" text-anchor="middle">Installed Telephone Service</text>
+</g>
+<g class="class-node" data-classifier="Telephone Service Category"><title>Telephone Service Category. Пример: категория телефонной услуги — тип-степень набора обобщений Installed Telephone Service.</title>
+<rect class="class-box" x="1100" y="400" width="250" height="55"/>
+<line class="class-divider" x1="1100" y1="432" x2="1350" y2="432"/>
+<text class="class-name" x="1225.0" y="423" text-anchor="middle">Telephone Service Category</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: установленная услуга относится к категории телефонной услуги.</title><path class="example-association" d="M 880 427 H 1100"/><path class="association-hitbox" d="M 880 427 H 1100" aria-hidden="true"/>
+
+<text class="example-label" x="1070" y="413" text-anchor="end">service</text>
+<text class="example-label" x="1088" y="413" text-anchor="end">1</text>
+<text class="example-label" x="892" y="449">*</text>
+<text class="example-label" x="892" y="465">category</text>
+</g>
+<path class="generalization-line" d="M 650 567 H 630 V 500 H 720 V 455" data-child="Service kinds" data-parent="Installed Telephone Service" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 650 647 H 630" data-child="Call Transferring" data-parent="Installed Telephone Service"/>
+<text class="association-label" x="850" y="510"><title>Набор обобщений несовместный (disjoint) и непокрывающий (incomplete): экземпляр относится не более чем к одному специальному классификатору.</title>{disjoint, incomplete}</text>
+<text class="association-label" x="850" y="526"><title>Тип-степень (powertype) набора: каждой услуге соответствует экземпляр Telephone Service Category.</title>:TelephoneServiceCategory</text>
+<g class="class-node" data-classifier="Call Waiting"><title>Call Waiting. Пример: вид телефонной услуги — специализация Installed Telephone Service.</title>
+<rect class="class-box" x="650" y="540" width="160" height="55"/>
+<line class="class-divider" x1="650" y1="572" x2="810" y2="572"/>
+<text class="class-name" x="730.0" y="563" text-anchor="middle">Call Waiting</text>
+</g>
+<g class="class-node" data-classifier="Call Transferring"><title>Call Transferring. Пример: вид телефонной услуги — специализация Installed Telephone Service.</title>
+<rect class="class-box" x="650" y="620" width="170" height="55"/>
+<line class="class-divider" x1="650" y1="652" x2="820" y2="652"/>
+<text class="class-name" x="735.0" y="643" text-anchor="middle">Call Transferring</text>
+</g>
+<text class="example-label" x="620" y="710">(d) Пример «телефонная услуга / категория услуг»</text>
+</svg>

@@ -120,7 +120,7 @@ def check_static():
         if re.search(rf"function\s+{rendering_function}\b", app):
             errors.append(f"Page rendering remains in JavaScript: {rendering_function}")
 
-    for script in ("sync_xmi_properties.py --check", "generate_common_structure_svg.py --check", "build_site.py --check"):
+    for script in ("sync_xmi_properties.py --check", "generate_common_structure_svg.py --check", "generate_classification_svg.py --check", "build_site.py --check"):
         result = run_check(script)
         if result.returncode:
             errors.append(f"{script} failed: {result.stdout}{result.stderr}")

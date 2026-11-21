@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="425" viewBox="0 0 1100 425" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.26">
+  <title id="diagram-title">Рисунок 9.26 — Более одного типа-степени</title>
+  <desc id="diagram-description">Policy классифицируется одновременно по Policy Coverage Type (набор {disjoint, complete}) и по Insurance Line (набор {disjoint, incomplete}).</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1100" height="425"/>
+  <g class="class-node" data-classifier="Policy Coverage Type"><title>Policy Coverage Type. Пример: тип страхового покрытия — тип-степень набора обобщений Policy.</title>
+<rect class="class-box" x="60" y="40" width="200" height="55"/>
+<line class="class-divider" x1="60" y1="72" x2="260" y2="72"/>
+<text class="class-name" x="160.0" y="63" text-anchor="middle">Policy Coverage Type</text>
+</g>
+<g class="class-node" data-classifier="Policy"><title>Policy. Пример: страховой полис.</title>
+<rect class="class-box" x="480" y="40" width="130" height="50"/>
+<line class="class-divider" x1="480" y1="72" x2="610" y2="72"/>
+<text class="class-name" x="545.0" y="63" text-anchor="middle">Policy</text>
+</g>
+<g class="class-node" data-classifier="Insurance Line"><title>Insurance Line. Пример: страховая линия — тип-степень набора обобщений Policy.</title>
+<rect class="class-box" x="880" y="40" width="170" height="55"/>
+<line class="class-divider" x1="880" y1="72" x2="1050" y2="72"/>
+<text class="class-name" x="965.0" y="63" text-anchor="middle">Insurance Line</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: полис относится к типу страхового покрытия.</title><path class="example-association" d="M 260 67 H 480"/><path class="association-hitbox" d="M 260 67 H 480" aria-hidden="true"/>
+
+<text class="example-label" x="302" y="53" text-anchor="end">1</text>
+<text class="example-label" x="455" y="53" text-anchor="end">policy</text>
+<text class="example-label" x="272" y="88">*</text>
+<text class="example-label" x="272" y="104">coverage type</text>
+</g>
+<g class="example-association-group"><title>Ассоциация примера: полис относится к страховой линии.</title><path class="example-association" d="M 610 67 H 880"/><path class="association-hitbox" d="M 610 67 H 880" aria-hidden="true"/>
+
+<text class="example-label" x="655" y="53" text-anchor="end">policy</text>
+<text class="example-label" x="860" y="53" text-anchor="end">insurance line</text>
+<text class="example-label" x="868" y="53">1</text>
+<text class="example-label" x="622" y="88">*</text>
+</g>
+<path class="generalization-line" d="M 340 247 H 320 V 170 H 510 V 90" data-child="Coverage kinds" data-parent="Policy" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 340 327 H 320" data-child="Individual Policy" data-parent="Policy"/>
+<text class="association-label" x="60" y="135"><title>Набор обобщений несовместный (disjoint) и покрывающий (complete): каждый экземпляр относится ровно к одному специальному классификатору.</title>{disjoint, complete}</text>
+<text class="association-label" x="60" y="151"><title>Тип-степень (powertype) набора: каждому виду покрытия соответствует экземпляр Policy Coverage Type.</title>:PolicyCoverageType</text>
+<path class="generalization-line" d="M 700 187 H 680 V 140 H 570 V 90" data-child="Insurance lines" data-parent="Policy" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 700 267 H 680" data-child="Health Policy" data-parent="Policy"/>
+<path class="generalization-line" d="M 700 347 H 680" data-child="Property/Casualty Policy" data-parent="Policy"/>
+<text class="association-label" x="900" y="135"><title>Набор обобщений несовместный (disjoint) и непокрывающий (incomplete): экземпляр относится не более чем к одному специальному классификатору.</title>{disjoint, incomplete}</text>
+<text class="association-label" x="900" y="151"><title>Тип-степень (powertype) набора: каждой страховой линии соответствует экземпляр Insurance Line.</title>:InsuranceLine</text>
+<g class="class-node" data-classifier="Group Policy"><title>Group Policy. Пример: вид полиса по типу покрытия — специализация Policy.</title>
+<rect class="class-box" x="340" y="220" width="150" height="55"/>
+<line class="class-divider" x1="340" y1="252" x2="490" y2="252"/>
+<text class="class-name" x="415.0" y="243" text-anchor="middle">Group Policy</text>
+</g>
+<g class="class-node" data-classifier="Individual Policy"><title>Individual Policy. Пример: вид полиса по типу покрытия — специализация Policy.</title>
+<rect class="class-box" x="340" y="300" width="170" height="55"/>
+<line class="class-divider" x1="340" y1="332" x2="510" y2="332"/>
+<text class="class-name" x="425.0" y="323" text-anchor="middle">Individual Policy</text>
+</g>
+<g class="class-node" data-classifier="Life Policy"><title>Life Policy. Пример: вид полиса по страховой линии — специализация Policy.</title>
+<rect class="class-box" x="700" y="160" width="150" height="55"/>
+<line class="class-divider" x1="700" y1="192" x2="850" y2="192"/>
+<text class="class-name" x="775.0" y="183" text-anchor="middle">Life Policy</text>
+</g>
+<g class="class-node" data-classifier="Health Policy"><title>Health Policy. Пример: вид полиса по страховой линии — специализация Policy.</title>
+<rect class="class-box" x="700" y="240" width="150" height="55"/>
+<line class="class-divider" x1="700" y1="272" x2="850" y2="272"/>
+<text class="class-name" x="775.0" y="263" text-anchor="middle">Health Policy</text>
+</g>
+<g class="class-node" data-classifier="Property/Casualty Policy"><title>Property/Casualty Policy. Пример: вид полиса по страховой линии — специализация Policy.</title>
+<rect class="class-box" x="700" y="320" width="230" height="55"/>
+<line class="class-divider" x1="700" y1="352" x2="930" y2="352"/>
+<text class="class-name" x="815.0" y="343" text-anchor="middle">Property/Casualty Policy</text>
+</g>
+</svg>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1580" viewBox="0 0 2200 1580" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.1">
+  <title id="diagram-title">Рисунок 9.1 — Классификаторы</title>
+  <desc id="diagram-description">Абстрактный синтаксис Classifier, Generalization, GeneralizationSet, Substitution, Feature и связанных элементов.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="2200" height="1580"/>
+  <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="60" y="30" width="180" height="60"/>
+<line class="class-divider" x1="60" y1="62" x2="240" y2="62"/>
+<text class="class-name abstract" x="150.0" y="53" text-anchor="middle">NamedElement</text>
+</a>
+<a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
+<rect class="class-box" x="700" y="30" width="180" height="60"/>
+<line class="class-divider" x1="700" y1="62" x2="880" y2="62"/>
+<text class="class-name abstract" x="790.0" y="53" text-anchor="middle">Namespace</text>
+</a>
+<a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
+<rect class="class-box" x="970" y="30" width="140" height="60"/>
+<line class="class-divider" x1="970" y1="62" x2="1110" y2="62"/>
+<text class="class-name abstract" x="1040.0" y="53" text-anchor="middle">Type</text>
+</a>
+<a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
+<rect class="class-box" x="1260" y="30" width="260" height="60"/>
+<line class="class-divider" x1="1260" y1="62" x2="1520" y2="62"/>
+<text class="class-name abstract" x="1390.0" y="53" text-anchor="middle">TemplateableElement</text>
+</a>
+<a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
+<rect class="class-box" x="1800" y="30" width="240" height="60"/>
+<line class="class-divider" x1="1800" y1="62" x2="2040" y2="62"/>
+<text class="class-name abstract" x="1920.0" y="53" text-anchor="middle">DirectedRelationship</text>
+</a>
+<a class="class-node" data-classifier="RedefinableElement" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
+<rect class="class-box" x="80" y="300" width="260" height="250"/>
+<line class="class-divider" x1="80" y1="332" x2="340" y2="332"/>
+<text class="class-name abstract" x="210.0" y="323" text-anchor="middle">RedefinableElement</text>
+<text class="attribute" x="90" y="354">+ isLeaf : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="850" y="240" width="260" height="980"/>
+<line class="class-divider" x1="850" y1="272" x2="1110" y2="272"/>
+<text class="class-name abstract" x="980.0" y="263" text-anchor="middle">Classifier</text>
+<text class="attribute" x="860" y="294">+ isAbstract : Boolean = false</text>
+<text class="attribute" x="860" y="315">+ isFinalSpecialization : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="Generalization" href="../../index.html#/classifier/generalization" target="_top" aria-label="Generalization — открыть описание класса"><title>Generalization. Таксономическое отношение между более общим и более специальным классификаторами. Каждый экземпляр специального классификатора также является экземпляром общего классификатора; специальный классификатор наследует характеристики более общего. Обобщение принадлежит специальному классификатору.</title>
+<rect class="class-box" x="1780" y="260" width="270" height="180"/>
+<line class="class-divider" x1="1780" y1="292" x2="2050" y2="292"/>
+<text class="class-name" x="1915.0" y="283" text-anchor="middle">Generalization</text>
+<text class="attribute" x="1790" y="314">+ isSubstitutable : Boolean [0..1] = true</text>
+</a>
+<a class="class-node" data-classifier="GeneralizationSet" href="../../index.html#/classifier/generalizationset" target="_top" aria-label="GeneralizationSet — открыть описание класса"><title>GeneralizationSet. PackageableElement, экземпляры которого представляют множества отношений Generalization.</title>
+<rect class="class-box" x="1810" y="620" width="220" height="60"/>
+<line class="class-divider" x1="1810" y1="652" x2="2030" y2="652"/>
+<text class="class-name" x="1920.0" y="643" text-anchor="middle">GeneralizationSet</text>
+</a>
+<g class="class-node" data-classifier="UseCase"><title>UseCase. UseCase. Specifies actions performed by subjects that yield an observable result of value for Actors or other stakeholders.</title>
+<rect class="class-box" x="1800" y="800" width="180" height="160"/>
+<line class="class-divider" x1="1800" y1="832" x2="1980" y2="832"/>
+<text class="class-name" x="1890.0" y="823" text-anchor="middle">UseCase</text>
+</g>
+<a class="class-node" data-classifier="Substitution" href="../../index.html#/classifier/substitution" target="_top" aria-label="Substitution — открыть описание класса"><title>Substitution. Отношение между двумя классификаторами, означающее, что подставляющий классификатор соответствует контракту, заданному классификатором контракта. Это означает, что экземпляры подставляющего классификатора взаимозаменяемы во время выполнения там, где ожидаются экземпляры классификатора контракта.</title>
+<rect class="class-box" x="1800" y="1080" width="200" height="200"/>
+<line class="class-divider" x1="1800" y1="1112" x2="2000" y2="1112"/>
+<text class="class-name" x="1900.0" y="1103" text-anchor="middle">Substitution</text>
+</a>
+<a class="class-node" data-classifier="Realization" href="../../index.html#/classifier/realization" target="_top" aria-label="Realization — открыть описание класса"><title>Realization. Специализированное отношение Abstraction между спецификацией-поставщиком и её реализацией-клиентом.</title>
+<rect class="class-box" x="1800" y="1360" width="180" height="60"/>
+<line class="class-divider" x1="1800" y1="1392" x2="1980" y2="1392"/>
+<text class="class-name" x="1890.0" y="1383" text-anchor="middle">Realization</text>
+</a>
+<a class="class-node" data-classifier="Feature" href="../../index.html#/classifier/feature" target="_top" aria-label="Feature — открыть описание класса"><title>Feature. Объявляет поведенческую или структурную характеристику классификаторов.</title>
+<rect class="class-box" x="80" y="700" width="200" height="70"/>
+<line class="class-divider" x1="80" y1="732" x2="280" y2="732"/>
+<text class="class-name abstract" x="180.0" y="723" text-anchor="middle">Feature</text>
+<text class="attribute" x="90" y="754">+ isStatic : Boolean = false</text>
+</a>
+<a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="80" y="930" width="180" height="60"/>
+<line class="class-divider" x1="80" y1="962" x2="260" y2="962"/>
+<text class="class-name" x="170.0" y="953" text-anchor="middle">Property</text>
+</a>
+<g class="class-node" data-classifier="CollaborationUse"><title>CollaborationUse. CollaborationUse. Specifies the application of the pattern described by a Collaboration to a specific situation.</title>
+<rect class="class-box" x="820" y="1400" width="260" height="60"/>
+<line class="class-divider" x1="820" y1="1432" x2="1080" y2="1432"/>
+<text class="class-name" x="950.0" y="1423" text-anchor="middle">CollaborationUse</text>
+</g>
+<a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+<rect class="class-box" x="1450" y="1400" width="180" height="60"/>
+<line class="class-divider" x1="1450" y1="1432" x2="1630" y2="1432"/>
+<text class="class-name abstract" x="1540.0" y="1423" text-anchor="middle">NamedElement</text>
+</a>
+<path class="generalization-line" d="M 170 300 V 90" data-child="RedefinableElement" data-parent="NamedElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 900 240 L 790 90" data-child="Classifier" data-parent="Namespace" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1000 240 V 90" data-child="Classifier" data-parent="Type" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1080 240 V 110 H 1390 V 90" data-child="Classifier" data-parent="TemplateableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1900 260 V 90" data-child="Generalization" data-parent="DirectedRelationship" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1900 1280 V 1360" data-child="Substitution" data-parent="Realization" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 180 700 V 550" data-child="Feature" data-parent="RedefinableElement" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-inheritedmember-inheritingclassifier" target="_top" aria-label="Открыть описание ассоциации A_inheritedMember_inheritingClassifier">
+<g class="association-group" id="A_inheritedMember_inheritingClassifier"><title>Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>
+<path class="association" d="M 240 60 H 400 V 280 H 850"/><path class="association-hitbox" d="M 240 60 H 400 V 280 H 850" aria-hidden="true"/>
+<circle class="end-dot" cx="240" cy="60" r="3"/>
+<text class="association-end" x="260" y="40"><title>inheritedMember. Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>+ /inheritedMember</text>
+<text class="association-end" x="830" y="260" text-anchor="end"><title>inheritingClassifier. Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>+ inheritingClassifier</text>
+<text class="association-label" x="260" y="20">{readOnly, subsets member}</text>
+<text class="association-label" x="260" y="4">*</text>
+<text class="association-label" x="830" y="240" text-anchor="end">{subsets memberNamespace}</text>
+<text class="association-label" x="830" y="224" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinitioncontext-redefinableelement" target="_top" aria-label="Открыть описание ассоциации A_redefinitionContext_redefinableElement">
+<g class="association-group" id="A_redefinitionContext_redefinableElement"><title>Связывает контекст переопределения с переопределяемыми элементами, которые могут в нём переопределяться.</title>
+<path class="association" d="M 340 380 H 850" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 340 380 H 850" aria-hidden="true"/>
+
+<text class="association-end" x="360" y="360"><title>redefinableElement. Связывает контекст переопределения с переопределяемыми элементами, которые могут в нём переопределяться.</title>+ /redefinableElement</text>
+<text class="association-end" x="830" y="360" text-anchor="end"><title>Контексты, в которых этот элемент может быть переопределён.</title>+ /redefinitionContext</text>
+<text class="association-label" x="360" y="340">{readOnly, union}</text>
+<text class="association-label" x="360" y="324">*</text>
+<text class="association-label" x="830" y="340" text-anchor="end">{readOnly, union}</text>
+<text class="association-label" x="830" y="324" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinedelement-redefinableelement" target="_top" aria-label="Открыть описание ассоциации A_redefinedElement_redefinableElement">
+<g class="association-group" id="A_redefinedElement_redefinableElement"><title>Связывает переопределённый элемент с переопределяемыми элементами, которые его переопределяют.</title>
+<path class="association" d="M 340 470 H 600 V 650 H 200 V 550"/><path class="association-hitbox" d="M 340 470 H 600 V 650 H 200 V 550" aria-hidden="true"/>
+<circle class="end-dot" cx="340" cy="470" r="3"/>
+<text class="association-end" x="360" y="450"><title>redefinableElement. Связывает переопределённый элемент с переопределяемыми элементами, которые его переопределяют.</title>+ /redefinableElement</text>
+<text class="association-end" x="220" y="588"><title>Переопределяемые элементы, которые переопределяет этот элемент.</title>+ /redefinedElement</text>
+<text class="association-label" x="360" y="430">{readOnly, union}</text>
+<text class="association-label" x="360" y="414">*</text>
+<text class="association-label" x="220" y="604">{readOnly, union}</text>
+<text class="association-label" x="220" y="620">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinedclassifier-classifier" target="_top" aria-label="Открыть описание ассоциации A_redefinedClassifier_classifier">
+<g class="association-group" id="A_redefinedClassifier_classifier"><title>Связывает переопределённый классификатор с классификаторами, которые его переопределяют.</title>
+<path class="association" d="M 1110 580 H 1500 V 120 H 1080 V 240"/><path class="association-hitbox" d="M 1110 580 H 1500 V 120 H 1080 V 240" aria-hidden="true"/>
+<circle class="end-dot" cx="1110" cy="580" r="3"/>
+<text class="association-end" x="1130" y="560"><title>Классификаторы, переопределяемые этим классификатором.</title>+ redefinedClassifier</text>
+<text class="association-end" x="1100" y="212"><title>classifier. Связывает переопределённый классификатор с классификаторами, которые его переопределяют.</title>+ classifier</text>
+<text class="association-label" x="1130" y="540">{subsets redefinedElement}</text>
+<text class="association-label" x="1130" y="524">*</text>
+<text class="association-label" x="1100" y="196">{subsets redefinableElement}</text>
+<text class="association-label" x="1100" y="180">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-general-classifier" target="_top" aria-label="Открыть описание ассоциации A_general_classifier">
+<g class="association-group" id="A_general_classifier"><title>Связывает общий классификатор с классификаторами, для которых он является общим.</title>
+<path class="association" d="M 1110 480 H 1450 V 1320 H 1080 V 1220"/><path class="association-hitbox" d="M 1110 480 H 1450 V 1320 H 1080 V 1220" aria-hidden="true"/>
+
+<text class="association-end" x="1130" y="460"><title>Обобщающие классификаторы для этого классификатора.</title>+ /general</text>
+<text class="association-end" x="1100" y="1258"><title>classifier. Связывает общий классификатор с классификаторами, для которых он является общим.</title>+ classifier</text>
+<text class="association-label" x="1130" y="440">*</text>
+<text class="association-label" x="1100" y="1274">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-feature-featuringclassifier" target="_top" aria-label="Открыть описание ассоциации A_feature_featuringClassifier">
+<g class="association-group" id="A_feature_featuringClassifier"><title>Связывает характеристику с классификаторами, для которых она является характеристикой.</title>
+<path class="association" d="M 280 735 H 850"/><path class="association-hitbox" d="M 280 735 H 850" aria-hidden="true"/>
+<circle class="end-dot" cx="280" cy="735" r="3"/>
+<text class="association-end" x="300" y="715"><title>feature. Связывает характеристику с классификаторами, для которых она является характеристикой.</title>+ /feature</text>
+<text class="association-end" x="830" y="715" text-anchor="end"><title>featuringClassifier. Связывает характеристику с классификаторами, для которых она является характеристикой.</title>+ /featuringClassifier</text>
+<text class="association-label" x="300" y="695">{readOnly, union, subsets member}</text>
+<text class="association-label" x="300" y="679">*</text>
+<text class="association-label" x="830" y="695" text-anchor="end">{readOnly, union,</text>
+<text class="association-label" x="830" y="679" text-anchor="end">subsets memberNamespace}</text>
+<text class="association-label" x="830" y="663" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-attribute-classifier" target="_top" aria-label="Открыть описание ассоциации A_attribute_classifier">
+<g class="association-group" id="A_attribute_classifier"><title>Связывает атрибут классификатора с владеющим им классификатором.</title>
+<path class="association" d="M 260 960 H 850"/><path class="association-hitbox" d="M 260 960 H 850" aria-hidden="true"/>
+<circle class="end-dot" cx="260" cy="960" r="3"/>
+<text class="association-end" x="280" y="940"><title>attribute. Связывает атрибут классификатора с владеющим им классификатором.</title>+ /attribute</text>
+<text class="association-end" x="830" y="940" text-anchor="end"><title>classifier. Связывает атрибут классификатора с владеющим им классификатором.</title>+ /classifier</text>
+<text class="association-label" x="280" y="920">{ordered, readOnly, union,</text>
+<text class="association-label" x="280" y="904">subsets feature,</text>
+<text class="association-label" x="280" y="888">subsets redefinableElement}</text>
+<text class="association-label" x="280" y="872">*</text>
+<text class="association-label" x="830" y="920" text-anchor="end">{readOnly, union,</text>
+<text class="association-label" x="830" y="904" text-anchor="end">subsets featuringClassifier,</text>
+<text class="association-label" x="830" y="888" text-anchor="end">subsets redefinitionContext}</text>
+<text class="association-label" x="830" y="872" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-generalization-specific" target="_top" aria-label="Открыть описание ассоциации A_generalization_specific">
+<g class="association-group" id="A_generalization_specific"><title>Связывает обобщение с конкретным (специальным) классификатором, которому оно принадлежит.</title>
+<path class="association" d="M 1110 300 H 1780"/><path class="association-hitbox" d="M 1110 300 H 1780" aria-hidden="true"/>
+<polygon class="composition" points="1110,300 1118,292 1126,300 1118,308"/><circle class="end-dot" cx="1780" cy="300" r="3"/>
+<text class="association-end" x="1130" y="280"><title>specific. Связывает обобщение с конкретным (специальным) классификатором, которому оно принадлежит.</title>+ specific</text>
+<text class="association-end" x="1760" y="280" text-anchor="end"><title>generalization. Связывает обобщение с конкретным (специальным) классификатором, которому оно принадлежит.</title>+ generalization</text>
+<text class="association-label" x="1130" y="260">{subsets source, subsets owner}</text>
+<text class="association-label" x="1130" y="244">1</text>
+<text class="association-label" x="1760" y="260" text-anchor="end">{subsets ownedElement,</text>
+<text class="association-label" x="1760" y="244" text-anchor="end">subsets directedRelationship}</text>
+<text class="association-label" x="1760" y="228" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-general-generalization" target="_top" aria-label="Открыть описание ассоциации A_general_generalization">
+<g class="association-group" id="A_general_generalization"><title>Связывает общий классификатор с обобщениями, ссылающимися на него как на общий классификатор.</title>
+<path class="association" d="M 1110 420 H 1780"/><path class="association-hitbox" d="M 1110 420 H 1780" aria-hidden="true"/>
+<circle class="end-dot" cx="1110" cy="420" r="3"/>
+<text class="association-end" x="1130" y="400"><title>Обобщающие классификаторы для этого классификатора.</title>+ general</text>
+<text class="association-end" x="1760" y="400" text-anchor="end"><title>generalization. Связывает общий классификатор с обобщениями, ссылающимися на него как на общий классификатор.</title>+ generalization</text>
+<text class="association-label" x="1130" y="380">{subsets target}</text>
+<text class="association-label" x="1130" y="364">1</text>
+<text class="association-label" x="1760" y="380" text-anchor="end">{subsets directedRelationship}</text>
+<text class="association-label" x="1760" y="364" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-powertypeextent-powertype" target="_top" aria-label="Открыть описание ассоциации A_powertypeExtent_powertype">
+<g class="association-group" id="A_powertypeExtent_powertype"><title>Связывает классификатор-powertype с наборами обобщений, для которых он является powertype.</title>
+<path class="association" d="M 1110 680 H 1810"/><path class="association-hitbox" d="M 1110 680 H 1810" aria-hidden="true"/>
+<circle class="end-dot" cx="1110" cy="680" r="3"/>
+<text class="association-end" x="1130" y="660"><title>powertype. Связывает классификатор-powertype с наборами обобщений, для которых он является powertype.</title>+ powertype</text>
+<text class="association-end" x="1790" y="660" text-anchor="end"><title>powertypeExtent. Связывает классификатор-powertype с наборами обобщений, для которых он является powertype.</title>+ powertypeExtent</text>
+<text class="association-label" x="1130" y="640">0..1</text>
+<text class="association-label" x="1790" y="640" text-anchor="end">*</text>
+</g></a>
+<g class="example-association-group"><title>subject : Classifier. The subjects to which this UseCase applies. Association A_subject_useCase from the UseCases clause.</title><path class="example-association" d="M 1110 840 H 1800"/><path class="association-hitbox" d="M 1110 840 H 1800" aria-hidden="true"/>
+
+<text class="example-label" x="1130" y="820">+ subject</text>
+<text class="example-label" x="1130" y="804">*</text>
+<text class="example-label" x="1780" y="820" text-anchor="end">+ useCase</text>
+<text class="example-label" x="1780" y="804" text-anchor="end">*</text>
+</g>
+<a class="association-link" href="../../index.html#/association/a-ownedusecase-classifier" target="_top" aria-label="Открыть описание ассоциации A_ownedUseCase_classifier">
+<g class="association-group" id="A_ownedUseCase_classifier"><title>Связывает вариант использования с владеющим им классификатором.</title>
+<path class="association" d="M 1110 920 H 1800"/><path class="association-hitbox" d="M 1110 920 H 1800" aria-hidden="true"/>
+<polygon class="composition" points="1110,920 1118,912 1126,920 1118,928"/><circle class="end-dot" cx="1800" cy="920" r="3"/>
+<text class="association-end" x="1130" y="900"><title>classifier. Связывает вариант использования с владеющим им классификатором.</title>+ classifier</text>
+<text class="association-end" x="1780" y="900" text-anchor="end"><title>ownedUseCase. Связывает вариант использования с владеющим им классификатором.</title>+ ownedUseCase</text>
+<text class="association-label" x="1130" y="880">{subsets namespace}</text>
+<text class="association-label" x="1130" y="864">0..1</text>
+<text class="association-label" x="1780" y="880" text-anchor="end">{subsets ownedMember}</text>
+<text class="association-label" x="1780" y="864" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-contract-substitution" target="_top" aria-label="Открыть описание ассоциации A_contract_substitution">
+<g class="association-group" id="A_contract_substitution"><title>Связывает контракт подстановки с подстановками, ссылающимися на этот контракт.</title>
+<path class="association" d="M 1110 1120 H 1800"/><path class="association-hitbox" d="M 1110 1120 H 1800" aria-hidden="true"/>
+<circle class="end-dot" cx="1110" cy="1120" r="3"/>
+<text class="association-end" x="1130" y="1100"><title>contract. Связывает контракт подстановки с подстановками, ссылающимися на этот контракт.</title>+ contract</text>
+<text class="association-end" x="1780" y="1100" text-anchor="end"><title>substitution. Связывает контракт подстановки с подстановками, ссылающимися на этот контракт.</title>+ substitution</text>
+<text class="association-label" x="1130" y="1080">{subsets supplier}</text>
+<text class="association-label" x="1130" y="1064">1</text>
+<text class="association-label" x="1780" y="1080" text-anchor="end">{subsets supplierDependency}</text>
+<text class="association-label" x="1780" y="1064" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-substitution-substitutingclassifier" target="_top" aria-label="Открыть описание ассоциации A_substitution_substitutingClassifier">
+<g class="association-group" id="A_substitution_substitutingClassifier"><title>Связывает подстановку с подставляющим классификатором, которому она принадлежит.</title>
+<path class="association" d="M 1110 1210 H 1800"/><path class="association-hitbox" d="M 1110 1210 H 1800" aria-hidden="true"/>
+<polygon class="composition" points="1110,1210 1118,1202 1126,1210 1118,1218"/>
+<text class="association-end" x="1130" y="1190"><title>substitutingClassifier. Связывает подстановку с подставляющим классификатором, которому она принадлежит.</title>+ substitutingClassifier</text>
+<text class="association-end" x="1780" y="1190" text-anchor="end"><title>substitution. Связывает подстановку с подставляющим классификатором, которому она принадлежит.</title>+ substitution</text>
+<text class="association-label" x="1130" y="1170">{subsets client, subsets owner}</text>
+<text class="association-label" x="1130" y="1154">1</text>
+<text class="association-label" x="1780" y="1170" text-anchor="end">{subsets ownedElement,</text>
+<text class="association-label" x="1780" y="1154" text-anchor="end">subsets clientDependency}</text>
+<text class="association-label" x="1780" y="1138" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-generalizationset-generalization" target="_top" aria-label="Открыть описание ассоциации A_generalizationSet_generalization">
+<g class="association-group" id="A_generalizationSet_generalization"><title>Связывает обобщение с наборами обобщений, в которые оно входит.</title>
+<path class="association" d="M 1950 440 V 620"/><path class="association-hitbox" d="M 1950 440 V 620" aria-hidden="true"/>
+<circle class="end-dot" cx="1950" cy="440" r="3"/><circle class="end-dot" cx="1950" cy="620" r="3"/>
+<text class="association-end" x="1970" y="478"><title>Наборы обобщений, членом которых является это обобщение. Обобщение может входить во множество наборов обобщений.</title>+ generalizationSet</text>
+<text class="association-end" x="1970" y="592"><title>Обозначает экземпляры обобщения, являющиеся членами этого набора обобщений.</title>+ generalization</text>
+<text class="association-label" x="1970" y="494">*</text>
+<text class="association-label" x="1970" y="576">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-inheritedmember-inheritingclassifier" target="_top" aria-label="Открыть описание ассоциации A_inheritedMember_inheritingClassifier">
+<g class="association-group" id="A_inheritedMember_inheritingClassifier-2"><title>Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>
+<path class="association" d="M 1110 1020 H 1540 V 1400"/><path class="association-hitbox" d="M 1110 1020 H 1540 V 1400" aria-hidden="true"/>
+<circle class="end-dot" cx="1110" cy="1020" r="3"/>
+<text class="association-end" x="1130" y="1000"><title>inheritingClassifier. Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>+ inheritingClassifier</text>
+<text class="association-end" x="1560" y="1372"><title>inheritedMember. Связывает унаследованного члена с классификаторами, унаследовавшими его.</title>+ /inheritedMember</text>
+<text class="association-label" x="1130" y="980">{subsets memberNamespace}</text>
+<text class="association-label" x="1130" y="964">*</text>
+<text class="association-label" x="1560" y="1356">{readOnly, subsets member}</text>
+<text class="association-label" x="1560" y="1340">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-collaborationuse-classifier" target="_top" aria-label="Открыть описание ассоциации A_collaborationUse_classifier">
+<g class="association-group" id="A_collaborationUse_classifier"><title>Связывает использование кооперации с владеющим им классификатором.</title>
+<path class="association" d="M 900 1220 V 1400"/><path class="association-hitbox" d="M 900 1220 V 1400" aria-hidden="true"/>
+<polygon class="composition" points="900,1220 892,1228 900,1236 908,1228"/><circle class="end-dot" cx="900" cy="1400" r="3"/>
+<text class="association-end" x="820" y="1258" text-anchor="end"><title>classifier. Связывает использование кооперации с владеющим им классификатором.</title>+ classifier</text>
+<text class="association-end" x="820" y="1372" text-anchor="end"><title>collaborationUse. Связывает использование кооперации с владеющим им классификатором.</title>+ collaborationUse</text>
+<text class="association-label" x="820" y="1274" text-anchor="end">{subsets owner}</text>
+<text class="association-label" x="820" y="1290" text-anchor="end">0..1</text>
+<text class="association-label" x="820" y="1356" text-anchor="end">{subsets ownedElement}</text>
+<text class="association-label" x="820" y="1340" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-representation-classifier" target="_top" aria-label="Открыть описание ассоциации A_representation_classifier">
+<g class="association-group" id="A_representation_classifier"><title>Связывает использование кооперации как представление классификатора с классификатором, который оно представляет.</title>
+<path class="association" d="M 1040 1220 V 1400"/><path class="association-hitbox" d="M 1040 1220 V 1400" aria-hidden="true"/>
+<circle class="end-dot" cx="1040" cy="1220" r="3"/><circle class="end-dot" cx="1040" cy="1400" r="3"/>
+<text class="association-end" x="1180" y="1258"><title>classifier. Связывает использование кооперации как представление классификатора с классификатором, который оно представляет.</title>+ classifier</text>
+<text class="association-end" x="1180" y="1372"><title>representation. Связывает использование кооперации как представление классификатора с классификатором, который оно представляет.</title>+ representation</text>
+<text class="association-label" x="1180" y="1274">{redefines classifier}</text>
+<text class="association-label" x="1180" y="1290">0..1</text>
+<text class="association-label" x="1180" y="1356">{subsets collaborationUse}</text>
+<text class="association-label" x="1180" y="1340">0..1</text>
+</g></a>
+</svg>

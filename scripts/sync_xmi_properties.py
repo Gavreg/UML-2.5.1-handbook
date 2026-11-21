@@ -2,8 +2,8 @@
 Name: sync_xmi_properties.py
 Purpose: Generate classifier and association properties from the normative UML 2.5.1 XMI.
 Interface: python scripts/sync_xmi_properties.py [--check]
-Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI.
-Requires: Python 3; site/docs/UML-2.5.1.xmi and site/data/common-structure.js.
+Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI for sections 7-9.
+Requires: Python 3; site/docs/UML-2.5.1.xmi, site/data/common-structure.js and site/data/classification.js.
 """
 
 from argparse import ArgumentParser
@@ -16,7 +16,10 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
 XMI = ROOT / "site" / "docs" / "UML-2.5.1.xmi"
-DATA = ROOT / "site" / "data" / "common-structure.js"
+DATA_FILES = (
+    ROOT / "site" / "data" / "common-structure.js",
+    ROOT / "site" / "data" / "classification.js",
+)
 OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
 XMI_DIR = ROOT / "site" / "data" / "xmi"
 XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
@@ -24,6 +27,24 @@ UML_NS = "{http://www.omg.org/spec/UML/20131001}"
 
 CLASSIFIER_TRANSLATIONS = {
     "Expression": "Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.",
+    "BehavioralFeature": "Поведенческая характеристика — это характеристика классификатора, задающая аспект поведения его экземпляров. Она реализуется поведением. Поведенческая характеристика указывает, что классификатор отвечает на заданный запрос вызовом реализующего её метода.",
+    "Classifier": "Классификатор представляет классификацию экземпляров по их характеристикам.",
+    "ClassifierTemplateParameter": "Параметр шаблона классификатора предоставляет классификатор как формальный параметр шаблона.",
+    "Feature": "Характеристика объявляет поведенческую или структурную характеристику классификаторов.",
+    "Generalization": "Обобщение — таксономическое отношение между более общим и более конкретным классификаторами. Каждый экземпляр конкретного классификатора является также экземпляром общего классификатора. Конкретный классификатор наследует характеристики более общего классификатора. Обобщение принадлежит конкретному классификатору.",
+    "GeneralizationSet": "Набор обобщений — упаковываемый элемент, экземпляры которого представляют множества отношений обобщения.",
+    "InstanceSpecification": "Спецификация экземпляра — элемент модели, представляющий экземпляр в моделируемой системе. Она может выступать как цель развёртывания в отношении развёртывания, если представляет экземпляр узла, а также как развёрнутый артефакт, если представляет экземпляр артефакта.",
+    "InstanceValue": "Значение экземпляра — это спецификация значения, которая идентифицирует экземпляр.",
+    "Operation": "Операция — поведенческая характеристика классификатора, задающая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать как выполнение поведений-методов, так и другие поведенческие отклики. Операция специализирует TemplateableElement, чтобы поддерживать задание шаблонных операций и связанных операций, и ParameterableElement, чтобы операцию можно было предоставлять как формальный параметр шаблона и передавать как фактический параметр привязки шаблона.",
+    "OperationTemplateParameter": "Параметр шаблона операции предоставляет операцию как формальный параметр шаблона.",
+    "Parameter": "Параметр — спецификация аргумента, используемого для передачи информации на вход или выход при вызове поведенческой характеристики. Параметры можно рассматривать как соединяемые элементы внутри коопераций.",
+    "ParameterSet": "Набор параметров обозначает альтернативные множества входов или выходов, которые поведение может использовать.",
+    "Property": "Свойство — структурная характеристика. Свойство, связанное отношением ownedAttribute с классификатором (отличным от ассоциации), представляет атрибут и может также представлять конец ассоциации; оно относит экземпляр классификатора к значению или множеству значений типа атрибута. Свойство, связанное отношением memberEnd с ассоциацией, представляет конец ассоциации; тип свойства является типом конца ассоциации. Свойство может выступать как цель развёртывания в отношении развёртывания, что позволяет моделировать развёртывание на иерархических узлах, чьи свойства выполняют роль внутренних частей. Свойство специализирует ParameterableElement, чтобы его можно было предоставлять как формальный параметр шаблона и передавать как фактический параметр привязки шаблона.",
+    "RedefinableElement": "Переопределяемый элемент — элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (прямо или косвенно) контекстный классификатор.",
+    "RedefinableTemplateSignature": "Переопределяемая подпись шаблона поддерживает добавление формальных параметров шаблона в специализации шаблонного классификатора.",
+    "Slot": "Слот обозначает, что сущность, смоделированная спецификацией экземпляра, имеет значение или значения для конкретной структурной характеристики.",
+    "StructuralFeature": "Структурная характеристика — типизированная характеристика классификатора, задающая структуру экземпляров классификатора.",
+    "Substitution": "Подстановка — отношение между двумя классификаторами, означающее, что подставляющий классификатор соответствует контракту, заданному классификатором контракта. Это означает, что экземпляры подставляющего классификатора могут подставляться во время выполнения там, где ожидаются экземпляры классификатора контракта.",
 }
 
 PROPERTY_TRANSLATIONS = {
@@ -156,12 +177,143 @@ PROPERTY_TRANSLATIONS = {
     "TimeExpression-observation": "Наблюдения, участвующие в вычислении значения TimeExpression.",
     "TimeInterval-max": "TimeExpression, обозначающее максимальное значение диапазона.",
     "TimeInterval-min": "TimeExpression, обозначающее минимальное значение диапазона.",
+    "Behavior-specification": "Обозначает поведенческую характеристику, которую реализует поведение. Она должна принадлежать BehavioredClassifier, владеющему поведением, или быть им унаследована. Параметры поведенческой характеристики и реализующего поведения должны совпадать. Спецификация поведению не обязательна; в этом случае оно либо является classifierBehavior некоторого BehavioredClassifier, либо может вызываться только другим поведением этого классификатора.",
+    "BehavioralFeature-concurrency": "Задаёт семантику одновременных вызовов одного и того же пассивного экземпляра (то есть экземпляра, происходящего из Class с isActive = false). Активные экземпляры сами управляют доступом к своим поведенческим характеристикам.",
+    "BehavioralFeature-isAbstract": "Если true, поведенческая характеристика не имеет реализации, и её должна предоставить более специфичная Classifier. Если false, реализация должна быть в Classifier или унаследована.",
+    "BehavioralFeature-method": "Поведение, реализующее поведенческую характеристику. Для данной пары Classifier (как владельца Behavior) и BehavioralFeature (как спецификации Behavior) может существовать не более одного Behavior.",
+    "BehavioralFeature-ownedParameter": "Упорядоченное множество формальных параметров этой поведенческой характеристики.",
+    "BehavioralFeature-ownedParameterSet": "Наборы параметров, принадлежащие этой поведенческой характеристике.",
+    "Classifier-isAbstract": "Если true, Classifier может быть создан только созданием одной из его специализаций. Абстрактный Classifier предназначен для использования другими классификаторами, например как цель ассоциаций или обобщений.",
+    "Classifier-isFinalSpecialization": "Если true, Classifier не может иметь специализаций.",
+    "Classifier-attribute": "Все свойства, являющиеся прямыми (то есть не унаследованными и не импортированными) атрибутами классификатора.",
+    "Classifier-collaborationUse": "Использования кооперации, принадлежащие классификатору.",
+    "Classifier-feature": "Задаёт каждую характеристику, непосредственно определённую в классификаторе. Члены классификатора типа Feature могут в неё не входить, например унаследованные характеристики.",
+    "Classifier-general": "Обобщающие классификаторы для этого классификатора.",
+    "Classifier-generalization": "Отношения обобщения этого классификатора. Эти обобщения ведут к более общим классификаторам в иерархии обобщений.",
+    "Classifier-ownedTemplateSignature": "Необязательная переопределяемая подпись шаблона, задающая формальные параметры шаблона.",
+    "Classifier-ownedUseCase": "Варианты использования, принадлежащие этому классификатору.",
+    "Classifier-powertypeExtent": "Наборы обобщений, для которых этот классификатор является powertype.",
+    "Classifier-redefinedClassifier": "Классификаторы, переопределяемые этим классификатором.",
+    "Classifier-representation": "Использование кооперации, указывающее кооперацию, которая представляет этот классификатор.",
+    "Classifier-substitution": "Подстановки, принадлежащие этому классификатору.",
+    "Classifier-templateParameter": "Параметр шаблона классификатора, который предоставляет этот элемент как формальный параметр.",
+    "Classifier-useCase": "Варианты использования, субъектом которых является этот классификатор.",
+    "ClassifierTemplateParameter-allowSubstitutable": "Ограничивает требуемое отношение между фактическим параметром и parameteredElement этого формального параметра.",
+    "ClassifierTemplateParameter-constrainingClassifier": "Классификаторы, ограничивающие аргумент, который может использоваться для параметра. Если атрибут allowSubstitutable равен true, может быть подставлен любой классификатор, совместимый с этим ограничивающим классификатором; иначе это должен быть этот классификатор или одна из его специализаций. Если свойство пусто, ограничений на классификатор, используемый как аргумент, нет.",
+    "ClassifierTemplateParameter-parameteredElement": "Классификатор, предоставляемый этим параметром шаблона классификатора.",
+    "ConnectableElement-end": "Множество концов соединителей, присоединённых к этому соединяемому элементу.",
+    "ConnectableElement-templateParameter": "Параметр шаблона соединяемого элемента для этого параметра ConnectableElement.",
+    "DeploymentTarget-deployment": "Множество развёртываний для этой цели развёртывания.",
+    "Feature-isStatic": "Указывает, характеризует ли эта характеристика отдельные экземпляры, классифицированные классификатором (false), или сам классификатор (true).",
+    "Feature-featuringClassifier": "Классификаторы, характеристикой которых является эта Feature.",
+    "Generalization-isSubstitutable": "Указывает, может ли конкретный классификатор использоваться везде, где может использоваться общий классификатор. Если true, сценарии выполнения конкретного классификатора должны быть надмножеством сценариев выполнения общего классификатора. Если false, такого ограничения на сценарии выполнения нет. Если не задано, моделировщик не указал, существует ли такое ограничение.",
+    "Generalization-general": "Общий классификатор в отношении обобщения.",
+    "Generalization-generalizationSet": "Наборы обобщений, членом которых является это обобщение. Обобщение может входить во множество наборов обобщений.",
+    "Generalization-specific": "Конкретный (специализирующий) классификатор в отношении обобщения.",
+    "GeneralizationSet-isCovering": "Указывает (через связанные обобщения), покрывают ли конкретные классификаторы набора общий классификатор. Если isCovering равен true, каждый экземпляр общего классификатора является также экземпляром хотя бы одного из конкретных классификаторов набора. Если isCovering равен false, существует один или несколько экземпляров общего классификатора, не являющихся экземплярами ни одного из конкретных классификаторов набора.",
+    "GeneralizationSet-isDisjoint": "Указывает, имеют ли конкретные классификаторы в отношении обобщения общие экземпляры. Если isDisjoint равен true, конкретные классификаторы данного набора не имеют общих элементов, то есть их пересечение пусто. Если isDisjoint равен false, они имеют один или несколько общих элементов, то есть их пересечение не пусто.",
+    "GeneralizationSet-generalization": "Обозначает экземпляры обобщения, являющиеся членами этого набора обобщений.",
+    "GeneralizationSet-powertype": "Обозначает классификатор, определённый как powertype для связанного набора обобщений, если он есть.",
+    "InstanceSpecification-classifier": "Классификатор или классификаторы представленного экземпляра. Если задано несколько классификаторов, экземпляр классифицирован всеми ими.",
+    "InstanceSpecification-slot": "Слот, задающий значение или значения структурной характеристики экземпляра. Спецификация экземпляра может иметь один слот на каждую структурную характеристику своих классификаторов, включая унаследованные характеристики. Необязательно моделировать слот для каждой структурной характеристики; в этом случае спецификация экземпляра является частичным описанием.",
+    "InstanceValue-instance": "Спецификация экземпляра, представляющая заданное значение.",
+    "Operation-class": "Класс, владеющий этой операцией, если есть.",
+    "Operation-datatype": "Тип данных, владеющий этой операцией, если есть.",
+    "Operation-interface": "Интерфейс, владеющий этой операцией, если есть.",
+    "Operation-isOrdered": "Указывает, является ли возвращаемый параметр упорядоченным, если он есть. Эта информация выводится из возвращаемого результата операции.",
+    "Operation-isQuery": "Указывает, оставляет ли выполнение поведенческой характеристики состояние системы неизменным (isQuery = true) или могут ли происходить побочные эффекты (isQuery = false).",
+    "Operation-isUnique": "Указывает, является ли возвращаемый параметр уникальным, если он есть. Эта информация выводится из возвращаемого результата операции.",
+    "Operation-lower": "Нижняя кратность возвращаемого параметра, если он есть. Эта информация выводится из возвращаемого результата операции.",
+    "Operation-upper": "Верхняя кратность возвращаемого параметра, если он есть. Эта информация выводится из возвращаемого результата операции.",
+    "Operation-ownedParameter": "Параметры, принадлежащие этой операции.",
+    "Operation-redefinedOperation": "Операции, переопределяемые этой операцией.",
+    "Operation-templateParameter": "Параметр шаблона операции, который предоставляет этот элемент как формальный параметр.",
+    "OperationTemplateParameter-parameteredElement": "Операция, предоставляемая этим параметром шаблона операции.",
+    "Parameter-default": "Строка, представляющая значение, используемое, когда для параметра не передан аргумент.",
+    "Parameter-direction": "Указывает, передаётся ли параметр в поведенческий элемент или из него.",
+    "Parameter-effect": "Задаёт эффект, который выполнения владельца параметра оказывают на объекты, передаваемые через параметр на вход или выход.",
+    "Parameter-isException": "Показывает, может ли выходной параметр выдать значение с исключением остальных выходов.",
+    "Parameter-isStream": "Указывает, может ли входной параметр принимать значения во время выполнения своего поведения, а выходной — выдавать значения во время выполнения поведения.",
+    "Parameter-operation": "Операция, владеющая этим параметром.",
+    "Parameter-parameterSet": "Наборы параметров, содержащие этот параметр. См. ParameterSet.",
+    "ParameterSet-parameter": "Параметры в наборе параметров.",
+    "Property-aggregation": "Задаёт вид агрегирования, применимый к свойству.",
+    "Property-isComposite": "Если isComposite равен true, объект, содержащий атрибут, является контейнером для объекта или значения, содержащихся в атрибуте. Это выводимое значение, показывающее, является ли агрегирование свойства композицией.",
+    "Property-isDerived": "Указывает, является ли свойство выводимым, то есть могут ли его значения вычисляться из другой информации.",
+    "Property-isDerivedUnion": "Указывает, выводится ли свойство как объединение всех свойств, которые ограничены быть его подмножествами.",
+    "Property-isID": "True указывает, что это свойство может использоваться для однозначной идентификации экземпляра содержащего его класса.",
+    "Property-association": "Ассоциация, членом которой является это свойство, если есть.",
+    "Property-associationEnd": "Обозначает необязательный конец ассоциации, владеющий атрибутом-квалификатором.",
+    "Property-class": "Класс, владеющий этим свойством, если есть.",
+    "Property-datatype": "Тип данных, владеющий этим свойством, если есть.",
+    "Property-interface": "Интерфейс, владеющий этим свойством, если есть.",
+    "Property-opposite": "Когда свойство является одним из концов бинарной ассоциации, даёт другой её конец.",
+    "Property-owningAssociation": "Владеющая ассоциация этого свойства, если есть.",
+    "Property-qualifier": "Необязательный упорядоченный список атрибутов-квалификаторов конца.",
+    "Property-redefinedProperty": "Свойства, переопределяемые этим свойством, если есть.",
+    "Property-subsettedProperty": "Свойства, подмножеством которых это свойство ограничено быть, если есть.",
+    "RedefinableElement-isLeaf": "Указывает, возможно ли дальнейшее переопределение переопределяемого элемента. Если значение true, дальнейшее переопределение невозможно.",
+    "RedefinableElement-redefinedElement": "Переопределяемые элементы, которые переопределяет этот элемент.",
+    "RedefinableElement-redefinitionContext": "Контексты, в которых этот элемент может быть переопределён.",
+    "RedefinableTemplateSignature-classifier": "Классификатор, владеющий этой переопределяемой подписью шаблона.",
+    "RedefinableTemplateSignature-extendedSignature": "Подписи шаблонов, расширяемые этой переопределяемой подписью шаблона.",
+    "Slot-definingFeature": "Структурная характеристика, задающая значения, которые может хранить слот.",
+    "Slot-owningInstance": "Спецификация экземпляра, владеющая этим слотом.",
+    "StructuralFeature-isReadOnly": "Если isReadOnly равен true, структурную характеристику нельзя изменять после инициализации.",
+    "Substitution-contract": "Контракт, которому следует подставляющий классификатор.",
+    "Substitution-substitutingClassifier": "Экземпляры подставляющего классификатора могут подставляться во время выполнения там, где ожидаются экземпляры классификатора контракта.",
+    "A_attribute_classifier-classifier": "Классификатор, для которого свойство является атрибутом.",
+    "A_bodyCondition_bodyContext-bodyContext": "Операция, задающая условие на значения результата своего вызова.",
+    "A_classifier_instanceSpecification-instanceSpecification": "Спецификации экземпляров, классифицированные этим классификатором.",
+    "A_collaborationUse_classifier-classifier": "Классификатор, владеющий использованием кооперации.",
+    "A_condition_parameterSet-parameterSet": "Набор параметров, владеющий условием.",
+    "A_constrainingClassifier_classifierTemplateParameter-classifierTemplateParameter": "Параметры шаблона классификатора, которые ограничивает этот классификатор.",
+    "A_contract_substitution-substitution": "Подстановки, контрактом которых служит этот классификатор.",
+    "A_defaultValue_owningParameter-owningParameter": "Параметр, владеющий значением по умолчанию.",
+    "A_defaultValue_owningProperty-owningProperty": "Свойство, владеющее значением по умолчанию.",
+    "A_definingFeature_slot-slot": "Слоты, значения которых задаёт эта определяющая характеристика.",
+    "A_extendedSignature_redefinableTemplateSignature-redefinableTemplateSignature": "Переопределяемые подписи шаблонов, расширяемые этой подписью.",
+    "A_general_classifier-classifier": "Классификаторы, обобщаемые этим классификатором.",
+    "A_general_generalization-generalization": "Обобщения, общим классификатором которых служит этот классификатор.",
+    "A_inheritedMember_inheritingClassifier-inheritingClassifier": "Классификаторы, унаследовавшие этот элемент.",
+    "A_inheritedParameter_redefinableTemplateSignature-redefinableTemplateSignature": "Переопределяемые подписи шаблонов, унаследовавшие этот формальный параметр.",
+    "A_instance_instanceValue-instanceValue": "Значения экземпляра, ссылающиеся на эту спецификацию экземпляра.",
+    "A_opposite_property-property": "Свойства, для которых это свойство является противоположным концом.",
+    "A_ownedParameterSet_behavioralFeature-behavioralFeature": "Поведенческая характеристика, владеющая набором параметров.",
+    "A_ownedParameter_ownerFormalParam-ownerFormalParam": "Поведенческая характеристика, владеющая формальным параметром.",
+    "A_ownedUseCase_classifier-classifier": "Классификатор, владеющий вариантом использования.",
+    "A_postcondition_postContext-postContext": "Операция, задающая постусловие.",
+    "A_precondition_preContext-preContext": "Операция, задающая предусловие.",
+    "A_raisedException_behavioralFeature-behavioralFeature": "Поведенческие характеристики, при вызове которых может возникнуть это исключение.",
+    "A_raisedException_operation-operation": "Операции, при вызове которых может возникнуть это исключение.",
+    "A_redefinedClassifier_classifier-classifier": "Классификаторы, переопределяемые этим классификатором.",
+    "A_redefinedElement_redefinableElement-redefinableElement": "Переопределяемые элементы, которые переопределяет этот элемент.",
+    "A_redefinedOperation_operation-operation": "Операции, переопределяемые этой операцией.",
+    "A_redefinedProperty_property-property": "Свойства, переопределяемые этим свойством.",
+    "A_redefinitionContext_redefinableElement-redefinableElement": "Переопределяемые элементы, контекстом переопределения которых служит этот классификатор.",
+    "A_representation_classifier-classifier": "Классификатор, представление которого задаёт это использование кооперации.",
+    "A_specification_owningInstanceSpec-owningInstanceSpec": "Спецификация экземпляра, владеющая этой спецификацией значения.",
+    "A_subsettedProperty_property-property": "Свойства, подмножествами которых являются эти свойства.",
+    "A_type_operation-operation": "Операции, возвращаемым типом которых служит этот тип.",
+    "A_value_owningSlot-owningSlot": "Слот, владеющий этим значением.",
 }
 
 
+def array_slice(text, start_marker, end_marker):
+    """Slice of text between two array markers, or None if the start marker is absent."""
+    if start_marker not in text:
+        return None
+    block = text.split(start_marker, 1)[1]
+    return block.split(end_marker, 1)[0] if end_marker in block else block
+
+
 def classifier_blocks(text):
-    block = text.split("const classifiers = [", 1)[1].split("const associations = [", 1)[0]
-    starts = list(re.finditer(r'^    \{\n      name: "([A-Za-z]+)",\n      ru:', block, re.MULTILINE))
+    block = array_slice(text, "const classifiers = [", "const associations = [")
+    if block is None:
+        return
+    # Matches both the multi-line entries of common-structure.js and the
+    # compact single-line entries of classification.js.
+    starts = list(re.finditer(r'^    \{\s*name: "([A-Za-z]+)",\s*ru:', block, re.MULTILINE))
     for index, match in enumerate(starts):
         end = starts[index + 1].start() if index + 1 < len(starts) else len(block)
         yield match.group(1), block[match.start():end]
@@ -180,7 +332,9 @@ def curated_descriptions(text):
 
 
 def association_names(text):
-    block = text.split("const associations = [", 1)[1].split("const diagrams = [", 1)[0]
+    block = array_slice(text, "const associations = [", "const diagrams = [")
+    if block is None:
+        return []
     return re.findall(r'name: "(A_[A-Za-z_]+)"', block)
 
 
@@ -375,11 +529,18 @@ class XmiModel:
 
 
 def generate():
-    text = DATA.read_text(encoding="utf-8")
     model = XmiModel(XMI)
-    descriptions = curated_descriptions(text)
-    class_names = [name for name, _ in classifier_blocks(text)]
-    association_list = association_names(text)
+    descriptions = {}
+    class_names = []
+    association_list = []
+    for path in DATA_FILES:
+        text = path.read_text(encoding="utf-8")
+        descriptions.update(curated_descriptions(text))
+        names = [name for name, _ in classifier_blocks(text)]
+        if not names:
+            raise ValueError(f"No classifiers parsed from {path.relative_to(ROOT)}")
+        class_names.extend(names)
+        association_list.extend(association_names(text))
 
     enumeration_names = {
         element.get("name")

@@ -52,10 +52,12 @@
 <text class="class-name" x="685.0" y="148" text-anchor="middle">Company</text>
 </g>
 <g class="example-association-group"><title>Необязательный руководитель Person.</title><path class="example-association" d="M 195 125 V 55 H 55 V 157 H 120" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 195 125 V 55 H 55 V 157 H 120" aria-hidden="true"/>
+
 <text class="example-label" x="207" y="90">boss</text>
 <text class="example-label" x="207" y="106">0..1</text>
 </g>
 <g class="example-association-group"><title>Связь сотрудника и работодателя.</title><path class="example-association" d="M 270 157 H 600"/><path class="association-hitbox" d="M 270 157 H 600" aria-hidden="true"/>
+
 <text class="example-label" x="282" y="140">employee</text>
 <text class="example-label" x="588" y="140" text-anchor="end">employer</text>
 <text class="example-label" x="282" y="181">*</text>

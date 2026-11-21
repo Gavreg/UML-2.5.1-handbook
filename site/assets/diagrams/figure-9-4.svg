@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="750" viewBox="0 0 1600 750" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.4">
+  <title id="diagram-title">Рисунок 9.4 — Шаблоны классификаторов</title>
+  <desc id="diagram-description">Абстрактный синтаксис RedefinableTemplateSignature и ClassifierTemplateParameter.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1600" height="750"/>
+  <a class="class-node" data-classifier="RedefinableElement" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
+<rect class="class-box" x="100" y="20" width="220" height="60"/>
+<line class="class-divider" x1="100" y1="52" x2="320" y2="52"/>
+<text class="class-name abstract" x="210.0" y="43" text-anchor="middle">RedefinableElement</text>
+</a>
+<a class="class-node" data-classifier="TemplateSignature" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
+<rect class="class-box" x="430" y="20" width="220" height="60"/>
+<line class="class-divider" x1="430" y1="52" x2="650" y2="52"/>
+<text class="class-name" x="540.0" y="43" text-anchor="middle">TemplateSignature</text>
+</a>
+<a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
+<rect class="class-box" x="1080" y="20" width="250" height="60"/>
+<line class="class-divider" x1="1080" y1="52" x2="1330" y2="52"/>
+<text class="class-name abstract" x="1205.0" y="43" text-anchor="middle">TemplateableElement</text>
+</a>
+<a class="class-node" data-classifier="RedefinableTemplateSignature" href="../../index.html#/classifier/redefinabletemplatesignature" target="_top" aria-label="RedefinableTemplateSignature — открыть описание класса"><title>RedefinableTemplateSignature. Поддерживает добавление формальных параметров шаблона в специализации шаблонного классификатора.</title>
+<rect class="class-box" x="140" y="170" width="320" height="220"/>
+<line class="class-divider" x1="140" y1="202" x2="460" y2="202"/>
+<text class="class-name" x="300.0" y="193" text-anchor="middle">RedefinableTemplateSignature</text>
+</a>
+<a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="1050" y="170" width="450" height="60"/>
+<line class="class-divider" x1="1050" y1="202" x2="1500" y2="202"/>
+<text class="class-name abstract" x="1275.0" y="193" text-anchor="middle">Classifier</text>
+</a>
+<a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
+<rect class="class-box" x="80" y="560" width="220" height="60"/>
+<line class="class-divider" x1="80" y1="592" x2="300" y2="592"/>
+<text class="class-name" x="190.0" y="583" text-anchor="middle">TemplateParameter</text>
+</a>
+<a class="class-node" data-classifier="ClassifierTemplateParameter" href="../../index.html#/classifier/classifiertemplateparameter" target="_top" aria-label="ClassifierTemplateParameter — открыть описание класса"><title>ClassifierTemplateParameter. Представляет Classifier как формальный параметр шаблона.</title>
+<rect class="class-box" x="1000" y="500" width="500" height="90"/>
+<line class="class-divider" x1="1000" y1="532" x2="1500" y2="532"/>
+<text class="class-name" x="1250.0" y="523" text-anchor="middle">ClassifierTemplateParameter</text>
+<text class="attribute" x="1010" y="554">+ allowSubstitutable : Boolean = true</text>
+</a>
+<path class="generalization-line" d="M 220 170 V 80" data-child="RedefinableTemplateSignature" data-parent="RedefinableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 400 170 H 300 V 80 H 430" data-child="RedefinableTemplateSignature" data-parent="TemplateSignature" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1160 170 V 80" data-child="Classifier" data-parent="TemplateableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1000 590 H 300" data-child="ClassifierTemplateParameter" data-parent="TemplateParameter" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-ownedtemplatesignature-classifier" target="_top" aria-label="Открыть описание ассоциации A_ownedTemplateSignature_classifier">
+<g class="association-group" id="A_ownedTemplateSignature_classifier"><title>Связывает переопределяемую подпись шаблона с владеющим ею классификатором.</title>
+<path class="association" d="M 460 210 H 1050"/><path class="association-hitbox" d="M 460 210 H 1050" aria-hidden="true"/>
+<circle class="end-dot" cx="460" cy="210" r="3"/><polygon class="composition" points="1050,210 1042,202 1034,210 1042,218"/>
+<text class="association-end" x="480" y="190"><title>ownedTemplateSignature. Связывает переопределяемую подпись шаблона с владеющим ею классификатором.</title>+ ownedTemplateSignature</text>
+<text class="association-end" x="1030" y="190" text-anchor="end"><title>classifier. Связывает переопределяемую подпись шаблона с владеющим ею классификатором.</title>+ classifier</text>
+<text class="association-label" x="480" y="170">{subsets redefinableElement,</text>
+<text class="association-label" x="480" y="154">redefines ownedTemplateSignature}</text>
+<text class="association-label" x="480" y="138">0..1</text>
+<text class="association-label" x="1030" y="170" text-anchor="end">{subsets redefinitionContext,</text>
+<text class="association-label" x="1030" y="154" text-anchor="end">redefines template}</text>
+<text class="association-label" x="1030" y="138" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-extendedsignature-redefinabletemplatesignature" target="_top" aria-label="Открыть описание ассоциации A_extendedSignature_redefinableTemplateSignature">
+<g class="association-group" id="A_extendedSignature_redefinableTemplateSignature"><title>Связывает расширенные подписи с переопределяемой подписью шаблона, которая их расширяет.</title>
+<path class="association" d="M 460 330 H 740 V 480 H 420 V 390"/><path class="association-hitbox" d="M 460 330 H 740 V 480 H 420 V 390" aria-hidden="true"/>
+
+<text class="association-end" x="480" y="310"><title>redefinableTemplateSignature. Связывает расширенные подписи с переопределяемой подписью шаблона, которая их расширяет.</title>+ redefinableTemplateSignature</text>
+<text class="association-end" x="440" y="428"><title>Подписи шаблонов, расширяемые этой переопределяемой подписью шаблона.</title>+ extendedSignature</text>
+<text class="association-label" x="480" y="290">{subsets redefinableElement}</text>
+<text class="association-label" x="480" y="274">*</text>
+<text class="association-label" x="440" y="444">{subsets redefinedElement}</text>
+<text class="association-label" x="440" y="460">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-inheritedparameter-redefinabletemplatesignature" target="_top" aria-label="Открыть описание ассоциации A_inheritedParameter_redefinableTemplateSignature">
+<g class="association-group" id="A_inheritedParameter_redefinableTemplateSignature"><title>Связывает унаследованный параметр подписи шаблона с переопределяемыми подписями шаблона, в которых он унаследован.</title>
+<path class="association" d="M 180 390 V 560"/><path class="association-hitbox" d="M 180 390 V 560" aria-hidden="true"/>
+<circle class="end-dot" cx="180" cy="390" r="3"/><circle class="end-dot" cx="180" cy="560" r="3"/>
+<text class="association-end" x="200" y="428"><title>redefinableTemplateSignature. Связывает унаследованный параметр подписи шаблона с переопределяемыми подписями шаблона, в которых он унаследован.</title>+ redefinableTemplateSignature</text>
+<text class="association-end" x="200" y="532"><title>inheritedParameter. Связывает унаследованный параметр подписи шаблона с переопределяемыми подписями шаблона, в которых он унаследован.</title>+ /inheritedParameter</text>
+<text class="association-label" x="200" y="444">{subsets templateSignature}</text>
+<text class="association-label" x="200" y="460">*</text>
+<text class="association-label" x="200" y="516">{readOnly, subsets parameter}</text>
+<text class="association-label" x="200" y="500">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-classifier-templateparameter-parameteredelement" target="_top" aria-label="Открыть описание ассоциации A_classifier_templateParameter_parameteredElement">
+<g class="association-group" id="A_classifier_templateParameter_parameteredElement"><title>Связывает классификатор с параметром шаблона классификатора, представляющим его как формальный параметр шаблона.</title>
+<path class="association" d="M 1100 230 V 500"/><path class="association-hitbox" d="M 1100 230 V 500" aria-hidden="true"/>
+<circle class="end-dot" cx="1100" cy="230" r="3"/><circle class="end-dot" cx="1100" cy="500" r="3"/>
+<text class="association-end" x="1120" y="268"><title>parameteredElement. Связывает классификатор с параметром шаблона классификатора, представляющим его как формальный параметр шаблона.</title>+ parameteredElement</text>
+<text class="association-end" x="1120" y="472"><title>templateParameter. Связывает классификатор с параметром шаблона классификатора, представляющим его как формальный параметр шаблона.</title>+ templateParameter</text>
+<text class="association-label" x="1120" y="284">{redefines parameteredElement}</text>
+<text class="association-label" x="1120" y="300">1</text>
+<text class="association-label" x="1120" y="456">{redefines templateParameter}</text>
+<text class="association-label" x="1120" y="440">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-constrainingclassifier-classifiertemplateparameter" target="_top" aria-label="Открыть описание ассоциации A_constrainingClassifier_classifierTemplateParameter">
+<g class="association-group" id="A_constrainingClassifier_classifierTemplateParameter"><title>Связывает ограничивающий классификатор с параметрами шаблона классификатора, которые им ограничиваются.</title>
+<path class="association" d="M 1500 230 V 500"/><path class="association-hitbox" d="M 1500 230 V 500" aria-hidden="true"/>
+<circle class="end-dot" cx="1500" cy="230" r="3"/><circle class="end-dot" cx="1500" cy="500" r="3"/>
+<text class="association-end" x="1480" y="268" text-anchor="end"><title>constrainingClassifier. Связывает ограничивающий классификатор с параметрами шаблона классификатора, которые им ограничиваются.</title>+ constrainingClassifier</text>
+<text class="association-end" x="1480" y="472" text-anchor="end"><title>classifierTemplateParameter. Связывает ограничивающий классификатор с параметрами шаблона классификатора, которые им ограничиваются.</title>+ classifierTemplateParameter</text>
+<text class="association-label" x="1480" y="284" text-anchor="end">*</text>
+<text class="association-label" x="1480" y="456" text-anchor="end">*</text>
+</g></a>
+</svg>

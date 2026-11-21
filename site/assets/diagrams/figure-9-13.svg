@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1600" viewBox="0 0 2200 1600" role="img" aria-labelledby="diagram-title diagram-description" data-figure="9.13">
+  <title id="diagram-title">Рисунок 9.13 — Операции</title>
+  <desc id="diagram-description">Абстрактный синтаксис Operation и OperationTemplateParameter, параметров, ограничений и исключений.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="2200" height="1600"/>
+  <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
+<rect class="class-box" x="600" y="50" width="250" height="60"/>
+<line class="class-divider" x1="600" y1="82" x2="850" y2="82"/>
+<text class="class-name abstract" x="725.0" y="73" text-anchor="middle">TemplateableElement</text>
+</a>
+<a class="class-node" data-classifier="BehavioralFeature" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
+<rect class="class-box" x="900" y="50" width="250" height="60"/>
+<line class="class-divider" x1="900" y1="82" x2="1150" y2="82"/>
+<text class="class-name abstract" x="1025.0" y="73" text-anchor="middle">BehavioralFeature</text>
+</a>
+<a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="1250" y="50" width="250" height="60"/>
+<line class="class-divider" x1="1250" y1="82" x2="1500" y2="82"/>
+<text class="class-name abstract" x="1375.0" y="73" text-anchor="middle">ParameterableElement</text>
+</a>
+<g class="class-node" data-classifier="Interface"><title>Interface. Пример класса Interface.</title>
+<rect class="class-box" x="50" y="350" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="382" x2="210" y2="382"/>
+<text class="class-name" x="130.0" y="373" text-anchor="middle">Interface</text>
+</g>
+<g class="class-node" data-classifier="DataType"><title>DataType. Пример класса DataType.</title>
+<rect class="class-box" x="50" y="600" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="632" x2="210" y2="632"/>
+<text class="class-name" x="130.0" y="623" text-anchor="middle">DataType</text>
+</g>
+<g class="class-node" data-classifier="Class"><title>Class. Пример класса Class.</title>
+<rect class="class-box" x="50" y="850" width="160" height="60"/>
+<line class="class-divider" x1="50" y1="882" x2="210" y2="882"/>
+<text class="class-name" x="130.0" y="873" text-anchor="middle">Class</text>
+</g>
+<a class="class-node" data-classifier="Operation" href="../../index.html#/classifier/operation" target="_top" aria-label="Operation — открыть описание класса"><title>Operation. BehavioralFeature классификатора, специфицирующая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать исполнение методов-поведений, а также другие поведенческие отклики. Operation специализирует TemplateableElement, чтобы поддерживать спецификацию шаблонных и связанных операций. Operation специализирует ParameterableElement, чтобы операцию можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="750" y="250" width="400" height="850"/>
+<line class="class-divider" x1="750" y1="282" x2="1150" y2="282"/>
+<text class="class-name" x="950.0" y="273" text-anchor="middle">Operation</text>
+<text class="attribute" x="760" y="304">+ /isOrdered : Boolean {readOnly}</text>
+<text class="attribute" x="760" y="325">+ isQuery : Boolean = false</text>
+<text class="attribute" x="760" y="346">+ /isUnique : Boolean {readOnly}</text>
+<text class="attribute" x="760" y="367">+ /lower : Integer [0..1] {readOnly}</text>
+<text class="attribute" x="760" y="388">+ /upper : UnlimitedNatural [0..1] {readOnly}</text>
+</a>
+<a class="class-node" data-classifier="Parameter" href="../../index.html#/classifier/parameter" target="_top" aria-label="Parameter — открыть описание класса"><title>Parameter. Спецификация аргумента, используемого для передачи информации вовнутрь или наружу вызова BehavioralFeature. Параметры могут рассматриваться как ConnectableElements внутри Collaborations.</title>
+<rect class="class-box" x="1700" y="250" width="200" height="60"/>
+<line class="class-divider" x1="1700" y1="282" x2="1900" y2="282"/>
+<text class="class-name" x="1800.0" y="273" text-anchor="middle">Parameter</text>
+</a>
+<a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
+<rect class="class-box" x="1700" y="400" width="200" height="400"/>
+<line class="class-divider" x1="1700" y1="432" x2="1900" y2="432"/>
+<text class="class-name" x="1800.0" y="423" text-anchor="middle">Constraint</text>
+</a>
+<a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
+<rect class="class-box" x="1700" y="850" width="200" height="250"/>
+<line class="class-divider" x1="1700" y1="882" x2="1900" y2="882"/>
+<text class="class-name abstract" x="1800.0" y="873" text-anchor="middle">Type</text>
+</a>
+<a class="class-node" data-classifier="OperationTemplateParameter" href="../../index.html#/classifier/operationtemplateparameter" target="_top" aria-label="OperationTemplateParameter — открыть описание класса"><title>OperationTemplateParameter. Представляет Operation как формальный параметр шаблона.</title>
+<rect class="class-box" x="750" y="1300" width="400" height="70"/>
+<line class="class-divider" x1="750" y1="1332" x2="1150" y2="1332"/>
+<text class="class-name" x="950.0" y="1323" text-anchor="middle">OperationTemplateParameter</text>
+</a>
+<a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
+<rect class="class-box" x="825" y="1480" width="250" height="60"/>
+<line class="class-divider" x1="825" y1="1512" x2="1075" y2="1512"/>
+<text class="class-name" x="950.0" y="1503" text-anchor="middle">TemplateParameter</text>
+</a>
+<path class="generalization-line" d="M 850 250 L 725 110" data-child="Operation" data-parent="TemplateableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 950 250 L 1025 110" data-child="Operation" data-parent="BehavioralFeature" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 1100 250 L 1375 110" data-child="Operation" data-parent="ParameterableElement" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 950 1370 V 1480" data-child="OperationTemplateParameter" data-parent="TemplateParameter" marker-end="url(#generalization)"/>
+<g class="example-association-group"><title>Ассоциация ownedOperation между Interface и Operation.</title><path class="example-association" d="M 210 380 H 750"/><path class="association-hitbox" d="M 210 380 H 750" aria-hidden="true"/>
+<polygon class="composition" points="210,380 218,372 226,380 218,388"/>
+<text class="example-label" x="230" y="360">+ interface</text>
+<text class="example-label" x="230" y="340">{subsets featuringClassifier,</text>
+<text class="example-label" x="230" y="324">subsets namespace,</text>
+<text class="example-label" x="230" y="308">subsets redefinitionContext}</text>
+<text class="example-label" x="230" y="292">0..1</text>
+<text class="example-label" x="730" y="360" text-anchor="end">+ ownedOperation</text>
+<text class="example-label" x="730" y="340" text-anchor="end">{ordered, subsets feature,</text>
+<text class="example-label" x="730" y="324" text-anchor="end">subsets redefinableElement,</text>
+<text class="example-label" x="730" y="308" text-anchor="end">subsets ownedMember}</text>
+<text class="example-label" x="730" y="292" text-anchor="end">*</text>
+</g>
+<g class="example-association-group"><title>Ассоциация ownedOperation между DataType и Operation.</title><path class="example-association" d="M 210 630 H 750"/><path class="association-hitbox" d="M 210 630 H 750" aria-hidden="true"/>
+<polygon class="composition" points="210,630 218,622 226,630 218,638"/>
+<text class="example-label" x="230" y="610">+ datatype</text>
+<text class="example-label" x="230" y="590">{subsets featuringClassifier,</text>
+<text class="example-label" x="230" y="574">subsets namespace,</text>
+<text class="example-label" x="230" y="558">subsets redefinitionContext}</text>
+<text class="example-label" x="230" y="542">0..1</text>
+<text class="example-label" x="730" y="610" text-anchor="end">+ ownedOperation</text>
+<text class="example-label" x="730" y="590" text-anchor="end">{ordered, subsets feature,</text>
+<text class="example-label" x="730" y="574" text-anchor="end">subsets redefinableElement,</text>
+<text class="example-label" x="730" y="558" text-anchor="end">subsets ownedMember}</text>
+<text class="example-label" x="730" y="542" text-anchor="end">*</text>
+</g>
+<g class="example-association-group"><title>Ассоциация ownedOperation между Class и Operation.</title><path class="example-association" d="M 210 880 H 750"/><path class="association-hitbox" d="M 210 880 H 750" aria-hidden="true"/>
+<polygon class="composition" points="210,880 218,872 226,880 218,888"/>
+<text class="example-label" x="230" y="860">+ class</text>
+<text class="example-label" x="230" y="840">{subsets featuringClassifier,</text>
+<text class="example-label" x="230" y="824">subsets namespace,</text>
+<text class="example-label" x="230" y="808">subsets redefinitionContext}</text>
+<text class="example-label" x="230" y="792">0..1</text>
+<text class="example-label" x="730" y="860" text-anchor="end">+ ownedOperation</text>
+<text class="example-label" x="730" y="840" text-anchor="end">{ordered, subsets feature,</text>
+<text class="example-label" x="730" y="824" text-anchor="end">subsets redefinableElement,</text>
+<text class="example-label" x="730" y="808" text-anchor="end">subsets ownedMember}</text>
+<text class="example-label" x="730" y="792" text-anchor="end">*</text>
+</g>
+<a class="association-link" href="../../index.html#/association/a-ownedparameter-operation" target="_top" aria-label="Открыть описание ассоциации A_ownedParameter_operation">
+<g class="association-group" id="A_ownedParameter_operation"><title>Связывает параметр с владеющей им операцией.</title>
+<path class="association" d="M 1150 300 H 1700"/><path class="association-hitbox" d="M 1150 300 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1150,300 1158,292 1166,300 1158,308"/><circle class="end-dot" cx="1700" cy="300" r="3"/>
+<text class="association-end" x="1170" y="280"><title>operation. Связывает параметр с владеющей им операцией.</title>+ operation</text>
+<text class="association-end" x="1680" y="280" text-anchor="end"><title>ownedParameter. Связывает параметр с владеющей им операцией.</title>+ ownedParameter</text>
+<text class="association-label" x="1170" y="260">{subsets ownerFormalParam}</text>
+<text class="association-label" x="1170" y="244">0..1</text>
+<text class="association-label" x="1680" y="260" text-anchor="end">{ordered, redefines ownedParameter}</text>
+<text class="association-label" x="1680" y="244" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-precondition-precontext" target="_top" aria-label="Открыть описание ассоциации A_precondition_preContext">
+<g class="association-group" id="A_precondition_preContext"><title>Связывает предусловие с владеющей им операцией.</title>
+<path class="association" d="M 1150 450 H 1700"/><path class="association-hitbox" d="M 1150 450 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1150,450 1158,442 1166,450 1158,458"/><circle class="end-dot" cx="1700" cy="450" r="3"/>
+<text class="association-end" x="1170" y="430"><title>preContext. Связывает предусловие с владеющей им операцией.</title>+ preContext</text>
+<text class="association-end" x="1680" y="430" text-anchor="end"><title>precondition. Связывает предусловие с владеющей им операцией.</title>+ precondition</text>
+<text class="association-label" x="1170" y="410">{subsets context}</text>
+<text class="association-label" x="1170" y="394">0..1</text>
+<text class="association-label" x="1680" y="410" text-anchor="end">{subsets ownedRule}</text>
+<text class="association-label" x="1680" y="394" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-postcondition-postcontext" target="_top" aria-label="Открыть описание ассоциации A_postcondition_postContext">
+<g class="association-group" id="A_postcondition_postContext"><title>Связывает постусловие с владеющей им операцией.</title>
+<path class="association" d="M 1150 600 H 1700"/><path class="association-hitbox" d="M 1150 600 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1150,600 1158,592 1166,600 1158,608"/><circle class="end-dot" cx="1700" cy="600" r="3"/>
+<text class="association-end" x="1170" y="580"><title>postContext. Связывает постусловие с владеющей им операцией.</title>+ postContext</text>
+<text class="association-end" x="1680" y="580" text-anchor="end"><title>postcondition. Связывает постусловие с владеющей им операцией.</title>+ postcondition</text>
+<text class="association-label" x="1170" y="560">{subsets context}</text>
+<text class="association-label" x="1170" y="544">0..1</text>
+<text class="association-label" x="1680" y="560" text-anchor="end">{subsets ownedRule}</text>
+<text class="association-label" x="1680" y="544" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-bodycondition-bodycontext" target="_top" aria-label="Открыть описание ассоциации A_bodyCondition_bodyContext">
+<g class="association-group" id="A_bodyCondition_bodyContext"><title>Связывает условие тела операции с владеющей ею операцией.</title>
+<path class="association" d="M 1150 750 H 1700"/><path class="association-hitbox" d="M 1150 750 H 1700" aria-hidden="true"/>
+<polygon class="composition" points="1150,750 1158,742 1166,750 1158,758"/><circle class="end-dot" cx="1700" cy="750" r="3"/>
+<text class="association-end" x="1170" y="730"><title>bodyContext. Связывает условие тела операции с владеющей ею операцией.</title>+ bodyContext</text>
+<text class="association-end" x="1680" y="730" text-anchor="end"><title>bodyCondition. Связывает условие тела операции с владеющей ею операцией.</title>+ bodyCondition</text>
+<text class="association-label" x="1170" y="710">{subsets context}</text>
+<text class="association-label" x="1170" y="694">0..1</text>
+<text class="association-label" x="1680" y="710" text-anchor="end">{subsets ownedRule}</text>
+<text class="association-label" x="1680" y="694" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-type-operation" target="_top" aria-label="Открыть описание ассоциации A_type_operation">
+<g class="association-group" id="A_type_operation"><title>Связывает тип с операциями, чей возвращаемый параметр им типизирован.</title>
+<path class="association" d="M 1150 900 H 1700"/><path class="association-hitbox" d="M 1150 900 H 1700" aria-hidden="true"/>
+<circle class="end-dot" cx="1150" cy="900" r="3"/>
+<text class="association-end" x="1170" y="880"><title>operation. Связывает тип с операциями, чей возвращаемый параметр им типизирован.</title>+ operation</text>
+<text class="association-end" x="1680" y="880" text-anchor="end"><title>/type. Связывает тип с операциями, чей возвращаемый параметр им типизирован.</title>+ /type</text>
+<text class="association-label" x="1170" y="860">{subsets behavioralFeature}</text>
+<text class="association-label" x="1170" y="844">*</text>
+<text class="association-label" x="1680" y="860" text-anchor="end">{readOnly}</text>
+<text class="association-label" x="1680" y="844" text-anchor="end">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-raisedexception-operation" target="_top" aria-label="Открыть описание ассоциации A_raisedException_operation">
+<g class="association-group" id="A_raisedException_operation"><title>Связывает тип исключения с операциями, которые могут его возбуждать.</title>
+<path class="association" d="M 1150 980 H 1700"/><path class="association-hitbox" d="M 1150 980 H 1700" aria-hidden="true"/>
+<circle class="end-dot" cx="1150" cy="980" r="3"/>
+<text class="association-end" x="1170" y="960"><title>operation. Связывает тип исключения с операциями, которые могут его возбуждать.</title>+ operation</text>
+<text class="association-end" x="1680" y="960" text-anchor="end"><title>raisedException. Связывает тип исключения с операциями, которые могут его возбуждать.</title>+ raisedException</text>
+<text class="association-label" x="1170" y="940">*</text>
+<text class="association-label" x="1680" y="940" text-anchor="end">{redefines raisedException}</text>
+<text class="association-label" x="1680" y="924" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinedoperation-operation" target="_top" aria-label="Открыть описание ассоциации A_redefinedOperation_operation">
+<g class="association-group" id="A_redefinedOperation_operation"><title>Связывает переопределённую операцию с операциями, которые её переопределяют.</title>
+<path class="association" d="M 1150 1080 H 1450 V 1200 H 950 V 1100"/><path class="association-hitbox" d="M 1150 1080 H 1450 V 1200 H 950 V 1100" aria-hidden="true"/>
+
+<text class="association-end" x="1170" y="1060"><title>operation. Связывает переопределённую операцию с операциями, которые её переопределяют.</title>+ operation</text>
+<text class="association-end" x="970" y="1138"><title>Операции, переопределяемые этой операцией.</title>+ redefinedOperation</text>
+<text class="association-label" x="1170" y="1040">{subsets redefinableElement}</text>
+<text class="association-label" x="1170" y="1024">*</text>
+<text class="association-label" x="970" y="1154">{subsets redefinedElement}</text>
+<text class="association-label" x="970" y="1170">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-operation-templateparameter-parameteredelement" target="_top" aria-label="Открыть описание ассоциации A_operation_templateParameter_parameteredElement">
+<g class="association-group" id="A_operation_templateParameter_parameteredElement"><title>Связывает операцию с параметром шаблона операции, представляющим её как формальный параметр шаблона.</title>
+<path class="association" d="M 850 1100 V 1300"/><path class="association-hitbox" d="M 850 1100 V 1300" aria-hidden="true"/>
+<circle class="end-dot" cx="850" cy="1100" r="3"/><circle class="end-dot" cx="850" cy="1300" r="3"/>
+<text class="association-end" x="730" y="1138" text-anchor="end"><title>parameteredElement. Связывает операцию с параметром шаблона операции, представляющим её как формальный параметр шаблона.</title>+ parameteredElement</text>
+<text class="association-end" x="730" y="1272" text-anchor="end"><title>templateParameter. Связывает операцию с параметром шаблона операции, представляющим её как формальный параметр шаблона.</title>+ templateParameter</text>
+<text class="association-label" x="730" y="1154" text-anchor="end">{redefines parameteredElement}</text>
+<text class="association-label" x="730" y="1170" text-anchor="end">1</text>
+<text class="association-label" x="730" y="1256" text-anchor="end">{redefines templateParameter}</text>
+<text class="association-label" x="730" y="1240" text-anchor="end">0..1</text>
+</g></a>
+</svg>

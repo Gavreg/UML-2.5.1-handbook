@@ -1,0 +1,864 @@
+===== PRINTED PAGE 167 / PDF PAGE 209 =====
+
+10
+Simple Classifiers
+10.1
+Summary
+This clause specifies various kinds of Classifier that do not have complex internal structure.
+10.2
+DataTypes
+10.2.1
+Summary
+DataTypes model Types whose instances are distinguished only by their value.
+10.2.2
+Abstract Syntax
+DataType
+Enumeration
+EnumerationLiteral
+PrimitiveType
+InstanceSpecification
+Property
+Operation
+Classifier
+1
++ enumeration
+*
++ ownedLiteral
+{subsets namespace}
+{ordered, subsets
+ownedMember}
+0..1
++ datatype
+*
++ ownedAttribute
+{subsets namespace,
+subsets classifier}
+{ordered, subsets attribute,
+subsets ownedMember}
+0..1
++ datatype
+*
++ ownedOperation
+{subsets featuringClassifier,
+subsets namespace, subsets
+redefinitionContext}
+{ordered, subsets feature, subsets
+redefinableElement, subsets
+ownedMember}
+*
++ enumerationLiteral
+1
++ /classifier
+{redefines instanceSpecification}
+{readOnly, redefines classifier}
+Figure 10.1  DataTypes
+10.2.3
+Semantics
+10.2.3.1
+DataTypes
+A DataType is a kind of Classifier. DataType differs from Class in that instances of a DataType are identified only by
+their value. All instances of a DataType with the same value are considered to be equal instances.
+If a DataType has attributes (i.e., Properties owned by it and in its namespace) it is called a structured DataType.
+Instances of a structured DataType contain attribute values matching its attributes. Instances of a structured DataType are
+considered to be equal if and only if the structure is the same and the values of the corresponding attributes are equal.
+Unified Modeling Language 2.5.1
+167
+===== PRINTED PAGE 168 / PDF PAGE 210 =====
+
+A DataType may be parameterized, bound, and used as TemplateParameters.
+10.2.3.2
+Primitive Types
+A PrimitiveType defines a predefined DataType, without any substructure. A PrimitiveType may have algebra and
+operations defined outside of UML, for example, mathematically. The run-time instances of a PrimitiveType are values
+that correspond to mathematical elements defined outside of UML (for example, the Integers).
+10.2.3.3
+Enumerations
+Enumeration is a kind of DataType. Each value of an Enumeration corresponds to one of its user-defined
+EnumerationLiterals.
+As a specialization of Classifier, Enumerations can participate in generalization relationships. An Enumeration that
+specializes another may define new EnumerationLiterals that are not defined in the generalizing Enumeration; in such a
+case the set of applicable literals comprises inherited literals plus locally-defined ones.
+An EnumerationLiteral defines an element of the run-time extension of an Enumeration. Values corresponding to
+EnumerationLiterals are immutable and may be compared for equality. EnumerationLiterals may not change during
+their existence, so any attributes on an Enumeration shall be read-only.
+An EnumerationLiteral has a name that shall be used to identify it within its Enumeration. The EnumerationLiteral
+name is scoped within and shall be unique within its Enumeration. EnumerationLiteral names shall be qualified for
+general use.
+10.2.4
+Notation
+A DataType is designated using the Classifier notation (a rectangle) with keyword «dataType» or, when it is referenced
+(e.g., by an attribute), by the name of the DataType. A compartment listing the attributes is placed below the name
+compartment. A compartment listing the Operations is placed below the attribute compartment.
+A PrimitiveType is similarly designated with the keyword «primitive» above or before the name of the PrimitiveType.
+An Enumeration is similarly designated. The name of the Enumeration is placed in the upper compartment with the
+keyword «enumeration» above or before the name. A list of EnumerationLiterals may be placed, one to a line, in a
+compartment named “literals” below the operations compartment. The attributes and operations compartments may be
+suppressed, and typically are suppressed and empty.
+10.2.5
+Examples
+Figure 10.2 illustrates the notation for defining a PrimitiveType.
+«primitive»
+Integer
+Figure 10.2  PrimitiveType Notation
+Figure 10.3 illustrates the notation for defining DataTypes. The FullName type defined on the left is used as the type of
+the fullName attribute in the Person type defined on the right.
+«dataType»
+FullName
+firstName : String
+secondName : String
+initial : String
+«dataType»
+Person
+fullName : FullName
+Figure 10.3  DataType Notation
+168
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 169 / PDF PAGE 211 =====
+
+Figure 10.4 illustrates the notation for defining Enumerations.
+«enumeration»
+VisibilityKind
+public
+private
+protected
+package
+Figure 10.4  Enumeration Notation
+10.3
+Signals
+10.3.1
+Summary
+Signals and Receptions are used to model asynchronous communication between objects.
+10.3.2
+Abstract Syntax
+Reception
+BehavioralFeature
+Signal
+Classifier
+Property
+*
++ reception
+1
++ signal
+0..1
++ owningSignal
+*
++ ownedAttribute
+{subsets namespace,
+subsets classifier}
+{ordered, subsets attribute,
+subsets ownedMember}
+Figure 10.5  Signals
+10.3.3
+Semantics
+10.3.3.1
+Signals
+A Signal is a specification of a kind of communication between objects in which a reaction is asynchronously triggered
+in the receiver without a reply. The receiving object handles Signals as specified by clause 13.3. The data carried by the
+communication are represented as attributes of the Signal. A Signal is defined independently of the Classifiers handling
+it.
+The sender of a Signal will not block waiting for a reply but continue execution immediately. By declaring a Reception
+associated to a given Signal, a Classifier specifies that its instances will be able to receive that Signal, or a subtype
+thereof, and will respond to it with the designated Behavior.
+A Signal may be parameterized, bound, and used as TemplateParameters.
+10.3.3.2
+Receptions
+A Reception specifies that its owning Class or Interface is prepared to react to the receipt of a Signal. A Reception
+matches a Signal if the received Signal is a specialization of the Reception’s signal. The details of how the object
+Unified Modeling Language 2.5.1
+169
+===== PRINTED PAGE 170 / PDF PAGE 212 =====
+
+responds to the received Signal depend on the kind of Behavior associated with the Reception and its owning Class or
+Interface. See 13.2. The name of the Reception is the same as the name of the Signal. A Reception may only have in
+Parameters (see 9.4.3) that match the attributes of the Signal by name, type, and multiplicity.
+10.3.4
+Notation
+A Signal is depicted by a Classifier symbol with the keyword «signal».
+Receptions are shown in the receptions compartment using the same notation as for Operations with the keyword
+«signal».
+10.3.5
+Examples
+Figure 10.6 shows an interface IAlarm that defines two Receptions, each referring to a Signal also shown in the
+example.
+NOTE. The name of the Reception matches the name of the Signal, and the parameter of the Reception matches the
+attribute of the Signal.
+«interface»
+IAlarm
+«signal» Notify()
+«signal» Activate()
+«signal»
+Notify
+«signal»
+Activate
+Figure 10.6  Reception Notation
+10.4
+Interfaces
+10.4.1
+Summary
+Interfaces declare coherent services that are implemented by BehavioredClassifiers that implement the Interfaces via
+InterfaceRealizations.
+170
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 171 / PDF PAGE 213 =====
+
+10.4.2
+Abstract Syntax
+Interface
+InterfaceRealization
+Classifier
+Realization
+Property
+Operation
+BehavioredClassifier
+Behavior
+Reception
+ProtocolStateMachine
+*
++ interfaceRealization
+1
++ contract
+{subsets supplierDependency}
+{subsets supplier}
+*
++ interface
+*
++ redefinedInterface
+{subsets classifier}
+{subsets redefinedClassifier}
+0..1
++ interface
+*
++ nestedClassifier
+{subsets namespace, subsets
+redefinitionContext}
+{ordered, subsets redefinableElement,
+subsets ownedMember}
+0..1
++ interface
+*
++ ownedOperation
+{subsets featuringClassifier,
+subsets namespace, subsets
+redefinitionContext}
+{ordered, subsets feature, subsets
+redefinableElement, subsets
+ownedMember}
+0..1
++ interface
+*
++ ownedAttribute
+{subsets namespace,
+subsets classifier}
+{ordered, subsets attribute, subsets
+ownedMember}
+1
++ implementingClassifier
+*
++ interfaceRealization
+{subsets client, subsets owner}
+{subsets ownedElement,
+subsets clientDependency}
+0..1
++ behavioredClassifier
+0..1
++ classifierBehavior
+{redefines behavioredClassifier}
+{subsets ownedBehavior}
+0..1
++ interface
+*
++ ownedReception
+{subsets featuringClassifier,
+subsets namespace}
+{subsets feature, subsets
+ownedMember}
+0..1
++ interface
+0..1
++ protocol
+{subsets namespace}
+{subsets ownedMember}
+0..1 + behavioredClassifier
+*
++ ownedBehavior
+{subsets namespace}
+{subsets ownedMember}
+Figure 10.7  Interfaces
+10.4.3
+Semantics
+10.4.3.1
+Interfaces
+An Interface is a kind of Classifier that represents a declaration of a set of public Features and obligations that together
+constitute a coherent service. An Interface specifies a contract; any instance of a Classifier that realizes the Interface
+shall fulfill that contract. The obligations associated with an Interface are in the form of constraints (such as pre- and
+postconditions) or protocol specifications, which may impose ordering restrictions on interactions through the Interface.
+Interfaces may not be instantiated. Instead, an Interface specification is implemented or realized by a
+BehavioredClassifier, which means that the BehavioredClassifier presents a public facade that conforms to the Interface
+specification.
+NOTE. A given BehavioredClassifier may implement more than one Interface and that an Interface may be
+implemented by a number of different BehavioredClassifiers.
+Interfaces provide a way to partition and characterize groups of public Features and obligations that realizing
+BehavioredClassifiers shall possess. An Interface does not specify how it is to be implemented, but merely what needs
+to be supported by realizing BehavioredClassifiers. That is, such BehavioredClassifiers shall provide a public façade
+consisting of attributes, Operations, and externally observable Behavior that conforms to the Interface.
+NOTE. If an Interface declares an attribute, this does not necessarily mean that the realizing BehavioredClassifier will
+necessarily have such an attribute in its implementation, but only that it will appear so to external observers.
+The set of Interfaces realized by a BehavioredClassifier are its provided Interfaces, which represent the services and
+obligations that instances of that BehavioredClassifier offer to their clients. Interfaces may also be used to specify
+required Interfaces, which are specified by a Usage dependency between the BehavioredClassifier and the
+corresponding Interfaces. Required Interfaces specify services that a BehavioredClassifier needs in order to perform its
+function and fulfill its own obligations to its clients.
+Unified Modeling Language 2.5.1
+171
+===== PRINTED PAGE 172 / PDF PAGE 214 =====
+
+Properties owned by Interfaces (including Association ends) imply that the realizing BehavioredClassifier should
+maintain information corresponding to the type and multiplicity of the Property and facilitate retrieval and modification
+of that information. A Property declared on an Interface does not necessarily imply that there will be such a Property on
+a realizing BehavioredClassifier (e.g., it may be realized by equivalent get and set Operations). Interfaces may also own
+constraints that impose constraints on the Features of the implementing BehavioredClassifier.
+Interfaces may own a ProtocolStateMachine that specifies event sequences and pre/post conditions for the Operations
+and Receptions described by the Interface. A BehavioredClassifier realizing an Interface shall comply with the
+ProtocolStateMachine owned by the Interface.
+An Interface may be parameterized, bound, and used as TemplateParameters.
+An InterfaceRealization relationship between a BehavioredClassifier and an Interface implies that the
+BehavioredClassifier conforms to the contract specified by the Interface by supporting the set of Features owned by the
+Interface, and any of its parent Interfaces. For BehavioralFeatures, the implementing BehavioredClassifier will have an
+Operation or Reception for every Operation or Reception, respectively, defined by the Interface. For Properties, the
+realizing BehavioredClassifier will provide functionality that maintains the state represented by the Property. While
+such may be done by direct mapping to a Property of the realizing BehavioredClassifier, it may also be supported by the
+StateMachine of the BehavioredClassifier or by a pair of Operations that support the retrieval of the state information
+and an Operation that changes the state information.
+10.4.4
+Notation
+An Interface may be designated using the default notation for Classifier (see 9.2.4) with the keyword «interface».
+Alternatively an InterfaceRealization dependency from a BehavioredClassifier to an Interface may be shown by
+representing the Interface by a circle or ball, often also called lollipop, labeled with the name of the Interface, attached
+by a solid line to the BehavioredClassifier that realizes this Interface.
+The Usage dependency from a Classifier to an Interface is shown by representing the Interface by a half-circle or socket,
+labeled with the name of the Interface, attached by a solid line to the Classifier that requires this Interface.
+Interfaces inherited from a generalization of the BehavioredClassifier may be notated on a diagram through a lollipop.
+These Interfaces are indicated on the diagram by preceding the name of the Interface by a caret symbol. Earlier versions
+of UML permitted a forward slash preceding the name to indicate inherited Interfaces; this notation is permitted but
+discouraged.
+If a Dependency is wired from a Usage to an InterfaceRealization that are represented using a socket and a lollipop, the
+dependency arrow may be shown joining the socket to the lollipop
+10.4.5
+Examples
+The InterfaceRealization dependency from ProximitySensor to ISensor is shown using ball (lollipop) notation (see
+Figure 10.8).
+ProximitySensor
+ISensor
+Figure 10.8  ISensor is a provided Interface of ProximitySensor
+Figure 10.9 shows the lollipop notation for an inherited provided interface.
+172
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 173 / PDF PAGE 215 =====
+
+ProximitySensor
+CapacitiveSensor
+^ ISensor
+Figure 10.9  ISensor, a provided Interface of ProximitySensor, is shown as inherited by CapacitiveSensor
+The Usage dependency from TheftAlarm to ISensor is shown using socket notation (see Figure 10.10).
+TheftAlarm
+...
+Text
+Text
+Figure 10.10  ISensor is a required Interface of TheftAlarm
+Alternatively, in cases where Interfaces are represented using the rectangle notation, InterfaceRealization and Usage
+dependencies are denoted with appropriate dependency arrows (see Figure 10.11). The Classifier at the tail of the arrow
+implements the Interface at the head of the arrow or uses that Interface, respectively.
+«interface»
+ISensor
+activate ( )
+read ( )
+ProximitySensor
+TheftAlarm
+«use»
+Figure 10.11  Alternative notation for required and provided Interface
+It is often the case in practice that two or more Interfaces are mutually coupled through application-specific
+dependencies. In such situations, each Interface represents a specific role in a multi-party “protocol.” These types of
+protocol role couplings may be captured by Associations between Interfaces as shown in the example in Figure 10.12.
+This shows the specification of three Interfaces, IAlarm, ISensor, and IBuzzer. IAlarm and ISensor are shown as
+engaged in a bidirectional protocol, meaning that any implementation of ISensor must maintain the information needed
+to realize the theAlarm property, and similarly for IAlarm and theSensor. IBuzzer describes an Interface that implementers
+of IAlarm must be able to access.
+«interface»
+IAlarm
+notify ( )
+«interface»
+ISensor
+activate ( )
+read ( )
+«interface»
+IBuzzer
+volume : Integer
+start ( )
+reset ( )
+*
+1
++ theBuzzer
+1
++ theAlarm
+1
++ theSensor
+Figure 10.12  A set of collaborating Interfaces
+Unified Modeling Language 2.5.1
+173
+===== PRINTED PAGE 174 / PDF PAGE 216 =====
+
+10.5
+Classifier Descriptions
+10.5.1
+BehavioredClassifier [Abstract Class]
+10.5.1.1
+Description
+A BehavioredClassifier may have InterfaceRealizations, and owns a set of Behaviors one of which may specify the
+behavior of the BehavioredClassifier itself.
+10.5.1.2
+Diagrams
+Interfaces, Use Cases, Classes, Collaborations, Behaviors
+10.5.1.3
+Generalizations
+Classifier
+10.5.1.4
+Specializations
+Actor, UseCase, Class, Collaboration
+10.5.1.5
+Association Ends
+
+classifierBehavior : Behavior [0..1]{subsets BehavioredClassifier::ownedBehavior} (opposite
+A_classifierBehavior_behavioredClassifier::behavioredClassifier)
+A Behavior that specifies the behavior of the BehavioredClassifier itself.
+
+♦ interfaceRealization : InterfaceRealization [0..*]{subsets Element::ownedElement, subsets
+NamedElement::clientDependency} (opposite InterfaceRealization::implementingClassifier)
+The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the
+Interfaces of which the BehavioredClassifier is an implementation.
+
+♦ ownedBehavior : Behavior [0..*]{subsets Namespace::ownedMember} (opposite
+A_ownedBehavior_behavioredClassifier::behavioredClassifier)
+Behaviors owned by a BehavioredClassifier.
+10.5.1.6
+Constraints
+
+class_behavior
+If a behavior is classifier behavior, it does not have a specification.
+inv: classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
+10.5.2
+DataType [Class]
+10.5.2.1
+Description
+A DataType is a type whose instances are identified only by their value.
+10.5.2.2
+Diagrams
+DataTypes, Properties, Operations
+10.5.2.3
+Generalizations
+Classifier
+174
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 175 / PDF PAGE 217 =====
+
+10.5.2.4
+Specializations
+Enumeration, PrimitiveType
+10.5.2.5
+Association Ends
+
+♦ ownedAttribute : Property [0..*]{ordered, subsets Classifier::attribute, subsets Namespace::ownedMember}
+(opposite Property::datatype)
+The attributes owned by the DataType.
+
+♦ ownedOperation : Operation [0..*]{ordered, subsets Classifier::feature, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+(opposite Operation::datatype)
+The Operations owned by the DataType.
+10.5.3
+Enumeration [Class]
+10.5.3.1
+Description
+An Enumeration is a DataType whose values are enumerated in the model as EnumerationLiterals.
+10.5.3.2
+Diagrams
+DataTypes
+10.5.3.3
+Generalizations
+DataType
+10.5.3.4
+Association Ends
+
+♦ ownedLiteral : EnumerationLiteral [0..*]{ordered, subsets Namespace::ownedMember} (opposite
+EnumerationLiteral::enumeration)
+The ordered set of literals owned by this Enumeration.
+10.5.3.5
+Constraints
+
+immutable
+inv: ownedAttribute->forAll(isReadOnly)
+10.5.4
+EnumerationLiteral [Class]
+10.5.4.1
+Description
+An EnumerationLiteral is a user-defined data value for an Enumeration.
+10.5.4.2
+Diagrams
+DataTypes
+10.5.4.3
+Generalizations
+InstanceSpecification
+Unified Modeling Language 2.5.1
+175
+===== PRINTED PAGE 176 / PDF PAGE 218 =====
+
+10.5.4.4
+Association Ends
+
+/classifier : Enumeration [1..1]{redefines InstanceSpecification::classifier} (opposite
+A_classifier_enumerationLiteral::enumerationLiteral)
+The classifier of this EnumerationLiteral derived to be equal to its Enumeration.
+
+enumeration : Enumeration [1..1]{subsets NamedElement::namespace} (opposite Enumeration::ownedLiteral)
+The Enumeration that this EnumerationLiteral is a member of.
+10.5.4.5
+Operations
+
+classifier() : Enumeration
+Derivation of Enumeration::/classifier
+body: enumeration
+10.5.5
+Interface [Class]
+10.5.5.1
+Description
+Interfaces declare coherent services that are implemented by BehavioredClassifiers that implement the Interfaces via
+InterfaceRealizations.
+10.5.5.2
+Diagrams
+Interfaces, Encapsulated Classifiers, Components, Properties, Operations
+10.5.5.3
+Generalizations
+Classifier
+10.5.5.4
+Association Ends
+
+♦ nestedClassifier : Classifier [0..*]{ordered, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+(opposite A_nestedClassifier_interface::interface)
+References all the Classifiers that are defined (nested) within the Interface.
+
+♦ ownedAttribute : Property [0..*]{ordered, subsets Classifier::attribute, subsets Namespace::ownedMember}
+(opposite Property::interface)
+The attributes (i.e., the Properties) owned by the Interface.
+
+♦ ownedOperation : Operation [0..*]{ordered, subsets Classifier::feature, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+(opposite Operation::interface)
+The Operations owned by the Interface.
+
+♦ ownedReception : Reception [0..*]{subsets Classifier::feature, subsets Namespace::ownedMember}
+(opposite A_ownedReception_interface::interface)
+Receptions that objects providing this Interface are willing to accept.
+
+♦ protocol : ProtocolStateMachine [0..1]{subsets Namespace::ownedMember} (opposite
+A_protocol_interface::interface)
+176
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 177 / PDF PAGE 219 =====
+
+References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures
+described in the Interface.
+
+redefinedInterface : Interface [0..*]{subsets Classifier::redefinedClassifier} (opposite
+A_redefinedInterface_interface::interface)
+References all the Interfaces redefined by this Interface.
+10.5.5.5
+Constraints
+
+visibility
+The visibility of all Features owned by an Interface must be public.
+inv: feature->forAll(visibility = VisibilityKind::public)
+10.5.6
+InterfaceRealization [Class]
+10.5.6.1
+Description
+An InterfaceRealization is a specialized realization relationship between a BehavioredClassifier and an Interface. This
+relationship signifies that the realizing BehavioredClassifier conforms to the contract specified by the Interface.
+10.5.6.2
+Diagrams
+Interfaces
+10.5.6.3
+Generalizations
+Realization
+10.5.6.4
+Association Ends
+
+contract : Interface [1..1]{subsets Dependency::supplier} (opposite
+A_contract_interfaceRealization::interfaceRealization)
+References the Interface specifying the conformance contract.
+
+implementingClassifier : BehavioredClassifier [1..1]{subsets Dependency::client, subsets Element::owner}
+(opposite BehavioredClassifier::interfaceRealization)
+References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that
+realizes the Interface to which it refers.
+10.5.7
+PrimitiveType [Class]
+10.5.7.1
+Description
+A PrimitiveType defines a predefined DataType, without any substructure. A PrimitiveType may have an algebra and
+operations defined outside of UML, for example, mathematically.
+10.5.7.2
+Diagrams
+DataTypes
+10.5.7.3
+Generalizations
+DataType
+Unified Modeling Language 2.5.1
+177
+===== PRINTED PAGE 178 / PDF PAGE 220 =====
+
+10.5.8
+Reception [Class]
+10.5.8.1
+Description
+A Reception is a declaration stating that a Classifier is prepared to react to the receipt of a Signal.
+10.5.8.2
+Diagrams
+Signals, Interfaces, Classes
+10.5.8.3
+Generalizations
+BehavioralFeature
+10.5.8.4
+Association Ends
+
+signal : Signal [1..1] (opposite A_signal_reception::reception)
+The Signal that this Reception handles.
+10.5.8.5
+Constraints
+
+same_name_as_signal
+A Reception has the same name as its signal
+inv: name = signal.name
+
+same_structure_as_signal
+A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
+inv: signal.ownedAttribute->size() = ownedParameter->size() and
+Sequence{1..signal.ownedAttribute->size()}->forAll( i |
+    ownedParameter->at(i).direction = ParameterDirectionKind::_'in' and
+    ownedParameter->at(i).name = signal.ownedAttribute->at(i).name and
+    ownedParameter->at(i).type = signal.ownedAttribute->at(i).type and
+    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
+    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
+)
+10.5.9
+Signal [Class]
+10.5.9.1
+Description
+A Signal is a specification of a kind of communication between objects in which a reaction is asynchronously triggered
+in the receiver without a reply.
+10.5.9.2
+Diagrams
+Signals, Events, Invocation Actions
+10.5.9.3
+Generalizations
+Classifier
+10.5.9.4
+Association Ends
+
+♦ ownedAttribute : Property [0..*]{ordered, subsets Classifier::attribute, subsets Namespace::ownedMember}
+(opposite A_ownedAttribute_owningSignal::owningSignal)
+The attributes owned by the Signal.
+178
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 179 / PDF PAGE 221 =====
+
+10.6
+Association Descriptions
+10.6.1
+A_classifierBehavior_behavioredClassifier [Association]
+10.6.1.1
+Diagrams
+Interfaces, Behaviors
+10.6.1.2
+Generalizations
+A_ownedBehavior_behavioredClassifier
+10.6.1.3
+Owned Ends
+
+behavioredClassifier : BehavioredClassifier [0..1]{redefines
+A_ownedBehavior_behavioredClassifier::behavioredClassifier} (opposite
+BehavioredClassifier::classifierBehavior)
+10.6.2
+A_classifier_enumerationLiteral [Association]
+10.6.2.1
+Diagrams
+DataTypes
+10.6.2.2
+Generalizations
+A_classifier_instanceSpecification
+10.6.2.3
+Owned Ends
+
+enumerationLiteral : EnumerationLiteral [0..*]{redefines
+A_classifier_instanceSpecification::instanceSpecification} (opposite EnumerationLiteral::classifier)
+10.6.3
+A_contract_interfaceRealization [Association]
+10.6.3.1
+Diagrams
+Interfaces
+10.6.3.2
+Owned Ends
+
+interfaceRealization : InterfaceRealization [0..*]{subsets
+A_supplier_supplierDependency::supplierDependency} (opposite InterfaceRealization::contract)
+10.6.4
+A_interfaceRealization_implementingClassifier [Association]
+10.6.4.1
+Diagrams
+Interfaces
+10.6.4.2
+Member Ends
+
+BehavioredClassifier::interfaceRealization
+Unified Modeling Language 2.5.1
+179
+===== PRINTED PAGE 180 / PDF PAGE 222 =====
+
+
+InterfaceRealization::implementingClassifier
+10.6.5
+A_nestedClassifier_interface [Association]
+10.6.5.1
+Diagrams
+Interfaces
+10.6.5.2
+Owned Ends
+
+interface : Interface [0..1]{subsets NamedElement::namespace, subsets
+RedefinableElement::redefinitionContext} (opposite Interface::nestedClassifier)
+10.6.6
+A_ownedAttribute_datatype [Association]
+10.6.6.1
+Diagrams
+DataTypes, Properties
+10.6.6.2
+Member Ends
+
+DataType::ownedAttribute
+
+Property::datatype
+10.6.7
+A_ownedAttribute_interface [Association]
+10.6.7.1
+Diagrams
+Interfaces, Properties
+10.6.7.2
+Member Ends
+
+Interface::ownedAttribute
+
+Property::interface
+10.6.8
+A_ownedAttribute_owningSignal [Association]
+10.6.8.1
+Diagrams
+Signals
+10.6.8.2
+Owned Ends
+
+owningSignal : Signal [0..1]{subsets NamedElement::namespace, subsets A_attribute_classifier::classifier}
+(opposite Signal::ownedAttribute)
+10.6.9
+A_ownedBehavior_behavioredClassifier [Association]
+10.6.9.1
+Diagrams
+Interfaces, Behaviors
+180
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 181 / PDF PAGE 223 =====
+
+10.6.9.2
+Specializations
+A_classifierBehavior_behavioredClassifier
+10.6.9.3
+Owned Ends
+
+behavioredClassifier : BehavioredClassifier [0..1]{subsets NamedElement::namespace} (opposite
+BehavioredClassifier::ownedBehavior)
+10.6.10
+A_ownedLiteral_enumeration [Association]
+10.6.10.1
+Diagrams
+DataTypes
+10.6.10.2
+Member Ends
+
+Enumeration::ownedLiteral
+
+EnumerationLiteral::enumeration
+10.6.11
+A_ownedOperation_datatype [Association]
+10.6.11.1
+Diagrams
+DataTypes, Operations
+10.6.11.2
+Member Ends
+
+DataType::ownedOperation
+
+Operation::datatype
+10.6.12
+A_ownedOperation_interface [Association]
+10.6.12.1
+Diagrams
+Interfaces, Operations
+10.6.12.2
+Member Ends
+
+Interface::ownedOperation
+
+Operation::interface
+10.6.13
+A_ownedReception_interface [Association]
+10.6.13.1
+Diagrams
+Interfaces
+Unified Modeling Language 2.5.1
+181
+===== PRINTED PAGE 182 / PDF PAGE 224 =====
+
+10.6.13.2
+Owned Ends
+
+interface : Interface [0..1]{subsets Feature::featuringClassifier, subsets NamedElement::namespace} (opposite
+Interface::ownedReception)
+10.6.14
+A_protocol_interface [Association]
+10.6.14.1
+Diagrams
+Interfaces
+10.6.14.2
+Owned Ends
+
+interface : Interface [0..1]{subsets NamedElement::namespace} (opposite Interface::protocol)
+Specifies the namespace in which the protocol state machine is defined.
+10.6.15
+A_redefinedInterface_interface [Association]
+10.6.15.1
+Diagrams
+Interfaces
+10.6.15.2
+Owned Ends
+
+interface : Interface [0..*]{subsets A_redefinedClassifier_classifier::classifier} (opposite
+Interface::redefinedInterface)
+10.6.16
+A_signal_reception [Association]
+10.6.16.1
+Diagrams
+Signals
+10.6.16.2
+Owned Ends
+
+reception : Reception [0..*] (opposite Reception::signal)
+182
+Unified Modeling Language 2.5.1

@@ -1,0 +1,1556 @@
+{
+  "clause": "10",
+  "title": "Simple Classifiers",
+  "completed_stage": 1,
+  "source": {
+    "specification": "OMG UML 2.5.1, formal/17-12-05",
+    "pdf": "omg-uml-2.5.1-formal-17-12-05.pdf",
+    "pdf_sha256": "416b57e1933780eb48bd60fe513e031da220c28a521bdd334a366bebc78a463e",
+    "xmi": "UML-2.5.1.xmi",
+    "xmi_sha256": "e8166c91f51b8a0c015a90101b83d2249d03252e9f9a500a6511654347804f21",
+    "xmi_package": "SimpleClassifiers",
+    "printed_pages": [
+      167,
+      182
+    ],
+    "pdf_pages": [
+      209,
+      224
+    ],
+    "extracted_text": "uml-2.5.1-simple-classifiers-en.txt"
+  },
+  "counts": {
+    "headings": 129,
+    "classifiers": 9,
+    "associations": 16,
+    "figures": 12,
+    "attributes": 18,
+    "operations": 1,
+    "constraints": 5,
+    "association_ends": 32,
+    "notes": 3
+  },
+  "headings": [
+    {
+      "id": "10.1",
+      "title": "Summary",
+      "page": 167
+    },
+    {
+      "id": "10.2",
+      "title": "DataTypes",
+      "page": 167
+    },
+    {
+      "id": "10.2.1",
+      "title": "Summary",
+      "page": 167
+    },
+    {
+      "id": "10.2.2",
+      "title": "Abstract Syntax",
+      "page": 167
+    },
+    {
+      "id": "10.2.3",
+      "title": "Semantics",
+      "page": 167
+    },
+    {
+      "id": "10.2.3.1",
+      "title": "DataTypes",
+      "page": 167
+    },
+    {
+      "id": "10.2.3.2",
+      "title": "Primitive Types",
+      "page": 168
+    },
+    {
+      "id": "10.2.3.3",
+      "title": "Enumerations",
+      "page": 168
+    },
+    {
+      "id": "10.2.4",
+      "title": "Notation",
+      "page": 168
+    },
+    {
+      "id": "10.2.5",
+      "title": "Examples",
+      "page": 168
+    },
+    {
+      "id": "10.3",
+      "title": "Signals",
+      "page": 169
+    },
+    {
+      "id": "10.3.1",
+      "title": "Summary",
+      "page": 169
+    },
+    {
+      "id": "10.3.2",
+      "title": "Abstract Syntax",
+      "page": 169
+    },
+    {
+      "id": "10.3.3",
+      "title": "Semantics",
+      "page": 169
+    },
+    {
+      "id": "10.3.3.1",
+      "title": "Signals",
+      "page": 169
+    },
+    {
+      "id": "10.3.3.2",
+      "title": "Receptions",
+      "page": 169
+    },
+    {
+      "id": "10.3.4",
+      "title": "Notation",
+      "page": 170
+    },
+    {
+      "id": "10.3.5",
+      "title": "Examples",
+      "page": 170
+    },
+    {
+      "id": "10.4",
+      "title": "Interfaces",
+      "page": 170
+    },
+    {
+      "id": "10.4.1",
+      "title": "Summary",
+      "page": 170
+    },
+    {
+      "id": "10.4.2",
+      "title": "Abstract Syntax",
+      "page": 171
+    },
+    {
+      "id": "10.4.3",
+      "title": "Semantics",
+      "page": 171
+    },
+    {
+      "id": "10.4.3.1",
+      "title": "Interfaces",
+      "page": 171
+    },
+    {
+      "id": "10.4.4",
+      "title": "Notation",
+      "page": 172
+    },
+    {
+      "id": "10.4.5",
+      "title": "Examples",
+      "page": 172
+    },
+    {
+      "id": "10.5",
+      "title": "Classifier Descriptions",
+      "page": 174
+    },
+    {
+      "id": "10.5.1",
+      "title": "BehavioredClassifier [Abstract Class]",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.1",
+      "title": "Description",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.2",
+      "title": "Diagrams",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.3",
+      "title": "Generalizations",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.4",
+      "title": "Specializations",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.5",
+      "title": "Association Ends",
+      "page": 174
+    },
+    {
+      "id": "10.5.1.6",
+      "title": "Constraints",
+      "page": 174
+    },
+    {
+      "id": "10.5.2",
+      "title": "DataType [Class]",
+      "page": 174
+    },
+    {
+      "id": "10.5.2.1",
+      "title": "Description",
+      "page": 174
+    },
+    {
+      "id": "10.5.2.2",
+      "title": "Diagrams",
+      "page": 174
+    },
+    {
+      "id": "10.5.2.3",
+      "title": "Generalizations",
+      "page": 174
+    },
+    {
+      "id": "10.5.2.4",
+      "title": "Specializations",
+      "page": 175
+    },
+    {
+      "id": "10.5.2.5",
+      "title": "Association Ends",
+      "page": 175
+    },
+    {
+      "id": "10.5.3",
+      "title": "Enumeration [Class]",
+      "page": 175
+    },
+    {
+      "id": "10.5.3.1",
+      "title": "Description",
+      "page": 175
+    },
+    {
+      "id": "10.5.3.2",
+      "title": "Diagrams",
+      "page": 175
+    },
+    {
+      "id": "10.5.3.3",
+      "title": "Generalizations",
+      "page": 175
+    },
+    {
+      "id": "10.5.3.4",
+      "title": "Association Ends",
+      "page": 175
+    },
+    {
+      "id": "10.5.3.5",
+      "title": "Constraints",
+      "page": 175
+    },
+    {
+      "id": "10.5.4",
+      "title": "EnumerationLiteral [Class]",
+      "page": 175
+    },
+    {
+      "id": "10.5.4.1",
+      "title": "Description",
+      "page": 175
+    },
+    {
+      "id": "10.5.4.2",
+      "title": "Diagrams",
+      "page": 175
+    },
+    {
+      "id": "10.5.4.3",
+      "title": "Generalizations",
+      "page": 175
+    },
+    {
+      "id": "10.5.4.4",
+      "title": "Association Ends",
+      "page": 176
+    },
+    {
+      "id": "10.5.4.5",
+      "title": "Operations",
+      "page": 176
+    },
+    {
+      "id": "10.5.5",
+      "title": "Interface [Class]",
+      "page": 176
+    },
+    {
+      "id": "10.5.5.1",
+      "title": "Description",
+      "page": 176
+    },
+    {
+      "id": "10.5.5.2",
+      "title": "Diagrams",
+      "page": 176
+    },
+    {
+      "id": "10.5.5.3",
+      "title": "Generalizations",
+      "page": 176
+    },
+    {
+      "id": "10.5.5.4",
+      "title": "Association Ends",
+      "page": 176
+    },
+    {
+      "id": "10.5.5.5",
+      "title": "Constraints",
+      "page": 177
+    },
+    {
+      "id": "10.5.6",
+      "title": "InterfaceRealization [Class]",
+      "page": 177
+    },
+    {
+      "id": "10.5.6.1",
+      "title": "Description",
+      "page": 177
+    },
+    {
+      "id": "10.5.6.2",
+      "title": "Diagrams",
+      "page": 177
+    },
+    {
+      "id": "10.5.6.3",
+      "title": "Generalizations",
+      "page": 177
+    },
+    {
+      "id": "10.5.6.4",
+      "title": "Association Ends",
+      "page": 177
+    },
+    {
+      "id": "10.5.7",
+      "title": "PrimitiveType [Class]",
+      "page": 177
+    },
+    {
+      "id": "10.5.7.1",
+      "title": "Description",
+      "page": 177
+    },
+    {
+      "id": "10.5.7.2",
+      "title": "Diagrams",
+      "page": 177
+    },
+    {
+      "id": "10.5.7.3",
+      "title": "Generalizations",
+      "page": 177
+    },
+    {
+      "id": "10.5.8",
+      "title": "Reception [Class]",
+      "page": 178
+    },
+    {
+      "id": "10.5.8.1",
+      "title": "Description",
+      "page": 178
+    },
+    {
+      "id": "10.5.8.2",
+      "title": "Diagrams",
+      "page": 178
+    },
+    {
+      "id": "10.5.8.3",
+      "title": "Generalizations",
+      "page": 178
+    },
+    {
+      "id": "10.5.8.4",
+      "title": "Association Ends",
+      "page": 178
+    },
+    {
+      "id": "10.5.8.5",
+      "title": "Constraints",
+      "page": 178
+    },
+    {
+      "id": "10.5.9",
+      "title": "Signal [Class]",
+      "page": 178
+    },
+    {
+      "id": "10.5.9.1",
+      "title": "Description",
+      "page": 178
+    },
+    {
+      "id": "10.5.9.2",
+      "title": "Diagrams",
+      "page": 178
+    },
+    {
+      "id": "10.5.9.3",
+      "title": "Generalizations",
+      "page": 178
+    },
+    {
+      "id": "10.5.9.4",
+      "title": "Association Ends",
+      "page": 178
+    },
+    {
+      "id": "10.6",
+      "title": "Association Descriptions",
+      "page": 179
+    },
+    {
+      "id": "10.6.1",
+      "title": "A_classifierBehavior_behavioredClassifier [Association]",
+      "page": 179
+    },
+    {
+      "id": "10.6.1.1",
+      "title": "Diagrams",
+      "page": 179
+    },
+    {
+      "id": "10.6.1.2",
+      "title": "Generalizations",
+      "page": 179
+    },
+    {
+      "id": "10.6.1.3",
+      "title": "Owned Ends",
+      "page": 179
+    },
+    {
+      "id": "10.6.2",
+      "title": "A_classifier_enumerationLiteral [Association]",
+      "page": 179
+    },
+    {
+      "id": "10.6.2.1",
+      "title": "Diagrams",
+      "page": 179
+    },
+    {
+      "id": "10.6.2.2",
+      "title": "Generalizations",
+      "page": 179
+    },
+    {
+      "id": "10.6.2.3",
+      "title": "Owned Ends",
+      "page": 179
+    },
+    {
+      "id": "10.6.3",
+      "title": "A_contract_interfaceRealization [Association]",
+      "page": 179
+    },
+    {
+      "id": "10.6.3.1",
+      "title": "Diagrams",
+      "page": 179
+    },
+    {
+      "id": "10.6.3.2",
+      "title": "Owned Ends",
+      "page": 179
+    },
+    {
+      "id": "10.6.4",
+      "title": "A_interfaceRealization_implementingClassifier [Association]",
+      "page": 179
+    },
+    {
+      "id": "10.6.4.1",
+      "title": "Diagrams",
+      "page": 179
+    },
+    {
+      "id": "10.6.4.2",
+      "title": "Member Ends",
+      "page": 179
+    },
+    {
+      "id": "10.6.5",
+      "title": "A_nestedClassifier_interface [Association]",
+      "page": 180
+    },
+    {
+      "id": "10.6.5.1",
+      "title": "Diagrams",
+      "page": 180
+    },
+    {
+      "id": "10.6.5.2",
+      "title": "Owned Ends",
+      "page": 180
+    },
+    {
+      "id": "10.6.6",
+      "title": "A_ownedAttribute_datatype [Association]",
+      "page": 180
+    },
+    {
+      "id": "10.6.6.1",
+      "title": "Diagrams",
+      "page": 180
+    },
+    {
+      "id": "10.6.6.2",
+      "title": "Member Ends",
+      "page": 180
+    },
+    {
+      "id": "10.6.7",
+      "title": "A_ownedAttribute_interface [Association]",
+      "page": 180
+    },
+    {
+      "id": "10.6.7.1",
+      "title": "Diagrams",
+      "page": 180
+    },
+    {
+      "id": "10.6.7.2",
+      "title": "Member Ends",
+      "page": 180
+    },
+    {
+      "id": "10.6.8",
+      "title": "A_ownedAttribute_owningSignal [Association]",
+      "page": 180
+    },
+    {
+      "id": "10.6.8.1",
+      "title": "Diagrams",
+      "page": 180
+    },
+    {
+      "id": "10.6.8.2",
+      "title": "Owned Ends",
+      "page": 180
+    },
+    {
+      "id": "10.6.9",
+      "title": "A_ownedBehavior_behavioredClassifier [Association]",
+      "page": 180
+    },
+    {
+      "id": "10.6.9.1",
+      "title": "Diagrams",
+      "page": 180
+    },
+    {
+      "id": "10.6.9.2",
+      "title": "Specializations",
+      "page": 181
+    },
+    {
+      "id": "10.6.9.3",
+      "title": "Owned Ends",
+      "page": 181
+    },
+    {
+      "id": "10.6.10",
+      "title": "A_ownedLiteral_enumeration [Association]",
+      "page": 181
+    },
+    {
+      "id": "10.6.10.1",
+      "title": "Diagrams",
+      "page": 181
+    },
+    {
+      "id": "10.6.10.2",
+      "title": "Member Ends",
+      "page": 181
+    },
+    {
+      "id": "10.6.11",
+      "title": "A_ownedOperation_datatype [Association]",
+      "page": 181
+    },
+    {
+      "id": "10.6.11.1",
+      "title": "Diagrams",
+      "page": 181
+    },
+    {
+      "id": "10.6.11.2",
+      "title": "Member Ends",
+      "page": 181
+    },
+    {
+      "id": "10.6.12",
+      "title": "A_ownedOperation_interface [Association]",
+      "page": 181
+    },
+    {
+      "id": "10.6.12.1",
+      "title": "Diagrams",
+      "page": 181
+    },
+    {
+      "id": "10.6.12.2",
+      "title": "Member Ends",
+      "page": 181
+    },
+    {
+      "id": "10.6.13",
+      "title": "A_ownedReception_interface [Association]",
+      "page": 181
+    },
+    {
+      "id": "10.6.13.1",
+      "title": "Diagrams",
+      "page": 181
+    },
+    {
+      "id": "10.6.13.2",
+      "title": "Owned Ends",
+      "page": 182
+    },
+    {
+      "id": "10.6.14",
+      "title": "A_protocol_interface [Association]",
+      "page": 182
+    },
+    {
+      "id": "10.6.14.1",
+      "title": "Diagrams",
+      "page": 182
+    },
+    {
+      "id": "10.6.14.2",
+      "title": "Owned Ends",
+      "page": 182
+    },
+    {
+      "id": "10.6.15",
+      "title": "A_redefinedInterface_interface [Association]",
+      "page": 182
+    },
+    {
+      "id": "10.6.15.1",
+      "title": "Diagrams",
+      "page": 182
+    },
+    {
+      "id": "10.6.15.2",
+      "title": "Owned Ends",
+      "page": 182
+    },
+    {
+      "id": "10.6.16",
+      "title": "A_signal_reception [Association]",
+      "page": 182
+    },
+    {
+      "id": "10.6.16.1",
+      "title": "Diagrams",
+      "page": 182
+    },
+    {
+      "id": "10.6.16.2",
+      "title": "Owned Ends",
+      "page": 182
+    }
+  ],
+  "classifiers": [
+    {
+      "name": "BehavioredClassifier",
+      "section": "10.5.1",
+      "page": 174,
+      "kind": "Abstract Class",
+      "generalizations": [
+        "Classifier"
+      ],
+      "specializations": [
+        "Actor",
+        "Class",
+        "Collaboration",
+        "UseCase"
+      ],
+      "attributes": [
+        {
+          "id": "BehavioredClassifier-classifierBehavior",
+          "name": "classifierBehavior",
+          "type": "Behavior",
+          "association": "A_classifierBehavior_behavioredClassifier"
+        },
+        {
+          "id": "BehavioredClassifier-interfaceRealization",
+          "name": "interfaceRealization",
+          "type": "InterfaceRealization",
+          "association": "A_interfaceRealization_implementingClassifier"
+        },
+        {
+          "id": "BehavioredClassifier-ownedBehavior",
+          "name": "ownedBehavior",
+          "type": "Behavior",
+          "association": "A_ownedBehavior_behavioredClassifier"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "BehavioredClassifier-class_behavior",
+          "name": "class_behavior"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Use Cases",
+        "Classes",
+        "Collaborations",
+        "Behaviors"
+      ]
+    },
+    {
+      "name": "DataType",
+      "section": "10.5.2",
+      "page": 174,
+      "kind": "Class",
+      "generalizations": [
+        "Classifier"
+      ],
+      "specializations": [
+        "Enumeration",
+        "PrimitiveType"
+      ],
+      "attributes": [
+        {
+          "id": "DataType-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "association": "A_ownedAttribute_datatype"
+        },
+        {
+          "id": "DataType-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "association": "A_ownedOperation_datatype"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "diagrams": [
+        "DataTypes",
+        "Properties",
+        "Operations"
+      ]
+    },
+    {
+      "name": "Enumeration",
+      "section": "10.5.3",
+      "page": 175,
+      "kind": "Class",
+      "generalizations": [
+        "DataType"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Enumeration-ownedLiteral",
+          "name": "ownedLiteral",
+          "type": "EnumerationLiteral",
+          "association": "A_ownedLiteral_enumeration"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "Enumeration-immutable",
+          "name": "immutable"
+        }
+      ],
+      "diagrams": [
+        "DataTypes"
+      ]
+    },
+    {
+      "name": "EnumerationLiteral",
+      "section": "10.5.4",
+      "page": 175,
+      "kind": "Class",
+      "generalizations": [
+        "InstanceSpecification"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "EnumerationLiteral-classifier",
+          "name": "classifier",
+          "type": "Enumeration",
+          "association": "A_classifier_enumerationLiteral"
+        },
+        {
+          "id": "EnumerationLiteral-enumeration",
+          "name": "enumeration",
+          "type": "Enumeration",
+          "association": "A_ownedLiteral_enumeration"
+        }
+      ],
+      "operations": [
+        {
+          "id": "EnumerationLiteral-classifier.1",
+          "name": "classifier"
+        }
+      ],
+      "constraints": [],
+      "diagrams": [
+        "DataTypes"
+      ]
+    },
+    {
+      "name": "Interface",
+      "section": "10.5.5",
+      "page": 176,
+      "kind": "Class",
+      "generalizations": [
+        "Classifier"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Interface-nestedClassifier",
+          "name": "nestedClassifier",
+          "type": "Classifier",
+          "association": "A_nestedClassifier_interface"
+        },
+        {
+          "id": "Interface-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "association": "A_ownedAttribute_interface"
+        },
+        {
+          "id": "Interface-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "association": "A_ownedOperation_interface"
+        },
+        {
+          "id": "Interface-ownedReception",
+          "name": "ownedReception",
+          "type": "Reception",
+          "association": "A_ownedReception_interface"
+        },
+        {
+          "id": "Interface-protocol",
+          "name": "protocol",
+          "type": "ProtocolStateMachine",
+          "association": "A_protocol_interface"
+        },
+        {
+          "id": "Interface-redefinedInterface",
+          "name": "redefinedInterface",
+          "type": "Interface",
+          "association": "A_redefinedInterface_interface"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "Interface-visibility",
+          "name": "visibility"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Encapsulated Classifiers",
+        "Components",
+        "Properties",
+        "Operations"
+      ]
+    },
+    {
+      "name": "InterfaceRealization",
+      "section": "10.5.6",
+      "page": 177,
+      "kind": "Class",
+      "generalizations": [
+        "Realization"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "InterfaceRealization-contract",
+          "name": "contract",
+          "type": "Interface",
+          "association": "A_contract_interfaceRealization"
+        },
+        {
+          "id": "InterfaceRealization-implementingClassifier",
+          "name": "implementingClassifier",
+          "type": "BehavioredClassifier",
+          "association": "A_interfaceRealization_implementingClassifier"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "PrimitiveType",
+      "section": "10.5.7",
+      "page": 177,
+      "kind": "Class",
+      "generalizations": [
+        "DataType"
+      ],
+      "specializations": [],
+      "attributes": [],
+      "operations": [],
+      "constraints": [],
+      "diagrams": [
+        "DataTypes"
+      ]
+    },
+    {
+      "name": "Reception",
+      "section": "10.5.8",
+      "page": 178,
+      "kind": "Class",
+      "generalizations": [
+        "BehavioralFeature"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Reception-signal",
+          "name": "signal",
+          "type": "Signal",
+          "association": "A_signal_reception"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "Reception-same_name_as_signal",
+          "name": "same_name_as_signal"
+        },
+        {
+          "id": "Reception-same_structure_as_signal",
+          "name": "same_structure_as_signal"
+        }
+      ],
+      "diagrams": [
+        "Signals",
+        "Interfaces",
+        "Classes"
+      ]
+    },
+    {
+      "name": "Signal",
+      "section": "10.5.9",
+      "page": 178,
+      "kind": "Class",
+      "generalizations": [
+        "Classifier"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Signal-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "association": "A_ownedAttribute_owningSignal"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "diagrams": [
+        "Signals",
+        "Events",
+        "Invocation Actions"
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "name": "A_classifierBehavior_behavioredClassifier",
+      "section": "10.6.1",
+      "page": 179,
+      "generalizations": [
+        "A_ownedBehavior_behavioredClassifier"
+      ],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "BehavioredClassifier-classifierBehavior",
+          "name": "classifierBehavior",
+          "type": "Behavior",
+          "owner": "BehavioredClassifier"
+        },
+        {
+          "id": "A_classifierBehavior_behavioredClassifier-behavioredClassifier",
+          "name": "behavioredClassifier",
+          "type": "BehavioredClassifier",
+          "owner": "A_classifierBehavior_behavioredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Behaviors"
+      ]
+    },
+    {
+      "name": "A_classifier_enumerationLiteral",
+      "section": "10.6.2",
+      "page": 179,
+      "generalizations": [
+        "A_classifier_instanceSpecification"
+      ],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "EnumerationLiteral-classifier",
+          "name": "classifier",
+          "type": "Enumeration",
+          "owner": "EnumerationLiteral"
+        },
+        {
+          "id": "A_classifier_enumerationLiteral-enumerationLiteral",
+          "name": "enumerationLiteral",
+          "type": "EnumerationLiteral",
+          "owner": "A_classifier_enumerationLiteral"
+        }
+      ],
+      "diagrams": [
+        "DataTypes"
+      ]
+    },
+    {
+      "name": "A_contract_interfaceRealization",
+      "section": "10.6.3",
+      "page": 179,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "InterfaceRealization-contract",
+          "name": "contract",
+          "type": "Interface",
+          "owner": "InterfaceRealization"
+        },
+        {
+          "id": "A_contract_interfaceRealization-interfaceRealization",
+          "name": "interfaceRealization",
+          "type": "InterfaceRealization",
+          "owner": "A_contract_interfaceRealization"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_interfaceRealization_implementingClassifier",
+      "section": "10.6.4",
+      "page": 179,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "BehavioredClassifier-interfaceRealization",
+          "name": "interfaceRealization",
+          "type": "InterfaceRealization",
+          "owner": "BehavioredClassifier"
+        },
+        {
+          "id": "InterfaceRealization-implementingClassifier",
+          "name": "implementingClassifier",
+          "type": "BehavioredClassifier",
+          "owner": "InterfaceRealization"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_nestedClassifier_interface",
+      "section": "10.6.5",
+      "page": 180,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-nestedClassifier",
+          "name": "nestedClassifier",
+          "type": "Classifier",
+          "owner": "Interface"
+        },
+        {
+          "id": "A_nestedClassifier_interface-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "A_nestedClassifier_interface"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_ownedAttribute_datatype",
+      "section": "10.6.6",
+      "page": 180,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "DataType-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "owner": "DataType"
+        },
+        {
+          "id": "Property-datatype",
+          "name": "datatype",
+          "type": "DataType",
+          "owner": "Property"
+        }
+      ],
+      "diagrams": [
+        "DataTypes",
+        "Properties"
+      ]
+    },
+    {
+      "name": "A_ownedAttribute_interface",
+      "section": "10.6.7",
+      "page": 180,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "owner": "Interface"
+        },
+        {
+          "id": "Property-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "Property"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Properties"
+      ]
+    },
+    {
+      "name": "A_ownedAttribute_owningSignal",
+      "section": "10.6.8",
+      "page": 180,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Signal-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "owner": "Signal"
+        },
+        {
+          "id": "A_ownedAttribute_owningSignal-owningSignal",
+          "name": "owningSignal",
+          "type": "Signal",
+          "owner": "A_ownedAttribute_owningSignal"
+        }
+      ],
+      "diagrams": [
+        "Signals"
+      ]
+    },
+    {
+      "name": "A_ownedBehavior_behavioredClassifier",
+      "section": "10.6.9",
+      "page": 180,
+      "generalizations": [],
+      "specializations": [
+        "A_classifierBehavior_behavioredClassifier"
+      ],
+      "ends": [
+        {
+          "id": "BehavioredClassifier-ownedBehavior",
+          "name": "ownedBehavior",
+          "type": "Behavior",
+          "owner": "BehavioredClassifier"
+        },
+        {
+          "id": "A_ownedBehavior_behavioredClassifier-behavioredClassifier",
+          "name": "behavioredClassifier",
+          "type": "BehavioredClassifier",
+          "owner": "A_ownedBehavior_behavioredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Behaviors"
+      ]
+    },
+    {
+      "name": "A_ownedLiteral_enumeration",
+      "section": "10.6.10",
+      "page": 181,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Enumeration-ownedLiteral",
+          "name": "ownedLiteral",
+          "type": "EnumerationLiteral",
+          "owner": "Enumeration"
+        },
+        {
+          "id": "EnumerationLiteral-enumeration",
+          "name": "enumeration",
+          "type": "Enumeration",
+          "owner": "EnumerationLiteral"
+        }
+      ],
+      "diagrams": [
+        "DataTypes"
+      ]
+    },
+    {
+      "name": "A_ownedOperation_datatype",
+      "section": "10.6.11",
+      "page": 181,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "DataType-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "owner": "DataType"
+        },
+        {
+          "id": "Operation-datatype",
+          "name": "datatype",
+          "type": "DataType",
+          "owner": "Operation"
+        }
+      ],
+      "diagrams": [
+        "DataTypes",
+        "Operations"
+      ]
+    },
+    {
+      "name": "A_ownedOperation_interface",
+      "section": "10.6.12",
+      "page": 181,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "owner": "Interface"
+        },
+        {
+          "id": "Operation-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "Operation"
+        }
+      ],
+      "diagrams": [
+        "Interfaces",
+        "Operations"
+      ]
+    },
+    {
+      "name": "A_ownedReception_interface",
+      "section": "10.6.13",
+      "page": 181,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-ownedReception",
+          "name": "ownedReception",
+          "type": "Reception",
+          "owner": "Interface"
+        },
+        {
+          "id": "A_ownedReception_interface-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "A_ownedReception_interface"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_protocol_interface",
+      "section": "10.6.14",
+      "page": 182,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-protocol",
+          "name": "protocol",
+          "type": "ProtocolStateMachine",
+          "owner": "Interface"
+        },
+        {
+          "id": "A_protocol_interface-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "A_protocol_interface"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_redefinedInterface_interface",
+      "section": "10.6.15",
+      "page": 182,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Interface-redefinedInterface",
+          "name": "redefinedInterface",
+          "type": "Interface",
+          "owner": "Interface"
+        },
+        {
+          "id": "A_redefinedInterface_interface-interface",
+          "name": "interface",
+          "type": "Interface",
+          "owner": "A_redefinedInterface_interface"
+        }
+      ],
+      "diagrams": [
+        "Interfaces"
+      ]
+    },
+    {
+      "name": "A_signal_reception",
+      "section": "10.6.16",
+      "page": 182,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Reception-signal",
+          "name": "signal",
+          "type": "Signal",
+          "owner": "Reception"
+        },
+        {
+          "id": "A_signal_reception-reception",
+          "name": "reception",
+          "type": "Reception",
+          "owner": "A_signal_reception"
+        }
+      ],
+      "diagrams": [
+        "Signals"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "10.1",
+      "title": "DataTypes",
+      "page": 167,
+      "section": "10.2.2"
+    },
+    {
+      "id": "10.2",
+      "title": "PrimitiveType Notation",
+      "page": 168,
+      "section": "10.2.5"
+    },
+    {
+      "id": "10.3",
+      "title": "DataType Notation",
+      "page": 168,
+      "section": "10.2.5"
+    },
+    {
+      "id": "10.4",
+      "title": "Enumeration Notation",
+      "page": 169,
+      "section": "10.2.5"
+    },
+    {
+      "id": "10.5",
+      "title": "Signals",
+      "page": 169,
+      "section": "10.3.2"
+    },
+    {
+      "id": "10.6",
+      "title": "Reception Notation",
+      "page": 170,
+      "section": "10.3.5"
+    },
+    {
+      "id": "10.7",
+      "title": "Interfaces",
+      "page": 171,
+      "section": "10.4.2"
+    },
+    {
+      "id": "10.8",
+      "title": "ISensor is a provided Interface of ProximitySensor",
+      "page": 172,
+      "section": "10.4.5"
+    },
+    {
+      "id": "10.9",
+      "title": "ISensor, a provided Interface of ProximitySensor, is shown as inherited by CapacitiveSensor",
+      "page": 173,
+      "section": "10.4.5"
+    },
+    {
+      "id": "10.10",
+      "title": "ISensor is a required Interface of TheftAlarm",
+      "page": 173,
+      "section": "10.4.5"
+    },
+    {
+      "id": "10.11",
+      "title": "Alternative notation for required and provided Interface",
+      "page": 173,
+      "section": "10.4.5"
+    },
+    {
+      "id": "10.12",
+      "title": "A set of collaborating Interfaces",
+      "page": 173,
+      "section": "10.4.5"
+    }
+  ],
+  "external_classifiers": {
+    "already_in_handbook": [
+      "BehavioralFeature",
+      "Classifier",
+      "InstanceSpecification",
+      "Operation",
+      "Property",
+      "Realization"
+    ],
+    "require_future_clauses": [
+      "Actor",
+      "Behavior",
+      "Class",
+      "Collaboration",
+      "ProtocolStateMachine",
+      "UseCase"
+    ]
+  },
+  "planned_integration": {
+    "new_routes": 43,
+    "routes": [
+      "#/section/10-1",
+      "#/section/10-2",
+      "#/section/10-3",
+      "#/section/10-4",
+      "#/section/10-5",
+      "#/section/10-6",
+      "#/classifier/behavioredclassifier",
+      "#/classifier/datatype",
+      "#/classifier/enumeration",
+      "#/classifier/enumerationliteral",
+      "#/classifier/interface",
+      "#/classifier/interfacerealization",
+      "#/classifier/primitivetype",
+      "#/classifier/reception",
+      "#/classifier/signal",
+      "#/association/a-classifierbehavior-behavioredclassifier",
+      "#/association/a-classifier-enumerationliteral",
+      "#/association/a-contract-interfacerealization",
+      "#/association/a-interfacerealization-implementingclassifier",
+      "#/association/a-nestedclassifier-interface",
+      "#/association/a-ownedattribute-datatype",
+      "#/association/a-ownedattribute-interface",
+      "#/association/a-ownedattribute-owningsignal",
+      "#/association/a-ownedbehavior-behavioredclassifier",
+      "#/association/a-ownedliteral-enumeration",
+      "#/association/a-ownedoperation-datatype",
+      "#/association/a-ownedoperation-interface",
+      "#/association/a-ownedreception-interface",
+      "#/association/a-protocol-interface",
+      "#/association/a-redefinedinterface-interface",
+      "#/association/a-signal-reception",
+      "#/diagram/10-1",
+      "#/diagram/10-2",
+      "#/diagram/10-3",
+      "#/diagram/10-4",
+      "#/diagram/10-5",
+      "#/diagram/10-6",
+      "#/diagram/10-7",
+      "#/diagram/10-8",
+      "#/diagram/10-9",
+      "#/diagram/10-10",
+      "#/diagram/10-11",
+      "#/diagram/10-12"
+    ],
+    "new_source_files": [
+      "site/data/simple-classifiers.js",
+      "site/data/content/sections-10.js",
+      "scripts/generate_simple_classifiers_svg.py"
+    ],
+    "generated_files": [
+      "site/data/pages/sections-10.js",
+      "site/data/pages/classifiers-10.js",
+      "site/data/pages/associations-10.js",
+      "site/data/pages/diagrams-10.js",
+      "site/data/xmi/<Classifier>.js (9 new fragments)",
+      "site/assets/diagrams/figure-10-*.png (12 files)",
+      "site/assets/diagrams/figure-10-*.svg (12 files)"
+    ],
+    "existing_files_to_extend": [
+      "site/index.html",
+      "scripts/handbook_data.py",
+      "scripts/sync_xmi_properties.py",
+      "scripts/build_site.py",
+      "scripts/check_spec_completeness.py",
+      "scripts/render_common_structure_diagrams.py",
+      "scripts/validate_site.py",
+      "AGENTS.md"
+    ],
+    "batching": "The clause fits one task per remaining stage; no subdivision is required."
+  }
+}

@@ -4,6 +4,11 @@ Purpose: Load shared clause metadata and resolve handbook source files.
 Interface: from section_config import load_sections, section_settings, data_files
 Goal: Keep clause-specific paths, catalogs and generator settings out of individual tools.
 Requires: Python 3 standard library and scripts/sections.json.
+Usage:
+  Import this module from other scripts in scripts/; it is not a standalone command.
+  from section_config import section_settings
+  settings = section_settings("9")
+  Edit scripts/sections.json to add a clause or change its configured paths and generator.
 """
 
 import json

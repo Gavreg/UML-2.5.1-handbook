@@ -4,6 +4,11 @@ Purpose: Load the handbook's JavaScript data files without executing JavaScript.
 Interface: from handbook_data import load_handbook, slug, base_routes
 Goal: Give Python generators and validators one typed, deterministic view of the curated data.
 Requires: Python 3 standard library.
+Usage:
+  Import this module from other scripts in scripts/; it is not a standalone command.
+  from handbook_data import load_handbook
+  data, xmi, content = load_handbook()
+  Use load_pages() for generated pages and base_routes(data) for permanent hash routes.
 """
 
 import json

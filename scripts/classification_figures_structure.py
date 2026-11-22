@@ -5,6 +5,11 @@ Interface: import classification_figures_structure as cfs; svg = cfs.BUILDERS["9
 Goal: Recreate the official metamodel diagrams as clickable vector figures with tooltips, preserving OMG notation and semantics verified against site/docs/UML-2.5.1.xmi.
 Sources: site/docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF (figures 9.14 and 9.27).
 Requires: Python 3 standard library and the helpers from scripts/generate_common_structure_svg.py.
+Usage:
+  Run from the repository root to render only figures 9.14 and 9.27 during development.
+  python scripts/classification_figures_structure.py
+  python scripts/classification_figures_structure.py --output-dir PATH
+  Output defaults to .tmp-pages; use generate_classification_svg.py for the full Clause 9 set.
 """
 
 from argparse import ArgumentParser

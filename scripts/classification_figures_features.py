@@ -5,6 +5,11 @@ Interface: python scripts/classification_figures_features.py [--output-dir PATH]
 Goal: Preserve OMG semantics and notation with linked classes, associations and clear labels.
 Sources: site/docs/UML-2.5.1.xmi and the official UML 2.5.1 PDF, figures 9.9, 9.10 and 9.13.
 Requires: Python 3 standard library and the shared SVG helpers.
+Usage:
+  Run from the repository root to render only figures 9.9, 9.10 and 9.13 during development.
+  python scripts/classification_figures_features.py
+  python scripts/classification_figures_features.py --output-dir PATH
+  Output defaults to .tmp-pages; use generate_classification_svg.py for the full Clause 9 set.
 """
 
 from argparse import ArgumentParser

@@ -4,6 +4,11 @@ Purpose: Extract a normative UML clause and build its stage-1 source inventory.
 Interface: python scripts/prepare_section.py --clause 10 [--check]
 Goal: Preserve the exact clause text and reconcile its headings, objects and figures with the OMG XMI before translation.
 Requires: Python 3 and PyMuPDF; the official PDF and XMI in site/docs.
+Usage:
+  Configure the clause in scripts/sections.json, then run from the repository root.
+  python scripts/prepare_section.py --clause 10           write stage-1 text and inventory
+  python scripts/prepare_section.py --clause 10 --check   verify them without changing files
+  Review the inventory before proceeding to stage 2; this stage does not translate content.
 """
 
 from argparse import ArgumentParser

@@ -5,6 +5,11 @@ Interface: import classification_figures_layout as layout; layout.horizontal_ass
 Goal: Keep association labels near their ends with consistent clearances and 16 px line spacing.
 Sources: AGENTS.md diagram rules and scripts/check_svg_overlaps.py.
 Requires: Python 3 standard library and scripts/generate_common_structure_svg.py.
+Usage:
+  Import these helpers from Clause 9 figure builders; this module is not a standalone command.
+  from classification_figures_layout import horizontal_association
+  horizontal_association(svg, name, x1, x2, y, start, end)
+  Pass association-end tuples in the form (owner, property, label, additional_labels).
 """
 
 from generate_common_structure_svg import association

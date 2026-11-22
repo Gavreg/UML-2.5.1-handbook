@@ -4,6 +4,11 @@ Purpose: Create non-destructive stage-2 JavaScript data and content skeletons fr
 Interface: python scripts/scaffold_section.py --clause 10 [--check]
 Goal: Automate repetitive identifiers, routes, hierarchy and figure links while leaving Russian prose to the editor.
 Requires: Python 3 standard library; run scripts/prepare_section.py first.
+Usage:
+  Run from the repository root after reviewing the stage-1 inventory.
+  python scripts/scaffold_section.py --clause 10           create missing stage-2 skeletons
+  python scripts/scaffold_section.py --clause 10 --check   compare skeletons without writing
+  Existing files are never overwritten; fill the empty Russian descriptions manually next.
 """
 
 from argparse import ArgumentParser

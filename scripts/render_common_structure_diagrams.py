@@ -5,6 +5,11 @@ Interface: python scripts/render_common_structure_diagrams.py [--clause N] [--pd
 Goal: Preserve the original OMG diagram artwork while making it available to the offline handbook.
 Source: OMG Unified Modeling Language 2.5.1, formal/17-12-05, printed pages 21-40, 69-78 and 99-129.
 Requires: Python 3 and PyMuPDF.
+Usage:
+  Run from the repository root to refresh reference PNGs from the official PDF.
+  python scripts/render_common_structure_diagrams.py --clause 9
+  python scripts/render_common_structure_diagrams.py --pdf PATH --output-dir PATH
+  Without --clause all configured figures are rendered; output defaults to site/assets/diagrams.
 """
 
 from argparse import ArgumentParser

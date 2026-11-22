@@ -4,6 +4,11 @@ Purpose: Synchronize the offline script manifest in site/index.html with existin
 Interface: from site_manifest import expected_index, write_index
 Goal: Add new clause resources without manual, order-sensitive HTML edits.
 Requires: Python 3 standard library and scripts/sections.json.
+Usage:
+  Import this module from generators; it is not a standalone command.
+  from site_manifest import write_index
+  write_index()
+  Call write_index() after adding or removing data fragments; expected_index() only computes HTML.
 """
 
 from pathlib import Path

@@ -4,6 +4,11 @@ Purpose: Check SVG geometry entirely in Python and report overlapping or misplac
 Interface: python scripts/check_svg_overlaps.py [SVG ...]
 Goal: Detect text collisions, insufficient clearances and invalid line or marker connections without a browser.
 Requires: Python 3 and Pillow; Arial is used when available, with DejaVu Sans as a metrics fallback.
+Usage:
+  Run from the repository root; without arguments all handbook SVG figures are checked.
+  python scripts/check_svg_overlaps.py
+  python scripts/check_svg_overlaps.py site/assets/diagrams/figure-9-1.svg
+  Pass one or more SVG paths to narrow the check; a nonzero exit code reports geometry errors.
 """
 
 from argparse import ArgumentParser

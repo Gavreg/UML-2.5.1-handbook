@@ -12,6 +12,12 @@ Sources: site/docs/omg-uml-2.5.1-formal-17-12-05.pdf (PDF pages 103, 106-107, 11
          .tmp-pages/classification-103.png, -106.png, -107.png, -115.png, -116.png, -129.png,
          site/docs/omg-uml-2.5.1-formal-17-12-05.txt.
 Requires: Python 3 standard library and scripts/generate_common_structure_svg.py.
+Usage:
+  Run from the repository root to render or verify only this module's example figures.
+  python scripts/classification_figures_examples.py
+  python scripts/classification_figures_examples.py --check
+  python scripts/classification_figures_examples.py --output-dir PATH
+  Output defaults to site/assets/diagrams; --check never rewrites files.
 """
 
 from argparse import ArgumentParser

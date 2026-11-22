@@ -10,6 +10,11 @@ Goal: Preserve the OMG notation and layout of the original figures while adding 
 Sources: site/docs/omg-uml-2.5.1-formal-17-12-05.pdf (pp. 118-124, Clause 9.7.4-9.7.5) and
          the reference renders .tmp-pages/classification-120.png ... classification-126.png.
 Requires: Python 3 standard library and scripts/generate_common_structure_svg.py.
+Usage:
+  Run from the repository root to render figures 9.15-9.26 in memory and report success.
+  python scripts/classification_figures_generalizations.py
+  python scripts/classification_figures_generalizations.py --output-dir PATH
+  Files are written only when --output-dir is supplied; use the shared generator for site output.
 """
 
 from argparse import ArgumentParser

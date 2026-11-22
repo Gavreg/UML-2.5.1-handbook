@@ -5,6 +5,12 @@ Interface: python scripts/generate_classification_svg.py [--clause N] [--output-
 Goal: Preserve OMG semantics and notation while adding local links, tooltips and consistent geometry.
 Sources: site/docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
 Requires: Python 3 standard library.
+Usage:
+  Run from the repository root after changing a Clause 9 figure builder or its source data.
+  python scripts/generate_classification_svg.py                 write all Clause 9 SVG figures
+  python scripts/generate_classification_svg.py --clause 9      select the configured clause
+  python scripts/generate_classification_svg.py --check         verify output without rewriting it
+  Use --output-dir PATH for a separate destination instead of site/assets/diagrams.
 """
 
 from argparse import ArgumentParser

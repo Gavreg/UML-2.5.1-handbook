@@ -4,6 +4,12 @@ Purpose: Generate classifier and association properties from the normative UML 2
 Interface: python scripts/sync_xmi_properties.py [--clause N] [--check]
 Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI for every clause configured in scripts/sections.json.
 Requires: Python 3; site/docs/UML-2.5.1.xmi, scripts/section_config.py with scripts/sections.json and the clause data files listed there.
+Usage:
+  Run from the repository root after stage-2 data is available or the XMI/translations change.
+  python scripts/sync_xmi_properties.py                 regenerate XMI data for all clauses
+  python scripts/sync_xmi_properties.py --clause 9      update only Clause 9, preserving others
+  python scripts/sync_xmi_properties.py --check         detect stale output without changing files
+  Build the site afterwards so pages include the regenerated properties.
 """
 
 from argparse import ArgumentParser

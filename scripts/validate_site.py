@@ -4,6 +4,12 @@ Purpose: Validate generated offline UML handbook pages, Python SVG geometry and 
 Interface: python scripts/validate_site.py [--clause N] [--browser PATH] [--static-only]
 Goal: Detect stale generated data, missing content, invalid SVG geometry, broken links and browser JavaScript errors.
 Requires: Python 3, Pillow; Chrome or Edge only for final browser rendering checks.
+Usage:
+  Run from the repository root after generation; validation itself does not rewrite site data.
+  python scripts/validate_site.py                       run static and file:// browser checks
+  python scripts/validate_site.py --clause 9            limit checks to Clause 9 and shared pages
+  python scripts/validate_site.py --static-only         skip browser checks
+  Use --browser PATH when Chrome or Edge is not installed in a standard location.
 """
 
 from argparse import ArgumentParser

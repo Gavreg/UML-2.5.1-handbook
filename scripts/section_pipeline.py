@@ -4,6 +4,12 @@ Purpose: Run one deterministic stage of a configured UML clause without manual c
 Interface: python scripts/section_pipeline.py --clause 10 --stage 1 [--check] [--static-only]
 Goal: Give the editor a short result or a focused failure log; never advance to another stage implicitly.
 Requires: Python 3 standard library, scripts/sections.json and the selected stage's tool dependencies.
+Usage:
+  Run from the repository root; every invocation executes exactly one explicitly selected stage.
+  python scripts/section_pipeline.py --clause 10 --stage 1
+  python scripts/section_pipeline.py --clause 10 --stage 1 --check
+  python scripts/section_pipeline.py --clause 9 --stage 6 --static-only
+  Use --check for non-writing verification at stages 1-5 and --static-only to skip browsers at stage 6.
 """
 
 from argparse import ArgumentParser

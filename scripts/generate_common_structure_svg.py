@@ -5,6 +5,12 @@ Interface: python scripts/generate_common_structure_svg.py [--clause N] [--outpu
 Goal: Preserve OMG semantics and notation while adding local links, tooltips and consistent geometry.
 Sources: site/docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
 Requires: Python 3 standard library.
+Usage:
+  Run from the repository root after changing diagram code or handbook data for Clauses 7-8.
+  python scripts/generate_common_structure_svg.py                 write all supported SVG figures
+  python scripts/generate_common_structure_svg.py --clause 8      write only Clause 8 figures
+  python scripts/generate_common_structure_svg.py --check         verify output without rewriting it
+  Use --output-dir PATH for a separate destination instead of site/assets/diagrams.
 """
 
 from argparse import ArgumentParser

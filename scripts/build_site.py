@@ -4,6 +4,11 @@ Purpose: Build every handbook page, hash route, navigation block and search reco
 Interface: python scripts/build_site.py [--clause N] [--check]
 Goal: Keep JavaScript limited to browser interaction while generating deterministic offline page content.
 Requires: Python 3 standard library, scripts/sections.json and existing clause data files.
+Usage:
+  Run from the repository root after editing handbook data or Russian content.
+  python scripts/build_site.py                regenerate all pages and the script manifest
+  python scripts/build_site.py --clause 9     regenerate only Clause 9 and shared base data
+  python scripts/build_site.py --check        fail on stale output without changing files
 """
 
 from argparse import ArgumentParser

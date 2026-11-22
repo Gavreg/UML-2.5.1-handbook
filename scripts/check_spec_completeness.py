@@ -4,6 +4,12 @@ Purpose: Compare integrated clauses against the official UML 2.5.1 sources and c
 Interface: python scripts/check_spec_completeness.py [--clause N ...]
 Goal: Detect missing sections, classifiers, associations, figures, OCL expressions or dropped translated strings.
 Requires: Python 3 standard library; run scripts/build_site.py first. Clause sources, catalogs and titles come from scripts/sections.json via section_config.
+Usage:
+  Run from the repository root after building the pages being checked.
+  python scripts/check_spec_completeness.py                    check all integrated clauses
+  python scripts/check_spec_completeness.py --clause 9         check only Clause 9
+  python scripts/check_spec_completeness.py --clause 8 --clause 9
+  Repeat --clause to combine clauses; this script is read-only and has no --check mode.
 """
 
 from argparse import ArgumentParser

@@ -1,9 +1,9 @@
 """
 Name: build_site.py
 Purpose: Build every handbook page, hash route, navigation block and search record in Python.
-Interface: python scripts/build_site.py [--check]
+Interface: python scripts/build_site.py [--clause N] [--check]
 Goal: Keep JavaScript limited to browser interaction while generating deterministic offline page content.
-Requires: Python 3 standard library and the existing site/data/common-structure*.js and classification.js data files.
+Requires: Python 3 standard library, scripts/sections.json and existing clause data files.
 """
 
 from argparse import ArgumentParser
@@ -12,15 +12,11 @@ import json
 import re
 
 from handbook_data import ROOT, SITE, base_routes, load_handbook, slug
+from section_config import catalog_sections, load_sections
+from site_manifest import INDEX, expected_index, write_index
 
 
 PAGES_DIR = SITE / "data" / "pages"
-FRAGMENT_NAMES = [
-    "sections-7", "sections-8", "sections-9",
-    "classifiers-7", "classifiers-8", "classifiers-9", "classifiers-external",
-    "associations-7", "associations-8", "associations-9",
-    "diagrams-7", "diagrams-8", "diagrams-9",
-]
 
 OUTPUT = SITE / "data" / "common-structure-pages.js"
 
@@ -29,39 +25,15 @@ KIND_LABELS = {
     "Abstract Class": "Абстрактный класс",
     "Enumeration": "Перечисление",
 }
-DIAGRAM_BY_NAME = {
-    "Root": "7.1",
-    "Templates": "7.3",
-    "Template Bindings": "7.4",
-    "Namespaces": "7.5",
-    "Types": "7.10",
-    "Constraints": "7.13",
-    "Dependencies": "7.17",
-    "Literals": "8.1",
-    "Expressions": "8.2",
-    "Time": "8.3",
-    "Intervals": "8.4",
-    "Classifiers": "9.1",
-    "Classifier Templates": "9.4",
-    "Features": "9.9",
-    "Properties": "9.10",
-    "Operations": "9.13",
-    "Generalization Sets": "9.14",
-    "Instances": "9.27",
-}
 CLAUSES = {
-    "7": {"label": "7 Common Structure", "title": "Общая структура", "en": "Common Structure"},
-    "8": {"label": "8 Values", "title": "Значения", "en": "Values"},
-    "9": {"label": "9 Classification", "title": "Классификация", "en": "Classification"},
+    clause: {
+        "label": f"{clause} {settings['title']}",
+        "title": settings["title_ru"],
+        "en": settings["title"],
+    }
+    for clause, settings in load_sections().items()
 }
-CATALOG_SECTIONS = {
-    "7.8": ("classifier", "Классификаторы раздела"),
-    "8.6": ("classifier", "Классификаторы раздела"),
-    "9.9": ("classifier", "Классификаторы раздела"),
-    "7.9": ("association", "Ассоциации раздела"),
-    "8.7": ("association", "Ассоциации раздела"),
-    "9.10": ("association", "Ассоциации раздела"),
-}
+CATALOG_SECTIONS = catalog_sections()
 CATALOG_TITLES = {"classifier": "Классификаторы", "association": "Ассоциации"}
 
 
@@ -77,6 +49,19 @@ class HandbookRenderer:
         self.classifiers = {item["name"]: item for item in data["classifiers"]}
         self.associations = {item["name"]: item for item in data["associations"]}
         self.diagrams = {item["id"]: item for item in data["diagrams"]}
+        self.diagram_by_name = {}
+        for diagram in data["diagrams"]:
+            for name in (diagram.get("name"), diagram.get("en")):
+                if name:
+                    self.diagram_by_name.setdefault(name.casefold(), diagram["id"])
+        for settings in load_sections().values():
+            for name, figure in settings.get("diagram_aliases", {}).items():
+                self.diagram_by_name[name.casefold()] = figure
+        self.clauses = {
+            clause: metadata
+            for clause, metadata in CLAUSES.items()
+            if any(section["id"].startswith(clause + ".") for section in data["sections"])
+        }
         names = sorted([*self.classifiers, *self.associations], key=len, reverse=True)
         self.metamodel_pattern = re.compile(
             r"(^|[^A-Za-z0-9_])(" + "|".join(re.escape(name) for name in names) + r")(?![A-Za-z0-9_])"
@@ -228,7 +213,10 @@ class HandbookRenderer:
         return result
 
     def association_figures(self, item):
-        return [DIAGRAM_BY_NAME[name] for name in item["diagrams"] if name in DIAGRAM_BY_NAME]
+        return [
+            self.diagram_by_name[name.casefold()]
+            for name in item["diagrams"] if name.casefold() in self.diagram_by_name
+        ]
 
     def subset_diagram_link(self, reference, name):
         owner = reference.get("owner") or {}
@@ -348,9 +336,21 @@ class HandbookRenderer:
             return few
         return many
 
+    def clause_coverage(self):
+        items = [f'{clause} «{metadata["en"]}»' for clause, metadata in self.clauses.items()]
+        if len(items) < 2:
+            return "".join(items)
+        return ", ".join(items[:-1]) + " и " + items[-1]
+
+    def clause_range(self):
+        numbers = [int(clause) for clause in self.clauses]
+        if numbers == list(range(numbers[0], numbers[-1] + 1)):
+            return f"{numbers[0]}–{numbers[-1]}"
+        return ", ".join(map(str, numbers))
+
     def render_home(self):
         groups = []
-        for clause_id, clause in CLAUSES.items():
+        for clause_id, clause in self.clauses.items():
             narrative = [
                 section for section in self.data["sections"]
                 if section["id"].startswith(clause_id + ".") and section["id"] not in CATALOG_SECTIONS
@@ -386,12 +386,12 @@ class HandbookRenderer:
         diagrams_count = len(self.data["diagrams"])
         return f'''<p class="eyebrow">OMG UML 2.5.1 · formal/17-12-05</p>
           <h1>Метамодель UML.<br>От базовых понятий — к деталям.</h1>
-          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает разделы 7 «Common Structure», 8 «Values» и 9 «Classification».</p>
+          <p class="lead">Русскоязычный интерактивный справочник по официальной спецификации. Сейчас охватывает разделы {self.clause_coverage()}.</p>
           <div class="meta-row"><span class="meta-tag">Онлайн и офлайн</span><span class="meta-tag">Без внешних зависимостей</span><span class="meta-tag">Исходная нумерация OMG</span></div>
           <div class="stats" aria-label="Охват справочника"><div class="stat"><strong>{sections_count}</strong><span>{self.plural(sections_count, "подраздел", "подраздела", "подразделов")}</span></div>
             <div class="stat"><strong>{classifiers_count}</strong><span>{self.plural(classifiers_count, "классификатор", "классификатора", "классификаторов")}</span></div>
             <div class="stat"><strong>{diagrams_count}</strong><span>{self.plural(diagrams_count, "рисунок", "рисунка", "рисунков")} из спецификации</span></div></div>
-          <div class="notice">Рисунки разделов 7–9 перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
+          <div class="notice">Рисунки разделов {self.clause_range()} перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
           {"".join(groups)}'''
 
     def render_section(self, section):
@@ -568,7 +568,10 @@ class HandbookRenderer:
               {self.related_figures(self.association_figures(item))}'''
         ends = self.xmi["associations"].get(item["name"], {}).get("ends")
         if ends is None:
-            ends = [{"signature": end} for end in item["ends"]]
+            ends = [
+                {"signature": end} if isinstance(end, str) else end
+                for end in item.get("ends", [])
+            ]
         generalizations = f'<section><h2>Обобщения</h2>{self.link_list(item["generalizations"], "association")}</section>' if item.get("generalizations") else ""
         specializations = f'<section><h2>Специализации</h2>{self.link_list(item["specializations"], "association")}</section>' if item.get("specializations") else ""
         tags = "".join(f'<span class="meta-tag">{escape(name)}</span>' for name in item["diagrams"])
@@ -586,8 +589,8 @@ class HandbookRenderer:
         tiles = "".join(self.diagram_tile(diagram) for diagram in self.data["diagrams"])
         count = len(self.data["diagrams"])
         return f'''{self.breadcrumbs([{"label": "Справочник"}, {"label": "Диаграммы"}])}
-          <p class="eyebrow">Разделы 7–9 · {count} {self.plural(count, "рисунок", "рисунка", "рисунков")}</p><h1>Диаграммы</h1>
-          <p class="lead">Векторные копии рисунков разделов 7 «Common Structure», 8 «Values» и 9 «Classification». Все материалы сохранены локально и доступны без подключения к сети.</p>
+          <p class="eyebrow">Разделы {self.clause_range()} · {count} {self.plural(count, "рисунок", "рисунка", "рисунков")}</p><h1>Диаграммы</h1>
+          <p class="lead">Векторные копии рисунков разделов {self.clause_coverage()}. Все материалы сохранены локально и доступны без подключения к сети.</p>
           <div class="diagram-grid">{tiles}</div>'''
 
     def render_diagram(self, diagram):
@@ -605,7 +608,7 @@ class HandbookRenderer:
 
     def navigation(self):
         groups = []
-        for clause_id, clause in CLAUSES.items():
+        for clause_id, clause in self.clauses.items():
             sections = "".join(
                 f'<a class="nav-section" data-route="section-{slug(section["id"])}" href="#/section/{slug(section["id"])}"><span class="nav-number">{section["id"]}</span><span>{escape(section["title"])}</span></a>'
                 for section in self.data["sections"]
@@ -725,9 +728,13 @@ def generate():
         "navigation": full["navigation"],
         "searchItems": [],
     }
+    fragment_names = list(dict.fromkeys(
+        name for name in (_fragment_key(route, clauses) for route, _ in base_routes(data))
+        if name
+    ))
     groups = {
         name: {"pages": {}, "titles": {}, "searchItems": []}
-        for name in FRAGMENT_NAMES
+        for name in fragment_names
     }
     for route, _ in base_routes(data):
         name = _fragment_key(route, clauses)
@@ -739,35 +746,51 @@ def generate():
     base_text = "window.UML_PAGES = " + json.dumps(base, ensure_ascii=False, indent=2) + ";\n"
     fragments = [
         (f"{name}.js", _fragment_js(groups[name]["pages"], groups[name]["titles"], groups[name]["searchItems"]))
-        for name in FRAGMENT_NAMES
+        for name in fragment_names
     ]
     return base_text, fragments
 
 
 def main():
     parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--clause", choices=sorted(load_sections(), key=int), help="Build only this clause's fragments and shared base data")
     parser.add_argument("--check", action="store_true", help="Check that generated pages and routes are current")
     args = parser.parse_args()
     base_text, fragments = generate()
-    expected = {OUTPUT: base_text}
+
+    def selected(path):
+        if path in {OUTPUT, INDEX} or path.name == "classifiers-external.js":
+            return True
+        return args.clause is None or path.stem.endswith("-" + args.clause)
+
+    expected = {OUTPUT: base_text, INDEX: expected_index()}
     expected.update({PAGES_DIR / name: text for name, text in fragments})
+    expected = {path: text for path, text in expected.items() if selected(path)}
     if args.check:
         outdated = [
             path.relative_to(ROOT)
             for path, text in expected.items()
             if not path.is_file() or path.read_text(encoding="utf-8") != text
         ]
-        stale = set(PAGES_DIR.glob("*.js")) - set(expected) if PAGES_DIR.is_dir() else set()
+        stale = {
+            path for path in PAGES_DIR.glob("*.js")
+            if selected(path) and path not in expected
+        } if PAGES_DIR.is_dir() else set()
         if outdated or stale:
             raise SystemExit("Generated pages are out of date; run python scripts/build_site.py")
-        print(f"Generated pages and routes: OK ({len(base_routes(load_handbook()[0]))} routes)")
+        scope = f"clause {args.clause}" if args.clause else "all clauses"
+        print(f"Generated pages and routes: OK; {scope} ({len(base_routes(load_handbook()[0]))} routes)")
         return
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     for path, text in expected.items():
-        path.write_text(text, encoding="utf-8")
-    for path in set(PAGES_DIR.glob("*.js")) - set(expected):
-        path.unlink()
-    print(f"Generated {OUTPUT.relative_to(ROOT)} + {len(fragments)} fragments ({len(base_routes(load_handbook()[0]))} routes)")
+        if path != INDEX:
+            path.write_text(text, encoding="utf-8")
+    for path in PAGES_DIR.glob("*.js"):
+        if selected(path) and path not in expected:
+            path.unlink()
+    write_index()
+    scope = f"clause {args.clause}" if args.clause else "all clauses"
+    print(f"Generated {scope}: {OUTPUT.relative_to(ROOT)} + {len(expected) - 2} fragments ({len(base_routes(load_handbook()[0]))} routes)")
 
 
 if __name__ == "__main__":

@@ -16,6 +16,7 @@ import xml.etree.ElementTree as ET
 import pymupdf
 
 from handbook_data import load_handbook, slug
+from section_config import load_sections, section_settings
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -23,28 +24,6 @@ DOCS = ROOT / "site" / "docs"
 PDF = DOCS / "omg-uml-2.5.1-formal-17-12-05.pdf"
 XMI = DOCS / "UML-2.5.1.xmi"
 XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
-SECTION_SETTINGS = {
-    "10": {
-        "title": "Simple Classifiers",
-        "slug": "simple-classifiers",
-        "package": "SimpleClassifiers",
-        "first_page": 167,
-        "last_page": 182,
-        "classifier_catalog": "10.5",
-        "association_catalog": "10.6",
-        "expected": {
-            "headings": 129,
-            "classifiers": 9,
-            "associations": 16,
-            "figures": 12,
-            "attributes": 18,
-            "operations": 1,
-            "constraints": 5,
-            "association_ends": 32,
-            "notes": 3,
-        },
-    }
-}
 
 
 def extract_pdf(settings):
@@ -122,7 +101,7 @@ def xmi_inventory(settings, headings, text):
     package_elements = package.findall("packagedElement")
     class_elements = {
         element.get("name"): element for element in package_elements
-        if element.get(XMI_NS + "type") == "uml:Class"
+        if element.get(XMI_NS + "type") in {"uml:Class", "uml:Enumeration"}
     }
     association_elements = {
         element.get("name"): element for element in package_elements
@@ -130,7 +109,7 @@ def xmi_inventory(settings, headings, text):
     }
     all_classes = {
         element.get("name"): element for element in root.iter()
-        if element.get(XMI_NS + "type") == "uml:Class"
+        if element.get(XMI_NS + "type") in {"uml:Class", "uml:Enumeration"}
     }
     all_associations = {
         element.get("name"): element for element in root.iter()
@@ -154,7 +133,7 @@ def xmi_inventory(settings, headings, text):
     classifier_headings = {
         item["title"].split(" [", 1)[0]: item for item in headings
         if item["id"].startswith(settings["classifier_catalog"] + ".")
-        and re.search(r"\[(?:Abstract Class|Class)\]$", item["title"])
+        and re.search(r"\[(?:Abstract Class|Class|Enumeration)\]$", item["title"])
     }
     association_headings = {
         item["title"].split(" [", 1)[0]: item for item in headings
@@ -174,7 +153,11 @@ def xmi_inventory(settings, headings, text):
             "name": name,
             "section": section,
             "page": heading["page"],
-            "kind": "Abstract Class" if element.get("isAbstract") == "true" else "Class",
+            "kind": (
+                "Enumeration" if element.get(XMI_NS + "type") == "uml:Enumeration"
+                else "Abstract Class" if element.get("isAbstract") == "true"
+                else "Class"
+            ),
             "generalizations": [item.get("general") for item in element.findall("generalization")],
             "specializations": sorted(
                 candidate for candidate, candidate_element in all_classes.items()
@@ -196,6 +179,10 @@ def xmi_inventory(settings, headings, text):
             "constraints": [
                 {"id": item.get(XMI_NS + "id"), "name": item.get("name")}
                 for item in element.findall("ownedRule")
+            ],
+            "literals": [
+                {"id": item.get(XMI_NS + "id"), "name": item.get("name")}
+                for item in element.findall("ownedLiteral")
             ],
             "diagrams": diagram_references(text, section),
         })
@@ -260,7 +247,7 @@ def build_inventory(clause, settings, source, pages):
         "association_ends": sum(len(item["ends"]) for item in associations),
         "notes": len(re.findall(r"^NOTE\.", text, re.MULTILINE)),
     }
-    if counts != settings["expected"]:
+    if settings.get("expected") and counts != settings["expected"]:
         raise ValueError(f"Inventory counts differ: {counts} instead of {settings['expected']}")
 
     existing_data, _, _ = load_handbook()
@@ -271,9 +258,11 @@ def build_inventory(clause, settings, source, pages):
     }
     dependencies.update(
         attribute["type"] for item in classifiers for attribute in item["attributes"]
+        if attribute["type"]
     )
     dependencies.update(
         end["type"] for item in associations for end in item["ends"]
+        if end["type"]
     )
     external = sorted(dependencies - own_classifiers)
 
@@ -284,8 +273,8 @@ def build_inventory(clause, settings, source, pages):
     routes.extend(f"#/classifier/{slug(item['name'])}" for item in classifiers)
     routes.extend(f"#/association/{slug(item['name'])}" for item in associations)
     routes.extend(f"#/diagram/{slug(item['id'])}" for item in figures)
-    if len(routes) != 43 or len(routes) != len(set(routes)):
-        raise ValueError("Unexpected route inventory")
+    if len(routes) != len(set(routes)):
+        raise ValueError("Duplicate routes in inventory")
 
     return {
         "clause": clause,
@@ -315,27 +304,22 @@ def build_inventory(clause, settings, source, pages):
             "new_routes": len(routes),
             "routes": routes,
             "new_source_files": [
-                "site/data/simple-classifiers.js",
-                "site/data/content/sections-10.js",
-                "scripts/generate_simple_classifiers_svg.py",
+                settings["data"],
+                *[f"site/data/content/{name}" for name in settings["content"]],
+                f"scripts/{settings['svg_generator']}",
             ],
             "generated_files": [
-                "site/data/pages/sections-10.js",
-                "site/data/pages/classifiers-10.js",
-                "site/data/pages/associations-10.js",
-                "site/data/pages/diagrams-10.js",
-                "site/data/xmi/<Classifier>.js (9 new fragments)",
-                "site/assets/diagrams/figure-10-*.png (12 files)",
-                "site/assets/diagrams/figure-10-*.svg (12 files)",
+                f"site/data/pages/sections-{clause}.js",
+                f"site/data/pages/classifiers-{clause}.js",
+                f"site/data/pages/associations-{clause}.js",
+                f"site/data/pages/diagrams-{clause}.js",
+                f"site/data/xmi/<Classifier>.js ({len(classifiers)} new fragments)",
+                f"site/assets/diagrams/figure-{clause}-*.png ({len(figures)} files)",
+                f"site/assets/diagrams/figure-{clause}-*.svg ({len(figures)} files)",
             ],
             "existing_files_to_extend": [
-                "site/index.html",
-                "scripts/handbook_data.py",
-                "scripts/sync_xmi_properties.py",
-                "scripts/build_site.py",
-                "scripts/check_spec_completeness.py",
+                "site/index.html (generated script manifest)",
                 "scripts/render_common_structure_diagrams.py",
-                "scripts/validate_site.py",
                 "AGENTS.md",
             ],
             "batching": "The clause fits one task per remaining stage; no subdivision is required.",
@@ -344,9 +328,7 @@ def build_inventory(clause, settings, source, pages):
 
 
 def generate(clause):
-    if clause not in SECTION_SETTINGS:
-        raise ValueError(f"Unsupported clause: {clause}; configure it in SECTION_SETTINGS first")
-    settings = SECTION_SETTINGS[clause]
+    settings = section_settings(clause)
     source, pages = extract_pdf(settings)
     inventory = build_inventory(clause, settings, source, pages)
     return source, json.dumps(inventory, ensure_ascii=False, indent=2) + "\n"
@@ -354,10 +336,10 @@ def generate(clause):
 
 def main():
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument("--clause", required=True, choices=sorted(SECTION_SETTINGS))
+    parser.add_argument("--clause", required=True, choices=sorted(load_sections(), key=int))
     parser.add_argument("--check", action="store_true", help="Check extracted files without modifying them")
     args = parser.parse_args()
-    settings = SECTION_SETTINGS[args.clause]
+    settings = section_settings(args.clause)
     source_path = DOCS / f"uml-2.5.1-{settings['slug']}-en.txt"
     inventory_path = DOCS / f"uml-2.5.1-{settings['slug']}-inventory.json"
     expected = generate(args.clause)

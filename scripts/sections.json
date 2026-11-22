@@ -1,0 +1,77 @@
+{
+  "7": {
+    "title": "Common Structure",
+    "title_ru": "Общая структура",
+    "slug": "common-structure",
+    "package": "CommonStructure",
+    "first_page": 21,
+    "last_page": 68,
+    "classifier_catalog": "7.8",
+    "association_catalog": "7.9",
+    "source": "site/docs/uml-2.5.1-common-structure-en.txt",
+    "data": "site/data/common-structure.js",
+    "content": ["sections-7.js", "classifiers-7.js"],
+    "svg_generator": "generate_common_structure_svg.py",
+    "diagram_aliases": {
+      "Types": "7.10",
+      "Constraints": "7.13",
+      "Dependencies": "7.17"
+    }
+  },
+  "8": {
+    "title": "Values",
+    "title_ru": "Значения",
+    "slug": "values",
+    "package": "Values",
+    "first_page": 69,
+    "last_page": 98,
+    "classifier_catalog": "8.6",
+    "association_catalog": "8.7",
+    "source": "site/docs/uml-2.5.1-values-en.txt",
+    "data": "site/data/common-structure.js",
+    "content": ["sections-8.js", "classifiers-8.js"],
+    "svg_generator": "generate_common_structure_svg.py",
+    "diagram_aliases": {
+      "Time": "8.3"
+    }
+  },
+  "9": {
+    "title": "Classification",
+    "title_ru": "Классификация",
+    "slug": "classification",
+    "package": "Classification",
+    "first_page": 99,
+    "last_page": 166,
+    "classifier_catalog": "9.9",
+    "association_catalog": "9.10",
+    "source": "site/docs/omg-uml-2.5.1-formal-17-12-05.txt",
+    "data": "site/data/classification.js",
+    "content": ["sections-9.js"],
+    "svg_generator": "generate_classification_svg.py"
+  },
+  "10": {
+    "title": "Simple Classifiers",
+    "title_ru": "Простые классификаторы",
+    "slug": "simple-classifiers",
+    "package": "SimpleClassifiers",
+    "first_page": 167,
+    "last_page": 182,
+    "classifier_catalog": "10.5",
+    "association_catalog": "10.6",
+    "source": "site/docs/uml-2.5.1-simple-classifiers-en.txt",
+    "data": "site/data/simple-classifiers.js",
+    "content": ["sections-10.js"],
+    "svg_generator": "generate_simple_classifiers_svg.py",
+    "expected": {
+      "headings": 129,
+      "classifiers": 9,
+      "associations": 16,
+      "figures": 12,
+      "attributes": 18,
+      "operations": 1,
+      "constraints": 5,
+      "association_ends": 32,
+      "notes": 3
+    }
+  }
+}

@@ -1,7 +1,7 @@
 """
 Name: validate_site.py
-Purpose: Validate generated offline UML handbook pages, Python SVG geometry and every hash route in Clauses 7-9.
-Interface: python scripts/validate_site.py [--browser PATH] [--static-only]
+Purpose: Validate generated offline UML handbook pages, Python SVG geometry and hash routes.
+Interface: python scripts/validate_site.py [--clause N] [--browser PATH] [--static-only]
 Goal: Detect stale generated data, missing content, invalid SVG geometry, broken links and browser JavaScript errors.
 Requires: Python 3, Pillow; Chrome or Edge only for final browser rendering checks.
 """
@@ -18,7 +18,8 @@ import xml.etree.ElementTree as ET
 
 from check_spec_completeness import check_completeness
 from check_svg_overlaps import check_inheritance, check_svg, find_browser
-from handbook_data import ROOT, SITE, base_routes, load_handbook, load_pages
+from handbook_data import ROOT, SITE, base_routes, load_handbook, load_pages, slug
+from section_config import load_sections
 
 
 INDEX = SITE / "index.html"
@@ -48,14 +49,31 @@ class ResourceParser(HTMLParser):
             self.hash_links.append(attributes["href"])
 
 
-def routes(data=None):
+def routes(data=None, clause=None):
     data = data or load_handbook()[0]
-    return base_routes(data) + [("#/search/Namespace", "Результаты поиска")]
+    if clause is None:
+        return base_routes(data) + [("#/search/Namespace", "Результаты поиска")]
+    result = base_routes(data)[:2]
+    groups = (
+        ("sections", "section", "id"),
+        ("classifiers", "classifier", "name"),
+        ("associations", "association", "name"),
+        ("diagrams", "diagram", "id"),
+    )
+    for group, kind, name in groups:
+        for item in data[group]:
+            section = item["id"] if group in {"sections", "diagrams"} else item["section"]
+            if section.split(".")[0] == clause:
+                result.append((f"#/{kind}/{slug(item[name])}", item.get("title") or item.get("ru")))
+    return result + [("#/search/Namespace", "Результаты поиска")]
 
 
-def diagram_vectors(data=None):
+def diagram_vectors(data=None, clause=None):
     data = data or load_handbook()[0]
-    return [item["vector"] for item in data["diagrams"]]
+    return [
+        item["vector"] for item in data["diagrams"]
+        if clause is None or item["id"].split(".")[0] == clause
+    ]
 
 
 def run_check(script):
@@ -69,7 +87,7 @@ def run_check(script):
     return result
 
 
-def check_static():
+def check_static(clause=None):
     errors = []
     data, xmi, _ = load_handbook()
     for path in (INDEX, DATA, XMI_DATA, CONTENT_DATA, PAGES, SITE / "app.js", SITE / "styles.css"):
@@ -87,16 +105,18 @@ def check_static():
             errors.append(f"Missing resource: {resource}")
 
     images = sorted((SITE / "assets" / "diagrams").glob("figure-*.png"))
-    expected_diagrams = len(data["diagrams"])
+    if clause is not None:
+        images = [path for path in images if path.stem.split("-")[1] == clause]
+    expected_diagrams = len(diagram_vectors(data, clause))
     if len(images) != expected_diagrams:
         errors.append(f"Expected {expected_diagrams} diagram screenshots, found {len(images)}")
     for image in images:
         if image.stat().st_size < 100:
             errors.append(f"Empty image: {image.name}")
 
-    all_routes = routes(data)
-    known_routes = {item[0] for item in all_routes} | {"#/", "#content"}
-    vectors = diagram_vectors(data)
+    all_routes = routes(data, clause)
+    known_routes = {item[0] for item in base_routes(data)} | {"#/", "#content"}
+    vectors = diagram_vectors(data, clause)
     if len(vectors) != expected_diagrams:
         errors.append(f"Expected {expected_diagrams} vector diagrams, found {len(vectors)}")
     for vector in vectors:
@@ -110,7 +130,7 @@ def check_static():
             if route not in known_routes:
                 errors.append(f"Broken SVG link in {vector}: {route}")
 
-    expected_routes = len(base_routes(data)) + 1
+    expected_routes = len(routes(data, clause))
     if len(all_routes) != expected_routes:
         errors.append(f"Route extraction mismatch: {len(all_routes)} routes instead of {expected_routes}")
     app = (SITE / "app.js").read_text(encoding="utf-8")
@@ -120,14 +140,34 @@ def check_static():
         if re.search(rf"function\s+{rendering_function}\b", app):
             errors.append(f"Page rendering remains in JavaScript: {rendering_function}")
 
-    for script in ("sync_xmi_properties.py --check", "generate_common_structure_svg.py --check", "generate_classification_svg.py --check", "build_site.py --check"):
+    sections = load_sections()
+    active_clauses = [clause] if clause is not None else [
+        number for number in sections
+        if any(item["id"].startswith(number + ".") for item in data["sections"])
+    ]
+    scripts = ["sync_xmi_properties.py --check"]
+    for number in active_clauses:
+        generator = sections[number]["svg_generator"]
+        command = f"{generator} --check"
+        if command not in scripts:
+            scripts.append(command)
+    scripts.append("build_site.py --check")
+    if clause is not None:
+        scripts = [
+            script.replace(" --check", f" --clause {clause} --check")
+            for script in scripts
+        ]
+    for script in scripts:
         result = run_check(script)
         if result.returncode:
             errors.append(f"{script} failed: {result.stdout}{result.stderr}")
 
     if PAGES.is_file():
         generated = load_pages()
+        selected_routes = {route for route, _ in all_routes}
         for route, page in generated["pages"].items():
+            if clause is not None and route not in selected_routes:
+                continue
             if route not in known_routes:
                 errors.append(f"Unexpected generated route: {route}")
             page_parser = ResourceParser()
@@ -143,7 +183,7 @@ def check_static():
         generated = None
 
     if not any(error.startswith("check_spec_completeness") for error in errors):
-        completeness_errors, _ = check_completeness()
+        completeness_errors, _ = check_completeness([clause] if clause is not None else None)
         errors.extend(completeness_errors)
     return errors, all_routes, data, xmi, generated
 
@@ -194,22 +234,25 @@ def check_route(browser, route, expected, known_routes, placeholder_routes):
 
 def main():
     parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--clause", choices=sorted(load_sections(), key=int), help="Validate only this clause and shared pages")
     parser.add_argument("--browser", help="Path to Chrome or Edge")
     parser.add_argument("--static-only", action="store_true", help="Skip browser route checks")
     args = parser.parse_args()
 
-    errors, all_routes, data, xmi, generated = check_static()
+    errors, all_routes, data, xmi, generated = check_static(args.clause)
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         raise SystemExit(1)
     print(f"Static checks and specification completeness: OK; {len(all_routes)} routes discovered")
 
-    vectors = diagram_vectors(data)
+    vectors = diagram_vectors(data, args.clause)
     geometry_failures = [error for vector in vectors for error in check_svg(SITE / vector)]
     if generated:
         for item in data["classifiers"]:
-            if item.get("placeholder"):
+            if item.get("placeholder") or (
+                args.clause is not None and item["section"].split(".")[0] != args.clause
+            ):
                 continue
             route = f"#/classifier/{re.sub(r'[^a-z0-9]+', '-', item['name'].lower())}"
             page = generated["pages"][route]
@@ -222,7 +265,11 @@ def main():
         for failure in geometry_failures:
             print(f"ERROR: {failure}")
         raise SystemExit(1)
-    inheritance_count = sum(not item.get("placeholder") for item in data["classifiers"])
+    inheritance_count = sum(
+        not item.get("placeholder")
+        and (args.clause is None or item["section"].split(".")[0] == args.clause)
+        for item in data["classifiers"]
+    )
     print(f"Python SVG geometry checks: OK; {len(vectors)} figures and {inheritance_count} inheritance diagrams passed")
 
     if args.static_only:

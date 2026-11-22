@@ -1,7 +1,7 @@
 """
 Name: generate_classification_svg.py
 Purpose: Generate interactive vector versions of 32 figures in UML 2.5.1 Clause 9.
-Interface: python scripts/generate_classification_svg.py [--output-dir PATH] [--check]
+Interface: python scripts/generate_classification_svg.py [--clause N] [--output-dir PATH] [--check]
 Goal: Preserve OMG semantics and notation while adding local links, tooltips and consistent geometry.
 Sources: site/docs/UML-2.5.1.xmi, the official UML 2.5.1 PDF and the curated handbook data.
 Requires: Python 3 standard library.
@@ -15,6 +15,7 @@ from classification_figures_examples import BUILDERS as EXAMPLE_BUILDERS
 from classification_figures_features import BUILDERS as FEATURE_BUILDERS
 from classification_figures_generalizations import BUILDERS as GENERALIZATION_BUILDERS
 from classification_figures_structure import BUILDERS as STRUCTURE_BUILDERS
+from section_config import load_sections
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,12 +34,17 @@ FIGURE_BUILDERS = dict(sorted(
 
 def main():
     parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--clause", choices=sorted(load_sections(), key=int), help="Generate only this clause's figures")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "site" / "assets" / "diagrams")
     parser.add_argument("--check", action="store_true", help="Check generated SVG files without rewriting them")
     args = parser.parse_args()
+    builders = {
+        figure: builder for figure, builder in FIGURE_BUILDERS.items()
+        if args.clause is None or figure.split(".")[0] == args.clause
+    }
     missing = []
     changed = []
-    for figure, builder in FIGURE_BUILDERS.items():
+    for figure, builder in builders.items():
         target = args.output_dir / f"figure-{figure.replace('.', '-')}.svg"
         content = builder().render()
         if not target.is_file():
@@ -55,7 +61,7 @@ def main():
             print(f"Outdated: {path}")
         raise SystemExit(1)
     if args.check:
-        print(f"Generated SVG checks: OK; {len(FIGURE_BUILDERS)} figures synchronized")
+        print(f"Generated SVG checks: OK; {len(builders)} figures synchronized")
 
 
 if __name__ == "__main__":

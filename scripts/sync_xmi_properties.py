@@ -1,9 +1,9 @@
 """
 Name: sync_xmi_properties.py
 Purpose: Generate classifier and association properties from the normative UML 2.5.1 XMI.
-Interface: python scripts/sync_xmi_properties.py [--check]
-Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI for sections 7-9.
-Requires: Python 3; site/docs/UML-2.5.1.xmi, site/data/common-structure.js and site/data/classification.js.
+Interface: python scripts/sync_xmi_properties.py [--clause N] [--check]
+Goal: Keep owned attributes, association ends, inherited properties and signatures consistent with OMG XMI for every clause configured in scripts/sections.json.
+Requires: Python 3; site/docs/UML-2.5.1.xmi, scripts/section_config.py with scripts/sections.json and the clause data files listed there.
 """
 
 from argparse import ArgumentParser
@@ -13,13 +13,12 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
+from handbook_data import parse_literal
+from section_config import data_files, load_sections
+
 
 ROOT = Path(__file__).resolve().parent.parent
 XMI = ROOT / "site" / "docs" / "UML-2.5.1.xmi"
-DATA_FILES = (
-    ROOT / "site" / "data" / "common-structure.js",
-    ROOT / "site" / "data" / "classification.js",
-)
 OUTPUT = ROOT / "site" / "data" / "common-structure-xmi.js"
 XMI_DIR = ROOT / "site" / "data" / "xmi"
 XMI_NS = "{http://www.omg.org/spec/XMI/20131001}"
@@ -331,13 +330,6 @@ def curated_descriptions(text):
     return result
 
 
-def association_names(text):
-    block = array_slice(text, "const associations = [", "const diagrams = [")
-    if block is None:
-        return []
-    return re.findall(r'name: "(A_[A-Za-z_]+)"', block)
-
-
 def value(element, default):
     if element is None:
         return default
@@ -528,19 +520,35 @@ class XmiModel:
         return result
 
 
-def generate():
+def generate(clause=None):
     model = XmiModel(XMI)
+    clause_paths = data_files(None if clause is None else [clause])
+    if clause is not None and not clause_paths:
+        raise ValueError(f"No data files found for clause {clause}; create the clause data file first")
+    # Curated Russian descriptions are shared reference data: inherited properties
+    # of clause classifiers are owned by ancestor classes from other clauses.
     descriptions = {}
-    class_names = []
+    for path in data_files():
+        descriptions.update(curated_descriptions(path.read_text(encoding="utf-8")))
+    parsed_names = []
     association_list = []
-    for path in DATA_FILES:
+    for path in clause_paths:
         text = path.read_text(encoding="utf-8")
-        descriptions.update(curated_descriptions(text))
-        names = [name for name, _ in classifier_blocks(text)]
+        objects = {}
+        for key in ("classifiers", "associations"):
+            marker = f"const {key} ="
+            objects[key] = parse_literal(text, text.index(marker) + len(marker))
+        names = [
+            item["name"] for item in objects["classifiers"]
+            if clause is None or item["section"].split(".")[0] == clause
+        ]
         if not names:
             raise ValueError(f"No classifiers parsed from {path.relative_to(ROOT)}")
-        class_names.extend(names)
-        association_list.extend(association_names(text))
+        parsed_names.extend(names)
+        association_list.extend(
+            item["name"] for item in objects["associations"]
+            if clause is None or item["section"].split(".")[0] == clause
+        )
 
     enumeration_names = {
         element.get("name")
@@ -548,12 +556,12 @@ def generate():
         if element.get(XMI_NS + "type") == "uml:Enumeration"
     }
     missing_classes = [
-        name for name in class_names
+        name for name in parsed_names
         if name not in model.classes and name not in enumeration_names
     ]
     if missing_classes:
         raise ValueError(f"Diagram classifiers absent from XMI: {missing_classes}")
-    class_names = [name for name in class_names if name in model.classes]
+    class_names = [name for name in parsed_names if name in model.classes]
     missing_associations = [name for name in association_list if name not in model.associations]
     if missing_associations:
         raise ValueError(f"Associations absent from XMI: {missing_associations}")
@@ -599,30 +607,75 @@ def generate():
             for name in sorted(required_classes)
         },
     }
-    base_content = "window.UML_XMI_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
     class_entries = [(name, classes[name]) for name in class_names if name in required_classes]
-    return base_content, class_entries
+    return payload, class_entries, parsed_names
+
+
+BASE_PREFIX = "window.UML_XMI_DATA = "
+
+
+def serialize_base(payload):
+    return BASE_PREFIX + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
+
+
+def load_base_payload():
+    """Parsed content of the shared base file, or None if it does not exist yet."""
+    if not OUTPUT.is_file():
+        return None
+    text = OUTPUT.read_text(encoding="utf-8")
+    if not text.startswith(BASE_PREFIX) or not text.rstrip().endswith(";"):
+        raise ValueError(f"Cannot parse existing base file {OUTPUT.relative_to(ROOT)}")
+    return json.loads(text[len(BASE_PREFIX):].rstrip()[:-1])
+
+
+def merge_base(payload, existing):
+    """Overlay freshly generated clause records onto the existing base file content."""
+    if not existing:
+        return payload
+    merged = dict(existing)
+    merged["source"] = payload["source"]
+    merged["classes"] = payload["classes"]
+    for key in ("associations", "generalizations", "classifierDefinitions"):
+        section = dict(existing.get(key) or {})
+        section.update(payload[key])
+        merged[key] = section
+    return merged
+
+
+def fragment_content(name, data):
+    return f'window.UML_XMI_DATA.classes["{name}"] = ' + json.dumps(data, ensure_ascii=False, indent=2) + ";\n"
 
 
 def main():
     parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--clause", choices=sorted(load_sections()), help="Limit generation and checks to one handbook clause")
     parser.add_argument("--check", action="store_true", help="Check that the generated file is up to date")
     args = parser.parse_args()
-    base_content, class_entries = generate()
+    payload, class_entries, parsed_names = generate(args.clause)
     if args.check:
         ok = True
-        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != base_content:
-            print(f"Base file {OUTPUT.relative_to(ROOT)} is out of date")
-            ok = False
+        if args.clause is None:
+            if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != serialize_base(payload):
+                print(f"Base file {OUTPUT.relative_to(ROOT)} is out of date")
+                ok = False
+        else:
+            existing = load_base_payload()
+            merged = merge_base(payload, existing)
+            if existing is None or OUTPUT.read_text(encoding="utf-8") != serialize_base(merged):
+                print(f"Base file {OUTPUT.relative_to(ROOT)} is out of date for clause {args.clause}")
+                ok = False
         for name, data in class_entries:
             fpath = XMI_DIR / f"{name}.js"
-            expected = f'window.UML_XMI_DATA.classes["{name}"] = ' + json.dumps(data, ensure_ascii=False, indent=2) + ";\n"
-            if not fpath.is_file() or fpath.read_text(encoding="utf-8") != expected:
+            if not fpath.is_file() or fpath.read_text(encoding="utf-8") != fragment_content(name, data):
                 print(f"Fragment {fpath.relative_to(ROOT)} is out of date")
                 ok = False
-        for fpath in sorted(XMI_DIR.glob("*.js")):
-            stem = fpath.stem
-            if not any(name == stem for name, _ in class_entries):
+        if args.clause is None:
+            candidates = sorted(XMI_DIR.glob("*.js"))
+        else:
+            candidates = [XMI_DIR / f"{name}.js" for name in parsed_names]
+        required = {name for name, _ in class_entries}
+        for fpath in candidates:
+            if fpath.stem not in required and (args.clause is None or fpath.is_file()):
                 print(f"Stale fragment to remove: {fpath.relative_to(ROOT)}")
                 ok = False
         if not ok:
@@ -630,14 +683,16 @@ def main():
         print("XMI property data: OK")
         return
     XMI_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(base_content, encoding="utf-8")
+    OUTPUT.write_text(serialize_base(merge_base(payload, load_base_payload()) if args.clause else payload), encoding="utf-8")
     for name, data in class_entries:
-        fpath = XMI_DIR / f"{name}.js"
-        fpath.write_text(f'window.UML_XMI_DATA.classes["{name}"] = ' + json.dumps(data, ensure_ascii=False, indent=2) + ";\n", encoding="utf-8")
+        (XMI_DIR / f"{name}.js").write_text(fragment_content(name, data), encoding="utf-8")
     existing = {f.stem for f in XMI_DIR.glob("*.js")}
     required = {name for name, _ in class_entries}
-    for stale in existing - required:
-        (XMI_DIR / f"{stale}.js").unlink()
+    stale = existing - required
+    if args.clause is not None:
+        stale &= set(parsed_names)
+    for stem in stale:
+        (XMI_DIR / f"{stem}.js").unlink()
     print(f"Generated {OUTPUT.relative_to(ROOT)} + {len(class_entries)} fragments in {XMI_DIR.relative_to(ROOT)}/")
 
 

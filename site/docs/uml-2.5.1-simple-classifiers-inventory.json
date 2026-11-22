@@ -719,6 +719,7 @@
           "name": "class_behavior"
         }
       ],
+      "literals": [],
       "diagrams": [
         "Interfaces",
         "Use Cases",
@@ -755,6 +756,7 @@
       ],
       "operations": [],
       "constraints": [],
+      "literals": [],
       "diagrams": [
         "DataTypes",
         "Properties",
@@ -785,6 +787,7 @@
           "name": "immutable"
         }
       ],
+      "literals": [],
       "diagrams": [
         "DataTypes"
       ]
@@ -819,6 +822,7 @@
         }
       ],
       "constraints": [],
+      "literals": [],
       "diagrams": [
         "DataTypes"
       ]
@@ -877,6 +881,7 @@
           "name": "visibility"
         }
       ],
+      "literals": [],
       "diagrams": [
         "Interfaces",
         "Encapsulated Classifiers",
@@ -910,6 +915,7 @@
       ],
       "operations": [],
       "constraints": [],
+      "literals": [],
       "diagrams": [
         "Interfaces"
       ]
@@ -926,6 +932,7 @@
       "attributes": [],
       "operations": [],
       "constraints": [],
+      "literals": [],
       "diagrams": [
         "DataTypes"
       ]
@@ -958,6 +965,7 @@
           "name": "same_structure_as_signal"
         }
       ],
+      "literals": [],
       "diagrams": [
         "Signals",
         "Interfaces",
@@ -983,6 +991,7 @@
       ],
       "operations": [],
       "constraints": [],
+      "literals": [],
       "diagrams": [
         "Signals",
         "Events",
@@ -1542,13 +1551,8 @@
       "site/assets/diagrams/figure-10-*.svg (12 files)"
     ],
     "existing_files_to_extend": [
-      "site/index.html",
-      "scripts/handbook_data.py",
-      "scripts/sync_xmi_properties.py",
-      "scripts/build_site.py",
-      "scripts/check_spec_completeness.py",
+      "site/index.html (generated script manifest)",
       "scripts/render_common_structure_diagrams.py",
-      "scripts/validate_site.py",
       "AGENTS.md"
     ],
     "batching": "The clause fits one task per remaining stage; no subdivision is required."

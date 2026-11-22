@@ -10,42 +10,25 @@ import json
 from pathlib import Path
 import re
 
+from section_config import content_files, data_files
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DATA = SITE / "data" / "common-structure.js"
-CLASSIFICATION_DATA = SITE / "data" / "classification.js"
 XMI_DATA = SITE / "data" / "common-structure-xmi.js"
 XMI_DIR = SITE / "data" / "xmi"
 CONTENT_DIR = SITE / "data" / "content"
 PAGES_DATA = SITE / "data" / "common-structure-pages.js"
 PAGES_DIR = SITE / "data" / "pages"
-PAGE_FRAGMENTS = (
-    "sections-7.js", "sections-8.js", "sections-9.js",
-    "classifiers-7.js", "classifiers-8.js", "classifiers-9.js", "classifiers-external.js",
-    "associations-7.js", "associations-8.js", "associations-9.js",
-    "diagrams-7.js", "diagrams-8.js", "diagrams-9.js",
-)
 
 
 def _load_content_from_fragments():
-    """Merge content fragments into one {sections, classifiers} dict."""
     content = {"sections": {}, "classifiers": {}}
-    fragment_files = [
-        ("sections-7.js", "Object.assign(window.UML_CONTENT.sections,"),
-        ("sections-8.js", "Object.assign(window.UML_CONTENT.sections,"),
-        ("sections-9.js", "Object.assign(window.UML_CONTENT.sections,"),
-        ("classifiers-7.js", "Object.assign(window.UML_CONTENT.classifiers,"),
-        ("classifiers-8.js", "Object.assign(window.UML_CONTENT.classifiers,"),
-    ]
-    for fname, marker in fragment_files:
-        fpath = CONTENT_DIR / fname
-        if not fpath.exists():
-            raise FileNotFoundError(f"Missing fragment: {fname}")
-        merged = assigned_literal(fpath, marker)
-        target_key = "sections" if "sections" in fname else "classifiers"
-        content[target_key].update(merged)
-
+    for path in content_files():
+        target_key = "sections" if path.name.startswith("sections-") else "classifiers"
+        marker = f"Object.assign(window.UML_CONTENT.{target_key},"
+        content[target_key].update(assigned_literal(path, marker))
     return content
 
 
@@ -188,8 +171,7 @@ def load_xmi():
 
 def load_pages():
     result = assigned_literal(PAGES_DATA)
-    for name in PAGE_FRAGMENTS:
-        path = PAGES_DIR / name
+    for path in sorted(PAGES_DIR.glob("*.js")):
         result["pages"].update(assigned_literal(path, "Object.assign(window.UML_PAGES.pages,"))
         result["titles"].update(assigned_literal(path, "Object.assign(window.UML_PAGES.titles,"))
         result["searchItems"].extend(assigned_literal(path, "window.UML_PAGES.searchItems.push(..."))
@@ -200,7 +182,7 @@ def load_handbook():
     data = {}
     for name in ("sections", "classifiers", "associations", "diagrams"):
         data[name] = []
-    for path in (DATA, CLASSIFICATION_DATA):
+    for path in data_files():
         text = path.read_text(encoding="utf-8")
         for name in data:
             marker = f"const {name} ="

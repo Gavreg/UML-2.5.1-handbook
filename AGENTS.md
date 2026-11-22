@@ -24,34 +24,46 @@
 - `site/data/common-structure-pages.js` — генерируемый базовый HTML главной страницы и каталога, навигация и заглушка 404; остальные страницы, заголовки и поисковый индекс разбиты по типам и разделам в `site/data/pages/`. Все фрагменты необходимы для работы сайта и включаются в репозиторий.
 - `site/assets/diagrams/` — интерактивные SVG для 58 рисунков разделов 7–9; исходные PNG сохранены как справочные копии и резерв для встроенных объектов.
 - `site/docs/` — официальные PDF и XMI OMG, извлечённые текстовые материалы; каталог публикуется вместе с сайтом, а ссылки на PDF остаются относительными.
-- `scripts/handbook_data.py` — загрузка базовых JS-данных и их фрагментов в Python без выполнения JavaScript и единый список постоянных маршрутов.
-- `scripts/prepare_section.py` — извлечение официального раздела из PDF и формирование реестра этапа 1 с заголовками, объектами XMI, рисунками, маршрутами и планом интеграции; поддерживает `--check`.
-- `scripts/build_site.py` — построение HTML, маршрутов, навигации и поискового индекса из структурированных данных с записью во фрагменты `site/data/pages/`; поддерживает `--check`.
-- `scripts/render_common_structure_diagrams.py` — повторное создание справочных PNG из PDF; требует PyMuPDF.
-- `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21 и 8.1–8.5; ссылки и подсказки строятся по данным справочника и XMI.
-- `scripts/generate_classification_svg.py` — генерация и проверка 32 интерактивных SVG раздела 9; builders сгруппированы в `scripts/classification_figures_*.py`.
-- `scripts/sync_xmi_properties.py` — генерация и проверка базовых XMI-данных и отдельных файлов классов в `site/data/xmi/`; русские описания отсутствующих свойств задаются в самом скрипте.
+- `scripts/sections.json` и `scripts/section_config.py` — единая конфигурация разделов: страницы PDF, XMI-пакет, каталоги, источники, data/content-файлы и SVG-генератор; остальные инструменты не должны дублировать эти настройки.
+- `scripts/handbook_data.py` — загрузка настроенных JS-данных и их фрагментов в Python без выполнения JavaScript и единый список постоянных маршрутов.
+- `scripts/prepare_section.py` — извлечение официального раздела из PDF и формирование реестра этапа 1 с заголовками, объектами XMI, рисунками, маршрутами и планом интеграции; поддерживает `--clause` и `--check`.
+- `scripts/scaffold_section.py` — неразрушающее создание заготовок этапа 2 из реестра: идентификаторы, иерархия, ассоциации и рисунки заполняются автоматически, русские описания остаются пустыми; существующие файлы не перезаписываются.
+- `scripts/build_site.py` — построение HTML, маршрутов, навигации и поискового индекса из структурированных данных с записью во фрагменты `site/data/pages/`; поддерживает `--clause` и `--check`.
+- `scripts/site_manifest.py` — синхронизация script-тегов существующих data/content/pages/XMI-фрагментов в `site/index.html` без ручного редактирования списка ресурсов.
+- `scripts/section_pipeline.py` — запуск ровно одного этапа `--stage 1`…`--stage 6` для `--clause N`; выводит краткий итог, а полный журнал оставляет для ошибок.
+- `scripts/render_common_structure_diagrams.py` — повторное создание справочных PNG из PDF; поддерживает `--clause`, требует PyMuPDF.
+- `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21 и 8.1–8.5; ссылки и подсказки строятся по данным справочника и XMI; поддерживает `--clause`.
+- `scripts/generate_classification_svg.py` — генерация и проверка 32 интерактивных SVG раздела 9; builders сгруппированы в `scripts/classification_figures_*.py`; поддерживает `--clause`.
+- `scripts/sync_xmi_properties.py` — генерация и проверка базовых XMI-данных и отдельных файлов классов в `site/data/xmi/`; `--clause` ограничивает запись выбранным разделом и сохраняет остальные данные; русские описания отсутствующих свойств задаются в самом скрипте.
 - `scripts/check_svg_overlaps.py` — геометрическая проверка SVG полностью на Python: метрики текста через Pillow, пути SVG, перекрытия, отступы подписей, соединения линий и наконечники; браузер не требуется.
-- `scripts/check_spec_completeness.py` — сверка разделов, подразделов, классификаторов, ассоциаций, рисунков и OCL с исходным текстом; проверяет полноту разделов 7–9, присутствие каждой строки структурированного русского контента в сгенерированных страницах и ссылки `subsets`.
-- `scripts/validate_site.py` — общая проверка актуальности генерации, полноты текста, ссылок, геометрии всех 58 рисунков и 69 иерархий наследования на Python, затем отображения всех 257 постоянных маршрутов и поисковой страницы через локальный Chrome или Edge.
+- `scripts/check_spec_completeness.py` — сверка разделов, подразделов, классификаторов, ассоциаций, рисунков и OCL с исходным текстом; проверяет присутствие каждой строки структурированного русского контента в сгенерированных страницах и ссылки `subsets`; поддерживает повторяемый `--clause`.
+- `scripts/validate_site.py` — общая проверка актуальности генерации, полноты текста, ссылок, геометрии рисунков и иерархий наследования на Python, затем отображения постоянных маршрутов и поисковой страницы через локальный Chrome или Edge; `--clause` ограничивает проверку разделом, `--static-only` пропускает браузер.
 
 ### Команды проверки
 
 ```bash
+python scripts/section_pipeline.py --clause 10 --stage 1
+python scripts/section_pipeline.py --clause 10 --stage 1 --check
+python scripts/section_pipeline.py --clause 9 --stage 6 --static-only
 python scripts/prepare_section.py --clause 10
 python scripts/prepare_section.py --clause 10 --check
+python scripts/scaffold_section.py --clause 10
 python scripts/sync_xmi_properties.py
+python scripts/sync_xmi_properties.py --clause 9 --check
 python scripts/sync_xmi_properties.py --check
 python scripts/generate_common_structure_svg.py
 python scripts/generate_common_structure_svg.py --check
 python scripts/generate_classification_svg.py
 python scripts/generate_classification_svg.py --check
 python scripts/build_site.py
+python scripts/build_site.py --clause 9 --check
 python scripts/build_site.py --check
 python scripts/check_svg_overlaps.py
 python scripts/check_spec_completeness.py
+python scripts/check_spec_completeness.py --clause 9
 python scripts/validate_site.py
-python scripts/render_common_structure_diagrams.py
+python scripts/validate_site.py --clause 9 --static-only
+python scripts/render_common_structure_diagrams.py --clause 9
 ```
 
 Проверка сайта не требует запуска HTTP-сервера: открывать `site/index.html` непосредственно в браузере.
@@ -94,6 +106,8 @@ python scripts/render_common_structure_diagrams.py
 4. Раздел 10 (Simple Classifiers): выполнен этап 1 из 6. Извлечены печатные страницы 167–182 и составлен реестр 129 заголовков, 9 классификаторов, 16 ассоциаций и 12 рисунков в `site/docs/uml-2.5.1-simple-classifiers-inventory.json`. Русский контент, данные сайта, страницы и диаграммы раздела ещё не добавляются.
 
 Статусы переноса по шестиэтапному плану: разделы 7–9 — 6; раздел 10 — 1; остальные разделы — 0. Повышать статус только после проверок и коммита соответствующего этапа; переходить к следующему этапу только по отдельной команде пользователя.
+
+Для переноса отдельного раздела этапы соответствуют инструментам: 1 — `prepare_section.py`; 2 — `scaffold_section.py` и последующее ручное наполнение русских описаний; 3 — `sync_xmi_properties.py`; 4 — `build_site.py`; 5 — builders и генератор SVG, указанный в `sections.json`; 6 — `validate_site.py`. Для нового раздела сначала добавить его параметры в `scripts/sections.json`. `section_pipeline.py` только запускает выбранный этап и не меняет статус переноса.
 
 ## Правила наполнения справочника
 

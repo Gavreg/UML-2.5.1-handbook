@@ -1,7 +1,7 @@
 """
 Name: render_common_structure_diagrams.py
 Purpose: Render the 58 figures in UML 2.5.1 Clauses 7-9 as lossless PNG screenshots.
-Interface: python scripts/render_common_structure_diagrams.py [--pdf PATH] [--output-dir PATH]
+Interface: python scripts/render_common_structure_diagrams.py [--clause N] [--pdf PATH] [--output-dir PATH]
 Goal: Preserve the original OMG diagram artwork while making it available to the offline handbook.
 Source: OMG Unified Modeling Language 2.5.1, formal/17-12-05, printed pages 21-40, 69-78 and 99-129.
 Requires: Python 3 and PyMuPDF.
@@ -11,6 +11,8 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import pymupdf
+
+from section_config import load_sections
 
 
 FIGURES = {
@@ -77,6 +79,7 @@ FIGURES = {
 
 def main():
     parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--clause", choices=sorted(load_sections(), key=int), help="Render only this clause's figures")
     parser.add_argument(
         "--pdf",
         type=Path,
@@ -92,6 +95,8 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     with pymupdf.open(args.pdf) as document:
         for figure, (printed_page, bounds) in FIGURES.items():
+            if args.clause is not None and figure.split(".")[0] != args.clause:
+                continue
             page = document[printed_page + 41]
             pixmap = page.get_pixmap(matrix=pymupdf.Matrix(2, 2), clip=pymupdf.Rect(bounds), alpha=False)
             target = args.output_dir / f"figure-{figure.replace('.', '-')}.png"

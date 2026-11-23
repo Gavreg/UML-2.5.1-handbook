@@ -285,7 +285,7 @@ def main():
         raise SystemExit("Chrome or Edge is required for browser checks; use --static-only to skip them")
 
     with ThreadPoolExecutor(max_workers=4) as executor:
-        known_routes = {item[0] for item in all_routes} | {"#/", "#content"}
+        known_routes = {item[0] for item in base_routes(data)} | {"#/", "#content"}
         placeholder_routes = {
             f"#/classifier/{item['name'].lower()}"
             for item in data["classifiers"]

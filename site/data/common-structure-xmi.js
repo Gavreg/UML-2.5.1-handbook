@@ -4941,6 +4941,1046 @@ window.UML_XMI_DATA = {
           "redefinedProperties": []
         }
       ]
+    },
+    "A_classifierBehavior_behavioredClassifier": {
+      "ends": [
+        {
+          "id": "BehavioredClassifier-classifierBehavior",
+          "name": "classifierBehavior",
+          "signature": "classifierBehavior : Behavior [0..1] {subsets ownedBehavior}",
+          "description": "Поведение, задающее поведение самого классификатора с поведением.",
+          "type": "Behavior",
+          "association": "A_classifierBehavior_behavioredClassifier",
+          "owner": "A_classifierBehavior_behavioredClassifier",
+          "subsets": [
+            "ownedBehavior"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "BehavioredClassifier-ownedBehavior",
+              "name": "ownedBehavior",
+              "type": "Behavior",
+              "owner": {
+                "type": "classifier",
+                "name": "BehavioredClassifier"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_classifierBehavior_behavioredClassifier-behavioredClassifier",
+          "name": "behavioredClassifier",
+          "signature": "behavioredClassifier : BehavioredClassifier [0..1] {redefines behavioredClassifier}",
+          "description": "Классификатор с поведением, поведение которого задаёт это поведение.",
+          "type": "BehavioredClassifier",
+          "association": "A_classifierBehavior_behavioredClassifier",
+          "owner": "A_classifierBehavior_behavioredClassifier",
+          "subsets": [],
+          "redefines": [
+            "behavioredClassifier"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "A_ownedBehavior_behavioredClassifier-behavioredClassifier",
+              "name": "behavioredClassifier",
+              "type": "BehavioredClassifier",
+              "owner": {
+                "type": "association",
+                "name": "A_ownedBehavior_behavioredClassifier"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_classifier_enumerationLiteral": {
+      "ends": [
+        {
+          "id": "EnumerationLiteral-classifier",
+          "name": "classifier",
+          "signature": "/classifier : Enumeration [1..1] {readOnly, redefines classifier}",
+          "description": "Классификатор литерала перечисления; выводится как равный его перечислению.",
+          "type": "Enumeration",
+          "association": "A_classifier_enumerationLiteral",
+          "owner": "A_classifier_enumerationLiteral",
+          "subsets": [],
+          "redefines": [
+            "classifier"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "InstanceSpecification-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "InstanceSpecification"
+              }
+            }
+          ]
+        },
+        {
+          "id": "A_classifier_enumerationLiteral-enumerationLiteral",
+          "name": "enumerationLiteral",
+          "signature": "enumerationLiteral : EnumerationLiteral [0..*] {redefines instanceSpecification}",
+          "description": "Литералы, классификатором которых является это перечисление.",
+          "type": "EnumerationLiteral",
+          "association": "A_classifier_enumerationLiteral",
+          "owner": "A_classifier_enumerationLiteral",
+          "subsets": [],
+          "redefines": [
+            "instanceSpecification"
+          ],
+          "subsettedProperties": [],
+          "redefinedProperties": [
+            {
+              "id": "A_classifier_instanceSpecification-instanceSpecification",
+              "name": "instanceSpecification",
+              "type": "InstanceSpecification",
+              "owner": {
+                "type": "association",
+                "name": "A_classifier_instanceSpecification"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "A_contract_interfaceRealization": {
+      "ends": [
+        {
+          "id": "InterfaceRealization-contract",
+          "name": "contract",
+          "signature": "contract : Interface [1..1] {subsets supplier}",
+          "description": "Интерфейс, задающий контракт соответствия.",
+          "type": "Interface",
+          "association": "A_contract_interfaceRealization",
+          "owner": "A_contract_interfaceRealization",
+          "subsets": [
+            "supplier"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Dependency-supplier",
+              "name": "supplier",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Dependency"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_contract_interfaceRealization-interfaceRealization",
+          "name": "interfaceRealization",
+          "signature": "interfaceRealization : InterfaceRealization [0..*] {subsets supplierDependency}",
+          "description": "Реализации интерфейса, в которых этот интерфейс задаёт контракт соответствия.",
+          "type": "InterfaceRealization",
+          "association": "A_contract_interfaceRealization",
+          "owner": "A_contract_interfaceRealization",
+          "subsets": [
+            "supplierDependency"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_supplier_supplierDependency-supplierDependency",
+              "name": "supplierDependency",
+              "type": "Dependency",
+              "owner": {
+                "type": "association",
+                "name": "A_supplier_supplierDependency"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_interfaceRealization_implementingClassifier": {
+      "ends": [
+        {
+          "id": "BehavioredClassifier-interfaceRealization",
+          "name": "interfaceRealization",
+          "signature": "interfaceRealization : InterfaceRealization [0..*] {subsets ownedElement, clientDependency}",
+          "description": "Реализации интерфейсов, принадлежащие классификатору с поведением. Они ссылаются на интерфейсы, реализуемые этим классификатором.",
+          "type": "InterfaceRealization",
+          "association": "A_interfaceRealization_implementingClassifier",
+          "owner": "A_interfaceRealization_implementingClassifier",
+          "subsets": [
+            "ownedElement",
+            "clientDependency"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Element-ownedElement",
+              "name": "ownedElement",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            },
+            {
+              "id": "NamedElement-clientDependency",
+              "name": "clientDependency",
+              "type": "Dependency",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "InterfaceRealization-implementingClassifier",
+          "name": "implementingClassifier",
+          "signature": "implementingClassifier : BehavioredClassifier [1..1] {subsets client, owner}",
+          "description": "Классификатор с поведением, владеющий этой реализацией интерфейса и реализующий интерфейс, на который она ссылается.",
+          "type": "BehavioredClassifier",
+          "association": "A_interfaceRealization_implementingClassifier",
+          "owner": "A_interfaceRealization_implementingClassifier",
+          "subsets": [
+            "client",
+            "owner"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Dependency-client",
+              "name": "client",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Dependency"
+              }
+            },
+            {
+              "id": "Element-owner",
+              "name": "owner",
+              "type": "Element",
+              "owner": {
+                "type": "classifier",
+                "name": "Element"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_nestedClassifier_interface": {
+      "ends": [
+        {
+          "id": "Interface-nestedClassifier",
+          "name": "nestedClassifier",
+          "signature": "nestedClassifier : Classifier [0..*] {ordered, subsets redefinableElement, ownedMember}",
+          "description": "Классификаторы, определённые внутри этого интерфейса.",
+          "type": "Classifier",
+          "association": "A_nestedClassifier_interface",
+          "owner": "A_nestedClassifier_interface",
+          "subsets": [
+            "redefinableElement",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinitionContext_redefinableElement"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_nestedClassifier_interface-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..1] {subsets namespace, redefinitionContext}",
+          "description": "Интерфейс, владеющий вложенным классификатором.",
+          "type": "Interface",
+          "association": "A_nestedClassifier_interface",
+          "owner": "A_nestedClassifier_interface",
+          "subsets": [
+            "namespace",
+            "redefinitionContext"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            },
+            {
+              "id": "RedefinableElement-redefinitionContext",
+              "name": "redefinitionContext",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedAttribute_datatype": {
+      "ends": [
+        {
+          "id": "DataType-ownedAttribute",
+          "name": "ownedAttribute",
+          "signature": "ownedAttribute : Property [0..*] {ordered, subsets attribute, ownedMember}",
+          "description": "Атрибуты, принадлежащие типу данных.",
+          "type": "Property",
+          "association": "A_ownedAttribute_datatype",
+          "owner": "A_ownedAttribute_datatype",
+          "subsets": [
+            "attribute",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-attribute",
+              "name": "attribute",
+              "type": "Property",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Property-datatype",
+          "name": "datatype",
+          "signature": "datatype : DataType [0..1] {subsets classifier, namespace}",
+          "description": "Тип данных, владеющий этим свойством, если есть.",
+          "type": "DataType",
+          "association": "A_ownedAttribute_datatype",
+          "owner": "A_ownedAttribute_datatype",
+          "subsets": [
+            "classifier",
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_attribute_classifier-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "association",
+                "name": "A_attribute_classifier"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedAttribute_interface": {
+      "ends": [
+        {
+          "id": "Interface-ownedAttribute",
+          "name": "ownedAttribute",
+          "signature": "ownedAttribute : Property [0..*] {ordered, subsets attribute, ownedMember}",
+          "description": "Атрибуты (свойства), принадлежащие интерфейсу.",
+          "type": "Property",
+          "association": "A_ownedAttribute_interface",
+          "owner": "A_ownedAttribute_interface",
+          "subsets": [
+            "attribute",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-attribute",
+              "name": "attribute",
+              "type": "Property",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Property-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..1] {subsets classifier, namespace}",
+          "description": "Интерфейс, владеющий этим свойством, если есть.",
+          "type": "Interface",
+          "association": "A_ownedAttribute_interface",
+          "owner": "A_ownedAttribute_interface",
+          "subsets": [
+            "classifier",
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_attribute_classifier-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "association",
+                "name": "A_attribute_classifier"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedAttribute_owningSignal": {
+      "ends": [
+        {
+          "id": "Signal-ownedAttribute",
+          "name": "ownedAttribute",
+          "signature": "ownedAttribute : Property [0..*] {ordered, subsets attribute, ownedMember}",
+          "description": "Атрибуты, принадлежащие сигналу.",
+          "type": "Property",
+          "association": "A_ownedAttribute_owningSignal",
+          "owner": "A_ownedAttribute_owningSignal",
+          "subsets": [
+            "attribute",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-attribute",
+              "name": "attribute",
+              "type": "Property",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedAttribute_owningSignal-owningSignal",
+          "name": "owningSignal",
+          "signature": "owningSignal : Signal [0..1] {subsets classifier, namespace}",
+          "description": "Сигнал, владеющий этим атрибутом.",
+          "type": "Signal",
+          "association": "A_ownedAttribute_owningSignal",
+          "owner": "A_ownedAttribute_owningSignal",
+          "subsets": [
+            "classifier",
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_attribute_classifier-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "association",
+                "name": "A_attribute_classifier"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedBehavior_behavioredClassifier": {
+      "ends": [
+        {
+          "id": "BehavioredClassifier-ownedBehavior",
+          "name": "ownedBehavior",
+          "signature": "ownedBehavior : Behavior [0..*] {subsets ownedMember}",
+          "description": "Поведения, принадлежащие классификатору с поведением.",
+          "type": "Behavior",
+          "association": "A_ownedBehavior_behavioredClassifier",
+          "owner": "A_ownedBehavior_behavioredClassifier",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedBehavior_behavioredClassifier-behavioredClassifier",
+          "name": "behavioredClassifier",
+          "signature": "behavioredClassifier : BehavioredClassifier [0..1] {subsets namespace}",
+          "description": "Классификатор с поведением, владеющий этим поведением.",
+          "type": "BehavioredClassifier",
+          "association": "A_ownedBehavior_behavioredClassifier",
+          "owner": "A_ownedBehavior_behavioredClassifier",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedLiteral_enumeration": {
+      "ends": [
+        {
+          "id": "Enumeration-ownedLiteral",
+          "name": "ownedLiteral",
+          "signature": "ownedLiteral : EnumerationLiteral [0..*] {ordered, subsets ownedMember}",
+          "description": "Упорядоченное множество литералов, принадлежащих этому перечислению.",
+          "type": "EnumerationLiteral",
+          "association": "A_ownedLiteral_enumeration",
+          "owner": "A_ownedLiteral_enumeration",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "EnumerationLiteral-enumeration",
+          "name": "enumeration",
+          "signature": "enumeration : Enumeration [1..1] {subsets namespace}",
+          "description": "Перечисление, членом которого является этот литерал перечисления.",
+          "type": "Enumeration",
+          "association": "A_ownedLiteral_enumeration",
+          "owner": "A_ownedLiteral_enumeration",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedOperation_datatype": {
+      "ends": [
+        {
+          "id": "DataType-ownedOperation",
+          "name": "ownedOperation",
+          "signature": "ownedOperation : Operation [0..*] {ordered, subsets redefinableElement, feature, ownedMember}",
+          "description": "Операции, принадлежащие типу данных.",
+          "type": "Operation",
+          "association": "A_ownedOperation_datatype",
+          "owner": "A_ownedOperation_datatype",
+          "subsets": [
+            "redefinableElement",
+            "feature",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinitionContext_redefinableElement"
+              }
+            },
+            {
+              "id": "Classifier-feature",
+              "name": "feature",
+              "type": "Feature",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Operation-datatype",
+          "name": "datatype",
+          "signature": "datatype : DataType [0..1] {subsets featuringClassifier, namespace, redefinitionContext}",
+          "description": "Тип данных, владеющий этой операцией, если есть.",
+          "type": "DataType",
+          "association": "A_ownedOperation_datatype",
+          "owner": "A_ownedOperation_datatype",
+          "subsets": [
+            "featuringClassifier",
+            "namespace",
+            "redefinitionContext"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Feature-featuringClassifier",
+              "name": "featuringClassifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "Feature"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            },
+            {
+              "id": "RedefinableElement-redefinitionContext",
+              "name": "redefinitionContext",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedOperation_interface": {
+      "ends": [
+        {
+          "id": "Interface-ownedOperation",
+          "name": "ownedOperation",
+          "signature": "ownedOperation : Operation [0..*] {ordered, subsets redefinableElement, feature, ownedMember}",
+          "description": "Операции, принадлежащие интерфейсу.",
+          "type": "Operation",
+          "association": "A_ownedOperation_interface",
+          "owner": "A_ownedOperation_interface",
+          "subsets": [
+            "redefinableElement",
+            "feature",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinitionContext_redefinableElement-redefinableElement",
+              "name": "redefinableElement",
+              "type": "RedefinableElement",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinitionContext_redefinableElement"
+              }
+            },
+            {
+              "id": "Classifier-feature",
+              "name": "feature",
+              "type": "Feature",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "Operation-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..1] {subsets featuringClassifier, namespace, redefinitionContext}",
+          "description": "Интерфейс, владеющий этой операцией, если есть.",
+          "type": "Interface",
+          "association": "A_ownedOperation_interface",
+          "owner": "A_ownedOperation_interface",
+          "subsets": [
+            "featuringClassifier",
+            "namespace",
+            "redefinitionContext"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Feature-featuringClassifier",
+              "name": "featuringClassifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "Feature"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            },
+            {
+              "id": "RedefinableElement-redefinitionContext",
+              "name": "redefinitionContext",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "RedefinableElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_ownedReception_interface": {
+      "ends": [
+        {
+          "id": "Interface-ownedReception",
+          "name": "ownedReception",
+          "signature": "ownedReception : Reception [0..*] {subsets feature, ownedMember}",
+          "description": "Восприятия, которые могут принимать объекты, предоставляющие этот интерфейс.",
+          "type": "Reception",
+          "association": "A_ownedReception_interface",
+          "owner": "A_ownedReception_interface",
+          "subsets": [
+            "feature",
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-feature",
+              "name": "feature",
+              "type": "Feature",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            },
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_ownedReception_interface-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..1] {subsets featuringClassifier, namespace}",
+          "description": "Интерфейс, владеющий этим восприятием.",
+          "type": "Interface",
+          "association": "A_ownedReception_interface",
+          "owner": "A_ownedReception_interface",
+          "subsets": [
+            "featuringClassifier",
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Feature-featuringClassifier",
+              "name": "featuringClassifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "Feature"
+              }
+            },
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_protocol_interface": {
+      "ends": [
+        {
+          "id": "Interface-protocol",
+          "name": "protocol",
+          "signature": "protocol : ProtocolStateMachine [0..1] {subsets ownedMember}",
+          "description": "Протокольная машина состояний, задающая допустимые последовательности вызовов поведенческих характеристик, описанных в интерфейсе.",
+          "type": "ProtocolStateMachine",
+          "association": "A_protocol_interface",
+          "owner": "A_protocol_interface",
+          "subsets": [
+            "ownedMember"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Namespace-ownedMember",
+              "name": "ownedMember",
+              "type": "NamedElement",
+              "owner": {
+                "type": "classifier",
+                "name": "Namespace"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_protocol_interface-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..1] {subsets namespace}",
+          "description": "Интерфейс, допустимые последовательности вызовов поведенческих характеристик которого задаёт эта протокольная машина состояний.",
+          "type": "Interface",
+          "association": "A_protocol_interface",
+          "owner": "A_protocol_interface",
+          "subsets": [
+            "namespace"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "NamedElement-namespace",
+              "name": "namespace",
+              "type": "Namespace",
+              "owner": {
+                "type": "classifier",
+                "name": "NamedElement"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_redefinedInterface_interface": {
+      "ends": [
+        {
+          "id": "Interface-redefinedInterface",
+          "name": "redefinedInterface",
+          "signature": "redefinedInterface : Interface [0..*] {subsets redefinedClassifier}",
+          "description": "Интерфейсы, переопределяемые этим интерфейсом.",
+          "type": "Interface",
+          "association": "A_redefinedInterface_interface",
+          "owner": "A_redefinedInterface_interface",
+          "subsets": [
+            "redefinedClassifier"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "Classifier-redefinedClassifier",
+              "name": "redefinedClassifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "classifier",
+                "name": "Classifier"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_redefinedInterface_interface-interface",
+          "name": "interface",
+          "signature": "interface : Interface [0..*] {subsets classifier}",
+          "description": "Интерфейсы, переопределяющие этот интерфейс.",
+          "type": "Interface",
+          "association": "A_redefinedInterface_interface",
+          "owner": "A_redefinedInterface_interface",
+          "subsets": [
+            "classifier"
+          ],
+          "redefines": [],
+          "subsettedProperties": [
+            {
+              "id": "A_redefinedClassifier_classifier-classifier",
+              "name": "classifier",
+              "type": "Classifier",
+              "owner": {
+                "type": "association",
+                "name": "A_redefinedClassifier_classifier"
+              }
+            }
+          ],
+          "redefinedProperties": []
+        }
+      ]
+    },
+    "A_signal_reception": {
+      "ends": [
+        {
+          "id": "Reception-signal",
+          "name": "signal",
+          "signature": "signal : Signal [1..1]",
+          "description": "Сигнал, обрабатываемый этим восприятием.",
+          "type": "Signal",
+          "association": "A_signal_reception",
+          "owner": "A_signal_reception",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        },
+        {
+          "id": "A_signal_reception-reception",
+          "name": "reception",
+          "signature": "reception : Reception [0..*]",
+          "description": "Восприятия, обрабатывающие этот сигнал.",
+          "type": "Reception",
+          "association": "A_signal_reception",
+          "owner": "A_signal_reception",
+          "subsets": [],
+          "redefines": [],
+          "subsettedProperties": [],
+          "redefinedProperties": []
+        }
+      ]
     }
   },
   "generalizations": {
@@ -5163,6 +6203,33 @@ window.UML_XMI_DATA = {
     "ValueSpecification": [
       "TypedElement",
       "PackageableElement"
+    ],
+    "BehavioredClassifier": [
+      "Classifier"
+    ],
+    "DataType": [
+      "Classifier"
+    ],
+    "Enumeration": [
+      "DataType"
+    ],
+    "EnumerationLiteral": [
+      "InstanceSpecification"
+    ],
+    "Interface": [
+      "Classifier"
+    ],
+    "InterfaceRealization": [
+      "Realization"
+    ],
+    "PrimitiveType": [
+      "DataType"
+    ],
+    "Reception": [
+      "BehavioralFeature"
+    ],
+    "Signal": [
+      "Classifier"
     ]
   },
   "classifierDefinitions": {
@@ -5232,6 +6299,15 @@ window.UML_XMI_DATA = {
     "Type": "A Type constrains the values represented by a TypedElement.",
     "TypedElement": "A TypedElement is a NamedElement that may have a Type specified for it.",
     "Usage": "A Usage is a Dependency in which the client Element requires the supplier Element (or set of Elements) for its full implementation or operation.",
-    "ValueSpecification": "A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template."
+    "ValueSpecification": "A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template.",
+    "BehavioredClassifier": "A BehavioredClassifier may have InterfaceRealizations, and owns a set of Behaviors one of which may specify the behavior of the BehavioredClassifier itself.",
+    "DataType": "A DataType is a type whose instances are identified only by their value.",
+    "Enumeration": "An Enumeration is a DataType whose values are enumerated in the model as EnumerationLiterals.",
+    "EnumerationLiteral": "An EnumerationLiteral is a user-defined data value for an Enumeration.",
+    "Interface": "Interfaces declare coherent services that are implemented by BehavioredClassifiers that implement the Interfaces via InterfaceRealizations.",
+    "InterfaceRealization": "An InterfaceRealization is a specialized realization relationship between a BehavioredClassifier and an Interface. This relationship signifies that the realizing BehavioredClassifier conforms to the contract specified by the Interface.",
+    "PrimitiveType": "A PrimitiveType defines a predefined DataType, without any substructure. A PrimitiveType may have an algebra and operations defined outside of UML, for example, mathematically.",
+    "Reception": "A Reception is a declaration stating that a Classifier is prepared to react to the receipt of a Signal.",
+    "Signal": "A Signal is a specification of a kind of communication between objects in which a reaction is asynchronously triggered in the receiver without a reply."
   }
 };

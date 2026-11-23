@@ -35,6 +35,8 @@
 - `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21 и 8.1–8.5; ссылки и подсказки строятся по данным справочника и XMI; поддерживает `--clause`.
 - `scripts/generate_classification_svg.py` — генерация и проверка 32 интерактивных SVG раздела 9; builders сгруппированы в `scripts/classification_figures_*.py`; поддерживает `--clause`.
 - `scripts/sync_xmi_properties.py` — генерация и проверка базовых XMI-данных и отдельных файлов классов в `site/data/xmi/`; `--clause` ограничивает запись выбранным разделом и сохраняет остальные данные; русские описания отсутствующих свойств задаются в самом скрипте.
+- `scripts/xmi_model.py` и `scripts/xmi_inspect.py` — общий read-only разбор XMI и компактные запросы: списки объектов раздела, карточки классификаторов и ассоциаций, наследуемые свойства, OCL, поиск, зависимости и нормализованная JSON-выгрузка. Использовать их вместо чтения больших фрагментов XMI при наполнении справочника.
+- `scripts/check_xmi.py` — read-only проверка XMI-ссылок, концов ассоциаций, обобщений и циклов наследования; `--clause` ограничивает область проверки. В официальном XMI есть восемь повторных идентификаторов у `State.isConsistentWith`, поэтому полная проверка сообщает об известном дефекте источника; проверки разделов 7–10 проходят.
 - `scripts/check_svg_overlaps.py` — геометрическая проверка SVG полностью на Python: метрики текста через Pillow, пути SVG, перекрытия, отступы подписей, соединения линий и наконечники; браузер не требуется.
 - `scripts/check_spec_completeness.py` — сверка разделов, подразделов, классификаторов, ассоциаций, рисунков и OCL с исходным текстом; проверяет присутствие каждой строки структурированного русского контента в сгенерированных страницах и ссылки `subsets`; поддерживает повторяемый `--clause`.
 - `scripts/validate_site.py` — общая проверка актуальности генерации, полноты текста, ссылок, геометрии рисунков и иерархий наследования на Python, затем отображения постоянных маршрутов и поисковой страницы через локальный Chrome или Edge; `--clause` ограничивает проверку разделом, `--static-only` пропускает браузер.
@@ -51,6 +53,14 @@ python scripts/scaffold_section.py --clause 10
 python scripts/sync_xmi_properties.py
 python scripts/sync_xmi_properties.py --clause 9 --check
 python scripts/sync_xmi_properties.py --check
+python scripts/xmi_inspect.py list --clause 10
+python scripts/xmi_inspect.py show DataType --inherited
+python scripts/xmi_inspect.py show A_ownedAttribute_datatype --json
+python scripts/xmi_inspect.py search behavior --clause 10 --kind property
+python scripts/xmi_inspect.py dependencies Interface --json
+python scripts/xmi_inspect.py export --clause 10 --output drafts/clause-10-xmi.json
+python scripts/check_xmi.py --clause 10
+python scripts/check_xmi.py
 python scripts/generate_common_structure_svg.py
 python scripts/generate_common_structure_svg.py --check
 python scripts/generate_classification_svg.py

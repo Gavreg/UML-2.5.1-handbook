@@ -1,5 +1,14 @@
 # Реестр раздела 17: Interactions (Взаимодействия) — ЧЕРНОВИК
 
+## Метаинформация
+
+> - **Подготовлено**: 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия не фиксировались.
+> - **Промпт**: черновик реестра раздела 17 Interactions OMG UML 2.5.1 (стр. 565–638): подразделы, классификаторы/ассоциации из XMI (Interactions), рисунки, замечания; ≤200k токенов; только официальные источники.
+> - **Проверка**: 2025-11-22, сверка с дампом/XMI; добавлены 9 подразделов, пересчитаны страницы, каталоги на стр. 608/633.
+> - **Состав**: конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам.
+> - **Критерий адекватности**: числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках».
+# Реестр раздела 17: Interactions (Взаимодействия) — ЧЕРНОВИК
+
 > **Контекст**: В OMG UML 2.5.1 — это раздел **17** (страницы 565–638).
 > Разделы: 16 = Actions, **17 = Interactions**, 18 = UseCases.
 
@@ -318,3 +327,78 @@
 - **Этап 3 (XMI sync)**: проверить, что все 49 ownedAttribute и 38 ассоциаций корректно генерируют страницы свойств.
 - **Этап 5 (SVG diagrams)**: 30 рисунков требуют интерактивных SVG. Особое внимание — Figure 17.24 (describing Collaborations) и Figure 17.25 (metamodel overview): они содержат сложные перекрёстные связи.
 - **Этап 6 (validation)**: проверить ссылки `subsets` в свойствах MessageEnd→Message, InteractionFragment→Interaction, а также `redefines` между классами ExecutionSpecification.
+
+## План иллюстраций
+
+| # | Рисунок | Страница | Тип | Сложность SVG | Приоритет |
+|---|---------|----------|-----|--------------|-----------|
+| 1 | Figure 17.1 Interactions | 565 | метамодель | средняя (3 класса + обобщения) | высокий |
+| 2 | Figure 17.2 Overlapping ExecutionSpecifications | 567 | sequence | низкая (пересечение зон выполнения) | средний |
+| 3 | Figure 17.3 An example of an Interaction in the form of a Sequence Diagram | 568 | sequence | высокая (lifelines, messages, destruction, timing) | высокий |
+| 4 | Figure 17.4 OccurrenceSpecification | 572 | метамодель | низкая (точки на lifeline) | высокий |
+| 5 | Figure 17.5 Sequence Diagram with time and timing concepts | 569 | sequence + timing | высокая (тайм-концепции, горизонтальная ось времени) | высокий |
+| 6 | Figure 17.6 Lifelines | 570 | метамодель | средняя (multiplicity, parts, states) | высокий |
+| 7 | Figure 17.7 Messages | 572 | sequence | высокая (типы сообщений, gate-стрелки, sort/kind) | высокий |
+| 8 | Figure 17.8 DestructionOccurrenceSpecification symbol | 576 | sequence | низкая (крестик на lifeline) | средний |
+| 9 | Figure 17.9 Occurrences | 578 | sequence | средняя (точки, GeneralOrdering) | высокий |
+| 10 | Figure 17.10 Example showing GeneralOrdering in a sequence diagram | 579 | sequence | высокая (частичный порядок, non-sequential events) | средний |
+| 11 | Figure 17.11 Fragments | 580 | метамодель | средняя (CombinedFragment иерархия) | высокий |
+| 12 | Figure 17.12 Critical Region | 585 | sequence | высокая (рамка critical region, guard, invariant) | средний |
+| 13 | Figure 17.13 Loop CombinedFragment | 586 | sequence + combinedFragments | высокая (вложенный loop, min/max, invariant) | высокий |
+| 14 | Figure 17.14 CombinedFragment | 586 | метамодель | средняя (operator, operand, gate) | высокий |
+| 15 | Figure 17.15 Continuation | 587 | sequence + combinedFragments | высокая (внешняя ссылка между CombinedFragment) | средний |
+| 16 | Figure 17.16 Continuation interpretation | 587 | sequence | высокая (объединение двух диаграмм через continuation) | низкий |
+| 17 | Figure 17.17 Ignore, consider, assert with StateInvariants | 588 | sequence + combinedFragments | высокая (stateInvariant guard, ignore/consider regions) | средний |
+| 18 | Figure 17.18 InteractionUses | 589 | метамодель | средняя (InteractionUse ↔ Interaction связь) | высокий |
+| 19 | Figure 17.19 InteractionUse | 590 | sequence | высокая (gates, returnValue, arguments) | высокий |
+| 20 | Figure 17.20 InteractionUse with value return | 591 | sequence | средняя (returnValueRecipient, тип результата) | средний |
+| 21 | Figure 17.21 PartDecomposition - the decomposed part | 591 | метамодель | низкая (стрелка represents на lifeline) | средний |
+| 22 | Figure 17.22 PartDecomposition - the decomposition | 591 | sequence | средняя (вложенная sub-диаграмма с альтернативой) | высокий |
+| 23 | Figure 17.23 Sequence Diagrams where two Lifelines refer to same Parts | 592 | sequence | высокая (internal structure, MultiplicityElement) | низкий |
+| 24 | Figure 17.24 Describing Collaborations and their binding | 593 | метамодель + sequence | высокая (collaboration use, binding, MultiplicityElement) | средний |
+| 25 | Figure 17.25 Overview of Metamodel elements of a Sequence Diagram | 601 | метамодель | критическая (24+ классов, все ассоциации пакета Interactions) | высокий |
+| 26 | Figure 17.26 Communication diagram | 599 | communication | средняя (numerals на связях, навигация) | средний |
+| 27 | Figure 17.27 Interaction Overview Diagram representing a High Level Interaction diagram | 601 | interaction overview | высокая (activity-диаграмма с InteractionUse узлами) | высокий |
+| 28 | Figure 17.28 A Lifeline for a discrete object | 603 | sequence + timing | средняя (state, activation, message) | средний |
+| 29 | Figure 17.29 Compact Lifeline with States | 604 | sequence + timing | средняя (состояния внутри lifeline rectangle) | низкий |
+| 30 | Figure 17.30 Timing Diagram with more than one Lifeline and with Messages | 604 | timing | критическая (горизонтальная ось времени, две lifeline, messages с timing constraints) | высокий |
+
+**Детальные приоритеты**: рисунки 13–15, 25, 30 — критическая сложность SVG из-за вложенных CombinedFragment, полной метамодельной диаграммы и временных осей. Рисунки 3, 7, 9, 12, 17, 19, 22, 27 — высокая сложность (множественные lifelines, gate-связи, partial ordering, interaction overview). Остальные — средняя или низкая сложность.
+
+## План межраздельных ссылок
+
+Элементы раздела 17 связаны с классами других пакетов OMG UML через ассоциации и подтипы. Ниже таблицы основных связей для навигации справочника.
+
+| Элемент (17) | Связанный элемент | Раздел | Тип связи |
+|-------------|------------------|--------|-----------|
+| `Interaction` | `Behavior` (общее предок Classifier) | 13 Common Behavior | обобщение через Action |
+| `ActionExecutionSpecification.action` | `Action` | 16 Actions | ассоциация A_action_actionExecutionSpecification |
+| `Action` (через Interaction) | `Interaction` | 17 Interactions | Association A_action_interaction |
+| `BehaviorExecutionSpecification.behavior` | `Behavior` | 13 Common Behavior | ассоциация A_behavior_behaviorExecutionSpecification |
+| `Message.signature` | `NamedElement` → `Operation` / `Signal` | 9 Classification, 12 Packages | subsets (Operation) |
+| `MessageEnd.message` | `Message` | 17 Interactions | ownedEnd (кратность [1..2]) |
+| `Lifeline.represents` | `ConnectableElement` / `MultipliciyElement` | 7 Common Structure | обобщение, MultiplicityElement |
+| `InteractionFragment.covered` | `Lifeline` | 17 Interactions | навигация через coveredBy |
+| `ExecutionSpecification.start/finish` | `OccurrenceSpecification` | 17 Interactions | ownedEnd A_finish_executionSpecification / A_start_executionSpecification |
+| `CombinedFragment.operand` | `InteractionOperand` | 17 Interactions | composite (кратность [1..*]) |
+| `InteractionConstraint.guard` | `InteractionOperand` | 17 Interactions | навигация через guard → minint/maxint |
+| `Gate` | `MessageEnd` | 17 Interactions | наследование от MessageEnd |
+| `StateInvariant.invariant` | `Constraint` (Expression) | 9 Classification | subsets (NamedElement) |
+| `Lifeline` / `StateInvariant` | `State` | 14 StateMachines | связь через states-attribute LIFELINE |
+| `GeneralOrdering` | `OccurrenceSpecification` | 17 Interactions | before → after (partial order) |
+
+**Связи с разделом 7 (Common Structure)**: Lifeline.represents ведёт к ConnectableElement и MultiplicityElement из раздела 7; Property в ReturnValueRecipient → Property из раздела 7.  
+**Связи с разделом 9 (Classification)**: Message.signature ссылается на Operation/Signal (классификаторы); InteractionOperatorKind — собственный enumeration пакета Interactions.  
+**Связи с разделом 13 (Common Behavior)**: Interaction и BehaviorExecutionSpecification.behavior связаны с поведением через Action/Berhavior; Behavior — базовый класс поведения из раздела 13.  
+**Связи с разделом 14 (StateMachines)**: StateInvariant ссылается на State из StateMachines; Lifeline может содержать states-атрибуты, ведущие к состояниям автомата.
+
+## Применение текущих скриптов для раздела 17
+
+Пайплайн `section_pipeline.py --clause 17` запускает этапы последовательно. **Этап 1 (prepare_section.py)** извлечёт заголовки из тела текста — с учётом пропусков Abstract Syntax (17.3.2–17.7.2), которые скрипт найдёт автоматически, но TOC-генерация даст неполный список. **Этап 2 (scaffold_section.py)** создаст заглушки для 25 классификаторов и 38 ассоциаций — необходимо учесть, что XMI-файл Interactions содержит packageImport из CommonStructure, Classification и SimpleClassifiers, поэтому cross-package ссылки потребуют ручной коррекции. **Этап 3 (sync_xmi_properties.py)** сгенерирует ownedAttribute и ownedEnd; для классов CombinedFragment (3 атрибута), Interaction (4 атрибута) и GeneralOrdering (3 атрибута) нужно проверить генерацию subsets-ссылок. **Этап 5 (SVG)** требует доработки builders — стандартный `generate_common_structure_svg.py` не обрабатывает sequence-диаграммы с CombinedFragment; потребуется кастомный builder для каждого типа (sequence, interaction overview, timing). **Особенности**: раздел содержит 4 вида диаграмм последовательности (с timed lifelines, combinedFragments, interaction overview, communication diagrams); рисунки в TOC имеют сдвиг строк из-за переносов; InteractionOperatorKind имеет 12 литералов — наибольшее в пакете.
+
+## Модернизация скриптов для раздела 17
+
+**SVG-билдер sequence-фрагментов** должен поддерживать CombinedFragment с nested operands, gate-связями и continuation-переходами между фрагментами; текущий generic-builder не обрабатывает вложенные операторы (alt/loop/neg) — требуется отдельный layout-алгоритм для прямоугольных рамок с заголовком оператора.  
+**Lifeline-layout**: необходимо добавить поддержку compact lifeline (состояния внутри rectangle), discrete object (state sequence), timing markers и partial ordering arrows между lifelines.  
+**Timing axes**: Figure 17.30 требует горизонтальной оси времени с вертикальными timeline-линиями, что не поддерживается текущим builder'ом для common-structure диаграмм; нужен отдельный timing-layout module.  
+**Компоновка CombinedFragment**: nested loop/alt/neg fragments требуют рекурсивного позиционирования operands и корректного соединения gate-стрелок с внешним контекстом — текущий алгоритм рисует только single-level combinedFragments.

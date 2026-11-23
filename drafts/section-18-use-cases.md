@@ -1,5 +1,15 @@
 # Черновик реестра раздела 18 «UseCases» (Варианты использования)
 
+## Метаинформация
+
+- Подготовлено: 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия не фиксировались.
+- Промпт: черновик реестра раздела 18 UseCases OMG UML 2.5.1 (стр. 639–652): подразделы, классификаторы/ассоциации из XMI (UseCases), рисунки, замечания; ≤200k токенов; только официальные источники.
+- Проверка: 2025-11-22, сверка с дампом/XMI; уточнено дерево подразделов, расширены замечания (OCL Actor-must_have_name, Extend-extension_points).
+- Состав: конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам.
+- Критерий адекватности: числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках».
+
+---
+
 ## Блок конфигурации для `scripts/sections.json`
 
 ```json
@@ -109,6 +119,73 @@
 **Итого:** **12 рисунков**.
 
 **Замечание по нумерации:** Figure 18.1 находится на странице 637 (PDF-индекс 679), что на 2 страницы раньше начала текста раздела 18 (639, PDF-индекс 680). Это общая диаграмма пакета UseCases, размещённая впереди — типичная практика OMG. Страница 637 входит в каталог рисунков TOC, но не в тело раздела 18 (639–652). При генерации SVG-диаграммы потребуется ссылка на страницу пакета (если будет создана) или на раздел общего каркаса.
+
+---
+
+## План иллюстраций
+
+| Рисунок | Страница | Тип | Сложность SVG | Приоритет |
+|---------|----------|-----|---------------|-----------|
+| Figure 18.1 UseCases | 637 | Диаграмма пакета (метамодель) | Низкая — прямоугольники пакетов/классов, связи Package→Element | Высокий (общий обзор) |
+| Figure 18.2 Class diagram… | 641 | Метамодель: Package owning UseCases/Actors/Subsystem | Средняя — классификаторы + ассоциации Package/Actor/UseCase/Subsystem | Высокий |
+| Figure 18.3 Example Extend | 641 | Диаграмма вариантов использования (пример) | Средняя — 3 UC, 1 Actor, 2Extend с ExtensionPoint и условием | Высокий |
+| Figure 18.4 Example Include | 642 | Диаграмма вариантов использования (пример) | Низкая — 2 UC, 1 Include-связь | Высокий |
+| Figure 18.5 UseCase using Classifier rectangle notation | 642 | Метамодель: UC как прямоугольник класса | Низкая — один класс с compartment для use cases | Средняя (справочная нотация) |
+| Figure 18.6 Actor notation using stick-man | 642 | Нотация актора (иконка-человек) | Низкая — stickman + 1 UC | Средняя |
+| Figure 18.7 Actor notation using Class rectangle | 642 | Нотация актора (прямоугольник класса) | Низкая — прямоугольник Actor + 1 UC | Средняя |
+| Figure 18.8 Actor notation using icon | 642 | Нотация актора (символ-иконка для нечеловека) | Низкая — иконка + 1 UC (система/устройство) | Средняя |
+| Figure 18.9 Notation for UseCase owned by Classifier | 643 | Метамодель: UC внутри Classifier compartment | Средняя — класс с compartment «Use Cases» | Высокий |
+| Figure 18.10 Example ATM system… | 643 | Диаграмма вариантов использования (пример) | Высокая — 5+ Actor/UC, Include/Extend связи, 2 Actor-группы | Высокий |
+| Figure 18.11 Example UseCases owned by Packages | 644 | Метамодель: Package с OwnedUseCase compartment | Средняя — 2 Package, UC внутри | Высокий |
+| Figure 18.12 Example UseCase with associated StateMachine | 644 | Диаграмма: UC с поведением (StateMachine) | Средняя — UC → dependency/stateMachine | Средняя |
+
+**Отдельно:** Figure 18.1 — диаграмма пакета UseCases. Низкая сложность: Package-блок, вложенные Class-блоки (Actor, Extend, ExtensionPoint, Include, UseCase), Association-линии, обобщения к предкам из других пакетов. SVG с кликабельными классами на страницы 18.2.x, ссылка на пакет UseCases (если будет страница пакета).
+
+---
+
+## План межраздельных ссылок
+
+| Элемент | Связанный элемент | Раздел | Тип связи |
+|---------|-------------------|--------|-----------|
+| Actor | BehavioredClassifier | 11 | Наследование (generalization) |
+| Actor | Classifier | 9 | A_subject_useCase.end `subject` (тип Classifier) |
+| UseCase | BehavioredClassifier | 11 | Наследование (generalization) |
+| UseCase | NamedElement | 9 | inherited через BehavioredClassifier |
+| Extend | Association | 9.1 | Стереотип association-class; наследуёт Association properties |
+| Extend | RedefinableElement | 9 | inherited через DirectedRelationship/NamedElement (через Association) |
+| Include | Association | 9.1 | Стереотип association-class |
+| Include | RedefinableElement | 9 | inherited как Extend |
+| ExtensionPoint | NamedElement | 9 | direct; must_have_name constraint |
+| A_extensionPoint_useCase | — | общий | ends: extensionPoint:ExtensionPoint[0..*], useCase:UseCase[0..*] |
+| A_include_includingCase | — | общий | ends: include:Include[0..*], includingCase:UseCase[0..*] |
+| Figure 18.2 Subsystem stereotype | Component | 22 (Components) | Stereotype «Subsystem» на Class → Component |
+| Figure 18.12 StateMachine | BehaviorState / ProtocolState | 14 | dependency/useCase::ownedBehavior:StateMachine |
+| UseCase.allIncludedUseCases() | Activity | 13 | behavior of UseCase (OCL specification в секции Semantics) |
+
+**Примечание:** Extend и Include — ассоциационные классы, наследующие свойства `Association` из раздела 9.1: `source`, `target`, `name`, `visibility`, `isReadOnly`, `isSpecializable`, `memberEnd`, `navMemberEnd`, `isDerivedAll`, `subsettedProperty`, `redefinedProperty`, `isNonUnique`, `isOrdered`, `isChangeable`.
+
+---
+
+## Применение текущих скриптов для раздела 18
+
+### Пайплайн этапов
+1. **Этап 1 (prepare):** `python scripts/section_pipeline.py --clause 18 --stage 1` — извлечение заголовков, объектов XMI, рисунков, маршрутов и плана интеграции в `site/docs/uml-2.5.1-use-cases-inventory.json`.
+2. **Этап 2 (scaffold):** `python scripts/section_pipeline.py --clause 18 --stage 2` + ручной ввод русских описаний из черновика — `drafts/section-18-use-cases.md`.
+3. **Этап 3 (XMI sync):** `python scripts/section_pipeline.py --clause 18 --stage 3`: `scripts/sync_xmi_properties.py` для файлов классов Actor, Extend, ExtensionPoint, Include, UseCase в `site/data/xmi/`.
+4. **Этап 4 (build):** `python scripts/section_pipeline.py --clause 18 --stage 4`: `scripts/build_site.py` для генерации страниц и поискового индекса.
+5. **Этап 5 (SVG render):** `scripts/generate_classification_svg.py` для 12 рисунков; SVG-билдеры должны поддерживать `association-class` (Extend/Include с атрибутами).
+6. **Этап 6 (validate):** `python scripts/section_pipeline.py --clause 18 --stage 6`: `scripts/validate_site.py --clause 18 --static-only`.
+
+### Особенности конфигурации sections.json
+- Ключ: `"18"`, classifier_catalog = `"18.2"`, association_catalog = `"18.3"`.
+- Первый классификатор (Actor) на стр. 647, но раздел начинается с 639 — это нормально, TOC уже содержит номер стартовой страницы.
+- Figure 18.1 находится вне диапазона страниц раздела (стр. 637 vs 639–652): в SVG-билдере нужно предусмотреть ссылку на страницу пакета или общий каркас, а не на раздел 18.
+
+### Модернизация скриптов
+1. **scaffold_section.py:** поддержка ассоциационных классов — при создании страницы для `Extend`/`Include` выводить два блока: атрибуты класса и концы ассоциации (ownedEnd), сгенерированные из соответствующих XMI-блоков.
+2. **generate_classification_svg.py / SVG-билдеры:** добавить параметр `association_class=True`, чтобы при рендеринге классов-ассоциаций рисовать не только прямоугольник класса, но и подписи концов ассоциации (как для Association), с пересечением атрибутов/кратностей.
+3. **Обработка внедиапазонных рисунков:** в пайплайне этапа 1 при обнаружении `Figure N.x` на странице < first_page или > last_page автоматически помечать его как «вне диапазона» и генерировать ссылку-заглушку (например, на страницу пакета или раздел общего каркаса).
+4. **cross_references в pages-фрагментах:** `build_site.py` должен автоматически добавлять межраздельные ссылки из Generalization и Dependency элементов XMI при формировании HTML-страниц классификаторов.
 
 ---
 

@@ -2,6 +2,18 @@
 
 Черновик, аналог этапа 1 (inventory). Источник: OMG UML 2.5.1 formal/17-12-05.
 
+## Метаинформация
+
+| Поле | Значение |
+|------|----------|
+| Подготовлено | 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия не фиксировались |
+| Промпт | Черновик реестра раздела 19 Deployments OMG UML 2.5.1 (стр. 653–668): подразделы, классификаторы/ассоциации из XMI (пакет Deployments), рисунки, замечания; ≤200k токенов; только официальные источники |
+| Проверка | 2025-11-22, сверка с дампом/XMI; подтверждены 32 подраздела, 10 классификаторов, 16 рисунков, детализация ассоциаций (memberEnd/ownedEnd) |
+| Состав | Конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам |
+| Критерий адекватности | Числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках» |
+
+---
+
 ---
 
 ## Конфигурация для sections.json
@@ -289,3 +301,101 @@
 
 *Черновик создан: раздел 19 Deployments спецификации OMG UML 2.5.1.*  
 *Следующие шаги: этап 2 (scaffold) — создание русского контента для каждого классификатора; этап 3 (XMI sync); этапы 4–6 (site build, SVG diagrams, validation).*
+
+---
+
+## План иллюстраций (интерактивные SVG для справочника)
+
+Для каждого из 16 рисунков OMG UML предлагается создать интерактивный SVG с гиперссылками на страницы классификаторов.
+
+| Рисунок | Страница | Тип диаграммы | Сложность SVG | Приоритет | Комментарий по реализации |
+|---------|----------|---------------|---------------|-----------|---------------------------|
+| Figure 19.1 | P694 | Метамодел. (классы + обобщения) | Средняя | Высокий | 7 классов пакета Deployments с link-ами; корень UMLModel на левом краю |
+| Figure 19.2 | P695 | Deployment-диаграмма | Высокий | Высокий | Зависимости между Artifact/DeploymentSpecification → DeploymentTarget; нужно масштабирование |
+| Figure 19.3 | P695 | Deployment-диаграмма (альтернатива) | Высокий | Средний | То же + «deploy» зависимость — рекурсивная link на страницу A_configuration_deployment |
+| Figure 19.4 | P696 | Текстовый список | Низкая | Низкий | Простой текстовый блок; гиперссылки DeployedArtifact → странице классификатора |
+| Figure 19.5 | P696 | Deployment-диаграмма (type + instance) | Высокий | Высокий | Два блока: Artifact type-level, DeployedArtifact instance-level; параметризация через DeploymentSpec |
+| Figure 19.6 | P696 | Зависимости между спецификациями | Средняя | Средний | Многократные links DeploymentSpecification → DeployedArtifact (multiple) |
+| Figure 19.7 | P697 | Детальная спецификация | Высокий | Высокий | Полный Detail-блок: DeploymentSpecification с атрибутами (deployment, deploymentLocation, executionLocation) — как expandable panel |
+| Figure 19.8 | P697 | Метамодел. (Artifacts иерархия) | Средняя | Средний | Artifact → DeployedArtifact + DeploymentSpecification (generalizations); link-ы на классы |
+| Figure 19.9 | P698 | Иконка артефакта | Низкая | Средний | Прямоугольник класса + иконка документа; link на Artifact страницу |
+| Figure 19.10 | P698 | Manifestation-связь | Средняя | Средний | dashed line с ««manifest»» между Artifact ↔ Component; link на Manifestation страницу |
+| Figure 19.11 | P699 | Метамодел. (Node иерархия) | Высокий | Высокий | Node + Device/ExecEnv + DeploymentTarget — нужно несколько столбцов наследования |
+| Figure 19.12 | P700 | Deployment-диаграмма узлов | Очень высокая | Критический | Вложенный Node → Device с ExecutionEnvironment, ConnectionPath к другому Device; прокрутка обязательна |
+| Figure 19.13 | P700 | Нотация ExecutionEnvironment | Низкая | Низкий | Простой прямоугольник с ««executionEnvironment»»; link на класс |
+| Figure 19.14 | P700 | Экземпляр Node | Средняя | Средний | Instance-specification + deployment; link-ы на Deployment |
+| Figure 19.15 | P700 | CommunicationPath между серверами | Высокий | Высокий | AppServer ↔ DBServer через CommunicationPath; deployed Artifacts — много элементов |
+| Figure 19.16 | P700 | Deployed component Artifacts | Высокий | Критический | Multiple deployed artifacts на одном node; nestedNode — self-link — требует прокрутки или вложенности |
+
+**Рекомендации:**
+- Диаграммы наследования (19.1, 19.8, 19.11): горизонтальное дерево, масштабирование по ширине экрана, навигация scroll-only.
+- Deployment-диаграммы (19.2–3, 5–7, 12, 15–16): фиксированные прямоугольники узлов, resize/pan через колесо мыши + drag.
+- Фигуры 19.12 и 19.16 критической сложности — реализовать горизонтальную прокрутку контейнера (CSS overflow-x: auto).
+
+---
+
+## План межраздельных ссылок (cross-section links)
+
+В пакете Deployments классификаторы наследуются из пакетов других разделов (Common Structure, Classification). Все такие ссылки нужно добавить на страницы справочника.
+
+| Элемент раздела 19 | Связанный элемент | Раздел источника | Тип связи |
+|---------------------|-------------------|-----------------|-----------|
+| Artifact → Classifier | Classifier | Раздел 7 (Common Structure), классификатор 7.2 | Наследование: обобщение Artifact→Classifier |
+| Artifact → DeployedArtifact | DeployedArtifact | Раздел 19, разделитель 19.5.3 | Внутреннее обобщение |
+| CommunicationPath → Association | Association | Раздел 8 (Common Structure), классификатор 8.1 | Наследование: обобщение CommPath→Association |
+| Deployment → Dependency | Dependency | Раздел 7.7, классификатор 7.35 | Насладование: обобщение Deployment→Dependency |
+| DeploymentTarget → NamedElement | NamedElement | Раздел 7 (Common Structure), классификатор 7.14 | Наследование: DeployedTarget→NamedElement |
+| DeployedArtifact → NamedElement | NamedElement | Раздел 7 (Common Structure) | Наследование: обобщение |
+| Device → Node | Node | Раздел 19, разделитель 19.5.10 | Внутреннее обобщение |
+| ExecutionEnvironment → Node | Node | Раздел 19, разделитель 19.5.10 | Внутреннее обобщение |
+| Manifestation → Abstraction | Abstraction | Раздел 12 (Classification), классификатор 12.3/12.4 | Наследование: обобщение Manifestation→Abstraction |
+| Node → Class | Class | Раздел 7 (Common Structure), классификатор 7.2 | Наследование: обобщение Node→Class |
+| Node → DeploymentTarget | DeploymentTarget | Раздел 19, разделитель 19.5.6 | Внутреннее обобщение |
+
+**Правила гиперссылок:**
+- На страницу каждого родителя давать текст вида `[Classifier]` (кнопка/блок) со ссылкой на соответствующий раздел справочника.
+- На диаграммах наследования все блоки-классы — кликабельные ссылки (как реализовано в разделе 9).
+- Внутренние ссылки (внутри раздела 19): DeployedArtifact, DeploymentTarget, Device, ExecEnv — ссылки на подразделы 19.5.x.
+- Внешние ссылки: Classifier (Раздел 7), Dependency (Раздел 7.7), Abstraction (Раздел 12) — при создании разделов справки для этих элементов нужно проставить cross-reference ID.
+
+---
+
+## Применение текущих скриптов к разделу 19
+
+Для переноса раздела 19 Deployments в справочник используется стандартный шестиэтапный пайплайн:
+
+### Этап 1: `prepare_section.py --clause 19`
+- Извлечёт из PDF (блоков P694–P708) заголовки, рисунки, классификаторы.
+- **Особенность:** нужно указать смещение строк дампа — реальный контент на блоках P694–P708 (не 653–668 как в TOC). Скрипт должен принимать параметр `--pdf_blocks 694-708` или автоматически определять начало контента.
+- **Особенность:** при поиске рисунков использовать поиск по тексту блоков P694–P708, а не по формальным TOC-страницам.
+
+### Этап 2: `scaffold_section.py --clause 19`
+- Создаст заготовки страниц для 10 классификаторов и 10 ассоциаций.
+- **Особенность:** при генерации диаграмм наследования учитывать родителей из внешних разделов (Classifier, Association, Dependency, Abstraction). Для блоков-родителей извне пакета — заглушки с cross-reference ID.
+- **Особенность:** для recursive associations (A_nestedArtifact_artifact, A_nestedNode_node) в SVG-билдере нужны self-referencing paths.
+
+### Этап 3: `sync_xmi_properties.py --clause 19`
+- Считает свойства из XMI пакета Deployments (15 ownedAttribute + 8 ownedEnd = 23 связи).
+- **Особенность:** association ends, определённые только через `memberEnd` (2 ассоциации), нужно резолвить по referenced ownedAttribute на страницах классов.
+
+### Этап 4: `build_site.py --clause 19`
+- Построит HTML-фрагменты страниц с навигацией и поисковым индексом.
+- **Особенность:** cross-links к разделам 7, 12 — пока placeholder (необходимо пометить как pending cross-reference).
+
+### Этап 5: SVG-диаграммы
+- **Недостаток текущих билдеров:** нет специфичной логики для deployment-диаграмм (зависимости deploy, artifact иконки).
+- Потребуется отдельный builder для типа `deployment_diagram` (аналог classification_figures_layout.py).
+
+### Этап 6: `validate_site.py --clause 19 --static-only`
+- Проверит полноту текста, ссылок, геометрии SVG.
+- **Особенность:** проверка cross-links к внешним разделам требует флага `--skip-unresolved-crossrefs`.
+
+---
+
+## Модернизация скриптов для раздела 19 (рекомендации)
+
+1. **SVG-билдер deployment-диаграмм:** Добавить новый builder в `scripts/classification_figures_*.py` с типом `deployment_diagram`, поддерживающим прямоугольники узлов, dashed dependency lines с «deploy» маркером, иконки документов для артефактов (inline SVG icon), и nested node hierarchy. Поддержка горизонтальной прокрутки через CSS-обёртку контейнера.
+
+2. **Обработка derived-атрибутов:** В `sync_xmi_properties.py` добавить логику маркировки атрибутов с `isDerived="true"` — при генерации страниц показывать такие свойства с пометкой «[derived]» и подсвечивать link к вычисляющей ассоциации (например, A_deployedElement_deploymentTarget для DeploymentTarget-deployedElement).
+
+3. **Self-рекурсивные связи в SVG:** В билдере диаграмм добавить поддержку self-referencing edges: при `type == type` концов ассоциации рисовать curved path от вершины класса к тому же классу с дугой (d=15px), аналогично реализации для A_nestedArtifact_artifact и A_nestedNode_node.

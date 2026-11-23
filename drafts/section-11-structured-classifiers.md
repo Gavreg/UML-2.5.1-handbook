@@ -1,3 +1,10 @@
+> **Метаинформация о черновике**
+> - Подготовлено: 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия модели не фиксировались.
+> - Исходная задача (промпт): составить черновик реестра раздела 11 Structured Classifiers спецификации OMG UML 2.5.1 (страницы 183–240) для будущего переноса в справочник: дерево подразделов, классификаторы и ассоциации из XMI, каталог рисунков, замечания; бюджет ≤200k токенов; источники — PDF `omg-uml-2.5.1-formal-17-12-05.pdf`, текстовый дамп `omg-uml-2.5.1-formal-17-12-05.txt`, XMI `UML-2.5.1.xmi` (пакет StructuredClassifiers); без выдумывания, только извлечение regex/grep/awk по нужным диапазонам.
+> - Дата и характер проверки: 2025-11-22, сверка с текстом спецификации (regex по дампу страниц 183–240) и с XMI (пакет StructuredClassifiers); исправлены рисунки (48→54), добавлены Figure 39/40/43; обновлены замечания и статус рисков.
+> - Состав черновика: конфигурация `sections.json`, дерево подразделов, таблицы классификаторов и ассоциаций с определениями из текста, каталог рисунков, замечания и риски, план иллюстраций, план межраздельных ссылок, рекомендации по применению скриптов пайплайна и модернизации.
+> - Критерий адекватности для проверяющей модели: числа в сводке (15 классификаторов, 35 ассоциаций, 54 рисунка, 90 заголовков подразделов, 5 Attributes / 12 Operations / 8 Constraints) должны сходиться с XMI и текстом спецификации; при расхождениях смотри раздел «Замечания и риски».
+
 # Черновик реестра раздела 11: Structured Classifiers
 
 **Статус**: черновик inventory (аналог этапа 1, cf. `uml-2.5.1-simple-classifiers-inventory.json`)
@@ -330,3 +337,142 @@
 - **Перекрёстные ссылки**: элементы раздела 11 активно используются в других разделах (Component → раздел 19, Connector → Activity diagrams). Ссылки строить с учётом порядка создания страниц.
 
 - **Enumeration PseudostateKind** имеет 9 литералов (initial, deepHistory, shallowHistory, join, fork, junction, choice, entryPoint, exitPoint, terminate) — но часть литералов описывается в контексте state machines (§13), не §11.
+
+## 8. План иллюстраций (из каталога рисунков 54 фигур)
+
+| № | Стр. | Тип диаграммы | Сложность SVG | Приоритет | Заметка |
+|---|------|---------------|---------------|-----------|---------|
+| 1 | 181 | Композиционная (обзор пакета) | Высокая — много элементов, перекрёстные связи | Высший | Схема «что входит» в StructuredClassifiers |
+| 2 | 184 | Нотация (прямоугольники частей/ролей) | Низкая | Высший | Базовая схема для понимания parts & roles |
+| 3 | 184 | Нотация (Ports на частях) | Средняя — требует port notation с интерфейсами | Высший | Показывает связь Part ↔ Port |
+| 4 | 185 | Варианты нотации (соединение Parts и Ports) | Низкая | Высший | Три альтернативы, нужно выбрать одну для справочника |
+| 5 | 185 | Сравнение (Assocation vs Connector) | Средняя — две схемы в одной фигуре | Высший | Ключевая схема: показывает семантическую разницу |
+| 6 | 186 | Шаблон Star (соединение N портов к одному узлу) | Средняя — радиальная компоновка, линии пересекаются | Средний | Пример топологии «звезда» для Connector |
+| 7 | 186 | Шаблон Array (массив коннекторов) | Средняя — повторяющийся паттерн, много элементов | Средний | Альтернатива Star для параллельных связей |
+| 8 | 187 | Пример assembly Connector между двумя Components | Высокая — содержит Port, Component и стрелку | Высший | Показывает делегирование от одного Interface к другому |
+| 9 | 187 | n-арный channeled ball-and-socket Connector | Высокaя — 4-арное соединение с каналами, перекрёстные линии | Средний | Усложнённый паттерн: можно реализовать через SVG `<path>` |
+| 10 | 188 | Композиционная (EncapsulatedClassifiers) | Средняя — порт-ориентированная нотация | Высший | Показывает Ports на Class, Component и др. |
+| 11–14 | 190–191 | Нотация портов (Port notation, behavior Port, multiple interfaces, примеры) | Низкая/Средняя | Высокий | Базовая нотация — приоритет выше примеров Car |
+| 15–21 | 192–195 | Классы и Connector/Parts для Car Class | Средняя (каждая по отдельности) | Средний | Примеры используют Car/Window/Axle/Wheel из разделов значений/ассоциаций |
+| 22–24 | 196 | InstanceSpecification — конструкторы Class | Низкая | Средний | Показывают создание объектов через IS |
+| 25, 27–38 | 197–207 | Ассоциации: двоичные, тернарные, маркировка концов, qualified associations, composite aggregation | Средняя (многие содержат multiple ends и стрелки) | Высший | **Критически важны для каталога метамодели** |
+| 26 | 200 | Точечная нотация «один конец принадлежит ассоциации» | Низкая | Средний | Показывает dot-маркер — можно реализовать через SVG `<circle>` |
+| 39–40 | 209 | Композиционная (Components + Dependencies) | Высокая — несколько Components, много Dependency стрелок | Средний | Примеры из разделов компонентов и зависимостей |
+| 41–48 | 210–212 | White-box notation, реализация Component, делегирование | Высокaя — много интерфейсов (lollipop/cocktail), Delegating Connector arrows | Высший | **Самые сложные схемы раздела** — требуют точной геометрии портов и коннекторов |
+| 49–54 | 213–217 | Collaborations (Observer, Sale, BrokeredSale) | Высокaя — нотация Collaboration (рамка с пунктиром), parts-roles, roleBinding | Высший | **Относятся к пакету Interactions/Actions из StateMachines** — переносить совместно |
+
+### Рисунки, относящиеся к вложенным пакетам
+| Рисунок | Вложенный пакет | Переносить с пакетом или с разделом 11? |
+|---------|----------------|-----------------------------------------|
+| 11.49–11.50 | Interactions + Collaborations (связь с CommonStructure) | С разделом 11 (описано в §11.7 Collaborations) |
+| 11.52–11.54 | Actions + «occurrence» нотация (вложена в Sale Collaboration) | С разделом 11, но проверить элементы из CommonBehavior (§7) |
+| 11.46–11.48 | Components + wiring через Dependencies (§7.7) | С разделом 11.6, но ссылки на §7.7 обязательны |
+
+## 9. План межраздельных ссылок
+
+Элементы раздела 11 активно ссылуются на другие разделы метамодели (наследование, типы, subsets).
+
+| Элемент (§11) | Связанный элемент | Раздел справочника | Тип связи |
+|---------------|-------------------|--------------------|-----------|
+| Association (11.8.1) → Generalization: `Relationship` | Relationship | 9.1 Classifier | Обобщение (предок) |
+| Association (11.8.1) → Generalization: `Classifier` | Classifier | 9.1 Classifier | Обобщение (предок) |
+| Association {isDerived} : Boolean | ownedAttribute in Class | 11.8.3 | subsets / атрибут из предка |
+| endType (Association) → Type | Type | 9.1 Classifier | тип атрибута из Classification |
+| memberEnd (Association) → Property | Property | 9.5 Feature, 9.5.4 | subset: Namespace::member |
+| Class {ownedAttribute} → Feature | Feature | 9.5 Feature | наследование от предка |
+| Class {name} → NamedElement | NamedElement | 7.2 NamedElement | обобщение (предок) |
+| Class {visibility} → VisibilityKind | VisibilityKind | 9.3 Property | тип из Classification |
+| CollaborationUse {classifier} → Classifier | Classifier | 9.1 Classifier | attribute type |
+| CollaborationUse {type} → Collaboration | Collaboration (§11.7) | раздел 11.7 | внутренняя ссылка |
+| Component {packagedElement} → PackageableElement | PackageableElement | Classification (раздел 9) | subsets / наследование |
+| ComponentRealization {abstraction} → Abstraction | Abstraction | 7.7 Dependencies | тип атрибута из CommonStructure |
+| ComponentRealization {realizingClassifier} → Classifier | Classifier | 9.1 Classifier | обобщение (предок) |
+| ConnectableElement {end} → Property | Property | 9.5 Feature | subsets / конец ассоциации |
+| ConnectorEnd {type} → ConnectableElement | ConnectableElement (§11.8.8) | раздел 11.8.8 | внутренний тип |
+| ConnectorKind (Enumeration, literal: assembly/delegation) | EnumerationLiteral | Classification (раздел 9) | тип из пакетов SimpleClassifiers |
+| Port {type} → Interface | Interface | 10.6 Interfaces | тип атрибута из SimpleClassifiers |
+| EncapsulatedClassifier {ownedPort} → Property | Property | 9.5 Feature | subsets / атрибут |
+| StructuredClassifier {ownedAttribute} → Property | Property | 9.5 Feature | subset: ownedEnd (в XMI) |
+| StateMachines::Vertex, StateMachine, Transition и др. | Classifier | 9.1 Classifier | обобщение от Classification (раздел 9) |
+| PseudostateKind literal names (initial, deepHistory...) | EnumerationLiteral | SimpleClassifiers (§10.4) | тип из пакета SimpleClassifiers |
+
+### Отмечу: какие пакеты XMI несут свои типы
+- **SimpleClassifiers** (§10): Interface, DataType, Enumeration, PrimitiveType — используются как `type` для атрибутов Port, Component и др.
+- **Classification** (§9): Classifier, Type, Feature, Property, NamedElement — базовые предки для всех 15 классификаторов.
+- **CommonStructure** (§7–8): Relationship, Dependency, Element — предки Association.
+- **StateMachines**: Vertex, StateMachine → StateMachines, но в §11 они являются наследниками Classifier (через SimpleClassifiers).
+
+## 10. Рекомендации по применению существующих скриптов
+
+### Подготовка конфигурации (sections.json)
+Добавить объект для `clause: 11`:
+```json
+{
+    "clause": 11,
+    "title": "Structured Classifiers",
+    "title_ru": "Структурированные классификаторы",
+    "slug": "structured-classifiers",
+    "package": "StructuredClassifiers",
+    "first_page": 183,
+    "last_page": 240,
+    "pdf_first": 141,
+    "pdf_last": 198,
+    "classifier_catalog": "11.8",
+    "association_catalog": "11.9",
+    "figure_catalog": "Figure 11.x",
+    "figure_count": 54,
+    "source": "site/docs/omg-uml-2.5.1-formal-17-12-05.pdf"
+}
+```
+
+### Этап 1 — prepare_section.py --clause 11
+- **Работает без изменений**: извлекает заголовки regex'ом, рисунки, XMI-ссылки из пакета.
+- **Корректировка**: добавить `--include_nested` для вложенных пакетов (StateMachines, ~13 классов; SimpleClassifiers — исключить). Без этого скрипт пропустит классы наследования от StructuredClassifier.
+
+### Этап 2 — scaffold_section.py --clause 11
+- **Работает без изменений**: создаёт файлы для 15 классификаторов и 35 ассоциаций из реестра.
+- **Корректировка**: в `ownedEnd`-полях ассоциаций оставить пустыми (нет русских описаний) — как сделано в разделе 9.
+
+### Этап 3 — sync_xmi_properties.py --clause 11
+- **Нужна корректировка**: добавить фильтрацию по пакету `StructuredClassifiers` (не только `xmi:id="X"`). Текущий скрипт ищет элементы по `packagedElement` в корне XMI, но здесь нужно рекурсивное сканирование пакета.
+- **Дополнительно**: включить `StateMachines` (~13 классов: Vertex, StateMachine, Region, Transition, State, Pseudostate, ConnectionPointReference, FinalState, ProtocolStateMachine, ProtocolTransition, ProtocolConformance) как наследников пакетного уровня.
+
+### Этап 4 — build_site.py --clause 11
+- **Работает без изменений**: строит HTML из data/content файлов + навигацию + поисковый индекс.
+
+### Этап 5 — генерация SVG-диаграмм
+| Скрипт | Применяется к разделу 11? | Особенности |
+|--------|--------------------------|-------------|
+| `generate_common_structure_svg.py` | Нет (для §7–8) | — |
+| `generate_classification_svg.py` | **Да** (большая часть) | Рисунки 1–37 относятся к классификаторам/ассоциациям (аналогично разделу 9); нужен `--clause 11`. Но: рисунки 6, 8–9 — паттерны коннекторов (топология Star/Array) — требуют нового layout-алгоритма |
+| SVG для StateMachines (~13 классов) | **Да**, но в отдельном builder'е | Рисунок наследования Vertex→StateMachine и т.д. — аналогично 9.2, но с глубже вложенными предками |
+
+### Этап 6 — validate_site.py --clause 11
+- **Работает без изменений**: проверяет ссылки, SVG-геометрию, текст.
+- **Дополнительно**: проверить, что все Figure 11.x (54 штуки) сгенерированы и не имеют наложений Pillow-метрик.
+
+## 11. Рекомендации по модернизации скриптов для раздела 11
+
+### 1. Расширить sync_xmi_properties.py: поддержка вложенных пакетов XMI
+**Проблема**: текущий скрипт находит классы/ассоциации только в корневом пакете или одном уровне `packagedElement`. Пакет `StructuredClassifiers` содержит 10 вложенных пакетов, из которых `StateMachines` имеет ~13 классов, каждый со своими атрибутами.
+**Предложение**: добавить параметр `--recursive-packages`, который рекурсивно обходит XMI-иерархию и собирает все классы/ассоциации из пакета и всех его вложенных пакетов (с пометкой `nested_package` для фильтрации).
+
+### 2. Новый builder в generate_classification_svg.py: «Topologies and patterns»
+**Проблема**: рисунки 6, 7, 8, 9 — паттерны коннекторов (Star, Array, assembly, ball-and-socket) — не являются классическими диаграммами наследования. Текущий builder ориентирован на деревья обобщений (root → leaf).
+**Предложение**: создать `builder_connector_patterns.py` с алгоритмом автоматической компоновки графов связей: узлы = классы, рёбра = коннекторы, топология расчитывается по параметру шаблона (радиальная для Star, сетчатая для Array, chain для n-ary).
+
+### 3. Обработка множественного наследования в диаграммах наследования
+**Проблема**: элементы из пакета StructuredClassifiers имеют сложное множественное наследование: `Association → Relationship + Classifier`, `ConnectableElement → NamedElement + Element`, `Port → Feature + Type` (через EncapsulatedClassifier), и т.д. Текущий генератор диаграмм наследования ориентирован на одноуровневые деревья.
+**Предложение**: добавить параметр `--multiple-inheritance=true` в builder, который строит граф с несколькими предками (DAG layout) вместо дерева — алгоритм Sugiyama или layering.
+
+### 4. Поддержка `subsets`-ссылок из XMI-конец ассоциаций
+**Проблема**: при извлечении свойств классов через XMI многие атрибуты указывают `subsets Feature::featuringClassifier` и т.д. — ссылки на другие пакеты. Текущий скрипт пишет их как текст без обработки ссылок.
+**Предложение**: добавить парсер OCL-ограничений `subsets`/`redefines` в `sync_xmi_properties.py`, который извлекает имя связанного атрибута и генерирует markdown-ссылку `[имя](../path/to/element)` вместо текста.
+
+### 5. Фильтрация «лишних» ассоциаций при импорте из пакетов
+**Проблема**: пакеты StateMachines, CommonBehavior и др. несут сотни собственных ассоциаций (A_action_actionExecutionSpecification, A_classifier_createObjectAction...), которые НЕ относятся к содержимому §11.8–11.9.
+**Предложение**: добавить whitelist в `sections.json` вида `association_whitelist: ["A_collaborationRole_collaboration", ...]`, чтобы sync_xmi_properties.py применял фильтрацию при записи файлов, а не на этапе ручного аудита.
+
+### 6. Поддержка «компонентных» диаграмм (Components/ports/interfaces)
+**Проблема**: рисунки 41–48 — это diagram components с lollipop interfaces (provides), sockets (requires), realization arrows и Delegating Connectors. Текущий SVG-движок строит прямоугольники классов, но не поддерживает interface symbols.
+**Предложение**: расширить SVG-шаблон для `Component` с поддержкой `provided_interface()` (полукруг справа), `required_interface()` (полукруг слева) и линий делегирования между ними — аналогично нотации в спецификации §11.6.4.

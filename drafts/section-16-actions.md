@@ -1,5 +1,10 @@
 # Раздел 16: Actions (Действия)
-
+<!-- Метаинформация -->
+- Подготовлено: 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия не фиксировались.
+- Промпт: черновик реестра раздела 16 Actions OMG UML 2.5.1 (стр. 441–564): подразделы, классификаторы/ассоциации из XMI (Actions), рисунки, замечания; ≤200k токенов; только официальные источники.
+- Проверка: 2025-11-22, сверка с дампом/XMI; рисунки 53→56, добавлены 9 подразделов и определения.
+- Состав: конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам.
+- Критерий адекватности: числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках».
 ## Предлагаемый блок конфигурации для `scripts/sections.json`
 
 ```json
@@ -34,7 +39,38 @@
 - Ограничения (ownedRule): **155**
 - Литералы (ownedLiteral): **3**
 
-## Дерево подразделов
+## План иллюстраций
+
+| Группа | Диапазон рисунков | Страницы | Тип | Сложность SVG | Приоритет |
+|--------|-------------------|----------|-----|---------------|-----------|
+| Вводные диаграммы раздела 16.2 | Figure 16.1–16.10 | 440–446 | Нотация Action/Pins | Низкая (базовая) | P1 |
+| Вводный обзор: общая диаграмма Actions | Figure 16.1 | 440 | Нотация классов | Низкая | P1 |
+| Базовая нотация Action | Figure 16.2 | 444 | Схема наследования | Средняя | P1 |
+| Нотация условий и пинов | Figure 16.3–16.6 | 444–445 | Анонции локальных предусловий/постусловий, Pin-нотации | Низкая | P2 |
+| Примеры базовых Actions | Figure 16.7–16.9 | 445–446 | Примеры с конкретным синтаксисом | Низкая | P2 |
+| Примеры пинов | Figure 16.10 | 446 | Пины с множественными значениями | Средняя | P3 |
+| Спецификация поведения ObjectNode на Pinaх | Figure 16.11 | 447 | Диаграмма абстр. синтаксиса | Высокая | P2 |
+| Пример ActionInputPins в абстр. синтаксисе | Figure 16.12 | 447 | Схема наследования/ассоциаций | Высокая | P2 |
+| Invocation Actions | Figure 16.13–16.17 | 448–452 | Вызов поведения/операции, стрелки с аннотациями | Средняя | P1 |
+| Аннотации пинов (exception/effect/stream) | Figure 16.18–16.23 | 452–454 | Нотации модификаторов на пинах | Низкая | P3 |
+| Сложные примеры Stream/Exception/Effect-пинов | Figure 16.22–16.29 | 454–455 | Заполненные треугольники, ParameterSet-нотации | Высокая | P3 |
+| Примеры отправки сигналов и Pin с эффектами | Figure 16.24–16.28 | 454–455 | Workflow с сигналами | Средняя | P3 |
+| Альтернативные вводы/выводы через ParameterSets | Figure 16.29 | 455 | Параметризованный ввод | Высокая | P4 |
+| Object Actions (значение/объект) | Figure 16.30–16.32 | 456–459 | ValueSpecificationAction нотация, константы | Низкая | P1 |
+| Link End Data / Link Actions | Figure 16.33–16.35 | 459–464 | Структура данных линков и их действия | Средняя | P2 |
+| Structural Feature Actions (чтение/запись) | Figure 16.36 | 465 | Атрибуты структурного свойства | Низкая | P1 |
+| Variable Actions | Figure 16.37–16.38 | 468–469 | Переменные, AddVariableValueAction | Низкая | P2 |
+| Accept Event Actions (включение/ноутация) | Figure 16.39–16.44 | 470–473 | Нотации, implicit/explicit Enable, UnmarshallAction | Средняя | P1 |
+| Structured Actions / Expansion Regions | Figure 16.45–16.56 | 474–484 | Структурированные узлы, ExpansionRegion, LoopNode, ConditionalNode | **Высокая** | P1 |
+
+**Детали сложных рисунков:**
+
+- **Figure 16.2 (Action — нотация наследования)**: схема с классами `ExecutableNode → Action → {InvocationAction, LinkAction, ...}` и всеми промежуточными абстрактными узлами. SVG: иерархический layout, связи обобщения (←), подсветка текущего класса.
+- **Figure 16.12 (ActionInputPins в абстр. синтаксисе)**: отображение структур `InputPin ↔ Action ↔ Action`, ассоциации `A_fromAction_actionInputPin`. SVG: двусторонние связи с подписями концов.
+- **Figure 16.47–16.50 (ExpansionRegion)**: нотация региона-расширения, shorthand notation (один узел в прямоугольнике), множественные вводы/выводы (`InputPin[] → ExpansionRegion → OutputPin[]`), режимы `bounded/fullyDetermined/partiallyDetermined` из `ExpansionKind`. SVG: прямоугольник с рамкой региона, массивные пины-множества.
+- **Figure 16.49–16.50 (Shorthand notation)**: упрощённая нотация ExpansionRegion с одним действием внутри — ключевой паттерн для генерации интерактивных диаграмм. SVG: компактный прямоугольник + одно действие, tooltip с режимом.
+- **Figure 16.11 (Selection behavior на ObjectFlow/Pins)**: FIFO/ordered/first-out выбор объектов из потока — требует динамического отображения фильтрации. SVG: объект-фильтр, стрелки с предикатами.
+
 
 | Номер | Заголовок | Страница | Тип |
 |-------|-----------|----------|-----|
@@ -468,6 +504,37 @@
 | `A_variable_scope` | `variable` | Variable | `scope` | StructuredActivityNode |
 | `A_variable_variableAction` | `variable` | Variable | `variableAction` | VariableAction |
 
+## Межраздельные ссылки (периодические элементы)
+
+| Элемент | Связанный элемент | Раздел | Тип связи |
+|---------|-------------------|--------|-----------|
+| Action | ExecutableNode | 15 | обобщение |
+| InvocationAction | Action | 16 | обобщение (внутр. раздела) |
+| CallAction | InvocationAction | 16 | обобщение (внутр. раздела) |
+| LinkAction | Action | 16 | обобщение (внутр. раздела) |
+| StructuralFeatureAction | Action | 16 | обобщение (внутр. раздела) |
+| WriteLinkAction | LinkAction | 16 | обобщение (внутр. раздела) |
+| WriteStructuralFeatureAction | StructuralFeatureAction | 16 | обобщение (внутр. раздела) |
+| VariableAction | Action | 16 | обобщение (внутр. раздела) |
+| Pin | ObjectNode | 15 | обобщение |
+| Pin | MultiplicityElement | 9 | обобщение |
+| InputPin | Pin | 16 | обобщение (внутр. раздела) |
+| OutputPin | Pin | 16 | обобщение (внутр. раздела) |
+| ActionInputPin | InputPin | 16 | обобщение (внутр. раздела) |
+| ValuePin | InputPin | 16 | обобщение (внутр. раздела) |
+| AcceptEventAction | Action | 16 | обобщение (внутр. раздела) |
+| AcceptCallAction | AcceptEventAction | 16 | обобщение (внутр. раздела) |
+| StructuredActivityNode | Namespace, ActivityGroup, Action | 15/9/16 | множественное обобщение |
+| ExpansionRegion | StructuredActivityNode | 16 | обобщение (внутр. раздела) |
+| LoopNode | StructuredActivityNode | 16 | обобщение (внутр. раздела) |
+| ConditionalNode | StructuredActivityNode | 16 | обобщение (внутр. раздела) |
+| SequenceNode | StructuredActivityNode | 16 | обобщение (внутр. раздела) |
+| ExpansionNode | ObjectNode | 15 | обобщение |
+| Clause | Element | 9 | обобщение |
+| SendSignalAction / BroadcastSignalAction | Signal | 13/17 | ассоциация (тип) |
+| AcceptEventAction.trigger | Trigger | 13 | ассоциация A_trigger_acceptEventAction |
+| ValueSpecification.value | ValueSpecification | 8 | ассоциация A_value_valueSpecificationAction |
+
 ## Список рисунков
 
 | Рисунок | Подпись | Страница |
@@ -528,6 +595,29 @@
 | Figure 16.54 | Examples of expansion region shorthand | 483 |
 | Figure 16.55 | Shorthand notation for expansion region | 484 |
 | Figure 16.56 | Other Actions | 484 |
+
+## Применение текущих скриптов для раздела 16
+
+| Этап | Скрипт | Команда | Особенности для раздела 16 |
+|------|--------|---------|---------------------------|
+| 1 | `prepare_section.py` | `python scripts/prepare_section.py --clause 16` | Выведит inventory.json с 63 классификаторами, 109 ассоциациями; сверка XMI/PDF обязательна из-за большого числа элементов. |
+| 2 | `scaffold_section.py` | `python scripts/scaffold_section.py --clause 16` | Создаст заготовки всех 63 страниц классификаторов — больше любого предыдущего раздела (max ранее: ~32 для раздела 9). |
+| 3 | `sync_xmi_properties.py` | `python scripts/sync_xmi_properties.py --clause 16 --check` | Обработка 135 атрибутов, 109 ассоциаций; нужно особое внимание концам пинов (InputPin/OutputPin) с кратностью. |
+| 4 | `build_site.py` | `python scripts/build_site.py --clause 16` | ~600+ новых маршрутов (#/classifier/..., #/association/...); проверка дубликатов критична при множественных абстрактных классах-промежутках. |
+| 5 | SVG-генератор (section_config) | Зависит от sections.json | Для раздела 16 потребуются builders для pin-диаграмм, нотаций ExpansionRegion и схем наследования Actions. |
+| 6 | `validate_site.py` | `python scripts/validate_site.py --clause 16 --static-only` | Проверка всех маршрутов, OCL-ограничений (155), геометрии диаграмм пинов (критичные размеры подписей). |
+
+**Ключевая особенность**: раздел 16 содержит самый большой каталог классификаторов в спецификации (63 элемента). Скрипты prepare_section и scaffold должны корректно обрабатывать множественное наследование StructuredActivityNode (Namespace + ActivityGroup + Action) и перекрёстные типы из раздела 15/9/13.
+
+## Модернизация скриптов
+
+1. **Генерация каталога из XMI без ручной сверки**: подготовить `sync_xmi_properties.py` с автоматическим поиском пакетов по имени (`packagedElement/@name == "Actions"`) и расширением поиска наследников (рекурсивный обход `generalization` в полном XMI), чтобы не зависеть от ручного сопоставления TOC.
+
+2. **Массовая обработка OCL-ограничений**: автоматический извлечение всех `ownedRule` для каждого классификатора с разбивкой на отдельные файлы `rules/<ClassName>.js`, поддержка парсинга OCL-invariant (inv:) в машиночитаемую структуру — 155 правил раздела 16 не помещаются в один JS-файл.
+
+3. **Шаблоны для pin-диаграмм**: генератор SVG с параметризуемой нотацией пинов (InputPin/OutputPin, стрелки модификаторов, подписи кратности) — единый builder вместо уникального кода для каждой диаграммы пинов (16.4–16.6, 16.10, 16.19–16.22).
+
+4. **Группировка ассоциаций по ends**: автоматическая проверка парности концов каждой ассоциации в XMI с подсветкой односторонних связей и отсутствующих типов — полезно при обработке 109 ассоциаций раздела 16, где большинство концов связывает пины с действиями.
 
 ## Замечания и риски
 

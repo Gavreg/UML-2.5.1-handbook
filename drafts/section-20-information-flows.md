@@ -4,6 +4,16 @@
 
 ---
 
+## Метаинформация
+
+> - Подготовлено: 2025-11-22, субагентом (coder) Kimi Code CLI на локальной модели; имя/версия не фиксировались.
+> - Промпт: черновик реестра раздела 20 InformationFlows OMG UML 2.5.1 (стр. 669–676): подразделы, классификаторы/ассоциации из XMI (InformationFlows), рисунки, замечания; ≤200k токенов; только официальные источники.
+> - Проверка: 2025-11-22, сверка с дампом/XMI; исправлены кратности (UML-дефолт 0..*), добавлены OCL-тексты, само-рекурсивные ассоциации.
+> - Состав: конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам.
+> - Критерий адекватности: числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках».
+
+---
+
 ## Конфигурация для sections.json
 
 ```json
@@ -248,7 +258,71 @@ InformationFlow имеет **множественное наследование
 - **Figure 20.2–20.6**: примеры использования — требуют текстовых подписей для InformationItem на диаграммах, что добавляет сложность в позиционирование. Нужно проверять пересечения текста (scripts/check_svg_overlaps.py).
 
 ### 10. Нумерация страниц в TOC
-В оглавлении PDF Figure 20.1 указан как страница 667, но он фактически содержится в разделе на странице 669. TOC-ссылка на рисунки может быть неточной — при генерации каталога диаграмм использовать фактическое содержимое, а не TOC.
+В оглавлении PDF Figure 20.1 указан как страница 667, но он фактически содержится в разделе на странице 669. TOC-ссылка на рисунки может быть неточной — при генерации каталога диаграмм использовать фактическое содержимое раздела, а не TOC.
+
+---
+
+## План иллюстраций (рисунков)
+
+Рисунки из раздела 20 (стр. 669–670): классификация по типу и оценке сложности генерации SVG.
+
+| Рисунок | Печ. стр. | Тип | Сложность SVG (1–5) | Приоритет |
+|---------|-----------|-----|---------------------|-----------|
+| Figure 20.1 | 669 | Метамодель (абстрактный синтаксис) | 5 | Высокий — главный; 9 классов, множественное наследование, само-рекурсивные связи |
+| Figure 20.2 | 669 | Пример использования | 3 | Средний — два InformationFlow между Company/Customers/Employees с подписями |
+| Figure 20.3 | 669 | Information flow notation (независимый классификатор) | 3 | Средний — прямоугольник + треугольник; одна подписанная ссылка на страницу класса |
+| Figure 20.4 | 669 | Пример использования (<<representation>>) | 3 | Средний — пунктирные связи с keyword <<representation>> |
+| Figure 20.5 | 669 | Пример использования (Connectors + InformationItems) | 4 | Высокий — треугольники направления на Connectors; нужно позиционировать имена InformationItem рядом с линиями |
+| Figure 20.6 | 670 | Пример использования (Associations + InformationItems) | 4 | Высокий — подписи product/wage у ассоциаций; аналогично 20.5, требует проверки перекрытий |
+
+> **Итог по сложности:** все рисунки нуждаются в кликабельных ссылках на страницы справочника. Figure 20.1 — критическая: множественное наследование + само-рекурсивные связи потребуют специальных SVG-решений (петли, многоярусная компоновка).
+
+---
+
+## Межраздельные ссылки
+
+Связи классификаторов и ассоциаций раздела 20 с элементами других пакетов OMG UML.
+
+| Элемент → Связанный элемент | Раздел спецификации | Тип связи | Страница раздела |
+|-----------------------------|---------------------|-----------|------------------|
+| InformationFlow → DirectedRelationship (parent) | Clause 7 — Common Structure, §7.9 | Generalization | p.669 |
+| InformationFlow → PackageableElement (parent) | Clause 12 — Packages, §12.4.1 | Generalization | p.669 |
+| InformationItem → Classifier (parent) | Clause 9 — Classification, §9.4.1 | Generalization | p.673 |
+| conveyed → Classifier (тип атрибута) | Clause 9 — Classification, §9.2–9.5; §10.1–10.8 | type association | p.672 |
+| realizingRelationship → Relationship (тип атрибута) | Clause 7 — Common Structure, §7.8–7.9 | type association | p.672 |
+| representation → InformationItem (тип конца) | Clause 9 + раздел 20.3.8 | ownedEnd end | p.676 |
+| informationSource / informationTarget → Actor | Clause 18 — Use Cases, §18.2.2 | Ограничение (OCL) | p.672 |
+| informationSource / informationTarget → Node | Clause 19 — Deployments, §19.5.10 | Ограничение (OCL) | p.672 |
+| informationSource / informationTarget → Artifact | Clause 19 — Deployments, §19.5.1 | Ограничение (OCL) | p.672 |
+| informationSource / informationTarget → Component | Clause 11 — Structured Classifiers, §11.4.1 | Ограничение (OCL) | p.672 |
+| conveyed_classifiers → Signal | Clause 10 — Simple Classifiers, §10.5.8 | Ограничение (OCL) | p.672 |
+| conveyed_classifiers → Interface | Clause 10 — Simple Classifiers, §10.5.6 | Ограничение (OCL) | p.672 |
+
+> **Примечание:** Пакет InformationFlows импортирует 7 пакетов: UseCases(18), Deployments(19), StructuredClassifiers(11), Classification(9), SimpleClassifiers(10), Packages(12), Activities(15). Все OCL-ограничения в правилах must_conform / sources_and_targets_kind перечисляют типы из этих пакетов.
+
+---
+
+## Применение текущих скриптов для раздела 20
+
+| Скрипт | Поведение для раздела 20 | Особенности |
+|--------|-------------------------|-------------|
+| `prepare_section.py --clause 20` | Извлечёт TOC (19 подразделов), реестр классификаторов из XMI, 6 рисунков, страницы PDF. Без ошибок — раздел компактный. | Нет ассоциаций в каталоге: в sections.json `association_catalog` указывает на подраздел 20.3, но это не «каталог рисунков», а описание типов объектов. |
+| `scaffold_section.py --clause 20` | Создаст заготовки HTML-страниц для 2 классификаторов + 8 ассоциаций. | Минимальный объём: ~10 страниц вместо типичных 30–50+. |
+| `sync_xmi_properties.py --clause 20` | Сгенерирует `site/data/xmi/InformationFlow.js` и `site/data/xmi/InformationItem.js`. | ownedAttribute=8 (7+1); ownedRule=6; ownedOperation=0. Ни один атрибут не имеет явного lowerBound — скрипт должен использовать UML-дефолт 0. |
+| `build_site.py --clause 20` | Построит HTML, маршруты и поисковой индекс из `site/data/pages/`. | `association_catalog="20.3 Association Descriptions"` корректно указывает подраздел с описаниями; `classifier_catalog="20.2 Classifier Descriptions"` — подраздел с определениями классов. |
+| `generate_classification_svg.py --clause 20` | Сгенерирует 6 SVG (Figure 20.1–20.6). | **Само-рекурсивные связи** (A_realization_abstraction_flow, A_represented_representation): стандартный layout генератора не поддерживает циклы; нужно добавить self-loop handling в SVG-builders. Множественное наследование InformationFlow → DirectedRelationship + PackageableElement: требует многоярусной компоновки, а не простого однострочного дерева. |
+| `check_svg_overlaps.py --clause 20` | Проверит геометрические перекрытия всех 6 рисунков. | Figure 20.1 (9 классов) — высокая вероятность наложения подписей; Figure 20.5/20.6 — текст InformationItem рядом с треугольниками направления. |
+| `validate_site.py --clause 20 --static-only` | Проверит полноту текста, ссылок, геометрию рисунков и иерархии наследования. | Рекомендуется запустить до начала этапа 3 для фиксации базовой корректности. |
+
+---
+
+## Модернизация скриптов: требования для раздела 20
+
+1. **Само-рекурсивные связи в SVG (generate_classification_svg.py):** Два из 8 классов ассоциаций имеют концы одинакового типа — `A_realization_abstraction_flow` и `A_represented_representation`. Текущие builders генераторов диаграмм не обрабатывают self-loops: нужно добавить параметр `self_loop_offset` в layout-алгоритм, который рисует петлю от узла к самому себе с боковым отступом (например, 40 px вбок + изгиб Bézier). Без этого ассоциации останутся без визуального отображения на диаграмме наследования.
+
+2. **Отсутствие association_catalog (build_site.py):** `association_catalog="20.3 Association Descriptions"` — это подраздел описаний, а не каталог рисунков. Если скрипт ожидает отдельную секцию каталога (как в разделах 7–9), он может пропустить 8 описаний ассоциаций при построении поискового индекса. Рекомендуется явный проход по подразделам `20.3.[1-8]` вместо reliance на generic catalog lookup.
+
+3. **Множественное наследование в layout (generate_classification_svg.py):** Класс InformationFlow наследуется от двух родителей — DirectedRelationship и PackageableElement. Текущий алгоритм рисования наследования поддерживает только один родительский блок слева. Нужно переписать layout-процедуру для поддержки `parent_rows > 1`: разместить предков в столбцах по возрастанию «удалённости» (DirectedRelationship на стр. 669 из Clause 7; PackageableElement на стр. 669 из Clause 12), затем соединить обе ветви к InformationFlow.
 
 ---
 

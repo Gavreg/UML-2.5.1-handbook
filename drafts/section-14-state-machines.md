@@ -1,5 +1,13 @@
 # Реестр раздела State Machines (Конечные автоматы) — ЧЕРНОВИК
 
+## Метаинформация о черновике
+
+> **Подготовлено**: 2025-07-xx, субагентом (coder) Kimi Code CLI на основе локальной модели; имя/версия модели не фиксировались.
+> **Исходная задача** (промпт): черновик реестра раздела 14 StateMachines OMG UML 2.5.1 (стр. 305–372) для переноса в справочник: подразделы, классификаторы/ассоциации из XMI (пакет StateMachines), рисунки, замечания; ≤200k токенов; только официальные источники.
+> **Проверка**: 2025-07-xx, сверка с дампом `omg-uml-2.5.1-formal-17-12-05.txt` и XMI `UML-2.5.1.xmi`; добавлены Notation-подразделы, подтверждены 14.6.23 и Figure 14.16.
+> **Состав документа**: конфигурация, дерево подразделов, классификаторы, ассоциации, рисунки, замечания и риски, план иллюстраций, план межраздельных ссылок, рекомендации по скриптам.
+> **Критерий адекватности**: все числа должны сходиться с XMI-пакетом `StateMachines` и телесным текстом спецификации; расхождения отмечены в разделе «Замечания и риски».
+
 > **Контекст**: В OMG UML 2.5.1 — это раздел **14** (страницы 305–372).
 > Разделы: 12 = Packages, 13 = Common Behavior, **14 = StateMachines**, 15 = Activities.
 
@@ -357,3 +365,155 @@
 3. Этап 3 (XMI): для ассоциаций с `(memberEnd)` нужно подтянуть реальные типы из пакетов Classification/CommonStructure.
 4. Этап 5 (SVG): приоритетные рисунки — 14.1, 14.3–14.6, 14.18–14.27 (базовая нотация); затем примеры и протоколы.
 5. Особое внимание к Figure 14.41–14.46 (ProtocolStateMachine) — сложные диаграммы с пересечениями.
+
+## План иллюстраций
+
+### Сложные группы (приоритетная обработка)
+
+| Группа | Рисунки | Причина сложности | Рекомендация |
+|--------|---------|-------------------|-------------|
+| Композитные состояния | 14.3, 14.7–14.10 | Регионы вложены в регионы; подписи ends пересекают границы | Использовать `overflow-x: auto` контейнер; подпись концов над/под линией |
+| Псевдосостояния (базовая нотация) | 14.18–14.23, 14.25–14.27 | Маленькие символы (< 1ex); стрелки в разных направлениях | Шрифт ≥ 16px; нечётные — полукруги с подписями сбоку |
+| Выходные/входные точки | 14.12–14.15, 14.28–14.31 | ConnectionPointReference: `via` в соединении; два варианта нотации | Показать оба на одной диаграмме с подписью «alternatives» |
+| Переходы (высокоуровневая нотация) | 14.2–14.5, 14.34–14.36 | Композитные переходы, действия, signal-символы | Линии подписей с `marker-start` и `marker-end`; подписи ≤ 14px |
+| ProtocolStateMachines | 14.41–14.46 | Две перекрывающиеся машины; OCL на переходах | Разделить вертикально (общий/частный); подписи OCL справа |
+
+### Полный план: 46 рисунков с классификацией и приоритетом
+
+| ID | Подпись | Страница | Тип | Сложность SVG | Приоритет |
+|----|---------|----------|-----|---------------|-----------|
+| Figure 14.1 | Behavior StateMachines | 305 | метамодель | высокая (13+ классов) | P0 — обзорная диаграмма |
+| Figure 14.2 | Compound transition example | 316 | пример | высокая (сложный граф переходов) | P0 |
+| Figure 14.3 | Notation for a composite State with Regions | 317 | нотация состояний | средняя | P0 |
+| Figure 14.4 | State notation | 317 | нотация состояний | низкая | P0 |
+| Figure 14.5 | State with a name tab | 318 | нотация состояний | низкая | P0 |
+| Figure 14.6 | State with compartments | 318 | нотация состояний | средняя (3 отсека) | P0 |
+| Figure 14.7 | Composite State with two States | 320 | пример | средняя | P1 |
+| Figure 14.8 | Composite State с hidden decomposition icon | 320 | нотация | низкая | P1 |
+| Figure 14.9 | Composite State с Regions | 320 | нотация | средняя | P0 |
+| Figure 14.10 | Composite State с two Regions и entry/exit/do | 321 | пример | высокая | P0 — содержит 3 поведения |
+| Figure 14.11 | Submachine State example | 322 | пример | средняя | P1 |
+| Figure 14.12 | StateMachine с exit point (внутри графа) | 323 | нотация | средняя | P0 |
+| Figure 14.13 | StateMachine с exit point на границе | 323 | нотация | средняя | P1 |
+| Figure 14.14 | Submachine Sate использует exit point | 324 | пример | средняя | P1 |
+| Figure 14.15 | State list notation option | 324 | нотация | средняя (список) | P0 |
+| Figure 14.16 | Diagram equivalent к Figure 14.15 без statelists | 325 | пример | высокая | P1 — альтернатива 14.15 |
+| Figure 14.17 | FinalState notation | 325 | псевдосостояния | низкая | P0 |
+| Figure 14.18 | initial Pseudostate | 325 | псевдосостояния | низкая | P0 |
+| Figure 14.19 | shallowHistory Pseudostate | 325 | псевдосостояния | низкая | P0 |
+| Figure 14.20 | deepHistory Pseudostate | 325 | псевдосостояния | средняя (отличие от shallow) | P0 |
+| Figure 14.21 | entryPoint Pseudostate | 326 | псевдосостояния | низкая | P0 |
+| Figure 14.22 | exitPoint Pseudostate | 326 | псевдосостояния | низкая | P0 |
+| Figure 14.23 | entry/exitPoints на composite State | 326 | пример | средняя | P1 |
+| Figure 14.24 | junction Pseudostate с incoming/outgoing | 327 | псевдосостояния | низкая | P0 |
+| Figure 14.25 | choice Pseudostates | 327 | псевдосостояния | низкая | P0 |
+| Figure 14.26 | terminate Pseudostate | 327 | псевдосостояния | низкая | P0 |
+| Figure 14.27 | fork/join Pseudostates | 328 | псевдосостояния | средняя (жирная линия) | P0 |
+| Figure 14.28 | Entry point ConnectionPointReference notation | 328 | нотация | низкая | P1 |
+| Figure 14.29 | Exit point ConnectionPointReference notation | 328 | нотация | низкая | P1 |
+| Figure 14.30 | Alternative entry point notation | 329 | нотация | низкая | P2 — альтернатива |
+| Figure 14.31 | Alternative exit point notation | 329 | нотация | низкая | P2 — альтернатива |
+| Figure 14.32 | Symbols для Signal reception/Sending/Actions | 331 | нотация переходов | средняя (6+ символов) | P0 |
+| Figure 14.33 | Deferred Trigger notation | 332 | нотация | низкая | P1 |
+| Figure 14.34 | Local Transitions | 333 | пример переходов | низкая | P1 |
+| Figure 14.35 | External Transitions | 333 | пример переходов | низкая | P1 |
+| Figure 14.36 | StateMachine diagram — telephone | 334 | пример (full) | высокая (полная диаграмма) | P0 — самый большой пример |
+| Figure 14.37 | StateMachine redefinition | 335 | метамодель | средняя (наследование) | P1 |
+| Figure 14.38 | A general StateMachine | 337 | пример расширения | средняя | P1 |
+| Figure 14.39 | An extended StateMachine | 337 | пример расширения | высокая | P0 — показывает extension |
+| Figure 14.40 | Adding Transitions (к Figure 14.39) | 338 | пример | средняя | P1 |
+| Figure 14.41 | ProtocolStateMachines | 339 | метамодель | высокая (2 машины, пересечение) | P0 |
+| Figure 14.42 | ProtocolTransition с operation "m1" | 341 | пример протокола | средняя | P1 |
+| Figure 14.43 | несколько ProtocolTransitions для m1 | 341 | пример протокола | средняя | P1 |
+| Figure 14.44 | ProtocolStateMachine example | 342 | пример протокола | высокая (полная диаграмма) | P0 |
+| Figure 14.45 | Notation для State с invariant | 343 | нотация | низкая | P1 |
+| Figure 14.46 | ProtocolTransition notation | 343 | нотация | низкая | P1 |
+
+**Приоритеты**: P0 = критично (базовая нотация, обзоры); P1 = важно; P2 = дополнительно.
+**Сложность SVG**: высокая (> 15 элементов или вложенность ≥ 2); средняя (6–15); низкая (< 6).
+
+## План межраздельных ссылок
+
+Элементы StateMachines связаны с другими разделами UML. Для scaffold-раздела 14 необходимо проставить гиперссылки между классификаторами.
+
+| Элемент (раздел 14) | Связанный элемент | Раздел | Тип связи |
+|--------------------|------------------|--------|-----------|
+| StateMachine (14) | BehavioredClassifier (12) | attribute: `ownedBehavior` → Behavior; наследование из Class |
+| StateMachine (14) | Region (14) | ownedAttribute `region: Region[0..*]` |
+| StateMachine (14) | State (14) | ownedAttribute `initial: State[?]`, `extendedStateMachine` |
+| State (14) | Vertex (14) | обобщение: State → Vertex [abstract] |
+| State (14) | Region (14) | ownedAttribute `region: Region[0..*]` |
+| State (14) | Transition (14) | ownedAttribute `incoming/incoming/outgoing` via Vertex-ends |
+| Pseudostate (14) | Vertex (14) | обобщение: Pseudostate → Vertex [abstract] |
+| ConnectionPointReference (14) | StateMachine (14) | attribute `connectionPoint_stateMachine: StateMachine[?]` |
+| ConnectionPointReference (14) | Pseudostate (14) | subsets из entry/exit Pseudostates |
+| ProtocolStateMachine (14) | BehavioredClassifier (12) | наследование + обобщение из Classifier (12) |
+| ProtocolStateMachine (14) | ProtocolConformance (14) | ownedAttribute `generalMachine` |
+| ProtocolTransition (14) | Transition (14) | обобщение: ProtocolTransition → Transition [abstract] |
+| ProtocolTransition (14) | ProtocolStateMachine (14) | attribute `protocolConformance: ProtocolConformance[?]` |
+| Transition (14) | Vertex (14) | ownedAttribute `source: Vertex[?]`, `target: Vertex[?]` |
+| Transition (14) | Event (13) | конец association A_trigger_transition: `trigger: Trigger → Event` |
+| Transition (14) | Guard (Expression, 12/13) | subsets из Constraint/Expression; attribute `guard` |
+| Transition (14) | Behavior (13) | эффект перехода: `effect: Behavior[0..*]` |
+| Region (14) | StateMachine (14) | обобщение (неявное, через extendedStateMachine) |
+| Region (14) | State (14) | ownedAttribute `state: State[0..*]` |
+| Region (14) | Transition (14) | ассоциация через Container (A_transition_container) |
+| Trigger (13) | ProtocolTransition (14) | ассоциация A_trigger_transition |
+| Behavior (13) | ProtocolStateMachine (14) | наследование от OpaqueBehavior/FunctionBehavior (13) |
+| Constraint (7) | StateInvariant_owningState (14) | 84 OCL-правила используют OclExpression/Constraint из CommonStructure (7) |
+| Activity (15) | doActivity/state (14) | Behavior → Action / ActivityNode (если State.doAction — ActionSequence) |
+| Class (12) | BehavioredClassifier (12) | Subsets: BehavioredClassifier → Class; context Classifier для ProtocolStateMachine |
+
+> **Ключевые перекрёстные**: Trigger/Event из раздела 13 Common Behavior; BehavioredClassifier/Class из 12 Packages; Constraint/OclExpression из 7 Common Structure; ActivityNode из 15 Activities.
+
+## Применение текущих скриптов для раздела 14
+
+### Поэтапный план пайплайна
+
+| Этап | Скрипт | Параметры | Особенности для раздела 14 |
+|------|--------|-----------|--------------------------|
+| **Этап 1** (inventory) | `prepare_section.py` | `--clause 14 --stage 1` | Указать в `sections.json`: title=«State Machines», package=«StateMachines», first_page=305, last_page=372. Извлечение классов из XMI пакета StateMachines (строки 5454–7778). |
+| **Этап 2** (scaffold) | `scaffold_section.py` | `--clause 14 --stage 2` | Создать заготовки для 13 классификаторов и 32 ассоциаций. Для классов со Specializations (State, Transition) подхватить потомков из CommonStructure. Пустые русские описания не перезаписывать. |
+| **Этап 3** (XMI sync) | `sync_xmi_properties.py` | `--clause 14 --stage 3` | Извлечь `ownedAttribute`/`ownedOperation`/`ownedRule` для каждого класса; концы ассоциаций с `(memberEnd)` подтянуть из импортированных пакетов (CommonStructure, Classification). Проверить: 49 attrs, 30 ops, 84 rules. |
+| **Этап 4** (build site) | `build_site.py` | `--clause 14 --stage 4 --check` | Построить HTML-фрагменты; проверить ссылки между классификаторами раздела; поисковый индекс для русских названий. |
+| **Этап 5** (SVG builder) | `generate_common_structure_svg.py` или кастомный StateMachines SVG | `--clause 14 --stage 5` | 32 SVG: базовая нотация состояний, псевдосостояния, протоколы. Обработка 84 OCL-ограничений — отображать как всплывающие подсказки при наведении на класс/переход. |
+| **Этап 6** (validate) | `validate_site.py` | `--clause 14 --static-only --stage 6` | Проверить все 46 рисунков; убедиться гиперссылки работают; проверить absence of overlaps via Pillow-geom. |
+
+### Настройки в sections.json для раздела 14
+
+```json
+{
+  "14": {
+    "title": "State Machines",
+    "title_ru": "Конечные автоматы",
+    "slug": "state-machines",
+    "package": "StateMachines",
+    "first_page": 305,
+    "last_page": 372,
+    "classifier_catalog": "14.5",
+    "association_catalog": "14.6",
+    "source": "omg-uml-2.5.1-formal-17-12-05.pdf",
+    "enumerations": ["PseudostateKind (14.5.7)", "TransitionKind (14.5.12)"],
+    "specializations_note": "State и Transition имеют подклассы в CommonStructure; PseudostateKind/TransitionKind — перечисления с литералами",
+    "ocl_count": 84,
+    "svg_complexity": "высокая: композитные состояния, псевдосостояния, протоколы"
+  }
+}
+```
+
+### Особенности, влияющие на скрипты
+
+- **PseudostateKind и TransitionKind** (перечисления с литералами): нужны для валидации SVG-символов. Литералы перечислены в подразделах 14.5.7.3 и 14.5.12.3.
+- **84 OCL-ограничения**: отображать как всплывающие подсказки; `body` берётся из XMI `ownedRule → specification → body`.
+- **Composite State diagrams** (Figures 14.7–14.10): вложенные регионы — SVG-builder должен обрабатывать иерархию `<g>` вложенных контейнеров.
+- **doActivity / entry / exit behaviors**: поведение States (ownedAttribute `doActivity`, `entry`, `exit`) — нужно генерировать подписи для каждого поведения на диаграмме.
+
+## Модернизация скриптов: рекомендации
+
+1. Добавить специализированный SVG-builder для нотации конечных автоматов (`generate_statemachine_svg.py`), который знает о специфических символах UML: начальное/конечное состояние (заполненный/двойной круг), псевдосостояния (треугольник, полукруг, жирная линия для fork/join), ConnectionPointReference (прямоугольник с `via`); автоматическая расстановка подписей ends с учётом OCL.
+2. Расширить `sync_xmi_properties.py` на импорт концов ассоциаций из PackageImport: при обработке StateMachines автоматически подтягивать типы CommonStructure и Classification, resolving memberEnd → ownedEnd в импортированном пакете.
+3. Добавить поддержку визуализации 84+ OCL-ограничений в SVG через `marker-end` с OCL-подсказками (tooltip при hover), а также `subsets`/`redefines` ссылки на страницы.
+4. Для Composite State diagrams (14.7–14.10) реализовать иерархическую компоновку: алгоритм вложения регионов внутрь состояний с рекурсивной прокруткой широких диаграмм.
+5. Добавить проверку `specializations` в XMI для классов с подклассами (State → 3+ потомков, Transition → специализации Guard/Trigger), чтобы scaffold-этап генерировал блоки наследования.
+6. Для ProtocolStateMachines (Figures 14.41–14.46) добавить отдельый SVG-layout: разделить диаграмму вертикальными линиями между «общим» и «частным» протоколами с подписью «protocol boundary».
+7. Интегрировать Pillow-based overlap-checker в `generate_statemachine_svg.py` на этапе генерации SVG для автоматической проверки пересечений текста/элементов до экспорта.

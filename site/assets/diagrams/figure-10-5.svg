@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="680" viewBox="0 0 750 680" role="img" aria-labelledby="diagram-title diagram-description" data-figure="10.5">
+  <title id="diagram-title">Рисунок 10.5 — Сигналы</title>
+  <desc id="diagram-description">Абстрактный синтаксис Signal и Reception: атрибуты сигнала, приёмы сигналов и сигнал, который обрабатывает приём.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="750" height="680"/>
+  <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="60" y="40" width="150" height="45"/>
+<line class="class-divider" x1="60" y1="72" x2="210" y2="72"/>
+<text class="class-name abstract" x="135.0" y="63" text-anchor="middle">Classifier</text>
+</a>
+<a class="class-node" data-classifier="BehavioralFeature" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
+<rect class="class-box" x="520" y="40" width="190" height="45"/>
+<line class="class-divider" x1="520" y1="72" x2="710" y2="72"/>
+<text class="class-name abstract" x="615.0" y="63" text-anchor="middle">BehavioralFeature</text>
+</a>
+<a class="class-node" data-classifier="Signal" href="../../index.html#/classifier/signal" target="_top" aria-label="Signal — открыть описание класса"><title>Signal. Спецификация вида взаимодействия между объектами, при котором реакция в получателе асинхронно инициируется без ответа.</title>
+<rect class="class-box" x="60" y="200" width="150" height="80"/>
+<line class="class-divider" x1="60" y1="232" x2="210" y2="232"/>
+<text class="class-name" x="135.0" y="223" text-anchor="middle">Signal</text>
+</a>
+<a class="class-node" data-classifier="Reception" href="../../index.html#/classifier/reception" target="_top" aria-label="Reception — открыть описание класса"><title>Reception. Объявление о том, что классификатор готов реагировать на приём сигнала.</title>
+<rect class="class-box" x="520" y="200" width="170" height="80"/>
+<line class="class-divider" x1="520" y1="232" x2="690" y2="232"/>
+<text class="class-name" x="605.0" y="223" text-anchor="middle">Reception</text>
+</a>
+<a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="60" y="560" width="130" height="55"/>
+<line class="class-divider" x1="60" y1="592" x2="190" y2="592"/>
+<text class="class-name" x="125.0" y="583" text-anchor="middle">Property</text>
+</a>
+<path class="generalization-line" d="M 135 200 V 85" data-child="Signal" data-parent="Classifier" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 615 200 V 85" data-child="Reception" data-parent="BehavioralFeature" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-signal-reception" target="_top" aria-label="Открыть описание ассоциации A_signal_reception">
+<g class="association-group" id="A_signal_reception"><title>Связывает сигнал Signal с приёмами сигналов Reception, которые его обрабатывают.</title>
+<path class="association" d="M 210 230 H 520" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 210 230 H 520" aria-hidden="true"/>
+<circle class="end-dot" cx="210" cy="230" r="3"/><circle class="end-dot" cx="520" cy="230" r="3"/>
+<text class="association-end" x="230" y="210"><title>Сигнал, обрабатываемый этим восприятием.</title>+ signal</text>
+<text class="association-end" x="500" y="210" text-anchor="end"><title>Восприятия, обрабатывающие этот сигнал.</title>+ reception</text>
+<text class="association-label" x="230" y="263">1</text>
+<text class="association-label" x="500" y="263" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedattribute-owningsignal" target="_top" aria-label="Открыть описание ассоциации A_ownedAttribute_owningSignal">
+<g class="association-group" id="A_ownedAttribute_owningSignal"><title>Связывает атрибуты Signal с владеющим ими сигналом.</title>
+<path class="association" d="M 135 280 V 560" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 135 280 V 560" aria-hidden="true"/>
+<polygon class="composition" points="135,280 127,288 135,296 143,288"/>
+<text class="association-end" x="155" y="318"><title>Сигнал, владеющий этим атрибутом.</title>+ owningSignal</text>
+<text class="association-end" x="155" y="532"><title>Атрибуты, принадлежащие сигналу.</title>+ ownedAttribute</text>
+<text class="association-label" x="155" y="350">{subsets namespace,</text>
+<text class="association-label" x="155" y="366">subsets classifier}</text>
+<text class="association-label" x="113" y="318" text-anchor="end">0..1</text>
+<text class="association-label" x="155" y="484">{ordered, subsets attribute,</text>
+<text class="association-label" x="155" y="500">subsets ownedMember}</text>
+<text class="association-label" x="113" y="532" text-anchor="end">*</text>
+</g></a>
+</svg>

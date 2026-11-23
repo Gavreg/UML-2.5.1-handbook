@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="230" viewBox="0 0 940 230" role="img" aria-labelledby="diagram-title diagram-description" data-figure="10.12">
+  <title id="diagram-title">Рисунок 10.12 — Набор взаимодействующих интерфейсов</title>
+  <desc id="diagram-description">Интерфейсы IBuzzer, IAlarm и ISensor связаны ассоциациями: IAlarm знает ISensor (theSensor), ISensor знает IAlarm (theAlarm), IAlarm знает IBuzzer (theBuzzer).</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="940" height="230"/>
+  <g class="class-node" data-classifier="IBuzzer"><title>IBuzzer. Пример интерфейса IBuzzer с атрибутом volume и операциями start и reset.</title>
+<rect class="class-box" x="60" y="60" width="140" height="130"/>
+<line class="class-divider" x1="60" y1="110" x2="200" y2="110"/>
+<text x="130.0" y="79" text-anchor="middle">«interface»</text>
+<text class="class-name" x="130.0" y="101" text-anchor="middle">IBuzzer</text>
+<text class="attribute" x="70" y="132">volume : Integer</text>
+<line class="class-divider" x1="60" y1="141" x2="200" y2="141"/>
+<text class="operation" x="70" y="162">start ( )</text>
+<text class="operation" x="70" y="183">reset ( )</text>
+</g>
+<g class="class-node" data-classifier="IAlarm"><title>IAlarm. Пример интерфейса IAlarm с операцией notify.</title>
+<rect class="class-box" x="430" y="60" width="130" height="95"/>
+<line class="class-divider" x1="430" y1="110" x2="560" y2="110"/>
+<text x="495.0" y="79" text-anchor="middle">«interface»</text>
+<text class="class-name" x="495.0" y="101" text-anchor="middle">IAlarm</text>
+<line class="class-divider" x1="430" y1="120" x2="560" y2="120"/>
+<text class="operation" x="440" y="141">notify ( )</text>
+</g>
+<g class="class-node" data-classifier="ISensor"><title>ISensor. Пример интерфейса ISensor с операциями activate и read.</title>
+<rect class="class-box" x="760" y="60" width="140" height="115"/>
+<line class="class-divider" x1="760" y1="110" x2="900" y2="110"/>
+<text x="830.0" y="79" text-anchor="middle">«interface»</text>
+<text class="class-name" x="830.0" y="101" text-anchor="middle">ISensor</text>
+<line class="class-divider" x1="760" y1="120" x2="900" y2="120"/>
+<text class="operation" x="770" y="141">activate ( )</text>
+<text class="operation" x="770" y="162">read ( )</text>
+</g>
+<g class="example-association-group"><title>Ассоциация между взаимодействующими интерфейсами IAlarm и IBuzzer.</title><path class="example-association" d="M 200 110 H 430" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 200 110 H 430" aria-hidden="true"/>
+<circle class="end-dot" cx="200" cy="110" r="3"/>
+<text class="example-label" x="220" y="94">1</text>
+<text class="example-label" x="410" y="94" text-anchor="end">*</text>
+<text class="example-label" x="220" y="132">+ theBuzzer</text>
+</g>
+<g class="example-association-group"><title>Двунаправленная ассоциация между взаимодействующими интерфейсами IAlarm и ISensor.</title><path class="example-association" d="M 560 110 H 760"/><path class="association-hitbox" d="M 560 110 H 760" aria-hidden="true"/>
+<circle class="end-dot" cx="560" cy="110" r="3"/><circle class="end-dot" cx="760" cy="110" r="3"/>
+<text class="example-label" x="580" y="94">+ theAlarm</text>
+<text class="example-label" x="610" y="132">1</text>
+<text class="example-label" x="740" y="94" text-anchor="end">+ theSensor</text>
+<text class="example-label" x="740" y="132" text-anchor="end">1</text>
+</g>
+</svg>

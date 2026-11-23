@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="210" viewBox="0 0 380 210" role="img" aria-labelledby="diagram-title diagram-description" data-figure="10.10">
+  <title id="diagram-title">Рисунок 10.10 — ISensor — требуемый интерфейс TheftAlarm</title>
+  <desc id="diagram-description">Требуемый интерфейс ISensor класса TheftAlarm обозначен символом «розетка» (полукруг).</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="380" height="210"/>
+  <g class="class-node" data-classifier="TheftAlarm"><title>TheftAlarm. Пример класса TheftAlarm, требующего интерфейс ISensor.</title>
+<rect class="class-box" x="80" y="55" width="150" height="105"/>
+<line class="class-divider" x1="80" y1="87" x2="230" y2="87"/>
+<text class="class-name" x="155.0" y="78" text-anchor="middle">TheftAlarm</text>
+</g>
+<a class="interface-symbol-link" href="../../index.html#/classifier/interface" target="_top" aria-label="Открыть описание Interface"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title><g class="example-association-group"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title><path class="example-association" d="M 250 107 H 310"/><path class="association-hitbox" d="M 250 107 H 310" aria-hidden="true"/><path class="example-association" d="M 310 87 L 315,88 L 320,90 L 324,93 L 327,97 L 329,102 L 330,107 L 329,112 L 327,117 L 324,121 L 320,124 L 315,126 L 310,127"/></g></a>
+</svg>

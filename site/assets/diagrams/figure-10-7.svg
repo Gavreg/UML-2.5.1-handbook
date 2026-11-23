@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1290" height="1000" viewBox="0 0 1290 1000" role="img" aria-labelledby="diagram-title diagram-description" data-figure="10.7">
+  <title id="diagram-title">Рисунок 10.7 — Интерфейсы</title>
+  <desc id="diagram-description">Абстрактный синтаксис Interface и InterfaceRealization: атрибуты, операции и приёмы интерфейса, вложенные классификаторы, протокол, переопределяемые интерфейсы, реализация интерфейса и поведения классификатора с поведением.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="1290" height="1000"/>
+  <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+<rect class="class-box" x="570" y="30" width="150" height="45"/>
+<line class="class-divider" x1="570" y1="62" x2="720" y2="62"/>
+<text class="class-name abstract" x="645.0" y="53" text-anchor="middle">Classifier</text>
+</a>
+<a class="class-node" data-classifier="Interface" href="../../index.html#/classifier/interface" target="_top" aria-label="Interface — открыть описание класса"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title>
+<rect class="class-box" x="520" y="150" width="250" height="450"/>
+<line class="class-divider" x1="520" y1="182" x2="770" y2="182"/>
+<text class="class-name" x="645.0" y="173" text-anchor="middle">Interface</text>
+</a>
+<a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="70" y="240" width="130" height="55"/>
+<line class="class-divider" x1="70" y1="272" x2="200" y2="272"/>
+<text class="class-name" x="135.0" y="263" text-anchor="middle">Property</text>
+</a>
+<a class="class-node" data-classifier="Operation" href="../../index.html#/classifier/operation" target="_top" aria-label="Operation — открыть описание класса"><title>Operation. BehavioralFeature классификатора, специфицирующая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать исполнение методов-поведений, а также другие поведенческие отклики. Operation специализирует TemplateableElement, чтобы поддерживать спецификацию шаблонных и связанных операций. Operation специализирует ParameterableElement, чтобы операцию можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+<rect class="class-box" x="70" y="373" width="140" height="55"/>
+<line class="class-divider" x1="70" y1="405" x2="210" y2="405"/>
+<text class="class-name" x="140.0" y="396" text-anchor="middle">Operation</text>
+</a>
+<a class="class-node" data-classifier="Reception" href="../../index.html#/classifier/reception" target="_top" aria-label="Reception — открыть описание класса"><title>Reception. Объявление о том, что классификатор готов реагировать на приём сигнала.</title>
+<rect class="class-box" x="70" y="506" width="150" height="55"/>
+<line class="class-divider" x1="70" y1="538" x2="220" y2="538"/>
+<text class="class-name" x="145.0" y="529" text-anchor="middle">Reception</text>
+</a>
+<g class="class-node" data-classifier="ProtocolStateMachine"><title>ProtocolStateMachine. Пример класса ProtocolStateMachine.</title>
+<rect class="class-box" x="1010" y="240" width="240" height="55"/>
+<line class="class-divider" x1="1010" y1="272" x2="1250" y2="272"/>
+<text class="class-name" x="1130.0" y="263" text-anchor="middle">ProtocolStateMachine</text>
+</g>
+<a class="class-node" data-classifier="BehavioredClassifier" href="../../index.html#/classifier/behavioredclassifier" target="_top" aria-label="BehavioredClassifier — открыть описание класса"><title>BehavioredClassifier. Классификатор с поведением может иметь InterfaceRealizations и владеет набором Behaviors, одно из которых может специфицировать поведение самого классификатора с поведением.</title>
+<rect class="class-box" x="230" y="700" width="240" height="55"/>
+<line class="class-divider" x1="230" y1="732" x2="470" y2="732"/>
+<text class="class-name abstract" x="350.0" y="723" text-anchor="middle">BehavioredClassifier</text>
+</a>
+<a class="class-node" data-classifier="InterfaceRealization" href="../../index.html#/classifier/interfacerealization" target="_top" aria-label="InterfaceRealization — открыть описание класса"><title>InterfaceRealization. Специализированное отношение реализации между BehavioredClassifier и Interface. Это отношение означает, что реализующий классификатор с поведением соответствует контракту, заданному интерфейсом.</title>
+<rect class="class-box" x="740" y="710" width="230" height="90"/>
+<line class="class-divider" x1="740" y1="742" x2="970" y2="742"/>
+<text class="class-name" x="855.0" y="733" text-anchor="middle">InterfaceRealization</text>
+</a>
+<g class="class-node" data-classifier="Behavior"><title>Behavior. Пример класса Behavior.</title>
+<rect class="class-box" x="250" y="920" width="170" height="55"/>
+<line class="class-divider" x1="250" y1="952" x2="420" y2="952"/>
+<text class="class-name" x="335.0" y="943" text-anchor="middle">Behavior</text>
+</g>
+<a class="class-node" data-classifier="Realization" href="../../index.html#/classifier/realization" target="_top" aria-label="Realization — открыть описание класса"><title>Realization. Специализированное отношение Abstraction между спецификацией-поставщиком и её реализацией-клиентом.</title>
+<rect class="class-box" x="785" y="870" width="140" height="55"/>
+<line class="class-divider" x1="785" y1="902" x2="925" y2="902"/>
+<text class="class-name" x="855.0" y="893" text-anchor="middle">Realization</text>
+</a>
+<path class="generalization-line" d="M 645 150 V 75" data-child="Interface" data-parent="Classifier" marker-end="url(#generalization)"/>
+<path class="generalization-line" d="M 855 800 V 870" data-child="InterfaceRealization" data-parent="Realization" marker-end="url(#generalization)"/>
+<a class="association-link" href="../../index.html#/association/a-ownedattribute-interface" target="_top" aria-label="Открыть описание ассоциации A_ownedAttribute_interface">
+<g class="association-group" id="A_ownedAttribute_interface"><title>Связывает атрибуты Interface с владеющим ими интерфейсом.</title>
+<path class="association" d="M 200 267 H 520"/><path class="association-hitbox" d="M 200 267 H 520" aria-hidden="true"/>
+<circle class="end-dot" cx="200" cy="267" r="3"/><circle class="end-dot" cx="520" cy="267" r="3"/><polygon class="composition" points="524,267 532,259 540,267 532,275"/>
+<text class="association-end" x="220" y="247"><title>ownedAttribute. Связывает атрибуты Interface с владеющим ими интерфейсом.</title>+ ownedAttribute</text>
+<text class="association-end" x="500" y="289" text-anchor="end"><title>interface. Связывает атрибуты Interface с владеющим ими интерфейсом.</title>+ interface</text>
+<text class="association-label" x="220" y="213">{ordered, subsets attribute,</text>
+<text class="association-label" x="220" y="229">subsets ownedMember}</text>
+<text class="association-label" x="220" y="301">*</text>
+<text class="association-label" x="500" y="247" text-anchor="end">0..1</text>
+<text class="association-label" x="500" y="305" text-anchor="end">{subsets namespace, subsets classifier}</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedoperation-interface" target="_top" aria-label="Открыть описание ассоциации A_ownedOperation_interface">
+<g class="association-group" id="A_ownedOperation_interface"><title>Связывает операции Interface с владеющим ими интерфейсом.</title>
+<path class="association" d="M 210 387 H 520"/><path class="association-hitbox" d="M 210 387 H 520" aria-hidden="true"/>
+<circle class="end-dot" cx="210" cy="387" r="3"/><circle class="end-dot" cx="520" cy="387" r="3"/><polygon class="composition" points="524,387 532,379 540,387 532,395"/>
+<text class="association-end" x="230" y="371"><title>ownedOperation. Связывает операции Interface с владеющим ими интерфейсом.</title>+ ownedOperation</text>
+<text class="association-end" x="500" y="411" text-anchor="end"><title>interface. Связывает операции Interface с владеющим ими интерфейсом.</title>+ interface</text>
+<text class="association-label" x="230" y="323">{ordered, subsets feature, subsets</text>
+<text class="association-label" x="230" y="339">redefinableElement, subsets</text>
+<text class="association-label" x="230" y="355">ownedMember}</text>
+<text class="association-label" x="230" y="423">*</text>
+<text class="association-label" x="500" y="367" text-anchor="end">0..1</text>
+<text class="association-label" x="500" y="427" text-anchor="end">{subsets featuringClassifier,</text>
+<text class="association-label" x="500" y="443" text-anchor="end">subsets namespace, subsets</text>
+<text class="association-label" x="500" y="459" text-anchor="end">redefinitionContext}</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedreception-interface" target="_top" aria-label="Открыть описание ассоциации A_ownedReception_interface">
+<g class="association-group" id="A_ownedReception_interface"><title>Связывает приёмы сигналов Interface с владеющим ими интерфейсом.</title>
+<path class="association" d="M 220 540 H 520" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 220 540 H 520" aria-hidden="true"/>
+<circle class="end-dot" cx="220" cy="540" r="3"/><circle class="end-dot" cx="520" cy="540" r="3"/><polygon class="composition" points="524,540 532,532 540,540 532,548"/>
+<text class="association-end" x="230" y="524"><title>Восприятия, которые могут принимать объекты, предоставляющие этот интерфейс.</title>+ ownedReception</text>
+<text class="association-end" x="500" y="566" text-anchor="end"><title>Интерфейс, владеющий этим восприятием.</title>+ interface</text>
+<text class="association-label" x="230" y="476">{subsets feature, subsets</text>
+<text class="association-label" x="230" y="492">ownedMember}</text>
+<text class="association-label" x="230" y="574">*</text>
+<text class="association-label" x="500" y="520" text-anchor="end">0..1</text>
+<text class="association-label" x="500" y="582" text-anchor="end">{subsets featuringClassifier,</text>
+<text class="association-label" x="500" y="598" text-anchor="end">subsets namespace}</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-nestedclassifier-interface" target="_top" aria-label="Открыть описание ассоциации A_nestedClassifier_interface">
+<g class="association-group" id="A_nestedClassifier_interface"><title>Связывает вложенные классификаторы Interface с владеющим ими интерфейсом.</title>
+<path class="association" d="M 770 200 H 990 V 52 H 720" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 770 200 H 990 V 52 H 720" aria-hidden="true"/>
+<circle class="end-dot" cx="770" cy="200" r="3"/><polygon class="composition" points="774,200 782,192 790,200 782,208"/>
+<text class="association-end" x="790" y="179"><title>Интерфейс, владеющий вложенным классификатором.</title>+ interface</text>
+<text class="association-end" x="740" y="92"><title>Классификаторы, определённые внутри этого интерфейса.</title>+ nestedClassifier</text>
+<text class="association-label" x="790" y="146">{subsets namespace, subsets</text>
+<text class="association-label" x="790" y="162">redefinitionContext}</text>
+<text class="association-label" x="800" y="224">0..1</text>
+<text class="association-label" x="740" y="20">{ordered, subsets redefinableElement,</text>
+<text class="association-label" x="740" y="36">subsets ownedMember}</text>
+<text class="association-label" x="740" y="116">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-protocol-interface" target="_top" aria-label="Открыть описание ассоциации A_protocol_interface">
+<g class="association-group" id="A_protocol_interface"><title>Связывает ProtocolStateMachine протокола с владеющим им интерфейсом.</title>
+<path class="association" d="M 770 267 H 1010" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 770 267 H 1010" aria-hidden="true"/>
+<polygon class="composition" points="772,267 780,259 788,267 780,275"/>
+<text class="association-end" x="790" y="243"><title>Протокольная машина состояний, задающая допустимые последовательности вызовов поведенческих характеристик, описанных в интерфейсе.</title>+ protocol</text>
+<text class="association-end" x="990" y="293" text-anchor="end"><title>Интерфейс, допустимые последовательности вызовов поведенческих характеристик которого задаёт эта протокольная машина состояний.</title>+ interface</text>
+<text class="association-label" x="800" y="259">{subsets ownedMember}</text>
+<text class="association-label" x="800" y="289">0..1</text>
+<text class="association-label" x="990" y="247" text-anchor="end">0..1</text>
+<text class="association-label" x="990" y="322" text-anchor="end">{subsets namespace}</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-redefinedinterface-interface" target="_top" aria-label="Открыть описание ассоциации A_redefinedInterface_interface">
+<g class="association-group" id="A_redefinedInterface_interface"><title>Связывает переопределяемые интерфейсы Interface с переопределяющим их интерфейсом.</title>
+<path class="association" d="M 770 330 H 990 V 430 H 770" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 770 330 H 990 V 430 H 770" aria-hidden="true"/>
+<circle class="end-dot" cx="770" cy="330" r="3"/>
+<text class="association-end" x="790" y="306"><title>Интерфейсы, переопределяемые этим интерфейсом.</title>+ redefinedInterface</text>
+<text class="association-end" x="790" y="466"><title>Интерфейсы, переопределяющие этот интерфейс.</title>+ interface</text>
+<text class="association-label" x="790" y="358">{subsets redefinedClassifier}</text>
+<text class="association-label" x="790" y="322">*</text>
+<text class="association-label" x="790" y="498">{subsets classifier}</text>
+<text class="association-label" x="790" y="414">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-contract-interfacerealization" target="_top" aria-label="Открыть описание ассоциации A_contract_interfaceRealization">
+<g class="association-group" id="A_contract_interfaceRealization"><title>Связывает контракт — Interface — с реализациями интерфейса InterfaceRealization, ссылающимися на этот контракт.</title>
+<path class="association" d="M 755 600 V 710" marker-start="url(#navigation-start)"/><path class="association-hitbox" d="M 755 600 V 710" aria-hidden="true"/>
+<circle class="end-dot" cx="755" cy="600" r="3"/>
+<text class="association-end" x="775" y="618"><title>Интерфейс, задающий контракт соответствия.</title>+ contract</text>
+<text class="association-end" x="775" y="668"><title>Реализации интерфейса, в которых этот интерфейс задаёт контракт соответствия.</title>+ interfaceRealization</text>
+<text class="association-label" x="775" y="650">{subsets supplier}</text>
+<text class="association-label" x="735" y="618" text-anchor="end">1</text>
+<text class="association-label" x="775" y="634">{subsets supplierDependency}</text>
+<text class="association-label" x="735" y="668" text-anchor="end">*</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-interfacerealization-implementingclassifier" target="_top" aria-label="Открыть описание ассоциации A_interfaceRealization_implementingClassifier">
+<g class="association-group" id="A_interfaceRealization_implementingClassifier"><title>Связывает BehavioredClassifier с принадлежащими ему реализациями интерфейсов InterfaceRealization.</title>
+<path class="association" d="M 470 745 H 740"/><path class="association-hitbox" d="M 470 745 H 740" aria-hidden="true"/>
+<circle class="end-dot" cx="470" cy="745" r="3"/><polygon class="composition" points="474,745 482,737 490,745 482,753"/><circle class="end-dot" cx="740" cy="745" r="3"/>
+<text class="association-end" x="720" y="777" text-anchor="end"><title>Реализации интерфейсов, принадлежащие классификатору с поведением. Они ссылаются на интерфейсы, реализуемые этим классификатором.</title>+ interfaceRealization</text>
+<text class="association-end" x="486" y="725"><title>Классификатор с поведением, владеющий этой реализацией интерфейса и реализующий интерфейс, на который она ссылается.</title>+ implementingClassifier</text>
+<text class="association-label" x="486" y="709">{subsets client, subsets owner}</text>
+<text class="association-label" x="486" y="774">1</text>
+<text class="association-label" x="720" y="725" text-anchor="end">*</text>
+<text class="association-label" x="720" y="793" text-anchor="end">{subsets ownedElement,</text>
+<text class="association-label" x="720" y="809" text-anchor="end">subsets clientDependency}</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-classifierbehavior-behavioredclassifier" target="_top" aria-label="Открыть описание ассоциации A_classifierBehavior_behavioredClassifier">
+<g class="association-group" id="A_classifierBehavior_behavioredClassifier"><title>Связывает поведение classifierBehavior с классификатором с поведением; специализация A_ownedBehavior_behavioredClassifier.</title>
+<path class="association" d="M 270 755 V 920" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 270 755 V 920" aria-hidden="true"/>
+
+<text class="association-end" x="254" y="794" text-anchor="end"><title>Поведение, задающее поведение самого классификатора с поведением.</title>+ classifierBehavior</text>
+<text class="association-end" x="254" y="878" text-anchor="end"><title>Классификатор с поведением, поведение которого задаёт это поведение.</title>+ behavioredClassifier</text>
+<text class="association-label" x="254" y="822" text-anchor="end">{subsets ownedBehavior}</text>
+<text class="association-label" x="288" y="794">0..1</text>
+<text class="association-label" x="254" y="850" text-anchor="end">{redefines behavioredClassifier}</text>
+<text class="association-label" x="288" y="878">0..1</text>
+</g></a>
+<a class="association-link" href="../../index.html#/association/a-ownedbehavior-behavioredclassifier" target="_top" aria-label="Открыть описание ассоциации A_ownedBehavior_behavioredClassifier">
+<g class="association-group" id="A_ownedBehavior_behavioredClassifier"><title>Связывает поведения BehavioredClassifier с владеющим ими классификатором с поведением.</title>
+<path class="association" d="M 390 755 V 920" marker-end="url(#navigation)"/><path class="association-hitbox" d="M 390 755 V 920" aria-hidden="true"/>
+<polygon class="composition" points="390,755 382,763 390,771 398,763"/>
+<text class="association-end" x="408" y="794"><title>Классификатор с поведением, владеющий этим поведением.</title>+ behavioredClassifier</text>
+<text class="association-end" x="408" y="878"><title>Поведения, принадлежащие классификатору с поведением.</title>+ ownedBehavior</text>
+<text class="association-label" x="408" y="822">{subsets namespace}</text>
+<text class="association-label" x="372" y="794" text-anchor="end">0..1</text>
+<text class="association-label" x="408" y="850">{subsets ownedMember}</text>
+<text class="association-label" x="372" y="878" text-anchor="end">*</text>
+</g></a>
+</svg>

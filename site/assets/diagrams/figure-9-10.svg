@@ -70,16 +70,16 @@
 <text class="attribute" x="1610" y="123">shared</text>
 <text class="attribute" x="1610" y="144">composite</text>
 </a>
-<g class="class-node" data-classifier="Interface"><title>Interface. Пример класса Interface.</title>
+<a class="class-node" data-classifier="Interface" href="../../index.html#/classifier/interface" target="_top" aria-label="Interface — открыть описание класса"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title>
 <rect class="class-box" x="50" y="400" width="160" height="60"/>
 <line class="class-divider" x1="50" y1="432" x2="210" y2="432"/>
 <text class="class-name" x="130.0" y="423" text-anchor="middle">Interface</text>
-</g>
-<g class="class-node" data-classifier="DataType"><title>DataType. Пример класса DataType.</title>
+</a>
+<a class="class-node" data-classifier="DataType" href="../../index.html#/classifier/datatype" target="_top" aria-label="DataType — открыть описание класса"><title>DataType. Тип, экземпляры которого идентифицируются только своим значением.</title>
 <rect class="class-box" x="50" y="650" width="160" height="60"/>
 <line class="class-divider" x1="50" y1="682" x2="210" y2="682"/>
 <text class="class-name" x="130.0" y="673" text-anchor="middle">DataType</text>
-</g>
+</a>
 <g class="class-node" data-classifier="Class"><title>Class. Пример класса Class.</title>
 <rect class="class-box" x="50" y="900" width="160" height="60"/>
 <line class="class-divider" x1="50" y1="932" x2="210" y2="932"/>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="310" viewBox="0 0 700 310" role="img" aria-labelledby="diagram-title diagram-description" data-figure="10.9">
+  <title id="diagram-title">Рисунок 10.9 — ISensor, предоставляемый интерфейс ProximitySensor, показан как унаследованный CapacitiveSensor</title>
+  <desc id="diagram-description">Унаследованный предоставляемый интерфейс ISensor обозначен «леденцом» с именем, которому предшествует символ caret.</desc>
+  <defs>
+    <marker id="generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <marker id="navigation" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="navigation-start" markerWidth="9" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.2"/></marker>
+    <marker id="annotation" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#8a2d2d"/></marker>
+    <style>.background, .class-box, .package-box, .note-box { fill: #ffffff; }
+  .class-box, .package-box, .note-box, .association, .generalization-line,
+  .class-divider, .example-association, .dependency-line, .note-link { stroke: #111111; stroke-width: 1.4; }
+  .association, .generalization-line, .class-divider, .example-association,
+  .dependency-line, .note-link { fill: none; }
+  .class-divider { stroke-width: 1; }
+  text { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+  .class-name { font-weight: 700; }
+  .abstract { font-style: italic; }
+  .attribute, .operation { font-size: 14px; }
+  .association-end, .association-label, .example-association-group .example-label { font-size: 14px; }
+  .end-dot, .composition { fill: #111111; }
+  .dependency-line, .note-link { stroke-dasharray: 7 5; }
+  .template-signature { stroke-dasharray: 4 3; }
+  a { cursor: pointer; }
+  a:hover .class-box, a:hover .note-box { fill: #eef3fb; stroke: #1e3a8a; }
+  a:focus-visible { outline: none; }
+  a:focus-visible .class-box, a:focus-visible .note-box { stroke: #7c3aed; stroke-width: 3; }
+  .association, .example-association, .dependency-line { pointer-events: stroke; }
+  .association-hitbox { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+  .association-group:hover .association, .example-association-group:hover .example-association,
+  .dependency-group:hover .dependency-line { stroke: #1e3a8a; stroke-width: 2.2; }
+  .association-group:hover text, .example-association-group:hover text,
+  .dependency-group:hover text { fill: #1e3a8a; }
+  .association-group:hover .end-dot, .association-group:hover .composition,
+  .example-association-group:hover .end-dot { fill: #1e3a8a; }
+  .association-end { cursor: help; }
+  .sequence-frame, .sequence-lifeline, .sequence-message, .sequence-observation, .sequence-constraint { fill: none; stroke: #111111; stroke-width: 1.4; }
+  .sequence-lifeline { stroke-dasharray: 7 5; }
+  .annotation-line { fill: none; stroke: #8a2d2d; stroke-width: 2; }
+  .annotation-label { fill: #8a2d2d; }
+  a:hover .annotation-label { fill: #1e3a8a; }</style>
+  </defs>
+  <rect class="background" width="700" height="310"/>
+  <g class="class-node" data-classifier="ProximitySensor"><title>ProximitySensor. Пример класса ProximitySensor, предоставляющего интерфейс ISensor.</title>
+<rect class="class-box" x="280" y="30" width="200" height="65"/>
+<line class="class-divider" x1="280" y1="62" x2="480" y2="62"/>
+<text class="class-name" x="380.0" y="53" text-anchor="middle">ProximitySensor</text>
+</g>
+<g class="class-node" data-classifier="CapacitiveSensor"><title>CapacitiveSensor. Пример класса CapacitiveSensor, наследующего ProximitySensor и унаследованный интерфейс ISensor.</title>
+<rect class="class-box" x="280" y="190" width="220" height="75"/>
+<line class="class-divider" x1="280" y1="222" x2="500" y2="222"/>
+<text class="class-name" x="390.0" y="213" text-anchor="middle">CapacitiveSensor</text>
+</g>
+<path class="generalization-line" d="M 390 190 V 95" data-child="CapacitiveSensor" data-parent="ProximitySensor" marker-end="url(#generalization)"/>
+<a class="interface-symbol-link" href="../../index.html#/classifier/interface" target="_top" aria-label="Открыть описание Interface"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title><g class="example-association-group"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title><path class="example-association" d="M 522 227 H 578"/><path class="association-hitbox" d="M 522 227 H 578" aria-hidden="true"/><circle cx="590" cy="227" r="12" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></g></a>
+<text class="class-name" x="540" y="206" text-anchor="middle"><title>Имя унаследованного предоставляемого интерфейса ISensor.</title>^ ISensor</text>
+</svg>

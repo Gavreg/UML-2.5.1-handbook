@@ -108,9 +108,11 @@ def xmi_inventory(settings, headings, text):
         element.get("name"): element for element in package_elements
         if element.get(XMI_NS + "type") in {"uml:Class", "uml:Enumeration"}
     }
+    excluded_associations = set(settings.get("xmi_exclude_associations", []))
     association_elements = {
         element.get("name"): element for element in package_elements
         if element.get(XMI_NS + "type") == "uml:Association"
+        and element.get("name") not in excluded_associations
     }
     all_classes = {
         element.get("name"): element for element in root.iter()

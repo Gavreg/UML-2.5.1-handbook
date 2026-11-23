@@ -1,0 +1,3409 @@
+{
+  "clause": "11",
+  "title": "Structured Classifiers",
+  "completed_stage": 1,
+  "source": {
+    "specification": "OMG UML 2.5.1, formal/17-12-05",
+    "pdf": "omg-uml-2.5.1-formal-17-12-05.pdf",
+    "pdf_sha256": "416b57e1933780eb48bd60fe513e031da220c28a521bdd334a366bebc78a463e",
+    "xmi": "UML-2.5.1.xmi",
+    "xmi_sha256": "e8166c91f51b8a0c015a90101b83d2249d03252e9f9a500a6511654347804f21",
+    "xmi_package": "StructuredClassifiers",
+    "printed_pages": [
+      183,
+      242
+    ],
+    "pdf_pages": [
+      225,
+      284
+    ],
+    "extracted_text": "uml-2.5.1-structured-classifiers-en.txt"
+  },
+  "counts": {
+    "headings": 257,
+    "classifiers": 15,
+    "associations": 34,
+    "figures": 54,
+    "attributes": 46,
+    "operations": 15,
+    "constraints": 22,
+    "association_ends": 68,
+    "notes": 7
+  },
+  "headings": [
+    {
+      "id": "11.1",
+      "title": "Summary",
+      "page": 183
+    },
+    {
+      "id": "11.2",
+      "title": "Structured Classifiers",
+      "page": 183
+    },
+    {
+      "id": "11.2.1",
+      "title": "Summary",
+      "page": 183
+    },
+    {
+      "id": "11.2.2",
+      "title": "Abstract Syntax",
+      "page": 183
+    },
+    {
+      "id": "11.2.3",
+      "title": "Semantics",
+      "page": 184
+    },
+    {
+      "id": "11.2.3.1",
+      "title": "Connectable Elements",
+      "page": 184
+    },
+    {
+      "id": "11.2.3.2",
+      "title": "Parts and Roles",
+      "page": 184
+    },
+    {
+      "id": "11.2.3.3",
+      "title": "Connectors",
+      "page": 184
+    },
+    {
+      "id": "11.2.3.4",
+      "title": "Multiplicities and topologies",
+      "page": 185
+    },
+    {
+      "id": "11.2.4",
+      "title": "Notation",
+      "page": 185
+    },
+    {
+      "id": "11.2.5",
+      "title": "Examples",
+      "page": 186
+    },
+    {
+      "id": "11.3",
+      "title": "Encapsulated Classifiers",
+      "page": 189
+    },
+    {
+      "id": "11.3.1",
+      "title": "Summary",
+      "page": 189
+    },
+    {
+      "id": "11.3.2",
+      "title": "Abstract Syntax",
+      "page": 190
+    },
+    {
+      "id": "11.3.3",
+      "title": "Semantics",
+      "page": 190
+    },
+    {
+      "id": "11.3.3.1",
+      "title": "Ports",
+      "page": 190
+    },
+    {
+      "id": "11.3.4",
+      "title": "Notation",
+      "page": 191
+    },
+    {
+      "id": "11.3.5",
+      "title": "Examples",
+      "page": 192
+    },
+    {
+      "id": "11.4",
+      "title": "Classes",
+      "page": 194
+    },
+    {
+      "id": "11.4.1",
+      "title": "Summary",
+      "page": 194
+    },
+    {
+      "id": "11.4.2",
+      "title": "Abstract Syntax",
+      "page": 194
+    },
+    {
+      "id": "11.4.3",
+      "title": "Semantics",
+      "page": 194
+    },
+    {
+      "id": "11.4.3.1",
+      "title": "Classes",
+      "page": 194
+    },
+    {
+      "id": "11.4.4",
+      "title": "Notation",
+      "page": 195
+    },
+    {
+      "id": "11.4.5",
+      "title": "Examples",
+      "page": 195
+    },
+    {
+      "id": "11.5",
+      "title": "Associations",
+      "page": 199
+    },
+    {
+      "id": "11.5.1",
+      "title": "Summary",
+      "page": 199
+    },
+    {
+      "id": "11.5.2",
+      "title": "Abstract Syntax",
+      "page": 199
+    },
+    {
+      "id": "11.5.3",
+      "title": "Semantics",
+      "page": 199
+    },
+    {
+      "id": "11.5.3.1",
+      "title": "Associations",
+      "page": 199
+    },
+    {
+      "id": "11.5.3.2",
+      "title": "Association Classes",
+      "page": 200
+    },
+    {
+      "id": "11.5.4",
+      "title": "Notation",
+      "page": 201
+    },
+    {
+      "id": "11.5.5",
+      "title": "Examples",
+      "page": 203
+    },
+    {
+      "id": "11.6",
+      "title": "Components",
+      "page": 208
+    },
+    {
+      "id": "11.6.1",
+      "title": "Summary",
+      "page": 208
+    },
+    {
+      "id": "11.6.2",
+      "title": "Abstract Syntax",
+      "page": 209
+    },
+    {
+      "id": "11.6.3",
+      "title": "Semantics",
+      "page": 209
+    },
+    {
+      "id": "11.6.3.1",
+      "title": "Components",
+      "page": 209
+    },
+    {
+      "id": "11.6.4",
+      "title": "Notation",
+      "page": 210
+    },
+    {
+      "id": "11.6.5",
+      "title": "Examples",
+      "page": 211
+    },
+    {
+      "id": "11.7",
+      "title": "Collaborations",
+      "page": 215
+    },
+    {
+      "id": "11.7.1",
+      "title": "Summary",
+      "page": 215
+    },
+    {
+      "id": "11.7.2",
+      "title": "Abstract Syntax",
+      "page": 215
+    },
+    {
+      "id": "11.7.3",
+      "title": "Semantics",
+      "page": 216
+    },
+    {
+      "id": "11.7.3.1",
+      "title": "Collaborations",
+      "page": 216
+    },
+    {
+      "id": "11.7.3.2",
+      "title": "CollaborationUses",
+      "page": 216
+    },
+    {
+      "id": "11.7.4",
+      "title": "Notation",
+      "page": 217
+    },
+    {
+      "id": "11.7.5",
+      "title": "Examples",
+      "page": 217
+    },
+    {
+      "id": "11.8",
+      "title": "Classifier Descriptions",
+      "page": 219
+    },
+    {
+      "id": "11.8.1",
+      "title": "Association [Class]",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.1",
+      "title": "Description",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.2",
+      "title": "Diagrams",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.3",
+      "title": "Generalizations",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.4",
+      "title": "Specializations",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.5",
+      "title": "Attributes",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.6",
+      "title": "Association Ends",
+      "page": 219
+    },
+    {
+      "id": "11.8.1.7",
+      "title": "Operations",
+      "page": 220
+    },
+    {
+      "id": "11.8.1.8",
+      "title": "Constraints",
+      "page": 220
+    },
+    {
+      "id": "11.8.2",
+      "title": "AssociationClass [Class]",
+      "page": 220
+    },
+    {
+      "id": "11.8.2.1",
+      "title": "Description",
+      "page": 220
+    },
+    {
+      "id": "11.8.2.2",
+      "title": "Diagrams",
+      "page": 220
+    },
+    {
+      "id": "11.8.2.3",
+      "title": "Generalizations",
+      "page": 221
+    },
+    {
+      "id": "11.8.2.4",
+      "title": "Constraints",
+      "page": 221
+    },
+    {
+      "id": "11.8.3",
+      "title": "Class [Class]",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.1",
+      "title": "Description",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.2",
+      "title": "Diagrams",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.3",
+      "title": "Generalizations",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.4",
+      "title": "Specializations",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.5",
+      "title": "Attributes",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.6",
+      "title": "Association Ends",
+      "page": 221
+    },
+    {
+      "id": "11.8.3.7",
+      "title": "Operations",
+      "page": 222
+    },
+    {
+      "id": "11.8.3.8",
+      "title": "Constraints",
+      "page": 222
+    },
+    {
+      "id": "11.8.4",
+      "title": "Collaboration [Class]",
+      "page": 222
+    },
+    {
+      "id": "11.8.4.1",
+      "title": "Description",
+      "page": 222
+    },
+    {
+      "id": "11.8.4.2",
+      "title": "Diagrams",
+      "page": 222
+    },
+    {
+      "id": "11.8.4.3",
+      "title": "Generalizations",
+      "page": 222
+    },
+    {
+      "id": "11.8.4.4",
+      "title": "Association Ends",
+      "page": 223
+    },
+    {
+      "id": "11.8.5",
+      "title": "CollaborationUse [Class]",
+      "page": 223
+    },
+    {
+      "id": "11.8.5.1",
+      "title": "Description",
+      "page": 223
+    },
+    {
+      "id": "11.8.5.2",
+      "title": "Diagrams",
+      "page": 223
+    },
+    {
+      "id": "11.8.5.3",
+      "title": "Generalizations",
+      "page": 223
+    },
+    {
+      "id": "11.8.5.4",
+      "title": "Association Ends",
+      "page": 223
+    },
+    {
+      "id": "11.8.5.5",
+      "title": "Constraints",
+      "page": 223
+    },
+    {
+      "id": "11.8.6",
+      "title": "Component [Class]",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.1",
+      "title": "Description",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.2",
+      "title": "Diagrams",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.3",
+      "title": "Generalizations",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.4",
+      "title": "Attributes",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.5",
+      "title": "Association Ends",
+      "page": 224
+    },
+    {
+      "id": "11.8.6.6",
+      "title": "Operations",
+      "page": 225
+    },
+    {
+      "id": "11.8.6.7",
+      "title": "Constraints",
+      "page": 225
+    },
+    {
+      "id": "11.8.7",
+      "title": "ComponentRealization [Class]",
+      "page": 225
+    },
+    {
+      "id": "11.8.7.1",
+      "title": "Description",
+      "page": 225
+    },
+    {
+      "id": "11.8.7.2",
+      "title": "Diagrams",
+      "page": 225
+    },
+    {
+      "id": "11.8.7.3",
+      "title": "Generalizations",
+      "page": 225
+    },
+    {
+      "id": "11.8.7.4",
+      "title": "Association Ends",
+      "page": 226
+    },
+    {
+      "id": "11.8.8",
+      "title": "ConnectableElement [Abstract Class]",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.1",
+      "title": "Description",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.2",
+      "title": "Diagrams",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.3",
+      "title": "Generalizations",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.4",
+      "title": "Specializations",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.5",
+      "title": "Association Ends",
+      "page": 226
+    },
+    {
+      "id": "11.8.8.6",
+      "title": "Operations",
+      "page": 226
+    },
+    {
+      "id": "11.8.9",
+      "title": "ConnectableElementTemplateParameter [Class]",
+      "page": 226
+    },
+    {
+      "id": "11.8.9.1",
+      "title": "Description",
+      "page": 226
+    },
+    {
+      "id": "11.8.9.2",
+      "title": "Diagrams",
+      "page": 227
+    },
+    {
+      "id": "11.8.9.3",
+      "title": "Generalizations",
+      "page": 227
+    },
+    {
+      "id": "11.8.9.4",
+      "title": "Association Ends",
+      "page": 227
+    },
+    {
+      "id": "11.8.10",
+      "title": "Connector [Class]",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.1",
+      "title": "Description",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.2",
+      "title": "Diagrams",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.3",
+      "title": "Generalizations",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.4",
+      "title": "Attributes",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.5",
+      "title": "Association Ends",
+      "page": 227
+    },
+    {
+      "id": "11.8.10.6",
+      "title": "Operations",
+      "page": 228
+    },
+    {
+      "id": "11.8.10.7",
+      "title": "Constraints",
+      "page": 228
+    },
+    {
+      "id": "11.8.11",
+      "title": "ConnectorEnd [Class]",
+      "page": 228
+    },
+    {
+      "id": "11.8.11.1",
+      "title": "Description",
+      "page": 228
+    },
+    {
+      "id": "11.8.11.2",
+      "title": "Diagrams",
+      "page": 228
+    },
+    {
+      "id": "11.8.11.3",
+      "title": "Generalizations",
+      "page": 228
+    },
+    {
+      "id": "11.8.11.4",
+      "title": "Association Ends",
+      "page": 228
+    },
+    {
+      "id": "11.8.11.5",
+      "title": "Operations",
+      "page": 229
+    },
+    {
+      "id": "11.8.11.6",
+      "title": "Constraints",
+      "page": 229
+    },
+    {
+      "id": "11.8.12",
+      "title": "ConnectorKind [Enumeration]",
+      "page": 229
+    },
+    {
+      "id": "11.8.12.1",
+      "title": "Description",
+      "page": 229
+    },
+    {
+      "id": "11.8.12.2",
+      "title": "Diagrams",
+      "page": 229
+    },
+    {
+      "id": "11.8.12.3",
+      "title": "Literals",
+      "page": 230
+    },
+    {
+      "id": "11.8.13",
+      "title": "EncapsulatedClassifier [Abstract Class]",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.1",
+      "title": "Description",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.2",
+      "title": "Diagrams",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.3",
+      "title": "Generalizations",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.4",
+      "title": "Specializations",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.5",
+      "title": "Association Ends",
+      "page": 230
+    },
+    {
+      "id": "11.8.13.6",
+      "title": "Operations",
+      "page": 230
+    },
+    {
+      "id": "11.8.14",
+      "title": "Port [Class]",
+      "page": 230
+    },
+    {
+      "id": "11.8.14.1",
+      "title": "Description",
+      "page": 230
+    },
+    {
+      "id": "11.8.14.2",
+      "title": "Diagrams",
+      "page": 230
+    },
+    {
+      "id": "11.8.14.3",
+      "title": "Generalizations",
+      "page": 231
+    },
+    {
+      "id": "11.8.14.4",
+      "title": "Attributes",
+      "page": 231
+    },
+    {
+      "id": "11.8.14.5",
+      "title": "Association Ends",
+      "page": 231
+    },
+    {
+      "id": "11.8.14.6",
+      "title": "Operations",
+      "page": 231
+    },
+    {
+      "id": "11.8.14.7",
+      "title": "Constraints",
+      "page": 232
+    },
+    {
+      "id": "11.8.15",
+      "title": "StructuredClassifier [Abstract Class]",
+      "page": 232
+    },
+    {
+      "id": "11.8.15.1",
+      "title": "Description",
+      "page": 232
+    },
+    {
+      "id": "11.8.15.2",
+      "title": "Diagrams",
+      "page": 232
+    },
+    {
+      "id": "11.8.15.3",
+      "title": "Generalizations",
+      "page": 232
+    },
+    {
+      "id": "11.8.15.4",
+      "title": "Specializations",
+      "page": 232
+    },
+    {
+      "id": "11.8.15.5",
+      "title": "Association Ends",
+      "page": 233
+    },
+    {
+      "id": "11.8.15.6",
+      "title": "Operations",
+      "page": 233
+    },
+    {
+      "id": "11.9",
+      "title": "Association Descriptions",
+      "page": 233
+    },
+    {
+      "id": "11.9.1",
+      "title": "A_collaborationRole_collaboration [Association]",
+      "page": 233
+    },
+    {
+      "id": "11.9.1.1",
+      "title": "Diagrams",
+      "page": 233
+    },
+    {
+      "id": "11.9.1.2",
+      "title": "Owned Ends",
+      "page": 233
+    },
+    {
+      "id": "11.9.2",
+      "title": "A_connectableElement_templateParameter_parameteredElement",
+      "page": 233
+    },
+    {
+      "id": "11.9.2.1",
+      "title": "Diagrams",
+      "page": 233
+    },
+    {
+      "id": "11.9.2.2",
+      "title": "Member Ends",
+      "page": 234
+    },
+    {
+      "id": "11.9.3",
+      "title": "A_contract_connector [Association]",
+      "page": 234
+    },
+    {
+      "id": "11.9.3.1",
+      "title": "Diagrams",
+      "page": 234
+    },
+    {
+      "id": "11.9.3.2",
+      "title": "Owned Ends",
+      "page": 234
+    },
+    {
+      "id": "11.9.4",
+      "title": "A_definingEnd_connectorEnd [Association]",
+      "page": 234
+    },
+    {
+      "id": "11.9.4.1",
+      "title": "Diagrams",
+      "page": 234
+    },
+    {
+      "id": "11.9.4.2",
+      "title": "Owned Ends",
+      "page": 234
+    },
+    {
+      "id": "11.9.5",
+      "title": "A_endType_association [Association]",
+      "page": 234
+    },
+    {
+      "id": "11.9.5.1",
+      "title": "Diagrams",
+      "page": 234
+    },
+    {
+      "id": "11.9.5.2",
+      "title": "Owned Ends",
+      "page": 234
+    },
+    {
+      "id": "11.9.6",
+      "title": "A_end_connector [Association]",
+      "page": 234
+    },
+    {
+      "id": "11.9.6.1",
+      "title": "Diagrams",
+      "page": 234
+    },
+    {
+      "id": "11.9.6.2",
+      "title": "Owned Ends",
+      "page": 234
+    },
+    {
+      "id": "11.9.7",
+      "title": "A_end_role [Association]",
+      "page": 234
+    },
+    {
+      "id": "11.9.7.1",
+      "title": "Diagrams",
+      "page": 234
+    },
+    {
+      "id": "11.9.7.2",
+      "title": "Member Ends",
+      "page": 235
+    },
+    {
+      "id": "11.9.8",
+      "title": "A_extension_metaclass [Association]",
+      "page": 235
+    },
+    {
+      "id": "11.9.8.1",
+      "title": "Diagrams",
+      "page": 235
+    },
+    {
+      "id": "11.9.8.2",
+      "title": "Member Ends",
+      "page": 235
+    },
+    {
+      "id": "11.9.9",
+      "title": "A_memberEnd_association [Association]",
+      "page": 235
+    },
+    {
+      "id": "11.9.9.1",
+      "title": "Diagrams",
+      "page": 235
+    },
+    {
+      "id": "11.9.9.2",
+      "title": "Member Ends",
+      "page": 235
+    },
+    {
+      "id": "11.9.10",
+      "title": "A_navigableOwnedEnd_association [Association]",
+      "page": 235
+    },
+    {
+      "id": "11.9.10.1",
+      "title": "Diagrams",
+      "page": 235
+    },
+    {
+      "id": "11.9.10.2",
+      "title": "Owned Ends",
+      "page": 235
+    },
+    {
+      "id": "11.9.11",
+      "title": "A_nestedClassifier_nestingClass [Association]",
+      "page": 235
+    },
+    {
+      "id": "11.9.11.1",
+      "title": "Diagrams",
+      "page": 235
+    },
+    {
+      "id": "11.9.11.2",
+      "title": "Owned Ends",
+      "page": 235
+    },
+    {
+      "id": "11.9.12",
+      "title": "A_ownedAttribute_class [Association]",
+      "page": 236
+    },
+    {
+      "id": "11.9.12.1",
+      "title": "Diagrams",
+      "page": 236
+    },
+    {
+      "id": "11.9.12.2",
+      "title": "Member Ends",
+      "page": 236
+    },
+    {
+      "id": "11.9.13",
+      "title": "A_ownedAttribute_structuredClassifier [Association]",
+      "page": 236
+    },
+    {
+      "id": "11.9.13.1",
+      "title": "Diagrams",
+      "page": 236
+    },
+    {
+      "id": "11.9.13.2",
+      "title": "Generalizations",
+      "page": 236
+    },
+    {
+      "id": "11.9.13.3",
+      "title": "Owned Ends",
+      "page": 236
+    },
+    {
+      "id": "11.9.14",
+      "title": "A_ownedConnector_structuredClassifier [Association]",
+      "page": 236
+    },
+    {
+      "id": "11.9.14.1",
+      "title": "Diagrams",
+      "page": 236
+    },
+    {
+      "id": "11.9.14.2",
+      "title": "Owned Ends",
+      "page": 236
+    },
+    {
+      "id": "11.9.15",
+      "title": "A_ownedEnd_owningAssociation [Association]",
+      "page": 236
+    },
+    {
+      "id": "11.9.15.1",
+      "title": "Diagrams",
+      "page": 236
+    },
+    {
+      "id": "11.9.15.2",
+      "title": "Member Ends",
+      "page": 236
+    },
+    {
+      "id": "11.9.16",
+      "title": "A_ownedOperation_class [Association]",
+      "page": 237
+    },
+    {
+      "id": "11.9.16.1",
+      "title": "Diagrams",
+      "page": 237
+    },
+    {
+      "id": "11.9.16.2",
+      "title": "Member Ends",
+      "page": 237
+    },
+    {
+      "id": "11.9.17",
+      "title": "A_ownedPort_encapsulatedClassifier [Association]",
+      "page": 237
+    },
+    {
+      "id": "11.9.17.1",
+      "title": "Diagrams",
+      "page": 237
+    },
+    {
+      "id": "11.9.17.2",
+      "title": "Owned Ends",
+      "page": 237
+    },
+    {
+      "id": "11.9.18",
+      "title": "A_ownedReception_class [Association]",
+      "page": 237
+    },
+    {
+      "id": "11.9.18.1",
+      "title": "Diagrams",
+      "page": 237
+    },
+    {
+      "id": "11.9.18.2",
+      "title": "Owned Ends",
+      "page": 237
+    },
+    {
+      "id": "11.9.19",
+      "title": "A_packagedElement_component [Association]",
+      "page": 237
+    },
+    {
+      "id": "11.9.19.1",
+      "title": "Diagrams",
+      "page": 237
+    },
+    {
+      "id": "11.9.19.2",
+      "title": "Owned Ends",
+      "page": 237
+    },
+    {
+      "id": "11.9.20",
+      "title": "A_partWithPort_connectorEnd [Association]",
+      "page": 237
+    },
+    {
+      "id": "11.9.20.1",
+      "title": "Diagrams",
+      "page": 237
+    },
+    {
+      "id": "11.9.20.2",
+      "title": "Owned Ends",
+      "page": 237
+    },
+    {
+      "id": "11.9.21",
+      "title": "A_part_structuredClassifier [Association]",
+      "page": 238
+    },
+    {
+      "id": "11.9.21.1",
+      "title": "Diagrams",
+      "page": 238
+    },
+    {
+      "id": "11.9.21.2",
+      "title": "Owned Ends",
+      "page": 238
+    },
+    {
+      "id": "11.9.22",
+      "title": "A_protocol_port [Association]",
+      "page": 238
+    },
+    {
+      "id": "11.9.22.1",
+      "title": "Diagrams",
+      "page": 238
+    },
+    {
+      "id": "11.9.22.2",
+      "title": "Owned Ends",
+      "page": 238
+    },
+    {
+      "id": "11.9.23",
+      "title": "A_provided_component [Association]",
+      "page": 238
+    },
+    {
+      "id": "11.9.23.1",
+      "title": "Diagrams",
+      "page": 238
+    },
+    {
+      "id": "11.9.23.2",
+      "title": "Owned Ends",
+      "page": 238
+    },
+    {
+      "id": "11.9.24",
+      "title": "A_provided_port [Association]",
+      "page": 238
+    },
+    {
+      "id": "11.9.24.1",
+      "title": "Diagrams",
+      "page": 238
+    },
+    {
+      "id": "11.9.24.2",
+      "title": "Owned Ends",
+      "page": 238
+    },
+    {
+      "id": "11.9.25",
+      "title": "A_realization_abstraction_component [Association]",
+      "page": 238
+    },
+    {
+      "id": "11.9.25.1",
+      "title": "Diagrams",
+      "page": 238
+    },
+    {
+      "id": "11.9.25.2",
+      "title": "Member Ends",
+      "page": 238
+    },
+    {
+      "id": "11.9.26",
+      "title": "A_realizingClassifier_componentRealization [Association]",
+      "page": 239
+    },
+    {
+      "id": "11.9.26.1",
+      "title": "Diagrams",
+      "page": 239
+    },
+    {
+      "id": "11.9.26.2",
+      "title": "Owned Ends",
+      "page": 239
+    },
+    {
+      "id": "11.9.27",
+      "title": "A_redefinedConnector_connector [Association]",
+      "page": 239
+    },
+    {
+      "id": "11.9.27.1",
+      "title": "Diagrams",
+      "page": 239
+    },
+    {
+      "id": "11.9.27.2",
+      "title": "Owned Ends",
+      "page": 239
+    },
+    {
+      "id": "11.9.28",
+      "title": "A_redefinedPort_port [Association]",
+      "page": 239
+    },
+    {
+      "id": "11.9.28.1",
+      "title": "Diagrams",
+      "page": 239
+    },
+    {
+      "id": "11.9.28.2",
+      "title": "Owned Ends",
+      "page": 239
+    },
+    {
+      "id": "11.9.29",
+      "title": "A_required_component [Association]",
+      "page": 239
+    },
+    {
+      "id": "11.9.29.1",
+      "title": "Diagrams",
+      "page": 239
+    },
+    {
+      "id": "11.9.29.2",
+      "title": "Owned Ends",
+      "page": 239
+    },
+    {
+      "id": "11.9.30",
+      "title": "A_required_port [Association]",
+      "page": 239
+    },
+    {
+      "id": "11.9.30.1",
+      "title": "Diagrams",
+      "page": 239
+    },
+    {
+      "id": "11.9.30.2",
+      "title": "Owned Ends",
+      "page": 239
+    },
+    {
+      "id": "11.9.31",
+      "title": "A_roleBinding_collaborationUse [Association]",
+      "page": 240
+    },
+    {
+      "id": "11.9.31.1",
+      "title": "Diagrams",
+      "page": 240
+    },
+    {
+      "id": "11.9.31.2",
+      "title": "Owned Ends",
+      "page": 240
+    },
+    {
+      "id": "11.9.32",
+      "title": "A_role_structuredClassifier [Association]",
+      "page": 240
+    },
+    {
+      "id": "11.9.32.1",
+      "title": "Diagrams",
+      "page": 240
+    },
+    {
+      "id": "11.9.32.2",
+      "title": "Specializations",
+      "page": 240
+    },
+    {
+      "id": "11.9.32.3",
+      "title": "Owned Ends",
+      "page": 240
+    },
+    {
+      "id": "11.9.33",
+      "title": "A_superClass_class [Association]",
+      "page": 240
+    },
+    {
+      "id": "11.9.33.1",
+      "title": "Diagrams",
+      "page": 240
+    },
+    {
+      "id": "11.9.33.2",
+      "title": "Owned Ends",
+      "page": 240
+    },
+    {
+      "id": "11.9.34",
+      "title": "A_type_collaborationUse [Association]",
+      "page": 240
+    },
+    {
+      "id": "11.9.34.1",
+      "title": "Diagrams",
+      "page": 240
+    },
+    {
+      "id": "11.9.34.2",
+      "title": "Owned Ends",
+      "page": 240
+    },
+    {
+      "id": "11.9.35",
+      "title": "A_type_connector [Association]",
+      "page": 240
+    },
+    {
+      "id": "11.9.35.1",
+      "title": "Diagrams",
+      "page": 240
+    },
+    {
+      "id": "11.9.35.2",
+      "title": "Owned Ends",
+      "page": 240
+    }
+  ],
+  "classifiers": [
+    {
+      "name": "Association",
+      "section": "11.8.1",
+      "page": 219,
+      "kind": "Class",
+      "generalizations": [
+        "Relationship",
+        "Classifier"
+      ],
+      "specializations": [
+        "AssociationClass",
+        "CommunicationPath",
+        "Extension"
+      ],
+      "attributes": [
+        {
+          "id": "Association-endType",
+          "name": "endType",
+          "type": "Type",
+          "association": "A_endType_association"
+        },
+        {
+          "id": "Association-isDerived",
+          "name": "isDerived",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Association-memberEnd",
+          "name": "memberEnd",
+          "type": "Property",
+          "association": "A_memberEnd_association"
+        },
+        {
+          "id": "Association-navigableOwnedEnd",
+          "name": "navigableOwnedEnd",
+          "type": "Property",
+          "association": "A_navigableOwnedEnd_association"
+        },
+        {
+          "id": "Association-ownedEnd",
+          "name": "ownedEnd",
+          "type": "Property",
+          "association": "A_ownedEnd_owningAssociation"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Association-endType.1",
+          "name": "endType"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Association-specialized_end_number",
+          "name": "specialized_end_number"
+        },
+        {
+          "id": "Association-specialized_end_types",
+          "name": "specialized_end_types"
+        },
+        {
+          "id": "Association-binary_associations",
+          "name": "binary_associations"
+        },
+        {
+          "id": "Association-association_ends",
+          "name": "association_ends"
+        },
+        {
+          "id": "Association-ends_must_be_typed",
+          "name": "ends_must_be_typed"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Structured Classifiers",
+        "Associations",
+        "Profiles",
+        "Nodes",
+        "Properties",
+        "Link Actions"
+      ]
+    },
+    {
+      "name": "Connector",
+      "section": "11.8.10",
+      "page": 227,
+      "kind": "Class",
+      "generalizations": [
+        "Feature"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Connector-contract",
+          "name": "contract",
+          "type": "Behavior",
+          "association": "A_contract_connector"
+        },
+        {
+          "id": "Connector-end",
+          "name": "end",
+          "type": "ConnectorEnd",
+          "association": "A_end_connector"
+        },
+        {
+          "id": "Connector-kind",
+          "name": "kind",
+          "type": "ConnectorKind",
+          "association": null
+        },
+        {
+          "id": "Connector-redefinedConnector",
+          "name": "redefinedConnector",
+          "type": "Connector",
+          "association": "A_redefinedConnector_connector"
+        },
+        {
+          "id": "Connector-type",
+          "name": "type",
+          "type": "Association",
+          "association": "A_type_connector"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Connector-kind.1",
+          "name": "kind"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Connector-types",
+          "name": "types"
+        },
+        {
+          "id": "Connector-roles",
+          "name": "roles"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Structured Classifiers",
+        "Messages",
+        "Information Flows"
+      ]
+    },
+    {
+      "name": "ConnectorEnd",
+      "section": "11.8.11",
+      "page": 228,
+      "kind": "Class",
+      "generalizations": [
+        "MultiplicityElement"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "ConnectorEnd-definingEnd",
+          "name": "definingEnd",
+          "type": "Property",
+          "association": "A_definingEnd_connectorEnd"
+        },
+        {
+          "id": "ConnectorEnd-partWithPort",
+          "name": "partWithPort",
+          "type": "Property",
+          "association": "A_partWithPort_connectorEnd"
+        },
+        {
+          "id": "ConnectorEnd-role",
+          "name": "role",
+          "type": "ConnectableElement",
+          "association": "A_end_role"
+        }
+      ],
+      "operations": [
+        {
+          "id": "ConnectorEnd-definingEnd.1",
+          "name": "definingEnd"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "ConnectorEnd-role_and_part_with_port",
+          "name": "role_and_part_with_port"
+        },
+        {
+          "id": "ConnectorEnd-part_with_port_empty",
+          "name": "part_with_port_empty"
+        },
+        {
+          "id": "ConnectorEnd-multiplicity",
+          "name": "multiplicity"
+        },
+        {
+          "id": "ConnectorEnd-self_part_with_port",
+          "name": "self_part_with_port"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Encapsulated Classifiers",
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "ConnectorKind",
+      "section": "11.8.12",
+      "page": 229,
+      "kind": "Enumeration",
+      "generalizations": [],
+      "specializations": [],
+      "attributes": [],
+      "operations": [],
+      "constraints": [],
+      "literals": [
+        {
+          "id": "ConnectorKind-assembly",
+          "name": "assembly"
+        },
+        {
+          "id": "ConnectorKind-delegation",
+          "name": "delegation"
+        }
+      ],
+      "diagrams": [
+        ""
+      ]
+    },
+    {
+      "name": "EncapsulatedClassifier",
+      "section": "11.8.13",
+      "page": 230,
+      "kind": "Abstract Class",
+      "generalizations": [
+        "StructuredClassifier"
+      ],
+      "specializations": [
+        "Class"
+      ],
+      "attributes": [
+        {
+          "id": "EncapsulatedClassifier-ownedPort",
+          "name": "ownedPort",
+          "type": "Port",
+          "association": "A_ownedPort_encapsulatedClassifier"
+        }
+      ],
+      "operations": [
+        {
+          "id": "EncapsulatedClassifier-ownedPort.1",
+          "name": "ownedPort"
+        }
+      ],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Encapsulated Classifiers",
+        "Classes"
+      ]
+    },
+    {
+      "name": "Port",
+      "section": "11.8.14",
+      "page": 230,
+      "kind": "Class",
+      "generalizations": [
+        "Property"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Port-isBehavior",
+          "name": "isBehavior",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Port-isConjugated",
+          "name": "isConjugated",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Port-isService",
+          "name": "isService",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Port-protocol",
+          "name": "protocol",
+          "type": "ProtocolStateMachine",
+          "association": "A_protocol_port"
+        },
+        {
+          "id": "Port-provided",
+          "name": "provided",
+          "type": "Interface",
+          "association": "A_provided_port"
+        },
+        {
+          "id": "Port-redefinedPort",
+          "name": "redefinedPort",
+          "type": "Port",
+          "association": "A_redefinedPort_port"
+        },
+        {
+          "id": "Port-required",
+          "name": "required",
+          "type": "Interface",
+          "association": "A_required_port"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Port-provided.1",
+          "name": "provided"
+        },
+        {
+          "id": "Port-required.1",
+          "name": "required"
+        },
+        {
+          "id": "Port-basicProvided",
+          "name": "basicProvided"
+        },
+        {
+          "id": "Port-basicRequired",
+          "name": "basicRequired"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Port-port_aggregation",
+          "name": "port_aggregation"
+        },
+        {
+          "id": "Port-default_value",
+          "name": "default_value"
+        },
+        {
+          "id": "Port-encapsulated_owner",
+          "name": "encapsulated_owner"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Encapsulated Classifiers",
+        "Events",
+        "Invocation Actions"
+      ]
+    },
+    {
+      "name": "StructuredClassifier",
+      "section": "11.8.15",
+      "page": 232,
+      "kind": "Abstract Class",
+      "generalizations": [
+        "Classifier"
+      ],
+      "specializations": [
+        "Collaboration",
+        "EncapsulatedClassifier"
+      ],
+      "attributes": [
+        {
+          "id": "StructuredClassifier-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "association": "A_ownedAttribute_structuredClassifier"
+        },
+        {
+          "id": "StructuredClassifier-ownedConnector",
+          "name": "ownedConnector",
+          "type": "Connector",
+          "association": "A_ownedConnector_structuredClassifier"
+        },
+        {
+          "id": "StructuredClassifier-part",
+          "name": "part",
+          "type": "Property",
+          "association": "A_part_structuredClassifier"
+        },
+        {
+          "id": "StructuredClassifier-role",
+          "name": "role",
+          "type": "ConnectableElement",
+          "association": "A_role_structuredClassifier"
+        }
+      ],
+      "operations": [
+        {
+          "id": "StructuredClassifier-part.1",
+          "name": "part"
+        },
+        {
+          "id": "StructuredClassifier-allRoles",
+          "name": "allRoles"
+        }
+      ],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Encapsulated Classifiers",
+        "Structured Classifiers",
+        "Collaborations"
+      ]
+    },
+    {
+      "name": "AssociationClass",
+      "section": "11.8.2",
+      "page": 220,
+      "kind": "Class",
+      "generalizations": [
+        "Class",
+        "Association"
+      ],
+      "specializations": [],
+      "attributes": [],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "AssociationClass-cannot_be_defined",
+          "name": "cannot_be_defined"
+        },
+        {
+          "id": "AssociationClass-disjoint_attributes_ends",
+          "name": "disjoint_attributes_ends"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Associations"
+      ]
+    },
+    {
+      "name": "Class",
+      "section": "11.8.3",
+      "page": 221,
+      "kind": "Class",
+      "generalizations": [
+        "BehavioredClassifier",
+        "EncapsulatedClassifier"
+      ],
+      "specializations": [
+        "AssociationClass",
+        "Behavior",
+        "Component",
+        "Node",
+        "Stereotype"
+      ],
+      "attributes": [
+        {
+          "id": "Class-extension",
+          "name": "extension",
+          "type": "Extension",
+          "association": "A_extension_metaclass"
+        },
+        {
+          "id": "Class-isAbstract",
+          "name": "isAbstract",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Class-isActive",
+          "name": "isActive",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Class-nestedClassifier",
+          "name": "nestedClassifier",
+          "type": "Classifier",
+          "association": "A_nestedClassifier_nestingClass"
+        },
+        {
+          "id": "Class-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "association": "A_ownedAttribute_class"
+        },
+        {
+          "id": "Class-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "association": "A_ownedOperation_class"
+        },
+        {
+          "id": "Class-ownedReception",
+          "name": "ownedReception",
+          "type": "Reception",
+          "association": "A_ownedReception_class"
+        },
+        {
+          "id": "Class-superClass",
+          "name": "superClass",
+          "type": "Class",
+          "association": "A_superClass_class"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Class-extension.1",
+          "name": "extension"
+        },
+        {
+          "id": "Class-superClass.1",
+          "name": "superClass"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Class-passive_class",
+          "name": "passive_class"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Classes",
+        "Associations",
+        "Components",
+        "Profiles",
+        "Nodes",
+        "Behaviors",
+        "Properties",
+        "Operations"
+      ]
+    },
+    {
+      "name": "Collaboration",
+      "section": "11.8.4",
+      "page": 222,
+      "kind": "Class",
+      "generalizations": [
+        "StructuredClassifier",
+        "BehavioredClassifier"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Collaboration-collaborationRole",
+          "name": "collaborationRole",
+          "type": "ConnectableElement",
+          "association": "A_collaborationRole_collaboration"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Collaborations"
+      ]
+    },
+    {
+      "name": "CollaborationUse",
+      "section": "11.8.5",
+      "page": 223,
+      "kind": "Class",
+      "generalizations": [
+        "NamedElement"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "CollaborationUse-roleBinding",
+          "name": "roleBinding",
+          "type": "Dependency",
+          "association": "A_roleBinding_collaborationUse"
+        },
+        {
+          "id": "CollaborationUse-type",
+          "name": "type",
+          "type": "Collaboration",
+          "association": "A_type_collaborationUse"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "CollaborationUse-client_elements",
+          "name": "client_elements"
+        },
+        {
+          "id": "CollaborationUse-every_role",
+          "name": "every_role"
+        },
+        {
+          "id": "CollaborationUse-connectors",
+          "name": "connectors"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Collaborations",
+        "Classifiers"
+      ]
+    },
+    {
+      "name": "Component",
+      "section": "11.8.6",
+      "page": 224,
+      "kind": "Class",
+      "generalizations": [
+        "Class"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Component-isIndirectlyInstantiated",
+          "name": "isIndirectlyInstantiated",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Component-packagedElement",
+          "name": "packagedElement",
+          "type": "PackageableElement",
+          "association": "A_packagedElement_component"
+        },
+        {
+          "id": "Component-provided",
+          "name": "provided",
+          "type": "Interface",
+          "association": "A_provided_component"
+        },
+        {
+          "id": "Component-realization",
+          "name": "realization",
+          "type": "ComponentRealization",
+          "association": "A_realization_abstraction_component"
+        },
+        {
+          "id": "Component-required",
+          "name": "required",
+          "type": "Interface",
+          "association": "A_required_component"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Component-provided.1",
+          "name": "provided"
+        },
+        {
+          "id": "Component-required.1",
+          "name": "required"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Component-no_nested_classifiers",
+          "name": "no_nested_classifiers"
+        },
+        {
+          "id": "Component-no_packaged_elements",
+          "name": "no_packaged_elements"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "ComponentRealization",
+      "section": "11.8.7",
+      "page": 225,
+      "kind": "Class",
+      "generalizations": [
+        "Realization"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "ComponentRealization-abstraction",
+          "name": "abstraction",
+          "type": "Component",
+          "association": "A_realization_abstraction_component"
+        },
+        {
+          "id": "ComponentRealization-realizingClassifier",
+          "name": "realizingClassifier",
+          "type": "Classifier",
+          "association": "A_realizingClassifier_componentRealization"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "ConnectableElement",
+      "section": "11.8.8",
+      "page": 226,
+      "kind": "Abstract Class",
+      "generalizations": [
+        "TypedElement",
+        "ParameterableElement"
+      ],
+      "specializations": [
+        "Parameter",
+        "Property",
+        "Variable"
+      ],
+      "attributes": [
+        {
+          "id": "ConnectableElement-end",
+          "name": "end",
+          "type": "ConnectorEnd",
+          "association": "A_end_role"
+        },
+        {
+          "id": "ConnectableElement-templateParameter",
+          "name": "templateParameter",
+          "type": "ConnectableElementTemplateParameter",
+          "association": "A_connectableElement_templateParameter_parameteredElement"
+        }
+      ],
+      "operations": [
+        {
+          "id": "ConnectableElement-end.1",
+          "name": "end"
+        }
+      ],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Structured Classifiers",
+        "Collaborations",
+        "Activities",
+        "Lifelines",
+        "Features",
+        "Properties"
+      ]
+    },
+    {
+      "name": "ConnectableElementTemplateParameter",
+      "section": "11.8.9",
+      "page": 226,
+      "kind": "Class",
+      "generalizations": [
+        "TemplateParameter"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "ConnectableElementTemplateParameter-parameteredElement",
+          "name": "parameteredElement",
+          "type": "ConnectableElement",
+          "association": "A_connectableElement_templateParameter_parameteredElement"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "name": "A_collaborationRole_collaboration",
+      "section": "11.9.1",
+      "page": 233,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Collaboration-collaborationRole",
+          "name": "collaborationRole",
+          "type": "ConnectableElement",
+          "owner": "Collaboration"
+        },
+        {
+          "id": "A_collaborationRole_collaboration-collaboration",
+          "name": "collaboration",
+          "type": "Collaboration",
+          "owner": "A_collaborationRole_collaboration"
+        }
+      ],
+      "diagrams": [
+        "Collaborations"
+      ]
+    },
+    {
+      "name": "A_contract_connector",
+      "section": "11.9.3",
+      "page": 234,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Connector-contract",
+          "name": "contract",
+          "type": "Behavior",
+          "owner": "Connector"
+        },
+        {
+          "id": "A_contract_connector-connector",
+          "name": "connector",
+          "type": "Connector",
+          "owner": "A_contract_connector"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_definingEnd_connectorEnd",
+      "section": "11.9.4",
+      "page": 234,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ConnectorEnd-definingEnd",
+          "name": "definingEnd",
+          "type": "Property",
+          "owner": "ConnectorEnd"
+        },
+        {
+          "id": "A_definingEnd_connectorEnd-connectorEnd",
+          "name": "connectorEnd",
+          "type": "ConnectorEnd",
+          "owner": "A_definingEnd_connectorEnd"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_endType_association",
+      "section": "11.9.5",
+      "page": 234,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Association-endType",
+          "name": "endType",
+          "type": "Type",
+          "owner": "Association"
+        },
+        {
+          "id": "A_endType_association-association",
+          "name": "association",
+          "type": "Association",
+          "owner": "A_endType_association"
+        }
+      ],
+      "diagrams": [
+        "Associations"
+      ]
+    },
+    {
+      "name": "A_end_connector",
+      "section": "11.9.6",
+      "page": 234,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Connector-end",
+          "name": "end",
+          "type": "ConnectorEnd",
+          "owner": "Connector"
+        },
+        {
+          "id": "A_end_connector-connector",
+          "name": "connector",
+          "type": "Connector",
+          "owner": "A_end_connector"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_end_role",
+      "section": "11.9.7",
+      "page": 234,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ConnectableElement-end",
+          "name": "end",
+          "type": "ConnectorEnd",
+          "owner": "ConnectableElement"
+        },
+        {
+          "id": "ConnectorEnd-role",
+          "name": "role",
+          "type": "ConnectableElement",
+          "owner": "ConnectorEnd"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_extension_metaclass",
+      "section": "11.9.8",
+      "page": 235,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-extension",
+          "name": "extension",
+          "type": "Extension",
+          "owner": "Class"
+        },
+        {
+          "id": "Extension-metaclass",
+          "name": "metaclass",
+          "type": "Class",
+          "owner": "Extension"
+        }
+      ],
+      "diagrams": [
+        "Classes",
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_memberEnd_association",
+      "section": "11.9.9",
+      "page": 235,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Association-memberEnd",
+          "name": "memberEnd",
+          "type": "Property",
+          "owner": "Association"
+        },
+        {
+          "id": "Property-association",
+          "name": "association",
+          "type": "Association",
+          "owner": "Property"
+        }
+      ],
+      "diagrams": [
+        "Associations",
+        "Properties"
+      ]
+    },
+    {
+      "name": "A_navigableOwnedEnd_association",
+      "section": "11.9.10",
+      "page": 235,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Association-navigableOwnedEnd",
+          "name": "navigableOwnedEnd",
+          "type": "Property",
+          "owner": "Association"
+        },
+        {
+          "id": "A_navigableOwnedEnd_association-association",
+          "name": "association",
+          "type": "Association",
+          "owner": "A_navigableOwnedEnd_association"
+        }
+      ],
+      "diagrams": [
+        "Associations"
+      ]
+    },
+    {
+      "name": "A_nestedClassifier_nestingClass",
+      "section": "11.9.11",
+      "page": 235,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-nestedClassifier",
+          "name": "nestedClassifier",
+          "type": "Classifier",
+          "owner": "Class"
+        },
+        {
+          "id": "A_nestedClassifier_nestingClass-nestingClass",
+          "name": "nestingClass",
+          "type": "Class",
+          "owner": "A_nestedClassifier_nestingClass"
+        }
+      ],
+      "diagrams": [
+        "Classes"
+      ]
+    },
+    {
+      "name": "A_ownedAttribute_class",
+      "section": "11.9.12",
+      "page": 236,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "owner": "Class"
+        },
+        {
+          "id": "Property-class",
+          "name": "class",
+          "type": "Class",
+          "owner": "Property"
+        }
+      ],
+      "diagrams": [
+        "Classes",
+        "Properties"
+      ]
+    },
+    {
+      "name": "A_ownedAttribute_structuredClassifier",
+      "section": "11.9.13",
+      "page": 236,
+      "generalizations": [
+        "A_role_structuredClassifier"
+      ],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "StructuredClassifier-ownedAttribute",
+          "name": "ownedAttribute",
+          "type": "Property",
+          "owner": "StructuredClassifier"
+        },
+        {
+          "id": "A_ownedAttribute_structuredClassifier-structuredClassifier",
+          "name": "structuredClassifier",
+          "type": "StructuredClassifier",
+          "owner": "A_ownedAttribute_structuredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_ownedConnector_structuredClassifier",
+      "section": "11.9.14",
+      "page": 236,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "StructuredClassifier-ownedConnector",
+          "name": "ownedConnector",
+          "type": "Connector",
+          "owner": "StructuredClassifier"
+        },
+        {
+          "id": "A_ownedConnector_structuredClassifier-structuredClassifier",
+          "name": "structuredClassifier",
+          "type": "StructuredClassifier",
+          "owner": "A_ownedConnector_structuredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_ownedEnd_owningAssociation",
+      "section": "11.9.15",
+      "page": 236,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Association-ownedEnd",
+          "name": "ownedEnd",
+          "type": "Property",
+          "owner": "Association"
+        },
+        {
+          "id": "Property-owningAssociation",
+          "name": "owningAssociation",
+          "type": "Association",
+          "owner": "Property"
+        }
+      ],
+      "diagrams": [
+        "Associations",
+        "Properties"
+      ]
+    },
+    {
+      "name": "A_ownedOperation_class",
+      "section": "11.9.16",
+      "page": 237,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-ownedOperation",
+          "name": "ownedOperation",
+          "type": "Operation",
+          "owner": "Class"
+        },
+        {
+          "id": "Operation-class",
+          "name": "class",
+          "type": "Class",
+          "owner": "Operation"
+        }
+      ],
+      "diagrams": [
+        "Classes",
+        "Operations"
+      ]
+    },
+    {
+      "name": "A_ownedPort_encapsulatedClassifier",
+      "section": "11.9.17",
+      "page": 237,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "EncapsulatedClassifier-ownedPort",
+          "name": "ownedPort",
+          "type": "Port",
+          "owner": "EncapsulatedClassifier"
+        },
+        {
+          "id": "A_ownedPort_encapsulatedClassifier-encapsulatedClassifier",
+          "name": "encapsulatedClassifier",
+          "type": "EncapsulatedClassifier",
+          "owner": "A_ownedPort_encapsulatedClassifier"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_ownedReception_class",
+      "section": "11.9.18",
+      "page": 237,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-ownedReception",
+          "name": "ownedReception",
+          "type": "Reception",
+          "owner": "Class"
+        },
+        {
+          "id": "A_ownedReception_class-class",
+          "name": "class",
+          "type": "Class",
+          "owner": "A_ownedReception_class"
+        }
+      ],
+      "diagrams": [
+        "Classes"
+      ]
+    },
+    {
+      "name": "A_packagedElement_component",
+      "section": "11.9.19",
+      "page": 237,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Component-packagedElement",
+          "name": "packagedElement",
+          "type": "PackageableElement",
+          "owner": "Component"
+        },
+        {
+          "id": "A_packagedElement_component-component",
+          "name": "component",
+          "type": "Component",
+          "owner": "A_packagedElement_component"
+        }
+      ],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "A_partWithPort_connectorEnd",
+      "section": "11.9.20",
+      "page": 237,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ConnectorEnd-partWithPort",
+          "name": "partWithPort",
+          "type": "Property",
+          "owner": "ConnectorEnd"
+        },
+        {
+          "id": "A_partWithPort_connectorEnd-connectorEnd",
+          "name": "connectorEnd",
+          "type": "ConnectorEnd",
+          "owner": "A_partWithPort_connectorEnd"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_part_structuredClassifier",
+      "section": "11.9.21",
+      "page": 238,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "StructuredClassifier-part",
+          "name": "part",
+          "type": "Property",
+          "owner": "StructuredClassifier"
+        },
+        {
+          "id": "A_part_structuredClassifier-structuredClassifier",
+          "name": "structuredClassifier",
+          "type": "StructuredClassifier",
+          "owner": "A_part_structuredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_protocol_port",
+      "section": "11.9.22",
+      "page": 238,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Port-protocol",
+          "name": "protocol",
+          "type": "ProtocolStateMachine",
+          "owner": "Port"
+        },
+        {
+          "id": "A_protocol_port-port",
+          "name": "port",
+          "type": "Port",
+          "owner": "A_protocol_port"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_provided_component",
+      "section": "11.9.23",
+      "page": 238,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Component-provided",
+          "name": "provided",
+          "type": "Interface",
+          "owner": "Component"
+        },
+        {
+          "id": "A_provided_component-component",
+          "name": "component",
+          "type": "Component",
+          "owner": "A_provided_component"
+        }
+      ],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "A_provided_port",
+      "section": "11.9.24",
+      "page": 238,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Port-provided",
+          "name": "provided",
+          "type": "Interface",
+          "owner": "Port"
+        },
+        {
+          "id": "A_provided_port-port",
+          "name": "port",
+          "type": "Port",
+          "owner": "A_provided_port"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_realization_abstraction_component",
+      "section": "11.9.25",
+      "page": 238,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Component-realization",
+          "name": "realization",
+          "type": "ComponentRealization",
+          "owner": "Component"
+        },
+        {
+          "id": "ComponentRealization-abstraction",
+          "name": "abstraction",
+          "type": "Component",
+          "owner": "ComponentRealization"
+        }
+      ],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "A_realizingClassifier_componentRealization",
+      "section": "11.9.26",
+      "page": 239,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ComponentRealization-realizingClassifier",
+          "name": "realizingClassifier",
+          "type": "Classifier",
+          "owner": "ComponentRealization"
+        },
+        {
+          "id": "A_realizingClassifier_componentRealization-componentRealization",
+          "name": "componentRealization",
+          "type": "ComponentRealization",
+          "owner": "A_realizingClassifier_componentRealization"
+        }
+      ],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "A_redefinedConnector_connector",
+      "section": "11.9.27",
+      "page": 239,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Connector-redefinedConnector",
+          "name": "redefinedConnector",
+          "type": "Connector",
+          "owner": "Connector"
+        },
+        {
+          "id": "A_redefinedConnector_connector-connector",
+          "name": "connector",
+          "type": "Connector",
+          "owner": "A_redefinedConnector_connector"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_redefinedPort_port",
+      "section": "11.9.28",
+      "page": 239,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Port-redefinedPort",
+          "name": "redefinedPort",
+          "type": "Port",
+          "owner": "Port"
+        },
+        {
+          "id": "A_redefinedPort_port-port",
+          "name": "port",
+          "type": "Port",
+          "owner": "A_redefinedPort_port"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_required_component",
+      "section": "11.9.29",
+      "page": 239,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Component-required",
+          "name": "required",
+          "type": "Interface",
+          "owner": "Component"
+        },
+        {
+          "id": "A_required_component-component",
+          "name": "component",
+          "type": "Component",
+          "owner": "A_required_component"
+        }
+      ],
+      "diagrams": [
+        "Components"
+      ]
+    },
+    {
+      "name": "A_required_port",
+      "section": "11.9.30",
+      "page": 239,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Port-required",
+          "name": "required",
+          "type": "Interface",
+          "owner": "Port"
+        },
+        {
+          "id": "A_required_port-port",
+          "name": "port",
+          "type": "Port",
+          "owner": "A_required_port"
+        }
+      ],
+      "diagrams": [
+        "Encapsulated Classifiers"
+      ]
+    },
+    {
+      "name": "A_roleBinding_collaborationUse",
+      "section": "11.9.31",
+      "page": 240,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "CollaborationUse-roleBinding",
+          "name": "roleBinding",
+          "type": "Dependency",
+          "owner": "CollaborationUse"
+        },
+        {
+          "id": "A_roleBinding_collaborationUse-collaborationUse",
+          "name": "collaborationUse",
+          "type": "CollaborationUse",
+          "owner": "A_roleBinding_collaborationUse"
+        }
+      ],
+      "diagrams": [
+        "Collaborations"
+      ]
+    },
+    {
+      "name": "A_role_structuredClassifier",
+      "section": "11.9.32",
+      "page": 240,
+      "generalizations": [],
+      "specializations": [
+        "A_ownedAttribute_structuredClassifier"
+      ],
+      "ends": [
+        {
+          "id": "StructuredClassifier-role",
+          "name": "role",
+          "type": "ConnectableElement",
+          "owner": "StructuredClassifier"
+        },
+        {
+          "id": "A_role_structuredClassifier-structuredClassifier",
+          "name": "structuredClassifier",
+          "type": "StructuredClassifier",
+          "owner": "A_role_structuredClassifier"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    },
+    {
+      "name": "A_superClass_class",
+      "section": "11.9.33",
+      "page": 240,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Class-superClass",
+          "name": "superClass",
+          "type": "Class",
+          "owner": "Class"
+        },
+        {
+          "id": "A_superClass_class-class",
+          "name": "class",
+          "type": "Class",
+          "owner": "A_superClass_class"
+        }
+      ],
+      "diagrams": [
+        "Classes"
+      ]
+    },
+    {
+      "name": "A_type_collaborationUse",
+      "section": "11.9.34",
+      "page": 240,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "CollaborationUse-type",
+          "name": "type",
+          "type": "Collaboration",
+          "owner": "CollaborationUse"
+        },
+        {
+          "id": "A_type_collaborationUse-collaborationUse",
+          "name": "collaborationUse",
+          "type": "CollaborationUse",
+          "owner": "A_type_collaborationUse"
+        }
+      ],
+      "diagrams": [
+        "Collaborations"
+      ]
+    },
+    {
+      "name": "A_type_connector",
+      "section": "11.9.35",
+      "page": 240,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Connector-type",
+          "name": "type",
+          "type": "Association",
+          "owner": "Connector"
+        },
+        {
+          "id": "A_type_connector-connector",
+          "name": "connector",
+          "type": "Connector",
+          "owner": "A_type_connector"
+        }
+      ],
+      "diagrams": [
+        "Structured Classifiers"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "11.1",
+      "title": "Structured Classifiers",
+      "page": 183,
+      "section": "11.2.2"
+    },
+    {
+      "id": "11.2",
+      "title": "shows examples of part boxes. On the left, the part box denotes that the containing instance will own four",
+      "page": 186,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.3",
+      "title": "shows examples of part boxes for properties typed by EncapsulatedClassifiers with Ports, in this case",
+      "page": 186,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.4",
+      "title": "shows three alternative notations for connecting simple Ports on the parts and roles within a",
+      "page": 187,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.5",
+      "title": "shows two possible views of the Car Class. In subfigure (i), Car is shown as having a composition",
+      "page": 187,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.6",
+      "title": "\"Star\" Connector pattern",
+      "page": 188,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.7",
+      "title": "\"Array\" Connector pattern",
+      "page": 188,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.8",
+      "title": "An assembly Connector maps a simple Port of a Component to a matching simple Port of another",
+      "page": 189,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.9",
+      "title": "An n-ary Connector that assembles four simple Ports using channeled ball-and-socket notation.",
+      "page": 189,
+      "section": "11.2.5"
+    },
+    {
+      "id": "11.10",
+      "title": "Encapsulated Classifiers",
+      "page": 190,
+      "section": "11.3.2"
+    },
+    {
+      "id": "11.11",
+      "title": "Port notation",
+      "page": 192,
+      "section": "11.3.5"
+    },
+    {
+      "id": "11.12",
+      "title": "Behavior Port notation",
+      "page": 192,
+      "section": "11.3.5"
+    },
+    {
+      "id": "11.13",
+      "title": "Port notation showing multiple provided Interfaces",
+      "page": 193,
+      "section": "11.3.5"
+    },
+    {
+      "id": "11.14",
+      "title": "shows a Class Engine with a Port p typed by its provided Interface IPowerTrain. This Interface specifies the",
+      "page": 193,
+      "section": "11.3.5"
+    },
+    {
+      "id": "11.15",
+      "title": "Classes",
+      "page": 194,
+      "section": "11.4.2"
+    },
+    {
+      "id": "11.16",
+      "title": "Class notation variants",
+      "page": 196,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.17",
+      "title": "Class notation: attributes and Operations grouped according to visibility",
+      "page": 196,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.18",
+      "title": "Active Class",
+      "page": 196,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.19",
+      "title": "Connectors and Parts",
+      "page": 197,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.20",
+      "title": "Connectors and Parts in a structure diagram using multiplicities",
+      "page": 197,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.21",
+      "title": "An Instance of the Car Class",
+      "page": 197,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.22",
+      "title": "InstanceSpecification indicating a constructor",
+      "page": 198,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.23",
+      "title": "A constructor for the Car Class",
+      "page": 198,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.24",
+      "title": "Showing that the extended Class is a metaclass",
+      "page": 198,
+      "section": "11.4.5"
+    },
+    {
+      "id": "11.25",
+      "title": "Associations",
+      "page": 199,
+      "section": "11.5.2"
+    },
+    {
+      "id": "11.26",
+      "title": "Graphic notation indicating exactly one Association end owned by the Association",
+      "page": 202,
+      "section": "11.5.4"
+    },
+    {
+      "id": "11.27",
+      "title": "Binary and ternary Associations",
+      "page": 204,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.28",
+      "title": "Association ends with various adornments",
+      "page": 204,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.29",
+      "title": "Examples of navigable association-owned ends",
+      "page": 205,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.30",
+      "title": "Examples of class-owned ends",
+      "page": 206,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.31",
+      "title": "Example of attribute notation for navigable end owned by an end Class",
+      "page": 206,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.32",
+      "title": "Derived supersets (union)",
+      "page": 206,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.33",
+      "title": "Composite aggregation is depicted as a black diamond",
+      "page": 207,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.34",
+      "title": "Composite aggregation sharing a source segment",
+      "page": 207,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.35",
+      "title": "Example AssociationClass Job, which is defined between the two Classes Person and Company",
+      "page": 207,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.36",
+      "title": "Example AssociationClass using diamond symbol",
+      "page": 208,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.37",
+      "title": "Qualified associations",
+      "page": 208,
+      "section": "11.5.5"
+    },
+    {
+      "id": "11.38",
+      "title": "Components",
+      "page": 209,
+      "section": "11.6.2"
+    },
+    {
+      "id": "11.39",
+      "title": "Example of an overview diagram showing Components and their general Dependencies",
+      "page": 211,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.40",
+      "title": "A Component with two provided and three required Interfaces",
+      "page": 211,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.41",
+      "title": "Black box notation showing a listing of provided and required interfaces",
+      "page": 212,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.42",
+      "title": "Optional “white-box” representation of a Component",
+      "page": 212,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.43",
+      "title": "Explicit representation of provided and required Interfaces using Dependency notation.",
+      "page": 212,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.44",
+      "title": "A representation of the realization of a complex Component",
+      "page": 213,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.45",
+      "title": "An alternative nested representation of a complex Component",
+      "page": 213,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.46",
+      "title": "Example model of a Component, its provided and required Interfaces, and wiring through",
+      "page": 214,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.47",
+      "title": "Internal structure of a Component",
+      "page": 214,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.48",
+      "title": "Delegation Connectors connect externally provided Interfaces to the parts that realize or require",
+      "page": 215,
+      "section": "11.6.5"
+    },
+    {
+      "id": "11.49",
+      "title": "Collaborations",
+      "page": 215,
+      "section": "11.7.2"
+    },
+    {
+      "id": "11.50",
+      "title": "The internal structure of the Observer Collaboration",
+      "page": 217,
+      "section": "11.7.5"
+    },
+    {
+      "id": "11.51",
+      "title": "Alternative notation for the parts of the Observer Collaboration.",
+      "page": 218,
+      "section": "11.7.5"
+    },
+    {
+      "id": "11.52",
+      "title": "The Sale Collaboration",
+      "page": 218,
+      "section": "11.7.5"
+    },
+    {
+      "id": "11.53",
+      "title": "The BrokeredSale Collaboration",
+      "page": 218,
+      "section": "11.7.5"
+    },
+    {
+      "id": "11.54",
+      "title": "A subset of the BrokeredSale Collaboration using «occurrence» and Dependency arrows",
+      "page": 219,
+      "section": "11.7.5"
+    }
+  ],
+  "external_classifiers": {
+    "already_in_handbook": [
+      "BehavioredClassifier",
+      "Classifier",
+      "Dependency",
+      "Feature",
+      "Interface",
+      "MultiplicityElement",
+      "NamedElement",
+      "Operation",
+      "PackageableElement",
+      "Parameter",
+      "ParameterableElement",
+      "Property",
+      "Realization",
+      "Reception",
+      "Relationship",
+      "TemplateParameter",
+      "Type",
+      "TypedElement"
+    ],
+    "require_future_clauses": [
+      "Behavior",
+      "CommunicationPath",
+      "Extension",
+      "Node",
+      "ProtocolStateMachine",
+      "Stereotype",
+      "Variable"
+    ]
+  },
+  "planned_integration": {
+    "new_routes": 112,
+    "routes": [
+      "#/section/11-1",
+      "#/section/11-2",
+      "#/section/11-3",
+      "#/section/11-4",
+      "#/section/11-5",
+      "#/section/11-6",
+      "#/section/11-7",
+      "#/section/11-8",
+      "#/section/11-9",
+      "#/classifier/association",
+      "#/classifier/connector",
+      "#/classifier/connectorend",
+      "#/classifier/connectorkind",
+      "#/classifier/encapsulatedclassifier",
+      "#/classifier/port",
+      "#/classifier/structuredclassifier",
+      "#/classifier/associationclass",
+      "#/classifier/class",
+      "#/classifier/collaboration",
+      "#/classifier/collaborationuse",
+      "#/classifier/component",
+      "#/classifier/componentrealization",
+      "#/classifier/connectableelement",
+      "#/classifier/connectableelementtemplateparameter",
+      "#/association/a-collaborationrole-collaboration",
+      "#/association/a-contract-connector",
+      "#/association/a-definingend-connectorend",
+      "#/association/a-endtype-association",
+      "#/association/a-end-connector",
+      "#/association/a-end-role",
+      "#/association/a-extension-metaclass",
+      "#/association/a-memberend-association",
+      "#/association/a-navigableownedend-association",
+      "#/association/a-nestedclassifier-nestingclass",
+      "#/association/a-ownedattribute-class",
+      "#/association/a-ownedattribute-structuredclassifier",
+      "#/association/a-ownedconnector-structuredclassifier",
+      "#/association/a-ownedend-owningassociation",
+      "#/association/a-ownedoperation-class",
+      "#/association/a-ownedport-encapsulatedclassifier",
+      "#/association/a-ownedreception-class",
+      "#/association/a-packagedelement-component",
+      "#/association/a-partwithport-connectorend",
+      "#/association/a-part-structuredclassifier",
+      "#/association/a-protocol-port",
+      "#/association/a-provided-component",
+      "#/association/a-provided-port",
+      "#/association/a-realization-abstraction-component",
+      "#/association/a-realizingclassifier-componentrealization",
+      "#/association/a-redefinedconnector-connector",
+      "#/association/a-redefinedport-port",
+      "#/association/a-required-component",
+      "#/association/a-required-port",
+      "#/association/a-rolebinding-collaborationuse",
+      "#/association/a-role-structuredclassifier",
+      "#/association/a-superclass-class",
+      "#/association/a-type-collaborationuse",
+      "#/association/a-type-connector",
+      "#/diagram/11-1",
+      "#/diagram/11-2",
+      "#/diagram/11-3",
+      "#/diagram/11-4",
+      "#/diagram/11-5",
+      "#/diagram/11-6",
+      "#/diagram/11-7",
+      "#/diagram/11-8",
+      "#/diagram/11-9",
+      "#/diagram/11-10",
+      "#/diagram/11-11",
+      "#/diagram/11-12",
+      "#/diagram/11-13",
+      "#/diagram/11-14",
+      "#/diagram/11-15",
+      "#/diagram/11-16",
+      "#/diagram/11-17",
+      "#/diagram/11-18",
+      "#/diagram/11-19",
+      "#/diagram/11-20",
+      "#/diagram/11-21",
+      "#/diagram/11-22",
+      "#/diagram/11-23",
+      "#/diagram/11-24",
+      "#/diagram/11-25",
+      "#/diagram/11-26",
+      "#/diagram/11-27",
+      "#/diagram/11-28",
+      "#/diagram/11-29",
+      "#/diagram/11-30",
+      "#/diagram/11-31",
+      "#/diagram/11-32",
+      "#/diagram/11-33",
+      "#/diagram/11-34",
+      "#/diagram/11-35",
+      "#/diagram/11-36",
+      "#/diagram/11-37",
+      "#/diagram/11-38",
+      "#/diagram/11-39",
+      "#/diagram/11-40",
+      "#/diagram/11-41",
+      "#/diagram/11-42",
+      "#/diagram/11-43",
+      "#/diagram/11-44",
+      "#/diagram/11-45",
+      "#/diagram/11-46",
+      "#/diagram/11-47",
+      "#/diagram/11-48",
+      "#/diagram/11-49",
+      "#/diagram/11-50",
+      "#/diagram/11-51",
+      "#/diagram/11-52",
+      "#/diagram/11-53",
+      "#/diagram/11-54"
+    ],
+    "new_source_files": [
+      "site/data/structured-classifiers.js",
+      "site/data/content/sections-11.js",
+      "scripts/generate_structured_classifiers_svg.py"
+    ],
+    "generated_files": [
+      "site/data/pages/sections-11.js",
+      "site/data/pages/classifiers-11.js",
+      "site/data/pages/associations-11.js",
+      "site/data/pages/diagrams-11.js",
+      "site/data/xmi/<Classifier>.js (15 new fragments)",
+      "site/assets/diagrams/figure-11-*.png (54 files)",
+      "site/assets/diagrams/figure-11-*.svg (54 files)"
+    ],
+    "existing_files_to_extend": [
+      "site/index.html (generated script manifest)",
+      "scripts/render_common_structure_diagrams.py",
+      "AGENTS.md"
+    ],
+    "batching": "The clause fits one task per remaining stage; no subdivision is required."
+  }
+}

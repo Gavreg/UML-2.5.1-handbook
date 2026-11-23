@@ -73,5 +73,20 @@
       "association_ends": 32,
       "notes": 3
     }
+  },
+  "11": {
+    "title": "Structured Classifiers",
+    "title_ru": "Структурированные классификаторы",
+    "slug": "structured-classifiers",
+    "package": "StructuredClassifiers",
+    "first_page": 183,
+    "last_page": 242,
+    "classifier_catalog": "11.8",
+    "association_catalog": "11.9",
+    "source": "site/docs/uml-2.5.1-structured-classifiers-en.txt",
+    "data": "site/data/structured-classifiers.js",
+    "content": ["sections-11.js"],
+    "svg_generator": "generate_structured_classifiers_svg.py",
+    "xmi_exclude_associations": ["A_connectableElement_templateParameter_parameteredElement"]
   }
 }

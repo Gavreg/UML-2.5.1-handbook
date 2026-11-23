@@ -1,0 +1,2714 @@
+===== PRINTED PAGE 183 / PDF PAGE 225 =====
+
+11
+Structured Classifiers
+11.1
+Summary
+StructuredClassifiers are Classifiers that may have an internal structure comprising a network of linked roles (which can
+themselves be instances of structured classifiers) and an external structure consisting of one or more Ports. The Ports of
+EncapsulatedClassifiers act as local agents of remote collaborators, allowing EncapsulatedClassifiers to differentiate
+between them but without being directly coupled to them. Classes, Components, Associations and Collaborations are
+concrete metaclasses that use these capabilities.
+11.2
+Structured Classifiers
+11.2.1
+Summary
+StructuredClassifiers may contain an internal structure of connected elements each of which plays a role in the overall
+behavior modeled by the StructuredClassifier. It may be helpful to read this sub clause in conjunction with sub clause
+11.5 - Associations.
+11.2.2
+Abstract Syntax
+ConnectableElement
+Connector
++ /kind : ConnectorKind {readOnly}
+StructuredClassifier
+Classifier
+ParameterableElement
+TypedElement
+Property
+Feature
+ConnectorEnd
+MultiplicityElement
+Association
+«enumeration»
+ConnectorKind
+assembly
+delegation
+ConnectableElementTemplateParamete
+TemplateParameter
+Behavior
+*
++ /structuredClassifier
+*
++ /role
+{readOnly, union, subsets
+memberNamespace}
+{readOnly, union,
+subsets member}
+0..1
++ structuredClassifier
+*
++ ownedConnector
+{subsets featuringClassifier,
+subsets namespace, subsets
+redefinitionContext}
+{subsets feature, subsets
+redefinableElement, subsets
+ownedMember}
+*
++ connector
+*
++ redefinedConnector
+{subsets redefinableElement}
+{subsets redefinedElement}
+0..1
++ structuredClassifier
+*
++ /part
+{readOnly}
+0..1
++ structuredClassifier
+*
++ ownedAttribute
+{subsets namespace,
+subsets classifier, redefines
+structuredClassifier}
+{ordered, subsets attribute,
+subsets role, subsets
+ownedMember}
+1
++ connector
+2..*
++ end
+{subsets owner}
+{ordered, subsets
+ownedElement}
+1
++ role
+*
++ /end
+{readOnly}
+*
++ connectorEnd
+0..1
++ /definingEnd
+{readOnly}
+*
++ connector
+0..1
++ type
+1
++ parameteredElement
+0..1
++ templateParameter
+{redefines
+parameteredElement}
+{redefines templateParameter}
+*
++ connector
+*
++ contract
+Figure 11.1  Structured Classifiers
+Unified Modeling Language 2.5.1
+183
+===== PRINTED PAGE 184 / PDF PAGE 226 =====
+
+11.2.3
+Semantics
+11.2.3.1
+Connectable Elements
+ConnectableElement is an abstract metaclass. Each ConnectableElement represents a participant within the internal
+structure of a StructuredClassifier; these participants are called roles. Roles may be joined by Connectors, and specify
+configurations of linked instances contained or referenced within an instance of the containing StructuredClassifier.
+The detailed semantics of ConnectableElement is given by its concrete subtypes. In general, each ConnectableElement
+exhibits a set of effective required Interfaces and a set of effective provided Interfaces. These sets are used to determine
+the connectability of ConnectableElements using Connectors, see below.
+For ConnectableElements except delegating Ports (see 11.3.3) the effective required Interfaces are the required
+Interfaces, and the effective provided Interfaces are the provided Interfaces, derived as follows:
+
+The provided Interfaces comprises the union of the sets of Interfaces realized by the type of the
+ConnectableElement and its supertypes, or the set containing just its type if it is typed by an Interface.
+
+The required Interfaces comprises the union of the sets of Interfaces used by the type of the
+ConnectableElement and its supertypes.
+A ConnectableElement may be exposed via a ConnectableElementTemplateParameter as a formal parameter for a
+template. The semantics and notation for this are only defined when the ConnectableElement is a Property (see the
+semantics and notation for Property in 9.5).
+11.2.3.2
+Parts and Roles
+The Properties of a StructuredClassifier obey the semantics of Property specified in 9.5.
+Property is a kind of ConnectableElement. All of the ownedAttributes of a StructuredClassifier are roles and can be
+connected using Connectors.
+Those ownedAttributes of a StructuredClassifier that have isComposite = true (see 9.5.3) are called its parts. Hence parts
+constitute a subset of roles.
+11.2.3.3
+Connectors
+A Connector specifies links (see 11.5 Associations) between two or more instances playing owned or inherited roles
+within a StructuredClassifier. Each link may be realized by something as simple as a pointer or by something as
+complex as a network connection, and may represent the possibility of instances being able to communicate because
+their identities are known by virtue of being passed in as parameters, held in variables or slots, or even because the
+communicating instances are the same instance.
+In contrast to Associations, which specify links between any suitably-typed instance of the associated Classifiers,
+Connectors specify links between instances playing the connected roles only.
+Each Connector may be attached to two or more ConnectableElements, each representing a set of instances that
+contribute to the instantiation of the containing StructuredClassifier.
+A ConnectorEnd is an endpoint of a Connector, which attaches the Connector to a ConnectableElement.
+Links corresponding to Connectors may be created upon the creation of the instance of the containing
+StructuredClassifier. All such links are destroyed when the containing StructuredClassifier instance is destroyed.
+A Connector may be typed by an Association, in which case the links specified by the Connector are instances of the
+typing Association.
+Each feature of each of the effective required Interfaces of each ConnectableElement at the end of a Connector must
+have at least one compatible feature among the features of the effective provided Interfaces of ConnectableElements at
+the other ends. One feature is compatible with another at least in the cases when the two features are the same or when
+184
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 185 / PDF PAGE 227 =====
+
+they are both properties or operations and the second feature is a redefinition of the first. However, conforming tools
+may allow additional cases of compatible features beyond this.
+When there are multiple connectors attached to a single ConnectableElement, the semantics are the same as a single n-
+ary Connector connecting the ConnectableElement to all of the ConnectableElements connected via the multiple
+connectors.
+Connectors have a kind, whose value is assembly or delegation. The semantics of delegation connectors are only related
+to Ports and described under Port (see 11.3). All other Connectors are assembly connectors.
+ConnectorKind is an enumeration of the following literal values:
+assembly
+Indicates that the Connector is an assembly Connector.
+delegation
+Indicates that the Connector is a delegation Connector.
+Behaviors may be associated with Connectors as contracts to specify valid interaction patterns across the Connector.
+11.2.3.4
+Multiplicities and topologies
+The multiplicities on ConnectableElements constrain the number of objects that may be created within an instance of
+the containing StructuredClassifier, according to the semantics of MultiplicityElement (see 7.5.3).
+For a binary Connector, the ConnectorEnd’s multiplicity indicates the number of instances that may be linked to each
+instance of the ConnectableElement on the other end. For an n-ary Connector, the multiplicity of one end constrains the
+number of links that may refer to a set containing one particular instance for each of the other ends.
+When an instance is removed from a role of an instance of a StructuredClassifier, links that exist due to Connectors
+between that role and others are destroyed.
+The topologies that result from matching the multiplicities of ConnectorEnds and those of ConnectableElements they
+interconnect cannot always be deduced from the model. Specific examples in which the topology can be determined
+from the multiplicities are shown in Figure 11.6 and Figure 11.7.
+11.2.4
+Notation
+The internal structure of a StructuredClassifier is shown in a separate compartment with the name “internal structure.”
+This compartment is mandatory: all tools that conform to the concrete syntax of UML must implement it. The internal
+structure compartment contains symbols representing the roles and connectors. The internal structure compartment
+appears below the attributes and operations compartments.
+A part may be shown by graphical nesting of a box symbol with a solid outline representing the part within the internal
+structure compartment. A role that is not a composition may be shown by graphical nesting of a box symbol with a
+dashed outline. In either case the box may be called a part box, even though strictly-speaking only the compositions are
+parts. Lollipop and socket symbols may optionally be shown to indicate the provided and required interfaces of the part,
+using the same notation as for the definition of the part’s type (see 10.4.4).
+The part box symbol has a name compartment, which contains a string according to the syntax defined in sub clause
+9.5.4. Detail may also be shown within the part box indicating specific values for Properties of the part’s type when
+instances corresponding to the Property are created.
+The multiplicity for a Property may also be shown as a multiplicity mark in the top right corner of the part box.
+When a role is typed by an EncapsulatedClassifier (see 11.3), any Ports of the type may also be shown as small square
+symbols overlapping the boundary of the part box denoting the role. The name of the Port is shown near the Port; the
+multiplicity follows the name surrounded by square brackets. Name and multiplicity may be elided. Lollipop and socket
+symbols may optionally be shown to indicate the provided and required interfaces of the Port, using the same notation
+as for the Port’s definition (see 11.3.4).
+Unified Modeling Language 2.5.1
+185
+===== PRINTED PAGE 186 / PDF PAGE 228 =====
+
+If a role is typed by a classifier other than Class, the name compartment of the part box symbol contains the appropriate
+keyword (e.g., «component») above the name. For some kinds of Classifiers, optionally in the right hand corner an icon
+denoting the kind of Classifier can be displayed.
+A Connector is drawn using similar notation to that for Association (see 11.5.4). The optional name string of the
+Connector obeys the following syntax:
+<connector> ::= ( [<name> ] ’:’ <associationname> ) | ([<name> ] ’:’ <associationclassname> ) |
+[<name> ]
+where <name> is the name of the Connector, and <associationname> or <associationclassname> is the name of the
+Association or AssociationClass, respectively, that is its type. A stereotype keyword within guillemets may be placed
+above or in front of the Connector name. A property string may be placed after or below the Connector name.
+Adornments may be shown on the ConnectorEnd using the same notation as adornments on Association ends. If no
+multiplicity is shown, the multiplicity matches the multiplicity of the role the end is attached to.
+If a ConnectorEnd is attached to a Port on a part or role of the internal structure and no multiplicity is shown, the
+multiplicity of the ConnectorEnd matches the multiplicity of the Port multiplied by the multiplicity of the role (if any).
+The notational specifications in the next three paragraphs are optional: a conforming tool does not need to implement
+them. They are useful for scalability in complex systems.
+If the parts have simple Ports (Ports with a single required or provided Interface), then ball-and-socket notation may be
+used to represent assembly Connectors between those Ports. Ball-and-socket notation may not be used to connect
+complex (i.e., non-simple) Ports or parts without Ports.
+When connecting simple Ports, normal Connector notation for assembly or delegation may be shown connected to the
+ball or socket symbol rather than to the Port symbol itself.
+When there is an n-ary Connector connecting more than two simple Ports, and two or more of the Ports provide or
+require the same or compatible Interfaces, a single symbol representing the Interface can be shown, and lines from the
+Components can be drawn to that symbol, in a “channeled ball-and-socket” notation.
+An internal structure compartment may also contain symbols representing CollaborationUses, following the notation
+described in 11.7.4.
+11.2.5
+Examples
+Figure 11.2  Parts and roles
+Figure 11.2 shows examples of part boxes. On the left, the part box denotes that the containing instance will own four
+instances of the Wheel class by composition. The multiplicity is shown in the corner of the part box. The part box on the
+right is not composite, and denotes that the containing instance will reference one or two instances of the Engine class.
+Figure 11.3  Parts and roles with Ports
+Figure 11.3 shows examples of part boxes for properties typed by EncapsulatedClassifiers with Ports, in this case
+simple Ports. The notation for more complex Ports can also be used.
+186
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 187 / PDF PAGE 229 =====
+
+Figure 11.4  Alternative notations for connecting parts and roles with Ports
+Figure 11.4 shows three alternative notations for connecting simple Ports on the parts and roles within a
+StructuredClassifier. In the top example, the connector is joined to the Port symbols themselves. This is the only
+mandatory notation for connecting Ports in an internal structure. The lollipops and sockets indicate the provided and
+required interfaces of the Ports; their appearance is optional.
+In the second example, the connector line is attached to the ball and socket symbols; in the third example, ball-and-
+socket notation is used. These notations correspond to the same model as the top example.
+Figure 11.5  Associations compared with Connectors
+Figure 11.5 shows two possible views of the Car Class. In subfigure (i), Car is shown as having a composition
+Association with role name rear to a class Wheel and an Association with role name e to a class Engine. In subfigure (ii),
+the same is specified. However, in addition, in subfigure (ii) it is specified that rear and e belong to the internal structure
+of the class Car. This allows specification of detail that holds only for instances of the Wheel and Engine classes within
+the context of the class Car, but which will not hold for wheels and engines in general. For example, subfigure (i)
+specifies that any instance of class Engine can be linked to an arbitrary number of instances of class Wheel. Subfigure
+(ii), however, specifies that within the context of class Car, the instance playing the role of e may only be connected to
+two instances playing the role of rear. In addition, the instances playing the e and rear roles may only be linked if they
+are roles of the same instance of class Car. In other words, subfigure (ii) asserts additional constraints on the instances
+of the classes Wheel and Engine, when they are playing the respective roles within an instance of class Car. These
+constraints are not true for instances of Wheel and Engine in general. Other wheels and engines may be arbitrarily
+linked as specified in subfigure (i).
+For each instance playing a role in an internal structure, there will initially be as many links as indicated by the lower
+multiplicity of the opposite ends of Connectors attached to that role. If the multiplicities of the ends match the
+multiplicities of the roles they are attached to as defined in Figure 11.6 (i), the initial configuration that will be created
+when an instance of the containing StructuredClassifier is created consists of the set of instances corresponding to the
+roles (as specified by the multiplicities on the roles) fully connected by links; see the resultant instance shown in Figure
+11.6 (ii).
+Unified Modeling Language 2.5.1
+187
+===== PRINTED PAGE 188 / PDF PAGE 230 =====
+
+Figure 11.6  "Star" Connector pattern
+Links will be created for each instance playing the connected roles according to their ordering until the minimum
+ConnectorEnd multiplicity is reached for both ends of the Connector; see the resultant instance in Figure 11.7 (ii). In
+this example, only two links are created.
+Figure 11.7  "Array" Connector pattern
+Figure 11.8 shows example notation for parts typed by Components with simple Ports (Ports with only one interface),
+and the optional ball-and-socket notation to represent an assembly Connector between compatible Ports. The
+Component definitions are on the left and the corresponding parts on the right.
+188
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 189 / PDF PAGE 231 =====
+
+Figure 11.8  An assembly Connector maps a simple Port of a Component to a matching simple Port of another
+Component.
+Figure 11.9 shows “channeled ball-and-socket notation” for a 4-ary Connector. The two simple Ports that require Person
+have been channeled into a single socket, and the two simple Ports that provide Person (either directly or indirectly)
+have been channeled into a single ball.
+Figure 11.9  An n-ary Connector that assembles four simple Ports using channeled ball-and-socket notation.
+11.3
+Encapsulated Classifiers
+11.3.1
+Summary
+EncapsulatedClassifier extends StructuredClassifier with the ability to own Ports, a mechanism for isolating an
+EncapsulatedClassifier from its environment.
+Unified Modeling Language 2.5.1
+189
+===== PRINTED PAGE 190 / PDF PAGE 232 =====
+
+11.3.2
+Abstract Syntax
+EncapsulatedClassifier
+Port
++ isBehavior : Boolean = false
++ isConjugated : Boolean = false
++ isService : Boolean = true
+Interface
+StructuredClassifier
+Property
+ConnectorEnd
+ProtocolStateMachine
+*
++ port
+*
++ redefinedPort
+{subsets property}
+{subsets redefinedProperty}
+0..1
++ encapsulatedClassifier
+*
++ /ownedPort
+{subsets structuredClassifier}
+{readOnly, subsets ownedAttribute}
+*
++ port
+*
++ /provided
+{readOnly}
+*
++ port
+*
++ /required
+{readOnly}
+*
++ connectorEnd
+0..1
++ partWithPort
+*
++ port
+0..1
++ protocol
+Figure 11.10  Encapsulated Classifiers
+11.3.3
+Semantics
+11.3.3.1
+Ports
+Ports represent interaction points through which an EncapsulatedClassifier communicates with its environment.
+Multiple Ports can be defined for an EncapsulatedClassifier, enabling different communications to be distinguished
+based on the Port through which they occur. By decoupling the internals of the EncapsulatedClassifier from its
+environment, Ports allow an EncapsulatedClassifier to be defined independently of its environment, making it reusable
+in any environment that conforms to the constraints imposed by its Ports.
+A Port is a Property of an EncapsulatedClassifier that specifies a distinct interaction point between that
+EncapsulatedClassifier and its environment or between the Behavior of the EncapsulatedClassifier and its internal roles.
+Ports are connected by Connectors through which requests can be made to invoke the BehavioralFeatures of an
+EncapsulatedClassifier. A Port may specify the services an EncapsulatedClassifier provides (offers) to its environment
+as well as the services that an EncapsulatedClassifier expects (requires) of its environment.
+The property isService, when true, indicates that this Port is used to provide the published functionality of an
+EncapsulatedClassifier. If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential
+externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the
+internal implementation of the EncapsulatedClassifier and other properties that are considered part of its
+implementation.
+The phrase Port on Part or more generally Port on Property signifies the situation where a Property playing a role in a
+StructuredClassifier is typed by an EncapsulatedClassifier that has Ports. A Connector within the containing
+StructuredClassifier may be connected to one of these Ports. In such a case, the property partWithPort of the applicable
+ConnectorEnd references the actual Property being connected: in general, there might be many Properties in the
+structure typed by the same EncapsulatedClassifier, and partWithPort is used to signify the right one.
+The Interfaces associated with a Port specify the nature of the interactions that may occur over it. The required Interfaces
+of a Port characterize the requests that may be made from the EncapsulatedClassifier to its environment through this
+Port. Instances of this EncapsulatedClassifier expect that the Features owned by its required Interfaces will be offered by
+one or more instances in its environment. The provided Interfaces of a Port characterize requests to the
+EncapsulatedClassifier that its environment may make through this Port. The owning EncapsulatedClassifier must offer
+the Features owned by the provided Interfaces.
+As a kind of Property, a Port has a type. The provided and required interfaces of the Port are related to its type mediated by
+the value of isConjugated as follows:
+
+If isConjugated is false, provided is derived as the union of the sets of Interfaces realized by the type of the Port
+and its supertypes, or directly from the type of the Port if the Port is typed by an Interface; required is derived as
+the union of the sets of Interfaces used by the type of the Port and its supertypes.
+190
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 191 / PDF PAGE 233 =====
+
+
+If isConjugated is true, provided is derived as the union of the sets of Interfaces used by the type of the Port and
+its supertypes; required is derived as the union of the sets of Interfaces realized by the type of the Port and its
+supertypes, or directly from the type of the Port if the Port is typed by an Interface.
+The Interfaces do not necessarily establish the exact sequences of interactions across the Port. A Port’s protocol may
+reference a ProtocolStateMachine that describes valid sequences of Operation and Reception invocations that may occur
+at this Port.
+When an instance of an EncapsulatedClassifier is created, instances corresponding to each of its Ports are created and
+held in the slots specified by each Port, in accordance with its type and multiplicity. These instances are referred to as
+“interaction points” and provide unique references. It is, therefore, possible for an EncapsulatedClassifier instance to
+differentiate between requests for the invocation of a BehavioralFeature targeted at its different Ports. Similarly, it is
+possible to direct such requests at a Port, and the requests will be routed as specified by the links corresponding to
+Connectors attached to this Port.
+NOTE. In the following, “requests arriving at a Port” shall mean “request occurrences arriving at the interaction point
+of this instance corresponding to this Port.”
+A Port has the ability, by setting the property isBehavior to true, to specify that any requests arriving at this Port are
+handled by the Behavior of the instance of the owning EncapsulatedClassifier, rather than being forwarded to any
+contained instances, if any. Such a Port is called a behavior Port. If there is no Behavior defined for this
+EncapsulatedClassifier, any communication arriving at a behavior Port is lost.
+A delegation Connector is a Connector that links a Port to a role within the owning EncapsulatedClassifier. It represents
+the forwarding of requests (Operation invocations and Signals). A request that arrives at a Port that has a delegation
+Connector to one or more Properties or Ports on Properties will be passed on to those targets for handling.
+Delegation Connectors can be used to model the hierarchical decomposition of behavior, where services provided by an
+EncapsulatedClassifier may ultimately be realized by one that is nested multiple levels deep within it.
+As a ConnectableElement, the effective provided Interfaces (see 11.2.3) of a Port are its provided interfaces, and the
+effective required Interfaces are its required Interfaces. However, for a delegating Port, i.e., a Port that is at an end of a
+delegation Connector and is not on a role and that is not a behavior Port, the effective provided Interfaces are its required
+interfaces and its effective required Interfaces are its provided interfaces. Consequently a delegating Port behaves, for
+connection, as though it had an internal “face” that is the conjugate of its external “face.”
+If several Connectors are attached on one side of a Port, then any request arriving at this Port on a link derived from a
+Connector on the other side of the Port will be forwarded on links corresponding to these Connectors. It is not defined
+whether these requests will be forwarded on all links, or on only one of those links.
+11.3.4
+Notation
+A Port of an EncapsulatedClassifier is shown as a small square symbol. The name of the Port is placed near the square
+symbol. The Port symbol may be placed either overlapping the boundary of the rectangle symbol denoting that
+EncapsulatedClassifier or it may be shown inside the rectangle symbol. When the Port is connected to elements visually
+contained in a compartment of the EncapsulatedClassifier, such as parts or roles in the internal structure compartment,
+the Port symbol must be placed within or overlapping the boundary of that compartment.
+The type of a Port may be shown following the Port name, separated by colon (“:”). When isConjugated is true for the
+Port, the type of the Port is shown with a tilde “~” prepended. A provided Interface may be shown using the lollipop
+notation (see Interface – 10.4) attached to the Port. A required Interface may be shown by the socket notation attached to
+the Port.
+A behavior Port is indicated by a Port being connected through a line to a small state symbol drawn inside the symbol
+representing the containing EncapsulatedClassifier. The small state symbol indicates the Behavior of the containing
+EncapsulatedClassifier.
+Unified Modeling Language 2.5.1
+191
+===== PRINTED PAGE 192 / PDF PAGE 234 =====
+
+The name of a Port may be suppressed. Every depiction of an unnamed Port denotes a different Port from any other
+Port.
+If there are multiple Interfaces associated with a Port, these Interfaces may be listed on the one Interface lollipop,
+separated by commas.
+In the case of a Dependency wired from a simple Port with a required Interface to a simple Port to a provided Interface
+it is a notational option to show the dependency arrow joining the socket to the lollipop.
+11.3.5
+Examples
+Figure 11.11 illustrates the notation for Ports. At the top of the figure is the definition of a class PowerTrain, together
+with an interface IPowerTrain that it realizes, and an interface IFeedback that it uses.
+On the lower left figure, p is a Port on the Engine Class which is typed by PowerTrain. As a consequence, the provided
+Interface of Port p is IPowerTrain and the required Interface is IFeedback. The multiplicity of p is 1, and isConjugated is
+false. On the right figure, e is a Port of the Class Wheel, which also has the type PowerTrain and isConjugated set to true,
+which results in the reversal of the provided and required Interfaces.
+Figure 11.11  Port notation
+Figure 11.12 illustrates a behavior port p, as indicated by its connection to the small state symbol representing the
+Behavior of the Engine Class. Its type is PowerTrain, as in the earlier example.
+Figure 11.12  Behavior Port notation
+Figure 11.13 below shows a Port OnlineServices on the OrderProcess Class with two provided Interfaces, OrderEntry
+and Tracking listed on the same interface lollipop, as well as a required Interface Payment.
+192
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 193 / PDF PAGE 235 =====
+
+Figure 11.13  Port notation showing multiple provided Interfaces
+Figure 11.14  Port examples
+Figure 11.14 shows a Class Engine with a Port p typed by its provided Interface IPowerTrain. This Interface specifies the
+services that the Engine offers at this Port (i.e., the Operations and Receptions that are accessible by communication
+arriving at this Port).
+Two uses of the Engine Class are depicted: Both a Boat and a Car contain a part that is an Engine. The Car Class
+connects Port p of the Engine to a pair of Wheels via the axle. The Boat Class connects Port p of the engine to a
+Propeller via the shaft. As long as the interaction between the Engine and the part linked to its Port p obeys the
+constraints specified by its Interface, the Engine will function as specified, whether it is in a Car or a Boat. This
+example also shows that Connectors need not necessarily attach to parts via Ports (as shown in the Car Class).
+Because the Ports are simple, the depiction of the connector within Boat could have been shown using any of the
+notational options shown in Figure 11.4.
+Unified Modeling Language 2.5.1
+193
+===== PRINTED PAGE 194 / PDF PAGE 236 =====
+
+11.4
+Classes
+11.4.1
+Summary
+Class is the concrete realization of EncapsulatedClassifier and BehavioredClassifier. The purpose of a Class is to
+specify a classification of objects and to specify the Features that characterize the structure and behavior of those
+objects.
+11.4.2
+Abstract Syntax
+Class
++ isAbstract : Boolean = false {redefines isAbstract}
++ isActive : Boolean = false
+EncapsulatedClassifier
+BehavioredClassifier
+Property
+Classifier
+Operation
+Reception
+Extension
+*
++ class
+*
++ /superClass
+{subsets classifier}
+{redefines general}
+0..1
++ class
+*
++ ownedAttribute
+{subsets namespace,
+subsets structuredClassifier,
+subsets classifier}
+{ordered, subsets attribute, subsets
+ownedMember, redefines
+ownedAttribute}
+0..1
++ class
+*
++ ownedOperation
+{subsets featuringClassifier,
+subsets namespace, subsets
+redefinitionContext}
+{ordered, subsets
+feature, subsets
+redefinableElement,
+subsets ownedMember}
+0..1
++ nestingClass
+*
++ nestedClassifier
+{subsets namespace, subsets
+redefinitionContext}
+{ordered, subsets
+redefinableElement,
+subsets ownedMember}
+0..1
++ class
+*
++ ownedReception
+{subsets featuringClassifier,
+subsets namespace}
+{subsets feature, subsets
+ownedMember}
+1
++ /metaclass
+*
++ /extension
+{readOnly}
+{readOnly}
+Figure 11.15  Classes
+11.4.3
+Semantics
+11.4.3.1
+Classes
+Class is a kind of EncapsulatedClassifier whose Features are Properties, Operations, Receptions, Ports and Connectors.
+Attributes of a Class are Properties that are owned by the Class. Some of these attributes may represent the ends of
+binary Associations.
+Objects of a Class must contain values for each attribute that is a member of that Class, in accordance with the
+characteristics of the attribute, for example its type and multiplicity.
+194
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 195 / PDF PAGE 237 =====
+
+When an object is instantiated in a Class, for every attribute of the Class that has a specified default, if an initial value of
+the attribute is not specified explicitly for the instantiation, then the default ValueSpecification is evaluated to set the
+initial value of the attribute for the object.
+Operations of a Class can be invoked on an object, given a particular set of values for the parameters of the Operation,
+according to the semantics specified in 9.6.3.
+A Class cannot access private Features of another Class, or protected Features on another Class that is not its ancestor.
+A Class acts as the namespace for various kinds of Classifiers defined within its scope, including Classes. Nested
+Classifiers are members of the namespace of the containing Class. Classifier nesting is used for reasons of information
+hiding.
+A Class may be designated by setting isActive to true as active (i.e., each of its instances is an active object). When
+isActive is false the Class is passive (i.e., each of its instances executes within the context of some other object).
+An active object is an object that, as a direct consequence of its creation, commences to execute its classifierBehavior, and
+does not cease until either the complete Behavior is executed or the object is terminated by some external object. (This
+is sometimes referred to as “the object having its own thread of control.”) The points at which an active object responds
+to communications from other objects is determined solely by the Behavior of the active object and not by the invoking
+object. If the classifierBehavior of an active object completes, the object is terminated.
+A Class’s Receptions specify which Signals the instances of this Class handle.
+An InstanceSpecification may be used to specify the initial value to be created for a Class.
+All instances corresponding to parts and ports of a Class are destroyed recursively, when an instance of that Class is
+deleted.
+A Class may act as a metaclass in the definition of Profiles and metamodels. See Profiles in 12.3.
+11.4.4
+Notation
+A Class is shown using the Classifier symbol. As Class is the most widely used Classifier, no keyword is needed to
+indicate that the metaclass is Class.
+A Class has four mandatory compartments: attributes, operations, receptions (see 9.2.4) and internal structure (see
+11.2.4). A Class may also have optional compartments as described for Classifiers in general (see 9.2.4).
+The operations compartment of a Class contains notation for its ownedOperations using the notation specified in 9.6.4.
+The receptions compartment contains ownedReceptions using the notation specified in 10.3.4.
+A usage dependency may relate an InstanceSpecification to a constructor for a Class, describing the single value
+returned by the constructor Operation. The Operation is the client, the created instance the supplier. The
+InstanceSpecification may reference parameters declared by the Operation. A constructor is an Operation having a
+single return result parameter of the type of the owning Class, and marked with the standard stereotype «Create». The
+InstanceSpecification that is the supplier of the usage dependency represents the default value of the single return result
+parameter of a constructor Operation.
+A Class with the Property isActive = true can be shown by a Class box with an additional vertical bar on either side.
+A Class that represents a metaclass may be extended by the optional stereotype «Metaclass» (see StandardProfile in
+clause 22) shown above or before its name.
+11.4.5
+Examples
+Figure 11.16 shows three ways of displaying the Class Window, according to the options set out for Classifier notation
+in 9.2.4. The top left symbol shows all compartments suppressed. The lower left symbol shows the attributes and
+operations compartments, each listing the features but suppressing details such as default values, parameters, and
+visibility markings. The right symbol shows these details, as well as the optional compartment headers.
+Unified Modeling Language 2.5.1
+195
+===== PRINTED PAGE 196 / PDF PAGE 238 =====
+
+NOTE. The display() and hide() operations have no visibility specified.
+Figure 11.16  Class notation variants
+Figure 11.17 shows the visibility grouping option (see 9.2.4) applied to the attributes and operations compartments in
+the Class Window.
+Figure 11.17  Class notation: attributes and Operations grouped according to visibility
+Figure 11.18 shows an example of an active class.
+Figure 11.18  Active Class
+The following example uses two Classes, Car and Wheel. The Car Class has four parts, all of type Wheel, representing
+the four wheels of the car. The front wheels and the rear wheels are linked via Connectors representing the front and
+rear axle, respectively. Figure 11.19 specifies that whenever an instance of the Car Class is created, four instances of the
+Wheel Class are created and held by composition within the car instance. In addition, one link each is created between
+the front wheel instances and the rear wheel instances.
+196
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 197 / PDF PAGE 239 =====
+
+Figure 11.19  Connectors and Parts
+Figure 11.20 specifies an equivalent system, but relies on multiplicities to show the replication of the wheel and axle
+arrangement. This diagram specifies that there will be exactly two instances of the left wheel and exactly two instances
+of the right wheel, with each matching instance connected by a link deriving from the Connector representing the axle.
+Figure 11.20  Connectors and Parts in a structure diagram using multiplicities
+Figure 11.21 shows an InstanceSpecification (see 9.8) for an instance of the Car Class (as specified in Figure 11.19). It
+describes the internal structure of the Car that it creates and how the four contained instances of Wheel will be
+initialized. In this case, every instance of Wheel will have the predefined size and use the brand of tire as specified. The
+left wheel instances are given names, and all wheel instances are shown as playing the respective roles. The types of the
+wheel instances have been suppressed.
+: Car
+tire = "Michelin"
+size = "215x95"
+l1 / leftFront
+frontaxle
+tire = "Michelin"
+size = "215x95"
+/ rightFront
+tire = "Firestone"
+size = "215x95"
+l2 / leftRear
+rearaxle
+tire = "Firestone"
+size = "215x95"
+l2 / rightRear
+tire : String
+size : String
+Wheel
+Figure 11.21  An Instance of the Car Class
+Figure 11.22 shows a constructor for the Window class, illustrating how the standard stereotype «Create» is applied to
+the makeWindow Operation to mark it as a constructor.
+Unified Modeling Language 2.5.1
+197
+===== PRINTED PAGE 198 / PDF PAGE 240 =====
+
+«Create» makeWindow(...) : Window
+Window
+theW : Window
+Figure 11.22  InstanceSpecification indicating a constructor
+Figure 11.23 shows a constructor for the Car Class. This constructor takes a parameter brand of type String. It describes
+the internal structure of the Car that it creates and how the four contained instances of Wheel will be initialized. In this
+case, every instance of Wheel will have the predefined size and use the brand of tire passed as parameter. The left wheel
+instances are given names, and all wheel instances are shown as playing the parts. The types of the wheel instances have
+been suppressed.
+: Car
+tire = "Michelin"
+size = "215x95"
+l1 / leftFront
+frontaxle
+tire = "Michelin"
+size = "215x95"
+/ rightFront
+tire = "Firestone"
+size = "215x95"
+l2 / leftRear
+rearaxle
+tire = "Firestone"
+size = "215x95"
+l2 / rightRear
+«Create» createCar(brand: String)
+Car
+Figure 11.23  A constructor for the Car Class
+In Figure 11.24, it is made explicit that the extended Class Interface is in fact a metaclass (from a reference metamodel).
+Figure 11.24  Showing that the extended Class is a metaclass
+198
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 199 / PDF PAGE 241 =====
+
+11.5
+Associations
+11.5.1
+Summary
+An Association classifies a set of tuples representing links between typed instances. An AssociationClass is both an
+Association and a Class.
+11.5.2
+Abstract Syntax
+Association
++ isDerived : Boolean = false
+Class
+Property
+Type
+Relationship
+Classifier
+AssociationClass
+0..1
++ association
+*
++ navigableOwnedEnd
+{subsets owningAssociation}
+{subsets ownedEnd}
+0..1
++ association
+2..*
++ memberEnd
+{subsets memberNamespace}
+{ordered, subsets member}
+0..1
++ owningAssociation
+*
++ ownedEnd
+{subsets featuringClassifier,
+subsets namespace, subsets
+association, subsets
+redefinitionContext}
+{ordered, subsets feature, subsets
+redefinableElement, subsets
+memberEnd, subsets
+ownedMember}
+*
++ association
+1..*
++ /endType
+{subsets relationship}
+{readOnly, subsets
+relatedElement}
+0..1
++ associationEnd
+*
++ qualifier
+{subsets owner}
+{ordered, subsets
+ownedElement}
+Figure 11.25  Associations
+11.5.3
+Semantics
+11.5.3.1
+Associations
+An Association specifies a semantic relationship that can occur between typed instances. It has at least two memberEnds
+represented by Properties, each of which has the type of the end. More than one end of the Association may have the
+same type.
+An Association declares that there can be links between instances whose types conform to or implement the associated
+types. A link is a tuple with one value for each memberEnd of the Association, where each value is an instance whose
+type conforms to or implements the type at the end.
+Not all links need to be classified by an Association.
+When one or more ends of the Association have isUnique=false, it is possible to have several links associating the same
+set of instances. In such a case, links carry an additional identifier apart from their end values.
+When one or more ends of the Association are ordered, links carry ordering information in addition to their end values.
+For an Association with N memberEnds, choose any N-1 ends. Let the Property that constitutes the other end be called
+oep, so that the Classifiers at the chosen N-1 ends are the context for oep (see 9.5.3). Associate specific instances with
+the context ends. Then the collection of links of the Association that refer to these specific instances will identify a set
+Unified Modeling Language 2.5.1
+199
+===== PRINTED PAGE 200 / PDF PAGE 242 =====
+
+of instances at oep. The value represented by oep (see 9.5.3) is a collection calculated from this set as follows: All of the
+instances in the set occur in the collection, and nothing else does. If oep is marked as unique, each instance will occur in
+the collection just once, regardless of how many links connect to it. If oep is marked as nonunique, each instance will
+occur in the collection once for each link that connects to it. If oep is marked as ordered, the collection will be ordered
+in accordance with the ordering information in the links. The cardinality of this collection is its size. The multiplicity of
+oep constrains this cardinality, or in the case of qualified associations, the size of the collection partition that may be
+associated with a qualifier value.
+Subsetting of Association ends has the meaning specified for Property (see 9.5.3).
+Specialization is, in contrast to subsetting, a relationship in the domain of intentional semantics, which is to say it
+characterizes the criteria whereby membership in the collection is defined, not by the membership. In the case of
+Associations, specialization means that a link classified by the specializing Association is also classified by the
+specialized Association. Semantically this implies that sets calculated by eliminating duplicates from the collections
+representing the ends of the specializing Association are subsets of the corresponding sets calculated by eliminating
+duplicates from collections representing the ends of the specialized Association; this fact of subsetting may or may not
+be explicitly declared in a model.
+NOTE. For n-ary Associations, the lower multiplicity of an end is typically 0. A lower multiplicity for an end of an n-
+ary Association of 1 (or more) implies that one link (or more) must exist for every possible combination of values for
+the other ends.
+A binary Association may represent a composite aggregation (i.e., a whole/part relationship). Composition is
+represented by the isComposite attribute on the part end of the Association being set to true. See the semantics of
+composition in 9.5.3. An end Property of an Association may only be marked as a shared or composite aggregation if
+the Association is binary and the other end is not marked as a shared or composite aggregation.
+An end Property of an Association that is owned by an end Class or that is a navigableOwnedEnd of the Association
+indicates that the Association is navigable from the opposite ends; otherwise, the Association is not navigable from the
+opposite ends. Navigability means that instances participating in links at runtime (instances of an Association) can be
+accessed efficiently from instances at the other ends of the Association. The precise mechanism by which such efficient
+access is achieved is implementation specific. If an end is not navigable, access from the other ends may or may not be
+possible, and if it is, it might not be efficient.
+NOTE. Tools operating on UML models are not prevented from navigating Associations from non-navigable ends.
+A qualified Association end has qualifiers that partition the instances associated with an instance at that end, the qualified
+instance. Each partition is designated by a qualifier value, which is a tuple comprising one value for each qualifier. The
+multiplicities at the other ends of the association determine the number of instances in each partition. So, for example,
+0..1 means there is at most one instance per qualifier value. If the lower bounds are non-zero, the qualifier values must be a
+finite set, for example because the qualifiers are typed by enumerations.
+The existence of an association may be derived from other information in the model. The logical relationship between
+the derivation of an Association and the derivation of its ends is model-specific.
+11.5.3.2
+Association Classes
+An AssociationClass is a declaration of an Association that has a set of Features of its own. An AssociationClass is both
+an Association and a Class, and preserves the static and dynamic semantics of both. An AssociationClass describes a set
+of objects that each share the same specifications of Features, Constraints, and semantics entailed by the
+AssociationClass as a kind of Class, and correspond to a unique link instantiating the AssociationClass as a kind of
+Association.
+Both Association and Class are Classifiers and hence have a set of common properties, like being able to have Features,
+having a name, etc. These properties are multiply inherited from the same construct (Classifier), and are not duplicated.
+Therefore, an AssociationClass has only one name, and has the set of Features that are defined for Classes and
+Associations. The constraints defined for Class and Association also are applicable for AssociationClass, which implies
+for example that the attributes of the AssociationClass, the memberEnds of the AssociationClass, and the opposite ends of
+Associations connected to the AssociationClass must all have distinct names. Moreover, the specialization and
+200
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 201 / PDF PAGE 243 =====
+
+refinement rules defined for Class and Association are also applicable to AssociationClass. Redefinition is applicable to
+an AssociationClass nested in the context of a Classifier just as it is applicable to a nested Class.
+An AssociationClass inherits the composite Properties Class::ownedAttribute and Association::ownedEnd. Values of
+ownedAttribute are Properties that are attributes of the Class, not ends of the AssociationClass owned through
+Association::ownedEnd. Values of Association::ownedEnd are the ends of the Association owned by the AssociationClass, not
+attributes of the AssociationClass. As Association ends, they can be used for navigation between end objects, as in all
+Associations, depending on whether they are navigable (see Navigability in the semantics of Association).
+An instance of an AssociationClass has the characteristics both of a link representing an instantiation of the
+AssociationClass as a kind of Association, and of an object representing an instantiation of the AssociationClass as a
+kind of Class.
+NOTE. Even when all ends of the AssociationClass have isUnique=true, it is possible to have several instances
+associating the same set of instances of the end Classes.
+An AssociationClass cannot be a generalization of an Association or a Class.
+11.5.4
+Notation
+Any Association may be drawn as a diamond (larger than a terminator on a line) with a solid line for each Association
+memberEnd connecting the diamond to the Classifier that is the end’s type. An Association with more than two ends can
+only be drawn this way.
+A binary Association is normally drawn as a solid line connecting two Classifiers, or a solid line connecting a single
+Classifier to itself (the two ends are distinct). A line may consist of one or more connected segments. The individual
+segments of the line itself have no semantic significance, but they may be graphically meaningful to a tool in dragging
+or resizing an Association symbol.
+An Association symbol may be adorned as follows:
+
+The Association’s name can be shown as a name string near the Association symbol, but not near enough to an
+end to be confused with the end’s name.
+
+A slash appearing in front of the name of an Association, or in place of the name if no name is shown, marks
+the Association as being derived.
+
+A property string may be placed near the Association symbol, but far enough from any end to not be confused
+with a property string on an end.
+On a binary Association drawn as a solid line, a solid triangular arrowhead next to or in place of the name of the
+Association and pointing along the line in the direction of one end indicates that end to be the last in the order of the
+ends of the Association. The arrow indicates that the Association is to be read as associating the end away from the
+direction of the arrow with the end to which the arrow is pointing (see Figure 11.27). This notation is for documentation
+purposes only and has no general semantic interpretation. It is used to capture some application-specific detail of the
+relationship between the associated Classifiers.
+Generalizations between Associations can be shown using a generalization arrow between the Association symbols.
+Other notational options for Generalizations such as “shared target style” (see 9.2.4) and the notations defined in 9.7.4
+may be used for Generalizations between Associations, but a conforming tool is not required to support those options.
+An Association end is the connection between the line depicting an Association and the icon (often a box) depicting the
+connected Classifier. A name string may be placed near the end of the line to show the name of the Association end. The
+name is optional and suppressible.
+Various other notations can be placed near the end of the line as follows:
+
+A multiplicity
+Unified Modeling Language 2.5.1
+201
+===== PRINTED PAGE 202 / PDF PAGE 244 =====
+
+
+A <prop-modifier> enclosed in curly braces, where <prop-modifier> is defined in Property (see 9.5.4).
+
+A <visibility> symbol (see 9.5.4).
+NOTE. If no multiplicity is shown on the diagram, no conclusion may be drawn about the multiplicity in the model.
+An open arrowhead on the end of an Association indicates the end is navigable. A small x on the end of an Association
+indicates the end is not navigable.
+If the Association end is derived, this may be shown by putting a slash in front of the name, or in place of the name if no
+name is shown.
+A binary Association may have one end with aggregation = AggregationKind::shared or aggregation =
+AggregationKind::composite. When one end has aggregation = AggregationKind::shared a hollow diamond is added as a
+terminal adornment at the end of the Association line opposite the end marked with aggregation =
+AggregationKind::shared. The diamond shall be noticeably smaller than the diamond notation for Associations. An
+Association with aggregation = AggregationKind::composite likewise has a diamond at the corresponding end, but
+differs in having the diamond filled in.
+Ownership of Association ends by an associated Classifier may be indicated graphically by a small filled circle, which
+for brevity we will term a dot. The dot is to be drawn integral to the graphic path of the line, at the point where it meets
+the Classifier, inserted between the end of the line and the side of the node representing the Classifier. The diameter of
+the dot shall not exceed half the height of the aggregation diamond, and shall be larger than the width of the line. This
+avoids visual confusion with the filled diamond notation while ensuring that it can be distinguished from the line. The
+dot shows that the model includes a Property of the type represented by the Classifier touched by the dot. This Property
+is owned by the Classifier at the other end. In such a case it is normal to suppress the Property from the attributes
+compartment of the owning Classifier.
+The dot may be used in combination with the other graphic line-path notations for Properties of Associations and
+Association ends. These include aggregation type and navigability.
+Explicit end-ownership notation is not mandatory, i.e., a conforming tool may not support it. Where the dot notation is
+used, it shall be applied consistently throughout each diagram, so that the absence of the dot signifies ownership by the
+Association. Stated otherwise, when applying this notation to a binary Association in a user model, the dot will be
+omitted only for ends which are not owned by a Classifier. In this way, in contexts where the notation is used, the
+absence of the dot on certain ends does not leave the ownership of those ends ambiguous.
+The dot is illustrated in Figure 11.26, at the maximum allowed size. The diagram shows endA to be owned by Classifier
+B, and because the notation must be applied consistently throughout the diagram, this diagram also shows
+unambiguously that endB is owned by BinaryAssociationAB.
+Figure 11.26  Graphic notation indicating exactly one Association end owned by the Association
+Navigability notation was often used in the past according to an informal convention, whereby non-navigable ends were
+assumed to be owned by the Association whereas navigable ends were assumed to be owned by the Classifier at the
+opposite end. This convention is now deprecated. Aggregation type, navigability, and end ownership are separate
+concepts, each with their own explicit notation. Association ends owned by classes are always navigable, while those
+owned by associations may be navigable or not.
+An AssociationClass is shown as a Class symbol attached to the Association path by a dashed line. The Association path
+may include a diamond, in which case the Class symbol shall be shown attached to the diamond by a dashed line. The
+Association path and the AssociationClass symbol represent the same underlying model element, which has a single
+name. The name may be placed on the path, in the Class symbol, or on both, but they must be the same name.
+202
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 203 / PDF PAGE 245 =====
+
+Association end names appear in the same position as regular Associations, not in the attribute compartment of the
+AssociationClass.
+Logically, the AssociationClass and the Association are the same semantic entity; however, they are graphically distinct.
+The AssociationClass symbol can be dragged away from the line, but the dashed line must remain attached to both the
+path and the Class symbol.
+When two association lines cross, a conforming tool may provide the option to show a small semicircular jog to indicate
+that the lines do not intersect (as in electrical circuit diagrams).
+In practice, it is often convenient to suppress some of the arrows and crosses that signify navigability of association
+ends. A conforming tool may provide various options for showing navigation arrows and crosses. As with dot notation,
+these options apply at the level of complete diagrams.
+
+Show all arrows and crosses. Navigation and its absence are made completely explicit.
+
+Suppress all arrows and crosses. No inference can be drawn about navigation.
+
+Suppress all crosses. Suppress arrows for Associations with navigability in both directions, and show arrows
+only for Associations with one-way navigability. In this case, the two-way navigability cannot be distinguished
+from situations where there is no navigation at all; however, the latter case occurs rarely in practice.
+If there are two or more aggregations to the same aggregate, a conforming tool may as a purely presentational option
+show them as a tree by merging the aggregation ends into a single segment adorned by the solid or hollow aggregation
+diamond symbol. Any adornments on that single segment apply to all of the aggregation ends. The absence of an
+adornment on a merged segment does not imply that the properties corresponding to the suppressed adornment have
+equal values for all of the aggregation ends.
+A qualifier is shown as a small rectangle attached to the end of an association path between the final path segment and the
+symbol of the Classifier that it connects to. The qualifier rectangle should be smaller than the attached class rectangle,
+unless this is not practical. The qualifier rectangle is part of the association path, not part of the Classifier. The qualifier
+rectangle is attached to the end of the association path that represents the memberEnd that owns the qualifier.
+The multiplicity attached to the target end denotes the possible cardinalities of the set of target instances selected by the
+pairing of a qualified instance and a qualifier value.
+The qualifier attributes are drawn within the qualifier box. There may be one or more attributes, shown one to a line.
+Qualifier attributes have the same notation as Classifier attributes, except that initial value expressions are not
+meaningful.
+It is permissible (although somewhat rare), to have a qualifier on every end of a single association.
+A qualifier may not be suppressed.
+11.5.5
+Examples
+Figure 11.27 shows a binary Association from Player to Year named PlayedInYear.
+Unified Modeling Language 2.5.1
+203
+===== PRINTED PAGE 204 / PDF PAGE 246 =====
+
+Figure 11.27  Binary and ternary Associations
+The solid triangle indicates the order of reading: Player PlayedInYear Year. The figure further shows a ternary
+Association between Team, Year, and Player with ends named team, season, and goalie respectively.
+The following example shows Association ends with various adornments.
+Figure 11.28  Association ends with various adornments
+The following adornments are shown on the four Association ends in Figure 11.28.
+
+Names a, b, and d on three of the ends.
+
+Public visibility marked on the ends a, b and d.
+
+Multiplicities 0..1 on a, * on b, and 0..1 on d.
+
+Specification of ordering on b and d.
+
+Subsetting on d. For an instance of Class C, the collection d is a subset of the collection b. This is equivalent to
+the OCL constraint:
+context C inv: b->includesAll(d)
+The following examples show notation for ends owned by an association (no dots).
+204
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 205 / PDF PAGE 247 =====
+
+Figure 11.29  Examples of navigable association-owned ends
+In Figure 11.29:
+
+The top pair AB shows a binary Association with two navigable ends.
+
+The second pair CD shows a binary Association with two non-navigable ends.
+
+The third pair EF shows a binary Association with unspecified navigability. In a diagram where arrows are
+only shown for one-way navigable associations, this probably signifies bidirectional navigability.
+
+The fourth pair GH shows a binary Association with one end navigable and the other non-navigable.
+
+The fifth pair IJ shows a binary Association with one end navigable and the other non-navigable, in a diagram
+where arrows are only shown for one-way navigable associations, and crosses are suppressed.
+The following examples show some class-owned ends, where class ownership is indicated by the dot. In Figure 11.30:
+
+In the top pair AB, end b is owned by Class A and end a is owned by Class B. Because the ends are class-
+owned, they are navigable.
+
+In the second pair CD, end d is owned by Class C, and hence is navigable. End c is owned by the Association,
+and is marked as navigable.
+
+In the third pair EF, end f is owned by Class E, and hence is navigable. End e is owned by the Association, and
+is marked as not navigable, in a diagram where arrows are only shown for one-way navigable associations, and
+crosses are suppressed.
+
+In the fourth pair GH, end h is owned by Class G and end g is owned by Class H. Because the ends are class-
+owned, they are navigable. This is in a diagram where arrows are only shown for one-way navigable
+associations.
+Unified Modeling Language 2.5.1
+205
+===== PRINTED PAGE 206 / PDF PAGE 248 =====
+
+Figure 11.30  Examples of class-owned ends
+Figure 11.31 shows that the attribute notation can be used for an Association end owned by a Class, because an
+Association end owned by a Class is also an attribute. Although it would typically be suppressed on grounds of
+redundancy, this notation may be used in conjunction with the association notation to make it perfectly clear that the
+attribute is also an Association end.
+Figure 11.31  Example of attribute notation for navigable end owned by an end Class
+Figure 11.32 shows the notation for a derived union. The attribute A::b is derived by being the strict union of all of the
+attributes that subset it. In this case there is just one of these, C::d. So for an instance of the Class C, d is a subset of b,
+and b is derived from d.
+Figure 11.32  Derived supersets (union)
+Figure 11.33 shows the black diamond notation for composite aggregation. The names of the composite ends have been
+suppressed in the diagram.
+206
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 207 / PDF PAGE 249 =====
+
+Figure 11.33  Composite aggregation is depicted as a black diamond
+Figure 11.34 shows a similar model using the notational option of sharing the same source segment between multiple
+compositions. The multiplicity and name adornments on the shared end apply to all of the compositions. The model
+values for absent adornments on the merged segment, such as property modifiers or visibility, may differ.
+Figure 11.34  Composite aggregation sharing a source segment
+Figure 11.35 shows the notation for an AssociationClass. In this example the name of the AssociationClass appears
+twice, once on the Class rectangle and once on the Association. These are both renderings of the same model element.
+Figure 11.35  Example AssociationClass Job, which is defined between the two Classes Person and Company
+Figure 11.36 shows the same model using the diamond notation for the AssociationClass.
+Unified Modeling Language 2.5.1
+207
+===== PRINTED PAGE 208 / PDF PAGE 250 =====
+
+Person
+Company
+salary
+Job
+Job
+*
+person
+1 ..*
+company
+Figure 11.36  Example AssociationClass using diamond symbol
+Figure 11.37 illustrates some qualified Associations. The left diagram shows that given a Bank, a particular accountNo
+identifies zero or one Person. The qualifier is the Property accountNo, and the qualified object is the Bank. The qualifier is
+owned by the unnamed Property at the Bank end of the Association, i.e., the Property whose type is Bank.
+The right diagram shows how an individual Square on the Chessboard may be identified by rank and file; in this case
+because the multiplicity is 1, the diagram shows that every possible value for Rank and File indicates an individual
+Square. In this case the qualifiers are owned by the unnamed association end Property whose type is Chessboard, while
+the opposite Property whose type is Square is marked with aggregation = composite.
+Figure 11.37  Qualified associations
+11.6
+Components
+11.6.1
+Summary
+This sub clause specifies a set of constructs that can be used to define software systems of arbitrary size and complexity.
+In particular, it specifies a Component as a modular unit with well-defined Interfaces that is replaceable within its
+environment. The Component concept addresses the area of component-based development and component-based
+system structuring, where a Component is modeled throughout the development life cycle and successively refined into
+deployment and run-time.
+An important aspect of component-based development is the reuse of previously constructed Components. A
+Component can always be considered an autonomous unit within a system or subsystem. It has one or more provided
+and/or required Interfaces (potentially exposed via Ports), and its internals are hidden and inaccessible other than as
+provided by its Interfaces. Although it may be dependent on other elements in terms of Interfaces that are required, a
+Component is encapsulated and its Dependencies are designed such that it can be treated as independently as possible.
+As a result, Components and subsystems can be flexibly reused and replaced by connecting (“wiring”) them together.
+208
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 209 / PDF PAGE 251 =====
+
+The aspects of autonomy and reuse also extend to Components at deployment time. The artifacts that implement
+Component are intended to be capable of being deployed and re-deployed independently, for instance to update an
+existing system.
+The Components package supports the specification of both logical Components (e.g., business components, process
+components) and physical Components (e.g., EJB components, CORBA components, COM+ and .NET components,
+WSDL components, etc.), along with the artifacts that implement them and the nodes on which they are deployed and
+executed. It is anticipated that profiles based around Components will be developed for specific component
+technologies and associated hardware and software environments.
+11.6.2
+Abstract Syntax
+Component
++ isIndirectlyInstantiated : Boolean = true
+ComponentRealization
+Class
+Realization
+Interface
+Classifier
+PackageableElement
+*
++ component
+*
++ /provided
+{readOnly}
+*
++ component
+*
++ /required
+{readOnly}
+*
++ componentRealization
+1..*
++ realizingClassifier
+{subsets clientDependency}
+{subsets client}
+0..1
++ component
+*
++ packagedElement
+{subsets namespace}
+{subsets ownedMember}
+0..1
++ abstraction
+*
++ realization
+{subsets supplier,
+subsets owner}
+{subsets ownedElement,
+subsets supplierDependency}
+Figure 11.38  Components
+11.6.3
+Semantics
+11.6.3.1
+Components
+A Component represents a modular part of a system that encapsulates its contents and whose manifestation is
+replaceable within its environment.
+A Component is a self-contained unit that encapsulates the state and behavior of a number of Classifiers. A Component
+specifies a formal contract of the services that it provides to its clients and those that it requires from other Components
+or services in the system in terms of its provided and required Interfaces.
+A Component is a substitutable unit that can be replaced at design time or run-time by a Component that offers
+equivalent functionality based on compatibility of its Interfaces. As long as the environment is fully compatible with the
+provided and required Interfaces of a Component, it will be able to interact with this environment. Similarly, a system can
+be extended by adding new Component types that add new functionality. Larger pieces of a system’s functionality may
+be assembled by reusing Components as parts in an encompassing Component or assembly of Components, and wiring
+them together.
+A Component is modeled throughout the development life cycle and successively refined into deployment and run-time.
+A Component may be manifested by one or more Artifacts, and in turn, that Artifact may be deployed to its execution
+environment. A DeploymentSpecification may define values that parameterize the Component’s execution. (See
+Deployments – Clause 19).
+The required and provided Interfaces of a Component allow for the specification of StructuralFeatures such as attributes
+and Association ends, as well as BehavioralFeatures such as Operations and Receptions. A Component may implement
+a provided Interface directly, or its realizing Classifiers may do so, or they may be inherited. The required and provided
+Interfaces may optionally be organized through Ports; these enable the definition of named sets of provided and required
+Interfaces that are typically (but not always) addressed at run-time.
+Unified Modeling Language 2.5.1
+209
+===== PRINTED PAGE 210 / PDF PAGE 252 =====
+
+A Component has an external view (or “black-box” view) by means of its publicly visible Properties and Operations.
+Optionally, a Behavior such as a ProtocolStateMachine may be attached to an Interface, Port, and to the Component
+itself, to define the external view more precisely by making dynamic constraints in the sequence of Operation calls
+explicit.
+The wiring between Components in a system or other context can be structurally defined by using Dependencies
+between compatible simple Ports, or between Usages and matching InterfaceRealizations that are represented by
+sockets and lollipops (see 10.4.4) on Components on Component diagrams. Creating a wiring Dependency between a
+Usage and a matching InterfaceRealization, or between compatible simple Ports, means that there may be some
+additional information, such as performance requirements, transport bindings, or other policies that determine that the
+Interface is realized in a way that is suitable for consumption by the depending Component. Such additional information
+could be captured in a profile by means of stereotypes.
+A Component also has an internal view (or “white-box” view) by means of its private Properties and realizing
+Classifiers. This view shows how the external Behavior is realized internally. Dependencies on the external view
+provide a convenient overview of what may happen in the internal view; they do not prescribe what must happen. More
+detailed behavior specifications such as Interactions and Activities may be used to detail the mapping from external to
+internal behavior.
+The execution time semantics for an assembly Connector in a Component are that requests (signals and operation
+invocations) travel along an instance of a Connector. The execution semantics for multiple Connectors directed to and
+from different roles, or n-ary Connectors where n> 2, indicates that the instance that will originate or handle the request
+will be determined at execution time.
+A number of UML standard stereotypes exist that apply to Component. For example, «Subsystem» to model large-scale
+Components, and «Specification» and «Realization» to model Components with distinct specification and realization
+definitions, where one specification may have multiple realizations (see the Standard Profiles).
+A Component may be realized (or implemented) by a number of Classifiers. In that case, a Component owns a set of
+ComponentRealizations to these Classifiers.
+A component acts like a Package for all model elements that are involved in or related to its definition, which should be
+either owned or imported explicitly. Typically the Classifiers that realize a Component are owned by it.
+The isDirectlyInstantiated property specifies the kind of instantiation that applies to a Component. If false, the Component
+is instantiated as an addressable object. If true, the Component is defined at design-time, but at run-time (or execution-
+time) an object specified by the Component does not exist, that is, the Component is instantiated indirectly, through the
+instantiation of its realizing Classifiers or parts.
+11.6.4
+Notation
+A Component is shown as a Classifier rectangle with the keyword «component». Optionally, in the right hand corner a
+Component icon can be displayed. This is a Classifier rectangle with two smaller rectangles protruding from its left
+hand side. If the icon symbol is shown, the keyword «component» may be hidden.
+The attributes, operations and internal structure compartments all have their normal meaning. The internal structure uses
+the notation defined in StructuredClassifiers (11.2).
+The provided and required Interfaces of a Component may be shown by means of ball (lollipop) and socket notation
+(see 10.4.4), where the lollipops and sockets stick out of the Component rectangle.
+For displaying the full signature of a provided or required Interface of a Component, the Interfaces can also be
+displayed as normal expandable Classifier rectangles. For this option, the Interface rectangles are connected to the
+Component rectangle by appropriate dependency arrows, as specified in 7.7.4 and 10.4.4.
+A conforming tool may optionally support compartments named “provided interfaces” and “required interfaces” listing
+the provided and required Interfaces by name. This may be a useful option in scenarios in which a Component has a
+large number of provided or required Interfaces.
+210
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 211 / PDF PAGE 253 =====
+
+Additional optional compartments “realizations” and “artifacts” may be used to list the realizing Classifiers (Classifiers
+reached by following the realization property) and manifesting Artifacts (Artifacts that manifest this component – see
+19.3).
+A ComponentRealization is notated in the same way as a Realization dependency (i.e., as a general dashed line with a
+hollow triangle as an arrowhead).
+The packagedElements of a Component may be displayed in an optional compartment named “packaged elements,”
+according to the specification for optional compartments for ownedMembers set out in 9.2.4.
+11.6.5
+Examples
+An overview diagram can show Components related by Dependencies, which signify some further unspecified kind of
+dependency between the components, and by implication a lack of dependency where there are no Dependency arrows.
+Figure 11.39  Example of an overview diagram showing Components and their general Dependencies
+Figure 11.40 shows an external (“black-box”) view of a Component by means of interface lollipops and sockets sticking
+out of the Component rectangle.
+Figure 11.40  A Component with two provided and three required Interfaces
+Figure 11.41 shows provided and required interfaces listed in optional compartments.
+Unified Modeling Language 2.5.1
+211
+===== PRINTED PAGE 212 / PDF PAGE 254 =====
+
+Figure 11.41  Black box notation showing a listing of provided and required interfaces
+Figure 11.42 shows a “white box” view of a Component listing realizing Classifiers and manifesting Artifacts in
+additional optional compartments.
+Figure 11.42  Optional “white-box” representation of a Component
+Figure 11.43 shows explicit representation of the provided and required Interfaces using Dependency notations,
+allowing Interface details such as Operations to be displayed.
+Figure 11.43  Explicit representation of provided and required Interfaces using Dependency notation.
+Figure 11.44 shows a set of Classifiers that realize a Component with realization arrows representing the
+ComponentRealizations.
+212
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 213 / PDF PAGE 255 =====
+
+Figure 11.44  A representation of the realization of a complex Component
+Figure 11.45 shows owned Classes that realize a Component nested within an optional “packaged elements”
+compartment of the Component shape.
+Figure 11.45  An alternative nested representation of a complex Component
+Figure 11.46 shows various ways of wiring Components using Dependencies.
+The Dependency on the right of the figure is from the Usage of OrderableItem to the InterfaceRealization of
+OrderableItem. This also shows that “/OrderableItem” is an Interface that is implemented by a supertype of Product,
+following the notation specified in 10.4.4.
+The Dependency between the AccountPayable Ports illustrates the notational option of showing the dependency arrow
+joining the socket to the lollipop, when a Dependency is wired between simple Ports.
+When realizing Classifiers are shown in a packaged elements compartment, a Dependency may be shown from a simple
+Port to a realizing Classifier to indicate that the Interface provided or required by the Port is dependent in some way
+upon the Classifier. This is illustrated by the Dependency from AccountPayable to OrderHeader, which indicates that
+something about the fact that the Component requires AccountPayable is dependent upon OrderHeader.
+Unified Modeling Language 2.5.1
+213
+===== PRINTED PAGE 214 / PDF PAGE 256 =====
+
+Figure 11.46  Example model of a Component, its provided and required Interfaces, and wiring through
+Dependencies
+Figure 11.47 shows an internal or white-box view of the internal structure of a Component that contains other
+Components with simple Ports as parts of its internal assembly. The assembly Connectors use ball-and-socket notation.
+The delegation connectors use the notational option that the Connector line can end on the ball or socket, rather than the
+simple port itself.
+Figure 11.47  Internal structure of a Component
+Figure 11.48 shows delegation Connectors from delegating Ports to handling parts; in this example the parts in the
+internal structure compartment are typed by Classes shown in the optional packaged elements compartment.
+214
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 215 / PDF PAGE 257 =====
+
+Figure 11.48  Delegation Connectors connect externally provided Interfaces to the parts that realize or require
+them.
+11.7
+Collaborations
+11.7.1
+Summary
+The primary purpose of Collaborations is to explain how a system of communicating elements collectively accomplish
+a specific task or set of tasks without necessarily having to incorporate detail that is irrelevant to the explanation.
+Collaborations are one way that UML may be used to capture design patterns.
+A CollaborationUse represents the application of the pattern described by a Collaboration to a specific situation
+involving specific elements playing its collaborationRoles.
+11.7.2
+Abstract Syntax
+CollaborationUse
+NamedElement
+Dependency
+Collaboration
+StructuredClassifier
+BehavioredClassifier
+ConnectableElement
+Classifier
+0..1
++ collaborationUse
+*
++ roleBinding
+{subsets owner}
+{subsets ownedElement}
+*
++ collaborationUse
+1
++ type
+*
++ collaboration
+*
++ collaborationRole
+{subsets structuredClassifier}
+{subsets role}
+0..1
+0..1
++ representation
+{subsets collaborationUse}
+0..1
++ classifier
+*
++ collaborationUse
+{subsets owner}
+{subsets ownedElement}
+Figure 11.49  Collaborations
+Unified Modeling Language 2.5.1
+215
+===== PRINTED PAGE 216 / PDF PAGE 258 =====
+
+11.7.3
+Semantics
+11.7.3.1
+Collaborations
+Collaborations may be used to explain how a collection of cooperating instances achieve a joint task or set of tasks.
+Therefore, a Collaboration typically incorporates only those aspects that are necessary for its explanation and
+suppresses everything else. Thus, a given object may be simultaneously playing collaborationRoles in multiple different
+Collaborations, but each Collaboration would only represent those aspects of that object that are relevant to its purpose.
+A Collaboration defines a set of cooperating participants that are needed for a given task. The collaborationRoles of a
+Collaboration will be played by instances when interacting with each other. Their relationships relevant for the given
+task are shown as Connectors between the collaborationRoles. CollaborationRoles of Collaborations define a usage of
+instances, while the Classifiers typing these collaborationRoles specify all required Properties of these instances. Thus, a
+Collaboration specifies what Properties instances must have to be able to participate in the Collaboration. The
+Connectors between the collaborationRoles specify what communication paths must exist between the participating
+instances.
+Neither all Features nor all contents of the participating instances nor all links between these instances are always
+required in a particular Collaboration. Therefore, a Collaboration is often defined in terms of collaborationRoles typed by
+Interfaces.
+Collaborations may be specialized from other Collaborations. If a collaborationRole is extended in the specialization, its
+type in the specialized Collaboration must conform to its type in the general Collaboration. The specialization of the
+types of the collaborationRoles does not imply corresponding specialization of the Classifiers that realize those
+collaborationRoles. It is sufficient that they conform to the constraints defined by those collaborationRoles.
+A Collaboration is not directly instantiable. Instead, the cooperation defined by the Collaboration comes about as a
+consequence of the actual cooperation between the instances that play the collaborationRoles defined in the Collaboration.
+11.7.3.2
+CollaborationUses
+A CollaborationUse represents a particular use of a Collaboration to explain the relationships between a set of elements.
+A CollaborationUse shows how the pattern described by a Collaboration is applied in a given context Classifier, by
+binding specific ConnectableElements from that context to the collaborationRoles of the Collaboration. There may be
+multiple CollaborationUses related to a given Collaboration within a Classifier, each bound differently. A given
+collaborationRole or Connector may be involved in multiple uses of the same or different Collaborations.
+The roleBindings are implemented using Dependencies owned by the CollaborationUse. Each collaborationRole in the
+Collaboration is bound by a distinct Dependency and is its supplier. The client of the Dependency is a
+ConnectableElement that relates in some way to the context Classifier: it may be a direct collaborationRole of the context
+Classifier, or an element reachable by some set of references from the context Classifier. These roleBindings indicate
+which ConnectableElement from the context Classifier plays which collaborationRole in the Collaboration.
+Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound
+in the context Classifier, and these corresponding Connectors must have the same or more general type than the
+Collaboration Connectors.
+One of the CollaborationUses owned by a Classifier may be singled out as representing the Behavior of the Classifier as
+a whole. This is called the Classifier’s representation. The Collaboration that is related to the Classifier by its
+representation shows how the instances corresponding to the StructuralFeatures of this Classifier (e.g., its attributes and
+parts) interact to generate the overall Behavior of the Classifier. The representing Collaboration may be used to provide
+a description of the Behavior of the Classifier at a different level of abstraction than is offered by the internal structure
+of the Classifier. The Properties of the Classifier are mapped to collaborationRoles in the Collaboration by the roleBindings
+of the CollaborationUse.
+Any Behavior attached to the Collaboration applies to the set of collaborationRoles and Connectors bound within a given
+CollaborationUse. For example, an interaction among parts of a Collaboration applies to the Classifier parts bound to a
+single CollaborationUse.
+216
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 217 / PDF PAGE 259 =====
+
+If the same ConnectableElement is used in both the Collaboration and the represented element, no roleBinding is
+required.
+It is not specified further when client and supplier elements in roleBindings are compatible.
+11.7.4
+Notation
+A Collaboration is shown as a dashed ellipse shape containing the name of the Collaboration. The internal structure of a
+Collaboration as comprised by collaborationRoles and Connectors may be shown in a compartment within the dashed
+ellipse shape. This compartment follows the same notational specification as for the internal structure compartment of a
+normal Classifier rectangle.
+Alternatively, a composite structure diagram can be used, or a normal Classifier rectangle with the keyword
+«collaboration».
+There is no notation defined for a Collaboration whose collaborationRoles are not Properties.
+Using an alternative notation for Properties, a line may be drawn from the elliptical Collaboration shape to rectangles
+denoting Classifiers that are the types of Properties of the Collaboration. Each line is labeled by the name of the
+Property. In this manner, a diagram can show the definition of a Collaboration together with the actual Classifiers that
+type the collaborationRoles in that definition
+A CollaborationUse is shown within an internal structure compartment of the context Classifier by a dashed ellipse
+containing the name of the occurrence, a colon, and the name of the Collaboration type. For every roleBinding, there is a
+dashed line from the ellipse to the client element; the dashed line is labeled on the client end with the name of the supplier
+element. With this notation the Connectors that must exist in the context Classifier as a consequence of the bindings
+may be suppressed.
+An optional notation for CollaborationUse is as a dashed arrow with the keyword «occurrence» pointing from the using
+Classifier to the used Collaboration. In conjunction with this the roleBindings are shown as normal Dependency arrows.
+With this option any Connectors that must exist in the context Classifier as a consequence of the bindings should be
+shown.
+11.7.5
+Examples
+Figure 11.50 shows the internal structure of the Collaboration named Observer, with two parts that are collaborationRoles
+named subject and observer, and a Connector between them.
+Figure 11.50  The internal structure of the Observer Collaboration
+Figure 11.51 shows the alternative notation for definition of the parts of the Observer Collaboration, which allows the
+details of the Classes CallQueue and SlidingBarIcon to be shown in the same definition. Any instance playing the
+Subject collaborationRole must possess the Properties specified by CallQueue, and similarly for the Observer
+collaborationRole. The example also shows a Constraint on Observer.
+Unified Modeling Language 2.5.1
+217
+===== PRINTED PAGE 218 / PDF PAGE 260 =====
+
+Figure 11.51  Alternative notation for the parts of the Observer Collaboration.
+The next example shows the definition of two Collaborations, Sale (Figure 11.52) and BrokeredSale (Figure 11.53).
+Sale is used twice as part of the definition of BrokeredSale. Sale is a Collaboration among two collaborationRoles
+(actually parts), a seller and a buyer. An interaction, or other Behavior specification, could be attached to Sale to specify
+the steps involved in making a Sale.
+Figure 11.52  The Sale Collaboration
+BrokeredSale is a Collaboration among three collaborationRoles, a producer, a broker, and a consumer. The specification
+of BrokeredSale shows that it consists of two CollaborationUses of the Sale Collaboration, indicated by the dashed
+ellipses. The occurrence wholesale indicates a Sale in which the producer is the seller and the broker is the buyer. The
+occurrence retail indicates a Sale in which the broker is the seller and the consumer is the buyer. The Connectors
+between sellers and buyers are not shown in the two occurrences; these Connectors must exist in the BrokeredSale
+Collaboration as a consequence of the Connector defined in Sale. The BrokeredSale Collaboration could itself be used
+as part of a larger Collaboration.
+Figure 11.53  The BrokeredSale Collaboration
+218
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 219 / PDF PAGE 261 =====
+
+Figure 11.54 shows part of the BrokeredSale Collaboration using the optional «occurrence» notation.
+Figure 11.54  A subset of the BrokeredSale Collaboration using «occurrence» and Dependency arrows
+11.8
+Classifier Descriptions
+11.8.1
+Association [Class]
+11.8.1.1
+Description
+A link is a tuple of values that refer to typed objects. An Association classifies a set of links, each of which is an
+instance of the Association. Each value in the link refers to an instance of the type of the corresponding end of the
+Association.
+11.8.1.2
+Diagrams
+Structured Classifiers, Associations, Profiles, Nodes, Properties, Link Actions
+11.8.1.3
+Generalizations
+Relationship, Classifier
+11.8.1.4
+Specializations
+AssociationClass, Extension, CommunicationPath
+11.8.1.5
+Attributes
+
+isDerived : Boolean [1..1] = false
+Specifies whether the Association is derived from other model elements such as other Associations.
+11.8.1.6
+Association Ends
+
+/endType : Type [1..*]{subsets Relationship::relatedElement} (opposite A_endType_association::association)
+The Classifiers that are used as types of the ends of the Association.
+
+memberEnd : Property [2..*]{ordered, subsets Namespace::member} (opposite Property::association)
+Each end represents participation of instances of the Classifier connected to the end in links of the Association.
+
+navigableOwnedEnd : Property [0..*]{subsets Association::ownedEnd} (opposite
+A_navigableOwnedEnd_association::association)
+The navigable ends that are owned by the Association itself.
+Unified Modeling Language 2.5.1
+219
+===== PRINTED PAGE 220 / PDF PAGE 262 =====
+
+
+♦ ownedEnd : Property [0..*]{ordered, subsets Classifier::feature, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Association::memberEnd, subsets
+Namespace::ownedMember} (opposite Property::owningAssociation)
+The ends that are owned by the Association itself.
+11.8.1.7
+Operations
+
+endType() : Type [1..*]
+endType is derived from the types of the member ends.
+body: memberEnd->collect(type)->asSet()
+11.8.1.8
+Constraints
+
+specialized_end_number
+An Association specializing another Association has the same number of ends as the other Association.
+inv: parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p |
+p.memberEnd->size() = self.memberEnd->size())
+
+specialized_end_types
+When an Association specializes another Association, every end of the specific Association corresponds to an
+end of the general Association, and the specific end reaches the same type or a subtype of the corresponding
+general end.
+inv: Sequence{1..memberEnd->size()}->
+forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
+forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
+
+binary_associations
+Only binary Associations can be aggregations.
+inv: memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2
+and memberEnd->exists(aggregation = AggregationKind::none))
+
+association_ends
+Ends of Associations with more than two ends must be owned by the Association itself.
+inv: memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
+
+ends_must_be_typed
+inv: memberEnd->forAll(type->notEmpty())
+11.8.2
+AssociationClass [Class]
+11.8.2.1
+Description
+A model element that has both Association and Class properties. An AssociationClass can be seen as an Association that
+also has Class properties, or as a Class that also has Association properties. It not only connects a set of Classifiers but
+also defines a set of Features that belong to the Association itself and not to any of the associated Classifiers.
+11.8.2.2
+Diagrams
+Associations
+220
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 221 / PDF PAGE 263 =====
+
+11.8.2.3
+Generalizations
+Class, Association
+11.8.2.4
+Constraints
+
+cannot_be_defined
+An AssociationClass cannot be defined between itself and something else.
+inv: self.endType()->excludes(self) and self.endType()->collect(et|
+et.oclAsType(Classifier).allParents())->flatten()->excludes(self)
+
+disjoint_attributes_ends
+The owned attributes and owned ends of an AssociationClass are disjoint.
+inv: ownedAttribute->intersection(ownedEnd)->isEmpty()
+11.8.3
+Class [Class]
+11.8.3.1
+Description
+A Class classifies a set of objects and specifies the features that characterize the structure and behavior of those objects.
+A Class may have an internal structure and Ports.
+11.8.3.2
+Diagrams
+Classes, Associations, Components, Profiles, Nodes, Behaviors, Properties, Operations
+11.8.3.3
+Generalizations
+BehavioredClassifier, EncapsulatedClassifier
+11.8.3.4
+Specializations
+AssociationClass, Component, Behavior, Stereotype, Node
+11.8.3.5
+Attributes
+
+isAbstract : Boolean [1..1] = false
+If true, the Class does not provide a complete declaration and cannot be instantiated. An abstract Class is
+typically used as a target of Associations or Generalizations.
+
+isActive : Boolean [1..1] = false
+Determines whether an object specified by this Class is active or not. If true, then the owning Class is referred
+to as an active Class. If false, then such a Class is referred to as a passive Class.
+11.8.3.6
+Association Ends
+
+/extension : Extension [0..*]{} (opposite Extension::metaclass)
+This property is used when the Class is acting as a metaclass. It references the Extensions that specify
+additional properties of the metaclass. The property is derived from the Extensions whose memberEnds are
+typed by the Class.
+
+♦ nestedClassifier : Classifier [0..*]{ordered, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+Unified Modeling Language 2.5.1
+221
+===== PRINTED PAGE 222 / PDF PAGE 264 =====
+
+(opposite A_nestedClassifier_nestingClass::nestingClass)
+The Classifiers owned by the Class that are not ownedBehaviors.
+
+♦ ownedAttribute : Property [0..*]{ordered, subsets Classifier::attribute, subsets Namespace::ownedMember,
+redefines StructuredClassifier::ownedAttribute} (opposite Property::class)
+The attributes (i.e., the Properties) owned by the Class.
+
+♦ ownedOperation : Operation [0..*]{ordered, subsets Classifier::feature, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+(opposite Operation::class)
+The Operations owned by the Class.
+
+♦ ownedReception : Reception [0..*]{subsets Classifier::feature, subsets Namespace::ownedMember}
+(opposite A_ownedReception_class::class)
+The Receptions owned by the Class.
+
+/superClass : Class [0..*]{redefines Classifier::general} (opposite A_superClass_class::class)
+The superclasses of a Class, derived from its Generalizations.
+11.8.3.7
+Operations
+
+extension() : Extension [0..*]
+Derivation for Class::/extension : Extension
+body: Extension.allInstances()->select(ext |
+  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier))
+in
+  endTypes->includes(self) or endTypes.allParents()->includes(self) )
+
+superClass() : Class [0..*]
+Derivation for Class::/superClass : Class
+body: self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet()
+11.8.3.8
+Constraints
+
+passive_class
+Only an active Class may own Receptions and have a classifierBehavior.
+inv: not isActive implies (ownedReception->isEmpty() and classifierBehavior = null)
+11.8.4
+Collaboration [Class]
+11.8.4.1
+Description
+A Collaboration describes a structure of collaborating elements (roles), each performing a specialized function, which
+collectively accomplish some desired functionality.
+11.8.4.2
+Diagrams
+Collaborations
+11.8.4.3
+Generalizations
+StructuredClassifier, BehavioredClassifier
+222
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 223 / PDF PAGE 265 =====
+
+11.8.4.4
+Association Ends
+
+collaborationRole : ConnectableElement [0..*]{subsets StructuredClassifier::role} (opposite
+A_collaborationRole_collaboration::collaboration)
+Represents the participants in the Collaboration.
+11.8.5
+CollaborationUse [Class]
+11.8.5.1
+Description
+A CollaborationUse is used to specify the application of a pattern specified by a Collaboration to a specific situation.
+11.8.5.2
+Diagrams
+Collaborations, Classifiers
+11.8.5.3
+Generalizations
+NamedElement
+11.8.5.4
+Association Ends
+
+♦ roleBinding : Dependency [0..*]{subsets Element::ownedElement} (opposite
+A_roleBinding_collaborationUse::collaborationUse)
+A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates
+which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement
+may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
+
+type : Collaboration [1..1] (opposite A_type_collaborationUse::collaborationUse)
+The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between
+its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
+11.8.5.5
+Constraints
+
+client_elements
+All the client elements of a roleBinding are in one Classifier and all supplier elements of a roleBinding are in
+one Collaboration.
+inv: roleBinding->collect(client)->forAll(ne1, ne2 |
+  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
+    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 :
+ConnectableElement = ne2.oclAsType(ConnectableElement) in
+      ce1.structuredClassifier = ce2.structuredClassifier)
+and
+  roleBinding->collect(supplier)->forAll(ne1, ne2 |
+  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
+    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 :
+ConnectableElement = ne2.oclAsType(ConnectableElement) in
+      ce1.collaboration = ce2.collaboration)
+
+every_role
+Every collaborationRole in the Collaboration is bound within the CollaborationUse.
+inv: type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier-
+>includes(role)))
+
+connectors
+Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between
+Unified Modeling Language 2.5.1
+223
+===== PRINTED PAGE 224 / PDF PAGE 266 =====
+
+elements bound in the context Classifier, and these corresponding Connectors must have the same or more
+general type than the Collaboration Connectors.
+inv: type.ownedConnector->forAll(connector |
+  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
+        relevantBindings : Set(Dependency) = roleBinding->select(rb | rb.supplier-
+>intersection(rolesConnectedInCollab)->notEmpty()),
+        boundRoles : Set(ConnectableElement) = relevantBindings-
+>collect(client.oclAsType(ConnectableElement))->asSet(),
+        contextClassifier : StructuredClassifier = boundRoles-
+>any(true).structuredClassifier->any(true) in
+          contextClassifier.ownedConnector->exists( correspondingConnector |
+              correspondingConnector.end.role->forAll( role | boundRoles->includes(role) )
+              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty())
+implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
+)
+11.8.6
+Component [Class]
+11.8.6.1
+Description
+A Component represents a modular part of a system that encapsulates its contents and whose manifestation is
+replaceable within its environment.
+11.8.6.2
+Diagrams
+Components
+11.8.6.3
+Generalizations
+Class
+11.8.6.4
+Attributes
+
+isIndirectlyInstantiated : Boolean [1..1] = true
+If true, the Component is defined at design-time, but at run-time (or execution-time) an object specified by the
+Component does not exist, that is, the Component is instantiated indirectly, through the instantiation of its
+realizing Classifiers or parts.
+11.8.6.5
+Association Ends
+
+♦ packagedElement : PackageableElement [0..*]{subsets Namespace::ownedMember} (opposite
+A_packagedElement_component::component)
+The set of PackageableElements that a Component owns. In the namespace of a Component, all model
+elements that are involved in or related to its definition may be owned or imported explicitly. These may
+include e.g., Classes, Interfaces, Components, Packages, UseCases, Dependencies (e.g., mappings), and
+Artifacts.
+
+/provided : Interface [0..*]{} (opposite A_provided_component::component)
+The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the
+Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
+
+♦ realization : ComponentRealization [0..*]{subsets Element::ownedElement, subsets
+A_supplier_supplierDependency::supplierDependency} (opposite ComponentRealization::abstraction)
+The set of Realizations owned by the Component. Realizations reference the Classifiers of which the
+Component is an abstraction; i.e., that realize its behavior.
+
+/required : Interface [0..*]{} (opposite A_required_component::component)
+The Interfaces that the Component requires from other Components in its environment in order to be able to
+224
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 225 / PDF PAGE 267 =====
+
+offer its full set of provided functionality. These Interfaces may be used by the Component or any of its
+realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
+11.8.6.6
+Operations
+
+provided() : Interface [0..*]
+Derivation for Component::/provided
+body: let
+ris : Set(Interface) = allRealizedInterfaces(),
+        realizingClassifiers : Set(Classifier) =  self.realization.realizingClassifier-
+>union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
+        allRealizingClassifiers : Set(Classifier) = realizingClassifiers-
+>union(realizingClassifiers.allParents())->asSet(),
+        realizingClassifierInterfaces : Set(Interface) = allRealizingClassifiers->iterate(c;
+rci : Set(Interface) = Set{} | rci->union(c.allRealizedInterfaces())),
+        ports : Set(Port) = self.ownedPort->union(allParents()->collect(ownedPort))-
+>asSet(),
+        providedByPorts : Set(Interface) = ports.provided->asSet()
+in     ris->union(realizingClassifierInterfaces) ->union(providedByPorts)->asSet()
+
+required() : Interface [0..*]
+Derivation for Component::/required
+body: let
+uis : Set(Interface) = allUsedInterfaces(),
+        realizingClassifiers : Set(Classifier) = self.realization.realizingClassifier-
+>union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
+        allRealizingClassifiers : Set(Classifier) = realizingClassifiers-
+>union(realizingClassifiers.allParents())->asSet(),
+        realizingClassifierInterfaces : Set(Interface) = allRealizingClassifiers->iterate(c;
+rci : Set(Interface) = Set{} | rci->union(c.allUsedInterfaces())),
+        ports : Set(Port) = self.ownedPort->union(allParents()->collect(ownedPort))-
+>asSet(),
+        usedByPorts : Set(Interface) = ports.required->asSet()
+in    uis->union(realizingClassifierInterfaces)->union(usedByPorts)->asSet()
+11.8.6.7
+Constraints
+
+no_nested_classifiers
+A Component cannot nest Classifiers.
+inv: nestedClassifier->isEmpty()
+
+no_packaged_elements
+A Component nested in a Class cannot have any packaged elements.
+inv: nestingClass <> null implies packagedElement->isEmpty()
+11.8.7
+ComponentRealization [Class]
+11.8.7.1
+Description
+Realization is specialized to (optionally) define the Classifiers that realize the contract offered by a Component in terms
+of its provided and required Interfaces. The Component forms an abstraction from these various Classifiers.
+11.8.7.2
+Diagrams
+Components
+11.8.7.3
+Generalizations
+Realization
+Unified Modeling Language 2.5.1
+225
+===== PRINTED PAGE 226 / PDF PAGE 268 =====
+
+11.8.7.4
+Association Ends
+
+abstraction : Component [0..1]{subsets Dependency::supplier, subsets Element::owner} (opposite
+Component::realization)
+The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
+
+realizingClassifier : Classifier [1..*]{subsets Dependency::client} (opposite
+A_realizingClassifier_componentRealization::componentRealization)
+The Classifiers that are involved in the implementation of the Component that owns this Realization.
+11.8.8
+ConnectableElement [Abstract Class]
+11.8.8.1
+Description
+ConnectableElement is an abstract metaclass representing a set of instances that play roles of a StructuredClassifier.
+ConnectableElements may be joined by attached Connectors and specify configurations of linked instances to be
+created within an instance of the containing StructuredClassifier.
+11.8.8.2
+Diagrams
+Structured Classifiers, Collaborations, Activities, Lifelines, Features, Properties
+11.8.8.3
+Generalizations
+TypedElement, ParameterableElement
+11.8.8.4
+Specializations
+Variable, Parameter, Property
+11.8.8.5
+Association Ends
+
+/end : ConnectorEnd [0..*]{} (opposite ConnectorEnd::role)
+A set of ConnectorEnds that attach to this ConnectableElement.
+
+templateParameter : ConnectableElementTemplateParameter [0..1]{redefines
+ParameterableElement::templateParameter} (opposite
+ConnectableElementTemplateParameter::parameteredElement)
+The ConnectableElementTemplateParameter for this ConnectableElement parameter.
+11.8.8.6
+Operations
+
+end() : ConnectorEnd [0..*]
+Derivation for ConnectableElement::/end : ConnectorEnd
+body: ConnectorEnd.allInstances()->select(role = self)
+11.8.9
+ConnectableElementTemplateParameter [Class]
+11.8.9.1
+Description
+A ConnectableElementTemplateParameter exposes a ConnectableElement as a formal parameter for a template.
+226
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 227 / PDF PAGE 269 =====
+
+11.8.9.2
+Diagrams
+Structured Classifiers
+11.8.9.3
+Generalizations
+TemplateParameter
+11.8.9.4
+Association Ends
+
+parameteredElement : ConnectableElement [1..1]{redefines TemplateParameter::parameteredElement}
+(opposite ConnectableElement::templateParameter)
+The ConnectableElement for this ConnectableElementTemplateParameter.
+11.8.10
+Connector [Class]
+11.8.10.1
+Description
+A Connector specifies links that enables communication between two or more instances. In contrast to Associations,
+which specify links between any instance of the associated Classifiers, Connectors specify links between instances
+playing the connected parts only.
+11.8.10.2
+Diagrams
+Structured Classifiers, Messages, Information Flows
+11.8.10.3
+Generalizations
+Feature
+11.8.10.4
+Attributes
+
+/kind : ConnectorKind [1..1]
+Indicates the kind of Connector. This is derived: a Connector with one or more ends connected to a Port which
+is not on a Part and which is not a behavior port is a delegation; otherwise it is an assembly.
+11.8.10.5
+Association Ends
+
+contract : Behavior [0..*] (opposite A_contract_connector::connector)
+The set of Behaviors that specify the valid interaction patterns across the Connector.
+
+♦ end : ConnectorEnd [2..*]{ordered, subsets Element::ownedElement} (opposite
+A_end_connector::connector)
+A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers
+typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
+
+redefinedConnector : Connector [0..*]{subsets RedefinableElement::redefinedElement} (opposite
+A_redefinedConnector_connector::connector)
+A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may
+have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the
+redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The
+properties of the ConnectorEnds of the redefining Connector may be replaced.
+
+type : Association [0..1] (opposite A_type_connector::connector)
+An optional Association that classifies links corresponding to this Connector.
+Unified Modeling Language 2.5.1
+227
+===== PRINTED PAGE 228 / PDF PAGE 270 =====
+
+11.8.10.6
+Operations
+
+kind() : ConnectorKind
+Derivation for Connector::/kind : ConnectorKind
+body: if end->exists(
+role.oclIsKindOf(Port)
+and partWithPort->isEmpty()
+and not role.oclAsType(Port).isBehavior)
+then ConnectorKind::delegation
+else ConnectorKind::assembly
+endif
+11.8.10.7
+Constraints
+
+types
+The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types
+of the ends of the Association that types the Connector, if any.
+inv: type<>null implies
+  let noOfEnds : Integer = end->size() in
+  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end-
+>at(i).role.type.conformsTo(type.memberEnd->at(i).type))
+
+roles
+The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or
+inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
+inv: structuredClassifier <> null
+and
+  end->forAll( e | structuredClassifier.allRoles()->includes(e.role)
+or
+  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
+11.8.11
+ConnectorEnd [Class]
+11.8.11.1
+Description
+A ConnectorEnd is an endpoint of a Connector, which attaches the Connector to a ConnectableElement.
+11.8.11.2
+Diagrams
+Encapsulated Classifiers, Structured Classifiers
+11.8.11.3
+Generalizations
+MultiplicityElement
+11.8.11.4
+Association Ends
+
+/definingEnd : Property [0..1]{} (opposite A_definingEnd_connectorEnd::connectorEnd)
+A derived property referencing the corresponding end on the Association which types the Connector owing this
+ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as
+this ConnectorEnd.
+
+partWithPort : Property [0..1] (opposite A_partWithPort_connectorEnd::connectorEnd)
+Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
+228
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 229 / PDF PAGE 271 =====
+
+
+role : ConnectableElement [1..1] (opposite ConnectableElement::end)
+The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is
+created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this
+ConnectableElement.
+11.8.11.5
+Operations
+
+definingEnd() : Property [0..1]
+Derivation for ConnectorEnd::/definingEnd : Property
+body: if connector.type = null
+then
+  null
+else
+  let index : Integer = connector.end->indexOf(self) in
+    connector.type.memberEnd->at(index)
+endif
+11.8.11.6
+Constraints
+
+role_and_part_with_port
+If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the
+type of the partWithPort.
+inv: partWithPort->notEmpty() implies
+  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
+
+part_with_port_empty
+If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
+inv: (role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort-
+>isEmpty()
+
+multiplicity
+The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end
+of the Association typing the owning Connector, if any.
+inv: self.compatibleWith(definingEnd)
+
+self_part_with_port
+The Property held in self.partWithPort must not be a Port.
+inv: partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
+11.8.12
+ConnectorKind [Enumeration]
+11.8.12.1
+Description
+ConnectorKind is an enumeration that defines whether a Connector is an assembly or a delegation.
+11.8.12.2
+Diagrams
+
+Structured Classifiers
+Unified Modeling Language 2.5.1
+229
+===== PRINTED PAGE 230 / PDF PAGE 272 =====
+
+11.8.12.3
+Literals
+
+assembly
+Indicates that the Connector is an assembly Connector.
+
+delegation
+Indicates that the Connector is a delegation Connector.
+11.8.13
+EncapsulatedClassifier [Abstract Class]
+11.8.13.1
+Description
+An EncapsulatedClassifier may own Ports to specify typed interaction points.
+11.8.13.2
+Diagrams
+Encapsulated Classifiers, Classes
+11.8.13.3
+Generalizations
+StructuredClassifier
+11.8.13.4
+Specializations
+Class
+11.8.13.5
+Association Ends
+
+♦ /ownedPort : Port [0..*]{subsets StructuredClassifier::ownedAttribute} (opposite
+A_ownedPort_encapsulatedClassifier::encapsulatedClassifier)
+The Ports owned by the EncapsulatedClassifier.
+11.8.13.6
+Operations
+
+ownedPort() : Port [0..*]{ordered}
+Derivation for EncapsulatedClassifier::/ownedPort : Port
+body: ownedAttribute->select(oclIsKindOf(Port))->collect(oclAsType(Port))->asOrderedSet()
+11.8.14
+Port [Class]
+11.8.14.1
+Description
+A Port is a property of an EncapsulatedClassifier that specifies a distinct interaction point between that
+EncapsulatedClassifier and its environment or between the (behavior of the) EncapsulatedClassifier and its internal
+parts. Ports are connected to Properties of the EncapsulatedClassifier by Connectors through which requests can be
+made to invoke BehavioralFeatures. A Port may specify the services an EncapsulatedClassifier provides (offers) to its
+environment as well as the services that an EncapsulatedClassifier expects (requires) of its environment. A Port may
+have an associated ProtocolStateMachine.
+11.8.14.2
+Diagrams
+Encapsulated Classifiers, Events, Invocation Actions
+230
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 231 / PDF PAGE 273 =====
+
+11.8.14.3
+Generalizations
+Property
+11.8.14.4
+Attributes
+
+isBehavior : Boolean [1..1] = false
+Specifies whether requests arriving at this Port are sent to the classifier behavior of this EncapsulatedClassifier.
+Such a Port is referred to as a behavior Port. Any invocation of a BehavioralFeature targeted at a behavior Port
+will be handled by the instance of the owning EncapsulatedClassifier itself, rather than by any instances that it
+may contain.
+
+isConjugated : Boolean [1..1] = false
+Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
+
+isService : Boolean [1..1] = true
+If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier. If
+false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible
+functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal
+implementation of the EncapsulatedClassifier and other properties that are considered part of its
+implementation.
+11.8.14.5
+Association Ends
+
+protocol : ProtocolStateMachine [0..1] (opposite A_protocol_port::port)
+An optional ProtocolStateMachine which describes valid interactions at this interaction point.
+
+/provided : Interface [0..*]{} (opposite A_provided_port::port)
+The Interfaces specifying the set of Operations and Receptions that the EncapsulatedClassifier offers to its
+environment via this Port, and which it will handle either directly or by forwarding it to a part of its internal
+structure. This association is derived according to the value of isConjugated. If isConjugated is false, provided
+is derived as the union of the sets of Interfaces realized by the type of the port and its supertypes, or directly
+from the type of the Port if the Port is typed by an Interface. If isConjugated is true, it is derived as the union of
+the sets of Interfaces used by the type of the Port and its supertypes.
+
+redefinedPort : Port [0..*]{subsets Property::redefinedProperty} (opposite A_redefinedPort_port::port)
+A Port may be redefined when its containing EncapsulatedClassifier is specialized. The redefining Port may
+have additional Interfaces to those that are associated with the redefined Port or it may replace an Interface by
+one of its subtypes.
+
+/required : Interface [0..*]{} (opposite A_required_port::port)
+The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCassifier expects its
+environment to handle via this port. This association is derived according to the value of isConjugated. If
+isConjugated is false, required is derived as the union of the sets of Interfaces used by the type of the Port and
+its supertypes. If isConjugated is true, it is derived as the union of the sets of Interfaces realized by the type of
+the Port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface.
+11.8.14.6
+Operations
+
+provided() : Interface [0..*]
+Derivation for Port::/provided
+body: if isConjugated then basicRequired() else basicProvided() endif
+Unified Modeling Language 2.5.1
+231
+===== PRINTED PAGE 232 / PDF PAGE 274 =====
+
+
+required() : Interface [0..*]
+Derivation for Port::/required
+body: if isConjugated then basicProvided() else basicRequired() endif
+
+basicProvided() : Interface [0..*]
+The union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly the type of the
+Port if the Port is typed by an Interface.
+body: if type.oclIsKindOf(Interface)
+then type.oclAsType(Interface)->asSet()
+else type.oclAsType(Classifier).allRealizedInterfaces()
+endif
+
+basicRequired() : Interface [0..*]
+The union of the sets of Interfaces used by the type of the Port and its supertypes.
+body:  type.oclAsType(Classifier).allUsedInterfaces()
+11.8.14.7
+Constraints
+
+port_aggregation
+Port.aggregation must be composite.
+inv: aggregation = AggregationKind::composite
+
+default_value
+A defaultValue for port cannot be specified when the type of the Port is an Interface.
+inv: type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
+
+encapsulated_owner
+All Ports are owned by an EncapsulatedClassifier.
+inv: owner = encapsulatedClassifier
+11.8.15
+StructuredClassifier [Abstract Class]
+11.8.15.1
+Description
+StructuredClassifiers may contain an internal structure of connected elements each of which plays a role in the overall
+Behavior modeled by the StructuredClassifier.
+11.8.15.2
+Diagrams
+Encapsulated Classifiers, Structured Classifiers, Collaborations
+11.8.15.3
+Generalizations
+Classifier
+11.8.15.4
+Specializations
+Collaboration, EncapsulatedClassifier
+232
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 233 / PDF PAGE 275 =====
+
+11.8.15.5
+Association Ends
+
+♦ ownedAttribute : Property [0..*]{ordered, subsets Classifier::attribute, subsets StructuredClassifier::role,
+subsets Namespace::ownedMember} (opposite A_ownedAttribute_structuredClassifier::structuredClassifier)
+The Properties owned by the StructuredClassifier.
+
+♦ ownedConnector : Connector [0..*]{subsets Classifier::feature, subsets
+A_redefinitionContext_redefinableElement::redefinableElement, subsets Namespace::ownedMember}
+(opposite A_ownedConnector_structuredClassifier::structuredClassifier)
+The connectors owned by the StructuredClassifier.
+
+/part : Property [0..*]{} (opposite A_part_structuredClassifier::structuredClassifier)
+The Properties specifying instances that the StructuredClassifier owns by composition. This collection is
+derived, selecting those owned Properties where isComposite is true.
+
+/role : ConnectableElement [0..*]{union, subsets Namespace::member} (opposite
+A_role_structuredClassifier::structuredClassifier)
+The roles that instances may play in this StructuredClassifier.
+11.8.15.6
+Operations
+
+part() : Property [0..*]
+Derivation for StructuredClassifier::/part
+body: ownedAttribute->select(isComposite)
+
+allRoles() : ConnectableElement [0..*]
+All features of type ConnectableElement, equivalent to all direct and inherited roles.
+body: allFeatures()->select(oclIsKindOf(ConnectableElement))-
+>collect(oclAsType(ConnectableElement))->asSet()
+11.9
+Association Descriptions
+11.9.1
+A_collaborationRole_collaboration [Association]
+11.9.1.1
+Diagrams
+Collaborations
+11.9.1.2
+Owned Ends
+
+collaboration : Collaboration [0..*]{subsets A_role_structuredClassifier::structuredClassifier} (opposite
+Collaboration::collaborationRole)
+11.9.2
+A_connectableElement_templateParameter_parameteredElement
+[Association]
+11.9.2.1
+Diagrams
+Structured Classifiers
+Unified Modeling Language 2.5.1
+233
+===== PRINTED PAGE 234 / PDF PAGE 276 =====
+
+11.9.2.2
+Member Ends
+
+ConnectableElement::templateParameter
+
+ConnectableElementTemplateParameter::parameteredElement
+11.9.3
+A_contract_connector [Association]
+11.9.3.1
+Diagrams
+Structured Classifiers
+11.9.3.2
+Owned Ends
+
+connector : Connector [0..*] (opposite Connector::contract)
+11.9.4
+A_definingEnd_connectorEnd [Association]
+11.9.4.1
+Diagrams
+Structured Classifiers
+11.9.4.2
+Owned Ends
+
+connectorEnd : ConnectorEnd [0..*] (opposite ConnectorEnd::definingEnd)
+11.9.5
+A_endType_association [Association]
+11.9.5.1
+Diagrams
+Associations
+11.9.5.2
+Owned Ends
+
+association : Association [0..*]{subsets A_relatedElement_relationship::relationship} (opposite
+Association::endType)
+11.9.6
+A_end_connector [Association]
+11.9.6.1
+Diagrams
+Structured Classifiers
+11.9.6.2
+Owned Ends
+
+connector : Connector [1..1]{subsets Element::owner} (opposite Connector::end)
+11.9.7
+A_end_role [Association]
+11.9.7.1
+Diagrams
+Structured Classifiers
+234
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 235 / PDF PAGE 277 =====
+
+11.9.7.2
+Member Ends
+
+ConnectableElement::end
+
+ConnectorEnd::role
+11.9.8
+A_extension_metaclass [Association]
+11.9.8.1
+Diagrams
+Classes, Profiles
+11.9.8.2
+Member Ends
+
+Class::extension
+
+Extension::metaclass
+11.9.9
+A_memberEnd_association [Association]
+11.9.9.1
+Diagrams
+Associations, Properties
+11.9.9.2
+Member Ends
+
+Association::memberEnd
+
+Property::association
+11.9.10
+A_navigableOwnedEnd_association [Association]
+11.9.10.1
+Diagrams
+Associations
+11.9.10.2
+Owned Ends
+
+association : Association [0..1]{subsets Property::owningAssociation} (opposite
+Association::navigableOwnedEnd)
+11.9.11
+A_nestedClassifier_nestingClass [Association]
+11.9.11.1
+Diagrams
+Classes
+11.9.11.2
+Owned Ends
+
+nestingClass : Class [0..1]{subsets NamedElement::namespace, subsets
+RedefinableElement::redefinitionContext} (opposite Class::nestedClassifier)
+Unified Modeling Language 2.5.1
+235
+===== PRINTED PAGE 236 / PDF PAGE 278 =====
+
+11.9.12
+A_ownedAttribute_class [Association]
+11.9.12.1
+Diagrams
+Classes, Properties
+11.9.12.2
+Member Ends
+
+Class::ownedAttribute
+
+Property::class
+11.9.13
+A_ownedAttribute_structuredClassifier [Association]
+11.9.13.1
+Diagrams
+Structured Classifiers
+11.9.13.2
+Generalizations
+A_role_structuredClassifier
+11.9.13.3
+Owned Ends
+
+structuredClassifier : StructuredClassifier [0..1]{subsets NamedElement::namespace, subsets
+A_attribute_classifier::classifier, redefines A_role_structuredClassifier::structuredClassifier} (opposite
+StructuredClassifier::ownedAttribute)
+11.9.14
+A_ownedConnector_structuredClassifier [Association]
+11.9.14.1
+Diagrams
+Structured Classifiers
+11.9.14.2
+Owned Ends
+
+structuredClassifier : StructuredClassifier [0..1]{subsets Feature::featuringClassifier, subsets
+NamedElement::namespace, subsets RedefinableElement::redefinitionContext} (opposite
+StructuredClassifier::ownedConnector)
+11.9.15
+A_ownedEnd_owningAssociation [Association]
+11.9.15.1
+Diagrams
+Associations, Properties
+11.9.15.2
+Member Ends
+
+Association::ownedEnd
+
+Property::owningAssociation
+236
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 237 / PDF PAGE 279 =====
+
+11.9.16
+A_ownedOperation_class [Association]
+11.9.16.1
+Diagrams
+Classes, Operations
+11.9.16.2
+Member Ends
+
+Class::ownedOperation
+
+Operation::class
+11.9.17
+A_ownedPort_encapsulatedClassifier [Association]
+11.9.17.1
+Diagrams
+Encapsulated Classifiers
+11.9.17.2
+Owned Ends
+
+encapsulatedClassifier : EncapsulatedClassifier [0..1]{subsets
+A_ownedAttribute_structuredClassifier::structuredClassifier} (opposite EncapsulatedClassifier::ownedPort)
+11.9.18
+A_ownedReception_class [Association]
+11.9.18.1
+Diagrams
+Classes
+11.9.18.2
+Owned Ends
+
+class : Class [0..1]{subsets Feature::featuringClassifier, subsets NamedElement::namespace} (opposite
+Class::ownedReception)
+11.9.19
+A_packagedElement_component [Association]
+11.9.19.1
+Diagrams
+Components
+11.9.19.2
+Owned Ends
+
+component : Component [0..1]{subsets NamedElement::namespace} (opposite Component::packagedElement)
+11.9.20
+A_partWithPort_connectorEnd [Association]
+11.9.20.1
+Diagrams
+Encapsulated Classifiers
+11.9.20.2
+Owned Ends
+
+connectorEnd : ConnectorEnd [0..*] (opposite ConnectorEnd::partWithPort)
+Unified Modeling Language 2.5.1
+237
+===== PRINTED PAGE 238 / PDF PAGE 280 =====
+
+11.9.21
+A_part_structuredClassifier [Association]
+11.9.21.1
+Diagrams
+Structured Classifiers
+11.9.21.2
+Owned Ends
+
+structuredClassifier : StructuredClassifier [0..1] (opposite StructuredClassifier::part)
+11.9.22
+A_protocol_port [Association]
+11.9.22.1
+Diagrams
+Encapsulated Classifiers
+11.9.22.2
+Owned Ends
+
+port : Port [0..*] (opposite Port::protocol)
+11.9.23
+A_provided_component [Association]
+11.9.23.1
+Diagrams
+Components
+11.9.23.2
+Owned Ends
+
+component : Component [0..*] (opposite Component::provided)
+11.9.24
+A_provided_port [Association]
+11.9.24.1
+Diagrams
+Encapsulated Classifiers
+11.9.24.2
+Owned Ends
+
+port : Port [0..*] (opposite Port::provided)
+11.9.25
+A_realization_abstraction_component [Association]
+11.9.25.1
+Diagrams
+Components
+11.9.25.2
+Member Ends
+
+Component::realization
+
+ComponentRealization::abstraction
+238
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 239 / PDF PAGE 281 =====
+
+11.9.26
+A_realizingClassifier_componentRealization [Association]
+11.9.26.1
+Diagrams
+Components
+11.9.26.2
+Owned Ends
+
+componentRealization : ComponentRealization [0..*]{subsets NamedElement::clientDependency} (opposite
+ComponentRealization::realizingClassifier)
+11.9.27
+A_redefinedConnector_connector [Association]
+11.9.27.1
+Diagrams
+Structured Classifiers
+11.9.27.2
+Owned Ends
+
+connector : Connector [0..*]{subsets A_redefinedElement_redefinableElement::redefinableElement} (opposite
+Connector::redefinedConnector)
+11.9.28
+A_redefinedPort_port [Association]
+11.9.28.1
+Diagrams
+Encapsulated Classifiers
+11.9.28.2
+Owned Ends
+
+port : Port [0..*]{subsets A_redefinedProperty_property::property} (opposite Port::redefinedPort)
+11.9.29
+A_required_component [Association]
+11.9.29.1
+Diagrams
+Components
+11.9.29.2
+Owned Ends
+
+component : Component [0..*] (opposite Component::required)
+11.9.30
+A_required_port [Association]
+11.9.30.1
+Diagrams
+Encapsulated Classifiers
+11.9.30.2
+Owned Ends
+
+port : Port [0..*] (opposite Port::required)
+Unified Modeling Language 2.5.1
+239
+===== PRINTED PAGE 240 / PDF PAGE 282 =====
+
+11.9.31
+A_roleBinding_collaborationUse [Association]
+11.9.31.1
+Diagrams
+Collaborations
+11.9.31.2
+Owned Ends
+
+collaborationUse : CollaborationUse [0..1]{subsets Element::owner} (opposite CollaborationUse::roleBinding)
+11.9.32
+A_role_structuredClassifier [Association]
+11.9.32.1
+Diagrams
+Structured Classifiers
+11.9.32.2
+Specializations
+A_ownedAttribute_structuredClassifier
+11.9.32.3
+Owned Ends
+
+/structuredClassifier : StructuredClassifier [0..*]{union, subsets
+A_member_memberNamespace::memberNamespace} (opposite StructuredClassifier::role)
+11.9.33
+A_superClass_class [Association]
+11.9.33.1
+Diagrams
+Classes
+11.9.33.2
+Owned Ends
+
+class : Class [0..*]{subsets A_general_classifier::classifier} (opposite Class::superClass)
+11.9.34
+A_type_collaborationUse [Association]
+11.9.34.1
+Diagrams
+Collaborations
+11.9.34.2
+Owned Ends
+
+collaborationUse : CollaborationUse [0..*] (opposite CollaborationUse::type)
+11.9.35
+A_type_connector [Association]
+11.9.35.1
+Diagrams
+Structured Classifiers
+11.9.35.2
+Owned Ends
+
+connector : Connector [0..*] (opposite Connector::type)
+240
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 241 / PDF PAGE 283 =====
+
+12
+Packages
+12.1
+Summary
+Packages provide the main generic structuring and organizing capability of UML. There are specializations for Models
+and for Profiles which organize extensions to UML.
+12.2
+Packages
+12.2.1
+Summary
+This sub clause provides the specification for Packages and Models.
+12.2.2
+Abstract Syntax
+Package
++ URI : String [0..1]
+TemplateableElement
+Namespace
+PackageableElement
+Type
+PackageMerge
+DirectedRelationship
+Model
++ viewpoint : String [0..1]
+0..1
++ nestingPackage
+*
++ /nestedPackage
+{subsets owningPackage}
+{subsets packagedElement}
+0..1
++ owningPackage
+*
++ packagedElement
+{subsets namespace}
+{subsets ownedMember}
+0..1
++ package
+*
++ /ownedType
+{subsets owningPackage}
+{subsets packagedElement}
+1
++ receivingPackage
+*
++ packageMerge
+{subsets source,
+subsets owner}
+{subsets ownedElement,
+subsets directedRelationship}
+*
++ packageMerge
+1
++ mergedPackage
+{subsets directedRelationship}
+{subsets target}
+Figure 12.1  Packages
+12.2.3
+Semantics
+12.2.3.1
+Package
+A Package is a namespace for its members, which comprise those elements associated via packagedElement (which are
+said to be owned or contained), and those imported.
+A Package definition can extend the contents of other Packages through the merging of the contained elements.
+Unified Modeling Language 2.5.1
+241
+===== PRINTED PAGE 242 / PDF PAGE 284 =====
+
+A Package may be defined as a template and bound to other templates: see sub clause 7.3, Templates, for further
+information.
+The URI can be specified to provide a unique identifier for a Package. Within UML there is no predetermined usage for
+this, with the exception of profiles (see sub clause 12.3.3). It may, for example, be used by model management facilities
+for model identification. The URI should hence be unique and unchanged once assigned. There is no requirement that
+the URI be dereferenceable (though this is of course permitted).
+12.2.3.2
+PackageMerge
+A PackageMerge is a directed relationship between two Packages that indicates that the contents of the target
+mergedPackage are combined into the source receivingPackage according to a set of rules defined below. It is very similar
+to Generalization in the sense that the source element conceptually adds the characteristics of the target element to its
+own characteristics resulting in an element that combines the characteristics of both. Just as a subclass is not normally
+depicted with its inherited features, a receiving Package is not normally depicted with the merged elements from its
+mergedPackages. In terms of model semantics, there is no difference between a model with explicit PackageMerges, and
+a model in which all the merges have been performed. Likewise XMI files containing PackageMerge are semantically
+equivalent to the same XMI files with the PackageMerges expanded.
+Also, as with Generalization, a Package may not merge itself (directly or indirectly).
+This capability is designed to be used when elements defined in different Packages have the same name and are intended
+to represent the same concept. A given base concept may be merged for different purposes, with each purpose defined in
+a separate receiving Package. By selecting different receiving packages, it is possible to obtain a custom definition of a
+concept for a specific end.
+Thus, any reference to a model element contained in the receiving Package implies a reference to the results of the
+merge rather than to the increment that is contained in that Package. This is illustrated by the example in Figure 12.2 in
+which Package P2 defines an increment of Class A originally defined in P1. Package P2 merges the contents of Package
+P1, which implies the merging of P1::A into increment P2::A. Package P3 defines a subclass of P2::A called SubA. In
+this case, element A in Package P2 (P2::A) represents the result of the merge of P1::A into P2::A and not just the
+increment P2::A.
+NOTE. If another package were to import P1, then a reference to A in the importing package would represent P1::A
+rather than the A resulting from merge.
+Figure 12.2  Illustration of the Meaning of Package Merge
+A PackageMerge can be viewed as an operation (that is itself a set of transformations) whereby the contents of the
+Package to be merged are combined with the contents of the receiving Package. In cases in which certain elements in
+the two Packages match (according to defined rules), their contents are (conceptually) merged into a single resulting
+element according to the formal rules of PackageMerge specified below. This operation is akin to “copying down” the
+features of superclasses into a subclass: the fully expanded subclass is the equivalent to the resulting package.
+To understand the rules of PackageMerge, it is necessary to clearly distinguish between three distinct entities: the
+mergedPackage (e.g., P1 in Figure 12.2), the receivingPackage (e.g., P2), and the result of the merge transformations (also
+P2). The receivingPackage also plays the role of resultingPackage. This dual interpretation of the same model element can
+be confusing, so it is useful to introduce the following terminology that aids understanding:
+
+merged package - the package that is to be merged into the receiving package (this is the package that is the
+target of the merge arrow in the diagrams).
+242
+Unified Modeling Language 2.5.1

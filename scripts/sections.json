@@ -88,5 +88,30 @@
     "content": ["sections-11.js"],
     "svg_generator": "generate_structured_classifiers_svg.py",
     "xmi_exclude_associations": ["A_connectableElement_templateParameter_parameteredElement"]
+  },
+  "12": {
+    "title": "Packages",
+    "title_ru": "Пакеты",
+    "slug": "packages",
+    "package": "Packages",
+    "first_page": 241,
+    "last_page": 284,
+    "classifier_catalog": "12.4",
+    "association_catalog": "12.5",
+    "source": "site/docs/uml-2.5.1-packages-en.txt",
+    "data": "site/data/packages.js",
+    "content": ["sections-12.js"],
+    "svg_generator": "generate_packages_svg.py",
+    "expected": {
+      "headings": 141,
+      "classifiers": 9,
+      "associations": 14,
+      "figures": 33,
+      "attributes": 26,
+      "operations": 14,
+      "constraints": 14,
+      "association_ends": 28,
+      "notes": 10
+    }
   }
 }

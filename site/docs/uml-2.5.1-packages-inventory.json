@@ -1,0 +1,1834 @@
+{
+  "clause": "12",
+  "title": "Packages",
+  "completed_stage": 1,
+  "source": {
+    "specification": "OMG UML 2.5.1, formal/17-12-05",
+    "pdf": "omg-uml-2.5.1-formal-17-12-05.pdf",
+    "pdf_sha256": "416b57e1933780eb48bd60fe513e031da220c28a521bdd334a366bebc78a463e",
+    "xmi": "UML-2.5.1.xmi",
+    "xmi_sha256": "e8166c91f51b8a0c015a90101b83d2249d03252e9f9a500a6511654347804f21",
+    "xmi_package": "Packages",
+    "printed_pages": [
+      241,
+      284
+    ],
+    "pdf_pages": [
+      283,
+      326
+    ],
+    "extracted_text": "uml-2.5.1-packages-en.txt"
+  },
+  "counts": {
+    "headings": 141,
+    "classifiers": 9,
+    "associations": 14,
+    "figures": 33,
+    "attributes": 26,
+    "operations": 14,
+    "constraints": 14,
+    "association_ends": 28,
+    "notes": 10
+  },
+  "headings": [
+    {
+      "id": "12.1",
+      "title": "Summary",
+      "page": 241
+    },
+    {
+      "id": "12.2",
+      "title": "Packages",
+      "page": 241
+    },
+    {
+      "id": "12.2.1",
+      "title": "Summary",
+      "page": 241
+    },
+    {
+      "id": "12.2.2",
+      "title": "Abstract Syntax",
+      "page": 241
+    },
+    {
+      "id": "12.2.3",
+      "title": "Semantics",
+      "page": 241
+    },
+    {
+      "id": "12.2.3.1",
+      "title": "Package",
+      "page": 241
+    },
+    {
+      "id": "12.2.3.2",
+      "title": "PackageMerge",
+      "page": 242
+    },
+    {
+      "id": "12.2.3.3",
+      "title": "General Package Merge Rules",
+      "page": 244
+    },
+    {
+      "id": "12.2.3.4",
+      "title": "Package Rules",
+      "page": 245
+    },
+    {
+      "id": "12.2.3.5",
+      "title": "Class and DataType Rules",
+      "page": 245
+    },
+    {
+      "id": "12.2.3.6",
+      "title": "Property Rules",
+      "page": 246
+    },
+    {
+      "id": "12.2.3.7",
+      "title": "Association Rules",
+      "page": 246
+    },
+    {
+      "id": "12.2.3.8",
+      "title": "Operation Rules",
+      "page": 247
+    },
+    {
+      "id": "12.2.3.9",
+      "title": "Enumeration Rules",
+      "page": 247
+    },
+    {
+      "id": "12.2.3.10",
+      "title": "Constraint Rules",
+      "page": 247
+    },
+    {
+      "id": "12.2.3.11",
+      "title": "Model",
+      "page": 247
+    },
+    {
+      "id": "12.2.4",
+      "title": "Notation",
+      "page": 248
+    },
+    {
+      "id": "12.2.5",
+      "title": "Examples",
+      "page": 249
+    },
+    {
+      "id": "12.3",
+      "title": "Profiles",
+      "page": 252
+    },
+    {
+      "id": "12.3.1",
+      "title": "Summary",
+      "page": 252
+    },
+    {
+      "id": "12.3.1.1",
+      "title": "Positioning Profiles versus Metamodels, MOF and UML",
+      "page": 252
+    },
+    {
+      "id": "12.3.2",
+      "title": "Abstract Syntax",
+      "page": 253
+    },
+    {
+      "id": "12.3.3",
+      "title": "Semantics",
+      "page": 253
+    },
+    {
+      "id": "12.3.3.1",
+      "title": "Profiles",
+      "page": 253
+    },
+    {
+      "id": "12.3.3.1.1",
+      "title": "Restricting Availability of UML Elements",
+      "page": 253
+    },
+    {
+      "id": "12.3.3.1.2",
+      "title": "Integrating and Extending Profiles",
+      "page": 255
+    },
+    {
+      "id": "12.3.3.1.3",
+      "title": "MOF-Equivalent Semantics",
+      "page": 255
+    },
+    {
+      "id": "12.3.3.2",
+      "title": "Defining Profiles for Non-UML Metamodels",
+      "page": 258
+    },
+    {
+      "id": "12.3.3.3",
+      "title": "ProfileApplication",
+      "page": 259
+    },
+    {
+      "id": "12.3.3.4",
+      "title": "Stereotypes",
+      "page": 259
+    },
+    {
+      "id": "12.3.3.5",
+      "title": "Images",
+      "page": 260
+    },
+    {
+      "id": "12.3.3.6",
+      "title": "Extensions",
+      "page": 260
+    },
+    {
+      "id": "12.3.3.7",
+      "title": "ExtensionEnd",
+      "page": 262
+    },
+    {
+      "id": "12.3.4",
+      "title": "Notation",
+      "page": 262
+    },
+    {
+      "id": "12.3.4.1",
+      "title": "Icon presentation",
+      "page": 263
+    },
+    {
+      "id": "12.3.5",
+      "title": "Examples",
+      "page": 264
+    },
+    {
+      "id": "12.4",
+      "title": "Classifier Descriptions",
+      "page": 273
+    },
+    {
+      "id": "12.4.1",
+      "title": "Extension [Class]",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.1",
+      "title": "Description",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.2",
+      "title": "Diagrams",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.3",
+      "title": "Generalizations",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.4",
+      "title": "Attributes",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.5",
+      "title": "Association Ends",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.6",
+      "title": "Operations",
+      "page": 273
+    },
+    {
+      "id": "12.4.1.7",
+      "title": "Constraints",
+      "page": 274
+    },
+    {
+      "id": "12.4.2",
+      "title": "ExtensionEnd [Class]",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.1",
+      "title": "Description",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.2",
+      "title": "Diagrams",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.3",
+      "title": "Generalizations",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.4",
+      "title": "Attributes",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.5",
+      "title": "Association Ends",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.6",
+      "title": "Operations",
+      "page": 274
+    },
+    {
+      "id": "12.4.2.7",
+      "title": "Constraints",
+      "page": 274
+    },
+    {
+      "id": "12.4.3",
+      "title": "Image [Class]",
+      "page": 275
+    },
+    {
+      "id": "12.4.3.1",
+      "title": "Description",
+      "page": 275
+    },
+    {
+      "id": "12.4.3.2",
+      "title": "Diagrams",
+      "page": 275
+    },
+    {
+      "id": "12.4.3.3",
+      "title": "Generalizations",
+      "page": 275
+    },
+    {
+      "id": "12.4.3.4",
+      "title": "Attributes",
+      "page": 275
+    },
+    {
+      "id": "12.4.4",
+      "title": "Model [Class]",
+      "page": 275
+    },
+    {
+      "id": "12.4.4.1",
+      "title": "Description",
+      "page": 275
+    },
+    {
+      "id": "12.4.4.2",
+      "title": "Diagrams",
+      "page": 275
+    },
+    {
+      "id": "12.4.4.3",
+      "title": "Generalizations",
+      "page": 275
+    },
+    {
+      "id": "12.4.4.4",
+      "title": "Attributes",
+      "page": 275
+    },
+    {
+      "id": "12.4.5",
+      "title": "Package [Class]",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.1",
+      "title": "Description",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.2",
+      "title": "Diagrams",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.3",
+      "title": "Generalizations",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.4",
+      "title": "Specializations",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.5",
+      "title": "Attributes",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.6",
+      "title": "Association Ends",
+      "page": 276
+    },
+    {
+      "id": "12.4.5.7",
+      "title": "Operations",
+      "page": 277
+    },
+    {
+      "id": "12.4.5.8",
+      "title": "Constraints",
+      "page": 278
+    },
+    {
+      "id": "12.4.6",
+      "title": "PackageMerge [Class]",
+      "page": 278
+    },
+    {
+      "id": "12.4.6.1",
+      "title": "Description",
+      "page": 278
+    },
+    {
+      "id": "12.4.6.2",
+      "title": "Diagrams",
+      "page": 278
+    },
+    {
+      "id": "12.4.6.3",
+      "title": "Generalizations",
+      "page": 278
+    },
+    {
+      "id": "12.4.6.4",
+      "title": "Association Ends",
+      "page": 278
+    },
+    {
+      "id": "12.4.7",
+      "title": "Profile [Class]",
+      "page": 278
+    },
+    {
+      "id": "12.4.7.1",
+      "title": "Description",
+      "page": 278
+    },
+    {
+      "id": "12.4.7.2",
+      "title": "Diagrams",
+      "page": 278
+    },
+    {
+      "id": "12.4.7.3",
+      "title": "Generalizations",
+      "page": 278
+    },
+    {
+      "id": "12.4.7.4",
+      "title": "Association Ends",
+      "page": 278
+    },
+    {
+      "id": "12.4.7.5",
+      "title": "Constraints",
+      "page": 279
+    },
+    {
+      "id": "12.4.8",
+      "title": "ProfileApplication [Class]",
+      "page": 279
+    },
+    {
+      "id": "12.4.8.1",
+      "title": "Description",
+      "page": 279
+    },
+    {
+      "id": "12.4.8.2",
+      "title": "Diagrams",
+      "page": 279
+    },
+    {
+      "id": "12.4.8.3",
+      "title": "Generalizations",
+      "page": 279
+    },
+    {
+      "id": "12.4.8.4",
+      "title": "Attributes",
+      "page": 279
+    },
+    {
+      "id": "12.4.8.5",
+      "title": "Association Ends",
+      "page": 279
+    },
+    {
+      "id": "12.4.9",
+      "title": "Stereotype [Class]",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.1",
+      "title": "Description",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.2",
+      "title": "Diagrams",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.3",
+      "title": "Generalizations",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.4",
+      "title": "Association Ends",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.5",
+      "title": "Operations",
+      "page": 280
+    },
+    {
+      "id": "12.4.9.6",
+      "title": "Constraints",
+      "page": 280
+    },
+    {
+      "id": "12.5",
+      "title": "Association Descriptions",
+      "page": 281
+    },
+    {
+      "id": "12.5.1",
+      "title": "A_appliedProfile_profileApplication [Association]",
+      "page": 281
+    },
+    {
+      "id": "12.5.1.1",
+      "title": "Diagrams",
+      "page": 281
+    },
+    {
+      "id": "12.5.1.2",
+      "title": "Owned Ends",
+      "page": 281
+    },
+    {
+      "id": "12.5.2",
+      "title": "A_icon_stereotype [Association]",
+      "page": 281
+    },
+    {
+      "id": "12.5.2.1",
+      "title": "Diagrams",
+      "page": 281
+    },
+    {
+      "id": "12.5.2.2",
+      "title": "Owned Ends",
+      "page": 281
+    },
+    {
+      "id": "12.5.3",
+      "title": "A_mergedPackage_packageMerge [Association]",
+      "page": 281
+    },
+    {
+      "id": "12.5.3.1",
+      "title": "Diagrams",
+      "page": 281
+    },
+    {
+      "id": "12.5.3.2",
+      "title": "Owned Ends",
+      "page": 282
+    },
+    {
+      "id": "12.5.4",
+      "title": "A_metaclassReference_profile [Association]",
+      "page": 282
+    },
+    {
+      "id": "12.5.4.1",
+      "title": "Diagrams",
+      "page": 282
+    },
+    {
+      "id": "12.5.4.2",
+      "title": "Owned Ends",
+      "page": 282
+    },
+    {
+      "id": "12.5.5",
+      "title": "A_metamodelReference_profile [Association]",
+      "page": 282
+    },
+    {
+      "id": "12.5.5.1",
+      "title": "Diagrams",
+      "page": 282
+    },
+    {
+      "id": "12.5.5.2",
+      "title": "Owned Ends",
+      "page": 282
+    },
+    {
+      "id": "12.5.6",
+      "title": "A_nestedPackage_nestingPackage [Association]",
+      "page": 282
+    },
+    {
+      "id": "12.5.6.1",
+      "title": "Diagrams",
+      "page": 282
+    },
+    {
+      "id": "12.5.6.2",
+      "title": "Member Ends",
+      "page": 282
+    },
+    {
+      "id": "12.5.7",
+      "title": "A_ownedEnd_extension [Association]",
+      "page": 282
+    },
+    {
+      "id": "12.5.7.1",
+      "title": "Diagrams",
+      "page": 282
+    },
+    {
+      "id": "12.5.7.2",
+      "title": "Owned Ends",
+      "page": 282
+    },
+    {
+      "id": "12.5.8",
+      "title": "A_ownedStereotype_owningPackage [Association]",
+      "page": 282
+    },
+    {
+      "id": "12.5.8.1",
+      "title": "Diagrams",
+      "page": 282
+    },
+    {
+      "id": "12.5.8.2",
+      "title": "Generalizations",
+      "page": 283
+    },
+    {
+      "id": "12.5.8.3",
+      "title": "Owned Ends",
+      "page": 283
+    },
+    {
+      "id": "12.5.9",
+      "title": "A_ownedType_package [Association]",
+      "page": 283
+    },
+    {
+      "id": "12.5.9.1",
+      "title": "Diagrams",
+      "page": 283
+    },
+    {
+      "id": "12.5.9.2",
+      "title": "Member Ends",
+      "page": 283
+    },
+    {
+      "id": "12.5.10",
+      "title": "A_packageMerge_receivingPackage [Association]",
+      "page": 283
+    },
+    {
+      "id": "12.5.10.1",
+      "title": "Diagrams",
+      "page": 283
+    },
+    {
+      "id": "12.5.10.2",
+      "title": "Member Ends",
+      "page": 283
+    },
+    {
+      "id": "12.5.11",
+      "title": "A_packagedElement_owningPackage [Association]",
+      "page": 283
+    },
+    {
+      "id": "12.5.11.1",
+      "title": "Diagrams",
+      "page": 283
+    },
+    {
+      "id": "12.5.11.2",
+      "title": "Specializations",
+      "page": 283
+    },
+    {
+      "id": "12.5.11.3",
+      "title": "Owned Ends",
+      "page": 283
+    },
+    {
+      "id": "12.5.12",
+      "title": "A_profileApplication_applyingPackage [Association]",
+      "page": 283
+    },
+    {
+      "id": "12.5.12.1",
+      "title": "Diagrams",
+      "page": 283
+    },
+    {
+      "id": "12.5.12.2",
+      "title": "Member Ends",
+      "page": 284
+    },
+    {
+      "id": "12.5.13",
+      "title": "A_profile_stereotype [Association]",
+      "page": 284
+    },
+    {
+      "id": "12.5.13.1",
+      "title": "Diagrams",
+      "page": 284
+    },
+    {
+      "id": "12.5.13.2",
+      "title": "Owned Ends",
+      "page": 284
+    },
+    {
+      "id": "12.5.14",
+      "title": "A_type_extensionEnd [Association]",
+      "page": 284
+    },
+    {
+      "id": "12.5.14.1",
+      "title": "Diagrams",
+      "page": 284
+    },
+    {
+      "id": "12.5.14.2",
+      "title": "Owned Ends",
+      "page": 284
+    }
+  ],
+  "classifiers": [
+    {
+      "name": "Extension",
+      "section": "12.4.1",
+      "page": 273,
+      "kind": "Class",
+      "generalizations": [
+        "Association"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Extension-isRequired",
+          "name": "isRequired",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Extension-metaclass",
+          "name": "metaclass",
+          "type": "Class",
+          "association": "A_extension_metaclass"
+        },
+        {
+          "id": "Extension-ownedEnd",
+          "name": "ownedEnd",
+          "type": "ExtensionEnd",
+          "association": "A_ownedEnd_extension"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Extension-isRequired.1",
+          "name": "isRequired"
+        },
+        {
+          "id": "Extension-metaclass.1",
+          "name": "metaclass"
+        },
+        {
+          "id": "Extension-metaclassEnd",
+          "name": "metaclassEnd"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Extension-non_owned_end",
+          "name": "non_owned_end"
+        },
+        {
+          "id": "Extension-is_binary",
+          "name": "is_binary"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Profiles",
+        "Classes"
+      ]
+    },
+    {
+      "name": "ExtensionEnd",
+      "section": "12.4.2",
+      "page": 274,
+      "kind": "Class",
+      "generalizations": [
+        "Property"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "ExtensionEnd-lower",
+          "name": "lower",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "ExtensionEnd-type",
+          "name": "type",
+          "type": "Stereotype",
+          "association": "A_type_extensionEnd"
+        }
+      ],
+      "operations": [
+        {
+          "id": "ExtensionEnd-lowerBound",
+          "name": "lowerBound"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "ExtensionEnd-multiplicity",
+          "name": "multiplicity"
+        },
+        {
+          "id": "ExtensionEnd-aggregation",
+          "name": "aggregation"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "Image",
+      "section": "12.4.3",
+      "page": 275,
+      "kind": "Class",
+      "generalizations": [
+        "Element"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Image-content",
+          "name": "content",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Image-format",
+          "name": "format",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Image-location",
+          "name": "location",
+          "type": null,
+          "association": null
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "Model",
+      "section": "12.4.4",
+      "page": 275,
+      "kind": "Class",
+      "generalizations": [
+        "Package"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Model-viewpoint",
+          "name": "viewpoint",
+          "type": null,
+          "association": null
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "Package",
+      "section": "12.4.5",
+      "page": 276,
+      "kind": "Class",
+      "generalizations": [
+        "PackageableElement",
+        "TemplateableElement",
+        "Namespace"
+      ],
+      "specializations": [
+        "Model",
+        "Profile"
+      ],
+      "attributes": [
+        {
+          "id": "Package-URI",
+          "name": "URI",
+          "type": null,
+          "association": null
+        },
+        {
+          "id": "Package-nestedPackage",
+          "name": "nestedPackage",
+          "type": "Package",
+          "association": "A_nestedPackage_nestingPackage"
+        },
+        {
+          "id": "Package-nestingPackage",
+          "name": "nestingPackage",
+          "type": "Package",
+          "association": "A_nestedPackage_nestingPackage"
+        },
+        {
+          "id": "Package-ownedStereotype",
+          "name": "ownedStereotype",
+          "type": "Stereotype",
+          "association": "A_ownedStereotype_owningPackage"
+        },
+        {
+          "id": "Package-ownedType",
+          "name": "ownedType",
+          "type": "Type",
+          "association": "A_ownedType_package"
+        },
+        {
+          "id": "Package-packageMerge",
+          "name": "packageMerge",
+          "type": "PackageMerge",
+          "association": "A_packageMerge_receivingPackage"
+        },
+        {
+          "id": "Package-packagedElement",
+          "name": "packagedElement",
+          "type": "PackageableElement",
+          "association": "A_packagedElement_owningPackage"
+        },
+        {
+          "id": "Package-profileApplication",
+          "name": "profileApplication",
+          "type": "ProfileApplication",
+          "association": "A_profileApplication_applyingPackage"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Package-allApplicableStereotypes",
+          "name": "allApplicableStereotypes"
+        },
+        {
+          "id": "Package-containingProfile",
+          "name": "containingProfile"
+        },
+        {
+          "id": "Package-makesVisible",
+          "name": "makesVisible"
+        },
+        {
+          "id": "Package-mustBeOwned",
+          "name": "mustBeOwned"
+        },
+        {
+          "id": "Package-nestedPackage.1",
+          "name": "nestedPackage"
+        },
+        {
+          "id": "Package-ownedStereotype.1",
+          "name": "ownedStereotype"
+        },
+        {
+          "id": "Package-ownedType.1",
+          "name": "ownedType"
+        },
+        {
+          "id": "Package-visibleMembers",
+          "name": "visibleMembers"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Package-elements_public_or_private",
+          "name": "elements_public_or_private"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Packages",
+        "Profiles",
+        "Namespaces"
+      ]
+    },
+    {
+      "name": "PackageMerge",
+      "section": "12.4.6",
+      "page": 278,
+      "kind": "Class",
+      "generalizations": [
+        "DirectedRelationship"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "PackageMerge-mergedPackage",
+          "name": "mergedPackage",
+          "type": "Package",
+          "association": "A_mergedPackage_packageMerge"
+        },
+        {
+          "id": "PackageMerge-receivingPackage",
+          "name": "receivingPackage",
+          "type": "Package",
+          "association": "A_packageMerge_receivingPackage"
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "Profile",
+      "section": "12.4.7",
+      "page": 278,
+      "kind": "Class",
+      "generalizations": [
+        "Package"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Profile-metaclassReference",
+          "name": "metaclassReference",
+          "type": "ElementImport",
+          "association": "A_metaclassReference_profile"
+        },
+        {
+          "id": "Profile-metamodelReference",
+          "name": "metamodelReference",
+          "type": "PackageImport",
+          "association": "A_metamodelReference_profile"
+        }
+      ],
+      "operations": [],
+      "constraints": [
+        {
+          "id": "Profile-metaclass_reference_not_specialized",
+          "name": "metaclass_reference_not_specialized"
+        },
+        {
+          "id": "Profile-references_same_metamodel",
+          "name": "references_same_metamodel"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "ProfileApplication",
+      "section": "12.4.8",
+      "page": 279,
+      "kind": "Class",
+      "generalizations": [
+        "DirectedRelationship"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "ProfileApplication-appliedProfile",
+          "name": "appliedProfile",
+          "type": "Profile",
+          "association": "A_appliedProfile_profileApplication"
+        },
+        {
+          "id": "ProfileApplication-applyingPackage",
+          "name": "applyingPackage",
+          "type": "Package",
+          "association": "A_profileApplication_applyingPackage"
+        },
+        {
+          "id": "ProfileApplication-isStrict",
+          "name": "isStrict",
+          "type": null,
+          "association": null
+        }
+      ],
+      "operations": [],
+      "constraints": [],
+      "literals": [],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "Stereotype",
+      "section": "12.4.9",
+      "page": 280,
+      "kind": "Class",
+      "generalizations": [
+        "Class"
+      ],
+      "specializations": [],
+      "attributes": [
+        {
+          "id": "Stereotype-icon",
+          "name": "icon",
+          "type": "Image",
+          "association": "A_icon_stereotype"
+        },
+        {
+          "id": "Stereotype-profile",
+          "name": "profile",
+          "type": "Profile",
+          "association": "A_profile_stereotype"
+        }
+      ],
+      "operations": [
+        {
+          "id": "Stereotype-containingProfile",
+          "name": "containingProfile"
+        },
+        {
+          "id": "Stereotype-profile.1",
+          "name": "profile"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "Stereotype-binaryAssociationsOnly",
+          "name": "binaryAssociationsOnly"
+        },
+        {
+          "id": "Stereotype-generalize",
+          "name": "generalize"
+        },
+        {
+          "id": "Stereotype-name_not_clash",
+          "name": "name_not_clash"
+        },
+        {
+          "id": "Stereotype-associationEndOwnership",
+          "name": "associationEndOwnership"
+        },
+        {
+          "id": "Stereotype-base_property_upper_bound",
+          "name": "base_property_upper_bound"
+        },
+        {
+          "id": "Stereotype-base_property_multiplicity_single_extension",
+          "name": "base_property_multiplicity_single_extension"
+        },
+        {
+          "id": "Stereotype-base_property_multiplicity_multiple_extension",
+          "name": "base_property_multiplicity_multiple_extension"
+        }
+      ],
+      "literals": [],
+      "diagrams": [
+        "Profiles"
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "name": "A_appliedProfile_profileApplication",
+      "section": "12.5.1",
+      "page": 281,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ProfileApplication-appliedProfile",
+          "name": "appliedProfile",
+          "type": "Profile",
+          "owner": "ProfileApplication"
+        },
+        {
+          "id": "A_appliedProfile_profileApplication-profileApplication",
+          "name": "profileApplication",
+          "type": "ProfileApplication",
+          "owner": "A_appliedProfile_profileApplication"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_icon_stereotype",
+      "section": "12.5.2",
+      "page": 281,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Stereotype-icon",
+          "name": "icon",
+          "type": "Image",
+          "owner": "Stereotype"
+        },
+        {
+          "id": "A_icon_stereotype-stereotype",
+          "name": "stereotype",
+          "type": "Stereotype",
+          "owner": "A_icon_stereotype"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_mergedPackage_packageMerge",
+      "section": "12.5.3",
+      "page": 281,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "PackageMerge-mergedPackage",
+          "name": "mergedPackage",
+          "type": "Package",
+          "owner": "PackageMerge"
+        },
+        {
+          "id": "A_mergedPackage_packageMerge-packageMerge",
+          "name": "packageMerge",
+          "type": "PackageMerge",
+          "owner": "A_mergedPackage_packageMerge"
+        }
+      ],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "A_metaclassReference_profile",
+      "section": "12.5.4",
+      "page": 282,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Profile-metaclassReference",
+          "name": "metaclassReference",
+          "type": "ElementImport",
+          "owner": "Profile"
+        },
+        {
+          "id": "A_metaclassReference_profile-profile",
+          "name": "profile",
+          "type": "Profile",
+          "owner": "A_metaclassReference_profile"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_metamodelReference_profile",
+      "section": "12.5.5",
+      "page": 282,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Profile-metamodelReference",
+          "name": "metamodelReference",
+          "type": "PackageImport",
+          "owner": "Profile"
+        },
+        {
+          "id": "A_metamodelReference_profile-profile",
+          "name": "profile",
+          "type": "Profile",
+          "owner": "A_metamodelReference_profile"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_nestedPackage_nestingPackage",
+      "section": "12.5.6",
+      "page": 282,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Package-nestedPackage",
+          "name": "nestedPackage",
+          "type": "Package",
+          "owner": "Package"
+        },
+        {
+          "id": "Package-nestingPackage",
+          "name": "nestingPackage",
+          "type": "Package",
+          "owner": "Package"
+        }
+      ],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "A_ownedEnd_extension",
+      "section": "12.5.7",
+      "page": 282,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Extension-ownedEnd",
+          "name": "ownedEnd",
+          "type": "ExtensionEnd",
+          "owner": "Extension"
+        },
+        {
+          "id": "A_ownedEnd_extension-extension",
+          "name": "extension",
+          "type": "Extension",
+          "owner": "A_ownedEnd_extension"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_ownedStereotype_owningPackage",
+      "section": "12.5.8",
+      "page": 282,
+      "generalizations": [
+        "A_packagedElement_owningPackage"
+      ],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Package-ownedStereotype",
+          "name": "ownedStereotype",
+          "type": "Stereotype",
+          "owner": "Package"
+        },
+        {
+          "id": "A_ownedStereotype_owningPackage-owningPackage",
+          "name": "owningPackage",
+          "type": "Package",
+          "owner": "A_ownedStereotype_owningPackage"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_ownedType_package",
+      "section": "12.5.9",
+      "page": 283,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Package-ownedType",
+          "name": "ownedType",
+          "type": "Type",
+          "owner": "Package"
+        },
+        {
+          "id": "Type-package",
+          "name": "package",
+          "type": "Package",
+          "owner": "Type"
+        }
+      ],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "A_packageMerge_receivingPackage",
+      "section": "12.5.10",
+      "page": 283,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Package-packageMerge",
+          "name": "packageMerge",
+          "type": "PackageMerge",
+          "owner": "Package"
+        },
+        {
+          "id": "PackageMerge-receivingPackage",
+          "name": "receivingPackage",
+          "type": "Package",
+          "owner": "PackageMerge"
+        }
+      ],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "A_packagedElement_owningPackage",
+      "section": "12.5.11",
+      "page": 283,
+      "generalizations": [],
+      "specializations": [
+        "A_ownedStereotype_owningPackage"
+      ],
+      "ends": [
+        {
+          "id": "Package-packagedElement",
+          "name": "packagedElement",
+          "type": "PackageableElement",
+          "owner": "Package"
+        },
+        {
+          "id": "A_packagedElement_owningPackage-owningPackage",
+          "name": "owningPackage",
+          "type": "Package",
+          "owner": "A_packagedElement_owningPackage"
+        }
+      ],
+      "diagrams": [
+        "Packages"
+      ]
+    },
+    {
+      "name": "A_profileApplication_applyingPackage",
+      "section": "12.5.12",
+      "page": 283,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Package-profileApplication",
+          "name": "profileApplication",
+          "type": "ProfileApplication",
+          "owner": "Package"
+        },
+        {
+          "id": "ProfileApplication-applyingPackage",
+          "name": "applyingPackage",
+          "type": "Package",
+          "owner": "ProfileApplication"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_profile_stereotype",
+      "section": "12.5.13",
+      "page": 284,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "Stereotype-profile",
+          "name": "profile",
+          "type": "Profile",
+          "owner": "Stereotype"
+        },
+        {
+          "id": "A_profile_stereotype-stereotype",
+          "name": "stereotype",
+          "type": "Stereotype",
+          "owner": "A_profile_stereotype"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    },
+    {
+      "name": "A_type_extensionEnd",
+      "section": "12.5.14",
+      "page": 284,
+      "generalizations": [],
+      "specializations": [],
+      "ends": [
+        {
+          "id": "ExtensionEnd-type",
+          "name": "type",
+          "type": "Stereotype",
+          "owner": "ExtensionEnd"
+        },
+        {
+          "id": "A_type_extensionEnd-extensionEnd",
+          "name": "extensionEnd",
+          "type": "ExtensionEnd",
+          "owner": "A_type_extensionEnd"
+        }
+      ],
+      "diagrams": [
+        "Profiles"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "12.1",
+      "title": "Packages",
+      "page": 241,
+      "section": "12.2.2"
+    },
+    {
+      "id": "12.2",
+      "title": "Illustration of the Meaning of Package Merge",
+      "page": 242,
+      "section": "12.2.3.2"
+    },
+    {
+      "id": "12.3",
+      "title": "Conceptual View of the Package Merge Semantics",
+      "page": 243,
+      "section": "12.2.3.2"
+    },
+    {
+      "id": "12.4",
+      "title": "Notation for Package Merge",
+      "page": 249,
+      "section": "12.2.4"
+    },
+    {
+      "id": "12.5",
+      "title": "Examples of a Package with Members",
+      "page": 249,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.6",
+      "title": "Simple Example of Package Merge",
+      "page": 250,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.7",
+      "title": "Simple Example of Transformed Packages Following the Merges",
+      "page": 250,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.8",
+      "title": "Introducing Additional Package Merges",
+      "page": 251,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.9",
+      "title": "Result of the Additional Package Merges",
+      "page": 251,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.10",
+      "title": "Three Models Representing Parts of a System",
+      "page": 251,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.11",
+      "title": "Two Views of One System Collected in a Container Model",
+      "page": 252,
+      "section": "12.2.5"
+    },
+    {
+      "id": "12.12",
+      "title": "Profiles",
+      "page": 253,
+      "section": "12.3.2"
+    },
+    {
+      "id": "12.13",
+      "title": "Using the HomeExample Profile to Extend a Model",
+      "page": 257,
+      "section": "12.3.3.1.3"
+    },
+    {
+      "id": "12.14",
+      "title": "Specification of an Available Metaclass",
+      "page": 259,
+      "section": "12.3.3.2"
+    },
+    {
+      "id": "12.15",
+      "title": "MOF Model Equivalent to Extending \"Interface\" by the \"Home\" Stereotype",
+      "page": 261,
+      "section": "12.3.3.6"
+    },
+    {
+      "id": "12.16",
+      "title": "Example of Multiple Metaclass Extension",
+      "page": 261,
+      "section": "12.3.3.6"
+    },
+    {
+      "id": "12.17",
+      "title": "MOF Model Equivalent to Multiple Metaclass Extension",
+      "page": 262,
+      "section": "12.3.3.6"
+    },
+    {
+      "id": "12.18",
+      "title": "The Notation for an Extension",
+      "page": 262,
+      "section": "12.3.4"
+    },
+    {
+      "id": "12.19",
+      "title": "Example of Using an Extension",
+      "page": 264,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.20",
+      "title": "Example of a Required Extension",
+      "page": 264,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.21",
+      "title": "Defining a Simple EJB Profile",
+      "page": 265,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.22",
+      "title": "Importing a Package from a Profile",
+      "page": 265,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.23",
+      "title": "Profiles Applied to a Package",
+      "page": 266,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.24",
+      "title": "Defining a Stereotype",
+      "page": 266,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.25",
+      "title": "Presentation Options for an Extended Class",
+      "page": 266,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.26",
+      "title": "An Instance Diagram when Defining a Stereotype",
+      "page": 266,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.27",
+      "title": "Defining Multiple Stereotypes on Multiple Stereotypes",
+      "page": 267,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.28",
+      "title": "Using a Stereotype",
+      "page": 267,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.29",
+      "title": "Showing Values of Stereotypes and a Simple Instance Specification",
+      "page": 267,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.30",
+      "title": "Using Stereotypes and Showing Values",
+      "page": 267,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.31",
+      "title": "Other Notational Forms for Depicting Stereotype Values",
+      "page": 268,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.32",
+      "title": "Example of a Profile defining Classes and binary composite and non-composite Associations",
+      "page": 268,
+      "section": "12.3.5"
+    },
+    {
+      "id": "12.33",
+      "title": "Diagram example of applying a profile defining Classes and Associations and of creating instances",
+      "page": 271,
+      "section": "12.3.5"
+    }
+  ],
+  "external_classifiers": {
+    "already_in_handbook": [
+      "DirectedRelationship",
+      "Element",
+      "ElementImport",
+      "Namespace",
+      "PackageImport",
+      "PackageableElement",
+      "Property",
+      "TemplateableElement",
+      "Type"
+    ],
+    "require_future_clauses": [
+      "Association",
+      "Class"
+    ]
+  },
+  "planned_integration": {
+    "new_routes": 61,
+    "routes": [
+      "#/section/12-1",
+      "#/section/12-2",
+      "#/section/12-3",
+      "#/section/12-4",
+      "#/section/12-5",
+      "#/classifier/extension",
+      "#/classifier/extensionend",
+      "#/classifier/image",
+      "#/classifier/model",
+      "#/classifier/package",
+      "#/classifier/packagemerge",
+      "#/classifier/profile",
+      "#/classifier/profileapplication",
+      "#/classifier/stereotype",
+      "#/association/a-appliedprofile-profileapplication",
+      "#/association/a-icon-stereotype",
+      "#/association/a-mergedpackage-packagemerge",
+      "#/association/a-metaclassreference-profile",
+      "#/association/a-metamodelreference-profile",
+      "#/association/a-nestedpackage-nestingpackage",
+      "#/association/a-ownedend-extension",
+      "#/association/a-ownedstereotype-owningpackage",
+      "#/association/a-ownedtype-package",
+      "#/association/a-packagemerge-receivingpackage",
+      "#/association/a-packagedelement-owningpackage",
+      "#/association/a-profileapplication-applyingpackage",
+      "#/association/a-profile-stereotype",
+      "#/association/a-type-extensionend",
+      "#/diagram/12-1",
+      "#/diagram/12-2",
+      "#/diagram/12-3",
+      "#/diagram/12-4",
+      "#/diagram/12-5",
+      "#/diagram/12-6",
+      "#/diagram/12-7",
+      "#/diagram/12-8",
+      "#/diagram/12-9",
+      "#/diagram/12-10",
+      "#/diagram/12-11",
+      "#/diagram/12-12",
+      "#/diagram/12-13",
+      "#/diagram/12-14",
+      "#/diagram/12-15",
+      "#/diagram/12-16",
+      "#/diagram/12-17",
+      "#/diagram/12-18",
+      "#/diagram/12-19",
+      "#/diagram/12-20",
+      "#/diagram/12-21",
+      "#/diagram/12-22",
+      "#/diagram/12-23",
+      "#/diagram/12-24",
+      "#/diagram/12-25",
+      "#/diagram/12-26",
+      "#/diagram/12-27",
+      "#/diagram/12-28",
+      "#/diagram/12-29",
+      "#/diagram/12-30",
+      "#/diagram/12-31",
+      "#/diagram/12-32",
+      "#/diagram/12-33"
+    ],
+    "new_source_files": [
+      "site/data/packages.js",
+      "site/data/content/sections-12.js",
+      "scripts/generate_packages_svg.py"
+    ],
+    "generated_files": [
+      "site/data/pages/sections-12.js",
+      "site/data/pages/classifiers-12.js",
+      "site/data/pages/associations-12.js",
+      "site/data/pages/diagrams-12.js",
+      "site/data/xmi/<Classifier>.js (9 new fragments)",
+      "site/assets/diagrams/figure-12-*.png (33 files)",
+      "site/assets/diagrams/figure-12-*.svg (33 files)"
+    ],
+    "existing_files_to_extend": [
+      "site/index.html (generated script manifest)",
+      "scripts/render_common_structure_diagrams.py",
+      "AGENTS.md"
+    ],
+    "batching": "The clause fits one task per remaining stage; no subdivision is required."
+  }
+}

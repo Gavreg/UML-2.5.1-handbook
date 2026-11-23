@@ -1,0 +1,2161 @@
+===== PRINTED PAGE 241 / PDF PAGE 283 =====
+
+12
+Packages
+12.1
+Summary
+Packages provide the main generic structuring and organizing capability of UML. There are specializations for Models
+and for Profiles which organize extensions to UML.
+12.2
+Packages
+12.2.1
+Summary
+This sub clause provides the specification for Packages and Models.
+12.2.2
+Abstract Syntax
+Package
++ URI : String [0..1]
+TemplateableElement
+Namespace
+PackageableElement
+Type
+PackageMerge
+DirectedRelationship
+Model
++ viewpoint : String [0..1]
+0..1
++ nestingPackage
+*
++ /nestedPackage
+{subsets owningPackage}
+{subsets packagedElement}
+0..1
++ owningPackage
+*
++ packagedElement
+{subsets namespace}
+{subsets ownedMember}
+0..1
++ package
+*
++ /ownedType
+{subsets owningPackage}
+{subsets packagedElement}
+1
++ receivingPackage
+*
++ packageMerge
+{subsets source,
+subsets owner}
+{subsets ownedElement,
+subsets directedRelationship}
+*
++ packageMerge
+1
++ mergedPackage
+{subsets directedRelationship}
+{subsets target}
+Figure 12.1  Packages
+12.2.3
+Semantics
+12.2.3.1
+Package
+A Package is a namespace for its members, which comprise those elements associated via packagedElement (which are
+said to be owned or contained), and those imported.
+A Package definition can extend the contents of other Packages through the merging of the contained elements.
+Unified Modeling Language 2.5.1
+241
+===== PRINTED PAGE 242 / PDF PAGE 284 =====
+
+A Package may be defined as a template and bound to other templates: see sub clause 7.3, Templates, for further
+information.
+The URI can be specified to provide a unique identifier for a Package. Within UML there is no predetermined usage for
+this, with the exception of profiles (see sub clause 12.3.3). It may, for example, be used by model management facilities
+for model identification. The URI should hence be unique and unchanged once assigned. There is no requirement that
+the URI be dereferenceable (though this is of course permitted).
+12.2.3.2
+PackageMerge
+A PackageMerge is a directed relationship between two Packages that indicates that the contents of the target
+mergedPackage are combined into the source receivingPackage according to a set of rules defined below. It is very similar
+to Generalization in the sense that the source element conceptually adds the characteristics of the target element to its
+own characteristics resulting in an element that combines the characteristics of both. Just as a subclass is not normally
+depicted with its inherited features, a receiving Package is not normally depicted with the merged elements from its
+mergedPackages. In terms of model semantics, there is no difference between a model with explicit PackageMerges, and
+a model in which all the merges have been performed. Likewise XMI files containing PackageMerge are semantically
+equivalent to the same XMI files with the PackageMerges expanded.
+Also, as with Generalization, a Package may not merge itself (directly or indirectly).
+This capability is designed to be used when elements defined in different Packages have the same name and are intended
+to represent the same concept. A given base concept may be merged for different purposes, with each purpose defined in
+a separate receiving Package. By selecting different receiving packages, it is possible to obtain a custom definition of a
+concept for a specific end.
+Thus, any reference to a model element contained in the receiving Package implies a reference to the results of the
+merge rather than to the increment that is contained in that Package. This is illustrated by the example in Figure 12.2 in
+which Package P2 defines an increment of Class A originally defined in P1. Package P2 merges the contents of Package
+P1, which implies the merging of P1::A into increment P2::A. Package P3 defines a subclass of P2::A called SubA. In
+this case, element A in Package P2 (P2::A) represents the result of the merge of P1::A into P2::A and not just the
+increment P2::A.
+NOTE. If another package were to import P1, then a reference to A in the importing package would represent P1::A
+rather than the A resulting from merge.
+Figure 12.2  Illustration of the Meaning of Package Merge
+A PackageMerge can be viewed as an operation (that is itself a set of transformations) whereby the contents of the
+Package to be merged are combined with the contents of the receiving Package. In cases in which certain elements in
+the two Packages match (according to defined rules), their contents are (conceptually) merged into a single resulting
+element according to the formal rules of PackageMerge specified below. This operation is akin to “copying down” the
+features of superclasses into a subclass: the fully expanded subclass is the equivalent to the resulting package.
+To understand the rules of PackageMerge, it is necessary to clearly distinguish between three distinct entities: the
+mergedPackage (e.g., P1 in Figure 12.2), the receivingPackage (e.g., P2), and the result of the merge transformations (also
+P2). The receivingPackage also plays the role of resultingPackage. This dual interpretation of the same model element can
+be confusing, so it is useful to introduce the following terminology that aids understanding:
+
+merged package - the package that is to be merged into the receiving package (this is the package that is the
+target of the merge arrow in the diagrams).
+242
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 243 / PDF PAGE 285 =====
+
+
+receiving package - the package that, conceptually, contains the results of the merge (and which is the source
+of the merge arrow in the diagrams). However, this term is used to refer to the package and its contents before
+the merge transformations have been performed.
+
+resulting package - the package that, conceptually, contains the results of the merge. In the model, this is, of
+course, the same package as the receiving package, but this particular term is used to refer to the package and
+its contents after the merge has been performed.
+
+merged element - refers to a model element that exists in the merged package.
+
+receiving element - is a model element in the receiving package. If the element has a matching (as defined
+below) merged element, the two are combined to produce the resulting element (see below). This term is used
+to refer to the element before the merge has been performed.
+
+resulting element - is a model element in the resulting package after the merge was performed. For receiving
+elements that have a matching merged element, this is the combined element after the merge was performed.
+For merged elements that have no matching receiving element, this is the same as the merged element. For
+receiving elements that have no matching merged element, this is the same as the receiving element.
+
+element type - refers to the type of any kind of TypedElement, such as the type of a Parameter or
+StructuralFeature.
+
+element metatype - is the MOF type of a model element (e.g., Classifier, Association, Feature).
+This terminology is based on a conceptual view of PackageMerge that is represented by the schematic diagram in
+Figure 12.3 (NB: this is not a UML diagram). The packagedElements (direct and indirect) of Packages A and B are all
+incorporated into the namespace of Package B'. However, it is important to emphasize that this view is merely a
+convenience for describing the semantics of PackageMerge and is not reflected in the stored model, that is, the physical
+model itself is not transformed in any way by the presence of PackageMerges.
+Figure 12.3  Conceptual View of the Package Merge Semantics
+The semantics of PackageMerge are defined by a set of constraints and transformations. The constraints specify the
+preconditions for a valid PackageMerge, while the transformations describe its semantic effects (i.e., postconditions). If
+any constraints are violated, the PackageMerge is ill-formed and the model that contains it is invalid. Different element
+metatypes have different semantics, but the general principle is always the same: a resulting element will not be any less
+Unified Modeling Language 2.5.1
+243
+===== PRINTED PAGE 244 / PDF PAGE 286 =====
+
+capable than it was prior to the merge: meaning, for instance, that the resulting navigability, multiplicity, visibility, etc.
+of a receiving model element will not be reduced as a result of a PackageMerge. One of the key consequences of this is
+that model elements in the resulting Package are compatible extensions of the corresponding elements in the
+(unmerged) receiving package.
+In this specification, explicit merge transformations are only defined for certain general element metatypes found
+mostly in metamodels (Packages, Classes, Associations, Properties, etc.), as the semantics of merging other kinds of
+element metatypes (e.g., state machines, interactions) are complex and domain specific. Elements of all other kinds of
+metatypes are transformed according to the default rule: they are simply deep copied into the resulting package. (This
+rule can be superseded for specific metatypes through profiles or other kinds of language extensions.)
+12.2.3.3
+General Package Merge Rules
+A merged element and a receiving element match if they satisfy the matching rules for their metatype.
+CONSTRAINTS:
+1
+There can be no cycles in the «merge» directed graph.
+2
+A Package cannot merge a Package in which it is contained (via owningPackage – direct or indirect).
+3
+A Package cannot merge a Package that it contains (via packagedElement – direct or indirect).
+4
+A merged element whose metatype is not a kind of Package, Class, DataType, Property, Association,
+Operation, Constraint, Enumeration, or EnumerationLiteral cannot have a receiving element with the same
+name and metatype unless that receiving element is an exact copy of the merged element (i.e., they are the
+same).
+5
+A PackageMerge is valid if and only if all the constraints (in this clause) required to perform the merge are
+satisfied.
+6
+Matching typed elements (e.g., Properties, Parameters) must have conforming types. For types that are Classes
+or Datatypes, a conforming type is either the same type or a common supertype. For all other cases,
+conformance means that the types must be the same.
+7
+A receiving element cannot have explicit references to any merged element.
+8
+Any redefinitions associated with matching RedefinableElements must not be conflicting.
+TRANSFORMATIONS:
+1
+(The default rule) Merged or receiving elements for which there is no matching element are deep copied into
+the resulting package.
+2
+The result of merging two elements with matching names and metatypes that are exact copies of each other is
+the receiving element.
+3
+Matching elements are combined according to the transformation rules specific to their metatype and the
+results included in the resulting Package.
+4
+All type references to typed elements that end up in the resulting package are transformed into references to the
+corresponding resulting TypedElements (i.e., not to their respective increments).
+5
+For all matching elements: if both matching elements have private visibility, the resulting element will have
+private visibility; otherwise, the resulting element will have public visibility.
+244
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 245 / PDF PAGE 287 =====
+
+6
+For all matching Classifier elements: if both matching elements have isAbstract = true, the resulting element
+has isAbstract = true; otherwise, the resulting element has isAbstract = false.
+7
+For all matching Classifier elements: if both matching elements has isFinalSpecialization = true, the resulting
+element has isFinalSpecialization = true; otherwise, the resulting element has isFinalSpecialization = false.
+8
+For all matching elements: if both matching elements are not derived, the resulting element is also not derived;
+otherwise, the resulting element is derived.
+9
+For all matching MultiplicityElements: the lower bound of the resulting element is the lesser of the lower bounds
+of the matching elements.
+10
+For all matching MultiplicityElements: the upper bound of the resulting element is the greater of the upper
+bounds of the matching elements.
+11
+Any stereotypes applied to a model element in either a merged or receiving element are also applied to the
+corresponding resulting element.
+12
+For matching RedefinableElements: different redefinitions of matching RedefinableElements are all applied to
+the resulting element.
+13
+For matching RedefinableElements: if both matching elements have isLeaf = true, the resulting element also
+has isLeaf = true; otherwise, the resulting element has isLeaf = false.
+12.2.3.4
+Package Rules
+Elements that are kinds of Package match by name and metatype
+CONSTRAINTS:
+1
+All Classifiers in the merged Package must have a non-empty qualifiedName and have isDistinguishableFrom() =
+true in the merged Package.
+2
+All Classifiers in the receiving Package must have a non-empty qualifiedName and have isDistinguishableFrom() =
+true in the receiving Package.
+TRANSFORMATIONS:
+1
+A nestedPackage from the merged Package is transformed into a nestedPackage with the same name and contents
+in the resulting Package, unless the receiving Package already contains a nestedPackage that matches. In the
+latter case, the merged nestedPackage is recursively merged with the matching receiving nestedPackage.
+2
+An ElementImport which is an elementImport of the receiving Package is transformed into a corresponding
+ElementImport in the resulting Package. Imported elements are not merged (unless there is also a
+PackageMerge to the Package owning the imported element).
+12.2.3.5
+Class and DataType Rules
+Elements that are kinds of Class or DataType match by name and metatype.
+TRANSFORMATIONS:
+1
+All Properties that are ownedAttributes of the merged Classifier are merged with the receiving Classifier to
+produce the resulting Classifier according to the Property transformation rules specified below.
+Unified Modeling Language 2.5.1
+245
+===== PRINTED PAGE 246 / PDF PAGE 288 =====
+
+2
+nestedClassifiers are merged recursively according to the same rules.
+12.2.3.6
+Property Rules
+Elements that are kinds of Property match by name and metatype.
+CONSTRAINTS:
+1
+The value of isStatic of matching Properties must be the same.
+2
+The value of isUnique of matching Properties must be the same.
+3
+Any Constraints associated with matching Properties must not be conflicting.
+TRANSFORMATIONS:
+1
+For merged Properties that do not have a matching receiving Property, the resulting Property is a Property in
+the resulting Classifier that is the same as the merged Property.
+2
+For merged Properties that have a matching receiving Property, the resulting Property is a Property with the
+same name and characteristics except where these characteristics are different. Where these characteristics are
+different, the resulting Property characteristics are determined by application of the appropriate transformation
+rules.
+3
+For matching Properties: if both Properties have isReadOnly = true, the resulting Property also has isReadOnly =
+true; otherwise, the resulting Property has isReadOnly = false.
+4
+For matching Properties: if both Properties have isOrdered = false, then the resulting Property also has isOrdered
+= false; otherwise, the resulting Property has isOrdered = true.
+5
+For matching Properties: if neither Property is designated as a subset of some derived union, then the resulting
+Property will not be designated as a subset; otherwise, the resulting Property will be designated as a subset of
+that derived union.
+6
+For matching Properties: different Constraints of matching Properties are all applied to the resulting Property.
+7
+For matching Properties: if either the merged and/or receiving elements have isUnique = false, the resulting
+element has isUnique = false; otherwise, the resulting element has isUnique = true.
+8
+The value of type for the resulting Property is transformed to refer to the corresponding type in the resulting
+Package.
+12.2.3.7
+Association Rules
+Elements that are kinds of Association match by name and metatype.
+CONSTRAINTS:
+1
+These rules only apply to binary Associations. (For merging n-ary associations the default rule is used)
+2
+The receiving association end must have aggregation = composite if the matching merged association end has
+aggregation = composite.
+3
+The receiving association end must be owned by the Association if the matching merged association end is
+owned by the Association.
+246
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 247 / PDF PAGE 289 =====
+
+TRANSFORMATIONS:
+1
+A merge of matching Associations is accomplished by merging the Association classifiers (using the merge
+rules for Classifiers) and merging their corresponding ownedEnd Properties according to the rules for Properties
+and the following rule for association ends.
+2
+For matching association ends: if neither association end is in ownedNavigableEnd, then the resulting association
+end is also not in ownedNavigableEnd. In all other cases, the resulting association end is in ownedNavigableEnd.
+12.2.3.8
+Operation Rules
+Elements that are kinds of Operation match by name, Parameter order, and Parameter types, not including any return
+type.
+CONSTRAINTS:
+1
+Operation Parameters and their types must conform to the same rules for type and multiplicity as were defined
+for Properties.
+2
+The receiving Operation must have isQuery = true if the matching merged Operation has isQuery = true.
+TRANSFORMATIONS:
+1
+For merged Operations that do not have a matching receiving Operation, the resulting Operation is an
+Operation with the same name and signature in the resulting classifier.
+2
+For merged Operations that have a matching receiving Operation, the resulting Operation is the outcome of a
+merge of the matching merged and receiving Operations, with Parameter transformations performed according
+to the Property transformations defined above.
+12.2.3.9
+Enumeration Rules
+Elements that are kinds of EnumerationLiteral match by owning Enumeration and Literal name.
+CONSTRAINTS:
+1
+Matching EnumerationLiterals must be in the same order.
+TRANSFORMATIONS:
+1
+Non-matching EnumerationLiterals from the merged Enumeration are included in the receiving Enumeration.
+12.2.3.10
+Constraint Rules
+CONSTRAINTS:
+1
+Constraints must be mutually non-contradictory.
+TRANSFORMATIONS:
+1
+The Constraints of the merged model elements are all added to the Constraints of the matching receiving
+model elements.
+12.2.3.11
+Model
+A Model is a description of a system, where ‘system’ is meant in the broadest sense and may include not only software
+and hardware but organizations and processes. It describes the system from a certain viewpoint (or vantage point) for a
+Unified Modeling Language 2.5.1
+247
+===== PRINTED PAGE 248 / PDF PAGE 290 =====
+
+certain category of stakeholders (e.g., designers, users, or customers of the system) and at a certain level of abstraction.
+A Model is complete in the sense that it covers the whole system, although only those aspects relevant to its purpose
+(i.e., within the given level of abstraction and viewpoint) are represented in the Model.
+As a Package, a Model has a set of members that together describe the system being modeled. The organization of these
+elements varies by the modeling method being used. One approach is one or more composition hierarchies where a top-
+most Package/Component represents the boundary of the system. A Model may also contain elements describing
+relevant parts of the system’s environment. The environment is typically modeled by Actors and their Interfaces. As
+these are external to the system, they reside outside the Package/Component hierarchy. They may be collected in a
+separate Package, or owned directly by the Model as packagedElements.
+Different Models can be defined for the same system, where typically the different Models are complementary and
+defined from the perspectives (viewpoints) of different system stakeholders. With composition of Models, a container
+model represents a comprehensive view of the system given by the different views defined by the contained Models.
+Models can have Abstraction Dependencies between them: refinement (stereotyped by «Refine» from the Standard
+Profile) or mapping ( for example stereotyped by «Trace» from the Standard Profile). These are typically represented in
+more detail by Dependencies between the elements contained in the Models. Relationships between elements in
+different Models generally no direct impact on the contents of the Models because each Model is meant to be complete.
+However, they are useful for tracing refinements and for keeping track of cross-references between models.
+12.2.4
+Notation
+A Package is shown as a large rectangle with a small rectangle (a “tab”) attached to the left side of the top of the large
+rectangle: collectively this represents a ‘folder icon.’ The members of the Package may be shown within the large
+rectangle. Members may also be shown by branching lines to member elements, drawn outside the package. A plus sign
+(+) within a circle is drawn at the end attached to the Package.
+Conformant tools may restrict the use of these notations to packagedElements. Optionally, elements that become
+available for use in an importing Package through a PackageImport or an ElementImport may have a distinct color or be
+dimmed to indicate that they are not packagedElements.
+
+If the members of the Package are not shown within the large rectangle, then the name of the Package should be
+placed within the large rectangle.
+
+If the members of the Package are shown within the large rectangle, then the name of the Package should be
+placed within the tab.
+The visibility of a packagedElement may be indicated by preceding the name by a visibility symbol (‘+’ for public and ‘-’
+for private). Packages may not have protected or package visibility.
+A tool may show visibility by a graphic marker, such as color or font. A tool may also show visibility by selectively
+displaying those elements that meet a given visibility level (e.g., only public elements). A diagram showing a Package
+with members need not necessarily show all its members; it may show a subset of the members according to some
+criterion.
+The URI for a Package may be indicated with the text {uri = <uri>} following the Package name.
+A PackageMerge is shown using a dashed line with an open arrowhead pointing from the receivingPackage (the source)
+to the mergedPackage (the target). In addition, the keyword «merge» is shown near the dashed line.
+248
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 249 / PDF PAGE 291 =====
+
+Figure 12.4  Notation for Package Merge
+A Model is notated using the ordinary Package symbol (a folder icon) with a small triangle in the upper right corner of
+the large rectangle.
+Optionally, especially if the members of the Model are shown within the large rectangle, the triangle may be drawn to
+the right of the Model name in the tab.
+A Model may also be notated as a Package, using the ordinary Package symbol with the keyword «model» placed above
+the name of the Model.
+12.2.5
+Examples
+There are three alternative representations of the same Package named Types in Figure 12.5. The one on the left just
+shows the Package without revealing any of its members. The middle one shows some of the members within the borders
+of the Package rectangle (and also its URI), and the one to the right shows some of the members using the alternative
+ownership notation.
+Figure 12.5  Examples of a Package with Members
+In Figure 12.6, packages P and Q are being merged by package R, while package S merges only package Q.
+Unified Modeling Language 2.5.1
+249
+===== PRINTED PAGE 250 / PDF PAGE 292 =====
+
+Figure 12.6  Simple Example of Package Merge
+The conceptually resulting packages R and S are shown in Figure 12.7. The expressions in square brackets indicate
+which individual elements were merged to produce the final result, with the “@” character denoting the conceptual
+merge ‘transformation’ as an operator, where X@Y signifies the resulting element from the merge transformation
+applied to matching receiving element X and merged element Y.
+NOTE. These expressions are not part of the standard notation, but are included here for explanatory purposes.
+Figure 12.7  Simple Example of Transformed Packages Following the Merges
+In Figure 12.8, additional PackageMerges are introduced by having Package T, which has no packagedElements of its
+own, merge Packages R and S defined previously.
+250
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 251 / PDF PAGE 293 =====
+
+Figure 12.8  Introducing Additional Package Merges
+In Figure 12.9, the conceptually resulting Package T is depicted. In this Package, the definitions of A, B, C, and D have
+all been brought together.
+NOTE. The types of the ends of the Associations that were originally in the packages Q and S have all been updated to
+refer to the appropriate elements in Package T.
+Figure 12.9  Result of the Additional Package Merges
+Figure 12.10  Three Models Representing Parts of a System
+Unified Modeling Language 2.5.1
+251
+===== PRINTED PAGE 252 / PDF PAGE 294 =====
+
+Figure 12.11  Two Views of One System Collected in a Container Model
+12.3
+Profiles
+12.3.1
+Summary
+The Profiles clause describes capabilities that allow metaclasses to be extended to adapt them for different purposes.
+This includes the ability to tailor the UML metamodel for different platforms (such as J2EE or .NET) or domains (such
+as real-time or Service Oriented Architecture). The Profiles clause is consistent with the OMG Meta Object Facility
+(MOF).
+12.3.1.1
+Positioning Profiles versus Metamodels, MOF and UML
+UML is reused at several meta-levels in various OMG specifications that deal with modeling. For example, MOF uses it
+to provide the ability to model metamodels. This clause deals with use cases comparable to the MOF at the meta-meta-
+level, which is one level higher than the rest of the superstructure specification. In order to allow this, the reference
+metamodel must be defined as an instance of UML that corresponds to its definition using MOF. Thus when defining a
+UML profile, the profile’s stereotypes are defined to extend the UML classes in the normative version of the UML
+metamodel whose XMI serialization is referenced in Annex E.
+Profiles are not a first-class extension capability (i.e., it does not allow for creating new metamodels). Rather, the
+intention of Profiles is to give a straightforward mechanism for adapting an existing metamodel with constructs that are
+specific to a particular domain, platform, or method. Each such adaptation is grouped in a Profile. It is not possible to
+remove any of the Constraints that apply to UML using a Profile, but it is possible to add new Constraints that are
+specific to the Profile. The only other restrictions are those inherent in this Profiles clause; there is nothing else that is
+intended to limit the way in which a metamodel is customized.
+First-class extensibility is handled through MOF, where there are no restrictions at the metamodel level: it is possible to
+add subclasses and associations as necessary.
+There are several reasons why you may want to extend UML:
+
+Give a terminology that is adapted to a particular platform or domain (for example EJB terminology like
+Home interfaces, Enterprise Java Beans, and Archives).
+
+Give a syntax for constructs that do not have a notation (such as in the case of Actions).
+
+Give a different notation for already existing symbols (such as being able to use a picture of a computer
+instead of the ordinary Node symbol to represent a computer in a network).
+
+Add additional semantics to UML or specific metaclasses.
+
+Add types that do not exist in UML (such as defining a timer, clock, or continuous time).
+252
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 253 / PDF PAGE 295 =====
+
+
+Add Constraints that restrict the way UML’s constructs are used (such as disallowing multiple
+inheritance).
+
+Add information that can be used when transforming a model to another model or code (such as defining
+mapping rules between a model and Java code).
+There is no simple answer for when to create a new metamodel, when to create a new profile, and when to create both
+(one for UML tooling, the other for MOF-based tooling).
+12.3.2
+Abstract Syntax
+Profile
+ProfileApplication
++ isStrict : Boolean = false
+DirectedRelationship
+Package
+Class
+Stereotype
+ElementImport
+PackageImport
+Image
++ content : String [0..1]
++ format : String [0..1]
++ location : String [0..1]
+Element
+ExtensionEnd
++ /lower : Integer [0..1] {redefines lower}
+Property
+Extension
++ /isRequired : Boolean {readOnly}
+Association
+*
++ profileApplication
+1
++ appliedProfile
+{subsets directedRelationship}
+{subsets target}
+1
++ applyingPackage
+*
++ profileApplication
+{subsets source,
+subsets owner}
+{subsets ownedElement, subsets
+directedRelationship}
+*
++ stereotype
+1
++ /profile
+{readOnly}
+0..1
++ profile
+*
++ metaclassReference
+{subsets
+importingNamespace}
+{subsets elementImport}
+0..1
++ profile
+*
++ metamodelReference
+{subsets
+importingNamespace}
+{subsets packageImport}
+0..1
++ stereotype
+*
++ icon
+{subsets owner}
+{subsets ownedElement}
+*
++ extensionEnd
+1
++ type
+{subsets typedElement}
+{redefines type}
+1
++ extension
+1
++ ownedEnd
+{subsets owningAssociation}
+{redefines ownedEnd}
+1
++ /metaclass
+*
++ /extension
+{readOnly}
+{readOnly}
+1
++ owningPackage
+*
++ /ownedStereotype
+{redefines owningPackage}
+{readOnly, subsets packagedElement}
+Figure 12.12  Profiles
+12.3.3
+Semantics
+12.3.3.1
+Profiles
+A Profile is a restricted form of metamodel that can be used to extend UML, as described below. The primary extension
+construct is the Stereotype.
+12.3.3.1.1
+Restricting Availability of UML Elements
+The metaclassReference ElementImports and metamodelReference PackageImports may be used to specify the Profile’s
+filtering rules. The filtering rules determine which UML elements are available when the Profile is applied and which
+ones are hidden.
+NOTE. Applying a Profile to a model does not change that model in any way; it merely defines a view of the
+underlying model.
+The effects of a metaclass being hidden (not available) are as follows:
+Unified Modeling Language 2.5.1
+253
+===== PRINTED PAGE 254 / PDF PAGE 296 =====
+
+
+It is not possible to create new instances of that metaclass (or its subclasses).
+
+Existing instances of that metaclass (or its subclasses) can no longer be seen in diagrams or selected in lists,
+including browser panes.
+
+Relationships with existing instances of that metaclass (or its subclasses) can no longer be seen in diagrams or
+selected in lists, including browser panes.
+Tools may vary in how they implement the above – for example they may hide the metaclass/instances completely in
+selection lists or make them grayed out/unselectable .
+In order for the filtering rules (described further below) on a Profile to be activated, the Profile must be applied in Strict
+mode: specifically the isStrict attribute on the ProfileApplication must be set to true; otherwise the filtering rules are
+ignored for this profile application.
+The most common case is when a Profile imports UML itself using a metamodelReference. A conformant tool may
+provide this as built-in behavior when the user creates a Profile. In that case, every UML metaclass is available.
+Alternatively, specific metaclasses could be referenced through metaclassReferences and only those would then be
+available. A further option is to use one or more metamodelReferences to Package(s) that contain ElementImports for a
+subset of UML metaclasses. This allows the set to be reusable across many Profiles without having to specify individual
+metaclassReferences each time.
+The visibility and alias properties of ElementImports are ignored when it is used as a metaclassReference.
+Where both a metaclassReference and a metamodelReference are present on a profile, the latter is ignored and only the
+specific metaclasses are available.
+In detail, the following rules are used to determine whether a model element is available after a Profile has been applied
+in Strict mode. Metaclasses and their instances are available if they are:
+1
+referenced by an explicit metaclassReference, or
+2
+(in the absence of a metaclassReference) members (directly or transitively) of a Package that is referenced by an
+explicit metamodelReference, or
+3
+extended by a Stereotype which is a member of the applied profile (even if the extended metaclass itself is not
+available).
+All other model elements are hidden (not available) when the Profile is applied in Strict mode.
+This makes invalid the combination of applied profiles that specify non-overlapping (disjoint) sets of available
+metaclasses.
+If a Profile P1 imports another Profile P2, then all metaclassReference and metamodelReference associations will be
+combined at the P1 level, and the filtering rules apply to this union. Stereotypes imported from another Profile using
+ElementImport or PackageImport are added to the namespace members of the importing profile.Profile Contents.
+A Profile can define or import Classes, Associations, DataTypes, PrimitiveTypes and Enumerations as well as
+Stereotypes. More precisely all the constraints of a CMOF-compliant metamodel apply to a UML Profile. These are
+defined in detail in Section 14.4 of the MOF Core Specification. The effect of these constraints is that, except for
+Stereotypes and Extensions, all other Types defined or imported in a Profile must be exactly one of the Types explicitly
+mentioned in the above subset and that no specialization outside this subset is allowed. The term Profile-defined Type
+corresponds to a CMOF-compliant Class, Association, DataType, PrimitiveType or Enumeration defined or imported in
+a Profile.
+Profile-defined Types can only be used as the type of Properties in that Profile or as a general classifier of another
+Profile-defined Type. They cannot be used as Types in models the Profile is applied to, such as the type of a
+TypedElement, the classifier of an InstanceSpecification or the general or specific classifier in a Generalization
+254
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 255 / PDF PAGE 297 =====
+
+relationship. It is however possible to define these types in separate Packages and import them as needed in both
+Profiles and model Packages in order to use them for both purposes.
+Stereotypes can participate only in binary Associations. The opposite class can be another Stereotype, a non-Stereotype
+Class that is a packagedElement of a Profile (directly or indirectly), or a UML metaclass. For these Associations there
+must be an ownedAttribute Property typed by the opposite class. Where the opposite class is not a stereotype, the opposite
+property must be an ownedMember of the Association itself rather than the other class/metaclass. The effect of these rules
+is that Associations in a Profile are not required to involve a Stereotype but may not own both of their Ends. According
+to CMOF-compliant metamodel constraints, Profile-defined binary Associations may have at most one end with
+aggregation = AggregationKind::composite; other ends shall have aggregation = AggregationKind::none. Furthermore,
+a Property of a Stereotype or Profile-defined Class can have composite aggregation if and only if its type is a Profile-
+defined Class whereas a Property of a Stereotype or Profile-defined Class or DataType shall have aggregation =
+AggregationKind::none if its type is a Profile-defined DataType, PrimitiveType, or Enumeration.
+The most direct implementation of the Profile capability that a tool can provide is by having a metamodel based
+implementation, similar to the Profile metamodel. However, this is not a requirement of the current standard, which
+requires only the support of the specification, and the standard XMI based interchange capacities. The Profile capability
+has been designed to be implementable by tools that do not have a metamodel-based implementation. Practically any
+mechanism used to attach new values to model elements can serve as a valid profile implementation; however, creating
+such values requires a limited metamodel-like capability for creating and referring to instances of Profile-defined
+Classes and DataTypes as the values of Properties typed by such Classes or DataTypes and for referring to instances of
+Profile-defined Classes for creating link instances of Profile-defined Associations. As an example, the UML1.4 profile
+metamodel could be the basis for implementing a UML2-compliant profile tool.
+12.3.3.1.2
+Integrating and Extending Profiles
+There is a number of ways to create, extend, and integrate Profiles. These are described briefly in this sub clause in
+order to foster better profile integration and reuse.
+The simplest form of Profile integration is to simply apply multiple Profiles to the same Package. This requires no
+integration between the Profiles at all. Such Profiles might be designed to complement each other, addressing different
+concerns.
+It is also possible for one Profile to reuse all of or parts of another, and to extend other Profiles. Like any other Class,
+Stereotypes can be defined in Packages or Profiles that can be factored for reuse. These Stereotypes can be directly
+reused by being referenced or specialized in other Profiles. Normal rules apply as to whether a referenced Stereotype is
+visible to users of the extending Profile.: a public import is needed to ensure that Stereotypes from other profiles are
+visible after applying the extending one.
+For example, the Unified Profile for DoDAF and MODAF (UPDM) Profile could integrate with the SysML Profile to
+reuse Stereotypes such as Requirement and ViewPoint. UPDM could be designed to use ViewPoint in a manner that is
+semantically consistent with SysML. However UPDM could extend ViewPoint with additional properties and
+associations for its purposes. The UPDM specification could note to users that ViewPoint is a stereotype in UPDM that
+represents a "placeholder" to ViewPoint in SysML. Users could then apply UPDM to a model, and get UPDM's
+ViewPoint capabilities without any coupling with, or need for SysML. UPDM could then provide another compliance
+point that merges with the SysML profile resulting in stereotypes Requirement and ViewPoint having the capabilities of
+both profiles. The SysML::ViewPoint would be merged with the UPDM::ViewPoint allowing the shared semantics to be
+supported without making any changes to the existing model. Users who want UPDM with SysML would then apply
+this merged profile.
+12.3.3.1.3
+MOF-Equivalent Semantics
+This sub clause specifies the semantics of Stereotypes and their instances using MOF. That does not mean that tools
+need implement Profiles using MOF, but that a non-MOF-based implementation must do whatever is necessary under
+the covers to ensure it behaves, in all observable ways, as if it were a MOF implementation.
+The same mapping to MOF is used to determine how to serialize applied profiles using XMI. A Profile is an instance of
+the UML2 metamodel, not a CMOF metamodel. Therefore the MOF to XMI mapping rules do not directly apply for
+instances of a Profile. Figure 12.15 is an example of a mapping between a UML2 Profile and an equivalent CMOF
+Unified Modeling Language 2.5.1
+255
+===== PRINTED PAGE 256 / PDF PAGE 298 =====
+
+model. This mapping is used as a means to explain and formally specify how Profiles are serialized and exchanged as
+XMI. Using the following Profile to CMOF mapping rules, the XMI specification can be used to determine how
+Profiles, and models with Profiles applied, are represented in XMI. In the mapping:
+
+A Profile maps to a CMOF Package.
+
+A Stereotype maps to a CMOF class with the same name and properties.
+
+A Metaclass is already a CMOF class so it maps to itself.
+
+An Extension maps to an Association as described in the Semantics sub clause of Extension.
+
+Any other elements in the Profile (i.e., non-Stereotype Classes, DataTypes, PrimitiveTypes, Enumerations and
+Associations) are treated as MOF elements.
+
+An instance of a Stereotype (created when the Stereotype is applied to an Element) maps to an instance of the
+CMOF class representing the Stereotype. This stereotype instance is compositionally associated with the
+Element to which it applies using a Link that is an instance of the composite Association to which the
+Extension is mapped.
+For a Profile the URI Property (inherited from Package) is used to determine the nsURI to be used to identify instances
+of the Profile in XMI.
+NOTE. By default the name attribute of the Profile is used for the nsPrefix in XMI but this can be overridden by the
+CMOF tag org.omg.xmi.nsPrefix.
+OMG normative Profiles, such as the UML Standard Profile, follow an OMG normative naming scheme for URIs. For
+non-standard profiles a recommended convention is:
+nsUri = http://<profileParentQualifiedName>/<version>/<profileName>.xmi
+nsPrefix = <profileName>
+where:
+
+<profileParentQualifiedName>is the qualified name of the Package containing the Profile (if any)
+with / (forward slash) substituted for ::, and all other illegal XML QName characters removed.
+
+<version> is a version identifier.
+NOTE. For OMG normative profiles this is a date in the format YYYYMMnn where nn is a serial number
+within the month, and represents the version of the Profile XMI not that of the specification which might be re-
+issued without affecting the XMI.
+
+<profileName> is the name of the Profile.
+A Profile can be exchanged just like any model, as an XMI file, and models that have a Profile applied can also be
+interchanged.
+Figure 12.19 shows a Stereotype named Home extending the Interface UML2 metaclass. Figure 12.15 illustrates the
+MOF correspondence for that example, basically by introducing an Association from the Home MOF class to the
+Interface MOF class. For illustration purposes, we add a Property “magic:String” to the Home Stereotype.
+The first serialization below shows how the model in Figure 12.19 (definition of the Profile extending the UML2
+metamodel) can be exchanged.
+<?xml version="1.0" encoding="UTF-8"?>
+256
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 257 / PDF PAGE 299 =====
+
+ <xmi:XMI xmlns:xmi=http://www.omg.org/spec/XMI/YYYYMMnn>
+ xmlns:mofext=http://www.omg.org/spec/MOF/YYYYMMnn xmlns:uml=http://www.omg.org/spec/UML/YYYYMMnn
+    <uml:Profile  xmi:id="id0" xmi:type=”uml:Profile” name="HomeExample">
+<metamodelReference xmi:type=”uml:PackageImport” xmi:id="id2">
+<importedPackage href="http://www.omg.org/spec/UMLYYYYMMnn/UML.xmi#_0"/>
+</metamodelReference >
+<packagedElement xmi:type="uml:Stereotype" xmi:id="id3" name="Home">
+<ownedAttribute xmi:type="uml:Property" xmi:id="id5" name="base_Interface"
+association="id6">
+ <type href="http://www.omg.org/spec/UML/YYYYMMnn/UML.xmi#Interface"/>
+</ownedAttribute>
+</packagedElement>
+<packagedElement xmi:type="uml:Extension" xmi:id="id6" name="A_Interface_Home"
+memberEnd="id7 id5">
+<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="id7" name="extension_Home" type="id3"
+aggregation="composite">
+</ownedEnd>
+</packagedElement>
+</uml:Profile>
+<mofext:Tag xmi:type=”mofext:Tag” name="org.omg.xmi.nsPrefix" value="HomeExample"/>
+<mofext:Tag xmi:type=”mofext:Tag” name="org.omg.xmi.nsURI"
+value="http://HomeExample/20120501/HomeExample.xmi"/>
+</xmi:XMI>
+Figure 12.13 is an example model that includes an instance of Interface extended by the Home stereotype.
+Figure 12.13  Using the HomeExample Profile to Extend a Model
+The XMI serialization of a model to which zero or more Profiles are applied is an XMI file organized in two
+logical parts (which may be physically organized in any order within a file or in separate files):
+1
+the XMI serialization of the model,
+2
+the XMI serialization of the instances corresponding to each application of a Profile to the model or
+some part of it.
+Since deleting the application of Profiles applied to the model or some parts of it must not modify the XMI
+serialization of the model itself, all XMI elements in Part (1) cannot have any XMI reference to any XMI
+element in Part (2). Typically, the values of the applied Stereotype’s “base” properties and of properties typed
+by metaclasses cause XMI elements corresponding to instances of Stereotypes in Part (2) to make reference
+to XMI elements in Part (1). In general, Part (2) contains the following kinds of instances:
+
+Instances of Stereotypes (see the example in Figure 12.13).
+
+Optionally, instances of Extensions according to their MOF-equivalent mapping as composite
+Associations.
+
+Instances of Profile-defined Classes and DataTypes. In particular, such instances should not be
+confused, replaced, or substituted with InstanceSpecifications, which are a UML-based model
+representation of instances but are not the same as, substitutable with or equivalent to the instances
+that they represent.
+
+Optionally, instances of Profile-defined composite and non-composite Associations.
+The XMI below shows how the model of Figure 12.13 is serialized in XMI. A tool importing that XMI file can filter out
+the elements related to the HomeExample Profile, if the tool does not have this Profile definition.
+<?xml version="1.0" encoding="UTF-8"?>
+Unified Modeling Language 2.5.1
+257
+===== PRINTED PAGE 258 / PDF PAGE 300 =====
+
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/YYYYMMnn"
+xmlns:uml="http://www.omg.org/spec/UML/YYYYMMnn"
+xmlns:HomeExample="http://HomeExample/20120501/HomeExample.xmi">
+<uml:Package xmi:type=”uml:Package” xmi:id="id1" name="ClientPackage">
+<profileApplication xmi:type=”uml:ProfileApplication” xmi:id="id3">
+<appliedProfile href="http://HomeExample/20120501/HomeExample.xmi#id0"/>
+</profileApplication>
+<packagedElement xmi:type="uml:Interface" xmi:id="id2" name="Client"/>
+</uml:Package>
+<!-- applied stereotypes -->
+<HomeExample:Home xmi:id= "id4" base_Interface="id2"/>
+</xmi:XMI>
+12.3.3.2
+Defining Profiles for Non-UML Metamodels
+In theory the Profiles capability can be used to define extensions for metamodels other than UML, though this
+capability has rarely, if at all, been used in practice. It would require any tooling implementing that metamodel to also
+support some kind of profile application mechanism – that is outside the scope of this specification. The following
+describes how the Profile definition mechanism may be used in this way.
+In addition to UML, a Profile may be related to another MOF-compliant reference metamodel. In general a reference
+metamodel typically consists of metaclasses that are either imported or locally owned. All metaclasses that are extended
+by a profile have to be members (directly or indirectly) of the same reference metamodel. The metaclassReference
+ElementImports and metamodelReference PackageImports serve two purposes: (1) they identify the reference metamodel
+elements that are imported by the profile and (2) they specify the Profile’s filtering rules. The filtering rules determine
+which elements of the metamodel are available when the Profile is applied and which ones are hidden.
+NOTE. Applying a Profile does not change the underlying model in any way; it merely defines a view of the underlying
+model.
+In general, only model elements that are instances of imported reference metaclasses will be visible when the profile is
+applied. Instances of all other metaclasses will be hidden and further instances may not be created. By default, model
+elements whose metaclasses are owned by the reference metamodel are visible. This applies transitively to any
+subpackages of the reference metamodel according to the default rules of package import. If any metaclass is imported
+using a metaclassReference ElementImport, then model elements whose metaclasses are the same as that metaclass are
+available. However, a metaclassReference blocks a metamodelReference whenever an element or Package of the referenced
+metamodel is also referenced by a metaclass reference. In such cases, only the elements that are explicitly referenced by
+the metaclassReference will be visible, while all other elements of the metamodel Package will be hidden.
+The following rules are used to determine whether a model element is available or hidden after a Profile has been
+applied. Model elements are available if they are instances of metaclasses that are:
+1
+referenced by an explicit metaclassReference, or
+2
+contained (directly or transitively) in a Package that is referenced by an explicit metamodelReference; unless
+there are other elements of subpackages of that Package that are explicitly referenced by a MetaclassReference,
+or
+3
+extended by a Stereotype owned by the applied profile (even if the extended metaclass itself is not visible).
+All other model elements are hidden (not available) when the Profile is applied.
+The most common case is when a Profile just imports an entire metamodel using a metamodelReference. In that case,
+every element instantiating a metaclass in the metamodel is visible.
+In the example in Figure 12.14, MyMetamodel is a metamodel containing two metaclasses: Metaclass1 and Metaclass2.
+MyProfile is a profile that references MyMetamodel and Metaclass2. However, there is also an explicit metaclass
+reference to Metaclass2, which overrides the metamodel reference. An application of MyProfile to some model based
+on MyMetamodel will show instances of Metaclass2 (because it is referenced by an explicit metaclass reference). Also,
+those instances of Metaclass1 that are extended by an instance of MyStereotype will be visible. However, instances of
+Metaclass1 that are not extended by MyStereotype remain hidden.
+258
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 259 / PDF PAGE 301 =====
+
+Figure 12.14  Specification of an Available Metaclass
+If a Profile P1 imports another Profile P2, then all metaclassReference and metamodelReference associations will be
+combined at the P2 level, and the filtering rules apply to this union.
+The filtering rules defined at the Profile level are, in essence, merely a suggestion to modeling tools on what to do when
+a profile is applied to a model.
+The isStrict attribute on a ProfileApplication specifies that the filtering rules have to be applied strictly. If isStrict is true
+on a ProfileApplication, then no other metaclasses than the accessible one defined by the profile shall be accessible
+when the Profile is applied on a model. This prohibits the combination of applied profiles that specify different
+accessible metaclasses.
+12.3.3.3
+ProfileApplication
+A ProfileApplication is used to record which Profiles have been applied to a Package.
+One or more Profiles that extend UML may be applied at will to a model Package. Applying a Profile means that it is
+possible to apply the Stereotypes that are defined as part of the Profile. It is possible to apply multiple Profiles to a
+Package, though this could make the Package invalid if they have conflicting Constraints. Applying a Profile means
+recursively applying all its nested and imported Profiles. Stereotypes that are public members of a Profile may be applied
+to applicable model elements in Packages to which the Profile has been applied.
+When a Profile is applied, instances of the appropriate Stereotypes must be created for those elements that are instances
+of metaclasses with ExtensionEnds which have isRequired = true. The model is not well-formed without these instances.
+Once a Profile has been applied to a Package, it is allowed to remove the applied Profile at will. Removing a Profile
+implies that all elements that are instances of Stereotypes defined in the Profile are deleted including the instances of
+Profile-defined Classes they compositionally aggregate and the instances of Profile-defined composite Associations
+linking them. Other instances that are not compositionally aggregated must also be deleted if their defining type is no
+longer accessible from any other Profile applied to the same model.The removal of an applied Profile leaves the
+instances of elements from the referenced metamodel intact. It is only the instances of the elements from the Profile that
+are deleted. This means that for example a profiled UML model can always be interchanged with another tool that does
+not support the profile and be interpreted as a pure UML model.
+A Profile which is a packagedElement of another Profile can be applied individually. However, the nested Profile must
+specify any required metaclass and/or metamodel references if it contains any Stereotypes and may use PackageImport
+to indicate other Profiles to be co-applied. Metaclass and/or metamodel references are not inherited from a containing
+Profile.
+12.3.3.4
+Stereotypes
+A Stereotype defines an extension for one or more metaclasses, and enables the use of specific terminology or notation
+in place of, or in addition to, the ones used for the extended metaclasses. If a Stereotype extends several metaclasses, it
+can only be applied to exactly one instance of one of those metaclasses at any point in time. It is, however, possible to
+detach the Stereotype instance from an instance of one metaclass and attach it to an instance of another metaclass.
+Unified Modeling Language 2.5.1
+259
+===== PRINTED PAGE 260 / PDF PAGE 302 =====
+
+A Stereotype is a limited kind of metaclass that cannot be used by itself, but must always be used in conjunction with
+one of the metaclasses it extends. Each Stereotype may extend one or more metaclasses through association (Extension)
+rather than generalization/specialization. Similarly, a metaclass may be extended by one or more Stereotypes. Relating
+an instance “S” of Stereotype to a metaclass “C” from UML using an “Extension” (which is a specific kind of
+Association) signifies that model elements of type “C” can be extended by an instance of “S” (see example in Figure
+12.24  Defining a Stereotype). At the model level (such as in Figure 12.29) instances of “S” are related to “C” model
+elements (instances of “C”) by links (occurrences of the Association/Extension from “S” to “C”).
+Any metaclass referenced by a metaclassReference or contained in a Package referenced by metamodelReference of the
+closest Profile directly or indirectly containing a Stereotype can be extended by the Stereotype. For example States,
+Transitions, Activities, Use Cases, Components, Properties, Dependencies, etc. can all be extended with Stereotypes if
+the metamodelReference is UML. A Stereotype may be contained in a Package in which case the metaclasses available for
+extension are those referenced by the closest parent Profile containing the Package.
+Just like a Class, a Stereotype may have Properties, which have traditionally been referred to as Tag Definitions. When
+a Stereotype is applied to a model element, the values of the Properties have traditionally been referred to as tagged
+values. Stereotype specializes Class and its Properties have the same meaning in Stereotypes as they do in Class. A
+Stereotype Property can have composite aggregation; just like the value of a composite aggregation Property on a Class
+is owned by an instance of that Class, the value of a composite aggregation Property on a Stereotype is owned by an
+instance of that Stereotype. Since a profile can be unapplied without modifying the model it was originally applied to,
+instances of metaclasses in the model cannot refer to instances of stereotypes or to values of their properties. The type
+of a composite aggregation Stereotype Property cannot be a Stereotype (since Stereotypes are owned by their
+Extensions) or a metaclass (since instances of metaclasses are owned by other instances of metaclasses); however, the
+type of such Property can be a Class defined in the Profile or a DataType defined in the Profile or accessible via import
+or via the Profile’s metamodel reference.Tool vendors may choose to support extensibility that includes owned
+operations and behaviors, but are not required to do so. Tools must however support Stereotype ownedAttributes.
+Its Profile or Package defines the namespace for the Stereotype. When Profiles are applied to a Package, the available
+Stereotypes for use are defined by the applied Profiles, and these Stereotypes can be displayed using the fully qualified
+name if needed in order to distinguish Stereotypes with the same name in different Profiles or Packages. PackageImport
+and ElementImport can be used to allow the use of unqualified names. Stereotypes directly owned by an applied Profile
+(ownedStereotype) may be used without qualified names.
+12.3.3.5
+Images
+The Image class provides the necessary information to display an Image in a diagram. Icons are typically handled
+through the Image class.
+Information such as physical placement or format is provided by the Image class. The Image class provides a generic
+way of representing images in different formats. Although some predefined values are specified for format for
+convenience and interoperability, the set of possible formats is open ended. However there is no requirement for a tool
+to be able to interpret and display any specific format, including those predefined values.
+The format property indicates the format of the content, which is how the string content should be interpreted. The
+following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix ‘MIME:’ is also
+reserved: this must be followed by a valid MIME type as defined by RFC3023. This option can be used as an alternative
+to express the reserved values above, for example “SVG” could instead be expressed “MIME: image/svg+xml.”
+12.3.3.6
+Extensions
+An Extension is used to indicate that the properties of a metaclass are extended through a Stereotype, and gives the
+ability to flexibly add (and later remove) stereotypes to classes.
+Extension is a kind of Association. One end of the Extension is an ordinary Property and the other end is an
+ExtensionEnd. The former ties the Extension to a (meta)Class, while the latter ties the Extension to a Stereotype that
+extends the Class.
+A required Extension (isRequired = true) means that an instance of this Stereotype must be linked to each instance of the
+extended metaclass in the model to which the containing Profile has been applied (otherwise the model is not well-
+260
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 261 / PDF PAGE 303 =====
+
+formed). If the extending Stereotype has subclasses, then at most one instance of the Stereotype or one of its subclasses
+is required.
+A non-required Extension (isRequired = false) means that an instance of this Stereotype may be linked to an instance of
+an extended metaclass at will, and also later deleted at will; however, there is no requirement that each instance of a
+metaclass be stereotyped. However the same stereotype (or its subtypes) can never be applied twice to the same
+element. An instance of a Stereotype is deleted when either the instance of the extended metaclass is deleted, or when
+the Profile defining the stereotype is removed from the appliedProfiles of the Package.
+The equivalence to a MOF construction for single metaclass extension is shown in Figure 12.15. This figure illustrates
+the case shown in Figure 12.19, where the Stereotype named Home extends the Interface metaclass. In this figure,
+Interface is an instance of the UML metaclass (a CMOF Class) and Home is an instance of a Stereotype (also
+considered a CMOF Class for this purpose). The MOF construct equivalent to an Extension is a composition from the
+extended metaclass to the extension Stereotype, owned by the extended metaclass. When the Extension is required, then
+the multiplicity of the property typed by the extension Stereotype is 1.
+The name of the Property typed by the extended metaclass is:
+‘base_’ extendedMetaclassName
+The name of the Property typed by the extension Stereotype (the ExtensionEnd) is:
+‘extension_’ stereotypeName
+Constraints are frequently added to Stereotypes. The above Properties may be used for expressing OCL navigations. For
+example, the following OCL expression states that a Home Interface shall not have attributes:
+self.base_Interface.ownedAttributes->isEmpty()
+Figure 12.15  MOF Model Equivalent to Extending "Interface" by the "Home" Stereotype
+An example for multiple metaclass extension is depicted in Figure 12.16. The Stereotype TestCase extends both
+metaclass Operation and Behavior.
+<<Metaclass>>
+Operation
+<<Metaclass>>
+Behavior
+<<stereotypes>>
+TestCase
+Figure 12.16  Example of Multiple Metaclass Extension
+The corresponding equivalence to a MOF construction for multiple metaclass extension is shown in Figure 12.17.
+Unified Modeling Language 2.5.1
+261
+===== PRINTED PAGE 262 / PDF PAGE 304 =====
+
+TestCase
+Operation
+Behavior
+base_Operation [0..1]
+extension_TestCase [0..1]
+extension_TestCase [0..1]
+base_Behavior [0..1]
+xor
+Figure 12.17  MOF Model Equivalent to Multiple Metaclass Extension
+12.3.3.7
+ExtensionEnd
+An ExtensionEnd is used to tie an Extension to a Stereotype when extending a metaclass: it is a navigableOwnedEnd of
+the Extension, avoiding an extra ownedAttribute on the extended Class. It is always typed by a Stereotype and must
+always have isComposite = true.
+The default multiplicity of an ExtensionEnd is 0..1. It may be 1..1 if the Stereotype is required but the upperBound may
+never be more than 1.
+12.3.4
+Notation
+The notation for an Extension is an arrow pointing from a Stereotype to the extended Class, where the arrowhead is
+shown as a filled triangle. An Extension may have the same adornments as an ordinary Association, but they are
+typically elided and navigability arrows are never shown. If isRequired = true, the adornment {required} is shown near
+the ExtensionEnd.
+Figure 12.18  The Notation for an Extension
+It is possible to use the multiplicities 0..1 or 1 on the ExtensionEnd as an alternative to the adornment {required}. Due
+to how isRequired is derived, the multiplicity 0..1 corresponds to isRequired = false.
+A Profile uses the same notation as a Package, with the addition that the keyword «profile» is shown before or above
+the name of the Package. Profile::metaclassReference and Profile::metamodelReference use the same notation as
+Package::elementImport and Package::packageImport, respectively but with the keyword «reference».
+ProfileApplications are shown using a dashed arrow with an open arrowhead from the Package to each applied Profile.
+Either the keyword «apply» is shown near the arrow, or the keyword «strict» - the latter if isStrict = true.
+If multiple appliedProfiles have Stereotypes with the same name, it may be necessary to qualify the name of the
+Stereotype (with the profile name).
+A Stereotype uses the same notation as a Class, with the addition that the keyword «stereotype» is shown before or
+above the name of the Class.
+When a Stereotype is applied to a model element (an instance of a Stereotype is linked to an instance of a metaclass),
+the name of the Stereotype is shown within a pair of guillemets above or before the name of the model element, or
+where the name would appear if the name is omitted or not displayed. For model elements that are not NamedElements
+but do have a graphical representation, unless specifically stated elsewhere, the stereotypes can be displayed within a
+pair of guillemets near the upper right corner of the graphical representation. If multiple stereotypes are applied, the
+names of the applied stereotypes are shown as a comma-separated list within a pair of guillemets. When the extended
+model element has a keyword, then the stereotype name(s) will be displayed close to the keyword, within the same or
+separate guillemets (example: «interface» «Clock» or «Clock, interface»).
+Normally a Stereotype’s name starts with an upper-case letter, to follow the convention for naming Classes. However
+Profiles may use different conventions. Matching between the names of Stereotype definitions and applications is case-
+insensitive, so naming stereotype applications with lower-case letters where the stereotypes are defined using upper-
+262
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 263 / PDF PAGE 305 =====
+
+case letters is valid, although stylistically obsolete. For legacy reasons a tool may display stereotype names with the
+initial letter in lower case even when defined in upper case.
+A tool can choose whether it will display Stereotypes or not. In particular, tools can choose not to display required
+stereotypes, but to display only the values of their ownedAttributes if any.
+The values of the ownedAttributes of a Stereotype (or its generalizations) applied to a model element can be shown in one
+of the following three ways:
+1
+As part of a comment symbol connected to the graphic node representing the model element.
+2
+In separate compartments of the graphic node representing that model element.
+3
+Above the name string within the graphic node or, else, before the name string.
+In the case where a compartment or comment symbol is used, the stereotype name may be shown in guillemets before
+the name string in addition to being included in the compartment or comment.
+The values are displayed as name-value pairs:
+<namestring> ‘=’ <valuestring>
+If a Stereotype Property is multi-valued, then the <valuestring> is displayed as a comma-separated list:
+<valuestring> ::= <value> [‘,’ <value>]*
+Certain values have special display rules:
+
+As an alternative to a name-value pair, when displaying the values of Boolean Properties, tools may
+use the convention that if the <namestring> is displayed, then the value is true; otherwise, the value is
+false.
+
+If the value is the name of a NamedElement, then, optionally, the qualifiedName of that element can be
+displayed.
+If compartments are used to display Stereotype Property values, then an additional compartment is required for each
+applied Stereotype whose Property values are to be displayed. Each such compartment is headed by the name of the
+applied stereotype in guillemets. Such compartments are only applicable to elements for which compartments generally
+may be used: specifically Classifiers and States.
+Within a comment symbol, or, if displayed before or above the model element’s name, the Property values from a
+specific Stereotype are optionally preceded with the name of the applied Stereotype within a pair of guillemets. This is
+useful if values of more than one applied stereotype should be shown.
+When displayed in compartments or in a comment symbol, at most one namestring-valuestring pair can appear on a
+single line. When displayed above or before a model element’s name, the name-value pairs are separated by semicolons
+and all pairs for a given stereotype are enclosed in braces.
+12.3.4.1
+Icon presentation
+It is possible to attach Images to a Stereotype that can be used in lieu of, or in addition to, the normal notation of a
+model element to which the Stereotype is applied.
+When a Stereotype has a value for icon, the referenced Image can be graphically attached to the model elements to
+which the Stereotype has been applied. Every model element that has a graphical presentation can have an attached
+icon. When model elements are graphically expressed as:
+
+Boxes (see Figure 12.25): the box may be replaced by the Image, and the name of the model element
+appears below the Image. This presentation option can be used only when a model element has one
+Unified Modeling Language 2.5.1
+263
+===== PRINTED PAGE 264 / PDF PAGE 306 =====
+
+single Stereotype applied and when Properties of the model element (e.g., ownedAttributes,
+ownedOperations of a Class) are not presented. As another option, the Image may be presented in a
+reduced size, inside and to the top of the box representing the model element. When several
+Stereotypes are applied, several Images may be presented within the box.
+
+Lines: the Image may be placed close to the line.
+
+Textual notation: the Image may be presented to the left of the textual notation.
+Several Images may be referenced by a Stereotype’s icon Property. The interpretation of the different attached Images in
+that case is a semantic variation point. Some tools may use the different Images for different purposes: the icon
+replacing the box, for the reduced-size icon inside the box, for icons within tree browsers, etc. Alternatively, depending
+on the Image format, tools may choose to scale one single Image into different sizes for these different purposes.
+Some model elements already use an icon for their default presentation. A typical example of this is the Actor model
+element, which uses the “stickman” icon. When a Stereotype with an icon is applied to such a model element, the
+Stereotype’s icon replaces the default presentation icon within diagrams.
+12.3.5
+Examples
+In Figure 12.19, a simple example of using an Extension is shown, where the stereotype Home extends the metaclass
+Interface.
+Figure 12.19  Example of Using an Extension
+An instance of the stereotype Home can be added to and removed from an instance of the class Interface at will, which
+provides for a flexible approach of dynamically adding (and removing) information specific to a Profile to a Package.
+In Figure 12.20, each instance of metaclass Component in a model to which the Profile has been applied must have
+applied an instance of the stereotype Bean, as the Extension has isRequired = true. (As the stereotype Bean is abstract,
+this means that each instance of metaclass Component must be stereotyped by an instance of one of its concrete
+subclasses.) The model is not well-formed unless such a Stereotype is applied. This provides a way to express
+Extensions that should always be present for all instances of the base metaclass depending on which Profiles are
+applied.
+Figure 12.20  Example of a Required Extension
+In Figure 12.21, a simple example of an EJB profile is shown.
+264
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 265 / PDF PAGE 307 =====
+
+Figure 12.21  Defining a Simple EJB Profile
+The Profile defines that the abstract stereotype Bean is required to be applied to metaclass Component, which means
+that an instance of either of the concrete subclasses Entity and Session of Bean must be linked to each instance of
+Component. The Constraints that are part of the Profile are evaluated when the Profile is applied to a Package, and these
+Constraints need to be satisfied in order for the model to be well-formed.
+Figure 12.22  Importing a Package from a Profile
+In Figure 12.22, the Package named Types is imported by the Profile named Manufacturer. The Enumeration named
+Color and the Class named JavaInteger are then used as the type of Properties of the Stereotype named Device as well
+as the standard PrimitiveType String.
+If the Profile Manufacturer is later applied to a Package, then the types from Types are not available for use in the
+Package to which the Profile is applied unless package Types is explicitly imported. This means that the class
+JavaInteger can be used as the type of a Stereotype Property (e.g., in Device) but not as an ordinary Property (as part
+of the Class TV) unless Package Factory also imports Package Types (which it does).
+NOTE. The value of the volume Property is displayed once the Stereotype Device has been applied to the Class TV.
+Given the profiles Java and EJB, Figure 12.23shows how these may be applied to the Package WebShopping.
+Unified Modeling Language 2.5.1
+265
+===== PRINTED PAGE 266 / PDF PAGE 308 =====
+
+Figure 12.23  Profiles Applied to a Package
+In Figure 12.24, a simple stereotype Clock is defined to be applicable at will (dynamically) to instances of the metaclass
+Class.
+Figure 12.24  Defining a Stereotype
+Figure 12.25  Presentation Options for an Extended Class
+In Figure 12.26, an instance diagram of the example in Figure 12.24 is shown.
+NOTE. The ExtensionEnd must be composite, and that the derived isRequired Property in this case is false.
+Figure 12.26 shows the instances representing the definition of the Stereotype named Clock defined in Figure 12.24. In
+this definition, the extended metaclass (:Class; “name = Class”) is defined in the UML2 metamodel (reference
+metamodel). In a UML modeling tool this representation of the UML2 standard metamodel would typically be in a
+“read only” form, or presented as proxies to the metaclass being extended.
+(It is therefore still at the same meta-level as UML, and does not show the instance model of a model extended by the
+stereotype. An example of this is provided in Figure 12.28 and Figure 12.29.) The Semantics sub clause of the
+Extension concept explains the MOF equivalent, and how constraints can be attached to stereotypes.
+Figure 12.26  An Instance Diagram when Defining a Stereotype
+266
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 267 / PDF PAGE 309 =====
+
+Figure 12.27 shows how the same Stereotype named Clock extends both the metaclass Component and the metaclass
+Class (though each instance of the Stereotype can extend only one model element). It also shows how different
+Stereotypes can extend the same metaclass.
+Figure 12.27  Defining Multiple Stereotypes on Multiple Stereotypes
+Figure 12.28 shows how the Stereotype Clock, as defined in Figure 12.27, is applied to a Class named StopWatch.
+Figure 12.28  Using a Stereotype
+Figure 12.29 shows the underlying semantics for when the Stereotype named Clock is applied to a class called
+StopWatch. The right-hand side uses instance diagram notation to show the MOF-equivalent instances that should be
+used to understand the behavior and XMI serialization of the UML diagram on the left. The Extension between the
+Stereotype and the metaclass Class results in a link between the instance of Stereotype Clock and the (user-defined)
+Class named StopWatch.
+Figure 12.29  Showing Values of Stereotypes and a Simple Instance Specification
+Next, two stereotypes, Clock and Creator, are applied to the same model element, as shown in Figure 12.30.
+NOTE. The Property values of each of the applied Stereotypes are shown in a comment symbol attached to the model
+element.
+Figure 12.30  Using Stereotypes and Showing Values
+Finally, two more alternative notational forms are shown in Figure 12.31.
+Unified Modeling Language 2.5.1
+267
+===== PRINTED PAGE 268 / PDF PAGE 310 =====
+
+Figure 12.31  Other Notational Forms for Depicting Stereotype Values
+Figure 12.32 shows an example of a profile with profile-defined classes and binary composite and noncomposite
+associations.
+Figure 12.32  Example of a Profile defining Classes and binary composite and non-composite Associations
+The following shows the XMI serialization of the profile shown in Figure 12.32:
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/YYYYMMnn"
+         xmlns:uml="http://www.omg.org/spec/UML/YYYYMMnn"
+         xmlns:mofext="http://www.omg.org/spec/MOF/YYYYMMnn">
+  <uml:Profile xmi:type="uml:Profile"
+               URI="http://www.example.org/IssuesProfile"
+               xmi:id="id0"
+               name="IssuesProfile"
+               metamodelReference="id309">
+    <packageImport xmi:id="id309">
+      <importedPackage xmi:type="uml:Model"
+                       href="http://www.omg.org/spec/UML/YYYYMMnn/UML.xmi#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class"
+                     xmi:id="id312"
+                     name="IssueDetail">
+      <ownedAttribute xmi:id="id315" name="number">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id318" name="url">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id321" name="text">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id324"
+                      name="issueComment"
+                      type="id343"
+                      aggregation="composite"
+                      association="id352">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id328"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id331"/>
+      </ownedAttribute>
+268
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 269 / PDF PAGE 311 =====
+
+      <ownedAttribute xmi:id="id334"
+                      name="duplicatesIssue"
+                      type="id312"
+                      association="id364">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id337"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id340"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class"
+                     xmi:id="id343"
+                     name="IssueComment">
+      <ownedAttribute xmi:id="id346" name="number">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id349" name="text">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association"
+                     xmi:id="id352"
+                     name="A_issueDetail_issueComment"
+                     memberEnd="id324 id355">
+      <ownedEnd xmi:id="id355"
+                name="issueDetail"
+                type="id312"
+                association="id352"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association"
+                     xmi:id="id364"
+                     name="A_issueDetail_duplicatesIssue"
+                     memberEnd="id334 id367">
+      <ownedEnd xmi:id="id367"
+                name="issueDetail"
+                type="id312"
+                association="id364">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id371"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id374"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Stereotype"
+                     xmi:id="id377"
+                     name="IssueTag">
+      <ownedAttribute xmi:id="id380"
+                      name="base_Element"
+                      association="id418">
+        <type xmi:type="uml:Class"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/UML.xmi#Element"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id383" name="reviewed">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="id386"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id389"
+                      name="issueDetail"
+                      type="id312"
+                      aggregation="composite"
+                      association="id424">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id393"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id396"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id399"
+                      name="affectedBy"
+                      type="id312"
+                      association="id436">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id403"
+Unified Modeling Language 2.5.1
+269
+===== PRINTED PAGE 270 / PDF PAGE 312 =====
+
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id406"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="id409"
+                      name="relatedElement"
+                      association="id448">
+        <type xmi:type="uml:Class"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/UML.xmi#Element"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id412"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id415"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Extension"
+                     xmi:id="id418"
+                     name="Element_IssueTag"
+                     memberEnd="id421 id380">
+      <ownedEnd xmi:type="uml:ExtensionEnd"
+                xmi:id="id421"
+                name="extension_IssueTag"
+                type="id377"
+                aggregation="composite"
+                association="id418"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association"
+                     xmi:id="id424"
+                     name="A_issueTag_issueDetail"
+                     memberEnd="id389 id427">
+      <ownedEnd xmi:id="id427"
+                name="issueTag"
+                type="id377"
+                association="id424"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association"
+                     xmi:id="id436"
+                     name="A_issueTag_affectedBy"
+                     memberEnd="id399 id439">
+      <ownedEnd xmi:id="id439"
+                name="issueTag"
+                type="id377"
+                association="id436">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id442"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id445"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association"
+                     xmi:id="id448"
+                     name="A_issueTag_relatedElement"
+                     memberEnd="id409 id451">
+      <ownedEnd xmi:id="id451"
+                name="issueTag"
+                type="id377"
+                association="id448">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                    xmi:id="id454"
+                    value="*"/>
+        <lowerValue value="0"
+                    xmi:type="uml:LiteralInteger"
+                    xmi:id="id457"/>
+      </ownedEnd>
+    </packagedElement>
+  </uml:Profile>
+  <mofext:Tag xmi:type="mofext:Tag"
+              org.omg.xmi.nsURI="http://www.example.org/IssuesProfile"/>
+  <mofext:Tag xmi:type="mofext:Tag"
+              org.omg.xmi.nsPrefix="IssuesProfile"/>
+</xmi:XMI>
+Figure 12.33 shows an example of applying the profile shown in Figure 12.32.
+270
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 271 / PDF PAGE 313 =====
+
+Figure 12.33  Diagram example of applying a profile defining Classes and Associations and of creating instances
+of such Classes. Tools can provide a notation similar to that of object diagrams for instances of Profile-defined
+Classes, DataTypes and Associations
+The following shows the XMI serialization of the example shown in Figure 12.33 without link instances of profile-
+defined associations:
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/YYYYMMnn"
+         xmlns:uml="http://www.omg.org/spec/UML/YYYYMMnn"
+         xmlns:IssuesProfile="http://www.example.org/IssuesProfile">
+  <uml:Package xmi:id="ex0"
+               name="IssueExample">
+    <packagedElement xmi:type="uml:Class" xmi:id="ex57" name="B">
+      <generalization xmi:id="ex60" general="ex65"/>
+      <ownedAttribute xmi:id="ex63" name="x">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="ex64" name="y"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="ex65" name="A">
+      <ownedAttribute xmi:id="ex69" name="width"/>
+      <ownedAttribute xmi:id="ex70" name="length"/>
+    </packagedElement>
+    <profileApplication xmi:id="ex77">
+      <appliedProfile href="http://www.example.org/IssuesProfile#id0"/>
+    </profileApplication>
+  </uml:Package>
+  <IssuesProfile:IssueTag xmi:id="ex66"
+                          base_Element="ex65"
+                          relatedElement="ex69 ex70">
+    <issueDetail xmi:id="ex67"
+                 number="1"
+                 url="http://www.example.org/issues/1"
+                 text="Some attributes lack a type.">
+      <issueComment xmi:id="ex68"
+                    number="3"
+                    text="Type should be string."/>
+    </issueDetail>
+  </IssuesProfile:IssueTag>
+  <IssuesProfile:IssueTag xmi:id="ex58"
+                          base_Element="ex57"
+                          affectedBy="ex66 ex61"
+                          relatedElement="ex64">
+    <issueDetail xmi:id="ex59"
+                 number="2"
+                 url="http://www.example.org/issues/2"
+                 text="Some attributes lack a type."
+                 duplicatesIssue="ex67"/>
+  </IssuesProfile:IssueTag>
+  <IssuesProfile:IssueTag xmi:id="ex61" base_Element="ex60">
+    <issueDetail xmi:id="ex62"
+                 number="4"
+                 url="http://www.example.org/issues/4"
+Unified Modeling Language 2.5.1
+271
+===== PRINTED PAGE 272 / PDF PAGE 314 =====
+
+                text="Why does B specialize A?"/>
+  </IssuesProfile:IssueTag>
+</xmi:XMI>
+The following shows the XMI serialization of the example shown in Figure 12.33 with link instances of profile-defined
+associations serialized:
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/YYYYMMnn"
+         xmlns:uml="http://www.omg.org/spec/UML/YYYYMMnn"
+         xmlns:IssuesProfile="http://www.example.org/IssuesProfile">
+  <uml:Package xmi:id="ex0" name="IssueExample">
+    <packagedElement xmi:type="uml:Class" xmi:id="ex73" name="B">
+      <generalization xmi:id="ex76" general="ex81"/>
+      <ownedAttribute xmi:id="ex79" name="x">
+        <type xmi:type="uml:PrimitiveType"
+              href="http://www.omg.org/spec/UML/YYYYMMnn/PrimitiveTypes.xmi#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="ex80" name="y"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="ex81" name="A">
+      <ownedAttribute xmi:id="ex85" name="width"/>
+      <ownedAttribute xmi:id="ex86" name="length"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package"
+                     xmi:id="ex87"
+                     name="PrimitiveTypes"/>
+    <profileApplication xmi:id="ex97">
+      <appliedProfile href="http://www.example.org/IssuesProfile#id0"/>
+    </profileApplication>
+  </uml:Package>
+  <IssuesProfile:IssueTag xmi:id="ex82"
+                          base_Element="ex81"
+                          relatedElement="ex85 ex86">
+    <issueDetail xmi:id="ex83"
+                 number="1"
+                 url="http://www.example.org/issues/1"
+                 text="Some attributes lack a type.">
+      <issueComment xmi:id="ex84"
+                    number="3"
+                    text="Type should be string."/>
+    </issueDetail>
+  </IssuesProfile:IssueTag>
+  <IssuesProfile:A_issueTag_issueDetail xmi:id="d1e109" issueTag="ex82" issueDetail="ex83"/>
+  <IssuesProfile:A_issueDetail_issueComment xmi:id="d1e110"
+                                            issueDetail="ex83"
+                                            issueComment="ex84"/>
+  <IssuesProfile:A_issueTag_relatedElement xmi:id="ex82ex85"
+                                           issueTag="ex82"
+                                           relatedElement="ex85"/>
+  <IssuesProfile:A_issueTag_relatedElement xmi:id="ex82ex86"
+                                           issueTag="ex82"
+                                           relatedElement="ex86"/>
+  <IssuesProfile:IssueTag xmi:id="ex74"
+                          base_Element="ex73"
+                          affectedBy="ex82 ex77"
+                          relatedElement="ex80">
+    <issueDetail xmi:id="ex75"
+                 number="2"
+                 url="http://www.example.org/issues/2"
+                 text="Some attributes lack a type."
+                 duplicatesIssue="ex83"/>
+  </IssuesProfile:IssueTag>
+  <IssuesProfile:A_issueTag_issueDetail xmi:id="d1e112" issueTag="ex74" issueDetail="ex75"/>
+  <IssuesProfile:A_issueDetail_duplicatesIssue xmi:id="ex75ex83"
+                                               issueDetail="ex75"
+                                               duplicatesIssue="ex83"/>
+  <IssuesProfile:A_issueTag_affectedBy xmi:id="ex74ex82" issueTag="ex74" affectedBy="ex82"/>
+  <IssuesProfile:A_issueTag_affectedBy xmi:id="ex74ex77" issueTag="ex74" affectedBy="ex77"/>
+  <IssuesProfile:A_issueTag_relatedElement xmi:id="ex74ex80"
+                                           issueTag="ex74"
+                                           relatedElement="ex80"/>
+  <IssuesProfile:IssueTag xmi:id="ex77" base_Element="ex76">
+    <issueDetail xmi:id="ex78"
+                 number="4"
+                 url="http://www.example.org/issues/4"
+                 text="Why does B specialize A?"/>
+  </IssuesProfile:IssueTag>
+  <IssuesProfile:A_issueTag_issueDetail xmi:id="d1e114" issueTag="ex77" issueDetail="ex78"/>
+</xmi:XMI>
+272
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 273 / PDF PAGE 315 =====
+
+12.4
+Classifier Descriptions
+12.4.1
+Extension [Class]
+12.4.1.1
+Description
+An extension is used to indicate that the properties of a metaclass are extended through a stereotype, and gives the
+ability to flexibly add (and later remove) stereotypes to classes.
+12.4.1.2
+Diagrams
+Profiles, Classes
+12.4.1.3
+Generalizations
+Association
+12.4.1.4
+Attributes
+
+/isRequired : Boolean [1..1]
+Indicates whether an instance of the extending stereotype must be created when an instance of the extended
+class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd
+referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false.
+Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
+12.4.1.5
+Association Ends
+
+/metaclass : Class [1..1]{} (opposite Class::extension)
+References the Class that is extended through an Extension. The property is derived from the type of the
+memberEnd that is not the ownedEnd.
+
+♦ ownedEnd : ExtensionEnd [1..1]{redefines Association::ownedEnd} (opposite
+A_ownedEnd_extension::extension)
+References the end of the extension that is typed by a Stereotype.
+12.4.1.6
+Operations
+
+isRequired() : Boolean
+The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
+body: ownedEnd.lowerBound() = 1
+
+metaclass() : Class
+The query metaclass() returns the metaclass that is being extended (as opposed to the extending stereotype).
+body: metaclassEnd().type.oclAsType(Class)
+
+metaclassEnd() : Property
+The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
+body: memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true)
+Unified Modeling Language 2.5.1
+273
+===== PRINTED PAGE 274 / PDF PAGE 316 =====
+
+12.4.1.7
+Constraints
+
+non_owned_end
+The non-owned end of an Extension is typed by a Class.
+inv: metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
+
+is_binary
+An Extension is binary, i.e., it has only two memberEnds.
+inv: memberEnd->size() = 2
+12.4.2
+ExtensionEnd [Class]
+12.4.2.1
+Description
+An extension end is used to tie an extension to a stereotype when extending a metaclass. The default multiplicity of an
+extension end is 0..1.
+12.4.2.2
+Diagrams
+Profiles
+12.4.2.3
+Generalizations
+Property
+12.4.2.4
+Attributes
+
+/lower : Integer [0..1]
+This redefinition changes the default multiplicity of association ends, since model elements are usually
+extended by 0 or 1 instance of the extension stereotype.
+12.4.2.5
+Association Ends
+
+type : Stereotype [1..1]{redefines TypedElement::type} (opposite A_type_extensionEnd::extensionEnd)
+References the type of the ExtensionEnd. Note that this association restricts the possible types of an
+ExtensionEnd to only be Stereotypes.
+12.4.2.6
+Operations
+
+lowerBound() : Integer [0..1] {redefines MultiplicityElement::lowerBound()}
+The query lowerBound() returns the lower bound of the multiplicity as an Integer. This is a redefinition of the
+default lower bound, which normally, for MultiplicityElements, evaluates to 1 if empty.
+body: if lowerValue=null then 0 else lowerValue.integerValue() endif
+12.4.2.7
+Constraints
+
+multiplicity
+The multiplicity of ExtensionEnd is 0..1 or 1.
+inv: (lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
+274
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 275 / PDF PAGE 317 =====
+
+
+aggregation
+The aggregation of an ExtensionEnd is composite.
+inv: self.aggregation = AggregationKind::composite
+12.4.3
+Image [Class]
+12.4.3.1
+Description
+Physical definition of a graphical image.
+12.4.3.2
+Diagrams
+Profiles
+12.4.3.3
+Generalizations
+Element
+12.4.3.4
+Attributes
+
+content : String [0..1]
+This contains the serialization of the image according to the format. The value could represent a bitmap, image
+such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is
+XML based).
+
+format : String [0..1]
+This indicates the format of the content, which is how the string content should be interpreted. The following
+values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved.
+This option can be used as an alternative to express the reserved values above, for example "SVG" could
+instead be expressed as "MIME: image/svg+xml".
+
+location : String [0..1]
+This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the
+stereotype.
+12.4.4
+Model [Class]
+12.4.4.1
+Description
+A model captures a view of a physical system. It is an abstraction of the physical system, with a certain purpose. This
+purpose determines what is to be included in the model and what is irrelevant. Thus the model completely describes
+those aspects of the physical system that are relevant to the purpose of the model, at the appropriate level of detail.
+12.4.4.2
+Diagrams
+Packages
+12.4.4.3
+Generalizations
+Package
+12.4.4.4
+Attributes
+
+viewpoint : String [0..1]
+The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
+Unified Modeling Language 2.5.1
+275
+===== PRINTED PAGE 276 / PDF PAGE 318 =====
+
+12.4.5
+Package [Class]
+12.4.5.1
+Description
+A package can have one or more profile applications to indicate which profiles have been applied. Because a profile is a
+package, it is possible to apply a profile not only to packages, but also to profiles. Package specializes
+TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used
+as a template and a PackageableElement as a template parameter. A package is used to group elements, and provides a
+namespace for the grouped elements.
+12.4.5.2
+Diagrams
+Packages, Profiles, Namespaces
+12.4.5.3
+Generalizations
+PackageableElement, TemplateableElement, Namespace
+12.4.5.4
+Specializations
+Model, Profile
+12.4.5.5
+Attributes
+
+URI : String [0..1]
+Provides an identifier for the package that can be used for many purposes. A URI is the universally unique
+identification of the package following the IETF URI specification, RFC 2396
+http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
+12.4.5.6
+Association Ends
+
+♦ /nestedPackage : Package [0..*]{subsets Package::packagedElement} (opposite Package::nestingPackage)
+References the packaged elements that are Packages.
+
+nestingPackage : Package [0..1]{subsets A_packagedElement_owningPackage::owningPackage} (opposite
+Package::nestedPackage)
+References the Package that owns this Package.
+
+♦ /ownedStereotype : Stereotype [0..*]{subsets Package::packagedElement} (opposite
+A_ownedStereotype_owningPackage::owningPackage)
+References the Stereotypes that are owned by the Package.
+
+♦ /ownedType : Type [0..*]{subsets Package::packagedElement} (opposite Type::package)
+References the packaged elements that are Types.
+
+♦ packageMerge : PackageMerge [0..*]{subsets Element::ownedElement, subsets
+A_source_directedRelationship::directedRelationship} (opposite PackageMerge::receivingPackage)
+References the PackageMerges that are owned by this Package.
+
+♦ packagedElement : PackageableElement [0..*]{subsets Namespace::ownedMember} (opposite
+A_packagedElement_owningPackage::owningPackage)
+Specifies the packageable elements that are owned by this Package.
+276
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 277 / PDF PAGE 319 =====
+
+
+♦ profileApplication : ProfileApplication [0..*]{subsets Element::ownedElement, subsets
+A_source_directedRelationship::directedRelationship} (opposite ProfileApplication::applyingPackage)
+References the ProfileApplications that indicate which profiles have been applied to the Package.
+12.4.5.7
+Operations
+
+allApplicableStereotypes() : Stereotype [0..*]
+The query allApplicableStereotypes() returns all the directly or indirectly owned stereotypes, including
+stereotypes contained in sub-profiles.
+body: let ownedPackages : Bag(Package) = ownedMember->select(oclIsKindOf(Package))-
+>collect(oclAsType(Package)) in
+ ownedStereotype->union(ownedPackages.allApplicableStereotypes())->flatten()->asSet()
+
+containingProfile() : Profile [0..1]
+The query containingProfile() returns the closest profile directly or indirectly containing this package (or this
+package itself, if it is a profile).
+body: if self.oclIsKindOf(Profile) then
+self.oclAsType(Profile)
+else
+self.namespace.oclAsType(Package).containingProfile()
+endif
+
+makesVisible(el : NamedElement) : Boolean
+The query makesVisible() defines whether a Package makes an element visible outside itself. Elements with no
+visibility and elements with public visibility are made visible.
+pre: member->includes(el)
+body: ownedMember->includes(el) or
+(elementImport->select(ei|ei.importedElement = VisibilityKind::public)-
+>collect(importedElement.oclAsType(NamedElement))->includes(el)) or
+(packageImport->select(visibility = VisibilityKind::public)->collect(importedPackage.member-
+>includes(el))->notEmpty())
+
+mustBeOwned() : Boolean {redefines Element::mustBeOwned()}
+The query mustBeOwned() indicates whether elements of this type must have an owner.
+body: false
+
+nestedPackage() : Package [0..*]
+Derivation for Package::/nestedPackage
+body: packagedElement->select(oclIsKindOf(Package))->collect(oclAsType(Package))->asSet()
+
+ownedStereotype() : Stereotype [0..*]
+Derivation for Package::/ownedStereotype
+body: packagedElement->select(oclIsKindOf(Stereotype))->collect(oclAsType(Stereotype))-
+>asSet()
+
+ownedType() : Type [0..*]
+Derivation for Package::/ownedType
+body: packagedElement->select(oclIsKindOf(Type))->collect(oclAsType(Type))->asSet()
+
+visibleMembers() : PackageableElement [0..*]
+The query visibleMembers() defines which members of a Package can be accessed outside it.
+Unified Modeling Language 2.5.1
+277
+===== PRINTED PAGE 278 / PDF PAGE 320 =====
+
+body: member->select( m | m.oclIsKindOf(PackageableElement) and self.makesVisible(m))-
+>collect(oclAsType(PackageableElement))->asSet()
+12.4.5.8
+Constraints
+
+elements_public_or_private
+If an element that is owned by a package has visibility, it is public or private.
+inv: packagedElement->forAll(e | e.visibility<> null implies e.visibility =
+VisibilityKind::public or e.visibility = VisibilityKind::private)
+12.4.6
+PackageMerge [Class]
+12.4.6.1
+Description
+A package merge defines how the contents of one package are extended by the contents of another package.
+12.4.6.2
+Diagrams
+Packages
+12.4.6.3
+Generalizations
+DirectedRelationship
+12.4.6.4
+Association Ends
+
+mergedPackage : Package [1..1]{subsets DirectedRelationship::target} (opposite
+A_mergedPackage_packageMerge::packageMerge)
+References the Package that is to be merged with the receiving package of the PackageMerge.
+
+receivingPackage : Package [1..1]{subsets DirectedRelationship::source, subsets Element::owner} (opposite
+Package::packageMerge)
+References the Package that is being extended with the contents of the merged package of the PackageMerge.
+12.4.7
+Profile [Class]
+12.4.7.1
+Description
+A profile defines limited extensions to a reference metamodel with the purpose of adapting the metamodel to a specific
+platform or domain.
+12.4.7.2
+Diagrams
+Profiles
+12.4.7.3
+Generalizations
+Package
+12.4.7.4
+Association Ends
+
+♦ metaclassReference : ElementImport [0..*]{subsets Namespace::elementImport} (opposite
+A_metaclassReference_profile::profile)
+References a metaclass that may be extended.
+278
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 279 / PDF PAGE 321 =====
+
+
+♦ metamodelReference : PackageImport [0..*]{subsets Namespace::packageImport} (opposite
+A_metamodelReference_profile::profile)
+References a package containing (directly or indirectly) metaclasses that may be extended.
+12.4.7.5
+Constraints
+
+metaclass_reference_not_specialized
+An element imported as a metaclassReference is not specialized or generalized in a Profile.
+inv: metaclassReference.importedElement->
+select(c | c.oclIsKindOf(Classifier) and
+(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))-
+>isEmpty()
+and
+packagedElement->
+    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
+       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))-
+>collect(oclAsType(Classifier)))->isEmpty()
+
+references_same_metamodel
+All elements imported either as metaclassReferences or through metamodelReferences are members of the
+same base reference metamodel.
+inv: metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
+  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
+12.4.8
+ProfileApplication [Class]
+12.4.8.1
+Description
+A profile application is used to show which profiles have been applied to a package.
+12.4.8.2
+Diagrams
+Profiles
+12.4.8.3
+Generalizations
+DirectedRelationship
+12.4.8.4
+Attributes
+
+isStrict : Boolean [1..1] = false
+Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly
+applied.
+12.4.8.5
+Association Ends
+
+appliedProfile : Profile [1..1]{subsets DirectedRelationship::target} (opposite
+A_appliedProfile_profileApplication::profileApplication)
+References the Profiles that are applied to a Package through this ProfileApplication.
+
+applyingPackage : Package [1..1]{subsets DirectedRelationship::source, subsets Element::owner} (opposite
+Package::profileApplication)
+The package that owns the profile application.
+Unified Modeling Language 2.5.1
+279
+===== PRINTED PAGE 280 / PDF PAGE 322 =====
+
+12.4.9
+Stereotype [Class]
+12.4.9.1
+Description
+A stereotype defines how an existing metaclass may be extended, and enables the use of platform or domain specific
+terminology or notation in place of, or in addition to, the ones used for the extended metaclass.
+12.4.9.2
+Diagrams
+Profiles
+12.4.9.3
+Generalizations
+Class
+12.4.9.4
+Association Ends
+
+♦ icon : Image [0..*]{subsets Element::ownedElement} (opposite A_icon_stereotype::stereotype)
+Stereotype can change the graphical appearance of the extended model element by using attached icons. When
+this association is not null, it references the location of the icon content to be displayed within diagrams
+presenting the extended model elements.
+
+/profile : Profile [1..1]{} (opposite A_profile_stereotype::stereotype)
+The profile that directly or indirectly contains this stereotype.
+12.4.9.5
+Operations
+
+containingProfile() : Profile
+The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
+body: self.namespace.oclAsType(Package).containingProfile()
+
+profile() : Profile
+A stereotype must be contained, directly or indirectly, in a profile.
+body: self.containingProfile()
+12.4.9.6
+Constraints
+
+binaryAssociationsOnly
+Stereotypes may only participate in binary associations.
+inv: ownedAttribute.association->forAll(memberEnd->size()=2)
+
+generalize
+A Stereotype may only generalize or specialize another Stereotype.
+inv: allParents()->forAll(oclIsKindOf(Stereotype))
+and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype))
+implies c.oclIsKindOf(Stereotype))
+
+name_not_clash
+Stereotype names should not clash with keyword names for the extended model element.
+Cannot be expressed in OCL
+280
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 281 / PDF PAGE 323 =====
+
+
+associationEndOwnership
+Where a stereotype’s property is an association end for an association other than a kind of extension, and the
+other end is not a stereotype, the other end must be owned by the association itself.
+inv: ownedAttribute
+->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not
+type.oclIsKindOf(Stereotype))
+->forAll(opposite.owner = association)
+
+base_property_upper_bound
+The upper bound of base-properties is exactly 1.
+Cannot be expressed in OCL
+
+base_property_multiplicity_single_extension
+If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
+Cannot be expressed in OCL
+
+base_property_multiplicity_multiple_extension
+If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be
+[0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
+Cannot be expressed in OCL
+12.5
+Association Descriptions
+12.5.1
+A_appliedProfile_profileApplication [Association]
+12.5.1.1
+Diagrams
+Profiles
+12.5.1.2
+Owned Ends
+
+profileApplication : ProfileApplication [0..*]{subsets A_target_directedRelationship::directedRelationship}
+(opposite ProfileApplication::appliedProfile)
+12.5.2
+A_icon_stereotype [Association]
+12.5.2.1
+Diagrams
+Profiles
+12.5.2.2
+Owned Ends
+
+stereotype : Stereotype [0..1]{subsets Element::owner} (opposite Stereotype::icon)
+12.5.3
+A_mergedPackage_packageMerge [Association]
+12.5.3.1
+Diagrams
+Packages
+Unified Modeling Language 2.5.1
+281
+===== PRINTED PAGE 282 / PDF PAGE 324 =====
+
+12.5.3.2
+Owned Ends
+
+packageMerge : PackageMerge [0..*]{subsets A_target_directedRelationship::directedRelationship} (opposite
+PackageMerge::mergedPackage)
+12.5.4
+A_metaclassReference_profile [Association]
+12.5.4.1
+Diagrams
+Profiles
+12.5.4.2
+Owned Ends
+
+profile : Profile [0..1]{subsets ElementImport::importingNamespace} (opposite Profile::metaclassReference)
+12.5.5
+A_metamodelReference_profile [Association]
+12.5.5.1
+Diagrams
+Profiles
+12.5.5.2
+Owned Ends
+
+profile : Profile [0..1]{subsets PackageImport::importingNamespace} (opposite Profile::metamodelReference)
+12.5.6
+A_nestedPackage_nestingPackage [Association]
+12.5.6.1
+Diagrams
+Packages
+12.5.6.2
+Member Ends
+
+Package::nestedPackage
+
+Package::nestingPackage
+12.5.7
+A_ownedEnd_extension [Association]
+12.5.7.1
+Diagrams
+Profiles
+12.5.7.2
+Owned Ends
+
+extension : Extension [1..1]{subsets Property::owningAssociation} (opposite Extension::ownedEnd)
+12.5.8
+A_ownedStereotype_owningPackage [Association]
+12.5.8.1
+Diagrams
+Profiles
+282
+Unified Modeling Language 2.5.1
+===== PRINTED PAGE 283 / PDF PAGE 325 =====
+
+12.5.8.2
+Generalizations
+A_packagedElement_owningPackage
+12.5.8.3
+Owned Ends
+
+owningPackage : Package [1..1]{redefines A_packagedElement_owningPackage::owningPackage} (opposite
+Package::ownedStereotype)
+12.5.9
+A_ownedType_package [Association]
+12.5.9.1
+Diagrams
+Packages
+12.5.9.2
+Member Ends
+
+Package::ownedType
+
+Type::package
+12.5.10
+A_packageMerge_receivingPackage [Association]
+12.5.10.1
+Diagrams
+Packages
+12.5.10.2
+Member Ends
+
+Package::packageMerge
+
+PackageMerge::receivingPackage
+12.5.11
+A_packagedElement_owningPackage [Association]
+12.5.11.1
+Diagrams
+Packages
+12.5.11.2
+Specializations
+A_ownedStereotype_owningPackage
+12.5.11.3
+Owned Ends
+
+owningPackage : Package [0..1]{subsets NamedElement::namespace} (opposite Package::packagedElement)
+12.5.12
+A_profileApplication_applyingPackage [Association]
+12.5.12.1
+Diagrams
+Profiles
+Unified Modeling Language 2.5.1
+283
+===== PRINTED PAGE 284 / PDF PAGE 326 =====
+
+12.5.12.2
+Member Ends
+
+Package::profileApplication
+
+ProfileApplication::applyingPackage
+12.5.13
+A_profile_stereotype [Association]
+12.5.13.1
+Diagrams
+Profiles
+12.5.13.2
+Owned Ends
+
+stereotype : Stereotype [0..*] (opposite Stereotype::profile)
+12.5.14
+A_type_extensionEnd [Association]
+12.5.14.1
+Diagrams
+Profiles
+12.5.14.2
+Owned Ends
+
+extensionEnd : ExtensionEnd [0..*]{subsets A_type_typedElement::typedElement} (opposite
+ExtensionEnd::type)
+284
+Unified Modeling Language 2.5.1

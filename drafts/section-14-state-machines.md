@@ -19,7 +19,7 @@
 }
 ```
 
-## Дерево подразделов (из официального TOC)
+## Дерево подразделов (из официального TOC + телесный текст)
 
 | Номер | Заголовок | Печатная страница |
 |-------|-----------|-------------------|
@@ -56,6 +56,24 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.3.9.5` | Transition selection algorithm | 324 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.3.9.6` | Transition execution sequence | 325 |
 | &nbsp;&nbsp;`14.2.4` | Notation | 319 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.1` | StateMachine Diagrams | 319 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.2` | StateMachine | 319 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.3` | Region | 319 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.4` | State | 320 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.4.1` | Composite State | 320 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.4.2` | Submachine State | 321 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.4.3` | State list notation | 324 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.5` | FinalState | 325 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.6` | Pseudostate | 325 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.7` | ConnectionPointReference | 328 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8` | Transition | 330 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.1` | Action symbols | 331 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.2` | Signal receipt symbol | 331 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.3` | Signal send symbol | 331 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.4` | Choice point symbol | 332 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.5` | Merge symbol | 332 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.8.6` | Deferred triggers | 332 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`14.2.4.9` | TransitionKind | 333 |
 | &nbsp;&nbsp;`14.2.5` | Examples | 335 |
 | `14.3` | StateMachine Redefinition | 336 |
 | &nbsp;&nbsp;`14.3.1` | Summary | 336 |
@@ -86,7 +104,6 @@
 
 > **Каталог классификаторов**: `14.5 Classifier Descriptions` (p.345)
 > **Каталог ассоциаций**: `14.6 Association Descriptions` (p.364)
-
 ## Классификаторы раздела
 
 ### Из XMI-пакета `StateMachines` (прямые классы/перечисления: 13)
@@ -314,9 +331,9 @@
 ## Замечания и риски
 
 ### Структура и нумерация
-- **Пропуск в TOC**: раздел `14.6.23` отсутствует в оглавлении (прыжок от `.22` к `.24`). Нужно проверить, действительно ли ассоциация `.23` не существует или это ошибка оригинала.
+- **14.6.23**: подтверждено — `A_redefinitionContext_transition` присутствует в TOC на строке 955 дампа (страница 369). Пробела в нумерации нет.
 - **Figure 14.1** расположен на странице 305 (до основной секции), это overview-диаграмма — его нужно вставлять как первую диаграмму раздела.
-- **Figure 14.16** не занесён в TOC, но существует в теле текста (p.325). Его нужно включать.
+- **Figure 14.16** присутствует и в TOC (p.325), и в теле текста — подтверждён, подписи верны.
 
 ### Размер и сложность
 - Раздел очень большой: ~68 страниц (305–372), **13 классификаторов**, **32 ассоциации**, **84 OCL-правила**, **46 рисунков**.

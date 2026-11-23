@@ -28,7 +28,7 @@
 ## Статистика
 
 - Печатные страницы: **565–638** (74 стр.)
-- Подразделы (из TOC): **105** записей в теле раздела (нормативные подразделы без повторов — ~90)
+- Подразделы (из TOC и тела раздела): **119** уникальных записей в теле раздела (~135 со всеми подкаталогами)
 - Классификаторы: **25** (22 класса/абстрактных класса + 3 перечисления)
 - Ассоциации: **38**
 - Рисунки: **30** (Figure 17.1–17.30)
@@ -63,16 +63,19 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.2.4.4` | ExecutionSpecification | 567 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.2.4.5` | StateInvariant | 568 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.2.4.6` | Formal Gate | 568 |
+| &nbsp;&nbsp;`17.2.5` | Examples | 570 |
 | `17.3` | Lifelines | 571 |
 | &nbsp;&nbsp;`17.3.1` | Summary | 571 |
-| &nbsp;&nbsp;`17.3.3` | Semantics | 571 |
+| &nbsp;&nbsp;`17.3.2` | Abstract Syntax | 572 |
+| &nbsp;&nbsp;`17.3.3` | Semantics | 572 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.3.3.1` | Lifelines | 571 |
 | &nbsp;&nbsp;`17.3.4` | Notation | 571 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.3.4.1` | Lifeline | 571 |
 | &nbsp;&nbsp;`17.3.5` | Examples | 571 |
 | `17.4` | Messages | 573 |
-| &nbsp;&nbsp;`17.4.1` | Summary | 573 |
-| &nbsp;&nbsp;`17.4.3` | Semantics | 573 |
+| &nbsp;&nbsp;`17.4.1` | Summary | 575 |
+| &nbsp;&nbsp;`17.4.2` | Abstract Syntax | 576 |
+| &nbsp;&nbsp;`17.4.3` | Semantics | 576 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.4.3.1` | Messages | 573 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.4.3.2` | Message Ends | 574 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.4.3.3` | Message Occurrence Specifications | 575 |
@@ -84,8 +87,9 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.4.4.3` | Gate | 577 |
 | &nbsp;&nbsp;`17.4.5` | Examples | 578 |
 | `17.5` | Occurrences | 579 |
-| &nbsp;&nbsp;`17.5.1` | Summary | 579 |
-| &nbsp;&nbsp;`17.5.3` | Semantics | 579 |
+| &nbsp;&nbsp;`17.5.1` | Summary | 581 |
+| &nbsp;&nbsp;`17.5.2` | Abstract Syntax | 582 |
+| &nbsp;&nbsp;`17.5.3` | Semantics | 582 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.5.3.1` | Action Execution Specifications | 579 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.5.3.2` | Behavior Execution Specifications | 579 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.5.3.3` | Execution Occurrence Specifications | 580 |
@@ -97,7 +101,8 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.5.4.4` | GeneralOrdering | 582 |
 | &nbsp;&nbsp;`17.5.5` | Examples | 583 |
 | `17.6` | Fragments | 584 |
-| &nbsp;&nbsp;`17.6.1` | Summary | 584 |
+| &nbsp;&nbsp;`17.6.1` | Summary | 583 |
+| &nbsp;&nbsp;`17.6.2` | Abstract Syntax | 584 |
 | &nbsp;&nbsp;`17.6.3` | Semantics | 584 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.6.3.1` | Interaction Operands | 584 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.6.3.2` | Interaction Constraints | 584 |
@@ -128,8 +133,9 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.6.4.10` | Parallel interactionOperator | 589 |
 | &nbsp;&nbsp;`17.6.5` | Examples | 590 |
 | `17.7` | Interaction Uses | 590 |
-| &nbsp;&nbsp;`17.7.1` | Summary | 590 |
-| &nbsp;&nbsp;`17.7.3` | Semantics | 590 |
+| &nbsp;&nbsp;`17.7.1` | Summary | 592 |
+| &nbsp;&nbsp;`17.7.2` | Abstract Syntax | 593 |
+| &nbsp;&nbsp;`17.7.3` | Semantics | 593 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.7.3.1` | Interaction Uses | 590 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.7.3.2` | Part Decompositions | 590 |
 | &nbsp;&nbsp;`17.7.4` | Notation | 591 |
@@ -141,12 +147,15 @@
 | &nbsp;&nbsp;`17.8.1` | Sequence Diagram Notation | 595 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.8.1.1` | Graphic Nodes | 595 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`17.8.1.2` | Graphic Paths | 596 |
-| `17.9` | Communication Diagrams | 599 |
+| &nbsp;&nbsp;`17.8.2` | Example Sequence Diagram | 601 |
+| `17.9` | Communication Diagrams | 601 |
 | &nbsp;&nbsp;`17.9.1` | Communication Diagram Notation | 599 |
 | &nbsp;&nbsp;`17.9.2` | Example Communication Diagram | 600 |
-| `17.10` | Interaction Overview Diagrams | 601 |
-| &nbsp;&nbsp;`17.10.1` | Interaction Overview Diagram Notation | 601 |
-| `17.11` | Timing Diagrams | 603 |
+| `17.10` | Interaction Overview Diagrams | 603 |
+| &nbsp;&nbsp;`17.10.1` | Interaction Overview Diagram Notation | 603 |
+| &nbsp;&nbsp;`17.10.2` | Examples of Interaction Overview Diagrams | 605 |
+| `17.11` | Timing Diagrams | 605 |
+| &nbsp;&nbsp;`17.11.1` | Timing Diagram Notation | 606 |
 | &nbsp;&nbsp;`17.11.2` | Examples of Timing Diagrams | 604 |
 | `17.12` | Classifier Descriptions | 606 |
 | `17.13` | Association Descriptions | 631 |
@@ -276,15 +285,19 @@
 
 2. **Параграф 17.6.3 огромный**: подраздел «Semantics» раздела Fragments содержит 17 вложенных подпараграфов (17.6.3.1–17.6.3.17), описывающих каждый тип оператора CombinedFragment отдельно. Каждый из них имеет собственную семантику, ограничения и примеры.
 
-3. **Параграфы 17.12/17.13**: в TOC «Classifier Descriptions» (стр. 606) и «Association Descriptions» (стр. 631) идут как разделы-заголовки без собственных страниц каталогов (аналогично разделу 16). Рекомендуется использовать `classifier_catalog: "17.12"` и `association_catalog: "17.13"`.
+3. **Параграфы 17.12/17.13**: Classifier Descriptions (стр. 608) и Association Descriptions (стр. 633) в теле текста — не каталоги, а полные описания каждого классификатора и ассоциации с OCL-ограничениями. Рекомендуется `classifier_catalog: "17.12"` и `association_catalog: "17.13"`.
+
+12. **ownedEnd vs memberEnd**: 38 ассоциаций используют `memberEnd` для ссылки на свойства классов и `ownedEnd` — для собственных концев ассоциации. Конец, принадлежащий самой ассоциации (`ownedEnd`), не является атрибутом класса противоположного конца. Для страниц справочника нужно показывать оба конца независимо от их владельца.
 
 ### Нумерационные аномалии
 
-4. **Пропуск в TOC**: в оглавлении отсутствует Figure 17.11 (Fragments на стр. 580) — оно появляется только в теле текста после `Figure 17.10`. Это упущение форматирования TOC, а не ошибки содержания.
+4. **Пропуски рисунков в TOC**: в оглавлении отсутствуют Figure 17.23 (стр. 592), Figure 17.27 (стр. 601) и Figure 17.30 (стр. 604) — они появляются только в теле текста после форм-фида. Все остальные рисунки присутствуют в TOC корректно.
 
 5. **Разрыв нумерации Notation**: в разделе 17.2 подпараграфы Notation идут как 17.2.4.1–17.2.4.6 с пропуском 17.2.4.3 (возможно, было удалено при финальной верстке). Нужно проверить оригинальный PDF на наличие этой страницы.
 
-6. **Опечатка TOC в разделе 17.5**: заголовок `17.5.4 Notation` имеет опечатку `ActionExecutionSpecificiation` (двойная i). В теле текста она исправлена на `ActionExecutionSpecification`.
+6. **Пропуски подразделов Abstract Syntax**: в теле раздела найдены пропущенные нумерационные ступени — подразделы `17.3.2`, `17.4.2`, `17.5.2`, `17.6.2`, `17.7.2` (Abstract Syntax) отсутствуют в TOC, но присутствуют в теле текста. Также отсутствуют `17.8.2` (Example Sequence Diagram), `17.10.2` и `17.11.1` (Timing Diagram Notation).
+
+7. **Артефакт верстки 17.6.4**: на стр. 594 в теле текста встречается «отковердовавший» заголовок `17.6.4 (Strict interactionOperator)` — артефакт переноса с предыдущей страницы. В нумерации не учитывается.
 
 ### Риски реализации
 
@@ -294,12 +307,13 @@
 
 9. **Перечисление InteractionOperatorKind**: 12 литералов — крупнейшее перечисление в пакете. Каждый литерал имеет собственную OCL-спецификацию семантики. Требуется отображение всех литералов с их определениями.
 
-10. **Параграфы 17.8 и 17.9**: Sequence Diagrams и Communication Diagrams не содержат собственных классификаторов (нет «17.8.2 Classifier Descriptions»), а описывают только нотацию. Фактические метамодельные элементы определены в подразделах 17.3–17.6.
+10. **Параграфы 17.8 и 17.9**: Sequence Diagrams (стр. 597) и Communication Diagrams (стр. 601) не содержат собственных классификаторов — в 17.12 перечислены только метамодельные элементы из подразделов 17.3–17.6, а 17.8.2 описывает только пример диаграммы.
 
 11. **XMI-связи с другими пакетами**: пакет Interactions импортирует CommonStructure, Classification и SimpleClassifiers. Многие типы ends ассоциаций (Action, Behavior, Connector) определены в этих внешних пакетах — ссылки на страницы справочника должны вести на соответствующие разделы 15/16.
 
 ### Рекомендации для следующих этапов
 
+- **Конфигурация**: classifier_catalog = "17.12" (Classifier Descriptions), association_catalog = "17.13" (Association Descriptions) — подтверждено по телу текста: стр. 608 и 633 соответственно, а не общие каталоги.
 - **Этап 2 (scaffold)**: разбить контент на ~15 файлов `site/data/content/section-17-*.js` по основным подразделам.
 - **Этап 3 (XMI sync)**: проверить, что все 49 ownedAttribute и 38 ассоциаций корректно генерируют страницы свойств.
 - **Этап 5 (SVG diagrams)**: 30 рисунков требуют интерактивных SVG. Особое внимание — Figure 17.24 (describing Collaborations) и Figure 17.25 (metamodel overview): они содержат сложные перекрёстные связи.

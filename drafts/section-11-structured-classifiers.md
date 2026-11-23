@@ -26,6 +26,8 @@
     "classifier_catalog": "11.8",
     "association_catalog": "11.9",
     "figure_catalog": "Figure 11.x",
+    "figure_count": 54,
+    "nested_packages": ["StateMachines", "SimpleClassifiers", "Packages", "Interactions", "InformationFlows", "Deployments", "CommonStructure", "CommonBehavior", "Classification", "Actions"],
     "source": "site/docs/omg-uml-2.5.1-formal-17-12-05.pdf"
 }
 ```
@@ -227,7 +229,7 @@
 
 ## 5. Рисунки раздела 11
 
-Всего: **48** рисунков (Figure 11.1–11.54, нумерация содержит пропуски).
+Всего: **54** рисунка (Figure 11.1–11.54, все пронумерованы подряд).
 
 | № | Подпись | Печ. стр. |
 |---|---------|-----------|
@@ -269,7 +271,10 @@
 | 36 | Example AssociationClass using diamond symbol | 206 |
 | 37 | Qualified associations | 206 |
 | 38 | Components | 207 |
-| 41 | Black box notation showing a listing of provided and required int | 210 |
+| 39 | Example of an overview diagram showing Components and their general Dependencies | 209 |
+| 40 | A Component with two provided and three required Interfaces | 209 |
+| 41 | Black box notation showing a listing of provided and required interfaces | 210 |
+| 43 | Explicit representation of provided and required Interfaces using Dependency notation | 210 |
 | 42 | Optional “white-box” representation of a Component | 210 |
 | 44 | A representation of the realization of a complex Component | 211 |
 | 45 | An alternative nested representation of a complex Component | 211 |
@@ -293,7 +298,7 @@
 |   PseudostateKind: 9 литералов | |
 |   TransitionKind: 4 литералов | |
 | Ассоциации (11.9.X) | 35 |
-| Рисунки | 48 |
+| Рисунки | 54 |
 | Подзаголовки "Attributes" в 11.8 | 5 |
 | Подзаголовки "Operations" в 11.8 | 12 |
 | Подзаголовки "Constraints" в 11.8 | 8 |
@@ -301,24 +306,27 @@
 
 ## 7. Замечания и риски
 
-### Особенности структуры раздела
+### Особенности структуры раздела (проверено)
 
-1. **Огромный XMI-пакет**: `StructuredClassifiers` объединяет элементы из разделов 7, 9, 10, 11, 12, 15–17.
-   При создании справочника нужно отфильтровать только те элементы, которые описываются в разделах 11.1–11.9 текста.
+1. **Все 15 классификаторов** (11.8.1–11.8.15) присутствуют как прямые дети пакета `StructuredClassifiers` в XMI ✓
 
-2. **Пакет StateMachines** — наиболее богатый подпакет (~13 классов). Все они относятся к разделу 11 и должны быть включены в справочник как часть структуры классификаторов, работающих с внутренними структурами.
+2. **Все 35 ассоциаций** (11.9.1–11.9.35) найдены в XMI, все являются прямыми детьми пакета ✓
+   Однако пакет содержит **сотни** других ассоциаций из вложенных пакетов — при импорте нужно фильтровать по `11.9.`
 
-3. **Пакет SimpleClassifiers** содержит DataType/Enumeration/PrimitiveType из раздела 10 — НЕ включать в содержимое разделов 11.8–11.9.
+3. **Все 54 рисунка** (Figure 11.1–11.54) присутствуют: TOC содержит только ~39 (пропускает Figure 11, 39–40), контентная область — все 54 подряд ✓
 
-4. **Самый объёмный каталог**: 35 ассоциаций в 11.9 — больше, чем в любом другом разделе справочника метамодели.
-   Многие (ownedAttribute, ownedOperation, nestedClassifier...) являются стандартными атрибутами метамодели.
+4. **Аномалия в структуре подразделов**:
+   - `11.8.2 AssociationClass` НЕ имеет подраздела "Generalizations" (только Description, Diagrams, Constraints)
+   - `11.8.9 ConnectableElementTemplateParameter` пропускает "Diagrams" (переход Description → Generalizations)
 
-### Риски
+5. **StateMachines** — подпакет с ~13 классами (Vertex, StateMachine и др.). Все относятся к разделу 11.
+
+6. **SimpleClassifiers** содержит DataType/Enumeration/PrimitiveType из раздела 10 — НЕ включать в справочник 11.8–11.9.
+
+### Риски (актуализировано)
+
+- **Ассоциации без концов в черновике**: текущий черновик перечисляет только имена ассоциаций. Для этапа 2 нужно извлечь `ownedEnd` (имя, тип, нижняя/верхняя кратность) для каждой из 35 ассоциаций из XMI.
 
 - **Перекрёстные ссылки**: элементы раздела 11 активно используются в других разделах (Component → раздел 19, Connector → Activity diagrams). Ссылки строить с учётом порядка создания страниц.
 
-- **Нумерация рисунков в TOC**: некоторые подписи переносятся на несколько строк (Figure 11.8, 11.26, 11.35), что усложняет автоматический парсинг. Рекомендуется ручной контроль.
-
-- **Малые классификаторы**: `ConnectableElementTemplateParameter` (11.8.9) и `ConnectorKind` (11.8.12) описаны 1–2 абзацами — рекомендуется объединить с родительскими разделами.
-
-- **Enumeration PseudostateKind** имеет 9 литералов (initial, deepHistory, shallowHistory, join, fork, junction, choice, entryPoint, exitPoint, terminate), но некоторые могут описываться в контексте state machines (§13).
+- **Enumeration PseudostateKind** имеет 9 литералов (initial, deepHistory, shallowHistory, join, fork, junction, choice, entryPoint, exitPoint, terminate) — но часть литералов описывается в контексте state machines (§13), не §11.

@@ -67,13 +67,13 @@
 
 В таблице 21.1 раздела 21.2 описаны **домены** (semantics) примитивных типов. В XMI они не являются отдельными классификаторами, но представляют собой фактические типы в метамодели UML:
 
-| # | Англ. имя | Семантика (англ.) | Пояснение (рус.) |
-|---|-----------|---------------------|------------------|
-| 1 | **Integer** | "An instance of Integer is a value in the (infinite) set of integers (-2, -1, 0, 1, 2, ...)." | Бесконечное множество целых чисел. Используется для атрибутов-счётчиков и индексации. |
-| 2 | **Boolean** | "An instance of Boolean is one of the predefined values true and false." | Двоичное значение: true или false. Основа логики UML (например, флаги isAbstract). |
-| 3 | **String** | "An instance of String defines a sequence of characters. Character sets may include non-Roman alphabets." | Последовательность символов, включая непанлафавитные наборы. Используется для комментариев, выражений OCL и т.д. |
-| 4 | **UnlimitedNatural** | "An instance of UnlimitedNatural is a value in the (infinite) set of natural numbers (0, 1, 2, ...) plus unlimited." | Натуральные числа плюс значение «неограничено» (*). Применяется для указания кратности без верхней границы. |
-| 5 | **Real** | "An instance of Real is a value in the (infinite) set of real numbers. Typically an implementation will internally represent Real numbers using a floating point standard such as ISO/IEC/IEEE 60559:2011." | Бесконечное множество действительных чисел; реализации обычно используют IEEE 754 с плавающей запятой. |
+| # | Англ. имя | Подраздел (spec) | Семантика (англ.) | Пояснение (рус.) |
+|---|-----------|------------------|---------------------|------------------|
+| 1 | **Integer** | 21.2 (Table 21.1) | "An instance of Integer is a value in the (infinite) set of integers (-2, -1, 0, 1, 2, ...)." | Бесконечное множество целых чисел. Используется для атрибутов-счётчиков и индексации. |
+| 2 | **Boolean** | 21.2 (Table 21.1) | "An instance of Boolean is one of the predefined values true and false." | Двоичное значение: true или false. Основа логики UML (например, флаги isAbstract). |
+| 3 | **String** | 21.2 (Table 21.1) | "An instance of String defines a sequence of characters. Character sets may include non-Roman alphabets. The semantics of the string itself depends on its purpose; it can be a comment, computational language expression, OCL expression, etc." | Последовательность символов, включая непанлафавитные наборы. Используется для комментариев, выражений языков и OCL. |
+| 4 | **UnlimitedNatural** | 21.2 (Table 21.1) | "An instance of UnlimitedNatural is a value in the (infinite) set of natural numbers (0, 1, 2, ...) plus unlimited. The value of unlimited is shown using an asterisk ('*'). UnlimitedNatural values are typically used to denote the upper bound of a range, such as a multiplicity; unlimited is used whenever the range is specified to have no upper bound." | Натуральные числа плюс значение «неограничено» (*). Применяется для указания кратности без верхней границы. |
+| 5 | **Real** | 21.2 (Table 21.1) | "An instance of Real is a value in the (infinite) set of real numbers. Typically an implementation will internally represent Real numbers using a floating point standard such as ISO/IEC/IEEE 60559:2011 (whose content is identical to the predecessor IEEE 754 standard)." | Бесконечное множество действительных чисел; реализации обычно используют IEEE 754 с плавающей запятой. |
 
 ### Наследование (из XMI)
 
@@ -172,12 +172,12 @@ PrimitiveType уже определён в разделе 10 (10.5.7). В спр
 ### 8. Смысл раздела 22 Standard Profile как отдельного раздела справочника
 Раздел 22 начинается на **печатной странице 679** и заканчивается перед Annex A (страница 683), то есть занимает страницы **679–682** (4 страницы).
 
-**Аргументы ЗА выделение раздела 22:**
-- Раздел 22 содержит уникальную структуру: `StandardProfile` с ~24 stereotypes.
-- Каждый stereotype имеет имя, область применения (Applies to) и описание (Description).
+**АргументЫ ЗА выделение раздела 22:**
+- Раздел 22 содержит уникальную структуру: `StandardProfile` с **28 стереотипами** (подтверждено из дампа).
+- Каждый stereotype имеет имя, область применения (Applies to) и описание (Description) из таблицы 22.1.
 - Это самостоятельный профиль с собственным XMI-пакетом.
 
-**Аргументы ПРОТИВ:**
+**АргументЫ ПРОТИВ:**
 - Раздел 22 очень короткий (4 страницы) и по структуре отличается от разделов 7–10 (профили, а не метамодель).
 - Stereotypes Standard Profile могут быть включены в отдельный раздел "Profiles" позже.
 
@@ -185,7 +185,9 @@ PrimitiveType уже определён в разделе 10 (10.5.7). В спр
 - 22 Standard Profile
 - 22.1 Summary
 - 22.2 Model (Figure 22.1)
-- 22.3 Standard Stereotypes (~24 stereotypes, каждый — страница)
+- 22.3 Standard Stereotypes (**28 стереотипов**, каждый — страница)
+
+Список всех 28 стереотипов из таблицы 22.1: Auxiliary, Focus, Call, Create, Derive, Destroy, Document, Executable, File, Library, Entity, Implement, ImplementationClass, Specification, Subsystem, Trace, Type, Utility, BuildComponent, Metaclass, ModelLibrary, SystemModel, Process, Responsibility, Script, Send, Service, Source.
 
 ---
 

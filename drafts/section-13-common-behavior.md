@@ -14,8 +14,8 @@
   "package": "CommonBehavior",
   "first_page": 285,
   "last_page": 304,
-  "classifier_catalog": "",
-  "association_catalog": "",
+  "classifier_catalog": "13.4 Classifier Descriptions",
+  "association_catalog": "13.5 Association Descriptions",
   "source": "omg-uml-2.5.1-formal-17-12-05.pdf"
 }
 ```
@@ -27,13 +27,21 @@
 | `13.1` | Summary | 285 |
 | `13.2` | Behaviors | 285 |
 | `13.2.1` | Summary | 285 |
+| `13.2.2` | Abstract Syntax | 286 |
+| `13.2.3` | Semantics | 286 |
 | `13.2.3.1` | Behaviors | 286 |
 | `13.2.3.2` | Behavior Parameters | 287 |
 | `13.2.3.3` | Opaque and Function Behaviors | 288 |
 | `13.2.3.4` | Behaviored Classifiers | 288 |
 | `13.2.3.5` | Behavioral Features and Methods | 289 |
+| `13.2.4` | Notation | 290 |
+| `13.2.5` | Examples | 290 |
 | `13.3` | Events | 290 |
 | `13.3.1` | Summary | 290 |
+| `13.3.2` | Abstract Syntax | 291 |
+| `13.3.3` | Semantics | 291 |
+| `13.3.4` | Notation | 293 |
+| `13.3.5` | Examples | 294 |
 | `13.3.3.1` | Event Dispatching | 291 |
 | `13.3.3.2` | Message Events | 292 |
 | `13.3.3.3` | Change Events | 292 |
@@ -78,21 +86,21 @@
 
 ## Классификаторы раздела
 
-### Из XMI-пакета `CommonBehaviors` (прямые классы/перечисления: 11)
+### Из XMI-пакета `CommonBehavior` (прямые классы/перечисления: 11)
 
 | Англ. имя | Тип | Подраздел | Русское пояснение | Первое предложение определения (англ.) |
 |-----------|-----|-----------|-------------------|------------------------------------------|
-| **AnyReceiveEvent** | [Class] | 13.4.1 | Приём любого сообщения | A trigger for an AnyReceiveEvent is triggered by the receipt of any message that...
-| **Behavior** | [Abstract Class] | 13.4.2 | Описывает поведение структурного элемента | Behavior is a specification of how its context BehavioredClassifier changes stat...
-| **CallEvent** | [Class] | 13.4.3 | Событие вызова операции/услуги | A CallEvent models the receipt by an object of a message invoking a call of an O...
-| **ChangeEvent** | [Class] | 13.4.4 | Событие изменения условия (guard) | A ChangeEvent models a change in the system configuration that makes a condition...
-| **Event** | [Abstract Class] | 13.4.5 | Момент во времени, когда происходит что-то значимое | An Event is the specification of some occurrence that may potentially trigger ef...
-| **FunctionBehavior** | [Class] | 13.4.6 | Чистая функция (без побочных эффектов) | A FunctionBehavior is an OpaqueBehavior that does not access or modify any objec...
-| **MessageEvent** | [Abstract Class] | 13.4.7 | Событие получения сообщения (операция или сигнал) | A MessageEvent specifies the receipt by an object of either an Operation call or...
-| **OpaqueBehavior** | [Class] | 13.4.8 | Поведение с текстовым телом (непрозрачное) | An OpaqueBehavior is a Behavior whose specification is given in a textual langua...
-| **SignalEvent** | [Class] | 13.4.9 | Событие получения асинхронного сигнала | A SignalEvent represents the receipt of an asynchronous Signal instance.
-| **TimeEvent** | [Class] | 13.4.10 | Событие, связанное со временем | A TimeEvent is an Event that occurs at a specific point in time.
-| **Trigger** | [Class] | 13.4.11 | Триггер перехода (событие + условие) | A Trigger specifies a specific point at which an Event occurrence may trigger an...
+| **AnyReceiveEvent** | [Class] | 13.4.1 | Приём любого сообщения | A trigger for an AnyReceiveEvent is triggered by the receipt of any message that triggers the event. |
+| **Behavior** | [Abstract Class] | 13.4.2 | Описывает поведение структурного элемента | Behavior is a specification of how its context BehavioredClassifier changes state either through execution or emergent behavior. |
+| **CallEvent** | [Class] | 13.4.3 | Событие вызова операции/услуги | A CallEvent models the receipt by an object of a message invoking a call of an Operation. |
+| **ChangeEvent** | [Class] | 13.4.4 | Событие изменения условия (guard) | A ChangeEvent models a change in the system configuration that makes a condition true or false. |
+| **Event** | [Abstract Class] | 13.4.5 | Момент во времени, когда происходит что-то значимое | An Event is the specification of some occurrence that may potentially trigger effect. |
+| **FunctionBehavior** | [Class] | 13.4.6 | Чистая функция (без побочных эффектов) | A FunctionBehavior is an OpaqueBehavior that does not access or modify any objects. |
+| **MessageEvent** | [Abstract Class] | 13.4.7 | Событие получения сообщения (операция или сигнал) | A MessageEvent specifies the receipt by an object of either an Operation call or a Signal. |
+| **OpaqueBehavior** | [Class] | 13.4.8 | Поведение с текстовым телом (непрозрачное) | An OpaqueBehavior is a Behavior whose specification is given in a textual language. |
+| **SignalEvent** | [Class] | 13.4.9 | Событие получения асинхронного сигнала | A SignalEvent represents the receipt of an asynchronous Signal instance. |
+| **TimeEvent** | [Class] | 13.4.10 | Событие, связанное со временем | A TimeEvent is an Event that occurs at a specific point in time or over a specified time interval. |
+| **Trigger** | [Class] | 13.4.11 | Триггер перехода (событие + условие) | A Trigger specifies a specific point at which an Event occurrence may trigger action. |
 
 ### Статистика атрибутов, операций и ограничений (из XMI)
 
@@ -159,13 +167,16 @@
 
 ## Замечания и риски
 
-- **Номера разделов**: В OMG UML 2.5.1 Common Behavior — это раздел **13** (страницы 285–304). Раздел 12 = Packages, раздел 14 = StateMachines.
-- **Размер**: 48 реальных подразделов, 11 классификаторов (из XMI CommonBehaviors), 12 ассоциаций.
-- **Рисунки**: 2. Основные рисунки в разделах 13.2 (Behaviors), 13.3 (Events).
+- **Номера разделов**: В OMG UML 2.5.1 Common Behavior — это раздел **13** (страницы 285–304). Раздел 12 = Packages (241–284), раздел 14 = StateMachines (305–372).
+- **Размер**: 56 подразделов (включая структурные: Abstract Syntax, Semantics, Notation, Examples для каждого из 13.2 и 13.3), 11 классификаторов (из XMI пакета `CommonBehavior`), 12 ассоциаций.
+- **Рисунки**: 2 (Figure 13.1 Behaviors стр. 286, Figure 13.2 Events стр. 291). Простые диаграммы наследования.
+- **XMI-пакет**: называется `CommonBehavior` (без 's' на конце) — не путать с "CommonBehaviors".
+- **Ассоциации**: все имеют по 2–3 конца; ends с пустым именем — это memberEnd, связывающий класс-владелец с ассоциацией. ownedEnd содержит фактический тип (ChangeEvent, Trigger и т.д.).
+- **Структура раздела**: 13.2 Behaviors и 13.3 Events каждый содержат подразделы Abstract Syntax / Semantics / Notation / Examples — эти разделы описывают синтаксис и семантику, а не новые элементы метамодели.
 
 ## Рекомендации по переносу
 
-1. Добавить конфигурацию для `sections.json` с номером раздела **13** (Common Behavior).
-2. Этап 2 (scaffold): создать заготовки страниц для 11 классификаторов и 12 ассоциаций.
-3. Этап 3 (XMI): извлечь свойства классов и концы ассоциаций.
-4. Этап 5 (SVG): сгенерировать диаграммы для всех рисунков раздела 13.
+1. Добавить конфигурацию для `sections.json` с номером раздела **13** (Common Behavior). В поле `package` указать `CommonBehavior` (без 's').
+2. Этап 2 (scaffold): создать заготовки страниц для 11 классификаторов и 12 ассоциаций. Структурные подразделы (Abstract Syntax, Semantics, Notation, Examples) не требуют отдельных страниц — это метаданные спецификации.
+3. Этап 3 (XMI): извлечь свойства классов и концы ассоциаций из XMI-пакета `CommonBehavior`. Внимание: ends с пустым именем в XMI — это memberEnd, связывающий класс-владелец, а не самостоятельный атрибут.
+4. Этап 5 (SVG): сгенерировать диаграммы для двух рисунков (Behaviors и Events). Обе — простые диаграммы наследования без сложной композиции.

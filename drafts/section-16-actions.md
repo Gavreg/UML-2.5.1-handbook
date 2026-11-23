@@ -25,10 +25,10 @@
 ## Статистика
 
 - Печатные страницы: **441–564** (124 стр.)
-- Подразделы (дерево): **238** записей в оглавлении
+- Подразделы (дерево): **238** записей в оглавлении + **878** заголовков в тексте раздела
 - Классификаторы: **63** (52 классов + 10 абстрактных + 1 перечисление)
-- Ассоциации: **109**
-- Рисунки: **53** (Figure 16.1–16.56; в TOC отсутствуют Figure 16.12 и Figure 16.49)
+- Ассоциации: **109** (все пронумерованы 16.15.1–16.15.109)
+- Рисунки: **56** (Figure 16.1–16.56, все пронумерованы последовательно)
 - Атрибуты (ownedAttribute): **135**
 - Операции (ownedOperation): **26**
 - Ограничения (ownedRule): **155**
@@ -135,6 +135,7 @@
 | `16.14.21` | ExpansionKind [Enumeration] | 505 | ── Подраздел |
 | `16.14.22` | ExpansionNode [Class] | 505 | ── Подраздел |
 | `16.14.23` | ExpansionRegion [Class] | 506 | ── Подраздел |
+| `16.14.40` | ReadLinkObjectEndQualifierAction [Class] | 521 | ── Подраздел |
 | `16.14.24` | InputPin [Class] | 506 | ── Подраздел |
 | `16.14.25` | InvocationAction [Abstract Class] | 507 | ── Подраздел |
 | `16.14.26` | LinkAction [Abstract Class] | 507 | ── Подраздел |
@@ -196,6 +197,7 @@
 | `16.15.19` | A_endData_destroyLinkAction [Association] | 545 | ── Подраздел |
 | `16.15.20` | A_endData_linkAction [Association] | 545 | ── Подраздел |
 | `16.15.21` | A_end_linkEndData [Association] | 545 | ── Подраздел |
+| `16.15.22` | A_end_readLinkObjectEndAction [Association] | 545 | ── Подраздел |
 | `16.15.23` | A_exception_raiseExceptionAction [Association] | 546 | ── Подраздел |
 | `16.15.24` | A_executableNode_sequenceNode [Association] | 546 | ── Подраздел |
 | `16.15.25` | A_first_testIdentityAction [Association] | 546 | ── Подраздел |
@@ -204,6 +206,7 @@
 | `16.15.28` | A_inputValue_linkAction [Association] | 547 | ── Подраздел |
 | `16.15.29` | A_inputValue_opaqueAction [Association] | 547 | ── Подраздел |
 | `16.15.30` | A_input_action [Association] | 547 | ── Подраздел |
+| `16.15.31` | A_insertAt_addStructuralFeatureValueAction [Association] | 547 | ── Подраздел |
 | `16.15.32` | A_insertAt_addVariableValueAction [Association] | 547 | ── Подраздел |
 | `16.15.33` | A_insertAt_linkEndCreationData [Association] | 548 | ── Подраздел |
 | `16.15.34` | A_localPostcondition_action [Association] | 548 | ── Подраздел |
@@ -213,9 +216,11 @@
 | `16.15.38` | A_newClassifier_reclassifyObjectAction [Association] | 549 | ── Подраздел |
 | `16.15.39` | A_node_inStructuredNode [Association] | 549 | ── Подраздел |
 | `16.15.40` | A_object_clearAssociationAction [Association] | 549 | ── Подраздел |
+| `16.15.41` | A_object_readIsClassifiedObjectAction [Association] | 549 | ── Подраздел |
 | `16.15.42` | A_object_readLinkObjectEndAction [Association] | 549 | ── Подраздел |
 | `16.15.43` | A_object_readLinkObjectEndQualifierAction [Association] | 550 | ── Подраздел |
 | `16.15.44` | A_object_reclassifyObjectAction [Association] | 550 | ── Подраздел |
+| `16.15.45` | A_object_startClassifierBehaviorAction [Association] | 550 | ── Подраздел |
 | `16.15.46` | A_object_startObjectBehaviorAction [Association] | 550 | ── Подраздел |
 | `16.15.47` | A_object_structuralFeatureAction [Association] | 550 | ── Подраздел |
 | `16.15.48` | A_object_unmarshallAction [Association] | 551 | ── Подраздел |
@@ -230,8 +235,10 @@
 | `16.15.57` | A_qualifier_qualifierValue [Association] | 552 | ── Подраздел |
 | `16.15.58` | A_qualifier_readLinkObjectEndQualifierAction [Association] | 553 | ── Подраздел |
 | `16.15.59` | A_reducer_reduceAction [Association] | 553 | ── Подраздел |
+| `16.15.60` | A_removeAt_removeStructuralFeatureValueAction [Association] | 553 | ── Подраздел |
 | `16.15.61` | A_removeAt_removeVariableValueAction [Association] | 553 | ── Подраздел |
 | `16.15.62` | A_replyToCall_replyAction [Association] | 553 | ── Подраздел |
+| `16.15.63` | A_replyValue_replyAction [Association] | 554 | ── Подраздел |
 | `16.15.64` | A_request_sendObjectAction [Association] | 554 | ── Подраздел |
 | `16.15.65` | A_result_acceptEventAction [Association] | 554 | ── Подраздел |
 | `16.15.66` | A_result_callAction [Association] | 554 | ── Подраздел |
@@ -244,6 +251,7 @@
 | `16.15.73` | A_result_readIsClassifiedObjectAction [Association] | 556 | ── Подраздел |
 | `16.15.74` | A_result_readLinkAction [Association] | 556 | ── Подраздел |
 | `16.15.75` | A_result_readLinkObjectEndAction [Association] | 556 | ── Подраздел |
+| `16.15.76` | A_result_readLinkObjectEndQualifierAction [Association] | 556 | ── Подраздел |
 | `16.15.77` | A_result_readSelfAction [Association] | 557 | ── Подраздел |
 | `16.15.78` | A_result_readStructuralFeatureAction [Association] | 557 | ── Подраздел |
 | `16.15.79` | A_result_readVariableAction [Association] | 557 | ── Подраздел |
@@ -272,6 +280,7 @@
 | `16.15.102` | A_value_linkEndData [Association] | 562 | ── Подраздел |
 | `16.15.103` | A_value_qualifierValue [Association] | 562 | ── Подраздел |
 | `16.15.104` | A_value_valuePin [Association] | 562 | ── Подраздел |
+| `16.15.105` | A_value_valueSpecificationAction [Association] | 562 | ── Подраздел |
 | `16.15.106` | A_value_writeStructuralFeatureAction [Association] | 562 | ── Подраздел |
 | `16.15.107` | A_value_writeVariableAction [Association] | 563 | ── Подраздел |
 | `16.15.108` | A_variable_scope [Association] | 563 | ── Подраздел |
@@ -279,16 +288,16 @@
 
 ## Таблица классификаторов
 
-| Имя | Тип | Подраздел | Атрибуты | Операции | Обобщения |
-|-----|-----|-----------|----------|----------|-----------|
+| Имя | Тип | Подраздел | Атрибуты | Операции | Обобщения | Определение (EN/RU) |
+|-----|-----|-----------|----------|----------|-----------|---------------------|
 | `AcceptCallAction` | Class | 16.14.1 | returnInformation | — | AcceptEventAction |
-| `AcceptEventAction` | Class | 16.14.2 | isUnmarshall, result, trigger | — | Action |
-| `Action` | Abstract Class | 16.2 | context, input, isLocallyReentrant, localPostcondition, localPrecondition, output | context, allActions, allOwnedNodes, containingBehavior | ExecutableNode |
+| `AcceptEventAction` | Class | 16.14.2 | isUnmarshall, result, trigger | — | Action | An AcceptEventAction is an Action that waits for the occurrence of one or more specific Events. / Действие ожидания одного или более событий |
+| `Action` | Abstract Class | 16.2 | context, input, isLocallyReentrant, localPostcondition, localPrecondition, output | context, allActions, allOwnedNodes, containingBehavior | ExecutableNode | An Action is the fundamental unit of executable functionality. / Базовый исполняемый элемент активности |
 | `ActionInputPin` | Class | 16.14.4 | fromAction | — | InputPin |
 | `AddStructuralFeatureValueAction` | Class | 16.14.5 | insertAt, isReplaceAll | — | WriteStructuralFeatureAction |
 | `AddVariableValueAction` | Class | 16.14.6 | insertAt, isReplaceAll | — | WriteVariableAction |
 | `BroadcastSignalAction` | Class | 16.14.7 | signal | — | InvocationAction |
-| `CallAction` | Abstract Class | 16.14.8 | isSynchronous, result | inputParameters, outputParameters | InvocationAction |
+| `CallAction` | Abstract Class | 16.14.8 | isSynchronous, result | inputParameters, outputParameters | InvocationAction | CallAction is an abstract class for Actions that invoke a Behavior with given argument values. / Абстрактный класс действий вызова поведения с аргументами |
 | `CallBehaviorAction` | Class | 16.14.9 | behavior | outputParameters, inputParameters | CallAction |
 | `CallOperationAction` | Class | 16.14.10 | operation, target | outputParameters, inputParameters | CallAction |
 | `Clause` | Class | 16.14.11 | body, bodyOutput, decider, predecessorClause, successorClause, test | — | Element |
@@ -303,14 +312,14 @@
 | `DestroyObjectAction` | Class | 16.14.20 | isDestroyLinks, isDestroyOwnedObjects, target | — | Action |
 | `ExpansionKind` | Enumeration | 16.14.21 | — | — | — |
 | `ExpansionNode` | Class | 16.14.22 | regionAsInput, regionAsOutput | — | ObjectNode |
-| `ExpansionRegion` | Class | 16.14.23 | inputElement, mode, outputElement | — | StructuredActivityNode |
+| `ExpansionRegion` | Class | 16.14.23 | inputElement, mode, outputElement | — | StructuredActivityNode | An ExpansionRegion is a StructuredActivityNode that executes its content multiple times corresponding to elements of a collection. / Узел с многократным выполнением содержимого для каждого элемента коллекции |
 | `InputPin` | Class | 16.14.4 | — | — | Pin |
 | `InvocationAction` | Abstract Class | 16.14.25 | argument, onPort | — | Action |
 | `LinkAction` | Abstract Class | 16.14.16 | endData, inputValue | association | Action |
 | `LinkEndCreationData` | Class | 16.14.27 | insertAt, isReplaceAll | allPins | LinkEndData |
 | `LinkEndData` | Class | 16.14.28 | end, qualifier, value | allPins | Element |
 | `LinkEndDestructionData` | Class | 16.14.29 | destroyAt, isDestroyDuplicates | allPins | LinkEndData |
-| `LoopNode` | Class | 16.14.30 | bodyOutput, bodyPart, decider, isTestedFirst, loopVariable, loopVariableInput, result, setupPart, test | allActions, sourceNodes | StructuredActivityNode |
+| `LoopNode` | Class | 16.14.30 | bodyOutput, bodyPart, decider, isTestedFirst, loopVariable, loopVariableInput, result, setupPart, test | allActions, sourceNodes | StructuredActivityNode | A LoopNode is a StructuredActivityNode that represents an iterative loop with setup, test, and body sections. / Узел-цикл с настройкой, проверкой и телом |
 | `OpaqueAction` | Class | 16.14.31 | body, inputValue, language, outputValue | — | Action |
 | `OutputPin` | Class | 16.14.32 | — | — | Pin |
 | `Pin` | Abstract Class | 16.14.4 | isControl | — | ObjectNode, MultiplicityElement |
@@ -320,7 +329,7 @@
 | `ReadIsClassifiedObjectAction` | Class | 16.14.37 | classifier, isDirect, object, result | — | Action |
 | `ReadLinkAction` | Class | 16.14.38 | result | openEnd | LinkAction |
 | `ReadLinkObjectEndAction` | Class | 16.14.39 | end, object, result | — | Action |
-| `ReadLinkObjectEndQualifierAction` | Class | 16.14.40 | object, qualifier, result | — | Action |
+| `ReadLinkObjectEndQualifierAction` | Class | 16.14.40 | object, qualifier, result | — | Action | A ReadLinkObjectEndQualifierAction is an Action that retrieves a qualifier end value from a link object. / Получение значения квалификатора конца линка объекта |
 | `ReadSelfAction` | Class | 16.14.41 | result | — | Action |
 | `ReadStructuralFeatureAction` | Class | 16.14.42 | result | — | StructuralFeatureAction |
 | `ReadVariableAction` | Class | 16.14.43 | result | — | VariableAction |
@@ -338,7 +347,7 @@
 | `StructuredActivityNode` | Class | 16.14.55 | activity, edge, mustIsolate, node, structuredNodeInput, structuredNodeOutput, variable | allActions, allOwnedNodes, sourceNodes, targetNodes, containingActivity | Namespace, ActivityGroup, Action |
 | `TestIdentityAction` | Class | 16.14.56 | first, result, second | — | Action |
 | `UnmarshallAction` | Class | 16.14.57 | object, result, unmarshallType | — | Action |
-| `ValuePin` | Class | 16.14.58 | value | — | InputPin |
+| `ValuePin` | Class | 16.14.58 | value | — | InputPin | A ValuePin is an InputPin that provides a value by evaluating a ValueSpecification. / Входной пин с конкретным вычисленным значением |
 | `ValueSpecificationAction` | Class | 16.14.59 | result, value | — | Action |
 | `VariableAction` | Abstract Class | 16.14.14 | variable | — | Action |
 | `WriteLinkAction` | Abstract Class | 16.14.61 | — | — | LinkAction |
@@ -473,6 +482,8 @@
 | Figure 16.8 | Example of action using a tool-specific concrete syntax | 445 |
 | Figure 16.9 | Example of an action with local pre- and post-conditions | 446 |
 | Figure 16.10 | Pin examples | 446 |
+| Figure 16.11 | Specifying selection behavior on an ObjectFlow | 447 |
+| Figure 16.12 | Example abstract syntax model showing the use of ActionInputPins | 447 |
 | Figure 16.13 | Invocation Actions | 448 |
 | Figure 16.14 | Calling a Behavior | 452 |
 | Figure 16.15 | Calling an Activity | 452 |
@@ -509,6 +520,7 @@
 | Figure 16.46 | Notation for StructuredActivityNode | 478 |
 | Figure 16.47 | Expansion Regions | 478 |
 | Figure 16.48 | Expansion Region | 481 |
+| Figure 16.49 | Shorthand notation for expansion region containing single node | 481 |
 | Figure 16.50 | Full form of previous shorthand notation | 481 |
 | Figure 16.51 | Notation for expansion region with one behavior invocation | 481 |
 | Figure 16.52 | Expansion region with two inputs and one output | 482 |
@@ -525,10 +537,12 @@
 2. **Вложенная иерархия**: Много уровней абстракции (Action → InvocationAction → CallAction → CallBehaviorAction/CallOperationAction, LinkAction → WriteLinkAction, StructuralFeatureAction → WriteStructuralFeatureAction и т.д.).
 3. **Обобщения из других пакетов**: Action наследуется от ExecutableNode (раздел 15), Pin — от ObjectNode и MultiplicityElement (разделы 15 и 9). При переносе потребуются ссылки на внешние классификаторы.
 4. **Специфические модели поведения**: ExpansionRegion, ConditionalNode и LoopNode добавляют сложную структуру узлов активности с условиями и циклами.
+5. **Множество рисунков (56)**: значительная часть диаграмм — схемы абстрактного синтаксиса (Figure 16.2, 16.12) или нотации объектов/пинов; их нужно корректно перевести в интерактивные SVG с сохранением структуры наследования.
 
 ### Риски
 
 - **Пересечения с разделом 15 (Activities)**: многие классы Actions (Action, Pin, StructuredActivityNode) имеют связи с элементами Activities. Необходима чёткая граница между разделами.
 - **Сложные диаграммы абстрактного синтаксиса**: Figure 16.2 и связанные содержат схемы наследования классов, которые нужно корректно перевести в интерактивные SVG.
-- **Нумерация рисунков**: в TOC отсутствуют Figure 16.12 и Figure 16.49 — возможно, они относятся к тексту предыдущего раздела или являются диаграммами абстрактного синтаксиса без отдельных номеров.
 - **Множество ограничений OCL**: 155 ownedRule — значительное количество OCL-ограничений для перевода и проверки.
+- **Нумерация TOC**: в оригинальном TOC текста пропущены Figure 16.12 (стр. 447) и Figure 16.49 (стр. 481), но они присутствуют в теле спецификации — при извлечении по регулярным выражениям легко потерять.
+- **109 ассоциаций**: подавляющее большинство концов связывают пины с действиями (`* → InputPin/OutputPin`); при генерации таблиц нужно чётко разделять ends и их типы.

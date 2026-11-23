@@ -67,7 +67,7 @@
 | 19.5.10 | Node [Class]                         | 664       |
 | 19.6    | Association Descriptions             | 665       |
 | 19.6.1  | A_configuration_deployment [Assoc.]  | 665       |
-| 19.6.2  | A_deployedArtifact_deploymentForArt. | 665       |
+| 19.6.2  | A_deployedArtifact_deploymentForArtifact [Association] | 665 |
 | 19.6.3  | A_deployedElement_deploymentTarget   | 665       |
 | 19.6.4  | A_deployment_location                | 665       |
 | 19.6.5  | A_manifestation_artifact             | 666       |
@@ -84,7 +84,7 @@
 | # | Англ. имя | Подраздел      | Определение (англ.)                                                     | Пояснение (рус.)                                   | Родители (из спецификации)            | Атриб. | Опер. | Правила |
 |---|-----------|----------------|-------------------------------------------------------------------------|------------------------------------------------------|---------------------------------------|--------|-------|---------|
 | 1 | Artifact          | 19.5.1           | An artifact is the specification of a physical piece of information that is used or produced by a software development process, or by deployment and operation of a system. | Спецификация физического информационного артефакта, используемого или создаваемого в процессе разработки или развёртывания системы. | Classifier, DeployedArtifact          | 5      | 0     | 0       |
-| 2 | CommunicationPath | 19.5.2           | A communication path is an association between two deployment targets, through which they are able to exchange information.                    | Ассоциация между двумя целями развёртывания для обмена информацией.              | Association                         | 0      | 0     | 1       |
+| 2 | CommunicationPath | 19.5.2           | A communication path is an association between two deployment targets, through which they are able to exchange signals and messages.             | Ассоциация между двумя целями развёртывания для обмена сигналами и сообщениями. | Association                         | 0      | 0     | 1       |
 | 3 | DeployedArtifact  | 19.5.3           | A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.                                    | Артефакт (или его экземпляр), развёрнутый на целевом узле.                     | NamedElement                        | 0      | 0     | 0       |
 | 4 | Deployment        | 19.5.4           | A deployment is the allocation of an artifact or artifact instance to a deployment target.                                                | Выделение артефакта на целевую точку развёртывания.                             | Dependency                          | 3      | 0     | 0       |
 | 5 | DeploymentSpecification | 19.5.5   | A deployment specification specifies a set of properties that determine execution parameters of a component artifact that is or will be deployed. | Набор свойств, определяющих параметры исполнения для развёртываемого артефакта. | Artifact                          | 3      | 0     | 2       |
@@ -119,24 +119,26 @@
 
 ## Рисунки
 
-| №        | Подпись                                                                                     | Печ. стр. |
-|----------|---------------------------------------------------------------------------------------------|-----------|
-| Figure 19.1   | Deployments                                                                                | 695       |
-| Figure 19.2   | A visual representation of the deployment location of artifacts, including a dependency     | 695       |
-| Figure 19.3   | Alternative deployment representation (deploy)                                             | 695       |
-| Figure 19.4   | Textual list based representation of DeployedArtifacts                                     | 696       |
-| Figure 19.5   | DeploymentSpecification for an artifact (type-level and instance-level)                    | 696       |
-| Figure 19.6   | DeploymentSpecifications related to the DeployedArtifacts they parameterize                | 696       |
-| Figure 19.7   | A DeploymentSpecification for a DeployedArtifact                                           | 697       |
-| Figure 19.8   | Artifacts                                                                                  | 697       |
-| Figure 19.9   | An Artifact instance (document icon)                                                       | 698       |
-| Figure 19.10  | A Manifestation relationship between an Artifact and a Component                           | 698       |
-| Figure 19.11  | Nodes                                                                                      | 699       |
-| Figure 19.12  | Notation for a Device containing an ExecutionEnvironment connected to another Device       | 700       |
-| Figure 19.13  | Notation for an ExecutionEnvironment                                                       | 700       |
-| Figure 19.14  | An instance of a Node                                                                      | 700       |
-| Figure 19.15  | CommunicationPath between AppServer and DBServer                                           | 700       |
-| Figure 19.16  | Deployed component Artifacts on a Node                                                     | 700       |
+Все рисунки находятся в PDF-блоках (разделённых форм-фидом) P694–P700, что соответствует области реального телесного контента раздела 19. Подписи приведены точно как в спецификации.
+
+| №        | Подпись                                                                                     | PDF блок |
+|----------|---------------------------------------------------------------------------------------------|----------|
+| Figure 19.1   | Deployments                                                                                | P694      |
+| Figure 19.2   | A visual representation of the deployment location of artifacts, including a dependency between their DeploymentSpecifications | P695      |
+| Figure 19.3   | Alternative deployment representation of using a dependency called «deploy» used when only a set of Artifacts are deployed with an abstract type | P695      |
+| Figure 19.4   | Textual list based representation of DeployedArtifacts.                                    | P696      |
+| Figure 19.5   | DeploymentSpecification for an artifact. On the left, a type-level specification, and on the right, an instance-level one with DeploymentTarget. | P696      |
+| Figure 19.6   | DeploymentSpecifications related to the DeployedArtifacts that they parameterize.           | P696      |
+| Figure 19.7   | A DeploymentSpecification for a DeployedArtifact.                                          | P697      |
+| Figure 19.8   | Artifacts                                                                                  | P697      |
+| Figure 19.9   | An Artifact instance                                                                       | P698      |
+| Figure 19.10  | A Manifestation relationship between an Artifact and a Component                           | P698      |
+| Figure 19.11  | Nodes                                                                                      | P699      |
+| Figure 19.12  | Notation for a Device containing an ExecutionEnvironment and connected to another Device by a CommunicationPath | P700      |
+| Figure 19.13  | Notation for a ExecutionEnvironment                                                        | P700      |
+| Figure 19.14  | An instance of a Node                                                                      | P700      |
+| Figure 19.15  | CommunicationPath between AppServer with deployed Artifacts and a DBServer                 | P700      |
+| Figure 19.16  | Deployed component Artifacts on a Node                                                     | P700      |
 
 **Итого рисунков: 16**
 
@@ -194,30 +196,50 @@
 
 ## Статистика XMI (пакет Deployments)
 
-| Категория          | Количество |
-|--------------------|------------|
-| Классы (Class/Enumeration/Signal) | 10         |
-|ownedAttribute     | ~23        |
-| ownedOperation    | 1          |
-| ownedRule         | 5          |
-| Association        | 10         |
+Данные подсчитаны точным обходом XMI пакета `Deployments` только для 10 классификаторов данного пакета
+(без импортированных из других пакетов типов).
 
-> **Примечание по подсчётам:** Точный посчёт через `grep -c` может отличаться от ручного обхода XMI, т.к. элементы типа `ownedAttribute` и `ownedOperation` могут быть развёрнуты на нескольких строках (каждый начинается с тега `<ownedAttribute ...>` и заканчивается `</ownedAttribute>`). Рекомендуется финальный подсчёт проводить через полный парсер XMI.
+| Категория          | Класс Artifact | Comm. Path | Dep. Artif. | Deployment | Dep. Spec. | Dep. Target | Device | ExecEnv. | Manifest. | Node | **Итого** |
+|--------------------|----------------|------------|-------------|------------|------------|-------------|--------|----------|-----------|------|-----------|
+| ownedAttribute     | 5              | 0          | 0           | 3          | 3          | 2           | 0      | 0        | 1         | 1    | **15**    |
+| ownedOperation     | 0              | 0          | 0           | 0          | 0          | 1           | 0      | 0        | 0         | 0    | **1**     |
+| ownedRule          | 0              | 1          | 0           | 0          | 2          | 1           | 0      | 0        | 0         | 1    | **5**     |
+
+> Общий итог по пакету Deployments:
+> - 15 ownedAttribute (только атрибуты, принадлежащие классам) + 8 ownedEnd Property (концы ассоциаций) = 23 свойство-ссылки.
+> - 2 ownedOperation (из них 1 в классе DeploymentTarget, второй — в импортированном Element).
+> - 5 ownedRule в классах пакета + дополнительные в импортированных типах.
 
 ---
 
 ## Замечания и риски
 
 ### 1. Специфичная структура раздела
-Раздел 19 существенно короче разделов 7–9: всего 16 страниц (653–668), 10 классификаторов и 10 ассоциаций. Однако он содержит сложные концепции развёртывания, которые требуют тщательного описания в справочнике.
+Раздел 19 содержит 10 классификаторов, 10 ассоциаций и 16 рисунков. Количество подразделов (32 включая вложенные) соответствует TOC спецификации. Реальный телесный контент занимает **PDF-блоки P694–P708** (текстовые блоки дампа). В TOC указано «стр. 653», но эти PDF-блоки содержат раздел 17 (Interactions) — см. замечание 6.
 
 ### 2. Два уровня абстракции
-Классы `DeployedArtifact` (662) и `DeploymentTarget` (663) — **абстрактные**. Их спецификации содержат подклассы, но прямых потомков в пакете Deployments нет — они наследуются из других пакетов (например, через `Dependency`, `NamedElement`).
+Классы `DeployedArtifact` (PDF блок P697, TOC стр. ~739) и `DeploymentTarget` (P699, TOC ~741) — **абстрактные**. Прямых потомков в пакете Deployments нет: потомки наследуются из других пакетов (Artifact и InstanceSpecification → DeployedArtifact; Node → DeploymentTarget). Specializations перечислены в спецификации как Artifact и InstanceSpecification для DeployedArtifact, и None для DeploymentTarget.
 
 ### 3. Ассоциации с `memberEnd`
-Некоторые ассоциации (A_configuration_deployment, A_deployedArtifact_deploymentForArtifact, A_deployment_location) используют **только** `<memberEnd>` без явного `<ownedEnd>`. Это означает, что концы ассоциаций определены как атрибуты владельцев (Deployment-configuration, DeploymentSpecification-deployment и т.д.). Для страницы каждой ассоциации необходимо:
-- Собрать memberEnd ссылки из XMI
-- Найти соответствующие ownedAttribute на страницах классов
+Всего в пакете Deployments **10 ассоциаций** (подтверждено точным обходом XMI). Из них:
+
+- **Только memberEnd** (концы определены как ownedAttribute владельцев, нет ownedEnd):
+  - A_configuration_deployment (Deployment-configuration ↔ DeploymentSpecification-deployment)
+  - A_deployment_location (DeploymentTarget-deployment ↔ Deployment-location)
+  
+- **memberEnd + ownedEnd**: концы ассоциаций частично определены внутри ассоциации:
+  - A_deployedArtifact_deploymentForArtifact — ownedEnd `deploymentForArtifact : Deployment [0..*]`
+  - A_deployedElement_deploymentTarget — ownedEnd `deploymentTarget : DeploymentTarget [0..*]`, derived
+  - A_manifestation_artifact — ownedEnd `artifact : Artifact [0..1]` (subsetted)
+  - A_nestedArtifact_artifact — ownedEnd `artifact : Artifact [0..1]` (self-referencing)
+  - A_nestedNode_node — ownedEnd `node : Node [1]` (required end on association side)
+  - A_ownedAttribute_artifact — ownedEnd `artifact : Artifact [0..1]` (subsetted from Classifier::attribute)
+  - A_ownedOperation_artifact — ownedEnd `artifact : Artifact [0..1]` (subsetted from Classifier::feature)
+  - A_utilizedElement_manifestation — ownedEnd `manifestation : Manifestation [0..*]`
+
+При реализации страниц ассоциаций для случаев с **memberEnd only** необходимо:
+- Пройтись по ownedAttribute владельцев (Deployment, DeploymentSpecification, DeploymentTarget)
+- Связать их через @opposite ссылки в XMI
 
 ### 4. Производный (derived) атрибут
 `DeploymentTarget-deployedElement` имеет флаг `isDerived="true"` — его значение вычисляется, а не хранится. Это важно для описания ассоциации A_deployedElement_deploymentTarget: он является производным от других отношений.
@@ -225,11 +247,19 @@
 ### 5. Ассоциация с самой собой (рекурсия)
 `A_nestedArtifact_artifact` и `A_nestedNode_node` — рекурсивные ассоциации (оба конца одного типа). Для диаграмм это означает само-ссылку, которая может усложнить визуальное представление.
 
-### 6. Нумерация страниц спецификации
-В оглавлении PDF: 19 Deployments → стр. 653. В секции ToC дампа печатная страница 653 соответствует **PDF-странице** (0-based index) 695. Формула: `PDF_page = print_page + 42`. Убедиться при ссылке на конкретные страницы PDF.
+### 6. Нумерация страниц — КРИТИЧЕСКОЕ РАСХОЖДЕНИЕ
+В оглавлении PDF: "19 Deployments ... 653". Однако при извлечении текстового дампа блоками (разделёнными форм-фидом) выяснилось:
+- **PDF-блоки 653–668 содержат контент раздела 17 (Interactions)**, а не раздела 19.
+- Реальный телесный контент раздела 19 Deployments находится в PDF-блоках **P694–P708** (содержит "DEPLOYMENTS PACKAGE", "19.1 Summary" и т.д.).
+- Раздел 20 (InformationFlows) начинается в блоке **P710**.
+- Формула `print_page = pdf_block + 42` из задания пользователя не позволяет напрямую сопоставить TOC-страницы с блоками контента — она работает для отдельных блоков, но не объясняет разрыв между TOC-entry (653) и реальным content-start (block 694 = TOC ~736).
+- **Вывод:** first_page=653 взято из TOC. Но при реализации этапа 2 scaffold следует ориентироваться на PDF-блоки P694–P708 для поиска текста и рисунков раздела 19.
 
 ### 7. Диаграммы 19.1–19.16
-Рисунки 19.1–19.7 посвящены концепции развёртывания, 19.8–19.10 — артефактам (иконки, нотация), 19.11–19.16 — узлам и путям связи. Диаграмма 19.12 (Device с ExecutionEnvironment) самая сложная — может потребовать адаптивной ширины или горизонтальной прокрутки.
+- Рисунки **19.1–19.3** (P694–P695): общая концепция развёртывания, визуальное и альтернативное представление deploy-зависимостей.
+- Рисунки **19.4–19.7** (P696–P697): DeploymentSpecification — текстовый список, type-level/instance-level спецификации, связи с DeployedArtifacts.
+- Рисунки **19.8–19.10** (P697–P698): нотация артефактов (прямоугольник класса + ««artifact»», иконка документа, Manifestation как dashed-line).
+- Рисунки **19.11–19.16** (P699–P700): узлы, Device с ExecutionEnvironment, CommunicationPath между серверами. Диаграмма 19.12 — самая сложная (вложенный Node), может потребовать горизонтальной прокрутки или масштабирования.
 
 ### 8. Риск: наследование извне пакета
 Некоторые "родители" классификаторов не находятся в пакете Deployments (Classifier, Association, Dependency, NamedElement, Abstraction). Их определения нужно брать из соответствующих пакетов XMI и разделов спецификации (Common Structure для Classifier/Association, Values для NamedElement/Dependency, Classification для Abstraction).
@@ -238,7 +268,7 @@
 В пакете Deployments нет элементов `xmi:type="uml:Enumeration"` или `xmi:type="uml:Signal"`. Все классификаторы — обычные или абстрактные классы. Для каталога литералов раздел 19 не содержит данных.
 
 ### 10. Соответствие XMI ↔ спецификация
-В секции 19.2 "Abstract Syntax" (653) дан синтаксис на языке UML abstract syntax (не diagram notation). Нужно проверить соответствие всех 10 классов и их атрибутов тексту абстрактного синтаксиса в разделе 19.2–19.4.
+Текст абстрактного синтаксиса разделов 19.2–19.4 находится в PDF-блоках P694–P700 (не в TOC-странице 653). Нужно проверить соответствие всех 10 классов XMI пакета Deployments тексту секций 19.2 Abstract Syntax, 19.3 Abstract Syntax и 19.4 Abstract Syntax из текста спецификации.
 
 ---
 

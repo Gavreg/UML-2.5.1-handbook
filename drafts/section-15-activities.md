@@ -427,9 +427,9 @@
 | 15.2 | Activity notation | 379 | - |
 | 15.3 | Activity class notation | 380 | - |
 | 15.4 | ActivityNode notation | 380 | - |
-| 15.5 | ActivityEdge notation | 376 | - |
+| 15.5 | ActivityEdge notation | 380 | - |
 | 15.6 | ActivityEdge connector notation | 380 | - |
-| 15.7 | in | 377 | - |
+| 15.7 | ActivityEdge notation | 381 | - |
 | 15.8 | ControlFlow notation | 381 | - |
 | 15.9 | ObjectFlow notations | 381 | - |
 | 15.10 | Specifying selection behavior on an ObjectFlow | 381 | - |
@@ -445,7 +445,7 @@
 | 15.20 | Equivalent model | 384 | - |
 | 15.21 | ActivityEdge weight examples | 384 | - |
 | 15.22 | Example of an activity with input parameter | 385 | - |
-| 15.23 | Part selection workflow example | 385 | - |
+| 15.23 | Part selection workflow example | 386 | - |
 | 15.24 | Trouble ticket workflow example | 386 | - |
 | 15.25 | Activity with attributes and operations | 386 | - |
 | 15.26 | Control Nodes | 387 | - |
@@ -481,7 +481,7 @@
 | 15.56 | Example of ActivityParameterNodes for regular and exception Parameters | 401 | - |
 | 15.57 | Example of ActivityParameterNodes for streaming Parameters | 401 | - |
 | 15.58 | CentralBufferNode example | 402 | - |
-| 15.59 | DataStoreNode example | 376 | - |
+| 15.59 | DataStoreNode example | 402 | - |
 | 15.60 | Executable Nodes | 403 | - |
 | 15.61 | ExecutableNode notation | 404 | - |
 | 15.62 | ExceptionHandler notation | 404 | - |
@@ -508,23 +508,49 @@
 
 ### Нумерация рисунков
 
-- Рисунки идут последовательно от `15.1` до `15.73` без пропусков.
+- Рисунки идут последовательно от `15.1` до `15.73`. Все 73 номера присутствуют, пропусков нет.
+- В PDF перед заголовком «Figure 15.X Title» иногда идёт описательный текст вида
+  «Figure 15.X illustrates...», который не является отдельным рисунком.
 
-### Особенности диаграмм
+### Особенности структуры раздела
 
-- **ActivityPartition (swimlanes) — сложные многомерные диаграммы:**
-  - `15.66`: ActivityPartition notations
-  - `15.67`: ActivityPartition notations
-  - `15.70`: ActivityPartitions using swimlane notation
-  - `15.71`: ActivityPartitions using annotation
-  - `15.72`: ActivityPartitions using multidimensional swimlane notation
+- **Размер:** 67 печатных страниц (373–439), 325 заголовков подразделов, 25 классификаторов,
+  34 ассоциации, 73 рисунка. Это один из самых крупных разделов спецификации.
+- **Нумерация каталогов:** `15.7 Classifier Descriptions` содержит все классификаторы,
+  `15.8 Association Descriptions` — все ассоциации (подтверждено сверкой с XMI).
+
+### Диаграммы ActivityPartition (swimlanes)
+
+Сложные многомерные диаграммы swimlanes:
+- **15.66–15.67** — нотация ActivityPartition (прямоугольники, аннотации)
+- **15.70–15.73** — примеры свимлейнов для order processing и InterruptibleActivityRegion
+- Диаграммы 15.66(c), 15.72 содержат многомерные «swim cells» (пересечения измерений).
+- SVG-генерация потребует special handling для пересекающихся областей.
+
+### Наследование из других разделов
+
+Классы раздела 15 активно наследуются от типов других разделов:
+- `Activity` → `Behavior` (раздел 13)
+- `ActivityNode`, `ActivityEdge` → `StructuredNode`, `StructuralFeature`
+- `ExecutableNode` → `ControlNode` (из этого же раздела, но абстрактный)
+- Некоторые свойства ссылаются на типы из разделов 7 (Common Structure), 9 (Classification)
+
+### Проверка ассоциаций: ownedEnd vs memberEnd
+
+- Все 34 ассоциации в XMI используют `memberEnd` для объявления концов.
+- Оба конца каждой ассоциации присутствуют — крест-ссылок нет.
+- Для некоторых ассоциаций (например, `A_inPartition_node`) один из концов может быть
+  представлен как `ownedEnd` владельца типа — требуется проверка при генерации страниц.
 
 ### Риски переноса
 
-- Раздел очень большой (~68 печатных страниц, 325 заголовков, 73 рисунка).
-- Диаграммы ActivityPartition (swimlanes) сложной геометрии — потребуют special handling при SVG-генерации.
-- Многие классы наследуются из других разделов: Behavior (раздел 13), StructuredNode, ActionInput и др.
-- Некоторые рисунки могут иметь подтипы (a/b/c) в оригинальном PDF — это нужно учитывать при обработке.
+1. **Объём:** 325 заголовков и 73 диаграммы требуют значительного объёма кода генерации.
+2. **Сложные геометрии:** swimlane-диаграммы (15.64–15.73) — пересекающиеся области,
+   многомерные сетки. Стандартный grid layout не подойдёт без адаптации.
+3. **Перекрёстные зависимости:** классификаторы ссылаются на типы из разделов 7, 9, 13.
+   Наследование должно корректно строиться из XMI, а не только из PDF-заголовков.
+4. **Дубликаты в тексте PDF:** некоторые подписи рисунков предварены описательным текстом
+   «Figure X.Y illustrates...» — нужно отличать от реальных заголовков.
 
 ## Сводка
 

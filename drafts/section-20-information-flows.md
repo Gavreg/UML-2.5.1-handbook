@@ -71,13 +71,13 @@
 
 | # | Имя атрибута | Тип | Кратность | Ассоциация | Описание |
 |---|-------------|-----|-----------|------------|----------|
-| 1 | conveyed | Classifier | 1..* | A_conveyed_conveyingFlow | Specifies the information items that may circulate on this information flow. |
-| 2 | informationSource | NamedElement | 1..* | A_informationSource_informationFlow | Defines from which source the conveyed InformationItems are initiated. (subsets DirectedRelationship-source) |
-| 3 | informationTarget | NamedElement | 1..* | A_informationTarget_informationFlow | Defines to which target the conveyed InformationItems are directed. (subsets DirectedRelationship-target) |
-| 4 | realization | Relationship | 1..* | A_realization_abstraction_flow | Determines which Relationship will realize the specified flow. |
-| 5 | realizingActivityEdge | ActivityEdge | 1..* | A_realizingActivityEdge_informationFlow | Determines which ActivityEdges will realize the specified flow. |
-| 6 | realizingConnector | Connector | 1..* | A_realizingConnector_informationFlow | Determines which Connectors will realize the specified flow. |
-| 7 | realizingMessage | Message | 1..* | A_realizingMessage_informationFlow | Determines which Messages will realize the specified flow. |
+| 1 | conveyed | Classifier | 0..* | A_conveyed_conveyingFlow | Specifies the information items that may circulate on this information flow. |
+| 2 | informationSource | NamedElement | 0..* | A_informationSource_informationFlow | Defines from which source the conveyed InformationItems are initiated. (subsets DirectedRelationship-source) |
+| 3 | informationTarget | NamedElement | 0..* | A_informationTarget_informationFlow | Defines to which target the conveyed InformationItems are directed. (subsets DirectedRelationship-target) |
+| 4 | realization | Relationship | 0..* | A_realization_abstraction_flow | Determines which Relationship will realize the specified flow. |
+| 5 | realizingActivityEdge | ActivityEdge | 0..* | A_realizingActivityEdge_informationFlow | Determines which ActivityEdges will realize the specified flow. |
+| 6 | realizingConnector | Connector | 0..* | A_realizingConnector_informationFlow | Determines which Connectors will realize the specified flow. |
+| 7 | realizingMessage | Message | 0..* | A_realizingMessage_informationFlow | Determines which Messages will realize the specified flow. |
 
 ### Атрибуты InformationItem (1 атрибут, из XMI):
 
@@ -92,8 +92,8 @@
 | # | Имя правила | Текст (англ.) |
 |---|-----------|---------------|
 | 1 | must_conform | The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships. |
-| 2 | sources_and_targets_kind | The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition, Behavior and InstanceSpecification (except when its classifier is a Relationship). |
-| 3 | convey_classifiers | An information flow can only convey classifiers that are allowed to represent an information item. |
+| 2 | sources_and_targets_kind | The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition, Behavior and InstanceSpecification (except when its classifier is a Relationship). OCL: `(self.informationSource->forAll(sis | oclIsKindOf(Actor) or oclIsKindOf(Node) or ...)) and (self.informationTarget->forAll(sit | same types))` |
+| 3 | convey_classifiers | An information flow can only convey classifiers that are allowed to represent an information item. OCL: `self.conveyed->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))` |
 
 #### InformationItem (3 правила):
 
@@ -124,13 +124,13 @@
 
 | # | Ассоциация | Конец 1 (тип/кратность) | Конец 2 (тип/кратность) |
 |---|-----------|------------------------|------------------------|
-| 1 | A_conveyed_conveyingFlow | conveyed : Classifier [1..*] (InformationFlow-ownedAttribute) | conveyingFlow : InformationFlow [0..*] (новое ownedEnd) |
-| 2 | A_informationSource_informationFlow | informationSource : NamedElement [1..*] (InformationFlow-attr, subsets source) | informationFlow : InformationFlow [0..*] (novoy ownedEnd) |
-| 3 | A_informationTarget_informationFlow | informationTarget : NamedElement [1..*] (InformationFlow-attr, subsets target) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
-| 4 | A_realization_abstraction_flow | realization : Relationship [1..*] (InformationFlow-attr) | abstraction : InformationFlow [0..*] (новое ownedEnd — **само-рекурсивная!**) |
-| 5 | A_realizingActivityEdge_informationFlow | realizingActivityEdge : ActivityEdge [1..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
-| 6 | A_realizingConnector_informationFlow | realizingConnector : Connector [1..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
-| 7 | A_realizingMessage_informationFlow | realizingMessage : Message [1..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 1 | A_conveyed_conveyingFlow | conveyed : Classifier [0..*] (InformationFlow-ownedAttribute) | conveyingFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 2 | A_informationSource_informationFlow | informationSource : NamedElement [0..*] (InformationFlow-attr, subsets source) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 3 | A_informationTarget_informationFlow | informationTarget : NamedElement [0..*] (InformationFlow-attr, subsets target) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 4 | A_realization_abstraction_flow | realization : Relationship [0..*] (InformationFlow-attr) | abstraction : InformationFlow [0..*] (новое ownedEnd — **само-рекурсивная!**) |
+| 5 | A_realizingActivityEdge_informationFlow | realizingActivityEdge : ActivityEdge [0..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 6 | A_realizingConnector_informationFlow | realizingConnector : Connector [0..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
+| 7 | A_realizingMessage_informationFlow | realizingMessage : Message [0..*] (InformationFlow-attr) | informationFlow : InformationFlow [0..*] (новое ownedEnd) |
 | 8 | A_represented_representation | represented : Classifier [0..*] (InformationItem-attr) | representation : InformationItem [0..*] (новое ownedEnd — **само-рекурсивная!**) |
 
 **Итого ассоциаций: 8** (все в пакете InformationFlows)
@@ -143,7 +143,7 @@
 
 | № | Подпись | Печ. стр. | Содержание |
 |---|---------|-----------|------------|
-| Figure 20.1 | Information Flows | 669 | Диаграмма пакетного содержимого: Classifier, DirectedRelationship, Relationship, InformationItem, InformationFlow, NamedElement, Connector, ActivityEdge, Message. Абстрактный синтаксис. |
+| Figure 20.1 | Information Flows | 669 | Диаграмма абстрактного синтаксиса: Classifier, DirectedRelationship, Relationship → InformationFlow; Classifier → InformationItem; NamedElement, Connector, ActivityEdge, Message. Все мультипликаторы на диаграмме — `*` (без нижнего ограничения). В XMI все ownedAttribute по умолчанию имеют lowerBound=0 (т.е. 0..*). |
 | Figure 20.2 | Example of InformationFlows conveying InformationItems | 669 | Пример: продукты и зарплаты (InformationItems) текут от компании к клиентам и сотрудникам по двум InformationFlows. Каналы передачи не показаны. |
 | Figure 20.3 | Information Item represented as a classifier | 669 | Wage InformationItem представлен независимо от любого InformationFlow как классификатор (прямоугольник с треугольником). |
 | Figure 20.4 | Examples of «representation» notation | 669 | Примеры нотации представления: travel document -> passports + plane tickets; Wage -> Salary + Bonus. Пунктирные стрелки <<representation>>. |
@@ -159,26 +159,27 @@
 ## Иерархия наследования (из XMI)
 
 ```
-                        ┌──────────┐
-                        │ Classifier│ (пакет Classification)
-                        └─────┬─────┘
-                              │ generalization
-                    ┌─────────┴─────────┐
-                    │                   │
-              ┌─────▼──────┐   ┌────────▼─────────┐
-              │Information│   │ InformationItem  │ (abstract)
-              │  Flow     │   │                  │
-              └─────┬─────┘   └────────┬─────────┘
-                    │                 |
-        ┌───────────┼─────────────────┤
-        │           │                 │
+                        ┌──────────┐         ┌─────────────────┐
+                        │ Classifier│         │ DirectedRel.    │ (из пакета CommonStructure)
+                        └─────┬─────┘         └────────┬────────┘
+                              │ generalization          │ generalization
+                    ┌─────────┴─────────┐     ┌─────────┴─────────┐
+                    │                   │     │                   │
+              ┌─────▼──────┐   ┌────────▼─────────┐    ┌────────▼─────────┐
+              │Information│   │ InformationItem  │    │PackageableElement│
+              │  Flow     │   │                  │    │                  │
+              └─────┬─────┘   └────────┬─────────┘    └────────┬─────────┘
+                    │                 |                          |
+        ┌───────────┼─────────────────┤                    + source : NamedElement [1..*]
+        │           │                 │                    + target : NamedElement [1..*]
  ┌──────▼──────┐  ┌─▼────────┐  ┌─────▼──────┐
- │DirectedRel. │  │Packageable│  │ Classifier │ (parent)
- │  elation    │  │ Element   │  │            │
+ │ DirectedRel.│  │Packageable│  │ Classifier │ (parent)
+ │ elation     │  │ Element   │  │            │
  └─────────────┘  └───────────┘  └────────────┘
 
-Родители InformationItem: Classifier (один родитель)
+Родители InformationItem: Classifier (один родитель, из пакета Classification)
 Родители InformationFlow: DirectedRelationship + PackageableElement (два родителя = множественное наследование)
+Направление обобщения: потомок → предок (как требует UML-нотация).
 ```
 
 ---
@@ -209,8 +210,10 @@
 ### 3. Само-рекурсивные ассоциации (2 штуки)
 | Ассоциация | Тип концов | Особенность |
 |-----------|------------|-------------|
-| A_realization_abstraction_flow | InformationFlow ↔ InformationFlow | Оба конца одного типа; абстракция может реализовывать саму себя (теоретически). Для диаграммы: петля от класса к себе. |
-| A_represented_representation | InformationItem ↔ InformationItem | Информационный элемент может представлять другие информационные элементы. Иерархическая декомпозиция. |
+| A_realization_abstraction_flow | InformationFlow ↔ InformationFlow | Оба конца одного типа; абстракция может реализовывать саму себя (теоретически). Для диаграммы: петля от класса к себе. В XMI: `abstraction` имеет `lowerBound=0`, т.е. 0..*. |
+| A_represented_representation | InformationItem ↔ InformationItem | Информационный элемент может представлять другие информационные элементы. Иерархическая декомпозиция. Оба конца [0..*]. |
+
+**Все 8 ассоциаций пакета имеют мультипликатор `0..*` на обоих концах.** В XMI ни один ownedEnd не имеет явного lowerBound (UML-дефолт = 0).
 
 ### 4. Все ассоциации используют memberEnd + ownedEnd
 Каждая ассоциация в XMI имеет:
@@ -219,10 +222,15 @@
 
 Это означает, что при генерации страниц для ассоциаций нужно собирать данные из двух разных мест XMI.
 
-### 5. Наследование от DirectedRelationship
-`InformationFlow` наследуется от **DirectedRelationship**, что даёт ему автоматические атрибуты `source` и `target`. Его собственные атрибуты `informationSource` и `informationTarget` **подсетеют** (subsets) эти унаследованные атрибуты. На странице класса нужно показывать:
-- Обычные ownedAttribute (7 штук)
-- Унаследованные source/target от DirectedRelationship
+### 5. Наследование от DirectedRelationship и PackageableElement
+`InformationFlow` наследуется от **DirectedRelationship** (пакет CommonStructure), что даёт ему автоматические атрибуты `source` и `target` типа `NamedElement [1..*]`. Его собственные атрибуты `informationSource` и `informationTarget` **подсетеют** (subsets) эти унаследованные атрибуты:
+- `informationSource` subsets `DirectedRelationship::source`
+- `informationTarget` subsets `DirectedRelationship::target`
+
+На странице класса нужно показывать:
+- Обычные ownedAttribute (7 штук, все 0..*)
+- Унаследованные source/target от DirectedRelationship (обязательные атрибуты базового класса)
+- `PackageableElement` — второй родитель (из пакета Packages), но без дополнительных атрибутов в наследовании.
 
 ### 6. Информация о пакетах-импортах
 Пакет InformationFlows импортирует **7 пакетов**: UseCases, Deployments, StructuredClassifiers, Classification, SimpleClassifiers, Packages, Activities. Многие типы концов (Actor, Node, Artifact, Component, Port и т.д.) находятся в этих пакетах — при написании описаний нужно ссылаться на соответствующие разделы.
@@ -236,8 +244,8 @@
 InformationFlow имеет **множественное наследование** (DirectedRelationship + PackageableElement). На SVG-диаграмме это потребует показать две ветви от разных предков к одному потомку. Информационные элементы — прямое наследование от Classifier, но с важным ограничением: они не могут быть инстанциированы (`isAbstract`).
 
 ### 9. Риски при генерации SVG диаграмм
-- **Figure 20.1** (абстрактный синтаксис): самый большой рисунок с 9 классами и множеством связей. Может потребовать горизонтальной прокрутки или адаптивной ширины.
-- **Figure 20.2–20.6**: примеры использования — требуют текстовых подписей для InformationItem на диаграммах, что добавляет сложность в позиционирование.
+- **Figure 20.1** (абстрактный синтаксис): самый большой рисунок с 9 классами и множеством связей. Все мультипликаторы на диаграмме — `*`. Может потребовать горизонтальной прокрутки или адаптивной ширины. Классификаторы InformationFlow и InformationItem должны быть кликабельными ссылками на соответствующие страницы.
+- **Figure 20.2–20.6**: примеры использования — требуют текстовых подписей для InformationItem на диаграммах, что добавляет сложность в позиционирование. Нужно проверять пересечения текста (scripts/check_svg_overlaps.py).
 
 ### 10. Нумерация страниц в TOC
 В оглавлении PDF Figure 20.1 указан как страница 667, но он фактически содержится в разделе на странице 669. TOC-ссылка на рисунки может быть неточной — при генерации каталога диаграмм использовать фактическое содержимое, а не TOC.
@@ -259,7 +267,7 @@ InformationFlow имеет **множественное наследование
 | Операции | 0 |
 | Перечисления / Signals | 0 |
 | Рисунки | 6 (Figure 20.1–20.6) |
-| Абстрактные классы | 0 (InformationItem не имеет isAbstract в XMI, но семантически абстрактен) |
+| Абстрактные классы | 0 (XMI: ни один класс не имеет `isAbstract="true"`; InformationItem семантически абстрактен через constraint `not_instantiable` с OCL `isAbstract`) |
 | Множественное наследование | Да (InformationFlow -> DirectedRelationship + PackageableElement) |
 | Само-рекурсивные ассоциации | 2 (A_realization_abstraction_flow, A_represented_representation) |
 

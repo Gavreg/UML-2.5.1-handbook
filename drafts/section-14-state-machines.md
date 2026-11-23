@@ -100,7 +100,7 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.1` | ProtocolStateMachine | 341 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2` | ProtocolTransition | 342 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2.1` | Unexpected trigger reception | 342 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2.2` | Unexpected triggers on exit transitions | 342 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2.2` | Unexpected Behavior | 342 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2.3` | Equivalences to pre-condition and guard | 343 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.2.4` | Using other types of Triggers | 343 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`14.4.3.3` | ProtocolConformance | 343 |
@@ -112,6 +112,7 @@
 
 > **Каталог классификаторов**: `14.5 Classifier Descriptions` (p.345)
 > **Каталог ассоциаций**: `14.6 Association Descriptions` (p.364)
+
 ## Классификаторы раздела
 
 ### Из XMI-пакета `StateMachines` (прямые классы/перечисления: 13)
@@ -274,14 +275,9 @@
 **A_trigger_transition** (3 конца: 1 ownedEnd + 2 memberEnd)
 - `transition : Transition[1..*]` — переходы с данным триггером
 
-### Агрегирующие ассоциации (обе стороны имеют ownedEnd)
+### Агрегирующие ассоциации
 
-| Ассоциация | Конец 1 | Конец 2 |
-|-----------|---------|---------|
-| (нужно уточнять в XMI для всех парных концов) |
-
-> Всего **32** ассоциации, **78** элементов концов (ownedEnd + memberEnd).
-> Многие ассоциации используют `memberEnd` для наследования концов из переопределяемых ассоциаций.
+> Всего **32** ассоциации, ~78 концов (ownedEnd + memberEnd). Многие ends определены через `memberEnd` (типы из CommonStructure/Classification); детальные ownedEnd есть в ~15 ассоциациях. Полный разбор — задача этапа 3 (sync_xmi_properties.py).
 
 ## Рисунки раздела
 
@@ -334,7 +330,7 @@
 | Figure 14.45 | Notation for a State with an invariant | 343 |
 | Figure 14.46 | ProtocolTransition notation | 343 |
 
-**Итого**: **46** рисунков (включая Figure 14.1 из TOC и Figure 14.16 из текста; в TOC пропущен).
+**Итого**: **46** рисунков (включая Figure 14.1 из TOC и Figure 14.16 — подтверждён в TOC p.325 и в теле текста).
 
 ## Замечания и риски
 

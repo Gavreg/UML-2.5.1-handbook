@@ -14,8 +14,6 @@
 
 ---
 
----
-
 ## Конфигурация для sections.json
 
 ```json
@@ -211,8 +209,8 @@
 Данные подсчитаны точным обходом XMI пакета `Deployments` только для 10 классификаторов данного пакета
 (без импортированных из других пакетов типов).
 
-| Категория          | Класс Artifact | Comm. Path | Dep. Artif. | Deployment | Dep. Spec. | Dep. Target | Device | ExecEnv. | Manifest. | Node | **Итого** |
-|--------------------|----------------|------------|-------------|------------|------------|-------------|--------|----------|-----------|------|-----------|
+| Категория          | Artifact | CommunicationPath | DeployedArtifact | Deployment | DeploymentSpec. | DeploymentTarget | Device | ExecutionEnv. | Manifestation | Node | **Итого** |
+|--------------------|----------|-------------------|------------------|------------|-----------------|------------------|--------|---------------|---------------|------|-----------|
 | ownedAttribute     | 5              | 0          | 0           | 3          | 3          | 2           | 0      | 0        | 1         | 1    | **15**    |
 | ownedOperation     | 0              | 0          | 0           | 0          | 0          | 1           | 0      | 0        | 0         | 0    | **1**     |
 | ownedRule          | 0              | 1          | 0           | 0          | 2          | 1           | 0      | 0        | 0         | 1    | **5**     |
@@ -312,12 +310,12 @@
 |---------|----------|---------------|---------------|-----------|---------------------------|
 | Figure 19.1 | P694 | Метамодел. (классы + обобщения) | Средняя | Высокий | 7 классов пакета Deployments с link-ами; корень UMLModel на левом краю |
 | Figure 19.2 | P695 | Deployment-диаграмма | Высокий | Высокий | Зависимости между Artifact/DeploymentSpecification → DeploymentTarget; нужно масштабирование |
-| Figure 19.3 | P695 | Deployment-диаграмма (альтернатива) | Высокий | Средний | То же + «deploy» зависимость — рекурсивная link на страницу A_configuration_deployment |
+| Figure 19.3 | P695 | Deployment-диаграмма (альтернатива) | Высокий | Средний | То же + «deploy» зависимость — рекурсивная гиперссылка на страницу A_configuration_deployment |
 | Figure 19.4 | P696 | Текстовый список | Низкая | Низкий | Простой текстовый блок; гиперссылки DeployedArtifact → странице классификатора |
 | Figure 19.5 | P696 | Deployment-диаграмма (type + instance) | Высокий | Высокий | Два блока: Artifact type-level, DeployedArtifact instance-level; параметризация через DeploymentSpec |
 | Figure 19.6 | P696 | Зависимости между спецификациями | Средняя | Средний | Многократные links DeploymentSpecification → DeployedArtifact (multiple) |
 | Figure 19.7 | P697 | Детальная спецификация | Высокий | Высокий | Полный Detail-блок: DeploymentSpecification с атрибутами (deployment, deploymentLocation, executionLocation) — как expandable panel |
-| Figure 19.8 | P697 | Метамодел. (Artifacts иерархия) | Средняя | Средний | Artifact → DeployedArtifact + DeploymentSpecification (generalizations); link-ы на классы |
+| Figure 19.8 | P697 | Метамодел. (Artifacts иерархия) | Средняя | Средний | Artifact → DeployedArtifact + DeploymentSpecification (generalizations); гиперссылки на классы |
 | Figure 19.9 | P698 | Иконка артефакта | Низкая | Средний | Прямоугольник класса + иконка документа; link на Artifact страницу |
 | Figure 19.10 | P698 | Manifestation-связь | Средняя | Средний | dashed line с ««manifest»» между Artifact ↔ Component; link на Manifestation страницу |
 | Figure 19.11 | P699 | Метамодел. (Node иерархия) | Высокий | Высокий | Node + Device/ExecEnv + DeploymentTarget — нужно несколько столбцов наследования |
@@ -343,8 +341,8 @@
 | Artifact → Classifier | Classifier | Раздел 7 (Common Structure), классификатор 7.2 | Наследование: обобщение Artifact→Classifier |
 | Artifact → DeployedArtifact | DeployedArtifact | Раздел 19, разделитель 19.5.3 | Внутреннее обобщение |
 | CommunicationPath → Association | Association | Раздел 8 (Common Structure), классификатор 8.1 | Наследование: обобщение CommPath→Association |
-| Deployment → Dependency | Dependency | Раздел 7.7, классификатор 7.35 | Насладование: обобщение Deployment→Dependency |
-| DeploymentTarget → NamedElement | NamedElement | Раздел 7 (Common Structure), классификатор 7.14 | Наследование: DeployedTarget→NamedElement |
+| Deployment → Dependency | Dependency | Раздел 7.7, классификатор 7.35 | Наследование: обобщение Deployment→Dependency |
+| DeploymentTarget → NamedElement | NamedElement | Раздел 7 (Common Structure), классификатор 7.14 | Наследование: DeploymentTarget→NamedElement |
 | DeployedArtifact → NamedElement | NamedElement | Раздел 7 (Common Structure) | Наследование: обобщение |
 | Device → Node | Node | Раздел 19, разделитель 19.5.10 | Внутреннее обобщение |
 | ExecutionEnvironment → Node | Node | Раздел 19, разделитель 19.5.10 | Внутреннее обобщение |
@@ -380,7 +378,7 @@
 
 ### Этап 4: `build_site.py --clause 19`
 - Построит HTML-фрагменты страниц с навигацией и поисковым индексом.
-- **Особенность:** cross-links к разделам 7, 12 — пока placeholder (необходимо пометить как pending cross-reference).
+- **Особенность:** cross-links к разделам 7, 12 — пока не реализованы (необходимо пометить как pending cross-reference).
 
 ### Этап 5: SVG-диаграммы
 - **Недостаток текущих билдеров:** нет специфичной логики для deployment-диаграмм (зависимости deploy, artifact иконки).

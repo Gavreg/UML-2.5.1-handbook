@@ -295,8 +295,8 @@ InformationFlow имеет **множественное наследование
 | informationSource / informationTarget → Node | Clause 19 — Deployments, §19.5.10 | Ограничение (OCL) | p.672 |
 | informationSource / informationTarget → Artifact | Clause 19 — Deployments, §19.5.1 | Ограничение (OCL) | p.672 |
 | informationSource / informationTarget → Component | Clause 11 — Structured Classifiers, §11.4.1 | Ограничение (OCL) | p.672 |
-| conveyed_classifiers → Signal | Clause 10 — Simple Classifiers, §10.5.8 | Ограничение (OCL) | p.672 |
-| conveyed_classifiers → Interface | Clause 10 — Simple Classifiers, §10.5.6 | Ограничение (OCL) | p.672 |
+| convey_classifiers → Signal (OCL-ограничение) | Clause 10 — Simple Classifiers, §10.5.8 | Ограничение (OCL) | p.672 |
+| convey_classifiers → Interface (OCL-ограничение) | Clause 10 — Simple Classifiers, §10.5.6 | Ограничение (OCL) | p.672 |
 
 > **Примечание:** Пакет InformationFlows импортирует 7 пакетов: UseCases(18), Deployments(19), StructuredClassifiers(11), Classification(9), SimpleClassifiers(10), Packages(12), Activities(15). Все OCL-ограничения в правилах must_conform / sources_and_targets_kind перечисляют типы из этих пакетов.
 
@@ -320,7 +320,7 @@ InformationFlow имеет **множественное наследование
 
 1. **Само-рекурсивные связи в SVG (generate_classification_svg.py):** Два из 8 классов ассоциаций имеют концы одинакового типа — `A_realization_abstraction_flow` и `A_represented_representation`. Текущие builders генераторов диаграмм не обрабатывают self-loops: нужно добавить параметр `self_loop_offset` в layout-алгоритм, который рисует петлю от узла к самому себе с боковым отступом (например, 40 px вбок + изгиб Bézier). Без этого ассоциации останутся без визуального отображения на диаграмме наследования.
 
-2. **Отсутствие association_catalog (build_site.py):** `association_catalog="20.3 Association Descriptions"` — это подраздел описаний, а не каталог рисунков. Если скрипт ожидает отдельную секцию каталога (как в разделах 7–9), он может пропустить 8 описаний ассоциаций при построении поискового индекса. Рекомендуется явный проход по подразделам `20.3.[1-8]` вместо reliance на generic catalog lookup.
+2. **Отсутствие association_catalog (build_site.py):** `association_catalog="20.3 Association Descriptions"` — это подраздел описаний, а не каталог рисунков. Если скрипт ожидает отдельную секцию каталога (как в разделах 7–9), он может пропустить 8 описаний ассоциаций при построении поискового индекса. Рекомендуется явный проход по подразделам `20.3.[1-8]` вместо опирания на generic catalog lookup.
 
 3. **Множественное наследование в layout (generate_classification_svg.py):** Класс InformationFlow наследуется от двух родителей — DirectedRelationship и PackageableElement. Текущий алгоритм рисования наследования поддерживает только один родительский блок слева. Нужно переписать layout-процедуру для поддержки `parent_rows > 1`: разместить предков в столбцах по возрастанию «удалённости» (DirectedRelationship на стр. 669 из Clause 7; PackageableElement на стр. 669 из Clause 12), затем соединить обе ветви к InformationFlow.
 

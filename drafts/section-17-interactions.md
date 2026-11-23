@@ -7,7 +7,6 @@
 > - **Проверка**: 2025-11-22, сверка с дампом/XMI; добавлены 9 подразделов, пересчитаны страницы, каталоги на стр. 608/633.
 > - **Состав**: конфигурация, подразделы, классификаторы, ассоциации, рисунки, замечания, план иллюстраций, межраздельные ссылки, рекомендации по скриптам.
 > - **Критерий адекватности**: числа сходятся с XMI и текстом; расхождения — в «Замечаниях и рисках».
-# Реестр раздела 17: Interactions (Взаимодействия) — ЧЕРНОВИК
 
 > **Контекст**: В OMG UML 2.5.1 — это раздел **17** (страницы 565–638).
 > Разделы: 16 = Actions, **17 = Interactions**, 18 = UseCases.
@@ -377,7 +376,7 @@
 | `BehaviorExecutionSpecification.behavior` | `Behavior` | 13 Common Behavior | ассоциация A_behavior_behaviorExecutionSpecification |
 | `Message.signature` | `NamedElement` → `Operation` / `Signal` | 9 Classification, 12 Packages | subsets (Operation) |
 | `MessageEnd.message` | `Message` | 17 Interactions | ownedEnd (кратность [1..2]) |
-| `Lifeline.represents` | `ConnectableElement` / `MultipliciyElement` | 7 Common Structure | обобщение, MultiplicityElement |
+| `Lifeline.represents` | `ConnectableElement` / `MultiplicityElement` | 7 Common Structure | обобщение, MultiplicityElement |
 | `InteractionFragment.covered` | `Lifeline` | 17 Interactions | навигация через coveredBy |
 | `ExecutionSpecification.start/finish` | `OccurrenceSpecification` | 17 Interactions | ownedEnd A_finish_executionSpecification / A_start_executionSpecification |
 | `CombinedFragment.operand` | `InteractionOperand` | 17 Interactions | composite (кратность [1..*]) |
@@ -389,7 +388,7 @@
 
 **Связи с разделом 7 (Common Structure)**: Lifeline.represents ведёт к ConnectableElement и MultiplicityElement из раздела 7; Property в ReturnValueRecipient → Property из раздела 7.  
 **Связи с разделом 9 (Classification)**: Message.signature ссылается на Operation/Signal (классификаторы); InteractionOperatorKind — собственный enumeration пакета Interactions.  
-**Связи с разделом 13 (Common Behavior)**: Interaction и BehaviorExecutionSpecification.behavior связаны с поведением через Action/Berhavior; Behavior — базовый класс поведения из раздела 13.  
+**Связи с разделом 13 (Common Behavior)**: Interaction и BehaviorExecutionSpecification.behavior связаны с поведением через Action/Behavior; Behavior — базовый класс поведения из раздела 13.  
 **Связи с разделом 14 (StateMachines)**: StateInvariant ссылается на State из StateMachines; Lifeline может содержать states-атрибуты, ведущие к состояниям автомата.
 
 ## Применение текущих скриптов для раздела 17

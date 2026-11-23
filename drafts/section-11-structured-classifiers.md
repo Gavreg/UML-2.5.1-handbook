@@ -3,7 +3,7 @@
 > - Исходная задача (промпт): составить черновик реестра раздела 11 Structured Classifiers спецификации OMG UML 2.5.1 (страницы 183–240) для будущего переноса в справочник: дерево подразделов, классификаторы и ассоциации из XMI, каталог рисунков, замечания; бюджет ≤200k токенов; источники — PDF `omg-uml-2.5.1-formal-17-12-05.pdf`, текстовый дамп `omg-uml-2.5.1-formal-17-12-05.txt`, XMI `UML-2.5.1.xmi` (пакет StructuredClassifiers); без выдумывания, только извлечение regex/grep/awk по нужным диапазонам.
 > - Дата и характер проверки: 2025-11-22, сверка с текстом спецификации (regex по дампу страниц 183–240) и с XMI (пакет StructuredClassifiers); исправлены рисунки (48→54), добавлены Figure 39/40/43; обновлены замечания и статус рисков.
 > - Состав черновика: конфигурация `sections.json`, дерево подразделов, таблицы классификаторов и ассоциаций с определениями из текста, каталог рисунков, замечания и риски, план иллюстраций, план межраздельных ссылок, рекомендации по применению скриптов пайплайна и модернизации.
-> - Критерий адекватности для проверяющей модели: числа в сводке (15 классификаторов, 35 ассоциаций, 54 рисунка, 90 заголовков подразделов, 5 Attributes / 12 Operations / 8 Constraints) должны сходиться с XMI и текстом спецификации; при расхождениях смотри раздел «Замечания и риски».
+> - Критерий адекватности для проверяющей модели: числа в сводке (15 классификаторов, 35 ассоциаций, 54 рисунка, ≈90 заголовков подразделов, 5 Attributes / 12 Operations / 8 Constraints) должны сходиться с XMI и текстом спецификации; при расхождениях смотри раздел «Замечания и риски».
 
 # Черновик реестра раздела 11: Structured Classifiers
 
@@ -281,8 +281,8 @@
 | 39 | Example of an overview diagram showing Components and their general Dependencies | 209 |
 | 40 | A Component with two provided and three required Interfaces | 209 |
 | 41 | Black box notation showing a listing of provided and required interfaces | 210 |
+| 42 | Optional "white-box" representation of a Component | 210 |
 | 43 | Explicit representation of provided and required Interfaces using Dependency notation | 210 |
-| 42 | Optional “white-box” representation of a Component | 210 |
 | 44 | A representation of the realization of a complex Component | 211 |
 | 45 | An alternative nested representation of a complex Component | 211 |
 | 46 | Example model of a Component, its provided and required Interfaces, and wiring | 211 |
@@ -370,7 +370,7 @@
 
 ## 9. План межраздельных ссылок
 
-Элементы раздела 11 активно ссылуются на другие разделы метамодели (наследование, типы, subsets).
+Элементы раздела 11 активно ссылаются на другие разделы метамодели (наследование, типы, subsets).
 
 | Элемент (§11) | Связанный элемент | Раздел справочника | Тип связи |
 |---------------|-------------------|--------------------|-----------|
@@ -421,6 +421,7 @@
     "association_catalog": "11.9",
     "figure_catalog": "Figure 11.x",
     "figure_count": 54,
+    "nested_packages": ["StateMachines", "SimpleClassifiers", "Packages", "Interactions", "InformationFlows", "Deployments", "CommonStructure", "CommonBehavior", "Classification", "Actions"],
     "source": "site/docs/omg-uml-2.5.1-formal-17-12-05.pdf"
 }
 ```

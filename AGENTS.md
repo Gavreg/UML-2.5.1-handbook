@@ -22,7 +22,7 @@
 - `site/data/structured-classifiers.js` и `site/data/content/sections-11.js` — раздел 11: русские тексты подразделов, 15 классификаторов, 34 ассоциации и каталог 54 рисунков; свойства XMI, страницы и SVG добавляются на следующих этапах.
 - `site/data/common-structure-content.js` — инициализатор русского контента; полные тексты подразделов и описания классификаторов разбиты по файлам в `site/data/content/`, чтобы при правках читать только нужный раздел. В `site/data/content/sections-9.js` находятся полные русские тексты подразделов 9.1–9.8.
 - `site/data/common-structure-xmi.js` — генерируемый из XMI базовый файл с ассоциациями, обобщениями и определениями предков; собственные и унаследованные атрибуты каждого класса находятся в отдельном файле `site/data/xmi/<Class>.js`.
-- `site/data/common-structure-pages.js` — генерируемый базовый HTML главной страницы и каталога, навигация и заглушка 404; остальные страницы, заголовки и поисковый индекс разбиты по типам и разделам в `site/data/pages/`. Все фрагменты необходимы для работы сайта и включаются в репозиторий.
+- `site/data/common-structure-pages.js` — генерируемый базовый HTML главной страницы и каталога, навигация и заглушка 404; на главную встроена общая SVG-иерархия всех 255 классификаторов XMI, где ссылки имеют только классификаторы с готовыми страницами; остальные страницы, заголовки и поисковый индекс разбиты по типам и разделам в `site/data/pages/`. Все фрагменты необходимы для работы сайта и включаются в репозиторий.
 - `site/assets/diagrams/` — интерактивные SVG для 70 рисунков разделов 7–10; исходные PNG сохранены как справочные копии и резерв для встроенных объектов.
 - `site/docs/` — официальные PDF и XMI OMG, извлечённые текстовые материалы; каталог публикуется вместе с сайтом, а ссылки на PDF остаются относительными.
 - `scripts/sections.json` и `scripts/section_config.py` — единая конфигурация разделов: страницы PDF, XMI-пакет, каталоги, источники, data/content-файлы и SVG-генератор; остальные инструменты не должны дублировать эти настройки.
@@ -36,6 +36,7 @@
 - `scripts/generate_common_structure_svg.py` — генерация и проверка интерактивных SVG для рисунков 7.2–7.21 и 8.1–8.5; ссылки и подсказки строятся по данным справочника и XMI; поддерживает `--clause`.
 - `scripts/generate_classification_svg.py` — генерация и проверка 32 интерактивных SVG раздела 9; builders сгруппированы в `scripts/classification_figures_*.py`; поддерживает `--clause`.
 - `scripts/generate_simple_classifiers_svg.py` — генерация и проверка 12 интерактивных SVG раздела 10; builders сгруппированы в `scripts/simple_classifiers_figures_*.py`; поддерживает `--clause` и `--check`.
+- `scripts/generate_metamodel_inheritance_svg.py` — генерация и проверка `site/assets/diagrams/metamodel-inheritance.svg`: все классификаторы полного XMI, связи обобщения, ссылки на готовые страницы и подсказки с определениями; поддерживает `--check`.
 - `scripts/sync_xmi_properties.py` — генерация и проверка базовых XMI-данных и отдельных файлов классов в `site/data/xmi/`; `--clause` ограничивает запись выбранным разделом и сохраняет остальные данные; русские описания отсутствующих свойств задаются в самом скрипте.
 - `scripts/xmi_model.py` и `scripts/xmi_inspect.py` — общий read-only разбор XMI и компактные запросы: списки объектов раздела, карточки классификаторов и ассоциаций, наследуемые свойства, OCL, поиск, зависимости и нормализованная JSON-выгрузка. Использовать их вместо чтения больших фрагментов XMI при наполнении справочника.
 - `scripts/check_xmi.py` — read-only проверка XMI-ссылок, концов ассоциаций, обобщений и циклов наследования; `--clause` ограничивает область проверки. В официальном XMI есть восемь повторных идентификаторов у `State.isConsistentWith`, поэтому полная проверка сообщает об известном дефекте источника; проверки разделов 7–10 проходят.
@@ -67,6 +68,8 @@ python scripts/generate_common_structure_svg.py
 python scripts/generate_common_structure_svg.py --check
 python scripts/generate_classification_svg.py
 python scripts/generate_classification_svg.py --check
+python scripts/generate_metamodel_inheritance_svg.py
+python scripts/generate_metamodel_inheritance_svg.py --check
 python scripts/build_site.py
 python scripts/build_site.py --clause 9 --check
 python scripts/build_site.py --check

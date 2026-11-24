@@ -545,6 +545,7 @@ def check_svg(source=None, text=None):
 
 
 def check_inheritance(svg_text, classifier_name, xmi, data):
+    """Check one classifier hierarchy, or the complete graph when classifier_name is None."""
     document = SvgDocument(text=svg_text)
     errors = []
     blocks = []
@@ -584,8 +585,9 @@ def check_inheritance(svg_text, classifier_name, xmi, data):
                 errors.append("class names overlap")
     current = [block for block in blocks if block["element"].get("data-current") == "true"]
     roots = [block for block in blocks if block["element"].get("data-depth") == "0"]
-    if len(current) != 1:
-        errors.append("inheritance SVG must have one current class")
+    expected_current = 0 if classifier_name is None else 1
+    if len(current) != expected_current:
+        errors.append(f"inheritance SVG must have {expected_current} current classes")
     if not roots:
         errors.append("inheritance SVG has no root")
     if blocks:
@@ -622,9 +624,10 @@ def check_inheritance(svg_text, classifier_name, xmi, data):
             if any(inside(path.point(distance), block["box"]) for block in blocks):
                 errors.append(f"inheritance line enters a class block: {element.get('d')}")
                 break
-    if len(current) == 1 and current[0]["element"].get("data-classifier") != classifier_name:
+    if classifier_name is not None and len(current) == 1 and current[0]["element"].get("data-classifier") != classifier_name:
         errors.append(f"current inheritance class is not {classifier_name}")
-    return [f"{classifier_name} inheritance: {error}" for error in dict.fromkeys(errors)]
+    label = classifier_name or "complete metamodel"
+    return [f"{label} inheritance: {error}" for error in dict.fromkeys(errors)]
 
 
 def display_path(source):

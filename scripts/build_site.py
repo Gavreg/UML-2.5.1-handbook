@@ -358,6 +358,27 @@ class HandbookRenderer:
             return f"{numbers[0]}–{numbers[-1]}"
         return ", ".join(map(str, numbers))
 
+    def metamodel_inheritance_overview(self):
+        path = SITE / "assets" / "diagrams" / "metamodel-inheritance.svg"
+        svg = path.read_text(encoding="utf-8")
+        dimensions = re.search(r'<svg[^>]*\bwidth="(\d+)"[^>]*\bheight="(\d+)"', svg)
+        if not dimensions:
+            raise ValueError(f"Missing SVG dimensions: {path}")
+        width, height = dimensions.groups()
+        total = svg.count('class="inheritance-class"')
+        linked = svg.count('<a class="inheritance-class"')
+        edges = svg.count('class="inheritance-generalization"')
+        return f'''<section class="metamodel-overview" aria-labelledby="metamodel-overview-title">
+          <h2 id="metamodel-overview-title">Наследование всей метамодели</h2>
+          <p>Полная XMI-модель UML 2.5.1: {total} классификаторов и {edges} связей обобщения. Корни расположены слева, потомки — правее. {linked} классификаторов являются ссылками на готовые страницы справочника; остальные пока показаны без ссылок.</p>
+          <p class="diagram-help">Диаграмму можно прокручивать по горизонтали. Наведите указатель на класс, чтобы увидеть его определение.</p>
+          <div class="inheritance-diagram metamodel-inheritance-diagram">
+            <object class="metamodel-inheritance-object" data="assets/diagrams/metamodel-inheritance.svg" type="image/svg+xml" width="{width}" height="{height}" aria-label="Иерархия наследования всех {total} классификаторов UML 2.5.1">
+              <a href="assets/diagrams/metamodel-inheritance.svg">Открыть диаграмму наследования</a>
+            </object>
+          </div>
+        </section>'''
+
     def render_home(self):
         groups = []
         for clause_id, clause in self.clauses.items():
@@ -402,6 +423,7 @@ class HandbookRenderer:
             <div class="stat"><strong>{classifiers_count}</strong><span>{self.plural(classifiers_count, "классификатор", "классификатора", "классификаторов")}</span></div>
             <div class="stat"><strong>{diagrams_count}</strong><span>{self.plural(diagrams_count, "рисунок", "рисунка", "рисунков")} из спецификации</span></div></div>
           <div class="notice">Рисунки разделов {self.clause_range()} перерисованы в масштабируемые SVG. На диаграммах абстрактного синтаксиса классы и ассоциации ведут на страницы справочника, а наведение открывает подсказки и подсвечивает связи.</div>
+          {self.metamodel_inheritance_overview()}
           {"".join(groups)}'''
 
     def render_section(self, section):

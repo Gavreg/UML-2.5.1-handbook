@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="4345" height="2724" viewBox="0 0 4345 2724" role="img" aria-labelledby="metamodel-title metamodel-description" data-diagram="metamodel-inheritance">
+  <title id="metamodel-title">Иерархия наследования всех классификаторов UML 2.5.1</title>
+  <desc id="metamodel-description">Все 255 классификаторов официальной XMI-модели и 283 связей обобщения. Корни расположены слева, потомки справа. 93 классификаторов имеют ссылки на страницы справочника.</desc>
+  <defs>
+    <marker id="inheritance-generalization" markerWidth="15" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 13 8 L 1 15 Z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/></marker>
+    <style>
+      .inheritance-generalization { fill: none; stroke: #111111; stroke-width: 1.4; }
+      .inheritance-class-box { fill: #ffffff; stroke: #111111; stroke-width: 1.4; }
+      .inheritance-class-name { fill: #111111; font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 700; }
+      .inheritance-class-name.abstract { font-style: italic; }
+      .inheritance-class[href] { cursor: pointer; }
+      .inheritance-class[href]:hover .inheritance-class-box { fill: #eef3fb; stroke: #1e3a8a; }
+      .inheritance-class[href]:focus-visible { outline: none; }
+      .inheritance-class[href]:focus-visible .inheritance-class-box { stroke: #7c3aed; stroke-width: 3; }
+    </style>
+  </defs>
+  <rect class="metamodel-background" width="4345" height="2724" fill="#ffffff"/>
+  <path class="inheritance-generalization" data-child="Activity" data-parent="Behavior" d="M 3763 48 H 3711 V 204 H 3425" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityEdge" data-parent="RedefinableElement" d="M 1231 48 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityFinalNode" data-parent="FinalNode" d="M 2497 100 H 2445 V 776 H 2168" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityGroup" data-parent="NamedElement" d="M 776 48 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityNode" data-parent="RedefinableElement" d="M 1231 100 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityParameterNode" data-parent="ObjectNode" d="M 2051 100 H 1999 V 1452 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActivityPartition" data-parent="ActivityGroup" d="M 1231 152 H 1179 V 48 H 929" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CentralBufferNode" data-parent="ObjectNode" d="M 2051 412 H 1999 V 1452 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ControlFlow" data-parent="ActivityEdge" d="M 1623 516 H 1571 V 48 H 1375" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ControlNode" data-parent="ActivityNode" d="M 1623 568 H 1571 V 100 H 1375" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DataStoreNode" data-parent="CentralBufferNode" d="M 2497 464 H 2445 V 412 H 2240" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DecisionNode" data-parent="ControlNode" d="M 2051 516 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExceptionHandler" data-parent="Element" d="M 375 152 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExecutableNode" data-parent="ActivityNode" d="M 1623 828 H 1571 V 100 H 1375" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="FinalNode" data-parent="ControlNode" d="M 2051 776 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="FlowFinalNode" data-parent="FinalNode" d="M 2497 828 H 2445 V 776 H 2168" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ForkNode" data-parent="ControlNode" d="M 2051 880 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InitialNode" data-parent="ControlNode" d="M 2051 984 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InterruptibleActivityRegion" data-parent="ActivityGroup" d="M 1231 1192 H 1179 V 48 H 929" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="JoinNode" data-parent="ControlNode" d="M 2051 1088 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MergeNode" data-parent="ControlNode" d="M 2051 1504 H 1999 V 568 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ObjectFlow" data-parent="ActivityEdge" d="M 1623 1400 H 1571 V 48 H 1375" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ObjectNode" data-parent="TypedElement" d="M 1623 1452 H 1603 V 2216 H 1147 V 1140 H 920" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ObjectNode" data-parent="ActivityNode" d="M 1623 1452 H 1571 V 100 H 1375" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Variable" data-parent="ConnectableElement" d="M 1623 2128 H 1571 V 256 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Variable" data-parent="MultiplicityElement" d="M 1623 2128 H 1603 V 2232 H 692 V 308 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Duration" data-parent="ValueSpecification" d="M 1623 672 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DurationConstraint" data-parent="IntervalConstraint" d="M 2051 620 H 1999 V 1140 H 1821" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DurationInterval" data-parent="Interval" d="M 2051 672 H 1999 V 1088 H 1731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DurationObservation" data-parent="Observation" d="M 1623 724 H 1571 V 1244 H 1366" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Expression" data-parent="ValueSpecification" d="M 1623 932 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Interval" data-parent="ValueSpecification" d="M 1623 1088 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="IntervalConstraint" data-parent="Constraint" d="M 1623 1140 H 1571 V 308 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralBoolean" data-parent="LiteralSpecification" d="M 2051 1140 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralInteger" data-parent="LiteralSpecification" d="M 2051 1192 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralNull" data-parent="LiteralSpecification" d="M 2051 1244 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralReal" data-parent="LiteralSpecification" d="M 2051 1296 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralSpecification" data-parent="ValueSpecification" d="M 1623 1192 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralString" data-parent="LiteralSpecification" d="M 2051 1348 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LiteralUnlimitedNatural" data-parent="LiteralSpecification" d="M 2051 1400 H 1999 V 1192 H 1839" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Observation" data-parent="PackageableElement" d="M 1231 1244 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OpaqueExpression" data-parent="ValueSpecification" d="M 1623 1504 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StringExpression" data-parent="TemplateableElement" d="M 2051 1920 H 2031 V 2248 H 692 V 776 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StringExpression" data-parent="Expression" d="M 2051 1920 H 1999 V 932 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TimeConstraint" data-parent="IntervalConstraint" d="M 2051 2024 H 1999 V 1140 H 1821" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TimeExpression" data-parent="ValueSpecification" d="M 1623 1972 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TimeInterval" data-parent="Interval" d="M 2051 2076 H 1999 V 1088 H 1731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TimeObservation" data-parent="Observation" d="M 1623 2024 H 1571 V 1244 H 1366" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ValueSpecification" data-parent="TypedElement" d="M 1231 1920 H 1179 V 1140 H 920" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ValueSpecification" data-parent="PackageableElement" d="M 1231 1920 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Actor" data-parent="BehavioredClassifier" d="M 2497 152 H 2445 V 308 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Extend" data-parent="NamedElement" d="M 1231 620 H 1211 V 2264 H 692 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Extend" data-parent="DirectedRelationship" d="M 1231 620 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExtensionPoint" data-parent="RedefinableElement" d="M 1231 672 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Include" data-parent="DirectedRelationship" d="M 1231 932 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Include" data-parent="NamedElement" d="M 1231 932 H 1211 V 2280 H 692 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="UseCase" data-parent="BehavioredClassifier" d="M 2497 2076 H 2445 V 308 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Association" data-parent="Relationship" d="M 2051 256 H 2031 V 2296 H 692 V 516 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Association" data-parent="Classifier" d="M 2051 256 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AssociationClass" data-parent="Class" d="M 3317 152 H 3265 V 256 H 3029" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AssociationClass" data-parent="Association" d="M 3317 152 H 3297 V 2312 H 2413 V 256 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Class" data-parent="BehavioredClassifier" d="M 2925 256 H 2905 V 2328 H 2413 V 308 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Class" data-parent="EncapsulatedClassifier" d="M 2925 256 H 2873 V 620 H 2731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Collaboration" data-parent="StructuredClassifier" d="M 2497 256 H 2445 V 1972 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Collaboration" data-parent="BehavioredClassifier" d="M 2497 256 H 2445 V 308 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CollaborationUse" data-parent="NamedElement" d="M 776 152 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Component" data-parent="Class" d="M 3317 360 H 3265 V 256 H 3029" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ComponentRealization" data-parent="Realization" d="M 2497 360 H 2445 V 1712 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConnectableElement" data-parent="TypedElement" d="M 1231 256 H 1179 V 1140 H 920" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConnectableElement" data-parent="ParameterableElement" d="M 1231 256 H 1211 V 2344 H 692 V 412 H 591" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConnectableElementTemplateParameter" data-parent="TemplateParameter" d="M 776 204 H 724 V 620 H 564" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Connector" data-parent="Feature" d="M 1623 412 H 1571 V 724 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConnectorEnd" data-parent="MultiplicityElement" d="M 776 256 H 724 V 308 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="EncapsulatedClassifier" data-parent="StructuredClassifier" d="M 2497 620 H 2445 V 1972 H 2267" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Port" data-parent="Property" d="M 2497 1192 H 2445 V 1660 H 2159" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuredClassifier" data-parent="Classifier" d="M 2051 1972 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConnectionPointReference" data-parent="Vertex" d="M 1623 360 H 1571 V 1972 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="FinalState" data-parent="State" d="M 2051 828 H 1999 V 1816 H 1727" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ProtocolConformance" data-parent="DirectedRelationship" d="M 1231 1556 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ProtocolStateMachine" data-parent="StateMachine" d="M 4101 100 H 4049 V 360 H 3907" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ProtocolTransition" data-parent="Transition" d="M 1623 1712 H 1571 V 1816 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Pseudostate" data-parent="Vertex" d="M 1623 1764 H 1571 V 1972 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Region" data-parent="Namespace" d="M 1231 1660 H 1179 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Region" data-parent="RedefinableElement" d="M 1231 1660 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="State" data-parent="Namespace" d="M 1623 1816 H 1603 V 2360 H 1147 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="State" data-parent="Vertex" d="M 1623 1816 H 1571 V 1972 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StateMachine" data-parent="Behavior" d="M 3763 360 H 3711 V 204 H 3425" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Transition" data-parent="Namespace" d="M 1231 1816 H 1179 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Transition" data-parent="RedefinableElement" d="M 1231 1816 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Vertex" data-parent="NamedElement" d="M 1231 1972 H 1211 V 2376 H 692 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Vertex" data-parent="RedefinableElement" d="M 1231 1972 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="BehavioredClassifier" data-parent="Classifier" d="M 2051 308 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DataType" data-parent="Classifier" d="M 2051 464 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Enumeration" data-parent="DataType" d="M 2497 672 H 2445 V 464 H 2159" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="EnumerationLiteral" data-parent="InstanceSpecification" d="M 1623 776 H 1571 V 1036 H 1456" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Interface" data-parent="Classifier" d="M 2051 1036 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InterfaceRealization" data-parent="Realization" d="M 2497 932 H 2445 V 1712 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PrimitiveType" data-parent="DataType" d="M 2497 1244 H 2445 V 464 H 2159" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Reception" data-parent="BehavioralFeature" d="M 2051 1764 H 1999 V 204 H 1812" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Signal" data-parent="Classifier" d="M 2051 1816 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Extension" data-parent="Association" d="M 2497 724 H 2445 V 256 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExtensionEnd" data-parent="Property" d="M 2497 776 H 2445 V 1660 H 2159" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Image" data-parent="Element" d="M 375 204 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Model" data-parent="Package" d="M 1623 1348 H 1571 V 1348 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Package" data-parent="PackageableElement" d="M 1231 1348 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Package" data-parent="TemplateableElement" d="M 1231 1348 H 1211 V 2392 H 692 V 776 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Package" data-parent="Namespace" d="M 1231 1348 H 1179 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PackageMerge" data-parent="DirectedRelationship" d="M 1231 1452 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Profile" data-parent="Package" d="M 1623 1660 H 1571 V 1348 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ProfileApplication" data-parent="DirectedRelationship" d="M 1231 1504 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Stereotype" data-parent="Class" d="M 3317 724 H 3265 V 256 H 3029" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActionExecutionSpecification" data-parent="ExecutionSpecification" d="M 1623 100 H 1571 V 568 H 1465" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="BehaviorExecutionSpecification" data-parent="ExecutionSpecification" d="M 1623 152 H 1571 V 568 H 1465" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CombinedFragment" data-parent="InteractionFragment" d="M 1231 204 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConsiderIgnoreFragment" data-parent="CombinedFragment" d="M 1623 464 H 1571 V 204 H 1411" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Continuation" data-parent="InteractionFragment" d="M 1231 360 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DestructionOccurrenceSpecification" data-parent="MessageOccurrenceSpecification" d="M 2051 568 H 1999 V 1296 H 1929" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExecutionOccurrenceSpecification" data-parent="OccurrenceSpecification" d="M 1623 880 H 1571 V 1296 H 1474" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExecutionSpecification" data-parent="InteractionFragment" d="M 1231 568 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Gate" data-parent="MessageEnd" d="M 1231 776 H 1179 V 776 H 902" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="GeneralOrdering" data-parent="NamedElement" d="M 776 464 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Interaction" data-parent="InteractionFragment" d="M 3763 256 H 3743 V 2408 H 1147 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Interaction" data-parent="Behavior" d="M 3763 256 H 3711 V 204 H 3425" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InteractionConstraint" data-parent="Constraint" d="M 1623 1036 H 1571 V 308 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InteractionFragment" data-parent="NamedElement" d="M 776 516 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InteractionOperand" data-parent="InteractionFragment" d="M 1231 1088 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InteractionOperand" data-parent="Namespace" d="M 1231 1088 H 1179 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InteractionUse" data-parent="InteractionFragment" d="M 1231 1140 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Lifeline" data-parent="NamedElement" d="M 776 568 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Message" data-parent="NamedElement" d="M 776 724 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MessageEnd" data-parent="NamedElement" d="M 776 776 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MessageOccurrenceSpecification" data-parent="MessageEnd" d="M 1623 1296 H 1603 V 2424 H 1147 V 776 H 902" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MessageOccurrenceSpecification" data-parent="OccurrenceSpecification" d="M 1623 1296 H 1571 V 1296 H 1474" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OccurrenceSpecification" data-parent="InteractionFragment" d="M 1231 1296 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PartDecomposition" data-parent="InteractionUse" d="M 1623 1608 H 1571 V 1140 H 1393" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StateInvariant" data-parent="InteractionFragment" d="M 1231 1712 H 1179 V 516 H 983" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InformationFlow" data-parent="DirectedRelationship" d="M 1231 984 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InformationFlow" data-parent="PackageableElement" d="M 1231 984 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InformationItem" data-parent="Classifier" d="M 2051 932 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Artifact" data-parent="Classifier" d="M 2051 204 H 1999 V 308 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Artifact" data-parent="DeployedArtifact" d="M 2051 204 H 2031 V 2440 H 1147 V 308 H 956" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CommunicationPath" data-parent="Association" d="M 2497 308 H 2445 V 256 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DeployedArtifact" data-parent="NamedElement" d="M 776 308 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Deployment" data-parent="Dependency" d="M 1623 620 H 1571 V 412 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DeploymentSpecification" data-parent="Artifact" d="M 2497 516 H 2445 V 204 H 2159" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DeploymentTarget" data-parent="NamedElement" d="M 776 360 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Device" data-parent="Node" d="M 3763 152 H 3711 V 516 H 3421" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExecutionEnvironment" data-parent="Node" d="M 3763 204 H 3711 V 516 H 3421" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Manifestation" data-parent="Abstraction" d="M 2051 1452 H 1999 V 48 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Node" data-parent="Class" d="M 3317 516 H 3265 V 256 H 3029" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Node" data-parent="DeploymentTarget" d="M 3317 516 H 3297 V 2456 H 1147 V 360 H 956" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Abstraction" data-parent="Dependency" d="M 1623 48 H 1571 V 412 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Comment" data-parent="Element" d="M 375 100 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Constraint" data-parent="PackageableElement" d="M 1231 308 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Dependency" data-parent="DirectedRelationship" d="M 1231 412 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Dependency" data-parent="PackageableElement" d="M 1231 412 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DirectedRelationship" data-parent="Relationship" d="M 776 412 H 724 V 516 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ElementImport" data-parent="DirectedRelationship" d="M 1231 464 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MultiplicityElement" data-parent="Element" d="M 375 308 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="NamedElement" data-parent="Element" d="M 375 360 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Namespace" data-parent="NamedElement" d="M 776 828 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PackageableElement" data-parent="ParameterableElement" d="M 776 932 H 724 V 412 H 591" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PackageableElement" data-parent="NamedElement" d="M 776 932 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="PackageImport" data-parent="DirectedRelationship" d="M 1231 1400 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ParameterableElement" data-parent="Element" d="M 375 412 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Realization" data-parent="Abstraction" d="M 2051 1712 H 1999 V 48 H 1758" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Relationship" data-parent="Element" d="M 375 516 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TemplateableElement" data-parent="Element" d="M 375 776 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TemplateBinding" data-parent="DirectedRelationship" d="M 1231 1764 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TemplateParameter" data-parent="Element" d="M 375 620 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TemplateParameterSubstitution" data-parent="Element" d="M 375 672 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TemplateSignature" data-parent="Element" d="M 375 724 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Type" data-parent="PackageableElement" d="M 1231 1868 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TypedElement" data-parent="NamedElement" d="M 776 1140 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Usage" data-parent="Dependency" d="M 1623 2076 H 1571 V 412 H 1357" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AnyReceiveEvent" data-parent="MessageEvent" d="M 2051 152 H 1999 V 1244 H 1767" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Behavior" data-parent="Class" d="M 3317 204 H 3265 V 256 H 3029" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CallEvent" data-parent="MessageEvent" d="M 2051 360 H 1999 V 1244 H 1767" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ChangeEvent" data-parent="Event" d="M 1623 256 H 1571 V 516 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Event" data-parent="PackageableElement" d="M 1231 516 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="FunctionBehavior" data-parent="OpaqueBehavior" d="M 4101 48 H 4049 V 308 H 3925" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="MessageEvent" data-parent="Event" d="M 1623 1244 H 1571 V 516 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OpaqueBehavior" data-parent="Behavior" d="M 3763 308 H 3711 V 204 H 3425" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="SignalEvent" data-parent="MessageEvent" d="M 2051 1868 H 1999 V 1244 H 1767" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TimeEvent" data-parent="Event" d="M 1623 1920 H 1571 V 516 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Trigger" data-parent="NamedElement" d="M 776 1088 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Substitution" data-parent="Realization" d="M 2497 1920 H 2445 V 1712 H 2186" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="BehavioralFeature" data-parent="Feature" d="M 1623 204 H 1571 V 724 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="BehavioralFeature" data-parent="Namespace" d="M 1623 204 H 1603 V 2472 H 1147 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Classifier" data-parent="Namespace" d="M 1623 308 H 1603 V 2488 H 1147 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Classifier" data-parent="Type" d="M 1623 308 H 1571 V 1868 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Classifier" data-parent="TemplateableElement" d="M 1623 308 H 1603 V 2504 H 692 V 776 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Classifier" data-parent="RedefinableElement" d="M 1623 308 H 1603 V 2520 H 1147 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ClassifierTemplateParameter" data-parent="TemplateParameter" d="M 776 100 H 724 V 620 H 564" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Feature" data-parent="RedefinableElement" d="M 1231 724 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Generalization" data-parent="DirectedRelationship" d="M 1231 828 H 1179 V 412 H 992" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="GeneralizationSet" data-parent="PackageableElement" d="M 1231 880 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InstanceSpecification" data-parent="DeploymentTarget" d="M 1231 1036 H 1179 V 360 H 956" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InstanceSpecification" data-parent="PackageableElement" d="M 1231 1036 H 1179 V 932 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InstanceSpecification" data-parent="DeployedArtifact" d="M 1231 1036 H 1179 V 308 H 956" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InstanceValue" data-parent="ValueSpecification" d="M 1623 984 H 1571 V 1920 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Operation" data-parent="TemplateableElement" d="M 2051 1556 H 2031 V 2536 H 692 V 776 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Operation" data-parent="ParameterableElement" d="M 2051 1556 H 2031 V 2552 H 692 V 412 H 591" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Operation" data-parent="BehavioralFeature" d="M 2051 1556 H 1999 V 204 H 1812" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OperationTemplateParameter" data-parent="TemplateParameter" d="M 776 880 H 724 V 620 H 564" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Parameter" data-parent="MultiplicityElement" d="M 1623 1556 H 1603 V 2568 H 692 V 308 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Parameter" data-parent="ConnectableElement" d="M 1623 1556 H 1571 V 256 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ParameterSet" data-parent="NamedElement" d="M 776 984 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Property" data-parent="ConnectableElement" d="M 2051 1660 H 2031 V 2584 H 1539 V 256 H 1429" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Property" data-parent="DeploymentTarget" d="M 2051 1660 H 2031 V 2600 H 1147 V 360 H 956" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Property" data-parent="StructuralFeature" d="M 2051 1660 H 1999 V 1868 H 1812" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RedefinableElement" data-parent="NamedElement" d="M 776 1036 H 724 V 360 H 519" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RedefinableTemplateSignature" data-parent="RedefinableElement" d="M 1231 1608 H 1179 V 1036 H 974" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RedefinableTemplateSignature" data-parent="TemplateSignature" d="M 1231 1608 H 1211 V 2616 H 692 V 724 H 564" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Slot" data-parent="Element" d="M 375 568 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuralFeature" data-parent="MultiplicityElement" d="M 1623 1868 H 1603 V 2632 H 692 V 308 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuralFeature" data-parent="TypedElement" d="M 1623 1868 H 1603 V 2648 H 1147 V 1140 H 920" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuralFeature" data-parent="Feature" d="M 1623 1868 H 1571 V 724 H 1335" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ValueSpecificationAction" data-parent="Action" d="M 2497 2128 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="VariableAction" data-parent="Action" d="M 2497 2180 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="WriteLinkAction" data-parent="LinkAction" d="M 2925 932 H 2873 V 1036 H 2623" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="WriteStructuralFeatureAction" data-parent="StructuralFeatureAction" d="M 2925 984 H 2873 V 1816 H 2740" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="WriteVariableAction" data-parent="VariableAction" d="M 2925 1036 H 2873 V 2180 H 2659" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AcceptCallAction" data-parent="AcceptEventAction" d="M 2925 48 H 2873 V 48 H 2686" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AcceptEventAction" data-parent="Action" d="M 2497 48 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Action" data-parent="ExecutableNode" d="M 2051 48 H 1999 V 828 H 1785" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ActionInputPin" data-parent="InputPin" d="M 2925 100 H 2873 V 880 H 2605" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AddStructuralFeatureValueAction" data-parent="WriteStructuralFeatureAction" d="M 3317 48 H 3265 V 984 H 3213" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="AddVariableValueAction" data-parent="WriteVariableAction" d="M 3317 100 H 3265 V 1036 H 3132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="BroadcastSignalAction" data-parent="InvocationAction" d="M 2925 152 H 2873 V 984 H 2677" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CallAction" data-parent="InvocationAction" d="M 2925 204 H 2873 V 984 H 2677" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CallBehaviorAction" data-parent="CallAction" d="M 3317 256 H 3265 V 204 H 3051" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CallOperationAction" data-parent="CallAction" d="M 3317 308 H 3265 V 204 H 3051" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Clause" data-parent="Element" d="M 375 48 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ClearAssociationAction" data-parent="Action" d="M 2497 204 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ClearStructuralFeatureAction" data-parent="StructuralFeatureAction" d="M 2925 308 H 2873 V 1816 H 2740" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ClearVariableAction" data-parent="VariableAction" d="M 2925 360 H 2873 V 2180 H 2659" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ConditionalNode" data-parent="StructuredActivityNode" d="M 2925 412 H 2873 V 1868 H 2731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CreateLinkAction" data-parent="WriteLinkAction" d="M 3317 412 H 3265 V 932 H 3096" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CreateLinkObjectAction" data-parent="CreateLinkAction" d="M 3763 100 H 3711 V 412 H 3497" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="CreateObjectAction" data-parent="Action" d="M 2497 412 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DestroyLinkAction" data-parent="WriteLinkAction" d="M 3317 464 H 3265 V 932 H 3096" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="DestroyObjectAction" data-parent="Action" d="M 2497 568 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExpansionNode" data-parent="ObjectNode" d="M 2051 724 H 1999 V 1452 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ExpansionRegion" data-parent="StructuredActivityNode" d="M 2925 464 H 2873 V 1868 H 2731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InputPin" data-parent="Pin" d="M 2497 880 H 2445 V 1608 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="InvocationAction" data-parent="Action" d="M 2497 984 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LinkAction" data-parent="Action" d="M 2497 1036 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LinkEndCreationData" data-parent="LinkEndData" d="M 776 620 H 724 V 256 H 510" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LinkEndData" data-parent="Element" d="M 375 256 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LinkEndDestructionData" data-parent="LinkEndData" d="M 776 672 H 724 V 256 H 510" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="LoopNode" data-parent="StructuredActivityNode" d="M 2925 516 H 2873 V 1868 H 2731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OpaqueAction" data-parent="Action" d="M 2497 1088 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="OutputPin" data-parent="Pin" d="M 2497 1140 H 2445 V 1608 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Pin" data-parent="ObjectNode" d="M 2051 1608 H 1999 V 1452 H 1749" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="Pin" data-parent="MultiplicityElement" d="M 2051 1608 H 2031 V 2664 H 692 V 308 H 582" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="QualifierValue" data-parent="Element" d="M 375 464 H 323 V 204 H 132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RaiseExceptionAction" data-parent="Action" d="M 2497 1296 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadExtentAction" data-parent="Action" d="M 2497 1348 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadIsClassifiedObjectAction" data-parent="Action" d="M 2497 1400 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadLinkAction" data-parent="LinkAction" d="M 2925 568 H 2873 V 1036 H 2623" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadLinkObjectEndAction" data-parent="Action" d="M 2497 1452 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadLinkObjectEndQualifierAction" data-parent="Action" d="M 2497 1504 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadSelfAction" data-parent="Action" d="M 2497 1556 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadStructuralFeatureAction" data-parent="StructuralFeatureAction" d="M 2925 620 H 2873 V 1816 H 2740" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReadVariableAction" data-parent="VariableAction" d="M 2925 672 H 2873 V 2180 H 2659" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReclassifyObjectAction" data-parent="Action" d="M 2497 1608 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReduceAction" data-parent="Action" d="M 2497 1660 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RemoveStructuralFeatureValueAction" data-parent="WriteStructuralFeatureAction" d="M 3317 568 H 3265 V 984 H 3213" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="RemoveVariableValueAction" data-parent="WriteVariableAction" d="M 3317 620 H 3265 V 1036 H 3132" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ReplyAction" data-parent="Action" d="M 2497 1712 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="SendObjectAction" data-parent="InvocationAction" d="M 2925 724 H 2873 V 984 H 2677" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="SendSignalAction" data-parent="InvocationAction" d="M 2925 776 H 2873 V 984 H 2677" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="SequenceNode" data-parent="StructuredActivityNode" d="M 2925 828 H 2873 V 1868 H 2731" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StartClassifierBehaviorAction" data-parent="Action" d="M 2497 1764 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StartObjectBehaviorAction" data-parent="CallAction" d="M 3317 672 H 3265 V 204 H 3051" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuralFeatureAction" data-parent="Action" d="M 2497 1816 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuredActivityNode" data-parent="Namespace" d="M 2497 1868 H 2477 V 2680 H 1147 V 828 H 893" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuredActivityNode" data-parent="ActivityGroup" d="M 2497 1868 H 2477 V 2696 H 1147 V 48 H 929" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="StructuredActivityNode" data-parent="Action" d="M 2497 1868 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="TestIdentityAction" data-parent="Action" d="M 2497 1972 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="UnmarshallAction" data-parent="Action" d="M 2497 2024 H 2445 V 48 H 2155" marker-end="url(#inheritance-generalization)"/>
+<path class="inheritance-generalization" data-child="ValuePin" data-parent="InputPin" d="M 2925 880 H 2873 V 880 H 2605" marker-end="url(#inheritance-generalization)"/>
+  <a class="inheritance-class" data-classifier="AggregationKind" data-depth="0" href="../../index.html#/classifier/aggregationkind" target="_top" aria-label="AggregationKind — открыть описание класса"><title>AggregationKind. Перечисление для задания вида агрегации Property.</title>
+              <rect class="inheritance-class-box" x="28" y="28" width="171" height="40"/>
+              <text class="inheritance-class-name" x="113.5" y="53" text-anchor="middle">AggregationKind</text></a>
+<a class="inheritance-class" data-classifier="CallConcurrencyKind" data-depth="0" href="../../index.html#/classifier/callconcurrencykind" target="_top" aria-label="CallConcurrencyKind — открыть описание класса"><title>CallConcurrencyKind. Перечисление, задающее семантику параллельных вызовов BehavioralFeature.</title>
+              <rect class="inheritance-class-box" x="28" y="80" width="207" height="40"/>
+              <text class="inheritance-class-name" x="131.5" y="105" text-anchor="middle">CallConcurrencyKind</text></a>
+<a class="inheritance-class" data-classifier="ConnectorKind" data-depth="0" href="../../index.html#/classifier/connectorkind" target="_top" aria-label="ConnectorKind — открыть описание класса"><title>ConnectorKind. Перечисление, определяющее, является ли коннектор сборочным (assembly) или делегирующим (delegation).</title>
+              <rect class="inheritance-class-box" x="28" y="132" width="153" height="40"/>
+              <text class="inheritance-class-name" x="104.5" y="157" text-anchor="middle">ConnectorKind</text></a>
+<a class="inheritance-class" data-classifier="Element" data-depth="0" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
+              <rect class="inheritance-class-box" x="28" y="184" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="80" y="209" text-anchor="middle">Element</text></a>
+<g class="inheritance-class" data-classifier="ExpansionKind" data-depth="0"><title>ExpansionKind. ExpansionKind is an enumeration type used to specify how an ExpansionRegion executes its contents.</title>
+              <rect class="inheritance-class-box" x="28" y="236" width="153" height="40"/>
+              <text class="inheritance-class-name" x="104.5" y="261" text-anchor="middle">ExpansionKind</text></g>
+<g class="inheritance-class" data-classifier="InteractionOperatorKind" data-depth="0"><title>InteractionOperatorKind. InteractionOperatorKind is an enumeration designating the different kinds of operators of CombinedFragments. The InteractionOperand defines the type of operator of a CombinedFragment.</title>
+              <rect class="inheritance-class-box" x="28" y="288" width="243" height="40"/>
+              <text class="inheritance-class-name" x="149.5" y="313" text-anchor="middle">InteractionOperatorKind</text></g>
+<g class="inheritance-class" data-classifier="MessageKind" data-depth="0"><title>MessageKind. This is an enumerated type that identifies the type of Message.</title>
+              <rect class="inheritance-class-box" x="28" y="340" width="135" height="40"/>
+              <text class="inheritance-class-name" x="95.5" y="365" text-anchor="middle">MessageKind</text></g>
+<g class="inheritance-class" data-classifier="MessageSort" data-depth="0"><title>MessageSort. This is an enumerated type that identifies the type of communication action that was used to generate the Message.</title>
+              <rect class="inheritance-class-box" x="28" y="392" width="135" height="40"/>
+              <text class="inheritance-class-name" x="95.5" y="417" text-anchor="middle">MessageSort</text></g>
+<g class="inheritance-class" data-classifier="ObjectNodeOrderingKind" data-depth="0"><title>ObjectNodeOrderingKind. ObjectNodeOrderingKind is an enumeration indicating queuing order for offering the tokens held by an ObjectNode.</title>
+              <rect class="inheritance-class-box" x="28" y="444" width="234" height="40"/>
+              <text class="inheritance-class-name" x="145" y="469" text-anchor="middle">ObjectNodeOrderingKind</text></g>
+<a class="inheritance-class" data-classifier="ParameterDirectionKind" data-depth="0" href="../../index.html#/classifier/parameterdirectionkind" target="_top" aria-label="ParameterDirectionKind — открыть описание класса"><title>ParameterDirectionKind. Перечисление, задающее литералы для спецификации направления параметров.</title>
+              <rect class="inheritance-class-box" x="28" y="496" width="234" height="40"/>
+              <text class="inheritance-class-name" x="145" y="521" text-anchor="middle">ParameterDirectionKind</text></a>
+<a class="inheritance-class" data-classifier="ParameterEffectKind" data-depth="0" href="../../index.html#/classifier/parametereffectkind" target="_top" aria-label="ParameterEffectKind — открыть описание класса"><title>ParameterEffectKind. Перечисление, задающее эффект поведения на значения, передаваемые в параметры или из них.</title>
+              <rect class="inheritance-class-box" x="28" y="548" width="207" height="40"/>
+              <text class="inheritance-class-name" x="131.5" y="573" text-anchor="middle">ParameterEffectKind</text></a>
+<g class="inheritance-class" data-classifier="PseudostateKind" data-depth="0"><title>PseudostateKind. PseudostateKind is an Enumeration type that is used to differentiate various kinds of Pseudostates.</title>
+              <rect class="inheritance-class-box" x="28" y="600" width="171" height="40"/>
+              <text class="inheritance-class-name" x="113.5" y="625" text-anchor="middle">PseudostateKind</text></g>
+<g class="inheritance-class" data-classifier="TransitionKind" data-depth="0"><title>TransitionKind. TransitionKind is an Enumeration type used to differentiate the various kinds of Transitions.</title>
+              <rect class="inheritance-class-box" x="28" y="652" width="162" height="40"/>
+              <text class="inheritance-class-name" x="109" y="677" text-anchor="middle">TransitionKind</text></g>
+<a class="inheritance-class" data-classifier="VisibilityKind" data-depth="0" href="../../index.html#/classifier/visibilitykind" target="_top" aria-label="VisibilityKind — открыть описание класса"><title>VisibilityKind. Перечисление, литералы которого определяют видимость элементов в модели.</title>
+              <rect class="inheritance-class-box" x="28" y="704" width="162" height="40"/>
+              <text class="inheritance-class-name" x="109" y="729" text-anchor="middle">VisibilityKind</text></a>
+<g class="inheritance-class" data-classifier="Clause" data-depth="1"><title>Clause. A Clause is an Element that represents a single branch of a ConditionalNode, including a test and a body section. The body section is executed only if (but not necessarily if) the test section evaluates to true.</title>
+              <rect class="inheritance-class-box" x="375" y="28" width="104" height="40"/>
+              <text class="inheritance-class-name" x="427" y="53" text-anchor="middle">Clause</text></g>
+<a class="inheritance-class" data-classifier="Comment" data-depth="1" href="../../index.html#/classifier/comment" target="_top" aria-label="Comment — открыть описание класса"><title>Comment. Текстовая аннотация, которую можно присоединить к множеству элементов.</title>
+              <rect class="inheritance-class-box" x="375" y="80" width="104" height="40"/>
+              <text class="inheritance-class-name" x="427" y="105" text-anchor="middle">Comment</text></a>
+<g class="inheritance-class" data-classifier="ExceptionHandler" data-depth="1"><title>ExceptionHandler. An ExceptionHandler is an Element that specifies a handlerBody ExecutableNode to execute in case the specified exception occurs during the execution of the protected ExecutableNode.</title>
+              <rect class="inheritance-class-box" x="375" y="132" width="180" height="40"/>
+              <text class="inheritance-class-name" x="465" y="157" text-anchor="middle">ExceptionHandler</text></g>
+<g class="inheritance-class" data-classifier="Image" data-depth="1"><title>Image. Physical definition of a graphical image.</title>
+              <rect class="inheritance-class-box" x="375" y="184" width="104" height="40"/>
+              <text class="inheritance-class-name" x="427" y="209" text-anchor="middle">Image</text></g>
+<g class="inheritance-class" data-classifier="LinkEndData" data-depth="1"><title>LinkEndData. LinkEndData is an Element that identifies on end of a link to be read or written by a LinkAction. As a link (that is not a link object) cannot be passed as a runtime value to or from an Action, it is instead identified by its end objects and qualifier values, if any. A LinkEndData instance provides these values for a single Association end.</title>
+              <rect class="inheritance-class-box" x="375" y="236" width="135" height="40"/>
+              <text class="inheritance-class-name" x="442.5" y="261" text-anchor="middle">LinkEndData</text></g>
+<a class="inheritance-class" data-classifier="MultiplicityElement" data-depth="1" href="../../index.html#/classifier/multiplicityelement" target="_top" aria-label="MultiplicityElement — открыть описание класса"><title>MultiplicityElement. Содержит определение включительного интервала неотрицательных целых чисел и задаёт допустимые кардинальности для экземпляра элемента.</title>
+              <rect class="inheritance-class-box" x="375" y="288" width="207" height="40"/>
+              <text class="inheritance-class-name abstract" x="478.5" y="313" text-anchor="middle">MultiplicityElement</text></a>
+<a class="inheritance-class" data-classifier="NamedElement" data-depth="1" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
+              <rect class="inheritance-class-box" x="375" y="340" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="447" y="365" text-anchor="middle">NamedElement</text></a>
+<a class="inheritance-class" data-classifier="ParameterableElement" data-depth="1" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
+              <rect class="inheritance-class-box" x="375" y="392" width="216" height="40"/>
+              <text class="inheritance-class-name abstract" x="483" y="417" text-anchor="middle">ParameterableElement</text></a>
+<g class="inheritance-class" data-classifier="QualifierValue" data-depth="1"><title>QualifierValue. A QualifierValue is an Element that is used as part of LinkEndData to provide the value for a single qualifier of the end given by the LinkEndData.</title>
+              <rect class="inheritance-class-box" x="375" y="444" width="162" height="40"/>
+              <text class="inheritance-class-name" x="456" y="469" text-anchor="middle">QualifierValue</text></g>
+<a class="inheritance-class" data-classifier="Relationship" data-depth="1" href="../../index.html#/classifier/relationship" target="_top" aria-label="Relationship — открыть описание класса"><title>Relationship. Абстрактное понятие, задающее некоторый вид отношения между элементами.</title>
+              <rect class="inheritance-class-box" x="375" y="496" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="447" y="521" text-anchor="middle">Relationship</text></a>
+<a class="inheritance-class" data-classifier="Slot" data-depth="1" href="../../index.html#/classifier/slot" target="_top" aria-label="Slot — открыть описание класса"><title>Slot. Указывает, что сущность, смоделированная InstanceSpecification, имеет значение или значения для конкретной StructuralFeature.</title>
+              <rect class="inheritance-class-box" x="375" y="548" width="104" height="40"/>
+              <text class="inheritance-class-name" x="427" y="573" text-anchor="middle">Slot</text></a>
+<a class="inheritance-class" data-classifier="TemplateParameter" data-depth="1" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
+              <rect class="inheritance-class-box" x="375" y="600" width="189" height="40"/>
+              <text class="inheritance-class-name" x="469.5" y="625" text-anchor="middle">TemplateParameter</text></a>
+<a class="inheritance-class" data-classifier="TemplateParameterSubstitution" data-depth="1" href="../../index.html#/classifier/templateparametersubstitution" target="_top" aria-label="TemplateParameterSubstitution — открыть описание класса"><title>TemplateParameterSubstitution. Связывает фактический параметр с формальным TemplateParameter в рамках привязки шаблона.</title>
+              <rect class="inheritance-class-box" x="375" y="652" width="297" height="40"/>
+              <text class="inheritance-class-name" x="523.5" y="677" text-anchor="middle">TemplateParameterSubstitution</text></a>
+<a class="inheritance-class" data-classifier="TemplateSignature" data-depth="1" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
+              <rect class="inheritance-class-box" x="375" y="704" width="189" height="40"/>
+              <text class="inheritance-class-name" x="469.5" y="729" text-anchor="middle">TemplateSignature</text></a>
+<a class="inheritance-class" data-classifier="TemplateableElement" data-depth="1" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
+              <rect class="inheritance-class-box" x="375" y="756" width="207" height="40"/>
+              <text class="inheritance-class-name abstract" x="478.5" y="781" text-anchor="middle">TemplateableElement</text></a>
+<g class="inheritance-class" data-classifier="ActivityGroup" data-depth="2"><title>ActivityGroup. ActivityGroup is an abstract class for defining sets of ActivityNodes and ActivityEdges in an Activity.</title>
+              <rect class="inheritance-class-box" x="776" y="28" width="153" height="40"/>
+              <text class="inheritance-class-name abstract" x="852.5" y="53" text-anchor="middle">ActivityGroup</text></g>
+<a class="inheritance-class" data-classifier="ClassifierTemplateParameter" data-depth="2" href="../../index.html#/classifier/classifiertemplateparameter" target="_top" aria-label="ClassifierTemplateParameter — открыть описание класса"><title>ClassifierTemplateParameter. Представляет Classifier как формальный параметр шаблона.</title>
+              <rect class="inheritance-class-box" x="776" y="80" width="279" height="40"/>
+              <text class="inheritance-class-name" x="915.5" y="105" text-anchor="middle">ClassifierTemplateParameter</text></a>
+<a class="inheritance-class" data-classifier="CollaborationUse" data-depth="2" href="../../index.html#/classifier/collaborationuse" target="_top" aria-label="CollaborationUse — открыть описание класса"><title>CollaborationUse. Использование кооперации применяется, чтобы задать применение шаблона, специфицированного кооперацией, к конкретной ситуации.</title>
+              <rect class="inheritance-class-box" x="776" y="132" width="180" height="40"/>
+              <text class="inheritance-class-name" x="866" y="157" text-anchor="middle">CollaborationUse</text></a>
+<a class="inheritance-class" data-classifier="ConnectableElementTemplateParameter" data-depth="2" href="../../index.html#/classifier/connectableelementtemplateparameter" target="_top" aria-label="ConnectableElementTemplateParameter — открыть описание класса"><title>ConnectableElementTemplateParameter. Параметр шаблона соединяемого элемента предоставляет соединяемый элемент как формальный параметр шаблона.</title>
+              <rect class="inheritance-class-box" x="776" y="184" width="351" height="40"/>
+              <text class="inheritance-class-name" x="951.5" y="209" text-anchor="middle">ConnectableElementTemplateParameter</text></a>
+<a class="inheritance-class" data-classifier="ConnectorEnd" data-depth="2" href="../../index.html#/classifier/connectorend" target="_top" aria-label="ConnectorEnd — открыть описание класса"><title>ConnectorEnd. Конец коннектора — это конечная точка коннектора, которая присоединяет коннектор к соединяемому элементу.</title>
+              <rect class="inheritance-class-box" x="776" y="236" width="144" height="40"/>
+              <text class="inheritance-class-name" x="848" y="261" text-anchor="middle">ConnectorEnd</text></a>
+<g class="inheritance-class" data-classifier="DeployedArtifact" data-depth="2"><title>DeployedArtifact. A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.</title>
+              <rect class="inheritance-class-box" x="776" y="288" width="180" height="40"/>
+              <text class="inheritance-class-name abstract" x="866" y="313" text-anchor="middle">DeployedArtifact</text></g>
+<g class="inheritance-class" data-classifier="DeploymentTarget" data-depth="2"><title>DeploymentTarget. A deployment target is the location for a deployed artifact.</title>
+              <rect class="inheritance-class-box" x="776" y="340" width="180" height="40"/>
+              <text class="inheritance-class-name abstract" x="866" y="365" text-anchor="middle">DeploymentTarget</text></g>
+<a class="inheritance-class" data-classifier="DirectedRelationship" data-depth="2" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
+              <rect class="inheritance-class-box" x="776" y="392" width="216" height="40"/>
+              <text class="inheritance-class-name abstract" x="884" y="417" text-anchor="middle">DirectedRelationship</text></a>
+<g class="inheritance-class" data-classifier="GeneralOrdering" data-depth="2"><title>GeneralOrdering. A GeneralOrdering represents a binary relation between two OccurrenceSpecifications, to describe that one OccurrenceSpecification must occur before the other in a valid trace. This mechanism provides the ability to define partial orders of OccurrenceSpecifications that may otherwise not have a specified order.</title>
+              <rect class="inheritance-class-box" x="776" y="444" width="171" height="40"/>
+              <text class="inheritance-class-name" x="861.5" y="469" text-anchor="middle">GeneralOrdering</text></g>
+<g class="inheritance-class" data-classifier="InteractionFragment" data-depth="2"><title>InteractionFragment. InteractionFragment is an abstract notion of the most general interaction unit. An InteractionFragment is a piece of an Interaction. Each InteractionFragment is conceptually like an Interaction by itself.</title>
+              <rect class="inheritance-class-box" x="776" y="496" width="207" height="40"/>
+              <text class="inheritance-class-name abstract" x="879.5" y="521" text-anchor="middle">InteractionFragment</text></g>
+<g class="inheritance-class" data-classifier="Lifeline" data-depth="2"><title>Lifeline. A Lifeline represents an individual participant in the Interaction. While parts and structural features may have multiplicity greater than 1, Lifelines represent only one interacting entity.</title>
+              <rect class="inheritance-class-box" x="776" y="548" width="108" height="40"/>
+              <text class="inheritance-class-name" x="830" y="573" text-anchor="middle">Lifeline</text></g>
+<g class="inheritance-class" data-classifier="LinkEndCreationData" data-depth="2"><title>LinkEndCreationData. LinkEndCreationData is LinkEndData used to provide values for one end of a link to be created by a CreateLinkAction.</title>
+              <rect class="inheritance-class-box" x="776" y="600" width="207" height="40"/>
+              <text class="inheritance-class-name" x="879.5" y="625" text-anchor="middle">LinkEndCreationData</text></g>
+<g class="inheritance-class" data-classifier="LinkEndDestructionData" data-depth="2"><title>LinkEndDestructionData. LinkEndDestructionData is LinkEndData used to provide values for one end of a link to be destroyed by a DestroyLinkAction.</title>
+              <rect class="inheritance-class-box" x="776" y="652" width="234" height="40"/>
+              <text class="inheritance-class-name" x="893" y="677" text-anchor="middle">LinkEndDestructionData</text></g>
+<g class="inheritance-class" data-classifier="Message" data-depth="2"><title>Message. A Message defines a particular communication between Lifelines of an Interaction.</title>
+              <rect class="inheritance-class-box" x="776" y="704" width="104" height="40"/>
+              <text class="inheritance-class-name" x="828" y="729" text-anchor="middle">Message</text></g>
+<g class="inheritance-class" data-classifier="MessageEnd" data-depth="2"><title>MessageEnd. MessageEnd is an abstract specialization of NamedElement that represents what can occur at the end of a Message.</title>
+              <rect class="inheritance-class-box" x="776" y="756" width="126" height="40"/>
+              <text class="inheritance-class-name abstract" x="839" y="781" text-anchor="middle">MessageEnd</text></g>
+<a class="inheritance-class" data-classifier="Namespace" data-depth="2" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
+              <rect class="inheritance-class-box" x="776" y="808" width="117" height="40"/>
+              <text class="inheritance-class-name abstract" x="834.5" y="833" text-anchor="middle">Namespace</text></a>
+<a class="inheritance-class" data-classifier="OperationTemplateParameter" data-depth="2" href="../../index.html#/classifier/operationtemplateparameter" target="_top" aria-label="OperationTemplateParameter — открыть описание класса"><title>OperationTemplateParameter. Представляет Operation как формальный параметр шаблона.</title>
+              <rect class="inheritance-class-box" x="776" y="860" width="270" height="40"/>
+              <text class="inheritance-class-name" x="911" y="885" text-anchor="middle">OperationTemplateParameter</text></a>
+<a class="inheritance-class" data-classifier="PackageableElement" data-depth="2" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
+              <rect class="inheritance-class-box" x="776" y="912" width="198" height="40"/>
+              <text class="inheritance-class-name abstract" x="875" y="937" text-anchor="middle">PackageableElement</text></a>
+<a class="inheritance-class" data-classifier="ParameterSet" data-depth="2" href="../../index.html#/classifier/parameterset" target="_top" aria-label="ParameterSet — открыть описание класса"><title>ParameterSet. Обозначает альтернативные множества входов или выходов, которые может использовать Behavior.</title>
+              <rect class="inheritance-class-box" x="776" y="964" width="144" height="40"/>
+              <text class="inheritance-class-name" x="848" y="989" text-anchor="middle">ParameterSet</text></a>
+<a class="inheritance-class" data-classifier="RedefinableElement" data-depth="2" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
+              <rect class="inheritance-class-box" x="776" y="1016" width="198" height="40"/>
+              <text class="inheritance-class-name abstract" x="875" y="1041" text-anchor="middle">RedefinableElement</text></a>
+<g class="inheritance-class" data-classifier="Trigger" data-depth="2"><title>Trigger. A Trigger specifies a specific point at which an Event occurrence may trigger an effect in a Behavior. A Trigger may be qualified by the Port on which the Event occurred.</title>
+              <rect class="inheritance-class-box" x="776" y="1068" width="104" height="40"/>
+              <text class="inheritance-class-name" x="828" y="1093" text-anchor="middle">Trigger</text></g>
+<a class="inheritance-class" data-classifier="TypedElement" data-depth="2" href="../../index.html#/classifier/typedelement" target="_top" aria-label="TypedElement — открыть описание класса"><title>TypedElement. NamedElement, для которого может быть задан Type.</title>
+              <rect class="inheritance-class-box" x="776" y="1120" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="848" y="1145" text-anchor="middle">TypedElement</text></a>
+<g class="inheritance-class" data-classifier="ActivityEdge" data-depth="3"><title>ActivityEdge. An ActivityEdge is an abstract class for directed connections between two ActivityNodes.</title>
+              <rect class="inheritance-class-box" x="1231" y="28" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="1303" y="53" text-anchor="middle">ActivityEdge</text></g>
+<g class="inheritance-class" data-classifier="ActivityNode" data-depth="3"><title>ActivityNode. ActivityNode is an abstract class for points in the flow of an Activity connected by ActivityEdges.</title>
+              <rect class="inheritance-class-box" x="1231" y="80" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="1303" y="105" text-anchor="middle">ActivityNode</text></g>
+<g class="inheritance-class" data-classifier="ActivityPartition" data-depth="3"><title>ActivityPartition. An ActivityPartition is a kind of ActivityGroup for identifying ActivityNodes that have some characteristic in common.</title>
+              <rect class="inheritance-class-box" x="1231" y="132" width="189" height="40"/>
+              <text class="inheritance-class-name" x="1325.5" y="157" text-anchor="middle">ActivityPartition</text></g>
+<g class="inheritance-class" data-classifier="CombinedFragment" data-depth="3"><title>CombinedFragment. A CombinedFragment defines an expression of InteractionFragments. A CombinedFragment is defined by an interaction operator and corresponding InteractionOperands. Through the use of CombinedFragments the user will be able to describe a number of traces in a compact and concise manner.</title>
+              <rect class="inheritance-class-box" x="1231" y="184" width="180" height="40"/>
+              <text class="inheritance-class-name" x="1321" y="209" text-anchor="middle">CombinedFragment</text></g>
+<a class="inheritance-class" data-classifier="ConnectableElement" data-depth="3" href="../../index.html#/classifier/connectableelement" target="_top" aria-label="ConnectableElement — открыть описание класса"><title>ConnectableElement. Соединяемый элемент — абстрактный метакласс, представляющий множество экземпляров, играющих роли структурированного классификатора. Соединяемые элементы могут соединяться присоединёнными коннекторами и специфицируют конфигурации связанных экземпляров, создаваемых внутри экземпляра содержащего структурированного классификатора.</title>
+              <rect class="inheritance-class-box" x="1231" y="236" width="198" height="40"/>
+              <text class="inheritance-class-name abstract" x="1330" y="261" text-anchor="middle">ConnectableElement</text></a>
+<a class="inheritance-class" data-classifier="Constraint" data-depth="3" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
+              <rect class="inheritance-class-box" x="1231" y="288" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1294" y="313" text-anchor="middle">Constraint</text></a>
+<g class="inheritance-class" data-classifier="Continuation" data-depth="3"><title>Continuation. A Continuation is a syntactic way to define continuations of different branches of an alternative CombinedFragment. Continuations are intuitively similar to labels representing intermediate points in a flow of control.</title>
+              <rect class="inheritance-class-box" x="1231" y="340" width="144" height="40"/>
+              <text class="inheritance-class-name" x="1303" y="365" text-anchor="middle">Continuation</text></g>
+<a class="inheritance-class" data-classifier="Dependency" data-depth="3" href="../../index.html#/classifier/dependency" target="_top" aria-label="Dependency — открыть описание класса"><title>Dependency. Relationship, показывающий, что элемент или множество элементов-клиентов нуждается в других элементах-поставщиках для своей спецификации или реализации.</title>
+              <rect class="inheritance-class-box" x="1231" y="392" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1294" y="417" text-anchor="middle">Dependency</text></a>
+<a class="inheritance-class" data-classifier="ElementImport" data-depth="3" href="../../index.html#/classifier/elementimport" target="_top" aria-label="ElementImport — открыть описание класса"><title>ElementImport. Позволяет ссылаться на NamedElement из другого пространства имён по неквалифицированному имени внутри пространства имён, владеющего импортом.</title>
+              <rect class="inheritance-class-box" x="1231" y="444" width="153" height="40"/>
+              <text class="inheritance-class-name" x="1307.5" y="469" text-anchor="middle">ElementImport</text></a>
+<g class="inheritance-class" data-classifier="Event" data-depth="3"><title>Event. An Event is the specification of some occurrence that may potentially trigger effects by an object.</title>
+              <rect class="inheritance-class-box" x="1231" y="496" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="1283" y="521" text-anchor="middle">Event</text></g>
+<g class="inheritance-class" data-classifier="ExecutionSpecification" data-depth="3"><title>ExecutionSpecification. An ExecutionSpecification is a specification of the execution of a unit of Behavior or Action within the Lifeline. The duration of an ExecutionSpecification is represented by two OccurrenceSpecifications, the start OccurrenceSpecification and the finish OccurrenceSpecification.</title>
+              <rect class="inheritance-class-box" x="1231" y="548" width="234" height="40"/>
+              <text class="inheritance-class-name abstract" x="1348" y="573" text-anchor="middle">ExecutionSpecification</text></g>
+<g class="inheritance-class" data-classifier="Extend" data-depth="3"><title>Extend. A relationship from an extending UseCase to an extended UseCase that specifies how and when the behavior defined in the extending UseCase can be inserted into the behavior defined in the extended UseCase.</title>
+              <rect class="inheritance-class-box" x="1231" y="600" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1283" y="625" text-anchor="middle">Extend</text></g>
+<g class="inheritance-class" data-classifier="ExtensionPoint" data-depth="3"><title>ExtensionPoint. An ExtensionPoint identifies a point in the behavior of a UseCase where that behavior can be extended by the behavior of some other (extending) UseCase, as specified by an Extend relationship.</title>
+              <rect class="inheritance-class-box" x="1231" y="652" width="162" height="40"/>
+              <text class="inheritance-class-name" x="1312" y="677" text-anchor="middle">ExtensionPoint</text></g>
+<a class="inheritance-class" data-classifier="Feature" data-depth="3" href="../../index.html#/classifier/feature" target="_top" aria-label="Feature — открыть описание класса"><title>Feature. Объявляет поведенческую или структурную характеристику классификаторов.</title>
+              <rect class="inheritance-class-box" x="1231" y="704" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="1283" y="729" text-anchor="middle">Feature</text></a>
+<g class="inheritance-class" data-classifier="Gate" data-depth="3"><title>Gate. A Gate is a MessageEnd which serves as a connection point for relating a Message which has a MessageEnd (sendEvent / receiveEvent) outside an InteractionFragment with another Message which has a MessageEnd (receiveEvent / sendEvent) inside that InteractionFragment.</title>
+              <rect class="inheritance-class-box" x="1231" y="756" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1283" y="781" text-anchor="middle">Gate</text></g>
+<a class="inheritance-class" data-classifier="Generalization" data-depth="3" href="../../index.html#/classifier/generalization" target="_top" aria-label="Generalization — открыть описание класса"><title>Generalization. Таксономическое отношение между более общим и более специальным классификаторами. Каждый экземпляр специального классификатора также является экземпляром общего классификатора; специальный классификатор наследует характеристики более общего. Обобщение принадлежит специальному классификатору.</title>
+              <rect class="inheritance-class-box" x="1231" y="808" width="162" height="40"/>
+              <text class="inheritance-class-name" x="1312" y="833" text-anchor="middle">Generalization</text></a>
+<a class="inheritance-class" data-classifier="GeneralizationSet" data-depth="3" href="../../index.html#/classifier/generalizationset" target="_top" aria-label="GeneralizationSet — открыть описание класса"><title>GeneralizationSet. PackageableElement, экземпляры которого представляют множества отношений Generalization.</title>
+              <rect class="inheritance-class-box" x="1231" y="860" width="189" height="40"/>
+              <text class="inheritance-class-name" x="1325.5" y="885" text-anchor="middle">GeneralizationSet</text></a>
+<g class="inheritance-class" data-classifier="Include" data-depth="3"><title>Include. An Include relationship specifies that a UseCase contains the behavior defined in another UseCase.</title>
+              <rect class="inheritance-class-box" x="1231" y="912" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1283" y="937" text-anchor="middle">Include</text></g>
+<g class="inheritance-class" data-classifier="InformationFlow" data-depth="3"><title>InformationFlow. InformationFlows describe circulation of information through a system in a general manner. They do not specify the nature of the information, mechanisms by which it is conveyed, sequences of exchange or any control conditions. During more detailed modeling, representation and realization links may be added to specify which model elements implement an InformationFlow and to show how information is conveyed. InformationFlows require some kind of “information channel” for unidirectional transmission of information items from sources to targets. They specify the information channel’s realizations, if any, and identify the information that flows along them. Information moving along the information channel may be represented by abstract InformationItems and by concrete Classifiers.</title>
+              <rect class="inheritance-class-box" x="1231" y="964" width="171" height="40"/>
+              <text class="inheritance-class-name" x="1316.5" y="989" text-anchor="middle">InformationFlow</text></g>
+<a class="inheritance-class" data-classifier="InstanceSpecification" data-depth="3" href="../../index.html#/classifier/instancespecification" target="_top" aria-label="InstanceSpecification — открыть описание класса"><title>InstanceSpecification. Элемент модели, представляющий экземпляр в моделируемой системе. InstanceSpecification может выступать DeploymentTarget в отношении Deployment, если представляет экземпляр Node. Он может также выступать DeployedArtifact, если представляет экземпляр Artifact.</title>
+              <rect class="inheritance-class-box" x="1231" y="1016" width="225" height="40"/>
+              <text class="inheritance-class-name" x="1343.5" y="1041" text-anchor="middle">InstanceSpecification</text></a>
+<g class="inheritance-class" data-classifier="InteractionOperand" data-depth="3"><title>InteractionOperand. An InteractionOperand is contained in a CombinedFragment. An InteractionOperand represents one operand of the expression given by the enclosing CombinedFragment.</title>
+              <rect class="inheritance-class-box" x="1231" y="1068" width="198" height="40"/>
+              <text class="inheritance-class-name" x="1330" y="1093" text-anchor="middle">InteractionOperand</text></g>
+<g class="inheritance-class" data-classifier="InteractionUse" data-depth="3"><title>InteractionUse. An InteractionUse refers to an Interaction. The InteractionUse is a shorthand for copying the contents of the referenced Interaction where the InteractionUse is. To be accurate the copying must take into account substituting parameters with arguments and connect the formal Gates with the actual ones.</title>
+              <rect class="inheritance-class-box" x="1231" y="1120" width="162" height="40"/>
+              <text class="inheritance-class-name" x="1312" y="1145" text-anchor="middle">InteractionUse</text></g>
+<g class="inheritance-class" data-classifier="InterruptibleActivityRegion" data-depth="3"><title>InterruptibleActivityRegion. An InterruptibleActivityRegion is an ActivityGroup that supports the termination of tokens flowing in the portions of an activity within it.</title>
+              <rect class="inheritance-class-box" x="1231" y="1172" width="279" height="40"/>
+              <text class="inheritance-class-name" x="1370.5" y="1197" text-anchor="middle">InterruptibleActivityRegion</text></g>
+<a class="inheritance-class" data-classifier="Observation" data-depth="3" href="../../index.html#/classifier/observation" target="_top" aria-label="Observation — открыть описание класса"><title>Observation. PackageableElement, обозначающий наблюдение событий, которые могут происходить относительно другой части модели.</title>
+              <rect class="inheritance-class-box" x="1231" y="1224" width="135" height="40"/>
+              <text class="inheritance-class-name abstract" x="1298.5" y="1249" text-anchor="middle">Observation</text></a>
+<g class="inheritance-class" data-classifier="OccurrenceSpecification" data-depth="3"><title>OccurrenceSpecification. An OccurrenceSpecification is the basic semantic unit of Interactions. The sequences of occurrences specified by them are the meanings of Interactions.</title>
+              <rect class="inheritance-class-box" x="1231" y="1276" width="243" height="40"/>
+              <text class="inheritance-class-name" x="1352.5" y="1301" text-anchor="middle">OccurrenceSpecification</text></g>
+<a class="inheritance-class" data-classifier="Package" data-depth="3" href="../../index.html#/classifier/package" target="_top" aria-label="Package — открыть описание класса"><title>Package. Элемент для группировки других элементов и предоставления им пространства имён; может использоваться как шаблон и применять профили.</title>
+              <rect class="inheritance-class-box" x="1231" y="1328" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1283" y="1353" text-anchor="middle">Package</text></a>
+<a class="inheritance-class" data-classifier="PackageImport" data-depth="3" href="../../index.html#/classifier/packageimport" target="_top" aria-label="PackageImport — открыть описание класса"><title>PackageImport. Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title>
+              <rect class="inheritance-class-box" x="1231" y="1380" width="153" height="40"/>
+              <text class="inheritance-class-name" x="1307.5" y="1405" text-anchor="middle">PackageImport</text></a>
+<g class="inheritance-class" data-classifier="PackageMerge" data-depth="3"><title>PackageMerge. A package merge defines how the contents of one package are extended by the contents of another package.</title>
+              <rect class="inheritance-class-box" x="1231" y="1432" width="144" height="40"/>
+              <text class="inheritance-class-name" x="1303" y="1457" text-anchor="middle">PackageMerge</text></g>
+<g class="inheritance-class" data-classifier="ProfileApplication" data-depth="3"><title>ProfileApplication. A profile application is used to show which profiles have been applied to a package.</title>
+              <rect class="inheritance-class-box" x="1231" y="1484" width="198" height="40"/>
+              <text class="inheritance-class-name" x="1330" y="1509" text-anchor="middle">ProfileApplication</text></g>
+<g class="inheritance-class" data-classifier="ProtocolConformance" data-depth="3"><title>ProtocolConformance. A ProtocolStateMachine can be redefined into a more specific ProtocolStateMachine or into behavioral StateMachine. ProtocolConformance declares that the specific ProtocolStateMachine specifies a protocol that conforms to the general ProtocolStateMachine or that the specific behavioral StateMachine abides by the protocol of the general ProtocolStateMachine.</title>
+              <rect class="inheritance-class-box" x="1231" y="1536" width="207" height="40"/>
+              <text class="inheritance-class-name" x="1334.5" y="1561" text-anchor="middle">ProtocolConformance</text></g>
+<a class="inheritance-class" data-classifier="RedefinableTemplateSignature" data-depth="3" href="../../index.html#/classifier/redefinabletemplatesignature" target="_top" aria-label="RedefinableTemplateSignature — открыть описание класса"><title>RedefinableTemplateSignature. Поддерживает добавление формальных параметров шаблона в специализации шаблонного классификатора.</title>
+              <rect class="inheritance-class-box" x="1231" y="1588" width="288" height="40"/>
+              <text class="inheritance-class-name" x="1375" y="1613" text-anchor="middle">RedefinableTemplateSignature</text></a>
+<g class="inheritance-class" data-classifier="Region" data-depth="3"><title>Region. A Region is a top-level part of a StateMachine or a composite State, that serves as a container for the Vertices and Transitions of the StateMachine. A StateMachine or composite State may contain multiple Regions representing behaviors that may occur in parallel.</title>
+              <rect class="inheritance-class-box" x="1231" y="1640" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1283" y="1665" text-anchor="middle">Region</text></g>
+<g class="inheritance-class" data-classifier="StateInvariant" data-depth="3"><title>StateInvariant. A StateInvariant is a runtime constraint on the participants of the Interaction. It may be used to specify a variety of different kinds of Constraints, such as values of Attributes or Variables, internal or external States, and so on. A StateInvariant is an InteractionFragment and it is placed on a Lifeline.</title>
+              <rect class="inheritance-class-box" x="1231" y="1692" width="162" height="40"/>
+              <text class="inheritance-class-name" x="1312" y="1717" text-anchor="middle">StateInvariant</text></g>
+<a class="inheritance-class" data-classifier="TemplateBinding" data-depth="3" href="../../index.html#/classifier/templatebinding" target="_top" aria-label="TemplateBinding — открыть описание класса"><title>TemplateBinding. DirectedRelationship между TemplateableElement и шаблоном, задающий подстановки фактических параметров вместо формальных.</title>
+              <rect class="inheritance-class-box" x="1231" y="1744" width="171" height="40"/>
+              <text class="inheritance-class-name" x="1316.5" y="1769" text-anchor="middle">TemplateBinding</text></a>
+<g class="inheritance-class" data-classifier="Transition" data-depth="3"><title>Transition. A Transition represents an arc between exactly one source Vertex and exactly one Target vertex (the source and targets may be the same Vertex). It may form part of a compound transition, which takes the StateMachine from one steady State configuration to another, representing the full response of the StateMachine to an occurrence of an Event that triggered it.</title>
+              <rect class="inheritance-class-box" x="1231" y="1796" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1294" y="1821" text-anchor="middle">Transition</text></g>
+<a class="inheritance-class" data-classifier="Type" data-depth="3" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
+              <rect class="inheritance-class-box" x="1231" y="1848" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="1283" y="1873" text-anchor="middle">Type</text></a>
+<a class="inheritance-class" data-classifier="ValueSpecification" data-depth="3" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
+              <rect class="inheritance-class-box" x="1231" y="1900" width="198" height="40"/>
+              <text class="inheritance-class-name abstract" x="1330" y="1925" text-anchor="middle">ValueSpecification</text></a>
+<g class="inheritance-class" data-classifier="Vertex" data-depth="3"><title>Vertex. A Vertex is an abstraction of a node in a StateMachine graph. It can be the source or destination of any number of Transitions.</title>
+              <rect class="inheritance-class-box" x="1231" y="1952" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="1283" y="1977" text-anchor="middle">Vertex</text></g>
+<a class="inheritance-class" data-classifier="Abstraction" data-depth="4" href="../../index.html#/classifier/abstraction" target="_top" aria-label="Abstraction — открыть описание класса"><title>Abstraction. Relationship, связывающий два элемента или множества элементов, которые представляют одно понятие на разных уровнях абстракции или с разных точек зрения.</title>
+              <rect class="inheritance-class-box" x="1623" y="28" width="135" height="40"/>
+              <text class="inheritance-class-name" x="1690.5" y="53" text-anchor="middle">Abstraction</text></a>
+<g class="inheritance-class" data-classifier="ActionExecutionSpecification" data-depth="4"><title>ActionExecutionSpecification. An ActionExecutionSpecification is a kind of ExecutionSpecification representing the execution of an Action.</title>
+              <rect class="inheritance-class-box" x="1623" y="80" width="288" height="40"/>
+              <text class="inheritance-class-name" x="1767" y="105" text-anchor="middle">ActionExecutionSpecification</text></g>
+<g class="inheritance-class" data-classifier="BehaviorExecutionSpecification" data-depth="4"><title>BehaviorExecutionSpecification. A BehaviorExecutionSpecification is a kind of ExecutionSpecification representing the execution of a Behavior.</title>
+              <rect class="inheritance-class-box" x="1623" y="132" width="306" height="40"/>
+              <text class="inheritance-class-name" x="1776" y="157" text-anchor="middle">BehaviorExecutionSpecification</text></g>
+<a class="inheritance-class" data-classifier="BehavioralFeature" data-depth="4" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
+              <rect class="inheritance-class-box" x="1623" y="184" width="189" height="40"/>
+              <text class="inheritance-class-name abstract" x="1717.5" y="209" text-anchor="middle">BehavioralFeature</text></a>
+<g class="inheritance-class" data-classifier="ChangeEvent" data-depth="4"><title>ChangeEvent. A ChangeEvent models a change in the system configuration that makes a condition true.</title>
+              <rect class="inheritance-class-box" x="1623" y="236" width="135" height="40"/>
+              <text class="inheritance-class-name" x="1690.5" y="261" text-anchor="middle">ChangeEvent</text></g>
+<a class="inheritance-class" data-classifier="Classifier" data-depth="4" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
+              <rect class="inheritance-class-box" x="1623" y="288" width="126" height="40"/>
+              <text class="inheritance-class-name abstract" x="1686" y="313" text-anchor="middle">Classifier</text></a>
+<g class="inheritance-class" data-classifier="ConnectionPointReference" data-depth="4"><title>ConnectionPointReference. A ConnectionPointReference represents a usage (as part of a submachine State) of an entry/exit point Pseudostate defined in the StateMachine referenced by the submachine State.</title>
+              <rect class="inheritance-class-box" x="1623" y="340" width="252" height="40"/>
+              <text class="inheritance-class-name" x="1749" y="365" text-anchor="middle">ConnectionPointReference</text></g>
+<a class="inheritance-class" data-classifier="Connector" data-depth="4" href="../../index.html#/classifier/connector" target="_top" aria-label="Connector — открыть описание класса"><title>Connector. Коннектор специфицирует связи, обеспечивающие коммуникацию между двумя или более экземплярами. В отличие от ассоциаций, которые специфицируют связи между любыми экземплярами связанных классификаторов, коннекторы специфицируют связи только между экземплярами, играющими соединённые части (parts).</title>
+              <rect class="inheritance-class-box" x="1623" y="392" width="117" height="40"/>
+              <text class="inheritance-class-name" x="1681.5" y="417" text-anchor="middle">Connector</text></a>
+<g class="inheritance-class" data-classifier="ConsiderIgnoreFragment" data-depth="4"><title>ConsiderIgnoreFragment. A ConsiderIgnoreFragment is a kind of CombinedFragment that is used for the consider and ignore cases, which require lists of pertinent Messages to be specified.</title>
+              <rect class="inheritance-class-box" x="1623" y="444" width="234" height="40"/>
+              <text class="inheritance-class-name" x="1740" y="469" text-anchor="middle">ConsiderIgnoreFragment</text></g>
+<g class="inheritance-class" data-classifier="ControlFlow" data-depth="4"><title>ControlFlow. A ControlFlow is an ActivityEdge traversed by control tokens or object tokens of control type, which are use to control the execution of ExecutableNodes.</title>
+              <rect class="inheritance-class-box" x="1623" y="496" width="135" height="40"/>
+              <text class="inheritance-class-name" x="1690.5" y="521" text-anchor="middle">ControlFlow</text></g>
+<g class="inheritance-class" data-classifier="ControlNode" data-depth="4"><title>ControlNode. A ControlNode is an abstract ActivityNode that coordinates flows in an Activity.</title>
+              <rect class="inheritance-class-box" x="1623" y="548" width="135" height="40"/>
+              <text class="inheritance-class-name abstract" x="1690.5" y="573" text-anchor="middle">ControlNode</text></g>
+<g class="inheritance-class" data-classifier="Deployment" data-depth="4"><title>Deployment. A deployment is the allocation of an artifact or artifact instance to a deployment target. A component deployment is the deployment of one or more artifacts or artifact instances to a deployment target, optionally parameterized by a deployment specification. Examples are executables and configuration files.</title>
+              <rect class="inheritance-class-box" x="1623" y="600" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1686" y="625" text-anchor="middle">Deployment</text></g>
+<a class="inheritance-class" data-classifier="Duration" data-depth="4" href="../../index.html#/classifier/duration" target="_top" aria-label="Duration — открыть описание класса"><title>Duration. ValueSpecification, задающая временное расстояние между двумя моментами времени.</title>
+              <rect class="inheritance-class-box" x="1623" y="652" width="108" height="40"/>
+              <text class="inheritance-class-name" x="1677" y="677" text-anchor="middle">Duration</text></a>
+<a class="inheritance-class" data-classifier="DurationObservation" data-depth="4" href="../../index.html#/classifier/durationobservation" target="_top" aria-label="DurationObservation — открыть описание класса"><title>DurationObservation. Observation, измеряющее длительность между событиями входа или выхода одного или двух NamedElements во время выполнения.</title>
+              <rect class="inheritance-class-box" x="1623" y="704" width="207" height="40"/>
+              <text class="inheritance-class-name" x="1726.5" y="729" text-anchor="middle">DurationObservation</text></a>
+<a class="inheritance-class" data-classifier="EnumerationLiteral" data-depth="4" href="../../index.html#/classifier/enumerationliteral" target="_top" aria-label="EnumerationLiteral — открыть описание класса"><title>EnumerationLiteral. Пользовательское значение данных для перечисления.</title>
+              <rect class="inheritance-class-box" x="1623" y="756" width="198" height="40"/>
+              <text class="inheritance-class-name" x="1722" y="781" text-anchor="middle">EnumerationLiteral</text></a>
+<g class="inheritance-class" data-classifier="ExecutableNode" data-depth="4"><title>ExecutableNode. An ExecutableNode is an abstract class for ActivityNodes whose execution may be controlled using ControlFlows and to which ExceptionHandlers may be attached.</title>
+              <rect class="inheritance-class-box" x="1623" y="808" width="162" height="40"/>
+              <text class="inheritance-class-name abstract" x="1704" y="833" text-anchor="middle">ExecutableNode</text></g>
+<g class="inheritance-class" data-classifier="ExecutionOccurrenceSpecification" data-depth="4"><title>ExecutionOccurrenceSpecification. An ExecutionOccurrenceSpecification represents moments in time at which Actions or Behaviors start or finish.</title>
+              <rect class="inheritance-class-box" x="1623" y="860" width="324" height="40"/>
+              <text class="inheritance-class-name" x="1785" y="885" text-anchor="middle">ExecutionOccurrenceSpecification</text></g>
+<a class="inheritance-class" data-classifier="Expression" data-depth="4" href="../../index.html#/classifier/expression" target="_top" aria-label="Expression — открыть описание класса"><title>Expression. Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.</title>
+              <rect class="inheritance-class-box" x="1623" y="912" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1686" y="937" text-anchor="middle">Expression</text></a>
+<a class="inheritance-class" data-classifier="InstanceValue" data-depth="4" href="../../index.html#/classifier/instancevalue" target="_top" aria-label="InstanceValue — открыть описание класса"><title>InstanceValue. ValueSpecification, идентифицирующая экземпляр.</title>
+              <rect class="inheritance-class-box" x="1623" y="964" width="153" height="40"/>
+              <text class="inheritance-class-name" x="1699.5" y="989" text-anchor="middle">InstanceValue</text></a>
+<g class="inheritance-class" data-classifier="InteractionConstraint" data-depth="4"><title>InteractionConstraint. An InteractionConstraint is a Boolean expression that guards an operand in a CombinedFragment.</title>
+              <rect class="inheritance-class-box" x="1623" y="1016" width="225" height="40"/>
+              <text class="inheritance-class-name" x="1735.5" y="1041" text-anchor="middle">InteractionConstraint</text></g>
+<a class="inheritance-class" data-classifier="Interval" data-depth="4" href="../../index.html#/classifier/interval" target="_top" aria-label="Interval — открыть описание класса"><title>Interval. ValueSpecification, задающая диапазон значений между двумя ValueSpecifications — нижней границей min и верхней границей max.</title>
+              <rect class="inheritance-class-box" x="1623" y="1068" width="108" height="40"/>
+              <text class="inheritance-class-name" x="1677" y="1093" text-anchor="middle">Interval</text></a>
+<a class="inheritance-class" data-classifier="IntervalConstraint" data-depth="4" href="../../index.html#/classifier/intervalconstraint" target="_top" aria-label="IntervalConstraint — открыть описание класса"><title>IntervalConstraint. Constraint, спецификация которого задаётся Interval.</title>
+              <rect class="inheritance-class-box" x="1623" y="1120" width="198" height="40"/>
+              <text class="inheritance-class-name" x="1722" y="1145" text-anchor="middle">IntervalConstraint</text></a>
+<a class="inheritance-class" data-classifier="LiteralSpecification" data-depth="4" href="../../index.html#/classifier/literalspecification" target="_top" aria-label="LiteralSpecification — открыть описание класса"><title>LiteralSpecification. ValueSpecification, задающая литеральное — явно обозначенное — значение.</title>
+              <rect class="inheritance-class-box" x="1623" y="1172" width="216" height="40"/>
+              <text class="inheritance-class-name abstract" x="1731" y="1197" text-anchor="middle">LiteralSpecification</text></a>
+<g class="inheritance-class" data-classifier="MessageEvent" data-depth="4"><title>MessageEvent. A MessageEvent specifies the receipt by an object of either an Operation call or a Signal instance.</title>
+              <rect class="inheritance-class-box" x="1623" y="1224" width="144" height="40"/>
+              <text class="inheritance-class-name abstract" x="1695" y="1249" text-anchor="middle">MessageEvent</text></g>
+<g class="inheritance-class" data-classifier="MessageOccurrenceSpecification" data-depth="4"><title>MessageOccurrenceSpecification. A MessageOccurrenceSpecification specifies the occurrence of Message events, such as sending and receiving of Signals or invoking or receiving of Operation calls. A MessageOccurrenceSpecification is a kind of MessageEnd. Messages are generated either by synchronous Operation calls or asynchronous Signal sends. They are received by the execution of corresponding AcceptEventActions.</title>
+              <rect class="inheritance-class-box" x="1623" y="1276" width="306" height="40"/>
+              <text class="inheritance-class-name" x="1776" y="1301" text-anchor="middle">MessageOccurrenceSpecification</text></g>
+<g class="inheritance-class" data-classifier="Model" data-depth="4"><title>Model. A model captures a view of a physical system. It is an abstraction of the physical system, with a certain purpose. This purpose determines what is to be included in the model and what is irrelevant. Thus the model completely describes those aspects of the physical system that are relevant to the purpose of the model, at the appropriate level of detail.</title>
+              <rect class="inheritance-class-box" x="1623" y="1328" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1675" y="1353" text-anchor="middle">Model</text></g>
+<g class="inheritance-class" data-classifier="ObjectFlow" data-depth="4"><title>ObjectFlow. An ObjectFlow is an ActivityEdge that is traversed by object tokens that may hold values. Object flows also support multicast/receive, token selection from object nodes, and transformation of tokens.</title>
+              <rect class="inheritance-class-box" x="1623" y="1380" width="126" height="40"/>
+              <text class="inheritance-class-name" x="1686" y="1405" text-anchor="middle">ObjectFlow</text></g>
+<g class="inheritance-class" data-classifier="ObjectNode" data-depth="4"><title>ObjectNode. An ObjectNode is an abstract ActivityNode that may hold tokens within the object flow in an Activity. ObjectNodes also support token selection, limitation on the number of tokens held, specification of the state required for tokens being held, and carrying control values.</title>
+              <rect class="inheritance-class-box" x="1623" y="1432" width="126" height="40"/>
+              <text class="inheritance-class-name abstract" x="1686" y="1457" text-anchor="middle">ObjectNode</text></g>
+<a class="inheritance-class" data-classifier="OpaqueExpression" data-depth="4" href="../../index.html#/classifier/opaqueexpression" target="_top" aria-label="OpaqueExpression — открыть описание класса"><title>OpaqueExpression. ValueSpecification, задающее вычисление набора значений через UML Behavior или текстовое выражение на языке, отличном от UML.</title>
+              <rect class="inheritance-class-box" x="1623" y="1484" width="180" height="40"/>
+              <text class="inheritance-class-name" x="1713" y="1509" text-anchor="middle">OpaqueExpression</text></a>
+<a class="inheritance-class" data-classifier="Parameter" data-depth="4" href="../../index.html#/classifier/parameter" target="_top" aria-label="Parameter — открыть описание класса"><title>Parameter. Спецификация аргумента, используемого для передачи информации вовнутрь или наружу вызова BehavioralFeature. Параметры могут рассматриваться как ConnectableElements внутри Collaborations.</title>
+              <rect class="inheritance-class-box" x="1623" y="1536" width="117" height="40"/>
+              <text class="inheritance-class-name" x="1681.5" y="1561" text-anchor="middle">Parameter</text></a>
+<g class="inheritance-class" data-classifier="PartDecomposition" data-depth="4"><title>PartDecomposition. A PartDecomposition is a description of the internal Interactions of one Lifeline relative to an Interaction.</title>
+              <rect class="inheritance-class-box" x="1623" y="1588" width="189" height="40"/>
+              <text class="inheritance-class-name" x="1717.5" y="1613" text-anchor="middle">PartDecomposition</text></g>
+<g class="inheritance-class" data-classifier="Profile" data-depth="4"><title>Profile. A profile defines limited extensions to a reference metamodel with the purpose of adapting the metamodel to a specific platform or domain.</title>
+              <rect class="inheritance-class-box" x="1623" y="1640" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1675" y="1665" text-anchor="middle">Profile</text></g>
+<g class="inheritance-class" data-classifier="ProtocolTransition" data-depth="4"><title>ProtocolTransition. A ProtocolTransition specifies a legal Transition for an Operation. Transitions of ProtocolStateMachines have the following information: a pre-condition (guard), a Trigger, and a post-condition. Every ProtocolTransition is associated with at most one BehavioralFeature belonging to the context Classifier of the ProtocolStateMachine.</title>
+              <rect class="inheritance-class-box" x="1623" y="1692" width="198" height="40"/>
+              <text class="inheritance-class-name" x="1722" y="1717" text-anchor="middle">ProtocolTransition</text></g>
+<g class="inheritance-class" data-classifier="Pseudostate" data-depth="4"><title>Pseudostate. A Pseudostate is an abstraction that encompasses different types of transient Vertices in the StateMachine graph. A StateMachine instance never comes to rest in a Pseudostate, instead, it will exit and enter the Pseudostate within a single run-to-completion step.</title>
+              <rect class="inheritance-class-box" x="1623" y="1744" width="135" height="40"/>
+              <text class="inheritance-class-name" x="1690.5" y="1769" text-anchor="middle">Pseudostate</text></g>
+<g class="inheritance-class" data-classifier="State" data-depth="4"><title>State. A State models a situation during which some (usually implicit) invariant condition holds.</title>
+              <rect class="inheritance-class-box" x="1623" y="1796" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1675" y="1821" text-anchor="middle">State</text></g>
+<a class="inheritance-class" data-classifier="StructuralFeature" data-depth="4" href="../../index.html#/classifier/structuralfeature" target="_top" aria-label="StructuralFeature — открыть описание класса"><title>StructuralFeature. Типизированная характеристика классификатора, специфицирующая структуру экземпляров классификатора.</title>
+              <rect class="inheritance-class-box" x="1623" y="1848" width="189" height="40"/>
+              <text class="inheritance-class-name abstract" x="1717.5" y="1873" text-anchor="middle">StructuralFeature</text></a>
+<g class="inheritance-class" data-classifier="TimeEvent" data-depth="4"><title>TimeEvent. A TimeEvent is an Event that occurs at a specific point in time.</title>
+              <rect class="inheritance-class-box" x="1623" y="1900" width="117" height="40"/>
+              <text class="inheritance-class-name" x="1681.5" y="1925" text-anchor="middle">TimeEvent</text></g>
+<a class="inheritance-class" data-classifier="TimeExpression" data-depth="4" href="../../index.html#/classifier/timeexpression" target="_top" aria-label="TimeExpression — открыть описание класса"><title>TimeExpression. ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.</title>
+              <rect class="inheritance-class-box" x="1623" y="1952" width="162" height="40"/>
+              <text class="inheritance-class-name" x="1704" y="1977" text-anchor="middle">TimeExpression</text></a>
+<a class="inheritance-class" data-classifier="TimeObservation" data-depth="4" href="../../index.html#/classifier/timeobservation" target="_top" aria-label="TimeObservation — открыть описание класса"><title>TimeObservation. Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.</title>
+              <rect class="inheritance-class-box" x="1623" y="2004" width="171" height="40"/>
+              <text class="inheritance-class-name" x="1708.5" y="2029" text-anchor="middle">TimeObservation</text></a>
+<a class="inheritance-class" data-classifier="Usage" data-depth="4" href="../../index.html#/classifier/usage" target="_top" aria-label="Usage — открыть описание класса"><title>Usage. Dependency, в которой элемент-клиент нуждается в элементе-поставщике или множестве поставщиков для своей полной реализации или работы.</title>
+              <rect class="inheritance-class-box" x="1623" y="2056" width="104" height="40"/>
+              <text class="inheritance-class-name" x="1675" y="2081" text-anchor="middle">Usage</text></a>
+<g class="inheritance-class" data-classifier="Variable" data-depth="4"><title>Variable. A Variable is a ConnectableElement that may store values during the execution of an Activity. Reading and writing the values of a Variable provides an alternative means for passing data than the use of ObjectFlows. A Variable may be owned directly by an Activity, in which case it is accessible from anywhere within that activity, or it may be owned by a StructuredActivityNode, in which case it is only accessible within that node.</title>
+              <rect class="inheritance-class-box" x="1623" y="2108" width="108" height="40"/>
+              <text class="inheritance-class-name" x="1677" y="2133" text-anchor="middle">Variable</text></g>
+<g class="inheritance-class" data-classifier="Action" data-depth="5"><title>Action. An Action is the fundamental unit of executable functionality. The execution of an Action represents some transformation or processing in the modeled system. Actions provide the ExecutableNodes within Activities and may also be used within Interactions.</title>
+              <rect class="inheritance-class-box" x="2051" y="28" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="2103" y="53" text-anchor="middle">Action</text></g>
+<g class="inheritance-class" data-classifier="ActivityParameterNode" data-depth="5"><title>ActivityParameterNode. An ActivityParameterNode is an ObjectNode for accepting values from the input Parameters or providing values to the output Parameters of an Activity.</title>
+              <rect class="inheritance-class-box" x="2051" y="80" width="225" height="40"/>
+              <text class="inheritance-class-name" x="2163.5" y="105" text-anchor="middle">ActivityParameterNode</text></g>
+<g class="inheritance-class" data-classifier="AnyReceiveEvent" data-depth="5"><title>AnyReceiveEvent. A trigger for an AnyReceiveEvent is triggered by the receipt of any message that is not explicitly handled by any related trigger.</title>
+              <rect class="inheritance-class-box" x="2051" y="132" width="171" height="40"/>
+              <text class="inheritance-class-name" x="2136.5" y="157" text-anchor="middle">AnyReceiveEvent</text></g>
+<g class="inheritance-class" data-classifier="Artifact" data-depth="5"><title>Artifact. An artifact is the specification of a physical piece of information that is used or produced by a software development process, or by deployment and operation of a system. Examples of artifacts include model files, source files, scripts, and binary executable files, a table in a database system, a development deliverable, or a word-processing document, a mail message. An artifact is the source of a deployment to a node.</title>
+              <rect class="inheritance-class-box" x="2051" y="184" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2105" y="209" text-anchor="middle">Artifact</text></g>
+<a class="inheritance-class" data-classifier="Association" data-depth="5" href="../../index.html#/classifier/association" target="_top" aria-label="Association — открыть описание класса"><title>Association. Связь (link) — это кортеж значений, ссылающихся на типизированные объекты. Ассоциация классифицирует множество связей, каждая из которых является экземпляром ассоциации. Каждое значение в связи ссылается на экземпляр типа соответствующего конца ассоциации.</title>
+              <rect class="inheritance-class-box" x="2051" y="236" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="261" text-anchor="middle">Association</text></a>
+<a class="inheritance-class" data-classifier="BehavioredClassifier" data-depth="5" href="../../index.html#/classifier/behavioredclassifier" target="_top" aria-label="BehavioredClassifier — открыть описание класса"><title>BehavioredClassifier. Классификатор с поведением может иметь InterfaceRealizations и владеет набором Behaviors, одно из которых может специфицировать поведение самого классификатора с поведением.</title>
+              <rect class="inheritance-class-box" x="2051" y="288" width="216" height="40"/>
+              <text class="inheritance-class-name abstract" x="2159" y="313" text-anchor="middle">BehavioredClassifier</text></a>
+<g class="inheritance-class" data-classifier="CallEvent" data-depth="5"><title>CallEvent. A CallEvent models the receipt by an object of a message invoking a call of an Operation.</title>
+              <rect class="inheritance-class-box" x="2051" y="340" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2109.5" y="365" text-anchor="middle">CallEvent</text></g>
+<g class="inheritance-class" data-classifier="CentralBufferNode" data-depth="5"><title>CentralBufferNode. A CentralBufferNode is an ObjectNode for managing flows from multiple sources and targets.</title>
+              <rect class="inheritance-class-box" x="2051" y="392" width="189" height="40"/>
+              <text class="inheritance-class-name" x="2145.5" y="417" text-anchor="middle">CentralBufferNode</text></g>
+<a class="inheritance-class" data-classifier="DataType" data-depth="5" href="../../index.html#/classifier/datatype" target="_top" aria-label="DataType — открыть описание класса"><title>DataType. Тип, экземпляры которого идентифицируются только своим значением.</title>
+              <rect class="inheritance-class-box" x="2051" y="444" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2105" y="469" text-anchor="middle">DataType</text></a>
+<g class="inheritance-class" data-classifier="DecisionNode" data-depth="5"><title>DecisionNode. A DecisionNode is a ControlNode that chooses between outgoing ActivityEdges for the routing of tokens.</title>
+              <rect class="inheritance-class-box" x="2051" y="496" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2123" y="521" text-anchor="middle">DecisionNode</text></g>
+<g class="inheritance-class" data-classifier="DestructionOccurrenceSpecification" data-depth="5"><title>DestructionOccurrenceSpecification. A DestructionOccurenceSpecification models the destruction of an object.</title>
+              <rect class="inheritance-class-box" x="2051" y="548" width="342" height="40"/>
+              <text class="inheritance-class-name" x="2222" y="573" text-anchor="middle">DestructionOccurrenceSpecification</text></g>
+<a class="inheritance-class" data-classifier="DurationConstraint" data-depth="5" href="../../index.html#/classifier/durationconstraint" target="_top" aria-label="DurationConstraint — открыть описание класса"><title>DurationConstraint. Constraint, ссылающийся на DurationInterval.</title>
+              <rect class="inheritance-class-box" x="2051" y="600" width="198" height="40"/>
+              <text class="inheritance-class-name" x="2150" y="625" text-anchor="middle">DurationConstraint</text></a>
+<a class="inheritance-class" data-classifier="DurationInterval" data-depth="5" href="../../index.html#/classifier/durationinterval" target="_top" aria-label="DurationInterval — открыть описание класса"><title>DurationInterval. Interval, задающий диапазон между двумя значениями длительности, заданными Durations.</title>
+              <rect class="inheritance-class-box" x="2051" y="652" width="180" height="40"/>
+              <text class="inheritance-class-name" x="2141" y="677" text-anchor="middle">DurationInterval</text></a>
+<g class="inheritance-class" data-classifier="ExpansionNode" data-depth="5"><title>ExpansionNode. An ExpansionNode is an ObjectNode used to indicate a collection input or output for an ExpansionRegion. A collection input of an ExpansionRegion contains a collection that is broken into its individual elements inside the region, whose content is executed once per element. A collection output of an ExpansionRegion combines individual elements produced by the execution of the region into a collection for use outside the region.</title>
+              <rect class="inheritance-class-box" x="2051" y="704" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2127.5" y="729" text-anchor="middle">ExpansionNode</text></g>
+<g class="inheritance-class" data-classifier="FinalNode" data-depth="5"><title>FinalNode. A FinalNode is an abstract ControlNode at which a flow in an Activity stops.</title>
+              <rect class="inheritance-class-box" x="2051" y="756" width="117" height="40"/>
+              <text class="inheritance-class-name abstract" x="2109.5" y="781" text-anchor="middle">FinalNode</text></g>
+<g class="inheritance-class" data-classifier="FinalState" data-depth="5"><title>FinalState. A special kind of State, which, when entered, signifies that the enclosing Region has completed. If the enclosing Region is directly contained in a StateMachine and all other Regions in that StateMachine also are completed, then it means that the entire StateMachine behavior is completed.</title>
+              <rect class="inheritance-class-box" x="2051" y="808" width="126" height="40"/>
+              <text class="inheritance-class-name" x="2114" y="833" text-anchor="middle">FinalState</text></g>
+<g class="inheritance-class" data-classifier="ForkNode" data-depth="5"><title>ForkNode. A ForkNode is a ControlNode that splits a flow into multiple concurrent flows.</title>
+              <rect class="inheritance-class-box" x="2051" y="860" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2105" y="885" text-anchor="middle">ForkNode</text></g>
+<g class="inheritance-class" data-classifier="InformationItem" data-depth="5"><title>InformationItem. InformationItems represent many kinds of information that can flow from sources to targets in very abstract ways. They represent the kinds of information that may move within a system, but do not elaborate details of the transferred information. Details of transferred information are the province of other Classifiers that may ultimately define InformationItems. Consequently, InformationItems cannot be instantiated and do not themselves have features, generalizations, or associations. An important use of InformationItems is to represent information during early design stages, possibly before the detailed modeling decisions that will ultimately define them have been made. Another purpose of InformationItems is to abstract portions of complex models in less precise, but perhaps more general and communicable, ways.</title>
+              <rect class="inheritance-class-box" x="2051" y="912" width="171" height="40"/>
+              <text class="inheritance-class-name" x="2136.5" y="937" text-anchor="middle">InformationItem</text></g>
+<g class="inheritance-class" data-classifier="InitialNode" data-depth="5"><title>InitialNode. An InitialNode is a ControlNode that offers a single control token when initially enabled.</title>
+              <rect class="inheritance-class-box" x="2051" y="964" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="989" text-anchor="middle">InitialNode</text></g>
+<a class="inheritance-class" data-classifier="Interface" data-depth="5" href="../../index.html#/classifier/interface" target="_top" aria-label="Interface — открыть описание класса"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title>
+              <rect class="inheritance-class-box" x="2051" y="1016" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2109.5" y="1041" text-anchor="middle">Interface</text></a>
+<g class="inheritance-class" data-classifier="JoinNode" data-depth="5"><title>JoinNode. A JoinNode is a ControlNode that synchronizes multiple flows.</title>
+              <rect class="inheritance-class-box" x="2051" y="1068" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2105" y="1093" text-anchor="middle">JoinNode</text></g>
+<a class="inheritance-class" data-classifier="LiteralBoolean" data-depth="5" href="../../index.html#/classifier/literalboolean" target="_top" aria-label="LiteralBoolean — открыть описание класса"><title>LiteralBoolean. LiteralSpecification, задающая постоянное значение примитивного типа Boolean.</title>
+              <rect class="inheritance-class-box" x="2051" y="1120" width="162" height="40"/>
+              <text class="inheritance-class-name" x="2132" y="1145" text-anchor="middle">LiteralBoolean</text></a>
+<a class="inheritance-class" data-classifier="LiteralInteger" data-depth="5" href="../../index.html#/classifier/literalinteger" target="_top" aria-label="LiteralInteger — открыть описание класса"><title>LiteralInteger. LiteralSpecification, задающая постоянное значение примитивного типа Integer.</title>
+              <rect class="inheritance-class-box" x="2051" y="1172" width="162" height="40"/>
+              <text class="inheritance-class-name" x="2132" y="1197" text-anchor="middle">LiteralInteger</text></a>
+<a class="inheritance-class" data-classifier="LiteralNull" data-depth="5" href="../../index.html#/classifier/literalnull" target="_top" aria-label="LiteralNull — открыть описание класса"><title>LiteralNull. LiteralSpecification, явно моделирующая отсутствие значения.</title>
+              <rect class="inheritance-class-box" x="2051" y="1224" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="1249" text-anchor="middle">LiteralNull</text></a>
+<a class="inheritance-class" data-classifier="LiteralReal" data-depth="5" href="../../index.html#/classifier/literalreal" target="_top" aria-label="LiteralReal — открыть описание класса"><title>LiteralReal. LiteralSpecification, задающая постоянное значение примитивного типа Real.</title>
+              <rect class="inheritance-class-box" x="2051" y="1276" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="1301" text-anchor="middle">LiteralReal</text></a>
+<a class="inheritance-class" data-classifier="LiteralString" data-depth="5" href="../../index.html#/classifier/literalstring" target="_top" aria-label="LiteralString — открыть описание класса"><title>LiteralString. LiteralSpecification, задающая постоянное значение примитивного типа String.</title>
+              <rect class="inheritance-class-box" x="2051" y="1328" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2127.5" y="1353" text-anchor="middle">LiteralString</text></a>
+<a class="inheritance-class" data-classifier="LiteralUnlimitedNatural" data-depth="5" href="../../index.html#/classifier/literalunlimitednatural" target="_top" aria-label="LiteralUnlimitedNatural — открыть описание класса"><title>LiteralUnlimitedNatural. LiteralSpecification, задающая постоянное значение примитивного типа UnlimitedNatural.</title>
+              <rect class="inheritance-class-box" x="2051" y="1380" width="243" height="40"/>
+              <text class="inheritance-class-name" x="2172.5" y="1405" text-anchor="middle">LiteralUnlimitedNatural</text></a>
+<g class="inheritance-class" data-classifier="Manifestation" data-depth="5"><title>Manifestation. A manifestation is the concrete physical rendering of one or more model elements by an artifact.</title>
+              <rect class="inheritance-class-box" x="2051" y="1432" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2127.5" y="1457" text-anchor="middle">Manifestation</text></g>
+<g class="inheritance-class" data-classifier="MergeNode" data-depth="5"><title>MergeNode. A merge node is a control node that brings together multiple alternate flows. It is not used to synchronize concurrent flows but to accept one among several alternate flows.</title>
+              <rect class="inheritance-class-box" x="2051" y="1484" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2109.5" y="1509" text-anchor="middle">MergeNode</text></g>
+<a class="inheritance-class" data-classifier="Operation" data-depth="5" href="../../index.html#/classifier/operation" target="_top" aria-label="Operation — открыть описание класса"><title>Operation. BehavioralFeature классификатора, специфицирующая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать исполнение методов-поведений, а также другие поведенческие отклики. Operation специализирует TemplateableElement, чтобы поддерживать спецификацию шаблонных и связанных операций. Operation специализирует ParameterableElement, чтобы операцию можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+              <rect class="inheritance-class-box" x="2051" y="1536" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2109.5" y="1561" text-anchor="middle">Operation</text></a>
+<g class="inheritance-class" data-classifier="Pin" data-depth="5"><title>Pin. A Pin is an ObjectNode and MultiplicityElement that provides input values to an Action or accepts output values from an Action.</title>
+              <rect class="inheritance-class-box" x="2051" y="1588" width="104" height="40"/>
+              <text class="inheritance-class-name abstract" x="2103" y="1613" text-anchor="middle">Pin</text></g>
+<a class="inheritance-class" data-classifier="Property" data-depth="5" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
+              <rect class="inheritance-class-box" x="2051" y="1640" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2105" y="1665" text-anchor="middle">Property</text></a>
+<a class="inheritance-class" data-classifier="Realization" data-depth="5" href="../../index.html#/classifier/realization" target="_top" aria-label="Realization — открыть описание класса"><title>Realization. Специализированное отношение Abstraction между спецификацией-поставщиком и её реализацией-клиентом.</title>
+              <rect class="inheritance-class-box" x="2051" y="1692" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="1717" text-anchor="middle">Realization</text></a>
+<a class="inheritance-class" data-classifier="Reception" data-depth="5" href="../../index.html#/classifier/reception" target="_top" aria-label="Reception — открыть описание класса"><title>Reception. Объявление о том, что классификатор готов реагировать на приём сигнала.</title>
+              <rect class="inheritance-class-box" x="2051" y="1744" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2109.5" y="1769" text-anchor="middle">Reception</text></a>
+<a class="inheritance-class" data-classifier="Signal" data-depth="5" href="../../index.html#/classifier/signal" target="_top" aria-label="Signal — открыть описание класса"><title>Signal. Спецификация вида взаимодействия между объектами, при котором реакция в получателе асинхронно инициируется без ответа.</title>
+              <rect class="inheritance-class-box" x="2051" y="1796" width="104" height="40"/>
+              <text class="inheritance-class-name" x="2103" y="1821" text-anchor="middle">Signal</text></a>
+<g class="inheritance-class" data-classifier="SignalEvent" data-depth="5"><title>SignalEvent. A SignalEvent represents the receipt of an asynchronous Signal instance.</title>
+              <rect class="inheritance-class-box" x="2051" y="1848" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2118.5" y="1873" text-anchor="middle">SignalEvent</text></g>
+<a class="inheritance-class" data-classifier="StringExpression" data-depth="5" href="../../index.html#/classifier/stringexpression" target="_top" aria-label="StringExpression — открыть описание класса"><title>StringExpression. Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.</title>
+              <rect class="inheritance-class-box" x="2051" y="1900" width="180" height="40"/>
+              <text class="inheritance-class-name" x="2141" y="1925" text-anchor="middle">StringExpression</text></a>
+<a class="inheritance-class" data-classifier="StructuredClassifier" data-depth="5" href="../../index.html#/classifier/structuredclassifier" target="_top" aria-label="StructuredClassifier — открыть описание класса"><title>StructuredClassifier. Структурированные классификаторы могут содержать внутреннюю структуру связанных элементов, каждый из которых играет роль в общем поведении, моделируемом структурированным классификатором.</title>
+              <rect class="inheritance-class-box" x="2051" y="1952" width="216" height="40"/>
+              <text class="inheritance-class-name abstract" x="2159" y="1977" text-anchor="middle">StructuredClassifier</text></a>
+<a class="inheritance-class" data-classifier="TimeConstraint" data-depth="5" href="../../index.html#/classifier/timeconstraint" target="_top" aria-label="TimeConstraint — открыть описание класса"><title>TimeConstraint. IntervalConstraint, спецификация которого задаётся TimeInterval. Атрибут firstEvent определяет, относится ли ограничение к событию входа или выхода constrainedElement.</title>
+              <rect class="inheritance-class-box" x="2051" y="2004" width="162" height="40"/>
+              <text class="inheritance-class-name" x="2132" y="2029" text-anchor="middle">TimeConstraint</text></a>
+<a class="inheritance-class" data-classifier="TimeInterval" data-depth="5" href="../../index.html#/classifier/timeinterval" target="_top" aria-label="TimeInterval — открыть описание класса"><title>TimeInterval. Interval, задающий диапазон между двумя моментами времени, заданными TimeExpressions.</title>
+              <rect class="inheritance-class-box" x="2051" y="2056" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2123" y="2081" text-anchor="middle">TimeInterval</text></a>
+<g class="inheritance-class" data-classifier="AcceptEventAction" data-depth="6"><title>AcceptEventAction. An AcceptEventAction is an Action that waits for the occurrence of one or more specific Events.</title>
+              <rect class="inheritance-class-box" x="2497" y="28" width="189" height="40"/>
+              <text class="inheritance-class-name" x="2591.5" y="53" text-anchor="middle">AcceptEventAction</text></g>
+<g class="inheritance-class" data-classifier="ActivityFinalNode" data-depth="6"><title>ActivityFinalNode. An ActivityFinalNode is a FinalNode that terminates the execution of its owning Activity or StructuredActivityNode.</title>
+              <rect class="inheritance-class-box" x="2497" y="80" width="189" height="40"/>
+              <text class="inheritance-class-name" x="2591.5" y="105" text-anchor="middle">ActivityFinalNode</text></g>
+<g class="inheritance-class" data-classifier="Actor" data-depth="6"><title>Actor. An Actor specifies a role played by a user or any other system that interacts with the subject.</title>
+              <rect class="inheritance-class-box" x="2497" y="132" width="104" height="40"/>
+              <text class="inheritance-class-name" x="2549" y="157" text-anchor="middle">Actor</text></g>
+<g class="inheritance-class" data-classifier="ClearAssociationAction" data-depth="6"><title>ClearAssociationAction. A ClearAssociationAction is an Action that destroys all links of an Association in which a particular object participates.</title>
+              <rect class="inheritance-class-box" x="2497" y="184" width="234" height="40"/>
+              <text class="inheritance-class-name" x="2614" y="209" text-anchor="middle">ClearAssociationAction</text></g>
+<a class="inheritance-class" data-classifier="Collaboration" data-depth="6" href="../../index.html#/classifier/collaboration" target="_top" aria-label="Collaboration — открыть описание класса"><title>Collaboration. Кооперация описывает структуру сотрудничающих элементов (ролей), каждый из которых выполняет специализированную функцию, которые в совокупности достигают некоторой требуемой функциональности.</title>
+              <rect class="inheritance-class-box" x="2497" y="236" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2573.5" y="261" text-anchor="middle">Collaboration</text></a>
+<g class="inheritance-class" data-classifier="CommunicationPath" data-depth="6"><title>CommunicationPath. A communication path is an association between two deployment targets, through which they are able to exchange signals and messages.</title>
+              <rect class="inheritance-class-box" x="2497" y="288" width="189" height="40"/>
+              <text class="inheritance-class-name" x="2591.5" y="313" text-anchor="middle">CommunicationPath</text></g>
+<a class="inheritance-class" data-classifier="ComponentRealization" data-depth="6" href="../../index.html#/classifier/componentrealization" target="_top" aria-label="ComponentRealization — открыть описание класса"><title>ComponentRealization. Realization специализируется, чтобы (дополнительно) определить классификаторы, реализующие контракт, предлагаемый компонентом в терминах его предоставляемых и требуемых интерфейсов. Компонент образует абстракцию от этих различных классификаторов.</title>
+              <rect class="inheritance-class-box" x="2497" y="340" width="216" height="40"/>
+              <text class="inheritance-class-name" x="2605" y="365" text-anchor="middle">ComponentRealization</text></a>
+<g class="inheritance-class" data-classifier="CreateObjectAction" data-depth="6"><title>CreateObjectAction. A CreateObjectAction is an Action that creates an instance of the specified Classifier.</title>
+              <rect class="inheritance-class-box" x="2497" y="392" width="198" height="40"/>
+              <text class="inheritance-class-name" x="2596" y="417" text-anchor="middle">CreateObjectAction</text></g>
+<g class="inheritance-class" data-classifier="DataStoreNode" data-depth="6"><title>DataStoreNode. A DataStoreNode is a CentralBufferNode for persistent data.</title>
+              <rect class="inheritance-class-box" x="2497" y="444" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2573.5" y="469" text-anchor="middle">DataStoreNode</text></g>
+<g class="inheritance-class" data-classifier="DeploymentSpecification" data-depth="6"><title>DeploymentSpecification. A deployment specification specifies a set of properties that determine execution parameters of a component artifact that is deployed on a node. A deployment specification can be aimed at a specific type of container. An artifact that reifies or implements deployment specification properties is a deployment descriptor.</title>
+              <rect class="inheritance-class-box" x="2497" y="496" width="243" height="40"/>
+              <text class="inheritance-class-name" x="2618.5" y="521" text-anchor="middle">DeploymentSpecification</text></g>
+<g class="inheritance-class" data-classifier="DestroyObjectAction" data-depth="6"><title>DestroyObjectAction. A DestroyObjectAction is an Action that destroys objects.</title>
+              <rect class="inheritance-class-box" x="2497" y="548" width="207" height="40"/>
+              <text class="inheritance-class-name" x="2600.5" y="573" text-anchor="middle">DestroyObjectAction</text></g>
+<a class="inheritance-class" data-classifier="EncapsulatedClassifier" data-depth="6" href="../../index.html#/classifier/encapsulatedclassifier" target="_top" aria-label="EncapsulatedClassifier — открыть описание класса"><title>EncapsulatedClassifier. Инкапсулированный классификатор может владеть портами, задающими типизированные точки взаимодействия.</title>
+              <rect class="inheritance-class-box" x="2497" y="600" width="234" height="40"/>
+              <text class="inheritance-class-name abstract" x="2614" y="625" text-anchor="middle">EncapsulatedClassifier</text></a>
+<a class="inheritance-class" data-classifier="Enumeration" data-depth="6" href="../../index.html#/classifier/enumeration" target="_top" aria-label="Enumeration — открыть описание класса"><title>Enumeration. Тип данных, значения которого перечислены в модели как литералы перечисления (EnumerationLiterals).</title>
+              <rect class="inheritance-class-box" x="2497" y="652" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2564.5" y="677" text-anchor="middle">Enumeration</text></a>
+<g class="inheritance-class" data-classifier="Extension" data-depth="6"><title>Extension. An extension is used to indicate that the properties of a metaclass are extended through a stereotype, and gives the ability to flexibly add (and later remove) stereotypes to classes.</title>
+              <rect class="inheritance-class-box" x="2497" y="704" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2555.5" y="729" text-anchor="middle">Extension</text></g>
+<g class="inheritance-class" data-classifier="ExtensionEnd" data-depth="6"><title>ExtensionEnd. An extension end is used to tie an extension to a stereotype when extending a metaclass. The default multiplicity of an extension end is 0..1.</title>
+              <rect class="inheritance-class-box" x="2497" y="756" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2569" y="781" text-anchor="middle">ExtensionEnd</text></g>
+<g class="inheritance-class" data-classifier="FlowFinalNode" data-depth="6"><title>FlowFinalNode. A FlowFinalNode is a FinalNode that terminates a flow by consuming the tokens offered to it.</title>
+              <rect class="inheritance-class-box" x="2497" y="808" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2573.5" y="833" text-anchor="middle">FlowFinalNode</text></g>
+<g class="inheritance-class" data-classifier="InputPin" data-depth="6"><title>InputPin. An InputPin is a Pin that holds input values to be consumed by an Action.</title>
+              <rect class="inheritance-class-box" x="2497" y="860" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2551" y="885" text-anchor="middle">InputPin</text></g>
+<a class="inheritance-class" data-classifier="InterfaceRealization" data-depth="6" href="../../index.html#/classifier/interfacerealization" target="_top" aria-label="InterfaceRealization — открыть описание класса"><title>InterfaceRealization. Специализированное отношение реализации между BehavioredClassifier и Interface. Это отношение означает, что реализующий классификатор с поведением соответствует контракту, заданному интерфейсом.</title>
+              <rect class="inheritance-class-box" x="2497" y="912" width="216" height="40"/>
+              <text class="inheritance-class-name" x="2605" y="937" text-anchor="middle">InterfaceRealization</text></a>
+<g class="inheritance-class" data-classifier="InvocationAction" data-depth="6"><title>InvocationAction. InvocationAction is an abstract class for the various actions that request Behavior invocation.</title>
+              <rect class="inheritance-class-box" x="2497" y="964" width="180" height="40"/>
+              <text class="inheritance-class-name abstract" x="2587" y="989" text-anchor="middle">InvocationAction</text></g>
+<g class="inheritance-class" data-classifier="LinkAction" data-depth="6"><title>LinkAction. LinkAction is an abstract class for all Actions that identify the links to be acted on using LinkEndData.</title>
+              <rect class="inheritance-class-box" x="2497" y="1016" width="126" height="40"/>
+              <text class="inheritance-class-name abstract" x="2560" y="1041" text-anchor="middle">LinkAction</text></g>
+<g class="inheritance-class" data-classifier="OpaqueAction" data-depth="6"><title>OpaqueAction. An OpaqueAction is an Action whose functionality is not specified within UML.</title>
+              <rect class="inheritance-class-box" x="2497" y="1068" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2569" y="1093" text-anchor="middle">OpaqueAction</text></g>
+<g class="inheritance-class" data-classifier="OutputPin" data-depth="6"><title>OutputPin. An OutputPin is a Pin that holds output values produced by an Action.</title>
+              <rect class="inheritance-class-box" x="2497" y="1120" width="117" height="40"/>
+              <text class="inheritance-class-name" x="2555.5" y="1145" text-anchor="middle">OutputPin</text></g>
+<a class="inheritance-class" data-classifier="Port" data-depth="6" href="../../index.html#/classifier/port" target="_top" aria-label="Port — открыть описание класса"><title>Port. Порт — это свойство инкапсулированного классификатора, задающее отдельную точку взаимодействия между этим инкапсулированным классификатором и его окружением или между (поведением) инкапсулированного классификатора и его внутренними частями. Порты соединяются со свойствами инкапсулированного классификатора коннекторами, через которые могут делаться запросы на вызов поведенческих характеристик. Порт может специфицировать сервисы, которые инкапсулированный классификатор предоставляет (предлагает) своему окружению, а также сервисы, которые инкапсулированный классификатор ожидает (требует) от своего окружения. Порт может иметь связанную протокольную машину состояний (ProtocolStateMachine).</title>
+              <rect class="inheritance-class-box" x="2497" y="1172" width="104" height="40"/>
+              <text class="inheritance-class-name" x="2549" y="1197" text-anchor="middle">Port</text></a>
+<a class="inheritance-class" data-classifier="PrimitiveType" data-depth="6" href="../../index.html#/classifier/primitivetype" target="_top" aria-label="PrimitiveType — открыть описание класса"><title>PrimitiveType. Задаёт предопределённый тип данных без какой-либо подструктуры. PrimitiveType может иметь алгебру и операции, определённые вне UML, например математически.</title>
+              <rect class="inheritance-class-box" x="2497" y="1224" width="153" height="40"/>
+              <text class="inheritance-class-name" x="2573.5" y="1249" text-anchor="middle">PrimitiveType</text></a>
+<g class="inheritance-class" data-classifier="RaiseExceptionAction" data-depth="6"><title>RaiseExceptionAction. A RaiseExceptionAction is an Action that causes an exception to occur. The input value becomes the exception object.</title>
+              <rect class="inheritance-class-box" x="2497" y="1276" width="216" height="40"/>
+              <text class="inheritance-class-name" x="2605" y="1301" text-anchor="middle">RaiseExceptionAction</text></g>
+<g class="inheritance-class" data-classifier="ReadExtentAction" data-depth="6"><title>ReadExtentAction. A ReadExtentAction is an Action that retrieves the current instances of a Classifier.</title>
+              <rect class="inheritance-class-box" x="2497" y="1328" width="180" height="40"/>
+              <text class="inheritance-class-name" x="2587" y="1353" text-anchor="middle">ReadExtentAction</text></g>
+<g class="inheritance-class" data-classifier="ReadIsClassifiedObjectAction" data-depth="6"><title>ReadIsClassifiedObjectAction. A ReadIsClassifiedObjectAction is an Action that determines whether an object is classified by a given Classifier.</title>
+              <rect class="inheritance-class-box" x="2497" y="1380" width="288" height="40"/>
+              <text class="inheritance-class-name" x="2641" y="1405" text-anchor="middle">ReadIsClassifiedObjectAction</text></g>
+<g class="inheritance-class" data-classifier="ReadLinkObjectEndAction" data-depth="6"><title>ReadLinkObjectEndAction. A ReadLinkObjectEndAction is an Action that retrieves an end object from a link object.</title>
+              <rect class="inheritance-class-box" x="2497" y="1432" width="243" height="40"/>
+              <text class="inheritance-class-name" x="2618.5" y="1457" text-anchor="middle">ReadLinkObjectEndAction</text></g>
+<g class="inheritance-class" data-classifier="ReadLinkObjectEndQualifierAction" data-depth="6"><title>ReadLinkObjectEndQualifierAction. A ReadLinkObjectEndQualifierAction is an Action that retrieves a qualifier end value from a link object.</title>
+              <rect class="inheritance-class-box" x="2497" y="1484" width="324" height="40"/>
+              <text class="inheritance-class-name" x="2659" y="1509" text-anchor="middle">ReadLinkObjectEndQualifierAction</text></g>
+<g class="inheritance-class" data-classifier="ReadSelfAction" data-depth="6"><title>ReadSelfAction. A ReadSelfAction is an Action that retrieves the context object of the Behavior execution within which the ReadSelfAction execution is taking place.</title>
+              <rect class="inheritance-class-box" x="2497" y="1536" width="162" height="40"/>
+              <text class="inheritance-class-name" x="2578" y="1561" text-anchor="middle">ReadSelfAction</text></g>
+<g class="inheritance-class" data-classifier="ReclassifyObjectAction" data-depth="6"><title>ReclassifyObjectAction. A ReclassifyObjectAction is an Action that changes the Classifiers that classify an object.</title>
+              <rect class="inheritance-class-box" x="2497" y="1588" width="234" height="40"/>
+              <text class="inheritance-class-name" x="2614" y="1613" text-anchor="middle">ReclassifyObjectAction</text></g>
+<g class="inheritance-class" data-classifier="ReduceAction" data-depth="6"><title>ReduceAction. A ReduceAction is an Action that reduces a collection to a single value by repeatedly combining the elements of the collection using a reducer Behavior.</title>
+              <rect class="inheritance-class-box" x="2497" y="1640" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2569" y="1665" text-anchor="middle">ReduceAction</text></g>
+<g class="inheritance-class" data-classifier="ReplyAction" data-depth="6"><title>ReplyAction. A ReplyAction is an Action that accepts a set of reply values and a value containing return information produced by a previous AcceptCallAction. The ReplyAction returns the values to the caller of the previous call, completing execution of the call.</title>
+              <rect class="inheritance-class-box" x="2497" y="1692" width="135" height="40"/>
+              <text class="inheritance-class-name" x="2564.5" y="1717" text-anchor="middle">ReplyAction</text></g>
+<g class="inheritance-class" data-classifier="StartClassifierBehaviorAction" data-depth="6"><title>StartClassifierBehaviorAction. A StartClassifierBehaviorAction is an Action that starts the classifierBehavior of the input object.</title>
+              <rect class="inheritance-class-box" x="2497" y="1744" width="297" height="40"/>
+              <text class="inheritance-class-name" x="2645.5" y="1769" text-anchor="middle">StartClassifierBehaviorAction</text></g>
+<g class="inheritance-class" data-classifier="StructuralFeatureAction" data-depth="6"><title>StructuralFeatureAction. StructuralFeatureAction is an abstract class for all Actions that operate on StructuralFeatures.</title>
+              <rect class="inheritance-class-box" x="2497" y="1796" width="243" height="40"/>
+              <text class="inheritance-class-name abstract" x="2618.5" y="1821" text-anchor="middle">StructuralFeatureAction</text></g>
+<g class="inheritance-class" data-classifier="StructuredActivityNode" data-depth="6"><title>StructuredActivityNode. A StructuredActivityNode is an Action that is also an ActivityGroup and whose behavior is specified by the ActivityNodes and ActivityEdges it so contains. Unlike other kinds of ActivityGroup, a StructuredActivityNode owns the ActivityNodes and ActivityEdges it contains, and so a node or edge can only be directly contained in one StructuredActivityNode, though StructuredActivityNodes may be nested.</title>
+              <rect class="inheritance-class-box" x="2497" y="1848" width="234" height="40"/>
+              <text class="inheritance-class-name" x="2614" y="1873" text-anchor="middle">StructuredActivityNode</text></g>
+<a class="inheritance-class" data-classifier="Substitution" data-depth="6" href="../../index.html#/classifier/substitution" target="_top" aria-label="Substitution — открыть описание класса"><title>Substitution. Отношение между двумя классификаторами, означающее, что подставляющий классификатор соответствует контракту, заданному классификатором контракта. Это означает, что экземпляры подставляющего классификатора взаимозаменяемы во время выполнения там, где ожидаются экземпляры классификатора контракта.</title>
+              <rect class="inheritance-class-box" x="2497" y="1900" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2569" y="1925" text-anchor="middle">Substitution</text></a>
+<g class="inheritance-class" data-classifier="TestIdentityAction" data-depth="6"><title>TestIdentityAction. A TestIdentityAction is an Action that tests if two values are identical objects.</title>
+              <rect class="inheritance-class-box" x="2497" y="1952" width="198" height="40"/>
+              <text class="inheritance-class-name" x="2596" y="1977" text-anchor="middle">TestIdentityAction</text></g>
+<g class="inheritance-class" data-classifier="UnmarshallAction" data-depth="6"><title>UnmarshallAction. An UnmarshallAction is an Action that retrieves the values of the StructuralFeatures of an object and places them on OutputPins.</title>
+              <rect class="inheritance-class-box" x="2497" y="2004" width="180" height="40"/>
+              <text class="inheritance-class-name" x="2587" y="2029" text-anchor="middle">UnmarshallAction</text></g>
+<g class="inheritance-class" data-classifier="UseCase" data-depth="6"><title>UseCase. A UseCase specifies a set of actions performed by its subjects, which yields an observable result that is of value for one or more Actors or other stakeholders of each subject.</title>
+              <rect class="inheritance-class-box" x="2497" y="2056" width="104" height="40"/>
+              <text class="inheritance-class-name" x="2549" y="2081" text-anchor="middle">UseCase</text></g>
+<g class="inheritance-class" data-classifier="ValueSpecificationAction" data-depth="6"><title>ValueSpecificationAction. A ValueSpecificationAction is an Action that evaluates a ValueSpecification and provides a result.</title>
+              <rect class="inheritance-class-box" x="2497" y="2108" width="252" height="40"/>
+              <text class="inheritance-class-name" x="2623" y="2133" text-anchor="middle">ValueSpecificationAction</text></g>
+<g class="inheritance-class" data-classifier="VariableAction" data-depth="6"><title>VariableAction. VariableAction is an abstract class for Actions that operate on a specified Variable.</title>
+              <rect class="inheritance-class-box" x="2497" y="2160" width="162" height="40"/>
+              <text class="inheritance-class-name abstract" x="2578" y="2185" text-anchor="middle">VariableAction</text></g>
+<g class="inheritance-class" data-classifier="AcceptCallAction" data-depth="7"><title>AcceptCallAction. An AcceptCallAction is an AcceptEventAction that handles the receipt of a synchronous call request. In addition to the values from the Operation input parameters, the Action produces an output that is needed later to supply the information to the ReplyAction necessary to return control to the caller. An AcceptCallAction is for synchronous calls. If it is used to handle an asynchronous call, execution of the subsequent ReplyAction will complete immediately with no effect.</title>
+              <rect class="inheritance-class-box" x="2925" y="28" width="180" height="40"/>
+              <text class="inheritance-class-name" x="3015" y="53" text-anchor="middle">AcceptCallAction</text></g>
+<g class="inheritance-class" data-classifier="ActionInputPin" data-depth="7"><title>ActionInputPin. An ActionInputPin is a kind of InputPin that executes an Action to determine the values to input to another Action.</title>
+              <rect class="inheritance-class-box" x="2925" y="80" width="162" height="40"/>
+              <text class="inheritance-class-name" x="3006" y="105" text-anchor="middle">ActionInputPin</text></g>
+<g class="inheritance-class" data-classifier="BroadcastSignalAction" data-depth="7"><title>BroadcastSignalAction. A BroadcastSignalAction is an InvocationAction that transmits a Signal instance to all the potential target objects in the system. Values from the argument InputPins are used to provide values for the attributes of the Signal. The requestor continues execution immediately after the Signal instances are sent out and cannot receive reply values.</title>
+              <rect class="inheritance-class-box" x="2925" y="132" width="225" height="40"/>
+              <text class="inheritance-class-name" x="3037.5" y="157" text-anchor="middle">BroadcastSignalAction</text></g>
+<g class="inheritance-class" data-classifier="CallAction" data-depth="7"><title>CallAction. CallAction is an abstract class for Actions that invoke a Behavior with given argument values and (if the invocation is synchronous) receive reply values.</title>
+              <rect class="inheritance-class-box" x="2925" y="184" width="126" height="40"/>
+              <text class="inheritance-class-name abstract" x="2988" y="209" text-anchor="middle">CallAction</text></g>
+<a class="inheritance-class" data-classifier="Class" data-depth="7" href="../../index.html#/classifier/class" target="_top" aria-label="Class — открыть описание класса"><title>Class. Класс классифицирует множество объектов и специфицирует характеристики, описывающие структуру и поведение этих объектов. Класс может иметь внутреннюю структуру и порты.</title>
+              <rect class="inheritance-class-box" x="2925" y="236" width="104" height="40"/>
+              <text class="inheritance-class-name" x="2977" y="261" text-anchor="middle">Class</text></a>
+<g class="inheritance-class" data-classifier="ClearStructuralFeatureAction" data-depth="7"><title>ClearStructuralFeatureAction. A ClearStructuralFeatureAction is a StructuralFeatureAction that removes all values of a StructuralFeature.</title>
+              <rect class="inheritance-class-box" x="2925" y="288" width="288" height="40"/>
+              <text class="inheritance-class-name" x="3069" y="313" text-anchor="middle">ClearStructuralFeatureAction</text></g>
+<g class="inheritance-class" data-classifier="ClearVariableAction" data-depth="7"><title>ClearVariableAction. A ClearVariableAction is a VariableAction that removes all values of a Variable.</title>
+              <rect class="inheritance-class-box" x="2925" y="340" width="207" height="40"/>
+              <text class="inheritance-class-name" x="3028.5" y="365" text-anchor="middle">ClearVariableAction</text></g>
+<g class="inheritance-class" data-classifier="ConditionalNode" data-depth="7"><title>ConditionalNode. A ConditionalNode is a StructuredActivityNode that chooses one among some number of alternative collections of ExecutableNodes to execute.</title>
+              <rect class="inheritance-class-box" x="2925" y="392" width="171" height="40"/>
+              <text class="inheritance-class-name" x="3010.5" y="417" text-anchor="middle">ConditionalNode</text></g>
+<g class="inheritance-class" data-classifier="ExpansionRegion" data-depth="7"><title>ExpansionRegion. An ExpansionRegion is a StructuredActivityNode that executes its content multiple times corresponding to elements of input collection(s).</title>
+              <rect class="inheritance-class-box" x="2925" y="444" width="171" height="40"/>
+              <text class="inheritance-class-name" x="3010.5" y="469" text-anchor="middle">ExpansionRegion</text></g>
+<g class="inheritance-class" data-classifier="LoopNode" data-depth="7"><title>LoopNode. A LoopNode is a StructuredActivityNode that represents an iterative loop with setup, test, and body sections.</title>
+              <rect class="inheritance-class-box" x="2925" y="496" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2979" y="521" text-anchor="middle">LoopNode</text></g>
+<g class="inheritance-class" data-classifier="ReadLinkAction" data-depth="7"><title>ReadLinkAction. A ReadLinkAction is a LinkAction that navigates across an Association to retrieve the objects on one end.</title>
+              <rect class="inheritance-class-box" x="2925" y="548" width="162" height="40"/>
+              <text class="inheritance-class-name" x="3006" y="573" text-anchor="middle">ReadLinkAction</text></g>
+<g class="inheritance-class" data-classifier="ReadStructuralFeatureAction" data-depth="7"><title>ReadStructuralFeatureAction. A ReadStructuralFeatureAction is a StructuralFeatureAction that retrieves the values of a StructuralFeature.</title>
+              <rect class="inheritance-class-box" x="2925" y="600" width="279" height="40"/>
+              <text class="inheritance-class-name" x="3064.5" y="625" text-anchor="middle">ReadStructuralFeatureAction</text></g>
+<g class="inheritance-class" data-classifier="ReadVariableAction" data-depth="7"><title>ReadVariableAction. A ReadVariableAction is a VariableAction that retrieves the values of a Variable.</title>
+              <rect class="inheritance-class-box" x="2925" y="652" width="198" height="40"/>
+              <text class="inheritance-class-name" x="3024" y="677" text-anchor="middle">ReadVariableAction</text></g>
+<g class="inheritance-class" data-classifier="SendObjectAction" data-depth="7"><title>SendObjectAction. A SendObjectAction is an InvocationAction that transmits an input object to the target object, which is handled as a request message by the target object. The requestor continues execution immediately after the object is sent out and cannot receive reply values.</title>
+              <rect class="inheritance-class-box" x="2925" y="704" width="180" height="40"/>
+              <text class="inheritance-class-name" x="3015" y="729" text-anchor="middle">SendObjectAction</text></g>
+<g class="inheritance-class" data-classifier="SendSignalAction" data-depth="7"><title>SendSignalAction. A SendSignalAction is an InvocationAction that creates a Signal instance and transmits it to the target object. Values from the argument InputPins are used to provide values for the attributes of the Signal. The requestor continues execution immediately after the Signal instance is sent out and cannot receive reply values.</title>
+              <rect class="inheritance-class-box" x="2925" y="756" width="180" height="40"/>
+              <text class="inheritance-class-name" x="3015" y="781" text-anchor="middle">SendSignalAction</text></g>
+<g class="inheritance-class" data-classifier="SequenceNode" data-depth="7"><title>SequenceNode. A SequenceNode is a StructuredActivityNode that executes a sequence of ExecutableNodes in order.</title>
+              <rect class="inheritance-class-box" x="2925" y="808" width="144" height="40"/>
+              <text class="inheritance-class-name" x="2997" y="833" text-anchor="middle">SequenceNode</text></g>
+<g class="inheritance-class" data-classifier="ValuePin" data-depth="7"><title>ValuePin. A ValuePin is an InputPin that provides a value by evaluating a ValueSpecification.</title>
+              <rect class="inheritance-class-box" x="2925" y="860" width="108" height="40"/>
+              <text class="inheritance-class-name" x="2979" y="885" text-anchor="middle">ValuePin</text></g>
+<g class="inheritance-class" data-classifier="WriteLinkAction" data-depth="7"><title>WriteLinkAction. WriteLinkAction is an abstract class for LinkActions that create and destroy links.</title>
+              <rect class="inheritance-class-box" x="2925" y="912" width="171" height="40"/>
+              <text class="inheritance-class-name abstract" x="3010.5" y="937" text-anchor="middle">WriteLinkAction</text></g>
+<g class="inheritance-class" data-classifier="WriteStructuralFeatureAction" data-depth="7"><title>WriteStructuralFeatureAction. WriteStructuralFeatureAction is an abstract class for StructuralFeatureActions that change StructuralFeature values.</title>
+              <rect class="inheritance-class-box" x="2925" y="964" width="288" height="40"/>
+              <text class="inheritance-class-name abstract" x="3069" y="989" text-anchor="middle">WriteStructuralFeatureAction</text></g>
+<g class="inheritance-class" data-classifier="WriteVariableAction" data-depth="7"><title>WriteVariableAction. WriteVariableAction is an abstract class for VariableActions that change Variable values.</title>
+              <rect class="inheritance-class-box" x="2925" y="1016" width="207" height="40"/>
+              <text class="inheritance-class-name abstract" x="3028.5" y="1041" text-anchor="middle">WriteVariableAction</text></g>
+<g class="inheritance-class" data-classifier="AddStructuralFeatureValueAction" data-depth="8"><title>AddStructuralFeatureValueAction. An AddStructuralFeatureValueAction is a WriteStructuralFeatureAction for adding values to a StructuralFeature.</title>
+              <rect class="inheritance-class-box" x="3317" y="28" width="315" height="40"/>
+              <text class="inheritance-class-name" x="3474.5" y="53" text-anchor="middle">AddStructuralFeatureValueAction</text></g>
+<g class="inheritance-class" data-classifier="AddVariableValueAction" data-depth="8"><title>AddVariableValueAction. An AddVariableValueAction is a WriteVariableAction for adding values to a Variable.</title>
+              <rect class="inheritance-class-box" x="3317" y="80" width="234" height="40"/>
+              <text class="inheritance-class-name" x="3434" y="105" text-anchor="middle">AddVariableValueAction</text></g>
+<a class="inheritance-class" data-classifier="AssociationClass" data-depth="8" href="../../index.html#/classifier/associationclass" target="_top" aria-label="AssociationClass — открыть описание класса"><title>AssociationClass. Элемент модели, обладающий одновременно свойствами ассоциации и класса. Класс ассоциации можно рассматривать как ассоциацию, которая также имеет свойства класса, или как класс, который также имеет свойства ассоциации. Он не только соединяет множество классификаторов, но и определяет набор характеристик, принадлежащих самой ассоциации, а не какому-либо из связанных классификаторов.</title>
+              <rect class="inheritance-class-box" x="3317" y="132" width="180" height="40"/>
+              <text class="inheritance-class-name" x="3407" y="157" text-anchor="middle">AssociationClass</text></a>
+<g class="inheritance-class" data-classifier="Behavior" data-depth="8"><title>Behavior. Behavior is a specification of how its context BehavioredClassifier changes state over time. This specification may be either a definition of possible behavior execution or emergent behavior, or a selective illustration of an interesting subset of possible executions. The latter form is typically used for capturing examples, such as a trace of a particular execution.</title>
+              <rect class="inheritance-class-box" x="3317" y="184" width="108" height="40"/>
+              <text class="inheritance-class-name abstract" x="3371" y="209" text-anchor="middle">Behavior</text></g>
+<g class="inheritance-class" data-classifier="CallBehaviorAction" data-depth="8"><title>CallBehaviorAction. A CallBehaviorAction is a CallAction that invokes a Behavior directly. The argument values of the CallBehaviorAction are passed on the input Parameters of the invoked Behavior. If the call is synchronous, the execution of the CallBehaviorAction waits until the execution of the invoked Behavior completes and the values of output Parameters of the Behavior are placed on the result OutputPins. If the call is asynchronous, the CallBehaviorAction completes immediately and no results values can be provided.</title>
+              <rect class="inheritance-class-box" x="3317" y="236" width="198" height="40"/>
+              <text class="inheritance-class-name" x="3416" y="261" text-anchor="middle">CallBehaviorAction</text></g>
+<g class="inheritance-class" data-classifier="CallOperationAction" data-depth="8"><title>CallOperationAction. A CallOperationAction is a CallAction that transmits an Operation call request to the target object, where it may cause the invocation of associated Behavior. The argument values of the CallOperationAction are passed on the input Parameters of the Operation. If call is synchronous, the execution of the CallOperationAction waits until the execution of the invoked Operation completes and the values of output Parameters of the Operation are placed on the result OutputPins. If the call is asynchronous, the CallOperationAction completes immediately and no results values can be provided.</title>
+              <rect class="inheritance-class-box" x="3317" y="288" width="207" height="40"/>
+              <text class="inheritance-class-name" x="3420.5" y="313" text-anchor="middle">CallOperationAction</text></g>
+<a class="inheritance-class" data-classifier="Component" data-depth="8" href="../../index.html#/classifier/component" target="_top" aria-label="Component — открыть описание класса"><title>Component. Компонент представляет собой модульную часть системы, которая инкапсулирует своё содержимое и чья манифестация заменяема в её окружении.</title>
+              <rect class="inheritance-class-box" x="3317" y="340" width="117" height="40"/>
+              <text class="inheritance-class-name" x="3375.5" y="365" text-anchor="middle">Component</text></a>
+<g class="inheritance-class" data-classifier="CreateLinkAction" data-depth="8"><title>CreateLinkAction. A CreateLinkAction is a WriteLinkAction for creating links.</title>
+              <rect class="inheritance-class-box" x="3317" y="392" width="180" height="40"/>
+              <text class="inheritance-class-name" x="3407" y="417" text-anchor="middle">CreateLinkAction</text></g>
+<g class="inheritance-class" data-classifier="DestroyLinkAction" data-depth="8"><title>DestroyLinkAction. A DestroyLinkAction is a WriteLinkAction that destroys links (including link objects).</title>
+              <rect class="inheritance-class-box" x="3317" y="444" width="189" height="40"/>
+              <text class="inheritance-class-name" x="3411.5" y="469" text-anchor="middle">DestroyLinkAction</text></g>
+<g class="inheritance-class" data-classifier="Node" data-depth="8"><title>Node. A Node is computational resource upon which artifacts may be deployed for execution. Nodes can be interconnected through communication paths to define network structures.</title>
+              <rect class="inheritance-class-box" x="3317" y="496" width="104" height="40"/>
+              <text class="inheritance-class-name" x="3369" y="521" text-anchor="middle">Node</text></g>
+<g class="inheritance-class" data-classifier="RemoveStructuralFeatureValueAction" data-depth="8"><title>RemoveStructuralFeatureValueAction. A RemoveStructuralFeatureValueAction is a WriteStructuralFeatureAction that removes values from a StructuralFeature.</title>
+              <rect class="inheritance-class-box" x="3317" y="548" width="342" height="40"/>
+              <text class="inheritance-class-name" x="3488" y="573" text-anchor="middle">RemoveStructuralFeatureValueAction</text></g>
+<g class="inheritance-class" data-classifier="RemoveVariableValueAction" data-depth="8"><title>RemoveVariableValueAction. A RemoveVariableValueAction is a WriteVariableAction that removes values from a Variables.</title>
+              <rect class="inheritance-class-box" x="3317" y="600" width="261" height="40"/>
+              <text class="inheritance-class-name" x="3447.5" y="625" text-anchor="middle">RemoveVariableValueAction</text></g>
+<g class="inheritance-class" data-classifier="StartObjectBehaviorAction" data-depth="8"><title>StartObjectBehaviorAction. A StartObjectBehaviorAction is an InvocationAction that starts the execution either of a directly instantiated Behavior or of the classifierBehavior of an object. Argument values may be supplied for the input Parameters of the Behavior. If the Behavior is invoked synchronously, then output values may be obtained for output Parameters.</title>
+              <rect class="inheritance-class-box" x="3317" y="652" width="261" height="40"/>
+              <text class="inheritance-class-name" x="3447.5" y="677" text-anchor="middle">StartObjectBehaviorAction</text></g>
+<g class="inheritance-class" data-classifier="Stereotype" data-depth="8"><title>Stereotype. A stereotype defines how an existing metaclass may be extended, and enables the use of platform or domain specific terminology or notation in place of, or in addition to, the ones used for the extended metaclass.</title>
+              <rect class="inheritance-class-box" x="3317" y="704" width="126" height="40"/>
+              <text class="inheritance-class-name" x="3380" y="729" text-anchor="middle">Stereotype</text></g>
+<g class="inheritance-class" data-classifier="Activity" data-depth="9"><title>Activity. An Activity is the specification of parameterized Behavior as the coordinated sequencing of subordinate units.</title>
+              <rect class="inheritance-class-box" x="3763" y="28" width="108" height="40"/>
+              <text class="inheritance-class-name" x="3817" y="53" text-anchor="middle">Activity</text></g>
+<g class="inheritance-class" data-classifier="CreateLinkObjectAction" data-depth="9"><title>CreateLinkObjectAction. A CreateLinkObjectAction is a CreateLinkAction for creating link objects (AssociationClasse instances).</title>
+              <rect class="inheritance-class-box" x="3763" y="80" width="234" height="40"/>
+              <text class="inheritance-class-name" x="3880" y="105" text-anchor="middle">CreateLinkObjectAction</text></g>
+<g class="inheritance-class" data-classifier="Device" data-depth="9"><title>Device. A device is a physical computational resource with processing capability upon which artifacts may be deployed for execution. Devices may be complex (i.e., they may consist of other devices).</title>
+              <rect class="inheritance-class-box" x="3763" y="132" width="104" height="40"/>
+              <text class="inheritance-class-name" x="3815" y="157" text-anchor="middle">Device</text></g>
+<g class="inheritance-class" data-classifier="ExecutionEnvironment" data-depth="9"><title>ExecutionEnvironment. An execution environment is a node that offers an execution environment for specific types of components that are deployed on it in the form of executable artifacts.</title>
+              <rect class="inheritance-class-box" x="3763" y="184" width="216" height="40"/>
+              <text class="inheritance-class-name" x="3871" y="209" text-anchor="middle">ExecutionEnvironment</text></g>
+<g class="inheritance-class" data-classifier="Interaction" data-depth="9"><title>Interaction. An Interaction is a unit of Behavior that focuses on the observable exchange of information between connectable elements.</title>
+              <rect class="inheritance-class-box" x="3763" y="236" width="135" height="40"/>
+              <text class="inheritance-class-name" x="3830.5" y="261" text-anchor="middle">Interaction</text></g>
+<g class="inheritance-class" data-classifier="OpaqueBehavior" data-depth="9"><title>OpaqueBehavior. An OpaqueBehavior is a Behavior whose specification is given in a textual language other than UML.</title>
+              <rect class="inheritance-class-box" x="3763" y="288" width="162" height="40"/>
+              <text class="inheritance-class-name" x="3844" y="313" text-anchor="middle">OpaqueBehavior</text></g>
+<g class="inheritance-class" data-classifier="StateMachine" data-depth="9"><title>StateMachine. StateMachines can be used to express event-driven behaviors of parts of a system. Behavior is modeled as a traversal of a graph of Vertices interconnected by one or more joined Transition arcs that are triggered by the dispatching of successive Event occurrences. During this traversal, the StateMachine may execute a sequence of Behaviors associated with various elements of the StateMachine.</title>
+              <rect class="inheritance-class-box" x="3763" y="340" width="144" height="40"/>
+              <text class="inheritance-class-name" x="3835" y="365" text-anchor="middle">StateMachine</text></g>
+<g class="inheritance-class" data-classifier="FunctionBehavior" data-depth="10"><title>FunctionBehavior. A FunctionBehavior is an OpaqueBehavior that does not access or modify any objects or other external data.</title>
+              <rect class="inheritance-class-box" x="4101" y="28" width="180" height="40"/>
+              <text class="inheritance-class-name" x="4191" y="53" text-anchor="middle">FunctionBehavior</text></g>
+<g class="inheritance-class" data-classifier="ProtocolStateMachine" data-depth="10"><title>ProtocolStateMachine. A ProtocolStateMachine is always defined in the context of a Classifier. It specifies which BehavioralFeatures of the Classifier can be called in which State and under which conditions, thus specifying the allowed invocation sequences on the Classifier&#x27;s BehavioralFeatures. A ProtocolStateMachine specifies the possible and permitted Transitions on the instances of its context Classifier, together with the BehavioralFeatures that carry the Transitions. In this manner, an instance lifecycle can be specified for a Classifier, by defining the order in which the BehavioralFeatures can be activated and the States through which an instance progresses during its existence.</title>
+              <rect class="inheritance-class-box" x="4101" y="80" width="216" height="40"/>
+              <text class="inheritance-class-name" x="4209" y="105" text-anchor="middle">ProtocolStateMachine</text></g>
+</svg>

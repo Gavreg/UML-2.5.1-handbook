@@ -1093,6 +1093,27 @@ h3 {
   height: auto;
 }
 
+.metamodel-overview {
+  margin: 32px 0 40px;
+}
+
+.diagram-help {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.metamodel-inheritance-diagram {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.metamodel-inheritance-object {
+  display: block;
+  max-width: none;
+  border: 0;
+  filter: var(--diagram-filter);
+}
+
 .inheritance-generalization {
   fill: none;
   stroke: #111111;

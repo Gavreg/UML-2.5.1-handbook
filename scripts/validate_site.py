@@ -26,6 +26,7 @@ from check_spec_completeness import check_completeness
 from check_svg_overlaps import check_inheritance, check_svg, find_browser
 from handbook_data import ROOT, SITE, base_routes, load_handbook, load_pages, slug
 from section_config import load_sections
+from xmi_model import XmiModel
 
 
 INDEX = SITE / "index.html"
@@ -136,6 +137,25 @@ def check_static(clause=None):
             if route not in known_routes:
                 errors.append(f"Broken SVG link in {vector}: {route}")
 
+    overview = SITE / "assets" / "diagrams" / "metamodel-inheritance.svg"
+    if not overview.is_file():
+        errors.append("Missing complete metamodel inheritance SVG")
+    else:
+        svg = ET.parse(overview).getroot()
+        namespace = "{http://www.w3.org/2000/svg}"
+        for link in svg.findall(f"{namespace}a"):
+            route = "#/" + link.get("href", "").split("#/", 1)[-1]
+            if route not in known_routes:
+                errors.append(f"Broken metamodel inheritance link: {route}")
+        model = XmiModel()
+        diagram_names = {item.get("data-classifier") for item in svg.iter() if item.get("data-classifier")}
+        if diagram_names != set(model.classifiers):
+            errors.append("Complete metamodel inheritance SVG does not match the XMI classifier set")
+        full_xmi = {"generalizations": {
+            name: model.generalizations(element) for name, element in model.classifiers.items()
+        }}
+        errors.extend(check_inheritance(overview.read_text(encoding="utf-8"), None, full_xmi, data))
+
     expected_routes = len(routes(data, clause))
     if len(all_routes) != expected_routes:
         errors.append(f"Route extraction mismatch: {len(all_routes)} routes instead of {expected_routes}")
@@ -151,7 +171,7 @@ def check_static(clause=None):
         number for number in sections
         if any(item["id"].startswith(number + ".") for item in data["sections"])
     ]
-    scripts = ["sync_xmi_properties.py --check"]
+    scripts = ([] if clause is not None else ["generate_metamodel_inheritance_svg.py --check"]) + ["sync_xmi_properties.py --check"]
     for number in active_clauses:
         generator = sections[number]["svg_generator"]
         command = f"{generator} --check"

@@ -67,7 +67,11 @@ class HandbookRenderer:
             for clause, metadata in CLAUSES.items()
             if any(section["id"].startswith(clause + ".") for section in data["sections"])
         }
-        names = sorted([*self.classifiers, *self.associations], key=len, reverse=True)
+        self.metamodel_names = {name: name for name in [*self.classifiers, *self.associations]}
+        for name in [*self.classifiers, *self.associations]:
+            plural = name[:-1] + "ies" if name.endswith("y") else name + "s"
+            self.metamodel_names[plural] = name
+        names = sorted(self.metamodel_names, key=len, reverse=True)
         self.metamodel_pattern = re.compile(
             r"(^|[^A-Za-z0-9_])(" + "|".join(re.escape(name) for name in names) + r")(?![A-Za-z0-9_])"
         )
@@ -90,12 +94,13 @@ class HandbookRenderer:
             name = match.group(2)
             start = match.start(2)
             result.append(escape(text[offset:start]))
-            if name == current_name:
+            target = self.metamodel_names[name]
+            if target == current_name:
                 result.append(escape(name))
-            elif name in self.classifiers:
-                result.append(f'<a href="#/classifier/{slug(name)}">{escape(name)}</a>')
+            elif target in self.classifiers:
+                result.append(f'<a href="#/classifier/{slug(target)}">{escape(name)}</a>')
             else:
-                result.append(f'<a href="#/association/{slug(name)}">{escape(name)}</a>')
+                result.append(f'<a href="#/association/{slug(target)}">{escape(name)}</a>')
             offset = match.end(2)
         result.append(escape(text[offset:]))
         return "".join(result)

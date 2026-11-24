@@ -361,18 +361,20 @@ class HandbookRenderer:
     def metamodel_inheritance_overview(self):
         path = SITE / "assets" / "diagrams" / "metamodel-inheritance.svg"
         svg = path.read_text(encoding="utf-8")
-        dimensions = re.search(r'<svg[^>]*\bwidth="(\d+)"[^>]*\bheight="(\d+)"', svg)
+        dimensions = re.search(r'<svg[^>]*\bwidth="(\d+(?:\.\d+)?)"[^>]*\bheight="(\d+(?:\.\d+)?)"', svg)
         if not dimensions:
             raise ValueError(f"Missing SVG dimensions: {path}")
         width, height = dimensions.groups()
         total = svg.count('class="inheritance-class"')
         linked = svg.count('<a class="inheritance-class"')
         edges = svg.count('data-child=')
+        element = re.search(r'data-classifier="Element"[^>]*>.*?<rect[^>]*\bx="(\d+(?:\.\d+)?)"', svg, re.DOTALL)
+        initial_scroll = max(0, float(element.group(1)) - 120) if element else 0
         return f'''<section class="metamodel-overview" aria-labelledby="metamodel-overview-title">
           <h2 id="metamodel-overview-title">Наследование всей метамодели</h2>
-          <p>Полная XMI-модель UML 2.5.1: {total} классификаторов и {edges} связей обобщения. Корни расположены слева, потомки — правее. {linked} классификаторов являются ссылками на готовые страницы справочника; остальные пока показаны без ссылок.</p>
+          <p>Полная XMI-модель UML 2.5.1: {total} классификаторов и {edges} связей обобщения. Родственные элементы образуют компактные группы, а связи проведены напрямую или по коротким обходным маршрутам. {linked} классификаторов являются ссылками на готовые страницы справочника; остальные пока показаны без ссылок.</p>
           <p class="diagram-help">Диаграмму можно прокручивать по горизонтали. Наведите указатель на класс, чтобы увидеть его определение.</p>
-          <div class="inheritance-diagram metamodel-inheritance-diagram">
+          <div class="inheritance-diagram metamodel-inheritance-diagram" data-initial-scroll="{number(initial_scroll)}">
             <object class="metamodel-inheritance-object" data="assets/diagrams/metamodel-inheritance.svg" type="image/svg+xml" width="{width}" height="{height}" aria-label="Иерархия наследования всех {total} классификаторов UML 2.5.1">
               <a href="assets/diagrams/metamodel-inheritance.svg">Открыть диаграмму наследования</a>
             </object>

@@ -86,6 +86,12 @@
     } else {
       const key = hash ? `#/${hash}` : "#/";
       content.innerHTML = generated.pages[key] || generated.notFound;
+      const initialScroll = content.querySelector("[data-initial-scroll]");
+      if (initialScroll) {
+        requestAnimationFrame(() => {
+          initialScroll.scrollLeft = Number(initialScroll.dataset.initialScroll);
+        });
+      }
       document.title = generated.titles[key] || "Страница не найдена — UML 2.5.1";
     }
     updateActiveNavigation(parts);

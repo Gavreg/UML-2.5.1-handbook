@@ -606,7 +606,7 @@ def check_inheritance(svg_text, classifier_name, xmi, data):
     if blocks:
         left = min(block["box"].x for block in blocks)
         right = max(block["box"].right for block in blocks)
-        if any(abs(block["box"].x - left) > 0.75 for block in roots):
+        if classifier_name is not None and any(abs(block["box"].x - left) > 0.75 for block in roots):
             errors.append("root is not the leftmost block")
         if len(current) == 1 and abs(current[0]["box"].right - right) > 0.75:
             errors.append("current class is not the rightmost block")

@@ -43,32 +43,26 @@
   <rect class="background" width="1600" height="750"/>
   <a class="class-node" data-classifier="RedefinableElement" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
 <rect class="class-box" x="100" y="20" width="220" height="60"/>
-<line class="class-divider" x1="100" y1="52" x2="320" y2="52"/>
 <text class="class-name abstract" x="210.0" y="43" text-anchor="middle">RedefinableElement</text>
 </a>
 <a class="class-node" data-classifier="TemplateSignature" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
 <rect class="class-box" x="430" y="20" width="220" height="60"/>
-<line class="class-divider" x1="430" y1="52" x2="650" y2="52"/>
 <text class="class-name" x="540.0" y="43" text-anchor="middle">TemplateSignature</text>
 </a>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="1080" y="20" width="250" height="60"/>
-<line class="class-divider" x1="1080" y1="52" x2="1330" y2="52"/>
 <text class="class-name abstract" x="1205.0" y="43" text-anchor="middle">TemplateableElement</text>
 </a>
 <a class="class-node" data-classifier="RedefinableTemplateSignature" href="../../index.html#/classifier/redefinabletemplatesignature" target="_top" aria-label="RedefinableTemplateSignature — открыть описание класса"><title>RedefinableTemplateSignature. Поддерживает добавление формальных параметров шаблона в специализации шаблонного классификатора.</title>
 <rect class="class-box" x="140" y="170" width="320" height="220"/>
-<line class="class-divider" x1="140" y1="202" x2="460" y2="202"/>
 <text class="class-name" x="300.0" y="193" text-anchor="middle">RedefinableTemplateSignature</text>
 </a>
 <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
 <rect class="class-box" x="1050" y="170" width="450" height="60"/>
-<line class="class-divider" x1="1050" y1="202" x2="1500" y2="202"/>
 <text class="class-name abstract" x="1275.0" y="193" text-anchor="middle">Classifier</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
 <rect class="class-box" x="80" y="560" width="220" height="60"/>
-<line class="class-divider" x1="80" y1="592" x2="300" y2="592"/>
 <text class="class-name" x="190.0" y="583" text-anchor="middle">TemplateParameter</text>
 </a>
 <a class="class-node" data-classifier="ClassifierTemplateParameter" href="../../index.html#/classifier/classifiertemplateparameter" target="_top" aria-label="ClassifierTemplateParameter — открыть описание класса"><title>ClassifierTemplateParameter. Представляет Classifier как формальный параметр шаблона.</title>

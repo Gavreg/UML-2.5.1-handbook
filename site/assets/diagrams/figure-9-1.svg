@@ -43,27 +43,22 @@
   <rect class="background" width="2200" height="1580"/>
   <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
 <rect class="class-box" x="60" y="30" width="180" height="60"/>
-<line class="class-divider" x1="60" y1="62" x2="240" y2="62"/>
 <text class="class-name abstract" x="150.0" y="53" text-anchor="middle">NamedElement</text>
 </a>
 <a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
 <rect class="class-box" x="700" y="30" width="180" height="60"/>
-<line class="class-divider" x1="700" y1="62" x2="880" y2="62"/>
 <text class="class-name abstract" x="790.0" y="53" text-anchor="middle">Namespace</text>
 </a>
 <a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
 <rect class="class-box" x="970" y="30" width="140" height="60"/>
-<line class="class-divider" x1="970" y1="62" x2="1110" y2="62"/>
 <text class="class-name abstract" x="1040.0" y="53" text-anchor="middle">Type</text>
 </a>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="1260" y="30" width="260" height="60"/>
-<line class="class-divider" x1="1260" y1="62" x2="1520" y2="62"/>
 <text class="class-name abstract" x="1390.0" y="53" text-anchor="middle">TemplateableElement</text>
 </a>
 <a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
 <rect class="class-box" x="1800" y="30" width="240" height="60"/>
-<line class="class-divider" x1="1800" y1="62" x2="2040" y2="62"/>
 <text class="class-name abstract" x="1920.0" y="53" text-anchor="middle">DirectedRelationship</text>
 </a>
 <a class="class-node" data-classifier="RedefinableElement" href="../../index.html#/classifier/redefinableelement" target="_top" aria-label="RedefinableElement — открыть описание класса"><title>RedefinableElement. Элемент, который, будучи определённым в контексте классификатора, может быть переопределён более конкретно или иначе в контексте другого классификатора, специализирующего (напрямую или косвенно) контекстный классификатор.</title>
@@ -87,22 +82,18 @@
 </a>
 <a class="class-node" data-classifier="GeneralizationSet" href="../../index.html#/classifier/generalizationset" target="_top" aria-label="GeneralizationSet — открыть описание класса"><title>GeneralizationSet. PackageableElement, экземпляры которого представляют множества отношений Generalization.</title>
 <rect class="class-box" x="1810" y="620" width="220" height="60"/>
-<line class="class-divider" x1="1810" y1="652" x2="2030" y2="652"/>
 <text class="class-name" x="1920.0" y="643" text-anchor="middle">GeneralizationSet</text>
 </a>
 <g class="class-node" data-classifier="UseCase"><title>UseCase. UseCase. Specifies actions performed by subjects that yield an observable result of value for Actors or other stakeholders.</title>
 <rect class="class-box" x="1800" y="800" width="180" height="160"/>
-<line class="class-divider" x1="1800" y1="832" x2="1980" y2="832"/>
 <text class="class-name" x="1890.0" y="823" text-anchor="middle">UseCase</text>
 </g>
 <a class="class-node" data-classifier="Substitution" href="../../index.html#/classifier/substitution" target="_top" aria-label="Substitution — открыть описание класса"><title>Substitution. Отношение между двумя классификаторами, означающее, что подставляющий классификатор соответствует контракту, заданному классификатором контракта. Это означает, что экземпляры подставляющего классификатора взаимозаменяемы во время выполнения там, где ожидаются экземпляры классификатора контракта.</title>
 <rect class="class-box" x="1800" y="1080" width="200" height="200"/>
-<line class="class-divider" x1="1800" y1="1112" x2="2000" y2="1112"/>
 <text class="class-name" x="1900.0" y="1103" text-anchor="middle">Substitution</text>
 </a>
 <a class="class-node" data-classifier="Realization" href="../../index.html#/classifier/realization" target="_top" aria-label="Realization — открыть описание класса"><title>Realization. Специализированное отношение Abstraction между спецификацией-поставщиком и её реализацией-клиентом.</title>
 <rect class="class-box" x="1800" y="1360" width="180" height="60"/>
-<line class="class-divider" x1="1800" y1="1392" x2="1980" y2="1392"/>
 <text class="class-name" x="1890.0" y="1383" text-anchor="middle">Realization</text>
 </a>
 <a class="class-node" data-classifier="Feature" href="../../index.html#/classifier/feature" target="_top" aria-label="Feature — открыть описание класса"><title>Feature. Объявляет поведенческую или структурную характеристику классификаторов.</title>
@@ -113,17 +104,14 @@
 </a>
 <a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="80" y="930" width="180" height="60"/>
-<line class="class-divider" x1="80" y1="962" x2="260" y2="962"/>
 <text class="class-name" x="170.0" y="953" text-anchor="middle">Property</text>
 </a>
-<g class="class-node" data-classifier="CollaborationUse"><title>CollaborationUse. CollaborationUse. Specifies the application of the pattern described by a Collaboration to a specific situation.</title>
+<a class="class-node" data-classifier="CollaborationUse" href="../../index.html#/classifier/collaborationuse" target="_top" aria-label="CollaborationUse — открыть описание класса"><title>CollaborationUse. CollaborationUse. Specifies the application of the pattern described by a Collaboration to a specific situation.</title>
 <rect class="class-box" x="820" y="1400" width="260" height="60"/>
-<line class="class-divider" x1="820" y1="1432" x2="1080" y2="1432"/>
 <text class="class-name" x="950.0" y="1423" text-anchor="middle">CollaborationUse</text>
-</g>
+</a>
 <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
 <rect class="class-box" x="1450" y="1400" width="180" height="60"/>
-<line class="class-divider" x1="1450" y1="1432" x2="1630" y2="1432"/>
 <text class="class-name abstract" x="1540.0" y="1423" text-anchor="middle">NamedElement</text>
 </a>
 <path class="generalization-line" d="M 170 300 V 90" data-child="RedefinableElement" data-parent="NamedElement" marker-end="url(#generalization)"/>

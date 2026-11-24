@@ -43,27 +43,22 @@
   <rect class="background" width="1250" height="430"/>
   <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
 <rect class="class-box" x="560" y="30" width="200" height="50"/>
-<line class="class-divider" x1="560" y1="62" x2="760" y2="62"/>
 <text class="class-name abstract" x="660.0" y="53" text-anchor="middle">PackageableElement</text>
 </a>
 <a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
 <rect class="class-box" x="520" y="130" width="240" height="190"/>
-<line class="class-divider" x1="520" y1="162" x2="760" y2="162"/>
 <text class="class-name" x="640.0" y="153" text-anchor="middle">Constraint</text>
 </a>
 <a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
 <rect class="class-box" x="40" y="190" width="150" height="55"/>
-<line class="class-divider" x1="40" y1="222" x2="190" y2="222"/>
 <text class="class-name abstract" x="115.0" y="213" text-anchor="middle">Namespace</text>
 </a>
 <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
 <rect class="class-box" x="960" y="115" width="140" height="55"/>
-<line class="class-divider" x1="960" y1="147" x2="1100" y2="147"/>
 <text class="class-name abstract" x="1030.0" y="138" text-anchor="middle">Element</text>
 </a>
 <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
 <rect class="class-box" x="1000" y="280" width="230" height="65"/>
-<line class="class-divider" x1="1000" y1="312" x2="1230" y2="312"/>
 <text class="class-name abstract" x="1115.0" y="303" text-anchor="middle">ValueSpecification</text>
 </a>
 <path class="generalization-line" d="M 640 130 V 80" data-child="Constraint" data-parent="PackageableElement" marker-end="url(#generalization)"/>

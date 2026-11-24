@@ -43,22 +43,18 @@
   <rect class="background" width="2050" height="1400"/>
   <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="250" y="50" width="240" height="60"/>
-<line class="class-divider" x1="250" y1="82" x2="490" y2="82"/>
 <text class="class-name abstract" x="370.0" y="73" text-anchor="middle">ParameterableElement</text>
 </a>
-<g class="class-node" data-classifier="ConnectableElement"><title>ConnectableElement. Пример класса ConnectableElement.</title>
+<a class="class-node" data-classifier="ConnectableElement" href="../../index.html#/classifier/connectableelement" target="_top" aria-label="ConnectableElement — открыть описание класса"><title>ConnectableElement. Соединяемый элемент — абстрактный метакласс, представляющий множество экземпляров, играющих роли структурированного классификатора. Соединяемые элементы могут соединяться присоединёнными коннекторами и специфицируют конфигурации связанных экземпляров, создаваемых внутри экземпляра содержащего структурированного классификатора.</title>
 <rect class="class-box" x="600" y="50" width="240" height="60"/>
-<line class="class-divider" x1="600" y1="82" x2="840" y2="82"/>
-<text class="class-name" x="720.0" y="73" text-anchor="middle">ConnectableElement</text>
-</g>
+<text class="class-name abstract" x="720.0" y="73" text-anchor="middle">ConnectableElement</text>
+</a>
 <a class="class-node" data-classifier="StructuralFeature" href="../../index.html#/classifier/structuralfeature" target="_top" aria-label="StructuralFeature — открыть описание класса"><title>StructuralFeature. Типизированная характеристика классификатора, специфицирующая структуру экземпляров классификатора.</title>
 <rect class="class-box" x="930" y="50" width="220" height="60"/>
-<line class="class-divider" x1="930" y1="82" x2="1150" y2="82"/>
 <text class="class-name abstract" x="1040.0" y="73" text-anchor="middle">StructuralFeature</text>
 </a>
 <g class="class-node" data-classifier="DeploymentTarget"><title>DeploymentTarget. Пример класса DeploymentTarget.</title>
 <rect class="class-box" x="1230" y="50" width="220" height="60"/>
-<line class="class-divider" x1="1230" y1="82" x2="1450" y2="82"/>
 <text class="class-name" x="1340.0" y="73" text-anchor="middle">DeploymentTarget</text>
 </g>
 <a class="class-node" data-classifier="AggregationKind" href="../../index.html#/classifier/aggregationkind" target="_top" aria-label="AggregationKind — открыть описание класса"><title>AggregationKind. Перечисление для задания вида агрегации Property.</title>
@@ -72,19 +68,16 @@
 </a>
 <a class="class-node" data-classifier="Interface" href="../../index.html#/classifier/interface" target="_top" aria-label="Interface — открыть описание класса"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title>
 <rect class="class-box" x="50" y="400" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="432" x2="210" y2="432"/>
 <text class="class-name" x="130.0" y="423" text-anchor="middle">Interface</text>
 </a>
 <a class="class-node" data-classifier="DataType" href="../../index.html#/classifier/datatype" target="_top" aria-label="DataType — открыть описание класса"><title>DataType. Тип, экземпляры которого идентифицируются только своим значением.</title>
 <rect class="class-box" x="50" y="650" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="682" x2="210" y2="682"/>
 <text class="class-name" x="130.0" y="673" text-anchor="middle">DataType</text>
 </a>
-<g class="class-node" data-classifier="Class"><title>Class. Пример класса Class.</title>
+<a class="class-node" data-classifier="Class" href="../../index.html#/classifier/class" target="_top" aria-label="Class — открыть описание класса"><title>Class. Класс классифицирует множество объектов и специфицирует характеристики, описывающие структуру и поведение этих объектов. Класс может иметь внутреннюю структуру и порты.</title>
 <rect class="class-box" x="50" y="900" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="932" x2="210" y2="932"/>
 <text class="class-name" x="130.0" y="923" text-anchor="middle">Class</text>
-</g>
+</a>
 <a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="800" y="350" width="350" height="700"/>
 <line class="class-divider" x1="800" y1="382" x2="1150" y2="382"/>
@@ -95,14 +88,12 @@
 <text class="attribute" x="810" y="467">+ isDerivedUnion : Boolean = false</text>
 <text class="attribute" x="810" y="488">+ isID : Boolean = false</text>
 </a>
-<g class="class-node" data-classifier="Association"><title>Association. Пример класса Association.</title>
+<a class="class-node" data-classifier="Association" href="../../index.html#/classifier/association" target="_top" aria-label="Association — открыть описание класса"><title>Association. Связь (link) — это кортеж значений, ссылающихся на типизированные объекты. Ассоциация классифицирует множество связей, каждая из которых является экземпляром ассоциации. Каждое значение в связи ссылается на экземпляр типа соответствующего конца ассоциации.</title>
 <rect class="class-box" x="1700" y="400" width="200" height="220"/>
-<line class="class-divider" x1="1700" y1="432" x2="1900" y2="432"/>
 <text class="class-name" x="1800.0" y="423" text-anchor="middle">Association</text>
-</g>
+</a>
 <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
 <rect class="class-box" x="1700" y="590" width="260" height="60"/>
-<line class="class-divider" x1="1700" y1="622" x2="1960" y2="622"/>
 <text class="class-name abstract" x="1830.0" y="613" text-anchor="middle">ValueSpecification</text>
 </a>
 <path class="generalization-line" d="M 900 350 H 1060 V 110 H 720" data-child="Property" data-parent="ConnectableElement" marker-end="url(#generalization)"/>

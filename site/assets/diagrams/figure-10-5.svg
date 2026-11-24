@@ -43,27 +43,22 @@
   <rect class="background" width="750" height="680"/>
   <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
 <rect class="class-box" x="60" y="40" width="150" height="45"/>
-<line class="class-divider" x1="60" y1="72" x2="210" y2="72"/>
 <text class="class-name abstract" x="135.0" y="63" text-anchor="middle">Classifier</text>
 </a>
 <a class="class-node" data-classifier="BehavioralFeature" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
 <rect class="class-box" x="520" y="40" width="190" height="45"/>
-<line class="class-divider" x1="520" y1="72" x2="710" y2="72"/>
 <text class="class-name abstract" x="615.0" y="63" text-anchor="middle">BehavioralFeature</text>
 </a>
 <a class="class-node" data-classifier="Signal" href="../../index.html#/classifier/signal" target="_top" aria-label="Signal — открыть описание класса"><title>Signal. Спецификация вида взаимодействия между объектами, при котором реакция в получателе асинхронно инициируется без ответа.</title>
 <rect class="class-box" x="60" y="200" width="150" height="80"/>
-<line class="class-divider" x1="60" y1="232" x2="210" y2="232"/>
 <text class="class-name" x="135.0" y="223" text-anchor="middle">Signal</text>
 </a>
 <a class="class-node" data-classifier="Reception" href="../../index.html#/classifier/reception" target="_top" aria-label="Reception — открыть описание класса"><title>Reception. Объявление о том, что классификатор готов реагировать на приём сигнала.</title>
 <rect class="class-box" x="520" y="200" width="170" height="80"/>
-<line class="class-divider" x1="520" y1="232" x2="690" y2="232"/>
 <text class="class-name" x="605.0" y="223" text-anchor="middle">Reception</text>
 </a>
 <a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="60" y="560" width="130" height="55"/>
-<line class="class-divider" x1="60" y1="592" x2="190" y2="592"/>
 <text class="class-name" x="125.0" y="583" text-anchor="middle">Property</text>
 </a>
 <path class="generalization-line" d="M 135 200 V 85" data-child="Signal" data-parent="Classifier" marker-end="url(#generalization)"/>

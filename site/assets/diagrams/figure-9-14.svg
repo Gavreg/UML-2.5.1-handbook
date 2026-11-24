@@ -43,12 +43,10 @@
   <rect class="background" width="1360" height="380"/>
   <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
 <rect class="class-box" x="530" y="30" width="220" height="50"/>
-<line class="class-divider" x1="530" y1="62" x2="750" y2="62"/>
 <text class="class-name abstract" x="640.0" y="53" text-anchor="middle">PackageableElement</text>
 </a>
 <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
 <rect class="class-box" x="70" y="247" width="150" height="55"/>
-<line class="class-divider" x1="70" y1="279" x2="220" y2="279"/>
 <text class="class-name abstract" x="145.0" y="270" text-anchor="middle">Classifier</text>
 </a>
 <a class="class-node" data-classifier="GeneralizationSet" href="../../index.html#/classifier/generalizationset" target="_top" aria-label="GeneralizationSet — открыть описание класса"><title>GeneralizationSet. PackageableElement, экземпляры которого представляют множества отношений Generalization.</title>
@@ -60,7 +58,6 @@
 </a>
 <a class="class-node" data-classifier="Generalization" href="../../index.html#/classifier/generalization" target="_top" aria-label="Generalization — открыть описание класса"><title>Generalization. Таксономическое отношение между более общим и более специальным классификаторами. Каждый экземпляр специального классификатора также является экземпляром общего классификатора; специальный классификатор наследует характеристики более общего. Обобщение принадлежит специальному классификатору.</title>
 <rect class="class-box" x="1100" y="247" width="180" height="55"/>
-<line class="class-divider" x1="1100" y1="279" x2="1280" y2="279"/>
 <text class="class-name" x="1190.0" y="270" text-anchor="middle">Generalization</text>
 </a>
 <path class="generalization-line" d="M 640 235 V 80" data-child="GeneralizationSet" data-parent="PackageableElement" marker-end="url(#generalization)"/>

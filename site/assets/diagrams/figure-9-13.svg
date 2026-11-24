@@ -43,34 +43,28 @@
   <rect class="background" width="2200" height="1600"/>
   <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="600" y="50" width="250" height="60"/>
-<line class="class-divider" x1="600" y1="82" x2="850" y2="82"/>
 <text class="class-name abstract" x="725.0" y="73" text-anchor="middle">TemplateableElement</text>
 </a>
 <a class="class-node" data-classifier="BehavioralFeature" href="../../index.html#/classifier/behavioralfeature" target="_top" aria-label="BehavioralFeature — открыть описание класса"><title>BehavioralFeature. Характеристика классификатора, специфицирующая аспект поведения его экземпляров. BehavioralFeature реализуется (осуществляется) Behavior; она указывает, что классификатор ответит на обозначенный запрос вызовом реализующего метода.</title>
 <rect class="class-box" x="900" y="50" width="250" height="60"/>
-<line class="class-divider" x1="900" y1="82" x2="1150" y2="82"/>
 <text class="class-name abstract" x="1025.0" y="73" text-anchor="middle">BehavioralFeature</text>
 </a>
 <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="1250" y="50" width="250" height="60"/>
-<line class="class-divider" x1="1250" y1="82" x2="1500" y2="82"/>
 <text class="class-name abstract" x="1375.0" y="73" text-anchor="middle">ParameterableElement</text>
 </a>
 <a class="class-node" data-classifier="Interface" href="../../index.html#/classifier/interface" target="_top" aria-label="Interface — открыть описание класса"><title>Interface. Интерфейсы объявляют согласованные сервисы, которые реализуются BehavioredClassifiers, реализующими интерфейсы через InterfaceRealizations.</title>
 <rect class="class-box" x="50" y="350" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="382" x2="210" y2="382"/>
 <text class="class-name" x="130.0" y="373" text-anchor="middle">Interface</text>
 </a>
 <a class="class-node" data-classifier="DataType" href="../../index.html#/classifier/datatype" target="_top" aria-label="DataType — открыть описание класса"><title>DataType. Тип, экземпляры которого идентифицируются только своим значением.</title>
 <rect class="class-box" x="50" y="600" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="632" x2="210" y2="632"/>
 <text class="class-name" x="130.0" y="623" text-anchor="middle">DataType</text>
 </a>
-<g class="class-node" data-classifier="Class"><title>Class. Пример класса Class.</title>
+<a class="class-node" data-classifier="Class" href="../../index.html#/classifier/class" target="_top" aria-label="Class — открыть описание класса"><title>Class. Класс классифицирует множество объектов и специфицирует характеристики, описывающие структуру и поведение этих объектов. Класс может иметь внутреннюю структуру и порты.</title>
 <rect class="class-box" x="50" y="850" width="160" height="60"/>
-<line class="class-divider" x1="50" y1="882" x2="210" y2="882"/>
 <text class="class-name" x="130.0" y="873" text-anchor="middle">Class</text>
-</g>
+</a>
 <a class="class-node" data-classifier="Operation" href="../../index.html#/classifier/operation" target="_top" aria-label="Operation — открыть описание класса"><title>Operation. BehavioralFeature классификатора, специфицирующая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать исполнение методов-поведений, а также другие поведенческие отклики. Operation специализирует TemplateableElement, чтобы поддерживать спецификацию шаблонных и связанных операций. Operation специализирует ParameterableElement, чтобы операцию можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="750" y="250" width="400" height="850"/>
 <line class="class-divider" x1="750" y1="282" x2="1150" y2="282"/>
@@ -83,27 +77,22 @@
 </a>
 <a class="class-node" data-classifier="Parameter" href="../../index.html#/classifier/parameter" target="_top" aria-label="Parameter — открыть описание класса"><title>Parameter. Спецификация аргумента, используемого для передачи информации вовнутрь или наружу вызова BehavioralFeature. Параметры могут рассматриваться как ConnectableElements внутри Collaborations.</title>
 <rect class="class-box" x="1700" y="250" width="200" height="60"/>
-<line class="class-divider" x1="1700" y1="282" x2="1900" y2="282"/>
 <text class="class-name" x="1800.0" y="273" text-anchor="middle">Parameter</text>
 </a>
 <a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
 <rect class="class-box" x="1700" y="400" width="200" height="400"/>
-<line class="class-divider" x1="1700" y1="432" x2="1900" y2="432"/>
 <text class="class-name" x="1800.0" y="423" text-anchor="middle">Constraint</text>
 </a>
 <a class="class-node" data-classifier="Type" href="../../index.html#/classifier/type" target="_top" aria-label="Type — открыть описание класса"><title>Type. Ограничивает значения, представляемые TypedElement.</title>
 <rect class="class-box" x="1700" y="850" width="200" height="250"/>
-<line class="class-divider" x1="1700" y1="882" x2="1900" y2="882"/>
 <text class="class-name abstract" x="1800.0" y="873" text-anchor="middle">Type</text>
 </a>
 <a class="class-node" data-classifier="OperationTemplateParameter" href="../../index.html#/classifier/operationtemplateparameter" target="_top" aria-label="OperationTemplateParameter — открыть описание класса"><title>OperationTemplateParameter. Представляет Operation как формальный параметр шаблона.</title>
 <rect class="class-box" x="750" y="1300" width="400" height="70"/>
-<line class="class-divider" x1="750" y1="1332" x2="1150" y2="1332"/>
 <text class="class-name" x="950.0" y="1323" text-anchor="middle">OperationTemplateParameter</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
 <rect class="class-box" x="825" y="1480" width="250" height="60"/>
-<line class="class-divider" x1="825" y1="1512" x2="1075" y2="1512"/>
 <text class="class-name" x="950.0" y="1503" text-anchor="middle">TemplateParameter</text>
 </a>
 <path class="generalization-line" d="M 850 250 L 725 110" data-child="Operation" data-parent="TemplateableElement" marker-end="url(#generalization)"/>

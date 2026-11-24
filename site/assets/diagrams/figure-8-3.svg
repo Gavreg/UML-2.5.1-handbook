@@ -43,27 +43,22 @@
   <rect class="background" width="1400" height="1060"/>
   <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
 <rect class="class-box" x="575" y="50" width="250" height="60"/>
-<line class="class-divider" x1="575" y1="82" x2="825" y2="82"/>
 <text class="class-name abstract" x="700.0" y="73" text-anchor="middle">ValueSpecification</text>
 </a>
 <a class="class-node" data-classifier="TimeExpression" href="../../index.html#/classifier/timeexpression" target="_top" aria-label="TimeExpression — открыть описание класса"><title>TimeExpression. ValueSpecification, вычисляющая временную координату момента времени, возможно относительно заданного набора наблюдений.</title>
 <rect class="class-box" x="150" y="280" width="230" height="60"/>
-<line class="class-divider" x1="150" y1="312" x2="380" y2="312"/>
 <text class="class-name" x="265.0" y="303" text-anchor="middle">TimeExpression</text>
 </a>
 <a class="class-node" data-classifier="Duration" href="../../index.html#/classifier/duration" target="_top" aria-label="Duration — открыть описание класса"><title>Duration. ValueSpecification, задающая временное расстояние между двумя моментами времени.</title>
 <rect class="class-box" x="1020" y="280" width="200" height="60"/>
-<line class="class-divider" x1="1020" y1="312" x2="1220" y2="312"/>
 <text class="class-name" x="1120.0" y="303" text-anchor="middle">Duration</text>
 </a>
 <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
 <rect class="class-box" x="575" y="400" width="250" height="60"/>
-<line class="class-divider" x1="575" y1="432" x2="825" y2="432"/>
 <text class="class-name abstract" x="700.0" y="423" text-anchor="middle">PackageableElement</text>
 </a>
 <a class="class-node" data-classifier="Observation" href="../../index.html#/classifier/observation" target="_top" aria-label="Observation — открыть описание класса"><title>Observation. PackageableElement, обозначающий наблюдение событий, которые могут происходить относительно другой части модели.</title>
 <rect class="class-box" x="575" y="580" width="250" height="60"/>
-<line class="class-divider" x1="575" y1="612" x2="825" y2="612"/>
 <text class="class-name abstract" x="700.0" y="603" text-anchor="middle">Observation</text>
 </a>
 <a class="class-node" data-classifier="TimeObservation" href="../../index.html#/classifier/timeobservation" target="_top" aria-label="TimeObservation — открыть описание класса"><title>TimeObservation. Observation, фиксирующее момент события входа или выхода NamedElement во время выполнения.</title>
@@ -80,7 +75,6 @@
 </a>
 <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
 <rect class="class-box" x="575" y="950" width="250" height="60"/>
-<line class="class-divider" x1="575" y1="982" x2="825" y2="982"/>
 <text class="class-name abstract" x="700.0" y="973" text-anchor="middle">NamedElement</text>
 </a>
 <path class="generalization-line" d="M 320 280 V 200 H 700 V 110" data-child="TimeExpression" data-parent="ValueSpecification" marker-end="url(#generalization)"/>

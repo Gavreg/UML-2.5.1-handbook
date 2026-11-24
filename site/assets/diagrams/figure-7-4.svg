@@ -43,42 +43,34 @@
   <rect class="background" width="1400" height="870"/>
   <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
 <rect class="class-box" x="540" y="30" width="120" height="45"/>
-<line class="class-divider" x1="540" y1="62" x2="660" y2="62"/>
 <text class="class-name abstract" x="600.0" y="53" text-anchor="middle">Element</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
 <rect class="class-box" x="60" y="140" width="210" height="65"/>
-<line class="class-divider" x1="60" y1="172" x2="270" y2="172"/>
 <text class="class-name" x="165.0" y="163" text-anchor="middle">TemplateParameter</text>
 </a>
 <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="40" y="285" width="230" height="115"/>
-<line class="class-divider" x1="40" y1="317" x2="270" y2="317"/>
 <text class="class-name abstract" x="155.0" y="308" text-anchor="middle">ParameterableElement</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameterSubstitution" href="../../index.html#/classifier/templateparametersubstitution" target="_top" aria-label="TemplateParameterSubstitution — открыть описание класса"><title>TemplateParameterSubstitution. Связывает фактический параметр с формальным TemplateParameter в рамках привязки шаблона.</title>
 <rect class="class-box" x="800" y="130" width="330" height="290"/>
-<line class="class-divider" x1="800" y1="162" x2="1130" y2="162"/>
 <text class="class-name" x="965.0" y="153" text-anchor="middle">TemplateParameterSubstitution</text>
 </a>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="50" y="540" width="220" height="65"/>
-<line class="class-divider" x1="50" y1="572" x2="270" y2="572"/>
 <text class="class-name abstract" x="160.0" y="563" text-anchor="middle">TemplateableElement</text>
 </a>
 <a class="class-node" data-classifier="TemplateSignature" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
 <rect class="class-box" x="100" y="680" width="200" height="65"/>
-<line class="class-divider" x1="100" y1="712" x2="300" y2="712"/>
 <text class="class-name" x="200.0" y="703" text-anchor="middle">TemplateSignature</text>
 </a>
 <a class="class-node" data-classifier="TemplateBinding" href="../../index.html#/classifier/templatebinding" target="_top" aria-label="TemplateBinding — открыть описание класса"><title>TemplateBinding. DirectedRelationship между TemplateableElement и шаблоном, задающий подстановки фактических параметров вместо формальных.</title>
 <rect class="class-box" x="850" y="560" width="220" height="225"/>
-<line class="class-divider" x1="850" y1="592" x2="1070" y2="592"/>
 <text class="class-name" x="960.0" y="583" text-anchor="middle">TemplateBinding</text>
 </a>
 <a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
 <rect class="class-box" x="840" y="810" width="240" height="45"/>
-<line class="class-divider" x1="840" y1="842" x2="1080" y2="842"/>
 <text class="class-name abstract" x="960.0" y="833" text-anchor="middle">DirectedRelationship</text>
 </a>
 <path class="generalization-line" d="M 965 130 V 90 H 600 V 75" data-child="TemplateParameterSubstitution" data-parent="Element" marker-end="url(#generalization)"/>

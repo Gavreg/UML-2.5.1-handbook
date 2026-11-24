@@ -43,7 +43,6 @@
   <rect class="background" width="1400" height="1180"/>
   <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
 <rect class="class-box" x="620" y="30" width="120" height="45"/>
-<line class="class-divider" x1="620" y1="62" x2="740" y2="62"/>
 <text class="class-name abstract" x="680.0" y="53" text-anchor="middle">Element</text>
 </a>
 <a class="class-node" data-classifier="NamedElement" href="../../index.html#/classifier/namedelement" target="_top" aria-label="NamedElement — открыть описание класса"><title>NamedElement. Элемент модели, который может иметь имя, заданное непосредственно или через StringExpression.</title>
@@ -56,12 +55,10 @@
 </a>
 <a class="class-node" data-classifier="Namespace" href="../../index.html#/classifier/namespace" target="_top" aria-label="Namespace — открыть описание класса"><title>Namespace. Элемент модели, который владеет именованными элементами и/или импортирует их, обеспечивая идентификацию по имени.</title>
 <rect class="class-box" x="250" y="470" width="220" height="190"/>
-<line class="class-divider" x1="250" y1="502" x2="470" y2="502"/>
 <text class="class-name abstract" x="360.0" y="493" text-anchor="middle">Namespace</text>
 </a>
 <a class="class-node" data-classifier="StringExpression" href="../../index.html#/classifier/stringexpression" target="_top" aria-label="StringExpression — открыть описание класса"><title>StringExpression. Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.</title>
 <rect class="class-box" x="1010" y="170" width="220" height="60"/>
-<line class="class-divider" x1="1010" y1="202" x2="1230" y2="202"/>
 <text class="class-name" x="1120.0" y="193" text-anchor="middle">StringExpression</text>
 </a>
 <a class="class-node" data-classifier="VisibilityKind" href="../../index.html#/classifier/visibilitykind" target="_top" aria-label="VisibilityKind — открыть описание класса"><title>VisibilityKind. Перечисление, литералы которого определяют видимость элементов в модели.</title>
@@ -76,7 +73,6 @@
 </a>
 <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="980" y="260" width="230" height="50"/>
-<line class="class-divider" x1="980" y1="292" x2="1210" y2="292"/>
 <text class="class-name abstract" x="1095.0" y="283" text-anchor="middle">ParameterableElement</text>
 </a>
 <a class="class-node" data-classifier="PackageableElement" href="../../index.html#/classifier/packageableelement" target="_top" aria-label="PackageableElement — открыть описание класса"><title>PackageableElement. NamedElement, который может непосредственно принадлежать пакету и выступать parameteredElement для TemplateParameter.</title>
@@ -94,7 +90,6 @@
 </a>
 <a class="class-node" data-classifier="DirectedRelationship" href="../../index.html#/classifier/directedrelationship" target="_top" aria-label="DirectedRelationship — открыть описание класса"><title>DirectedRelationship. Отношение между множеством исходных элементов модели и множеством целевых элементов модели.</title>
 <rect class="class-box" x="960" y="775" width="240" height="50"/>
-<line class="class-divider" x1="960" y1="807" x2="1200" y2="807"/>
 <text class="class-name abstract" x="1080.0" y="798" text-anchor="middle">DirectedRelationship</text>
 </a>
 <a class="class-node" data-classifier="PackageImport" href="../../index.html#/classifier/packageimport" target="_top" aria-label="PackageImport — открыть описание класса"><title>PackageImport. Relationship, импортирующий все незакрытые члены пакета в пространство имён, чтобы на них можно было ссылаться по неквалифицированным именам.</title>
@@ -105,12 +100,10 @@
 </a>
 <a class="class-node" data-classifier="Constraint" href="../../index.html#/classifier/constraint" target="_top" aria-label="Constraint — открыть описание класса"><title>Constraint. Условие или ограничение, записанное на естественном или машинно-читаемом языке и объявляющее часть семантики элемента или множества элементов.</title>
 <rect class="class-box" x="700" y="920" width="180" height="55"/>
-<line class="class-divider" x1="700" y1="952" x2="880" y2="952"/>
 <text class="class-name" x="790.0" y="943" text-anchor="middle">Constraint</text>
 </a>
 <a class="class-node" data-classifier="Package" href="../../index.html#/classifier/package" target="_top" aria-label="Package — открыть описание класса"><title>Package. Элемент для группировки других элементов и предоставления им пространства имён; может использоваться как шаблон и применять профили.</title>
 <rect class="class-box" x="1120" y="1120" width="150" height="55"/>
-<line class="class-divider" x1="1120" y1="1152" x2="1270" y2="1152"/>
 <text class="class-name" x="1195.0" y="1143" text-anchor="middle">Package</text>
 </a>
 <path class="generalization-line" d="M 480 145 V 100 H 680 V 75" data-child="NamedElement" data-parent="Element" marker-end="url(#generalization)"/>

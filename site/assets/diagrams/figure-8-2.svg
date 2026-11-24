@@ -43,7 +43,6 @@
   <rect class="background" width="1400" height="800"/>
   <a class="class-node" data-classifier="ValueSpecification" href="../../index.html#/classifier/valuespecification" target="_top" aria-label="ValueSpecification — открыть описание класса"><title>ValueSpecification. Спецификация возможно пустого множества значений; ParameterableElement, который может выступать формальным параметром шаблона или фактическим параметром при его привязке.</title>
 <rect class="class-box" x="700" y="80" width="250" height="60"/>
-<line class="class-divider" x1="700" y1="112" x2="950" y2="112"/>
 <text class="class-name abstract" x="825.0" y="103" text-anchor="middle">ValueSpecification</text>
 </a>
 <a class="class-node" data-classifier="Expression" href="../../index.html#/classifier/expression" target="_top" aria-label="Expression — открыть описание класса"><title>Expression. Узел дерева выражения, который может быть терминальным или нетерминальным. Задаёт символ и, возможно, пустую последовательность операндов — спецификаций значений. При вычислении в контексте обозначает, возможно, пустое множество значений.</title>
@@ -61,7 +60,6 @@
 </a>
 <a class="class-node" data-classifier="StringExpression" href="../../index.html#/classifier/stringexpression" target="_top" aria-label="StringExpression — открыть описание класса"><title>StringExpression. Expression, задающее строковое значение путём конкатенации последовательности строковых операндов или подвыражений, некоторые из которых могут быть параметрами шаблона.</title>
 <rect class="class-box" x="250" y="510" width="250" height="65"/>
-<line class="class-divider" x1="250" y1="542" x2="500" y2="542"/>
 <text class="class-name" x="375.0" y="533" text-anchor="middle">StringExpression</text>
 </a>
 <g class="class-node" data-classifier="Behavior"><title>Behavior. Пример класса Behavior.</title>
@@ -76,7 +74,6 @@
 </g>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="250" y="690" width="260" height="55"/>
-<line class="class-divider" x1="250" y1="722" x2="510" y2="722"/>
 <text class="class-name abstract" x="380.0" y="713" text-anchor="middle">TemplateableElement</text>
 </a>
 <path class="generalization-line" d="M 365 260 V 200 H 825 V 140" data-child="Expression" data-parent="ValueSpecification" marker-end="url(#generalization)"/>

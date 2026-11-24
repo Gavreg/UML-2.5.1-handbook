@@ -43,42 +43,34 @@
   <rect class="background" width="1040" height="850"/>
   <a class="class-node" data-classifier="Classifier" href="../../index.html#/classifier/classifier" target="_top" aria-label="Classifier — открыть описание класса"><title>Classifier. Представляет классификацию экземпляров по их Features.</title>
 <rect class="class-box" x="90" y="35" width="150" height="45"/>
-<line class="class-divider" x1="90" y1="67" x2="240" y2="67"/>
 <text class="class-name abstract" x="165.0" y="58" text-anchor="middle">Classifier</text>
 </a>
 <a class="class-node" data-classifier="DataType" href="../../index.html#/classifier/datatype" target="_top" aria-label="DataType — открыть описание класса"><title>DataType. Тип, экземпляры которого идентифицируются только своим значением.</title>
 <rect class="class-box" x="60" y="190" width="170" height="160"/>
-<line class="class-divider" x1="60" y1="222" x2="230" y2="222"/>
 <text class="class-name" x="145.0" y="213" text-anchor="middle">DataType</text>
 </a>
 <a class="class-node" data-classifier="Property" href="../../index.html#/classifier/property" target="_top" aria-label="Property — открыть описание класса"><title>Property. StructuralFeature. Property, связанная отношением ownedAttribute с классификатором (кроме ассоциации), представляет атрибут и может также представлять конец ассоциации; она связывает экземпляр классификатора со значением или множеством значений типа атрибута. Property, связанная отношением memberEnd с Association, представляет конец ассоциации; тип Property — тип конца ассоциации. Property может выступать DeploymentTarget в отношении Deployment, что позволяет моделировать развёртывание на иерархических узлах со свойствами в роли внутренних частей. Property специализирует ParameterableElement, чтобы свойство можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="770" y="180" width="130" height="55"/>
-<line class="class-divider" x1="770" y1="212" x2="900" y2="212"/>
 <text class="class-name" x="835.0" y="203" text-anchor="middle">Property</text>
 </a>
 <a class="class-node" data-classifier="Operation" href="../../index.html#/classifier/operation" target="_top" aria-label="Operation — открыть описание класса"><title>Operation. BehavioralFeature классификатора, специфицирующая имя, тип, параметры и ограничения для вызова связанного поведения. Операция может вызывать исполнение методов-поведений, а также другие поведенческие отклики. Operation специализирует TemplateableElement, чтобы поддерживать спецификацию шаблонных и связанных операций. Operation специализирует ParameterableElement, чтобы операцию можно было представить как формальный параметр шаблона и указать как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="770" y="317" width="140" height="55"/>
-<line class="class-divider" x1="770" y1="349" x2="910" y2="349"/>
 <text class="class-name" x="840.0" y="340" text-anchor="middle">Operation</text>
 </a>
 <a class="class-node" data-classifier="PrimitiveType" href="../../index.html#/classifier/primitivetype" target="_top" aria-label="PrimitiveType — открыть описание класса"><title>PrimitiveType. Задаёт предопределённый тип данных без какой-либо подструктуры. PrimitiveType может иметь алгебру и операции, определённые вне UML, например математически.</title>
 <rect class="class-box" x="60" y="620" width="160" height="55"/>
-<line class="class-divider" x1="60" y1="652" x2="220" y2="652"/>
 <text class="class-name" x="140.0" y="643" text-anchor="middle">PrimitiveType</text>
 </a>
 <a class="class-node" data-classifier="Enumeration" href="../../index.html#/classifier/enumeration" target="_top" aria-label="Enumeration — открыть описание класса"><title>Enumeration. Тип данных, значения которого перечислены в модели как литералы перечисления (EnumerationLiterals).</title>
 <rect class="class-box" x="390" y="595" width="160" height="140"/>
-<line class="class-divider" x1="390" y1="627" x2="550" y2="627"/>
 <text class="class-name" x="470.0" y="618" text-anchor="middle">Enumeration</text>
 </a>
 <a class="class-node" data-classifier="InstanceSpecification" href="../../index.html#/classifier/instancespecification" target="_top" aria-label="InstanceSpecification — открыть описание класса"><title>InstanceSpecification. Элемент модели, представляющий экземпляр в моделируемой системе. InstanceSpecification может выступать DeploymentTarget в отношении Deployment, если представляет экземпляр Node. Он может также выступать DeployedArtifact, если представляет экземпляр Artifact.</title>
 <rect class="class-box" x="740" y="420" width="240" height="55"/>
-<line class="class-divider" x1="740" y1="452" x2="980" y2="452"/>
 <text class="class-name" x="860.0" y="443" text-anchor="middle">InstanceSpecification</text>
 </a>
 <a class="class-node" data-classifier="EnumerationLiteral" href="../../index.html#/classifier/enumerationliteral" target="_top" aria-label="EnumerationLiteral — открыть описание класса"><title>EnumerationLiteral. Пользовательское значение данных для перечисления.</title>
 <rect class="class-box" x="800" y="555" width="220" height="180"/>
-<line class="class-divider" x1="800" y1="587" x2="1020" y2="587"/>
 <text class="class-name" x="910.0" y="578" text-anchor="middle">EnumerationLiteral</text>
 </a>
 <path class="generalization-line" d="M 165 190 V 80" data-child="DataType" data-parent="Classifier" marker-end="url(#generalization)"/>

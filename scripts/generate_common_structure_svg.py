@@ -171,7 +171,8 @@ def class_node(svg, name, x, y, width, height, attributes=None, operations=None,
     link_attrs = "" if tag == "g" else f' href="{href}" target="_top" aria-label="{escape(name)} — открыть описание класса"'
     svg.add(f'<{tag} class="class-node" data-classifier="{escape(name)}"{link_attrs}><title>{escape(name)}. {escape(definition)}</title>')
     svg.add(f'<rect class="class-box" x="{x}" y="{y}" width="{width}" height="{height}"/>')
-    svg.add(f'<line class="class-divider" x1="{x}" y1="{y + header}" x2="{x + width}" y2="{y + header}"/>')
+    if attributes or operations or example:
+        svg.add(f'<line class="class-divider" x1="{x}" y1="{y + header}" x2="{x + width}" y2="{y + header}"/>')
     if stereotype:
         svg.add(text(stereotype, x + width / 2, y + 19, "middle"))
         svg.add(text(name, x + width / 2, y + 41, "middle", "class-name" + (" abstract" if abstract else "")))

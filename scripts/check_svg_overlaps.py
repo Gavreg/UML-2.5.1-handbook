@@ -197,7 +197,7 @@ def path_geometry(element):
     current = (0.0, 0.0)
     start = current
     points = []
-    arity = {"M": 2, "L": 2, "H": 1, "V": 1, "Z": 0}
+    arity = {"M": 2, "L": 2, "H": 1, "V": 1, "C": 6, "Z": 0}
     while position < len(tokens):
         if tokens[position].isalpha():
             command = tokens[position]
@@ -217,6 +217,19 @@ def path_geometry(element):
             point = (values[0] + (current[0] if relative else 0), current[1])
         elif upper == "V":
             point = (current[0], values[0] + (current[1] if relative else 0))
+        elif upper == "C":
+            offset_x, offset_y = current if relative else (0, 0)
+            control1 = (values[0] + offset_x, values[1] + offset_y)
+            control2 = (values[2] + offset_x, values[3] + offset_y)
+            point = (values[4] + offset_x, values[5] + offset_y)
+            origin = current
+            for step in range(1, 25):
+                t = step / 24
+                inverse = 1 - t
+                points.append((
+                    inverse ** 3 * origin[0] + 3 * inverse ** 2 * t * control1[0] + 3 * inverse * t ** 2 * control2[0] + t ** 3 * point[0],
+                    inverse ** 3 * origin[1] + 3 * inverse ** 2 * t * control1[1] + 3 * inverse * t ** 2 * control2[1] + t ** 3 * point[1],
+                ))
         else:
             point = start
         if upper == "M":

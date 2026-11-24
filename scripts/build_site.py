@@ -367,7 +367,7 @@ class HandbookRenderer:
         width, height = dimensions.groups()
         total = svg.count('class="inheritance-class"')
         linked = svg.count('<a class="inheritance-class"')
-        edges = svg.count('class="inheritance-generalization"')
+        edges = svg.count('data-child=')
         return f'''<section class="metamodel-overview" aria-labelledby="metamodel-overview-title">
           <h2 id="metamodel-overview-title">Наследование всей метамодели</h2>
           <p>Полная XMI-модель UML 2.5.1: {total} классификаторов и {edges} связей обобщения. Корни расположены слева, потомки — правее. {linked} классификаторов являются ссылками на готовые страницы справочника; остальные пока показаны без ссылок.</p>

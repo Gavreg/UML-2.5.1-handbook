@@ -159,7 +159,7 @@ def classifier_label(svg, value, x, y, classifier, anchor="start", css=""):
         svg.add(f'<g>{content}</g>')
 
 
-def class_node(svg, name, x, y, width, height, attributes=None, operations=None, stereotype="", example=False, tooltip=""):
+def class_node(svg, name, x, y, width, height, attributes=None, operations=None, stereotype="", example=False, tooltip="", show_attributes=False):
     attributes = attributes or []
     operations = operations or []
     known = None if example else CLASSES.get(name)
@@ -171,7 +171,7 @@ def class_node(svg, name, x, y, width, height, attributes=None, operations=None,
     link_attrs = "" if tag == "g" else f' href="{href}" target="_top" aria-label="{escape(name)} — открыть описание класса"'
     svg.add(f'<{tag} class="class-node" data-classifier="{escape(name)}"{link_attrs}><title>{escape(name)}. {escape(definition)}</title>')
     svg.add(f'<rect class="class-box" x="{x}" y="{y}" width="{width}" height="{height}"/>')
-    if attributes or operations or example:
+    if attributes or operations or example or show_attributes:
         svg.add(f'<line class="class-divider" x1="{x}" y1="{y + header}" x2="{x + width}" y2="{y + header}"/>')
     if stereotype:
         svg.add(text(stereotype, x + width / 2, y + 19, "middle"))
@@ -277,10 +277,10 @@ def figure_7_2():
 def figure_7_3():
     svg = Svg("7.3", "Шаблоны", "Метаклассы TemplateSignature, TemplateParameter, TemplateableElement и ParameterableElement, их обобщения и ассоциации.", 1300, 940)
     class_node(svg, "Element", 590, 30, 120, 45)
-    class_node(svg, "TemplateSignature", 130, 170, 200, 60)
-    class_node(svg, "TemplateableElement", 900, 170, 230, 60)
-    class_node(svg, "TemplateParameter", 130, 500, 200, 310)
-    class_node(svg, "ParameterableElement", 900, 500, 240, 310)
+    class_node(svg, "TemplateSignature", 130, 170, 200, 60, show_attributes=True)
+    class_node(svg, "TemplateableElement", 900, 170, 230, 60, show_attributes=True)
+    class_node(svg, "TemplateParameter", 130, 500, 200, 310, show_attributes=True)
+    class_node(svg, "ParameterableElement", 900, 500, 240, 310, show_attributes=True)
     class_node(svg, "Element", 590, 865, 120, 45)
     generalization(svg, "M 230 170 V 100 H 650 V 75", child="TemplateSignature", parent="Element")
     generalization(svg, "M 1015 170 V 100 H 650", False)

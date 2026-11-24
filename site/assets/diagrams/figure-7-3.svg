@@ -47,18 +47,22 @@
 </a>
 <a class="class-node" data-classifier="TemplateSignature" href="../../index.html#/classifier/templatesignature" target="_top" aria-label="TemplateSignature — открыть описание класса"><title>TemplateSignature. Объединяет множество формальных TemplateParameters шаблона.</title>
 <rect class="class-box" x="130" y="170" width="200" height="60"/>
+<line class="class-divider" x1="130" y1="202" x2="330" y2="202"/>
 <text class="class-name" x="230.0" y="193" text-anchor="middle">TemplateSignature</text>
 </a>
 <a class="class-node" data-classifier="TemplateableElement" href="../../index.html#/classifier/templateableelement" target="_top" aria-label="TemplateableElement — открыть описание класса"><title>TemplateableElement. Элемент, который может быть определён как шаблон и привязан к другим шаблонам.</title>
 <rect class="class-box" x="900" y="170" width="230" height="60"/>
+<line class="class-divider" x1="900" y1="202" x2="1130" y2="202"/>
 <text class="class-name abstract" x="1015.0" y="193" text-anchor="middle">TemplateableElement</text>
 </a>
 <a class="class-node" data-classifier="TemplateParameter" href="../../index.html#/classifier/templateparameter" target="_top" aria-label="TemplateParameter — открыть описание класса"><title>TemplateParameter. Представляет ParameterableElement как формальный параметр шаблона.</title>
 <rect class="class-box" x="130" y="500" width="200" height="310"/>
+<line class="class-divider" x1="130" y1="532" x2="330" y2="532"/>
 <text class="class-name" x="230.0" y="523" text-anchor="middle">TemplateParameter</text>
 </a>
 <a class="class-node" data-classifier="ParameterableElement" href="../../index.html#/classifier/parameterableelement" target="_top" aria-label="ParameterableElement — открыть описание класса"><title>ParameterableElement. Элемент, который может быть представлен как формальный TemplateParameter шаблона или указан как фактический параметр при привязке шаблона.</title>
 <rect class="class-box" x="900" y="500" width="240" height="310"/>
+<line class="class-divider" x1="900" y1="532" x2="1140" y2="532"/>
 <text class="class-name abstract" x="1020.0" y="523" text-anchor="middle">ParameterableElement</text>
 </a>
 <a class="class-node" data-classifier="Element" href="../../index.html#/classifier/element" target="_top" aria-label="Element — открыть описание класса"><title>Element. Составная часть модели, способная владеть другими элементами.</title>
